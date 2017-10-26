@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2017, https://github.com/nebula-im
+ *  Copyright (c) 2017, https://github.com/nebulaim
  *  All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,17 +15,5 @@
  * limitations under the License.
  */
 
-package mtproto
+package rpc
 
-import (
-	"testing"
-	"log"
-)
-
-func TestFindAuthKey(t *testing.T) {
-	var keyID uint64 = 11119275193967038194
-	key := FindAuthKey(keyID)
-	if key == nil {
-		log.Println("Can't find keyID: ", int64(keyID))
-	}
-}

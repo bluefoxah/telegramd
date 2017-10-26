@@ -28,12 +28,14 @@ type AES256IGECryptor struct {
 }
 
 func NewAES256IGECryptor(aesKey, aesIV []byte) *AES256IGECryptor {
+	// TODO(@benqi): Check aesKey and aesIV valid.
 	return &AES256IGECryptor{
 		aesKey: 	aesKey,
 		aesIV:		aesIV,
 	}
 }
 
+// data长度必须是aes.BlockSize(16)的倍数，如果不是请调用者补齐
 func (c *AES256IGECryptor) Encrypt(data []byte) ([]byte, error) {
 	block, err := aes.NewCipher(c.aesKey)
 	if err != nil {

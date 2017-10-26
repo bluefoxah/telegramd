@@ -15,29 +15,29 @@
  * limitations under the License.
  */
 
-package crypto
+package rpc
 
 import (
+	"github.com/golang/glog"
+	"google.golang.org/grpc"
+	"context"
+	"testing"
 	"fmt"
 )
 
-const (
-	KEY = "12345678901234561234567890123456"
-	IV = "1234567890123456"
-)
-
-
-func main() {
-	MyString := "This is my string and I want to protect it with encryption"
-
-	fmt.Println("We start with a plain text: %s \n", MyString)
-	MyStringByte := []byte(MyString)
-	encryptor, _ := NewAesCTR128Encrypt([]byte(KEY), []byte(IV))
-	Encrypted := encryptor.Encrypt(MyStringByte);
-	fmt.Println("We encrypted the string this way %s \n", string(Encrypted))
-
-	decryptor, _ := NewAesCTR128Encrypt([]byte(KEY), []byte(IV))
-	Decrypted := decryptor.Encrypt(MyStringByte);
-	fmt.Println("Than we have the plain text again %s \n", string(Decrypted))
+func TestRPCClient(t *testing.T)  {
+	fmt.Println("TestRPCClient...")
+	conn, err := grpc.Dial("127.0.0.1:10001", grpc.WithInsecure())
+	if err != nil {
+		glog.Fatalf("fail to dial: %v\n", err)
+	}
+	defer conn.Close()
+	client := NewAuthClient(conn)
+	authSendCode := &TLAuthSendCode{}
+	// glog.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
+	auth_SentCode, err := client.AuthSentCode(context.Background(), authSendCode)
+	if err != nil {
+		fmt.Errorf("%v.AuthSentCode(_) = _, %v: \n", client, err)
+	}
+	fmt.Printf("%v\n", auth_SentCode)
 }
-

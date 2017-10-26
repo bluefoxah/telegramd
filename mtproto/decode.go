@@ -37,6 +37,10 @@ func NewDecodeBuf(b []byte) *DecodeBuf {
 	return &DecodeBuf{b, 0, len(b), nil}
 }
 
+func (m *DecodeBuf) GetError() error {
+	return m.err
+}
+
 func (m *DecodeBuf) Long() int64 {
 	if m.err != nil {
 		return 0

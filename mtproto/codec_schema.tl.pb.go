@@ -2,7 +2,7 @@
  * WARNING! All changes made in this file will be lost!
  * Created from 'scheme.tl' by 'codegen_encode_decode.py'
  *
- *  Copyright (c) 2017, https://github.com/nebula-im/nebula
+ *  Copyright (c) 2017, https://github.com/nebulaim
  *  All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,6 +23,7 @@ package mtproto
 import (
 	"encoding/binary"
 	"fmt"
+	"github.com/golang/protobuf/proto"
 )
 
 type newTLObjectFunc func() TLObject
@@ -926,6 +927,19 @@ func (m *ResPQ) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeResPQ(message proto.Message) (m *ResPQ) {
+	switch message.(type) {
+	case *TLResPQ:
+		m2, _ := message.(*TLResPQ)
+		m = &ResPQ{
+			Payload: &ResPQ_ResPQ{
+				ResPQ: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *P_QInnerData) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -945,6 +959,19 @@ func (m *P_QInnerData) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeP_QInnerData(message proto.Message) (m *P_QInnerData) {
+	switch message.(type) {
+	case *TLPQInnerData:
+		m2, _ := message.(*TLPQInnerData)
+		m = &P_QInnerData{
+			Payload: &P_QInnerData_PQInnerData{
+				PQInnerData: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Server_DH_Params) Encode() (b []byte) {
@@ -975,6 +1002,26 @@ func (m *Server_DH_Params) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeServer_DH_Params(message proto.Message) (m *Server_DH_Params) {
+	switch message.(type) {
+	case *TLServer_DHParamsFail:
+		m2, _ := message.(*TLServer_DHParamsFail)
+		m = &Server_DH_Params{
+			Payload: &Server_DH_Params_Server_DHParamsFail{
+				Server_DHParamsFail: m2,
+			},
+		}
+	case *TLServer_DHParamsOk:
+		m2, _ := message.(*TLServer_DHParamsOk)
+		m = &Server_DH_Params{
+			Payload: &Server_DH_Params_Server_DHParamsOk{
+				Server_DHParamsOk: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Server_DHInnerData) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -996,6 +1043,19 @@ func (m *Server_DHInnerData) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeServer_DHInnerData(message proto.Message) (m *Server_DHInnerData) {
+	switch message.(type) {
+	case *TLServer_DHInnerData:
+		m2, _ := message.(*TLServer_DHInnerData)
+		m = &Server_DHInnerData{
+			Payload: &Server_DHInnerData_Server_DHInnerData{
+				Server_DHInnerData: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Client_DH_Inner_Data) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1015,6 +1075,19 @@ func (m *Client_DH_Inner_Data) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeClient_DH_Inner_Data(message proto.Message) (m *Client_DH_Inner_Data) {
+	switch message.(type) {
+	case *TLClient_DHInnerData:
+		m2, _ := message.(*TLClient_DHInnerData)
+		m = &Client_DH_Inner_Data{
+			Payload: &Client_DH_Inner_Data_Client_DHInnerData{
+				Client_DHInnerData: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *SetClient_DHParamsAnswer) Encode() (b []byte) {
@@ -1052,6 +1125,33 @@ func (m *SetClient_DHParamsAnswer) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeSetClient_DHParamsAnswer(message proto.Message) (m *SetClient_DHParamsAnswer) {
+	switch message.(type) {
+	case *TLDhGenOk:
+		m2, _ := message.(*TLDhGenOk)
+		m = &SetClient_DHParamsAnswer{
+			Payload: &SetClient_DHParamsAnswer_DhGenOk{
+				DhGenOk: m2,
+			},
+		}
+	case *TLDhGenRetry:
+		m2, _ := message.(*TLDhGenRetry)
+		m = &SetClient_DHParamsAnswer{
+			Payload: &SetClient_DHParamsAnswer_DhGenRetry{
+				DhGenRetry: m2,
+			},
+		}
+	case *TLDhGenFail:
+		m2, _ := message.(*TLDhGenFail)
+		m = &SetClient_DHParamsAnswer{
+			Payload: &SetClient_DHParamsAnswer_DhGenFail{
+				DhGenFail: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *DestroyAuthKeyRes) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1087,6 +1187,33 @@ func (m *DestroyAuthKeyRes) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeDestroyAuthKeyRes(message proto.Message) (m *DestroyAuthKeyRes) {
+	switch message.(type) {
+	case *TLDestroyAuthKeyOk:
+		m2, _ := message.(*TLDestroyAuthKeyOk)
+		m = &DestroyAuthKeyRes{
+			Payload: &DestroyAuthKeyRes_DestroyAuthKeyOk{
+				DestroyAuthKeyOk: m2,
+			},
+		}
+	case *TLDestroyAuthKeyNone:
+		m2, _ := message.(*TLDestroyAuthKeyNone)
+		m = &DestroyAuthKeyRes{
+			Payload: &DestroyAuthKeyRes_DestroyAuthKeyNone{
+				DestroyAuthKeyNone: m2,
+			},
+		}
+	case *TLDestroyAuthKeyFail:
+		m2, _ := message.(*TLDestroyAuthKeyFail)
+		m = &DestroyAuthKeyRes{
+			Payload: &DestroyAuthKeyRes_DestroyAuthKeyFail{
+				DestroyAuthKeyFail: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *MsgsAck) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1106,6 +1233,19 @@ func (m *MsgsAck) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMsgsAck(message proto.Message) (m *MsgsAck) {
+	switch message.(type) {
+	case *TLMsgsAck:
+		m2, _ := message.(*TLMsgsAck)
+		m = &MsgsAck{
+			Payload: &MsgsAck_MsgsAck{
+				MsgsAck: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *BadMsgNotification) Encode() (b []byte) {
@@ -1136,6 +1276,26 @@ func (m *BadMsgNotification) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeBadMsgNotification(message proto.Message) (m *BadMsgNotification) {
+	switch message.(type) {
+	case *TLBadMsgNotification:
+		m2, _ := message.(*TLBadMsgNotification)
+		m = &BadMsgNotification{
+			Payload: &BadMsgNotification_BadMsgNotification{
+				BadMsgNotification: m2,
+			},
+		}
+	case *TLBadServerSalt:
+		m2, _ := message.(*TLBadServerSalt)
+		m = &BadMsgNotification{
+			Payload: &BadMsgNotification_BadServerSalt{
+				BadServerSalt: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *MsgsStateReq) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1155,6 +1315,19 @@ func (m *MsgsStateReq) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMsgsStateReq(message proto.Message) (m *MsgsStateReq) {
+	switch message.(type) {
+	case *TLMsgsStateReq:
+		m2, _ := message.(*TLMsgsStateReq)
+		m = &MsgsStateReq{
+			Payload: &MsgsStateReq_MsgsStateReq{
+				MsgsStateReq: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *MsgsStateInfo) Encode() (b []byte) {
@@ -1178,6 +1351,19 @@ func (m *MsgsStateInfo) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMsgsStateInfo(message proto.Message) (m *MsgsStateInfo) {
+	switch message.(type) {
+	case *TLMsgsStateInfo:
+		m2, _ := message.(*TLMsgsStateInfo)
+		m = &MsgsStateInfo{
+			Payload: &MsgsStateInfo_MsgsStateInfo{
+				MsgsStateInfo: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *MsgsAllInfo) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1197,6 +1383,19 @@ func (m *MsgsAllInfo) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMsgsAllInfo(message proto.Message) (m *MsgsAllInfo) {
+	switch message.(type) {
+	case *TLMsgsAllInfo:
+		m2, _ := message.(*TLMsgsAllInfo)
+		m = &MsgsAllInfo{
+			Payload: &MsgsAllInfo_MsgsAllInfo{
+				MsgsAllInfo: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *MsgDetailedInfo) Encode() (b []byte) {
@@ -1227,6 +1426,26 @@ func (m *MsgDetailedInfo) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMsgDetailedInfo(message proto.Message) (m *MsgDetailedInfo) {
+	switch message.(type) {
+	case *TLMsgDetailedInfo:
+		m2, _ := message.(*TLMsgDetailedInfo)
+		m = &MsgDetailedInfo{
+			Payload: &MsgDetailedInfo_MsgDetailedInfo{
+				MsgDetailedInfo: m2,
+			},
+		}
+	case *TLMsgNewDetailedInfo:
+		m2, _ := message.(*TLMsgNewDetailedInfo)
+		m = &MsgDetailedInfo{
+			Payload: &MsgDetailedInfo_MsgNewDetailedInfo{
+				MsgNewDetailedInfo: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *MsgResendReq) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1248,6 +1467,19 @@ func (m *MsgResendReq) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMsgResendReq(message proto.Message) (m *MsgResendReq) {
+	switch message.(type) {
+	case *TLMsgResendReq:
+		m2, _ := message.(*TLMsgResendReq)
+		m = &MsgResendReq{
+			Payload: &MsgResendReq_MsgResendReq{
+				MsgResendReq: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *RpcError) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1267,6 +1499,19 @@ func (m *RpcError) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeRpcError(message proto.Message) (m *RpcError) {
+	switch message.(type) {
+	case *TLRpcError:
+		m2, _ := message.(*TLRpcError)
+		m = &RpcError{
+			Payload: &RpcError_RpcError{
+				RpcError: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *RpcDropAnswer) Encode() (b []byte) {
@@ -1304,6 +1549,33 @@ func (m *RpcDropAnswer) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeRpcDropAnswer(message proto.Message) (m *RpcDropAnswer) {
+	switch message.(type) {
+	case *TLRpcAnswerUnknown:
+		m2, _ := message.(*TLRpcAnswerUnknown)
+		m = &RpcDropAnswer{
+			Payload: &RpcDropAnswer_RpcAnswerUnknown{
+				RpcAnswerUnknown: m2,
+			},
+		}
+	case *TLRpcAnswerDroppedRunning:
+		m2, _ := message.(*TLRpcAnswerDroppedRunning)
+		m = &RpcDropAnswer{
+			Payload: &RpcDropAnswer_RpcAnswerDroppedRunning{
+				RpcAnswerDroppedRunning: m2,
+			},
+		}
+	case *TLRpcAnswerDropped:
+		m2, _ := message.(*TLRpcAnswerDropped)
+		m = &RpcDropAnswer{
+			Payload: &RpcDropAnswer_RpcAnswerDropped{
+				RpcAnswerDropped: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *FutureSalt) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1323,6 +1595,19 @@ func (m *FutureSalt) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeFutureSalt(message proto.Message) (m *FutureSalt) {
+	switch message.(type) {
+	case *TLFutureSalt:
+		m2, _ := message.(*TLFutureSalt)
+		m = &FutureSalt{
+			Payload: &FutureSalt_FutureSalt{
+				FutureSalt: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *FutureSalts) Encode() (b []byte) {
@@ -1346,6 +1631,19 @@ func (m *FutureSalts) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeFutureSalts(message proto.Message) (m *FutureSalts) {
+	switch message.(type) {
+	case *TLFutureSalts:
+		m2, _ := message.(*TLFutureSalts)
+		m = &FutureSalts{
+			Payload: &FutureSalts_FutureSalts{
+				FutureSalts: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Pong) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1365,6 +1663,19 @@ func (m *Pong) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakePong(message proto.Message) (m *Pong) {
+	switch message.(type) {
+	case *TLPong:
+		m2, _ := message.(*TLPong)
+		m = &Pong{
+			Payload: &Pong_Pong{
+				Pong: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *DestroySessionRes) Encode() (b []byte) {
@@ -1395,6 +1706,26 @@ func (m *DestroySessionRes) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeDestroySessionRes(message proto.Message) (m *DestroySessionRes) {
+	switch message.(type) {
+	case *TLDestroySessionOk:
+		m2, _ := message.(*TLDestroySessionOk)
+		m = &DestroySessionRes{
+			Payload: &DestroySessionRes_DestroySessionOk{
+				DestroySessionOk: m2,
+			},
+		}
+	case *TLDestroySessionNone:
+		m2, _ := message.(*TLDestroySessionNone)
+		m = &DestroySessionRes{
+			Payload: &DestroySessionRes_DestroySessionNone{
+				DestroySessionNone: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *NewSession) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1414,6 +1745,19 @@ func (m *NewSession) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeNewSession(message proto.Message) (m *NewSession) {
+	switch message.(type) {
+	case *TLNewSessionCreated:
+		m2, _ := message.(*TLNewSessionCreated)
+		m = &NewSession{
+			Payload: &NewSession_NewSessionCreated{
+				NewSessionCreated: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *HttpWait) Encode() (b []byte) {
@@ -1437,6 +1781,19 @@ func (m *HttpWait) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeHttpWait(message proto.Message) (m *HttpWait) {
+	switch message.(type) {
+	case *TLHttpWait:
+		m2, _ := message.(*TLHttpWait)
+		m = &HttpWait{
+			Payload: &HttpWait_HttpWait{
+				HttpWait: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *IpPort) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1458,6 +1815,19 @@ func (m *IpPort) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeIpPort(message proto.Message) (m *IpPort) {
+	switch message.(type) {
+	case *TLIpPort:
+		m2, _ := message.(*TLIpPort)
+		m = &IpPort{
+			Payload: &IpPort_IpPort{
+				IpPort: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Help_ConfigSimple) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1477,6 +1847,19 @@ func (m *Help_ConfigSimple) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeHelp_ConfigSimple(message proto.Message) (m *Help_ConfigSimple) {
+	switch message.(type) {
+	case *TLHelpConfigSimple:
+		m2, _ := message.(*TLHelpConfigSimple)
+		m = &Help_ConfigSimple{
+			Payload: &Help_ConfigSimple_HelpConfigSimple{
+				HelpConfigSimple: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Bool) Encode() (b []byte) {
@@ -1507,6 +1890,26 @@ func (m *Bool) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeBool(message proto.Message) (m *Bool) {
+	switch message.(type) {
+	case *TLBoolFalse:
+		m2, _ := message.(*TLBoolFalse)
+		m = &Bool{
+			Payload: &Bool_BoolFalse{
+				BoolFalse: m2,
+			},
+		}
+	case *TLBoolTrue:
+		m2, _ := message.(*TLBoolTrue)
+		m = &Bool{
+			Payload: &Bool_BoolTrue{
+				BoolTrue: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *True) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1526,6 +1929,19 @@ func (m *True) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeTrue(message proto.Message) (m *True) {
+	switch message.(type) {
+	case *TLTrue:
+		m2, _ := message.(*TLTrue)
+		m = &True{
+			Payload: &True_True{
+				True: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Error) Encode() (b []byte) {
@@ -1549,6 +1965,19 @@ func (m *Error) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeError(message proto.Message) (m *Error) {
+	switch message.(type) {
+	case *TLError:
+		m2, _ := message.(*TLError)
+		m = &Error{
+			Payload: &Error_Error{
+				Error: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Null) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1568,6 +1997,19 @@ func (m *Null) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeNull(message proto.Message) (m *Null) {
+	switch message.(type) {
+	case *TLNull:
+		m2, _ := message.(*TLNull)
+		m = &Null{
+			Payload: &Null_Null{
+				Null: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InputPeer) Encode() (b []byte) {
@@ -1619,6 +2061,47 @@ func (m *InputPeer) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputPeer(message proto.Message) (m *InputPeer) {
+	switch message.(type) {
+	case *TLInputPeerEmpty:
+		m2, _ := message.(*TLInputPeerEmpty)
+		m = &InputPeer{
+			Payload: &InputPeer_InputPeerEmpty{
+				InputPeerEmpty: m2,
+			},
+		}
+	case *TLInputPeerSelf:
+		m2, _ := message.(*TLInputPeerSelf)
+		m = &InputPeer{
+			Payload: &InputPeer_InputPeerSelf{
+				InputPeerSelf: m2,
+			},
+		}
+	case *TLInputPeerChat:
+		m2, _ := message.(*TLInputPeerChat)
+		m = &InputPeer{
+			Payload: &InputPeer_InputPeerChat{
+				InputPeerChat: m2,
+			},
+		}
+	case *TLInputPeerUser:
+		m2, _ := message.(*TLInputPeerUser)
+		m = &InputPeer{
+			Payload: &InputPeer_InputPeerUser{
+				InputPeerUser: m2,
+			},
+		}
+	case *TLInputPeerChannel:
+		m2, _ := message.(*TLInputPeerChannel)
+		m = &InputPeer{
+			Payload: &InputPeer_InputPeerChannel{
+				InputPeerChannel: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *InputUser) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1654,6 +2137,33 @@ func (m *InputUser) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputUser(message proto.Message) (m *InputUser) {
+	switch message.(type) {
+	case *TLInputUserEmpty:
+		m2, _ := message.(*TLInputUserEmpty)
+		m = &InputUser{
+			Payload: &InputUser_InputUserEmpty{
+				InputUserEmpty: m2,
+			},
+		}
+	case *TLInputUserSelf:
+		m2, _ := message.(*TLInputUserSelf)
+		m = &InputUser{
+			Payload: &InputUser_InputUserSelf{
+				InputUserSelf: m2,
+			},
+		}
+	case *TLInputUser:
+		m2, _ := message.(*TLInputUser)
+		m = &InputUser{
+			Payload: &InputUser_InputUser{
+				InputUser: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *InputContact) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1673,6 +2183,19 @@ func (m *InputContact) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeInputContact(message proto.Message) (m *InputContact) {
+	switch message.(type) {
+	case *TLInputPhoneContact:
+		m2, _ := message.(*TLInputPhoneContact)
+		m = &InputContact{
+			Payload: &InputContact_InputPhoneContact{
+				InputPhoneContact: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InputFile) Encode() (b []byte) {
@@ -1701,6 +2224,26 @@ func (m *InputFile) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeInputFile(message proto.Message) (m *InputFile) {
+	switch message.(type) {
+	case *TLInputFile:
+		m2, _ := message.(*TLInputFile)
+		m = &InputFile{
+			Payload: &InputFile_InputFile{
+				InputFile: m2,
+			},
+		}
+	case *TLInputFileBig:
+		m2, _ := message.(*TLInputFileBig)
+		m = &InputFile{
+			Payload: &InputFile_InputFileBig{
+				InputFileBig: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InputMedia) Encode() (b []byte) {
@@ -1808,6 +2351,103 @@ func (m *InputMedia) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputMedia(message proto.Message) (m *InputMedia) {
+	switch message.(type) {
+	case *TLInputMediaEmpty:
+		m2, _ := message.(*TLInputMediaEmpty)
+		m = &InputMedia{
+			Payload: &InputMedia_InputMediaEmpty{
+				InputMediaEmpty: m2,
+			},
+		}
+	case *TLInputMediaUploadedPhoto:
+		m2, _ := message.(*TLInputMediaUploadedPhoto)
+		m = &InputMedia{
+			Payload: &InputMedia_InputMediaUploadedPhoto{
+				InputMediaUploadedPhoto: m2,
+			},
+		}
+	case *TLInputMediaPhoto:
+		m2, _ := message.(*TLInputMediaPhoto)
+		m = &InputMedia{
+			Payload: &InputMedia_InputMediaPhoto{
+				InputMediaPhoto: m2,
+			},
+		}
+	case *TLInputMediaGeoPoint:
+		m2, _ := message.(*TLInputMediaGeoPoint)
+		m = &InputMedia{
+			Payload: &InputMedia_InputMediaGeoPoint{
+				InputMediaGeoPoint: m2,
+			},
+		}
+	case *TLInputMediaContact:
+		m2, _ := message.(*TLInputMediaContact)
+		m = &InputMedia{
+			Payload: &InputMedia_InputMediaContact{
+				InputMediaContact: m2,
+			},
+		}
+	case *TLInputMediaUploadedDocument:
+		m2, _ := message.(*TLInputMediaUploadedDocument)
+		m = &InputMedia{
+			Payload: &InputMedia_InputMediaUploadedDocument{
+				InputMediaUploadedDocument: m2,
+			},
+		}
+	case *TLInputMediaDocument:
+		m2, _ := message.(*TLInputMediaDocument)
+		m = &InputMedia{
+			Payload: &InputMedia_InputMediaDocument{
+				InputMediaDocument: m2,
+			},
+		}
+	case *TLInputMediaVenue:
+		m2, _ := message.(*TLInputMediaVenue)
+		m = &InputMedia{
+			Payload: &InputMedia_InputMediaVenue{
+				InputMediaVenue: m2,
+			},
+		}
+	case *TLInputMediaGifExternal:
+		m2, _ := message.(*TLInputMediaGifExternal)
+		m = &InputMedia{
+			Payload: &InputMedia_InputMediaGifExternal{
+				InputMediaGifExternal: m2,
+			},
+		}
+	case *TLInputMediaPhotoExternal:
+		m2, _ := message.(*TLInputMediaPhotoExternal)
+		m = &InputMedia{
+			Payload: &InputMedia_InputMediaPhotoExternal{
+				InputMediaPhotoExternal: m2,
+			},
+		}
+	case *TLInputMediaDocumentExternal:
+		m2, _ := message.(*TLInputMediaDocumentExternal)
+		m = &InputMedia{
+			Payload: &InputMedia_InputMediaDocumentExternal{
+				InputMediaDocumentExternal: m2,
+			},
+		}
+	case *TLInputMediaGame:
+		m2, _ := message.(*TLInputMediaGame)
+		m = &InputMedia{
+			Payload: &InputMedia_InputMediaGame{
+				InputMediaGame: m2,
+			},
+		}
+	case *TLInputMediaInvoice:
+		m2, _ := message.(*TLInputMediaInvoice)
+		m = &InputMedia{
+			Payload: &InputMedia_InputMediaInvoice{
+				InputMediaInvoice: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *InputChatPhoto) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1843,6 +2483,33 @@ func (m *InputChatPhoto) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputChatPhoto(message proto.Message) (m *InputChatPhoto) {
+	switch message.(type) {
+	case *TLInputChatPhotoEmpty:
+		m2, _ := message.(*TLInputChatPhotoEmpty)
+		m = &InputChatPhoto{
+			Payload: &InputChatPhoto_InputChatPhotoEmpty{
+				InputChatPhotoEmpty: m2,
+			},
+		}
+	case *TLInputChatUploadedPhoto:
+		m2, _ := message.(*TLInputChatUploadedPhoto)
+		m = &InputChatPhoto{
+			Payload: &InputChatPhoto_InputChatUploadedPhoto{
+				InputChatUploadedPhoto: m2,
+			},
+		}
+	case *TLInputChatPhoto:
+		m2, _ := message.(*TLInputChatPhoto)
+		m = &InputChatPhoto{
+			Payload: &InputChatPhoto_InputChatPhoto{
+				InputChatPhoto: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *InputGeoPoint) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1871,6 +2538,26 @@ func (m *InputGeoPoint) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputGeoPoint(message proto.Message) (m *InputGeoPoint) {
+	switch message.(type) {
+	case *TLInputGeoPointEmpty:
+		m2, _ := message.(*TLInputGeoPointEmpty)
+		m = &InputGeoPoint{
+			Payload: &InputGeoPoint_InputGeoPointEmpty{
+				InputGeoPointEmpty: m2,
+			},
+		}
+	case *TLInputGeoPoint:
+		m2, _ := message.(*TLInputGeoPoint)
+		m = &InputGeoPoint{
+			Payload: &InputGeoPoint_InputGeoPoint{
+				InputGeoPoint: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *InputPhoto) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1897,6 +2584,26 @@ func (m *InputPhoto) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeInputPhoto(message proto.Message) (m *InputPhoto) {
+	switch message.(type) {
+	case *TLInputPhotoEmpty:
+		m2, _ := message.(*TLInputPhotoEmpty)
+		m = &InputPhoto{
+			Payload: &InputPhoto_InputPhotoEmpty{
+				InputPhotoEmpty: m2,
+			},
+		}
+	case *TLInputPhoto:
+		m2, _ := message.(*TLInputPhoto)
+		m = &InputPhoto{
+			Payload: &InputPhoto_InputPhoto{
+				InputPhoto: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InputFileLocation) Encode() (b []byte) {
@@ -1934,6 +2641,33 @@ func (m *InputFileLocation) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputFileLocation(message proto.Message) (m *InputFileLocation) {
+	switch message.(type) {
+	case *TLInputFileLocation:
+		m2, _ := message.(*TLInputFileLocation)
+		m = &InputFileLocation{
+			Payload: &InputFileLocation_InputFileLocation{
+				InputFileLocation: m2,
+			},
+		}
+	case *TLInputEncryptedFileLocation:
+		m2, _ := message.(*TLInputEncryptedFileLocation)
+		m = &InputFileLocation{
+			Payload: &InputFileLocation_InputEncryptedFileLocation{
+				InputEncryptedFileLocation: m2,
+			},
+		}
+	case *TLInputDocumentFileLocation:
+		m2, _ := message.(*TLInputDocumentFileLocation)
+		m = &InputFileLocation{
+			Payload: &InputFileLocation_InputDocumentFileLocation{
+				InputDocumentFileLocation: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *InputAppEvent) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -1953,6 +2687,19 @@ func (m *InputAppEvent) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeInputAppEvent(message proto.Message) (m *InputAppEvent) {
+	switch message.(type) {
+	case *TLInputAppEvent:
+		m2, _ := message.(*TLInputAppEvent)
+		m = &InputAppEvent{
+			Payload: &InputAppEvent_InputAppEvent{
+				InputAppEvent: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Peer) Encode() (b []byte) {
@@ -1988,6 +2735,33 @@ func (m *Peer) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakePeer(message proto.Message) (m *Peer) {
+	switch message.(type) {
+	case *TLPeerUser:
+		m2, _ := message.(*TLPeerUser)
+		m = &Peer{
+			Payload: &Peer_PeerUser{
+				PeerUser: m2,
+			},
+		}
+	case *TLPeerChat:
+		m2, _ := message.(*TLPeerChat)
+		m = &Peer{
+			Payload: &Peer_PeerChat{
+				PeerChat: m2,
+			},
+		}
+	case *TLPeerChannel:
+		m2, _ := message.(*TLPeerChannel)
+		m = &Peer{
+			Payload: &Peer_PeerChannel{
+				PeerChannel: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Storage_FileType) Encode() (b []byte) {
@@ -2074,6 +2848,82 @@ func (m *Storage_FileType) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeStorage_FileType(message proto.Message) (m *Storage_FileType) {
+	switch message.(type) {
+	case *TLStorageFileUnknown:
+		m2, _ := message.(*TLStorageFileUnknown)
+		m = &Storage_FileType{
+			Payload: &Storage_FileType_StorageFileUnknown{
+				StorageFileUnknown: m2,
+			},
+		}
+	case *TLStorageFilePartial:
+		m2, _ := message.(*TLStorageFilePartial)
+		m = &Storage_FileType{
+			Payload: &Storage_FileType_StorageFilePartial{
+				StorageFilePartial: m2,
+			},
+		}
+	case *TLStorageFileJpeg:
+		m2, _ := message.(*TLStorageFileJpeg)
+		m = &Storage_FileType{
+			Payload: &Storage_FileType_StorageFileJpeg{
+				StorageFileJpeg: m2,
+			},
+		}
+	case *TLStorageFileGif:
+		m2, _ := message.(*TLStorageFileGif)
+		m = &Storage_FileType{
+			Payload: &Storage_FileType_StorageFileGif{
+				StorageFileGif: m2,
+			},
+		}
+	case *TLStorageFilePng:
+		m2, _ := message.(*TLStorageFilePng)
+		m = &Storage_FileType{
+			Payload: &Storage_FileType_StorageFilePng{
+				StorageFilePng: m2,
+			},
+		}
+	case *TLStorageFilePdf:
+		m2, _ := message.(*TLStorageFilePdf)
+		m = &Storage_FileType{
+			Payload: &Storage_FileType_StorageFilePdf{
+				StorageFilePdf: m2,
+			},
+		}
+	case *TLStorageFileMp3:
+		m2, _ := message.(*TLStorageFileMp3)
+		m = &Storage_FileType{
+			Payload: &Storage_FileType_StorageFileMp3{
+				StorageFileMp3: m2,
+			},
+		}
+	case *TLStorageFileMov:
+		m2, _ := message.(*TLStorageFileMov)
+		m = &Storage_FileType{
+			Payload: &Storage_FileType_StorageFileMov{
+				StorageFileMov: m2,
+			},
+		}
+	case *TLStorageFileMp4:
+		m2, _ := message.(*TLStorageFileMp4)
+		m = &Storage_FileType{
+			Payload: &Storage_FileType_StorageFileMp4{
+				StorageFileMp4: m2,
+			},
+		}
+	case *TLStorageFileWebp:
+		m2, _ := message.(*TLStorageFileWebp)
+		m = &Storage_FileType{
+			Payload: &Storage_FileType_StorageFileWebp{
+				StorageFileWebp: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *FileLocation) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -2100,6 +2950,26 @@ func (m *FileLocation) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeFileLocation(message proto.Message) (m *FileLocation) {
+	switch message.(type) {
+	case *TLFileLocationUnavailable:
+		m2, _ := message.(*TLFileLocationUnavailable)
+		m = &FileLocation{
+			Payload: &FileLocation_FileLocationUnavailable{
+				FileLocationUnavailable: m2,
+			},
+		}
+	case *TLFileLocation:
+		m2, _ := message.(*TLFileLocation)
+		m = &FileLocation{
+			Payload: &FileLocation_FileLocation{
+				FileLocation: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *User) Encode() (b []byte) {
@@ -2130,6 +3000,26 @@ func (m *User) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeUser(message proto.Message) (m *User) {
+	switch message.(type) {
+	case *TLUserEmpty:
+		m2, _ := message.(*TLUserEmpty)
+		m = &User{
+			Payload: &User_UserEmpty{
+				UserEmpty: m2,
+			},
+		}
+	case *TLUser:
+		m2, _ := message.(*TLUser)
+		m = &User{
+			Payload: &User_User{
+				User: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *UserProfilePhoto) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -2156,6 +3046,26 @@ func (m *UserProfilePhoto) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeUserProfilePhoto(message proto.Message) (m *UserProfilePhoto) {
+	switch message.(type) {
+	case *TLUserProfilePhotoEmpty:
+		m2, _ := message.(*TLUserProfilePhotoEmpty)
+		m = &UserProfilePhoto{
+			Payload: &UserProfilePhoto_UserProfilePhotoEmpty{
+				UserProfilePhotoEmpty: m2,
+			},
+		}
+	case *TLUserProfilePhoto:
+		m2, _ := message.(*TLUserProfilePhoto)
+		m = &UserProfilePhoto{
+			Payload: &UserProfilePhoto_UserProfilePhoto{
+				UserProfilePhoto: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *UserStatus) Encode() (b []byte) {
@@ -2214,6 +3124,54 @@ func (m *UserStatus) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeUserStatus(message proto.Message) (m *UserStatus) {
+	switch message.(type) {
+	case *TLUserStatusEmpty:
+		m2, _ := message.(*TLUserStatusEmpty)
+		m = &UserStatus{
+			Payload: &UserStatus_UserStatusEmpty{
+				UserStatusEmpty: m2,
+			},
+		}
+	case *TLUserStatusOnline:
+		m2, _ := message.(*TLUserStatusOnline)
+		m = &UserStatus{
+			Payload: &UserStatus_UserStatusOnline{
+				UserStatusOnline: m2,
+			},
+		}
+	case *TLUserStatusOffline:
+		m2, _ := message.(*TLUserStatusOffline)
+		m = &UserStatus{
+			Payload: &UserStatus_UserStatusOffline{
+				UserStatusOffline: m2,
+			},
+		}
+	case *TLUserStatusRecently:
+		m2, _ := message.(*TLUserStatusRecently)
+		m = &UserStatus{
+			Payload: &UserStatus_UserStatusRecently{
+				UserStatusRecently: m2,
+			},
+		}
+	case *TLUserStatusLastWeek:
+		m2, _ := message.(*TLUserStatusLastWeek)
+		m = &UserStatus{
+			Payload: &UserStatus_UserStatusLastWeek{
+				UserStatusLastWeek: m2,
+			},
+		}
+	case *TLUserStatusLastMonth:
+		m2, _ := message.(*TLUserStatusLastMonth)
+		m = &UserStatus{
+			Payload: &UserStatus_UserStatusLastMonth{
+				UserStatusLastMonth: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Chat) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -2263,6 +3221,47 @@ func (m *Chat) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeChat(message proto.Message) (m *Chat) {
+	switch message.(type) {
+	case *TLChatEmpty:
+		m2, _ := message.(*TLChatEmpty)
+		m = &Chat{
+			Payload: &Chat_ChatEmpty{
+				ChatEmpty: m2,
+			},
+		}
+	case *TLChat:
+		m2, _ := message.(*TLChat)
+		m = &Chat{
+			Payload: &Chat_Chat{
+				Chat: m2,
+			},
+		}
+	case *TLChatForbidden:
+		m2, _ := message.(*TLChatForbidden)
+		m = &Chat{
+			Payload: &Chat_ChatForbidden{
+				ChatForbidden: m2,
+			},
+		}
+	case *TLChannel:
+		m2, _ := message.(*TLChannel)
+		m = &Chat{
+			Payload: &Chat_Channel{
+				Channel: m2,
+			},
+		}
+	case *TLChannelForbidden:
+		m2, _ := message.(*TLChannelForbidden)
+		m = &Chat{
+			Payload: &Chat_ChannelForbidden{
+				ChannelForbidden: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *ChatFull) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -2289,6 +3288,26 @@ func (m *ChatFull) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeChatFull(message proto.Message) (m *ChatFull) {
+	switch message.(type) {
+	case *TLChatFull:
+		m2, _ := message.(*TLChatFull)
+		m = &ChatFull{
+			Payload: &ChatFull_ChatFull{
+				ChatFull: m2,
+			},
+		}
+	case *TLChannelFull:
+		m2, _ := message.(*TLChannelFull)
+		m = &ChatFull{
+			Payload: &ChatFull_ChannelFull{
+				ChannelFull: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *ChatParticipant) Encode() (b []byte) {
@@ -2326,6 +3345,33 @@ func (m *ChatParticipant) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeChatParticipant(message proto.Message) (m *ChatParticipant) {
+	switch message.(type) {
+	case *TLChatParticipant:
+		m2, _ := message.(*TLChatParticipant)
+		m = &ChatParticipant{
+			Payload: &ChatParticipant_ChatParticipant{
+				ChatParticipant: m2,
+			},
+		}
+	case *TLChatParticipantCreator:
+		m2, _ := message.(*TLChatParticipantCreator)
+		m = &ChatParticipant{
+			Payload: &ChatParticipant_ChatParticipantCreator{
+				ChatParticipantCreator: m2,
+			},
+		}
+	case *TLChatParticipantAdmin:
+		m2, _ := message.(*TLChatParticipantAdmin)
+		m = &ChatParticipant{
+			Payload: &ChatParticipant_ChatParticipantAdmin{
+				ChatParticipantAdmin: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *ChatParticipants) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -2354,6 +3400,26 @@ func (m *ChatParticipants) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeChatParticipants(message proto.Message) (m *ChatParticipants) {
+	switch message.(type) {
+	case *TLChatParticipantsForbidden:
+		m2, _ := message.(*TLChatParticipantsForbidden)
+		m = &ChatParticipants{
+			Payload: &ChatParticipants_ChatParticipantsForbidden{
+				ChatParticipantsForbidden: m2,
+			},
+		}
+	case *TLChatParticipants:
+		m2, _ := message.(*TLChatParticipants)
+		m = &ChatParticipants{
+			Payload: &ChatParticipants_ChatParticipants{
+				ChatParticipants: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *ChatPhoto) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -2380,6 +3446,26 @@ func (m *ChatPhoto) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeChatPhoto(message proto.Message) (m *ChatPhoto) {
+	switch message.(type) {
+	case *TLChatPhotoEmpty:
+		m2, _ := message.(*TLChatPhotoEmpty)
+		m = &ChatPhoto{
+			Payload: &ChatPhoto_ChatPhotoEmpty{
+				ChatPhotoEmpty: m2,
+			},
+		}
+	case *TLChatPhoto:
+		m2, _ := message.(*TLChatPhoto)
+		m = &ChatPhoto{
+			Payload: &ChatPhoto_ChatPhoto{
+				ChatPhoto: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Message) Encode() (b []byte) {
@@ -2415,6 +3501,33 @@ func (m *Message) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessage(message proto.Message) (m *Message) {
+	switch message.(type) {
+	case *TLMessageEmpty:
+		m2, _ := message.(*TLMessageEmpty)
+		m = &Message{
+			Payload: &Message_MessageEmpty{
+				MessageEmpty: m2,
+			},
+		}
+	case *TLMessage:
+		m2, _ := message.(*TLMessage)
+		m = &Message{
+			Payload: &Message_Message{
+				Message: m2,
+			},
+		}
+	case *TLMessageService:
+		m2, _ := message.(*TLMessageService)
+		m = &Message{
+			Payload: &Message_MessageService{
+				MessageService: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *MessageMedia) Encode() (b []byte) {
@@ -2499,6 +3612,82 @@ func (m *MessageMedia) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessageMedia(message proto.Message) (m *MessageMedia) {
+	switch message.(type) {
+	case *TLMessageMediaEmpty:
+		m2, _ := message.(*TLMessageMediaEmpty)
+		m = &MessageMedia{
+			Payload: &MessageMedia_MessageMediaEmpty{
+				MessageMediaEmpty: m2,
+			},
+		}
+	case *TLMessageMediaPhoto:
+		m2, _ := message.(*TLMessageMediaPhoto)
+		m = &MessageMedia{
+			Payload: &MessageMedia_MessageMediaPhoto{
+				MessageMediaPhoto: m2,
+			},
+		}
+	case *TLMessageMediaGeo:
+		m2, _ := message.(*TLMessageMediaGeo)
+		m = &MessageMedia{
+			Payload: &MessageMedia_MessageMediaGeo{
+				MessageMediaGeo: m2,
+			},
+		}
+	case *TLMessageMediaContact:
+		m2, _ := message.(*TLMessageMediaContact)
+		m = &MessageMedia{
+			Payload: &MessageMedia_MessageMediaContact{
+				MessageMediaContact: m2,
+			},
+		}
+	case *TLMessageMediaUnsupported:
+		m2, _ := message.(*TLMessageMediaUnsupported)
+		m = &MessageMedia{
+			Payload: &MessageMedia_MessageMediaUnsupported{
+				MessageMediaUnsupported: m2,
+			},
+		}
+	case *TLMessageMediaDocument:
+		m2, _ := message.(*TLMessageMediaDocument)
+		m = &MessageMedia{
+			Payload: &MessageMedia_MessageMediaDocument{
+				MessageMediaDocument: m2,
+			},
+		}
+	case *TLMessageMediaWebPage:
+		m2, _ := message.(*TLMessageMediaWebPage)
+		m = &MessageMedia{
+			Payload: &MessageMedia_MessageMediaWebPage{
+				MessageMediaWebPage: m2,
+			},
+		}
+	case *TLMessageMediaVenue:
+		m2, _ := message.(*TLMessageMediaVenue)
+		m = &MessageMedia{
+			Payload: &MessageMedia_MessageMediaVenue{
+				MessageMediaVenue: m2,
+			},
+		}
+	case *TLMessageMediaGame:
+		m2, _ := message.(*TLMessageMediaGame)
+		m = &MessageMedia{
+			Payload: &MessageMedia_MessageMediaGame{
+				MessageMediaGame: m2,
+			},
+		}
+	case *TLMessageMediaInvoice:
+		m2, _ := message.(*TLMessageMediaInvoice)
+		m = &MessageMedia{
+			Payload: &MessageMedia_MessageMediaInvoice{
+				MessageMediaInvoice: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *MessageAction) Encode() (b []byte) {
@@ -2641,6 +3830,138 @@ func (m *MessageAction) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMessageAction(message proto.Message) (m *MessageAction) {
+	switch message.(type) {
+	case *TLMessageActionEmpty:
+		m2, _ := message.(*TLMessageActionEmpty)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionEmpty{
+				MessageActionEmpty: m2,
+			},
+		}
+	case *TLMessageActionChatCreate:
+		m2, _ := message.(*TLMessageActionChatCreate)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionChatCreate{
+				MessageActionChatCreate: m2,
+			},
+		}
+	case *TLMessageActionChatEditTitle:
+		m2, _ := message.(*TLMessageActionChatEditTitle)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionChatEditTitle{
+				MessageActionChatEditTitle: m2,
+			},
+		}
+	case *TLMessageActionChatEditPhoto:
+		m2, _ := message.(*TLMessageActionChatEditPhoto)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionChatEditPhoto{
+				MessageActionChatEditPhoto: m2,
+			},
+		}
+	case *TLMessageActionChatDeletePhoto:
+		m2, _ := message.(*TLMessageActionChatDeletePhoto)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionChatDeletePhoto{
+				MessageActionChatDeletePhoto: m2,
+			},
+		}
+	case *TLMessageActionChatAddUser:
+		m2, _ := message.(*TLMessageActionChatAddUser)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionChatAddUser{
+				MessageActionChatAddUser: m2,
+			},
+		}
+	case *TLMessageActionChatDeleteUser:
+		m2, _ := message.(*TLMessageActionChatDeleteUser)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionChatDeleteUser{
+				MessageActionChatDeleteUser: m2,
+			},
+		}
+	case *TLMessageActionChatJoinedByLink:
+		m2, _ := message.(*TLMessageActionChatJoinedByLink)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionChatJoinedByLink{
+				MessageActionChatJoinedByLink: m2,
+			},
+		}
+	case *TLMessageActionChannelCreate:
+		m2, _ := message.(*TLMessageActionChannelCreate)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionChannelCreate{
+				MessageActionChannelCreate: m2,
+			},
+		}
+	case *TLMessageActionChatMigrateTo:
+		m2, _ := message.(*TLMessageActionChatMigrateTo)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionChatMigrateTo{
+				MessageActionChatMigrateTo: m2,
+			},
+		}
+	case *TLMessageActionChannelMigrateFrom:
+		m2, _ := message.(*TLMessageActionChannelMigrateFrom)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionChannelMigrateFrom{
+				MessageActionChannelMigrateFrom: m2,
+			},
+		}
+	case *TLMessageActionPinMessage:
+		m2, _ := message.(*TLMessageActionPinMessage)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionPinMessage{
+				MessageActionPinMessage: m2,
+			},
+		}
+	case *TLMessageActionHistoryClear:
+		m2, _ := message.(*TLMessageActionHistoryClear)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionHistoryClear{
+				MessageActionHistoryClear: m2,
+			},
+		}
+	case *TLMessageActionGameScore:
+		m2, _ := message.(*TLMessageActionGameScore)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionGameScore{
+				MessageActionGameScore: m2,
+			},
+		}
+	case *TLMessageActionPaymentSentMe:
+		m2, _ := message.(*TLMessageActionPaymentSentMe)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionPaymentSentMe{
+				MessageActionPaymentSentMe: m2,
+			},
+		}
+	case *TLMessageActionPaymentSent:
+		m2, _ := message.(*TLMessageActionPaymentSent)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionPaymentSent{
+				MessageActionPaymentSent: m2,
+			},
+		}
+	case *TLMessageActionPhoneCall:
+		m2, _ := message.(*TLMessageActionPhoneCall)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionPhoneCall{
+				MessageActionPhoneCall: m2,
+			},
+		}
+	case *TLMessageActionScreenshotTaken:
+		m2, _ := message.(*TLMessageActionScreenshotTaken)
+		m = &MessageAction{
+			Payload: &MessageAction_MessageActionScreenshotTaken{
+				MessageActionScreenshotTaken: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Dialog) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -2660,6 +3981,19 @@ func (m *Dialog) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeDialog(message proto.Message) (m *Dialog) {
+	switch message.(type) {
+	case *TLDialog:
+		m2, _ := message.(*TLDialog)
+		m = &Dialog{
+			Payload: &Dialog_Dialog{
+				Dialog: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Photo) Encode() (b []byte) {
@@ -2688,6 +4022,26 @@ func (m *Photo) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakePhoto(message proto.Message) (m *Photo) {
+	switch message.(type) {
+	case *TLPhotoEmpty:
+		m2, _ := message.(*TLPhotoEmpty)
+		m = &Photo{
+			Payload: &Photo_PhotoEmpty{
+				PhotoEmpty: m2,
+			},
+		}
+	case *TLPhoto:
+		m2, _ := message.(*TLPhoto)
+		m = &Photo{
+			Payload: &Photo_Photo{
+				Photo: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *PhotoSize) Encode() (b []byte) {
@@ -2725,6 +4079,33 @@ func (m *PhotoSize) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakePhotoSize(message proto.Message) (m *PhotoSize) {
+	switch message.(type) {
+	case *TLPhotoSizeEmpty:
+		m2, _ := message.(*TLPhotoSizeEmpty)
+		m = &PhotoSize{
+			Payload: &PhotoSize_PhotoSizeEmpty{
+				PhotoSizeEmpty: m2,
+			},
+		}
+	case *TLPhotoSize:
+		m2, _ := message.(*TLPhotoSize)
+		m = &PhotoSize{
+			Payload: &PhotoSize_PhotoSize{
+				PhotoSize: m2,
+			},
+		}
+	case *TLPhotoCachedSize:
+		m2, _ := message.(*TLPhotoCachedSize)
+		m = &PhotoSize{
+			Payload: &PhotoSize_PhotoCachedSize{
+				PhotoCachedSize: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *GeoPoint) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -2753,6 +4134,26 @@ func (m *GeoPoint) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeGeoPoint(message proto.Message) (m *GeoPoint) {
+	switch message.(type) {
+	case *TLGeoPointEmpty:
+		m2, _ := message.(*TLGeoPointEmpty)
+		m = &GeoPoint{
+			Payload: &GeoPoint_GeoPointEmpty{
+				GeoPointEmpty: m2,
+			},
+		}
+	case *TLGeoPoint:
+		m2, _ := message.(*TLGeoPoint)
+		m = &GeoPoint{
+			Payload: &GeoPoint_GeoPoint{
+				GeoPoint: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Auth_CheckedPhone) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -2772,6 +4173,19 @@ func (m *Auth_CheckedPhone) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeAuth_CheckedPhone(message proto.Message) (m *Auth_CheckedPhone) {
+	switch message.(type) {
+	case *TLAuthCheckedPhone:
+		m2, _ := message.(*TLAuthCheckedPhone)
+		m = &Auth_CheckedPhone{
+			Payload: &Auth_CheckedPhone_AuthCheckedPhone{
+				AuthCheckedPhone: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Auth_SentCode) Encode() (b []byte) {
@@ -2795,6 +4209,19 @@ func (m *Auth_SentCode) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeAuth_SentCode(message proto.Message) (m *Auth_SentCode) {
+	switch message.(type) {
+	case *TLAuthSentCode:
+		m2, _ := message.(*TLAuthSentCode)
+		m = &Auth_SentCode{
+			Payload: &Auth_SentCode_AuthSentCode{
+				AuthSentCode: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Auth_Authorization) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -2816,6 +4243,19 @@ func (m *Auth_Authorization) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeAuth_Authorization(message proto.Message) (m *Auth_Authorization) {
+	switch message.(type) {
+	case *TLAuthAuthorization:
+		m2, _ := message.(*TLAuthAuthorization)
+		m = &Auth_Authorization{
+			Payload: &Auth_Authorization_AuthAuthorization{
+				AuthAuthorization: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Auth_ExportedAuthorization) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -2835,6 +4275,19 @@ func (m *Auth_ExportedAuthorization) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeAuth_ExportedAuthorization(message proto.Message) (m *Auth_ExportedAuthorization) {
+	switch message.(type) {
+	case *TLAuthExportedAuthorization:
+		m2, _ := message.(*TLAuthExportedAuthorization)
+		m = &Auth_ExportedAuthorization{
+			Payload: &Auth_ExportedAuthorization_AuthExportedAuthorization{
+				AuthExportedAuthorization: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InputNotifyPeer) Encode() (b []byte) {
@@ -2879,6 +4332,40 @@ func (m *InputNotifyPeer) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputNotifyPeer(message proto.Message) (m *InputNotifyPeer) {
+	switch message.(type) {
+	case *TLInputNotifyPeer:
+		m2, _ := message.(*TLInputNotifyPeer)
+		m = &InputNotifyPeer{
+			Payload: &InputNotifyPeer_InputNotifyPeer{
+				InputNotifyPeer: m2,
+			},
+		}
+	case *TLInputNotifyUsers:
+		m2, _ := message.(*TLInputNotifyUsers)
+		m = &InputNotifyPeer{
+			Payload: &InputNotifyPeer_InputNotifyUsers{
+				InputNotifyUsers: m2,
+			},
+		}
+	case *TLInputNotifyChats:
+		m2, _ := message.(*TLInputNotifyChats)
+		m = &InputNotifyPeer{
+			Payload: &InputNotifyPeer_InputNotifyChats{
+				InputNotifyChats: m2,
+			},
+		}
+	case *TLInputNotifyAll:
+		m2, _ := message.(*TLInputNotifyAll)
+		m = &InputNotifyPeer{
+			Payload: &InputNotifyPeer_InputNotifyAll{
+				InputNotifyAll: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *InputPeerNotifyEvents) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -2907,6 +4394,26 @@ func (m *InputPeerNotifyEvents) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputPeerNotifyEvents(message proto.Message) (m *InputPeerNotifyEvents) {
+	switch message.(type) {
+	case *TLInputPeerNotifyEventsEmpty:
+		m2, _ := message.(*TLInputPeerNotifyEventsEmpty)
+		m = &InputPeerNotifyEvents{
+			Payload: &InputPeerNotifyEvents_InputPeerNotifyEventsEmpty{
+				InputPeerNotifyEventsEmpty: m2,
+			},
+		}
+	case *TLInputPeerNotifyEventsAll:
+		m2, _ := message.(*TLInputPeerNotifyEventsAll)
+		m = &InputPeerNotifyEvents{
+			Payload: &InputPeerNotifyEvents_InputPeerNotifyEventsAll{
+				InputPeerNotifyEventsAll: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *InputPeerNotifySettings) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -2926,6 +4433,19 @@ func (m *InputPeerNotifySettings) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeInputPeerNotifySettings(message proto.Message) (m *InputPeerNotifySettings) {
+	switch message.(type) {
+	case *TLInputPeerNotifySettings:
+		m2, _ := message.(*TLInputPeerNotifySettings)
+		m = &InputPeerNotifySettings{
+			Payload: &InputPeerNotifySettings_InputPeerNotifySettings{
+				InputPeerNotifySettings: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *PeerNotifyEvents) Encode() (b []byte) {
@@ -2956,6 +4476,26 @@ func (m *PeerNotifyEvents) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakePeerNotifyEvents(message proto.Message) (m *PeerNotifyEvents) {
+	switch message.(type) {
+	case *TLPeerNotifyEventsEmpty:
+		m2, _ := message.(*TLPeerNotifyEventsEmpty)
+		m = &PeerNotifyEvents{
+			Payload: &PeerNotifyEvents_PeerNotifyEventsEmpty{
+				PeerNotifyEventsEmpty: m2,
+			},
+		}
+	case *TLPeerNotifyEventsAll:
+		m2, _ := message.(*TLPeerNotifyEventsAll)
+		m = &PeerNotifyEvents{
+			Payload: &PeerNotifyEvents_PeerNotifyEventsAll{
+				PeerNotifyEventsAll: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *PeerNotifySettings) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -2984,6 +4524,26 @@ func (m *PeerNotifySettings) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakePeerNotifySettings(message proto.Message) (m *PeerNotifySettings) {
+	switch message.(type) {
+	case *TLPeerNotifySettingsEmpty:
+		m2, _ := message.(*TLPeerNotifySettingsEmpty)
+		m = &PeerNotifySettings{
+			Payload: &PeerNotifySettings_PeerNotifySettingsEmpty{
+				PeerNotifySettingsEmpty: m2,
+			},
+		}
+	case *TLPeerNotifySettings:
+		m2, _ := message.(*TLPeerNotifySettings)
+		m = &PeerNotifySettings{
+			Payload: &PeerNotifySettings_PeerNotifySettings{
+				PeerNotifySettings: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *PeerSettings) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -3003,6 +4563,19 @@ func (m *PeerSettings) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakePeerSettings(message proto.Message) (m *PeerSettings) {
+	switch message.(type) {
+	case *TLPeerSettings:
+		m2, _ := message.(*TLPeerSettings)
+		m = &PeerSettings{
+			Payload: &PeerSettings_PeerSettings{
+				PeerSettings: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *WallPaper) Encode() (b []byte) {
@@ -3031,6 +4604,26 @@ func (m *WallPaper) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeWallPaper(message proto.Message) (m *WallPaper) {
+	switch message.(type) {
+	case *TLWallPaper:
+		m2, _ := message.(*TLWallPaper)
+		m = &WallPaper{
+			Payload: &WallPaper_WallPaper{
+				WallPaper: m2,
+			},
+		}
+	case *TLWallPaperSolid:
+		m2, _ := message.(*TLWallPaperSolid)
+		m = &WallPaper{
+			Payload: &WallPaper_WallPaperSolid{
+				WallPaperSolid: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *ReportReason) Encode() (b []byte) {
@@ -3075,6 +4668,40 @@ func (m *ReportReason) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeReportReason(message proto.Message) (m *ReportReason) {
+	switch message.(type) {
+	case *TLInputReportReasonSpam:
+		m2, _ := message.(*TLInputReportReasonSpam)
+		m = &ReportReason{
+			Payload: &ReportReason_InputReportReasonSpam{
+				InputReportReasonSpam: m2,
+			},
+		}
+	case *TLInputReportReasonViolence:
+		m2, _ := message.(*TLInputReportReasonViolence)
+		m = &ReportReason{
+			Payload: &ReportReason_InputReportReasonViolence{
+				InputReportReasonViolence: m2,
+			},
+		}
+	case *TLInputReportReasonPornography:
+		m2, _ := message.(*TLInputReportReasonPornography)
+		m = &ReportReason{
+			Payload: &ReportReason_InputReportReasonPornography{
+				InputReportReasonPornography: m2,
+			},
+		}
+	case *TLInputReportReasonOther:
+		m2, _ := message.(*TLInputReportReasonOther)
+		m = &ReportReason{
+			Payload: &ReportReason_InputReportReasonOther{
+				InputReportReasonOther: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *UserFull) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -3094,6 +4721,19 @@ func (m *UserFull) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeUserFull(message proto.Message) (m *UserFull) {
+	switch message.(type) {
+	case *TLUserFull:
+		m2, _ := message.(*TLUserFull)
+		m = &UserFull{
+			Payload: &UserFull_UserFull{
+				UserFull: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Contact) Encode() (b []byte) {
@@ -3117,6 +4757,19 @@ func (m *Contact) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeContact(message proto.Message) (m *Contact) {
+	switch message.(type) {
+	case *TLContact:
+		m2, _ := message.(*TLContact)
+		m = &Contact{
+			Payload: &Contact_Contact{
+				Contact: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *ImportedContact) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -3136,6 +4789,19 @@ func (m *ImportedContact) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeImportedContact(message proto.Message) (m *ImportedContact) {
+	switch message.(type) {
+	case *TLImportedContact:
+		m2, _ := message.(*TLImportedContact)
+		m = &ImportedContact{
+			Payload: &ImportedContact_ImportedContact{
+				ImportedContact: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *ContactBlocked) Encode() (b []byte) {
@@ -3159,6 +4825,19 @@ func (m *ContactBlocked) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeContactBlocked(message proto.Message) (m *ContactBlocked) {
+	switch message.(type) {
+	case *TLContactBlocked:
+		m2, _ := message.(*TLContactBlocked)
+		m = &ContactBlocked{
+			Payload: &ContactBlocked_ContactBlocked{
+				ContactBlocked: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *ContactStatus) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -3180,6 +4859,19 @@ func (m *ContactStatus) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeContactStatus(message proto.Message) (m *ContactStatus) {
+	switch message.(type) {
+	case *TLContactStatus:
+		m2, _ := message.(*TLContactStatus)
+		m = &ContactStatus{
+			Payload: &ContactStatus_ContactStatus{
+				ContactStatus: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Contacts_Link) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -3199,6 +4891,19 @@ func (m *Contacts_Link) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeContacts_Link(message proto.Message) (m *Contacts_Link) {
+	switch message.(type) {
+	case *TLContactsLink:
+		m2, _ := message.(*TLContactsLink)
+		m = &Contacts_Link{
+			Payload: &Contacts_Link_ContactsLink{
+				ContactsLink: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Contacts_Contacts) Encode() (b []byte) {
@@ -3229,6 +4934,26 @@ func (m *Contacts_Contacts) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeContacts_Contacts(message proto.Message) (m *Contacts_Contacts) {
+	switch message.(type) {
+	case *TLContactsContactsNotModified:
+		m2, _ := message.(*TLContactsContactsNotModified)
+		m = &Contacts_Contacts{
+			Payload: &Contacts_Contacts_ContactsContactsNotModified{
+				ContactsContactsNotModified: m2,
+			},
+		}
+	case *TLContactsContacts:
+		m2, _ := message.(*TLContactsContacts)
+		m = &Contacts_Contacts{
+			Payload: &Contacts_Contacts_ContactsContacts{
+				ContactsContacts: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Contacts_ImportedContacts) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -3248,6 +4973,19 @@ func (m *Contacts_ImportedContacts) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeContacts_ImportedContacts(message proto.Message) (m *Contacts_ImportedContacts) {
+	switch message.(type) {
+	case *TLContactsImportedContacts:
+		m2, _ := message.(*TLContactsImportedContacts)
+		m = &Contacts_ImportedContacts{
+			Payload: &Contacts_ImportedContacts_ContactsImportedContacts{
+				ContactsImportedContacts: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Contacts_Blocked) Encode() (b []byte) {
@@ -3278,6 +5016,26 @@ func (m *Contacts_Blocked) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeContacts_Blocked(message proto.Message) (m *Contacts_Blocked) {
+	switch message.(type) {
+	case *TLContactsBlocked:
+		m2, _ := message.(*TLContactsBlocked)
+		m = &Contacts_Blocked{
+			Payload: &Contacts_Blocked_ContactsBlocked{
+				ContactsBlocked: m2,
+			},
+		}
+	case *TLContactsBlockedSlice:
+		m2, _ := message.(*TLContactsBlockedSlice)
+		m = &Contacts_Blocked{
+			Payload: &Contacts_Blocked_ContactsBlockedSlice{
+				ContactsBlockedSlice: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Messages_Dialogs) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -3304,6 +5062,26 @@ func (m *Messages_Dialogs) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessages_Dialogs(message proto.Message) (m *Messages_Dialogs) {
+	switch message.(type) {
+	case *TLMessagesDialogs:
+		m2, _ := message.(*TLMessagesDialogs)
+		m = &Messages_Dialogs{
+			Payload: &Messages_Dialogs_MessagesDialogs{
+				MessagesDialogs: m2,
+			},
+		}
+	case *TLMessagesDialogsSlice:
+		m2, _ := message.(*TLMessagesDialogsSlice)
+		m = &Messages_Dialogs{
+			Payload: &Messages_Dialogs_MessagesDialogsSlice{
+				MessagesDialogsSlice: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Messages_Messages) Encode() (b []byte) {
@@ -3341,6 +5119,33 @@ func (m *Messages_Messages) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMessages_Messages(message proto.Message) (m *Messages_Messages) {
+	switch message.(type) {
+	case *TLMessagesMessages:
+		m2, _ := message.(*TLMessagesMessages)
+		m = &Messages_Messages{
+			Payload: &Messages_Messages_MessagesMessages{
+				MessagesMessages: m2,
+			},
+		}
+	case *TLMessagesMessagesSlice:
+		m2, _ := message.(*TLMessagesMessagesSlice)
+		m = &Messages_Messages{
+			Payload: &Messages_Messages_MessagesMessagesSlice{
+				MessagesMessagesSlice: m2,
+			},
+		}
+	case *TLMessagesChannelMessages:
+		m2, _ := message.(*TLMessagesChannelMessages)
+		m = &Messages_Messages{
+			Payload: &Messages_Messages_MessagesChannelMessages{
+				MessagesChannelMessages: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Messages_Chats) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -3369,6 +5174,26 @@ func (m *Messages_Chats) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMessages_Chats(message proto.Message) (m *Messages_Chats) {
+	switch message.(type) {
+	case *TLMessagesChats:
+		m2, _ := message.(*TLMessagesChats)
+		m = &Messages_Chats{
+			Payload: &Messages_Chats_MessagesChats{
+				MessagesChats: m2,
+			},
+		}
+	case *TLMessagesChatsSlice:
+		m2, _ := message.(*TLMessagesChatsSlice)
+		m = &Messages_Chats{
+			Payload: &Messages_Chats_MessagesChatsSlice{
+				MessagesChatsSlice: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Messages_ChatFull) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -3390,6 +5215,19 @@ func (m *Messages_ChatFull) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMessages_ChatFull(message proto.Message) (m *Messages_ChatFull) {
+	switch message.(type) {
+	case *TLMessagesChatFull:
+		m2, _ := message.(*TLMessagesChatFull)
+		m = &Messages_ChatFull{
+			Payload: &Messages_ChatFull_MessagesChatFull{
+				MessagesChatFull: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Messages_AffectedHistory) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -3409,6 +5247,19 @@ func (m *Messages_AffectedHistory) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessages_AffectedHistory(message proto.Message) (m *Messages_AffectedHistory) {
+	switch message.(type) {
+	case *TLMessagesAffectedHistory:
+		m2, _ := message.(*TLMessagesAffectedHistory)
+		m = &Messages_AffectedHistory{
+			Payload: &Messages_AffectedHistory_MessagesAffectedHistory{
+				MessagesAffectedHistory: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *MessagesFilter) Encode() (b []byte) {
@@ -3528,6 +5379,117 @@ func (m *MessagesFilter) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessagesFilter(message proto.Message) (m *MessagesFilter) {
+	switch message.(type) {
+	case *TLInputMessagesFilterEmpty:
+		m2, _ := message.(*TLInputMessagesFilterEmpty)
+		m = &MessagesFilter{
+			Payload: &MessagesFilter_InputMessagesFilterEmpty{
+				InputMessagesFilterEmpty: m2,
+			},
+		}
+	case *TLInputMessagesFilterPhotos:
+		m2, _ := message.(*TLInputMessagesFilterPhotos)
+		m = &MessagesFilter{
+			Payload: &MessagesFilter_InputMessagesFilterPhotos{
+				InputMessagesFilterPhotos: m2,
+			},
+		}
+	case *TLInputMessagesFilterVideo:
+		m2, _ := message.(*TLInputMessagesFilterVideo)
+		m = &MessagesFilter{
+			Payload: &MessagesFilter_InputMessagesFilterVideo{
+				InputMessagesFilterVideo: m2,
+			},
+		}
+	case *TLInputMessagesFilterPhotoVideo:
+		m2, _ := message.(*TLInputMessagesFilterPhotoVideo)
+		m = &MessagesFilter{
+			Payload: &MessagesFilter_InputMessagesFilterPhotoVideo{
+				InputMessagesFilterPhotoVideo: m2,
+			},
+		}
+	case *TLInputMessagesFilterPhotoVideoDocuments:
+		m2, _ := message.(*TLInputMessagesFilterPhotoVideoDocuments)
+		m = &MessagesFilter{
+			Payload: &MessagesFilter_InputMessagesFilterPhotoVideoDocuments{
+				InputMessagesFilterPhotoVideoDocuments: m2,
+			},
+		}
+	case *TLInputMessagesFilterDocument:
+		m2, _ := message.(*TLInputMessagesFilterDocument)
+		m = &MessagesFilter{
+			Payload: &MessagesFilter_InputMessagesFilterDocument{
+				InputMessagesFilterDocument: m2,
+			},
+		}
+	case *TLInputMessagesFilterUrl:
+		m2, _ := message.(*TLInputMessagesFilterUrl)
+		m = &MessagesFilter{
+			Payload: &MessagesFilter_InputMessagesFilterUrl{
+				InputMessagesFilterUrl: m2,
+			},
+		}
+	case *TLInputMessagesFilterGif:
+		m2, _ := message.(*TLInputMessagesFilterGif)
+		m = &MessagesFilter{
+			Payload: &MessagesFilter_InputMessagesFilterGif{
+				InputMessagesFilterGif: m2,
+			},
+		}
+	case *TLInputMessagesFilterVoice:
+		m2, _ := message.(*TLInputMessagesFilterVoice)
+		m = &MessagesFilter{
+			Payload: &MessagesFilter_InputMessagesFilterVoice{
+				InputMessagesFilterVoice: m2,
+			},
+		}
+	case *TLInputMessagesFilterMusic:
+		m2, _ := message.(*TLInputMessagesFilterMusic)
+		m = &MessagesFilter{
+			Payload: &MessagesFilter_InputMessagesFilterMusic{
+				InputMessagesFilterMusic: m2,
+			},
+		}
+	case *TLInputMessagesFilterChatPhotos:
+		m2, _ := message.(*TLInputMessagesFilterChatPhotos)
+		m = &MessagesFilter{
+			Payload: &MessagesFilter_InputMessagesFilterChatPhotos{
+				InputMessagesFilterChatPhotos: m2,
+			},
+		}
+	case *TLInputMessagesFilterPhoneCalls:
+		m2, _ := message.(*TLInputMessagesFilterPhoneCalls)
+		m = &MessagesFilter{
+			Payload: &MessagesFilter_InputMessagesFilterPhoneCalls{
+				InputMessagesFilterPhoneCalls: m2,
+			},
+		}
+	case *TLInputMessagesFilterRoundVoice:
+		m2, _ := message.(*TLInputMessagesFilterRoundVoice)
+		m = &MessagesFilter{
+			Payload: &MessagesFilter_InputMessagesFilterRoundVoice{
+				InputMessagesFilterRoundVoice: m2,
+			},
+		}
+	case *TLInputMessagesFilterRoundVideo:
+		m2, _ := message.(*TLInputMessagesFilterRoundVideo)
+		m = &MessagesFilter{
+			Payload: &MessagesFilter_InputMessagesFilterRoundVideo{
+				InputMessagesFilterRoundVideo: m2,
+			},
+		}
+	case *TLInputMessagesFilterMyMentions:
+		m2, _ := message.(*TLInputMessagesFilterMyMentions)
+		m = &MessagesFilter{
+			Payload: &MessagesFilter_InputMessagesFilterMyMentions{
+				InputMessagesFilterMyMentions: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Update) Encode() (b []byte) {
@@ -3999,6 +5961,467 @@ func (m *Update) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeUpdate(message proto.Message) (m *Update) {
+	switch message.(type) {
+	case *TLUpdateNewMessage:
+		m2, _ := message.(*TLUpdateNewMessage)
+		m = &Update{
+			Payload: &Update_UpdateNewMessage{
+				UpdateNewMessage: m2,
+			},
+		}
+	case *TLUpdateMessageID:
+		m2, _ := message.(*TLUpdateMessageID)
+		m = &Update{
+			Payload: &Update_UpdateMessageID{
+				UpdateMessageID: m2,
+			},
+		}
+	case *TLUpdateDeleteMessages:
+		m2, _ := message.(*TLUpdateDeleteMessages)
+		m = &Update{
+			Payload: &Update_UpdateDeleteMessages{
+				UpdateDeleteMessages: m2,
+			},
+		}
+	case *TLUpdateUserTyping:
+		m2, _ := message.(*TLUpdateUserTyping)
+		m = &Update{
+			Payload: &Update_UpdateUserTyping{
+				UpdateUserTyping: m2,
+			},
+		}
+	case *TLUpdateChatUserTyping:
+		m2, _ := message.(*TLUpdateChatUserTyping)
+		m = &Update{
+			Payload: &Update_UpdateChatUserTyping{
+				UpdateChatUserTyping: m2,
+			},
+		}
+	case *TLUpdateChatParticipants:
+		m2, _ := message.(*TLUpdateChatParticipants)
+		m = &Update{
+			Payload: &Update_UpdateChatParticipants{
+				UpdateChatParticipants: m2,
+			},
+		}
+	case *TLUpdateUserStatus:
+		m2, _ := message.(*TLUpdateUserStatus)
+		m = &Update{
+			Payload: &Update_UpdateUserStatus{
+				UpdateUserStatus: m2,
+			},
+		}
+	case *TLUpdateUserName:
+		m2, _ := message.(*TLUpdateUserName)
+		m = &Update{
+			Payload: &Update_UpdateUserName{
+				UpdateUserName: m2,
+			},
+		}
+	case *TLUpdateUserPhoto:
+		m2, _ := message.(*TLUpdateUserPhoto)
+		m = &Update{
+			Payload: &Update_UpdateUserPhoto{
+				UpdateUserPhoto: m2,
+			},
+		}
+	case *TLUpdateContactRegistered:
+		m2, _ := message.(*TLUpdateContactRegistered)
+		m = &Update{
+			Payload: &Update_UpdateContactRegistered{
+				UpdateContactRegistered: m2,
+			},
+		}
+	case *TLUpdateContactLink:
+		m2, _ := message.(*TLUpdateContactLink)
+		m = &Update{
+			Payload: &Update_UpdateContactLink{
+				UpdateContactLink: m2,
+			},
+		}
+	case *TLUpdateNewEncryptedMessage:
+		m2, _ := message.(*TLUpdateNewEncryptedMessage)
+		m = &Update{
+			Payload: &Update_UpdateNewEncryptedMessage{
+				UpdateNewEncryptedMessage: m2,
+			},
+		}
+	case *TLUpdateEncryptedChatTyping:
+		m2, _ := message.(*TLUpdateEncryptedChatTyping)
+		m = &Update{
+			Payload: &Update_UpdateEncryptedChatTyping{
+				UpdateEncryptedChatTyping: m2,
+			},
+		}
+	case *TLUpdateEncryption:
+		m2, _ := message.(*TLUpdateEncryption)
+		m = &Update{
+			Payload: &Update_UpdateEncryption{
+				UpdateEncryption: m2,
+			},
+		}
+	case *TLUpdateEncryptedMessagesRead:
+		m2, _ := message.(*TLUpdateEncryptedMessagesRead)
+		m = &Update{
+			Payload: &Update_UpdateEncryptedMessagesRead{
+				UpdateEncryptedMessagesRead: m2,
+			},
+		}
+	case *TLUpdateChatParticipantAdd:
+		m2, _ := message.(*TLUpdateChatParticipantAdd)
+		m = &Update{
+			Payload: &Update_UpdateChatParticipantAdd{
+				UpdateChatParticipantAdd: m2,
+			},
+		}
+	case *TLUpdateChatParticipantDelete:
+		m2, _ := message.(*TLUpdateChatParticipantDelete)
+		m = &Update{
+			Payload: &Update_UpdateChatParticipantDelete{
+				UpdateChatParticipantDelete: m2,
+			},
+		}
+	case *TLUpdateDcOptions:
+		m2, _ := message.(*TLUpdateDcOptions)
+		m = &Update{
+			Payload: &Update_UpdateDcOptions{
+				UpdateDcOptions: m2,
+			},
+		}
+	case *TLUpdateUserBlocked:
+		m2, _ := message.(*TLUpdateUserBlocked)
+		m = &Update{
+			Payload: &Update_UpdateUserBlocked{
+				UpdateUserBlocked: m2,
+			},
+		}
+	case *TLUpdateNotifySettings:
+		m2, _ := message.(*TLUpdateNotifySettings)
+		m = &Update{
+			Payload: &Update_UpdateNotifySettings{
+				UpdateNotifySettings: m2,
+			},
+		}
+	case *TLUpdateServiceNotification:
+		m2, _ := message.(*TLUpdateServiceNotification)
+		m = &Update{
+			Payload: &Update_UpdateServiceNotification{
+				UpdateServiceNotification: m2,
+			},
+		}
+	case *TLUpdatePrivacy:
+		m2, _ := message.(*TLUpdatePrivacy)
+		m = &Update{
+			Payload: &Update_UpdatePrivacy{
+				UpdatePrivacy: m2,
+			},
+		}
+	case *TLUpdateUserPhone:
+		m2, _ := message.(*TLUpdateUserPhone)
+		m = &Update{
+			Payload: &Update_UpdateUserPhone{
+				UpdateUserPhone: m2,
+			},
+		}
+	case *TLUpdateReadHistoryInbox:
+		m2, _ := message.(*TLUpdateReadHistoryInbox)
+		m = &Update{
+			Payload: &Update_UpdateReadHistoryInbox{
+				UpdateReadHistoryInbox: m2,
+			},
+		}
+	case *TLUpdateReadHistoryOutbox:
+		m2, _ := message.(*TLUpdateReadHistoryOutbox)
+		m = &Update{
+			Payload: &Update_UpdateReadHistoryOutbox{
+				UpdateReadHistoryOutbox: m2,
+			},
+		}
+	case *TLUpdateWebPage:
+		m2, _ := message.(*TLUpdateWebPage)
+		m = &Update{
+			Payload: &Update_UpdateWebPage{
+				UpdateWebPage: m2,
+			},
+		}
+	case *TLUpdateReadMessagesContents:
+		m2, _ := message.(*TLUpdateReadMessagesContents)
+		m = &Update{
+			Payload: &Update_UpdateReadMessagesContents{
+				UpdateReadMessagesContents: m2,
+			},
+		}
+	case *TLUpdateChannelTooLong:
+		m2, _ := message.(*TLUpdateChannelTooLong)
+		m = &Update{
+			Payload: &Update_UpdateChannelTooLong{
+				UpdateChannelTooLong: m2,
+			},
+		}
+	case *TLUpdateChannel:
+		m2, _ := message.(*TLUpdateChannel)
+		m = &Update{
+			Payload: &Update_UpdateChannel{
+				UpdateChannel: m2,
+			},
+		}
+	case *TLUpdateNewChannelMessage:
+		m2, _ := message.(*TLUpdateNewChannelMessage)
+		m = &Update{
+			Payload: &Update_UpdateNewChannelMessage{
+				UpdateNewChannelMessage: m2,
+			},
+		}
+	case *TLUpdateReadChannelInbox:
+		m2, _ := message.(*TLUpdateReadChannelInbox)
+		m = &Update{
+			Payload: &Update_UpdateReadChannelInbox{
+				UpdateReadChannelInbox: m2,
+			},
+		}
+	case *TLUpdateDeleteChannelMessages:
+		m2, _ := message.(*TLUpdateDeleteChannelMessages)
+		m = &Update{
+			Payload: &Update_UpdateDeleteChannelMessages{
+				UpdateDeleteChannelMessages: m2,
+			},
+		}
+	case *TLUpdateChannelMessageViews:
+		m2, _ := message.(*TLUpdateChannelMessageViews)
+		m = &Update{
+			Payload: &Update_UpdateChannelMessageViews{
+				UpdateChannelMessageViews: m2,
+			},
+		}
+	case *TLUpdateChatAdmins:
+		m2, _ := message.(*TLUpdateChatAdmins)
+		m = &Update{
+			Payload: &Update_UpdateChatAdmins{
+				UpdateChatAdmins: m2,
+			},
+		}
+	case *TLUpdateChatParticipantAdmin:
+		m2, _ := message.(*TLUpdateChatParticipantAdmin)
+		m = &Update{
+			Payload: &Update_UpdateChatParticipantAdmin{
+				UpdateChatParticipantAdmin: m2,
+			},
+		}
+	case *TLUpdateNewStickerSet:
+		m2, _ := message.(*TLUpdateNewStickerSet)
+		m = &Update{
+			Payload: &Update_UpdateNewStickerSet{
+				UpdateNewStickerSet: m2,
+			},
+		}
+	case *TLUpdateStickerSetsOrder:
+		m2, _ := message.(*TLUpdateStickerSetsOrder)
+		m = &Update{
+			Payload: &Update_UpdateStickerSetsOrder{
+				UpdateStickerSetsOrder: m2,
+			},
+		}
+	case *TLUpdateStickerSets:
+		m2, _ := message.(*TLUpdateStickerSets)
+		m = &Update{
+			Payload: &Update_UpdateStickerSets{
+				UpdateStickerSets: m2,
+			},
+		}
+	case *TLUpdateSavedGifs:
+		m2, _ := message.(*TLUpdateSavedGifs)
+		m = &Update{
+			Payload: &Update_UpdateSavedGifs{
+				UpdateSavedGifs: m2,
+			},
+		}
+	case *TLUpdateBotInlineQuery:
+		m2, _ := message.(*TLUpdateBotInlineQuery)
+		m = &Update{
+			Payload: &Update_UpdateBotInlineQuery{
+				UpdateBotInlineQuery: m2,
+			},
+		}
+	case *TLUpdateBotInlineSend:
+		m2, _ := message.(*TLUpdateBotInlineSend)
+		m = &Update{
+			Payload: &Update_UpdateBotInlineSend{
+				UpdateBotInlineSend: m2,
+			},
+		}
+	case *TLUpdateEditChannelMessage:
+		m2, _ := message.(*TLUpdateEditChannelMessage)
+		m = &Update{
+			Payload: &Update_UpdateEditChannelMessage{
+				UpdateEditChannelMessage: m2,
+			},
+		}
+	case *TLUpdateChannelPinnedMessage:
+		m2, _ := message.(*TLUpdateChannelPinnedMessage)
+		m = &Update{
+			Payload: &Update_UpdateChannelPinnedMessage{
+				UpdateChannelPinnedMessage: m2,
+			},
+		}
+	case *TLUpdateBotCallbackQuery:
+		m2, _ := message.(*TLUpdateBotCallbackQuery)
+		m = &Update{
+			Payload: &Update_UpdateBotCallbackQuery{
+				UpdateBotCallbackQuery: m2,
+			},
+		}
+	case *TLUpdateEditMessage:
+		m2, _ := message.(*TLUpdateEditMessage)
+		m = &Update{
+			Payload: &Update_UpdateEditMessage{
+				UpdateEditMessage: m2,
+			},
+		}
+	case *TLUpdateInlineBotCallbackQuery:
+		m2, _ := message.(*TLUpdateInlineBotCallbackQuery)
+		m = &Update{
+			Payload: &Update_UpdateInlineBotCallbackQuery{
+				UpdateInlineBotCallbackQuery: m2,
+			},
+		}
+	case *TLUpdateReadChannelOutbox:
+		m2, _ := message.(*TLUpdateReadChannelOutbox)
+		m = &Update{
+			Payload: &Update_UpdateReadChannelOutbox{
+				UpdateReadChannelOutbox: m2,
+			},
+		}
+	case *TLUpdateDraftMessage:
+		m2, _ := message.(*TLUpdateDraftMessage)
+		m = &Update{
+			Payload: &Update_UpdateDraftMessage{
+				UpdateDraftMessage: m2,
+			},
+		}
+	case *TLUpdateReadFeaturedStickers:
+		m2, _ := message.(*TLUpdateReadFeaturedStickers)
+		m = &Update{
+			Payload: &Update_UpdateReadFeaturedStickers{
+				UpdateReadFeaturedStickers: m2,
+			},
+		}
+	case *TLUpdateRecentStickers:
+		m2, _ := message.(*TLUpdateRecentStickers)
+		m = &Update{
+			Payload: &Update_UpdateRecentStickers{
+				UpdateRecentStickers: m2,
+			},
+		}
+	case *TLUpdateConfig:
+		m2, _ := message.(*TLUpdateConfig)
+		m = &Update{
+			Payload: &Update_UpdateConfig{
+				UpdateConfig: m2,
+			},
+		}
+	case *TLUpdatePtsChanged:
+		m2, _ := message.(*TLUpdatePtsChanged)
+		m = &Update{
+			Payload: &Update_UpdatePtsChanged{
+				UpdatePtsChanged: m2,
+			},
+		}
+	case *TLUpdateChannelWebPage:
+		m2, _ := message.(*TLUpdateChannelWebPage)
+		m = &Update{
+			Payload: &Update_UpdateChannelWebPage{
+				UpdateChannelWebPage: m2,
+			},
+		}
+	case *TLUpdateDialogPinned:
+		m2, _ := message.(*TLUpdateDialogPinned)
+		m = &Update{
+			Payload: &Update_UpdateDialogPinned{
+				UpdateDialogPinned: m2,
+			},
+		}
+	case *TLUpdatePinnedDialogs:
+		m2, _ := message.(*TLUpdatePinnedDialogs)
+		m = &Update{
+			Payload: &Update_UpdatePinnedDialogs{
+				UpdatePinnedDialogs: m2,
+			},
+		}
+	case *TLUpdateBotWebhookJSON:
+		m2, _ := message.(*TLUpdateBotWebhookJSON)
+		m = &Update{
+			Payload: &Update_UpdateBotWebhookJSON{
+				UpdateBotWebhookJSON: m2,
+			},
+		}
+	case *TLUpdateBotWebhookJSONQuery:
+		m2, _ := message.(*TLUpdateBotWebhookJSONQuery)
+		m = &Update{
+			Payload: &Update_UpdateBotWebhookJSONQuery{
+				UpdateBotWebhookJSONQuery: m2,
+			},
+		}
+	case *TLUpdateBotShippingQuery:
+		m2, _ := message.(*TLUpdateBotShippingQuery)
+		m = &Update{
+			Payload: &Update_UpdateBotShippingQuery{
+				UpdateBotShippingQuery: m2,
+			},
+		}
+	case *TLUpdateBotPrecheckoutQuery:
+		m2, _ := message.(*TLUpdateBotPrecheckoutQuery)
+		m = &Update{
+			Payload: &Update_UpdateBotPrecheckoutQuery{
+				UpdateBotPrecheckoutQuery: m2,
+			},
+		}
+	case *TLUpdatePhoneCall:
+		m2, _ := message.(*TLUpdatePhoneCall)
+		m = &Update{
+			Payload: &Update_UpdatePhoneCall{
+				UpdatePhoneCall: m2,
+			},
+		}
+	case *TLUpdateLangPackTooLong:
+		m2, _ := message.(*TLUpdateLangPackTooLong)
+		m = &Update{
+			Payload: &Update_UpdateLangPackTooLong{
+				UpdateLangPackTooLong: m2,
+			},
+		}
+	case *TLUpdateLangPack:
+		m2, _ := message.(*TLUpdateLangPack)
+		m = &Update{
+			Payload: &Update_UpdateLangPack{
+				UpdateLangPack: m2,
+			},
+		}
+	case *TLUpdateFavedStickers:
+		m2, _ := message.(*TLUpdateFavedStickers)
+		m = &Update{
+			Payload: &Update_UpdateFavedStickers{
+				UpdateFavedStickers: m2,
+			},
+		}
+	case *TLUpdateChannelReadMessagesContents:
+		m2, _ := message.(*TLUpdateChannelReadMessagesContents)
+		m = &Update{
+			Payload: &Update_UpdateChannelReadMessagesContents{
+				UpdateChannelReadMessagesContents: m2,
+			},
+		}
+	case *TLUpdateContactsReset:
+		m2, _ := message.(*TLUpdateContactsReset)
+		m = &Update{
+			Payload: &Update_UpdateContactsReset{
+				UpdateContactsReset: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Updates_State) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -4018,6 +6441,19 @@ func (m *Updates_State) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeUpdates_State(message proto.Message) (m *Updates_State) {
+	switch message.(type) {
+	case *TLUpdatesState:
+		m2, _ := message.(*TLUpdatesState)
+		m = &Updates_State{
+			Payload: &Updates_State_UpdatesState{
+				UpdatesState: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Updates_Difference) Encode() (b []byte) {
@@ -4060,6 +6496,40 @@ func (m *Updates_Difference) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeUpdates_Difference(message proto.Message) (m *Updates_Difference) {
+	switch message.(type) {
+	case *TLUpdatesDifferenceEmpty:
+		m2, _ := message.(*TLUpdatesDifferenceEmpty)
+		m = &Updates_Difference{
+			Payload: &Updates_Difference_UpdatesDifferenceEmpty{
+				UpdatesDifferenceEmpty: m2,
+			},
+		}
+	case *TLUpdatesDifference:
+		m2, _ := message.(*TLUpdatesDifference)
+		m = &Updates_Difference{
+			Payload: &Updates_Difference_UpdatesDifference{
+				UpdatesDifference: m2,
+			},
+		}
+	case *TLUpdatesDifferenceSlice:
+		m2, _ := message.(*TLUpdatesDifferenceSlice)
+		m = &Updates_Difference{
+			Payload: &Updates_Difference_UpdatesDifferenceSlice{
+				UpdatesDifferenceSlice: m2,
+			},
+		}
+	case *TLUpdatesDifferenceTooLong:
+		m2, _ := message.(*TLUpdatesDifferenceTooLong)
+		m = &Updates_Difference{
+			Payload: &Updates_Difference_UpdatesDifferenceTooLong{
+				UpdatesDifferenceTooLong: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Updates) Encode() (b []byte) {
@@ -4125,6 +6595,61 @@ func (m *Updates) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeUpdates(message proto.Message) (m *Updates) {
+	switch message.(type) {
+	case *TLUpdatesTooLong:
+		m2, _ := message.(*TLUpdatesTooLong)
+		m = &Updates{
+			Payload: &Updates_UpdatesTooLong{
+				UpdatesTooLong: m2,
+			},
+		}
+	case *TLUpdateShortMessage:
+		m2, _ := message.(*TLUpdateShortMessage)
+		m = &Updates{
+			Payload: &Updates_UpdateShortMessage{
+				UpdateShortMessage: m2,
+			},
+		}
+	case *TLUpdateShortChatMessage:
+		m2, _ := message.(*TLUpdateShortChatMessage)
+		m = &Updates{
+			Payload: &Updates_UpdateShortChatMessage{
+				UpdateShortChatMessage: m2,
+			},
+		}
+	case *TLUpdateShort:
+		m2, _ := message.(*TLUpdateShort)
+		m = &Updates{
+			Payload: &Updates_UpdateShort{
+				UpdateShort: m2,
+			},
+		}
+	case *TLUpdatesCombined:
+		m2, _ := message.(*TLUpdatesCombined)
+		m = &Updates{
+			Payload: &Updates_UpdatesCombined{
+				UpdatesCombined: m2,
+			},
+		}
+	case *TLUpdates:
+		m2, _ := message.(*TLUpdates)
+		m = &Updates{
+			Payload: &Updates_Updates{
+				Updates: m2,
+			},
+		}
+	case *TLUpdateShortSentMessage:
+		m2, _ := message.(*TLUpdateShortSentMessage)
+		m = &Updates{
+			Payload: &Updates_UpdateShortSentMessage{
+				UpdateShortSentMessage: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Photos_Photos) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -4153,6 +6678,26 @@ func (m *Photos_Photos) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakePhotos_Photos(message proto.Message) (m *Photos_Photos) {
+	switch message.(type) {
+	case *TLPhotosPhotos:
+		m2, _ := message.(*TLPhotosPhotos)
+		m = &Photos_Photos{
+			Payload: &Photos_Photos_PhotosPhotos{
+				PhotosPhotos: m2,
+			},
+		}
+	case *TLPhotosPhotosSlice:
+		m2, _ := message.(*TLPhotosPhotosSlice)
+		m = &Photos_Photos{
+			Payload: &Photos_Photos_PhotosPhotosSlice{
+				PhotosPhotosSlice: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Photos_Photo) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -4172,6 +6717,19 @@ func (m *Photos_Photo) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakePhotos_Photo(message proto.Message) (m *Photos_Photo) {
+	switch message.(type) {
+	case *TLPhotosPhoto:
+		m2, _ := message.(*TLPhotosPhoto)
+		m = &Photos_Photo{
+			Payload: &Photos_Photo_PhotosPhoto{
+				PhotosPhoto: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Upload_File) Encode() (b []byte) {
@@ -4202,6 +6760,26 @@ func (m *Upload_File) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeUpload_File(message proto.Message) (m *Upload_File) {
+	switch message.(type) {
+	case *TLUploadFile:
+		m2, _ := message.(*TLUploadFile)
+		m = &Upload_File{
+			Payload: &Upload_File_UploadFile{
+				UploadFile: m2,
+			},
+		}
+	case *TLUploadFileCdnRedirect:
+		m2, _ := message.(*TLUploadFileCdnRedirect)
+		m = &Upload_File{
+			Payload: &Upload_File_UploadFileCdnRedirect{
+				UploadFileCdnRedirect: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *DcOption) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -4221,6 +6799,19 @@ func (m *DcOption) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeDcOption(message proto.Message) (m *DcOption) {
+	switch message.(type) {
+	case *TLDcOption:
+		m2, _ := message.(*TLDcOption)
+		m = &DcOption{
+			Payload: &DcOption_DcOption{
+				DcOption: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Config) Encode() (b []byte) {
@@ -4244,6 +6835,19 @@ func (m *Config) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeConfig(message proto.Message) (m *Config) {
+	switch message.(type) {
+	case *TLConfig:
+		m2, _ := message.(*TLConfig)
+		m = &Config{
+			Payload: &Config_Config{
+				Config: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *NearestDc) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -4263,6 +6867,19 @@ func (m *NearestDc) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeNearestDc(message proto.Message) (m *NearestDc) {
+	switch message.(type) {
+	case *TLNearestDc:
+		m2, _ := message.(*TLNearestDc)
+		m = &NearestDc{
+			Payload: &NearestDc_NearestDc{
+				NearestDc: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Help_AppUpdate) Encode() (b []byte) {
@@ -4293,6 +6910,26 @@ func (m *Help_AppUpdate) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeHelp_AppUpdate(message proto.Message) (m *Help_AppUpdate) {
+	switch message.(type) {
+	case *TLHelpAppUpdate:
+		m2, _ := message.(*TLHelpAppUpdate)
+		m = &Help_AppUpdate{
+			Payload: &Help_AppUpdate_HelpAppUpdate{
+				HelpAppUpdate: m2,
+			},
+		}
+	case *TLHelpNoAppUpdate:
+		m2, _ := message.(*TLHelpNoAppUpdate)
+		m = &Help_AppUpdate{
+			Payload: &Help_AppUpdate_HelpNoAppUpdate{
+				HelpNoAppUpdate: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Help_InviteText) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -4312,6 +6949,19 @@ func (m *Help_InviteText) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeHelp_InviteText(message proto.Message) (m *Help_InviteText) {
+	switch message.(type) {
+	case *TLHelpInviteText:
+		m2, _ := message.(*TLHelpInviteText)
+		m = &Help_InviteText{
+			Payload: &Help_InviteText_HelpInviteText{
+				HelpInviteText: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *EncryptedChat) Encode() (b []byte) {
@@ -4363,6 +7013,47 @@ func (m *EncryptedChat) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeEncryptedChat(message proto.Message) (m *EncryptedChat) {
+	switch message.(type) {
+	case *TLEncryptedChatEmpty:
+		m2, _ := message.(*TLEncryptedChatEmpty)
+		m = &EncryptedChat{
+			Payload: &EncryptedChat_EncryptedChatEmpty{
+				EncryptedChatEmpty: m2,
+			},
+		}
+	case *TLEncryptedChatWaiting:
+		m2, _ := message.(*TLEncryptedChatWaiting)
+		m = &EncryptedChat{
+			Payload: &EncryptedChat_EncryptedChatWaiting{
+				EncryptedChatWaiting: m2,
+			},
+		}
+	case *TLEncryptedChatRequested:
+		m2, _ := message.(*TLEncryptedChatRequested)
+		m = &EncryptedChat{
+			Payload: &EncryptedChat_EncryptedChatRequested{
+				EncryptedChatRequested: m2,
+			},
+		}
+	case *TLEncryptedChat:
+		m2, _ := message.(*TLEncryptedChat)
+		m = &EncryptedChat{
+			Payload: &EncryptedChat_EncryptedChat{
+				EncryptedChat: m2,
+			},
+		}
+	case *TLEncryptedChatDiscarded:
+		m2, _ := message.(*TLEncryptedChatDiscarded)
+		m = &EncryptedChat{
+			Payload: &EncryptedChat_EncryptedChatDiscarded{
+				EncryptedChatDiscarded: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *InputEncryptedChat) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -4382,6 +7073,19 @@ func (m *InputEncryptedChat) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeInputEncryptedChat(message proto.Message) (m *InputEncryptedChat) {
+	switch message.(type) {
+	case *TLInputEncryptedChat:
+		m2, _ := message.(*TLInputEncryptedChat)
+		m = &InputEncryptedChat{
+			Payload: &InputEncryptedChat_InputEncryptedChat{
+				InputEncryptedChat: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *EncryptedFile) Encode() (b []byte) {
@@ -4410,6 +7114,26 @@ func (m *EncryptedFile) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeEncryptedFile(message proto.Message) (m *EncryptedFile) {
+	switch message.(type) {
+	case *TLEncryptedFileEmpty:
+		m2, _ := message.(*TLEncryptedFileEmpty)
+		m = &EncryptedFile{
+			Payload: &EncryptedFile_EncryptedFileEmpty{
+				EncryptedFileEmpty: m2,
+			},
+		}
+	case *TLEncryptedFile:
+		m2, _ := message.(*TLEncryptedFile)
+		m = &EncryptedFile{
+			Payload: &EncryptedFile_EncryptedFile{
+				EncryptedFile: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InputEncryptedFile) Encode() (b []byte) {
@@ -4454,6 +7178,40 @@ func (m *InputEncryptedFile) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputEncryptedFile(message proto.Message) (m *InputEncryptedFile) {
+	switch message.(type) {
+	case *TLInputEncryptedFileEmpty:
+		m2, _ := message.(*TLInputEncryptedFileEmpty)
+		m = &InputEncryptedFile{
+			Payload: &InputEncryptedFile_InputEncryptedFileEmpty{
+				InputEncryptedFileEmpty: m2,
+			},
+		}
+	case *TLInputEncryptedFileUploaded:
+		m2, _ := message.(*TLInputEncryptedFileUploaded)
+		m = &InputEncryptedFile{
+			Payload: &InputEncryptedFile_InputEncryptedFileUploaded{
+				InputEncryptedFileUploaded: m2,
+			},
+		}
+	case *TLInputEncryptedFile:
+		m2, _ := message.(*TLInputEncryptedFile)
+		m = &InputEncryptedFile{
+			Payload: &InputEncryptedFile_InputEncryptedFile{
+				InputEncryptedFile: m2,
+			},
+		}
+	case *TLInputEncryptedFileBigUploaded:
+		m2, _ := message.(*TLInputEncryptedFileBigUploaded)
+		m = &InputEncryptedFile{
+			Payload: &InputEncryptedFile_InputEncryptedFileBigUploaded{
+				InputEncryptedFileBigUploaded: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *EncryptedMessage) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -4480,6 +7238,26 @@ func (m *EncryptedMessage) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeEncryptedMessage(message proto.Message) (m *EncryptedMessage) {
+	switch message.(type) {
+	case *TLEncryptedMessage:
+		m2, _ := message.(*TLEncryptedMessage)
+		m = &EncryptedMessage{
+			Payload: &EncryptedMessage_EncryptedMessage{
+				EncryptedMessage: m2,
+			},
+		}
+	case *TLEncryptedMessageService:
+		m2, _ := message.(*TLEncryptedMessageService)
+		m = &EncryptedMessage{
+			Payload: &EncryptedMessage_EncryptedMessageService{
+				EncryptedMessageService: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Messages_DhConfig) Encode() (b []byte) {
@@ -4510,6 +7288,26 @@ func (m *Messages_DhConfig) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMessages_DhConfig(message proto.Message) (m *Messages_DhConfig) {
+	switch message.(type) {
+	case *TLMessagesDhConfigNotModified:
+		m2, _ := message.(*TLMessagesDhConfigNotModified)
+		m = &Messages_DhConfig{
+			Payload: &Messages_DhConfig_MessagesDhConfigNotModified{
+				MessagesDhConfigNotModified: m2,
+			},
+		}
+	case *TLMessagesDhConfig:
+		m2, _ := message.(*TLMessagesDhConfig)
+		m = &Messages_DhConfig{
+			Payload: &Messages_DhConfig_MessagesDhConfig{
+				MessagesDhConfig: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Messages_SentEncryptedMessage) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -4536,6 +7334,26 @@ func (m *Messages_SentEncryptedMessage) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessages_SentEncryptedMessage(message proto.Message) (m *Messages_SentEncryptedMessage) {
+	switch message.(type) {
+	case *TLMessagesSentEncryptedMessage:
+		m2, _ := message.(*TLMessagesSentEncryptedMessage)
+		m = &Messages_SentEncryptedMessage{
+			Payload: &Messages_SentEncryptedMessage_MessagesSentEncryptedMessage{
+				MessagesSentEncryptedMessage: m2,
+			},
+		}
+	case *TLMessagesSentEncryptedFile:
+		m2, _ := message.(*TLMessagesSentEncryptedFile)
+		m = &Messages_SentEncryptedMessage{
+			Payload: &Messages_SentEncryptedMessage_MessagesSentEncryptedFile{
+				MessagesSentEncryptedFile: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InputDocument) Encode() (b []byte) {
@@ -4566,6 +7384,26 @@ func (m *InputDocument) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputDocument(message proto.Message) (m *InputDocument) {
+	switch message.(type) {
+	case *TLInputDocumentEmpty:
+		m2, _ := message.(*TLInputDocumentEmpty)
+		m = &InputDocument{
+			Payload: &InputDocument_InputDocumentEmpty{
+				InputDocumentEmpty: m2,
+			},
+		}
+	case *TLInputDocument:
+		m2, _ := message.(*TLInputDocument)
+		m = &InputDocument{
+			Payload: &InputDocument_InputDocument{
+				InputDocument: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Document) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -4594,6 +7432,26 @@ func (m *Document) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeDocument(message proto.Message) (m *Document) {
+	switch message.(type) {
+	case *TLDocumentEmpty:
+		m2, _ := message.(*TLDocumentEmpty)
+		m = &Document{
+			Payload: &Document_DocumentEmpty{
+				DocumentEmpty: m2,
+			},
+		}
+	case *TLDocument:
+		m2, _ := message.(*TLDocument)
+		m = &Document{
+			Payload: &Document_Document{
+				Document: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Help_Support) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -4613,6 +7471,19 @@ func (m *Help_Support) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeHelp_Support(message proto.Message) (m *Help_Support) {
+	switch message.(type) {
+	case *TLHelpSupport:
+		m2, _ := message.(*TLHelpSupport)
+		m = &Help_Support{
+			Payload: &Help_Support_HelpSupport{
+				HelpSupport: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *NotifyPeer) Encode() (b []byte) {
@@ -4655,6 +7526,40 @@ func (m *NotifyPeer) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeNotifyPeer(message proto.Message) (m *NotifyPeer) {
+	switch message.(type) {
+	case *TLNotifyPeer:
+		m2, _ := message.(*TLNotifyPeer)
+		m = &NotifyPeer{
+			Payload: &NotifyPeer_NotifyPeer{
+				NotifyPeer: m2,
+			},
+		}
+	case *TLNotifyUsers:
+		m2, _ := message.(*TLNotifyUsers)
+		m = &NotifyPeer{
+			Payload: &NotifyPeer_NotifyUsers{
+				NotifyUsers: m2,
+			},
+		}
+	case *TLNotifyChats:
+		m2, _ := message.(*TLNotifyChats)
+		m = &NotifyPeer{
+			Payload: &NotifyPeer_NotifyChats{
+				NotifyChats: m2,
+			},
+		}
+	case *TLNotifyAll:
+		m2, _ := message.(*TLNotifyAll)
+		m = &NotifyPeer{
+			Payload: &NotifyPeer_NotifyAll{
+				NotifyAll: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *SendMessageAction) Encode() (b []byte) {
@@ -4762,6 +7667,103 @@ func (m *SendMessageAction) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeSendMessageAction(message proto.Message) (m *SendMessageAction) {
+	switch message.(type) {
+	case *TLSendMessageTypingAction:
+		m2, _ := message.(*TLSendMessageTypingAction)
+		m = &SendMessageAction{
+			Payload: &SendMessageAction_SendMessageTypingAction{
+				SendMessageTypingAction: m2,
+			},
+		}
+	case *TLSendMessageCancelAction:
+		m2, _ := message.(*TLSendMessageCancelAction)
+		m = &SendMessageAction{
+			Payload: &SendMessageAction_SendMessageCancelAction{
+				SendMessageCancelAction: m2,
+			},
+		}
+	case *TLSendMessageRecordVideoAction:
+		m2, _ := message.(*TLSendMessageRecordVideoAction)
+		m = &SendMessageAction{
+			Payload: &SendMessageAction_SendMessageRecordVideoAction{
+				SendMessageRecordVideoAction: m2,
+			},
+		}
+	case *TLSendMessageUploadVideoAction:
+		m2, _ := message.(*TLSendMessageUploadVideoAction)
+		m = &SendMessageAction{
+			Payload: &SendMessageAction_SendMessageUploadVideoAction{
+				SendMessageUploadVideoAction: m2,
+			},
+		}
+	case *TLSendMessageRecordAudioAction:
+		m2, _ := message.(*TLSendMessageRecordAudioAction)
+		m = &SendMessageAction{
+			Payload: &SendMessageAction_SendMessageRecordAudioAction{
+				SendMessageRecordAudioAction: m2,
+			},
+		}
+	case *TLSendMessageUploadAudioAction:
+		m2, _ := message.(*TLSendMessageUploadAudioAction)
+		m = &SendMessageAction{
+			Payload: &SendMessageAction_SendMessageUploadAudioAction{
+				SendMessageUploadAudioAction: m2,
+			},
+		}
+	case *TLSendMessageUploadPhotoAction:
+		m2, _ := message.(*TLSendMessageUploadPhotoAction)
+		m = &SendMessageAction{
+			Payload: &SendMessageAction_SendMessageUploadPhotoAction{
+				SendMessageUploadPhotoAction: m2,
+			},
+		}
+	case *TLSendMessageUploadDocumentAction:
+		m2, _ := message.(*TLSendMessageUploadDocumentAction)
+		m = &SendMessageAction{
+			Payload: &SendMessageAction_SendMessageUploadDocumentAction{
+				SendMessageUploadDocumentAction: m2,
+			},
+		}
+	case *TLSendMessageGeoLocationAction:
+		m2, _ := message.(*TLSendMessageGeoLocationAction)
+		m = &SendMessageAction{
+			Payload: &SendMessageAction_SendMessageGeoLocationAction{
+				SendMessageGeoLocationAction: m2,
+			},
+		}
+	case *TLSendMessageChooseContactAction:
+		m2, _ := message.(*TLSendMessageChooseContactAction)
+		m = &SendMessageAction{
+			Payload: &SendMessageAction_SendMessageChooseContactAction{
+				SendMessageChooseContactAction: m2,
+			},
+		}
+	case *TLSendMessageGamePlayAction:
+		m2, _ := message.(*TLSendMessageGamePlayAction)
+		m = &SendMessageAction{
+			Payload: &SendMessageAction_SendMessageGamePlayAction{
+				SendMessageGamePlayAction: m2,
+			},
+		}
+	case *TLSendMessageRecordRoundAction:
+		m2, _ := message.(*TLSendMessageRecordRoundAction)
+		m = &SendMessageAction{
+			Payload: &SendMessageAction_SendMessageRecordRoundAction{
+				SendMessageRecordRoundAction: m2,
+			},
+		}
+	case *TLSendMessageUploadRoundAction:
+		m2, _ := message.(*TLSendMessageUploadRoundAction)
+		m = &SendMessageAction{
+			Payload: &SendMessageAction_SendMessageUploadRoundAction{
+				SendMessageUploadRoundAction: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Contacts_Found) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -4781,6 +7783,19 @@ func (m *Contacts_Found) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeContacts_Found(message proto.Message) (m *Contacts_Found) {
+	switch message.(type) {
+	case *TLContactsFound:
+		m2, _ := message.(*TLContactsFound)
+		m = &Contacts_Found{
+			Payload: &Contacts_Found_ContactsFound{
+				ContactsFound: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InputPrivacyKey) Encode() (b []byte) {
@@ -4818,6 +7833,33 @@ func (m *InputPrivacyKey) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputPrivacyKey(message proto.Message) (m *InputPrivacyKey) {
+	switch message.(type) {
+	case *TLInputPrivacyKeyStatusTimestamp:
+		m2, _ := message.(*TLInputPrivacyKeyStatusTimestamp)
+		m = &InputPrivacyKey{
+			Payload: &InputPrivacyKey_InputPrivacyKeyStatusTimestamp{
+				InputPrivacyKeyStatusTimestamp: m2,
+			},
+		}
+	case *TLInputPrivacyKeyChatInvite:
+		m2, _ := message.(*TLInputPrivacyKeyChatInvite)
+		m = &InputPrivacyKey{
+			Payload: &InputPrivacyKey_InputPrivacyKeyChatInvite{
+				InputPrivacyKeyChatInvite: m2,
+			},
+		}
+	case *TLInputPrivacyKeyPhoneCall:
+		m2, _ := message.(*TLInputPrivacyKeyPhoneCall)
+		m = &InputPrivacyKey{
+			Payload: &InputPrivacyKey_InputPrivacyKeyPhoneCall{
+				InputPrivacyKeyPhoneCall: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *PrivacyKey) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -4851,6 +7893,33 @@ func (m *PrivacyKey) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakePrivacyKey(message proto.Message) (m *PrivacyKey) {
+	switch message.(type) {
+	case *TLPrivacyKeyStatusTimestamp:
+		m2, _ := message.(*TLPrivacyKeyStatusTimestamp)
+		m = &PrivacyKey{
+			Payload: &PrivacyKey_PrivacyKeyStatusTimestamp{
+				PrivacyKeyStatusTimestamp: m2,
+			},
+		}
+	case *TLPrivacyKeyChatInvite:
+		m2, _ := message.(*TLPrivacyKeyChatInvite)
+		m = &PrivacyKey{
+			Payload: &PrivacyKey_PrivacyKeyChatInvite{
+				PrivacyKeyChatInvite: m2,
+			},
+		}
+	case *TLPrivacyKeyPhoneCall:
+		m2, _ := message.(*TLPrivacyKeyPhoneCall)
+		m = &PrivacyKey{
+			Payload: &PrivacyKey_PrivacyKeyPhoneCall{
+				PrivacyKeyPhoneCall: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InputPrivacyRule) Encode() (b []byte) {
@@ -4909,6 +7978,54 @@ func (m *InputPrivacyRule) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputPrivacyRule(message proto.Message) (m *InputPrivacyRule) {
+	switch message.(type) {
+	case *TLInputPrivacyValueAllowContacts:
+		m2, _ := message.(*TLInputPrivacyValueAllowContacts)
+		m = &InputPrivacyRule{
+			Payload: &InputPrivacyRule_InputPrivacyValueAllowContacts{
+				InputPrivacyValueAllowContacts: m2,
+			},
+		}
+	case *TLInputPrivacyValueAllowAll:
+		m2, _ := message.(*TLInputPrivacyValueAllowAll)
+		m = &InputPrivacyRule{
+			Payload: &InputPrivacyRule_InputPrivacyValueAllowAll{
+				InputPrivacyValueAllowAll: m2,
+			},
+		}
+	case *TLInputPrivacyValueAllowUsers:
+		m2, _ := message.(*TLInputPrivacyValueAllowUsers)
+		m = &InputPrivacyRule{
+			Payload: &InputPrivacyRule_InputPrivacyValueAllowUsers{
+				InputPrivacyValueAllowUsers: m2,
+			},
+		}
+	case *TLInputPrivacyValueDisallowContacts:
+		m2, _ := message.(*TLInputPrivacyValueDisallowContacts)
+		m = &InputPrivacyRule{
+			Payload: &InputPrivacyRule_InputPrivacyValueDisallowContacts{
+				InputPrivacyValueDisallowContacts: m2,
+			},
+		}
+	case *TLInputPrivacyValueDisallowAll:
+		m2, _ := message.(*TLInputPrivacyValueDisallowAll)
+		m = &InputPrivacyRule{
+			Payload: &InputPrivacyRule_InputPrivacyValueDisallowAll{
+				InputPrivacyValueDisallowAll: m2,
+			},
+		}
+	case *TLInputPrivacyValueDisallowUsers:
+		m2, _ := message.(*TLInputPrivacyValueDisallowUsers)
+		m = &InputPrivacyRule{
+			Payload: &InputPrivacyRule_InputPrivacyValueDisallowUsers{
+				InputPrivacyValueDisallowUsers: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *PrivacyRule) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -4965,6 +8082,54 @@ func (m *PrivacyRule) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakePrivacyRule(message proto.Message) (m *PrivacyRule) {
+	switch message.(type) {
+	case *TLPrivacyValueAllowContacts:
+		m2, _ := message.(*TLPrivacyValueAllowContacts)
+		m = &PrivacyRule{
+			Payload: &PrivacyRule_PrivacyValueAllowContacts{
+				PrivacyValueAllowContacts: m2,
+			},
+		}
+	case *TLPrivacyValueAllowAll:
+		m2, _ := message.(*TLPrivacyValueAllowAll)
+		m = &PrivacyRule{
+			Payload: &PrivacyRule_PrivacyValueAllowAll{
+				PrivacyValueAllowAll: m2,
+			},
+		}
+	case *TLPrivacyValueAllowUsers:
+		m2, _ := message.(*TLPrivacyValueAllowUsers)
+		m = &PrivacyRule{
+			Payload: &PrivacyRule_PrivacyValueAllowUsers{
+				PrivacyValueAllowUsers: m2,
+			},
+		}
+	case *TLPrivacyValueDisallowContacts:
+		m2, _ := message.(*TLPrivacyValueDisallowContacts)
+		m = &PrivacyRule{
+			Payload: &PrivacyRule_PrivacyValueDisallowContacts{
+				PrivacyValueDisallowContacts: m2,
+			},
+		}
+	case *TLPrivacyValueDisallowAll:
+		m2, _ := message.(*TLPrivacyValueDisallowAll)
+		m = &PrivacyRule{
+			Payload: &PrivacyRule_PrivacyValueDisallowAll{
+				PrivacyValueDisallowAll: m2,
+			},
+		}
+	case *TLPrivacyValueDisallowUsers:
+		m2, _ := message.(*TLPrivacyValueDisallowUsers)
+		m = &PrivacyRule{
+			Payload: &PrivacyRule_PrivacyValueDisallowUsers{
+				PrivacyValueDisallowUsers: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Account_PrivacyRules) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -4986,6 +8151,19 @@ func (m *Account_PrivacyRules) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeAccount_PrivacyRules(message proto.Message) (m *Account_PrivacyRules) {
+	switch message.(type) {
+	case *TLAccountPrivacyRules:
+		m2, _ := message.(*TLAccountPrivacyRules)
+		m = &Account_PrivacyRules{
+			Payload: &Account_PrivacyRules_AccountPrivacyRules{
+				AccountPrivacyRules: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *AccountDaysTTL) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5005,6 +8183,19 @@ func (m *AccountDaysTTL) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeAccountDaysTTL(message proto.Message) (m *AccountDaysTTL) {
+	switch message.(type) {
+	case *TLAccountDaysTTL:
+		m2, _ := message.(*TLAccountDaysTTL)
+		m = &AccountDaysTTL{
+			Payload: &AccountDaysTTL_AccountDaysTTL{
+				AccountDaysTTL: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *DocumentAttribute) Encode() (b []byte) {
@@ -5070,6 +8261,61 @@ func (m *DocumentAttribute) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeDocumentAttribute(message proto.Message) (m *DocumentAttribute) {
+	switch message.(type) {
+	case *TLDocumentAttributeImageSize:
+		m2, _ := message.(*TLDocumentAttributeImageSize)
+		m = &DocumentAttribute{
+			Payload: &DocumentAttribute_DocumentAttributeImageSize{
+				DocumentAttributeImageSize: m2,
+			},
+		}
+	case *TLDocumentAttributeAnimated:
+		m2, _ := message.(*TLDocumentAttributeAnimated)
+		m = &DocumentAttribute{
+			Payload: &DocumentAttribute_DocumentAttributeAnimated{
+				DocumentAttributeAnimated: m2,
+			},
+		}
+	case *TLDocumentAttributeSticker:
+		m2, _ := message.(*TLDocumentAttributeSticker)
+		m = &DocumentAttribute{
+			Payload: &DocumentAttribute_DocumentAttributeSticker{
+				DocumentAttributeSticker: m2,
+			},
+		}
+	case *TLDocumentAttributeVideo:
+		m2, _ := message.(*TLDocumentAttributeVideo)
+		m = &DocumentAttribute{
+			Payload: &DocumentAttribute_DocumentAttributeVideo{
+				DocumentAttributeVideo: m2,
+			},
+		}
+	case *TLDocumentAttributeAudio:
+		m2, _ := message.(*TLDocumentAttributeAudio)
+		m = &DocumentAttribute{
+			Payload: &DocumentAttribute_DocumentAttributeAudio{
+				DocumentAttributeAudio: m2,
+			},
+		}
+	case *TLDocumentAttributeFilename:
+		m2, _ := message.(*TLDocumentAttributeFilename)
+		m = &DocumentAttribute{
+			Payload: &DocumentAttribute_DocumentAttributeFilename{
+				DocumentAttributeFilename: m2,
+			},
+		}
+	case *TLDocumentAttributeHasStickers:
+		m2, _ := message.(*TLDocumentAttributeHasStickers)
+		m = &DocumentAttribute{
+			Payload: &DocumentAttribute_DocumentAttributeHasStickers{
+				DocumentAttributeHasStickers: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Messages_Stickers) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5098,6 +8344,26 @@ func (m *Messages_Stickers) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMessages_Stickers(message proto.Message) (m *Messages_Stickers) {
+	switch message.(type) {
+	case *TLMessagesStickersNotModified:
+		m2, _ := message.(*TLMessagesStickersNotModified)
+		m = &Messages_Stickers{
+			Payload: &Messages_Stickers_MessagesStickersNotModified{
+				MessagesStickersNotModified: m2,
+			},
+		}
+	case *TLMessagesStickers:
+		m2, _ := message.(*TLMessagesStickers)
+		m = &Messages_Stickers{
+			Payload: &Messages_Stickers_MessagesStickers{
+				MessagesStickers: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *StickerPack) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5117,6 +8383,19 @@ func (m *StickerPack) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeStickerPack(message proto.Message) (m *StickerPack) {
+	switch message.(type) {
+	case *TLStickerPack:
+		m2, _ := message.(*TLStickerPack)
+		m = &StickerPack{
+			Payload: &StickerPack_StickerPack{
+				StickerPack: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Messages_AllStickers) Encode() (b []byte) {
@@ -5147,6 +8426,26 @@ func (m *Messages_AllStickers) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMessages_AllStickers(message proto.Message) (m *Messages_AllStickers) {
+	switch message.(type) {
+	case *TLMessagesAllStickersNotModified:
+		m2, _ := message.(*TLMessagesAllStickersNotModified)
+		m = &Messages_AllStickers{
+			Payload: &Messages_AllStickers_MessagesAllStickersNotModified{
+				MessagesAllStickersNotModified: m2,
+			},
+		}
+	case *TLMessagesAllStickers:
+		m2, _ := message.(*TLMessagesAllStickers)
+		m = &Messages_AllStickers{
+			Payload: &Messages_AllStickers_MessagesAllStickers{
+				MessagesAllStickers: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *DisabledFeature) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5168,6 +8467,19 @@ func (m *DisabledFeature) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeDisabledFeature(message proto.Message) (m *DisabledFeature) {
+	switch message.(type) {
+	case *TLDisabledFeature:
+		m2, _ := message.(*TLDisabledFeature)
+		m = &DisabledFeature{
+			Payload: &DisabledFeature_DisabledFeature{
+				DisabledFeature: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Messages_AffectedMessages) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5187,6 +8499,19 @@ func (m *Messages_AffectedMessages) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessages_AffectedMessages(message proto.Message) (m *Messages_AffectedMessages) {
+	switch message.(type) {
+	case *TLMessagesAffectedMessages:
+		m2, _ := message.(*TLMessagesAffectedMessages)
+		m = &Messages_AffectedMessages{
+			Payload: &Messages_AffectedMessages_MessagesAffectedMessages{
+				MessagesAffectedMessages: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *ContactLink) Encode() (b []byte) {
@@ -5231,6 +8556,40 @@ func (m *ContactLink) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeContactLink(message proto.Message) (m *ContactLink) {
+	switch message.(type) {
+	case *TLContactLinkUnknown:
+		m2, _ := message.(*TLContactLinkUnknown)
+		m = &ContactLink{
+			Payload: &ContactLink_ContactLinkUnknown{
+				ContactLinkUnknown: m2,
+			},
+		}
+	case *TLContactLinkNone:
+		m2, _ := message.(*TLContactLinkNone)
+		m = &ContactLink{
+			Payload: &ContactLink_ContactLinkNone{
+				ContactLinkNone: m2,
+			},
+		}
+	case *TLContactLinkHasPhone:
+		m2, _ := message.(*TLContactLinkHasPhone)
+		m = &ContactLink{
+			Payload: &ContactLink_ContactLinkHasPhone{
+				ContactLinkHasPhone: m2,
+			},
+		}
+	case *TLContactLinkContact:
+		m2, _ := message.(*TLContactLinkContact)
+		m = &ContactLink{
+			Payload: &ContactLink_ContactLinkContact{
+				ContactLinkContact: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *WebPage) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5273,6 +8632,40 @@ func (m *WebPage) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeWebPage(message proto.Message) (m *WebPage) {
+	switch message.(type) {
+	case *TLWebPageEmpty:
+		m2, _ := message.(*TLWebPageEmpty)
+		m = &WebPage{
+			Payload: &WebPage_WebPageEmpty{
+				WebPageEmpty: m2,
+			},
+		}
+	case *TLWebPagePending:
+		m2, _ := message.(*TLWebPagePending)
+		m = &WebPage{
+			Payload: &WebPage_WebPagePending{
+				WebPagePending: m2,
+			},
+		}
+	case *TLWebPage:
+		m2, _ := message.(*TLWebPage)
+		m = &WebPage{
+			Payload: &WebPage_WebPage{
+				WebPage: m2,
+			},
+		}
+	case *TLWebPageNotModified:
+		m2, _ := message.(*TLWebPageNotModified)
+		m = &WebPage{
+			Payload: &WebPage_WebPageNotModified{
+				WebPageNotModified: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Authorization) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5294,6 +8687,19 @@ func (m *Authorization) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeAuthorization(message proto.Message) (m *Authorization) {
+	switch message.(type) {
+	case *TLAuthorization:
+		m2, _ := message.(*TLAuthorization)
+		m = &Authorization{
+			Payload: &Authorization_Authorization{
+				Authorization: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Account_Authorizations) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5313,6 +8719,19 @@ func (m *Account_Authorizations) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeAccount_Authorizations(message proto.Message) (m *Account_Authorizations) {
+	switch message.(type) {
+	case *TLAccountAuthorizations:
+		m2, _ := message.(*TLAccountAuthorizations)
+		m = &Account_Authorizations{
+			Payload: &Account_Authorizations_AccountAuthorizations{
+				AccountAuthorizations: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Account_Password) Encode() (b []byte) {
@@ -5343,6 +8762,26 @@ func (m *Account_Password) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeAccount_Password(message proto.Message) (m *Account_Password) {
+	switch message.(type) {
+	case *TLAccountNoPassword:
+		m2, _ := message.(*TLAccountNoPassword)
+		m = &Account_Password{
+			Payload: &Account_Password_AccountNoPassword{
+				AccountNoPassword: m2,
+			},
+		}
+	case *TLAccountPassword:
+		m2, _ := message.(*TLAccountPassword)
+		m = &Account_Password{
+			Payload: &Account_Password_AccountPassword{
+				AccountPassword: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Account_PasswordSettings) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5362,6 +8801,19 @@ func (m *Account_PasswordSettings) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeAccount_PasswordSettings(message proto.Message) (m *Account_PasswordSettings) {
+	switch message.(type) {
+	case *TLAccountPasswordSettings:
+		m2, _ := message.(*TLAccountPasswordSettings)
+		m = &Account_PasswordSettings{
+			Payload: &Account_PasswordSettings_AccountPasswordSettings{
+				AccountPasswordSettings: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Account_PasswordInputSettings) Encode() (b []byte) {
@@ -5385,6 +8837,19 @@ func (m *Account_PasswordInputSettings) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeAccount_PasswordInputSettings(message proto.Message) (m *Account_PasswordInputSettings) {
+	switch message.(type) {
+	case *TLAccountPasswordInputSettings:
+		m2, _ := message.(*TLAccountPasswordInputSettings)
+		m = &Account_PasswordInputSettings{
+			Payload: &Account_PasswordInputSettings_AccountPasswordInputSettings{
+				AccountPasswordInputSettings: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Auth_PasswordRecovery) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5406,6 +8871,19 @@ func (m *Auth_PasswordRecovery) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeAuth_PasswordRecovery(message proto.Message) (m *Auth_PasswordRecovery) {
+	switch message.(type) {
+	case *TLAuthPasswordRecovery:
+		m2, _ := message.(*TLAuthPasswordRecovery)
+		m = &Auth_PasswordRecovery{
+			Payload: &Auth_PasswordRecovery_AuthPasswordRecovery{
+				AuthPasswordRecovery: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *ReceivedNotifyMessage) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5425,6 +8903,19 @@ func (m *ReceivedNotifyMessage) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeReceivedNotifyMessage(message proto.Message) (m *ReceivedNotifyMessage) {
+	switch message.(type) {
+	case *TLReceivedNotifyMessage:
+		m2, _ := message.(*TLReceivedNotifyMessage)
+		m = &ReceivedNotifyMessage{
+			Payload: &ReceivedNotifyMessage_ReceivedNotifyMessage{
+				ReceivedNotifyMessage: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *ExportedChatInvite) Encode() (b []byte) {
@@ -5455,6 +8946,26 @@ func (m *ExportedChatInvite) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeExportedChatInvite(message proto.Message) (m *ExportedChatInvite) {
+	switch message.(type) {
+	case *TLChatInviteEmpty:
+		m2, _ := message.(*TLChatInviteEmpty)
+		m = &ExportedChatInvite{
+			Payload: &ExportedChatInvite_ChatInviteEmpty{
+				ChatInviteEmpty: m2,
+			},
+		}
+	case *TLChatInviteExported:
+		m2, _ := message.(*TLChatInviteExported)
+		m = &ExportedChatInvite{
+			Payload: &ExportedChatInvite_ChatInviteExported{
+				ChatInviteExported: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *ChatInvite) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5481,6 +8992,26 @@ func (m *ChatInvite) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeChatInvite(message proto.Message) (m *ChatInvite) {
+	switch message.(type) {
+	case *TLChatInviteAlready:
+		m2, _ := message.(*TLChatInviteAlready)
+		m = &ChatInvite{
+			Payload: &ChatInvite_ChatInviteAlready{
+				ChatInviteAlready: m2,
+			},
+		}
+	case *TLChatInvite:
+		m2, _ := message.(*TLChatInvite)
+		m = &ChatInvite{
+			Payload: &ChatInvite_ChatInvite{
+				ChatInvite: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InputStickerSet) Encode() (b []byte) {
@@ -5518,6 +9049,33 @@ func (m *InputStickerSet) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputStickerSet(message proto.Message) (m *InputStickerSet) {
+	switch message.(type) {
+	case *TLInputStickerSetEmpty:
+		m2, _ := message.(*TLInputStickerSetEmpty)
+		m = &InputStickerSet{
+			Payload: &InputStickerSet_InputStickerSetEmpty{
+				InputStickerSetEmpty: m2,
+			},
+		}
+	case *TLInputStickerSetID:
+		m2, _ := message.(*TLInputStickerSetID)
+		m = &InputStickerSet{
+			Payload: &InputStickerSet_InputStickerSetID{
+				InputStickerSetID: m2,
+			},
+		}
+	case *TLInputStickerSetShortName:
+		m2, _ := message.(*TLInputStickerSetShortName)
+		m = &InputStickerSet{
+			Payload: &InputStickerSet_InputStickerSetShortName{
+				InputStickerSetShortName: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *StickerSet) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5537,6 +9095,19 @@ func (m *StickerSet) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeStickerSet(message proto.Message) (m *StickerSet) {
+	switch message.(type) {
+	case *TLStickerSet:
+		m2, _ := message.(*TLStickerSet)
+		m = &StickerSet{
+			Payload: &StickerSet_StickerSet{
+				StickerSet: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Messages_StickerSet) Encode() (b []byte) {
@@ -5560,6 +9131,19 @@ func (m *Messages_StickerSet) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMessages_StickerSet(message proto.Message) (m *Messages_StickerSet) {
+	switch message.(type) {
+	case *TLMessagesStickerSet:
+		m2, _ := message.(*TLMessagesStickerSet)
+		m = &Messages_StickerSet{
+			Payload: &Messages_StickerSet_MessagesStickerSet{
+				MessagesStickerSet: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *BotCommand) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5581,6 +9165,19 @@ func (m *BotCommand) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeBotCommand(message proto.Message) (m *BotCommand) {
+	switch message.(type) {
+	case *TLBotCommand:
+		m2, _ := message.(*TLBotCommand)
+		m = &BotCommand{
+			Payload: &BotCommand_BotCommand{
+				BotCommand: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *BotInfo) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5600,6 +9197,19 @@ func (m *BotInfo) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeBotInfo(message proto.Message) (m *BotInfo) {
+	switch message.(type) {
+	case *TLBotInfo:
+		m2, _ := message.(*TLBotInfo)
+		m = &BotInfo{
+			Payload: &BotInfo_BotInfo{
+				BotInfo: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *KeyboardButton) Encode() (b []byte) {
@@ -5672,6 +9282,68 @@ func (m *KeyboardButton) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeKeyboardButton(message proto.Message) (m *KeyboardButton) {
+	switch message.(type) {
+	case *TLKeyboardButton:
+		m2, _ := message.(*TLKeyboardButton)
+		m = &KeyboardButton{
+			Payload: &KeyboardButton_KeyboardButton{
+				KeyboardButton: m2,
+			},
+		}
+	case *TLKeyboardButtonUrl:
+		m2, _ := message.(*TLKeyboardButtonUrl)
+		m = &KeyboardButton{
+			Payload: &KeyboardButton_KeyboardButtonUrl{
+				KeyboardButtonUrl: m2,
+			},
+		}
+	case *TLKeyboardButtonCallback:
+		m2, _ := message.(*TLKeyboardButtonCallback)
+		m = &KeyboardButton{
+			Payload: &KeyboardButton_KeyboardButtonCallback{
+				KeyboardButtonCallback: m2,
+			},
+		}
+	case *TLKeyboardButtonRequestPhone:
+		m2, _ := message.(*TLKeyboardButtonRequestPhone)
+		m = &KeyboardButton{
+			Payload: &KeyboardButton_KeyboardButtonRequestPhone{
+				KeyboardButtonRequestPhone: m2,
+			},
+		}
+	case *TLKeyboardButtonRequestGeoLocation:
+		m2, _ := message.(*TLKeyboardButtonRequestGeoLocation)
+		m = &KeyboardButton{
+			Payload: &KeyboardButton_KeyboardButtonRequestGeoLocation{
+				KeyboardButtonRequestGeoLocation: m2,
+			},
+		}
+	case *TLKeyboardButtonSwitchInline:
+		m2, _ := message.(*TLKeyboardButtonSwitchInline)
+		m = &KeyboardButton{
+			Payload: &KeyboardButton_KeyboardButtonSwitchInline{
+				KeyboardButtonSwitchInline: m2,
+			},
+		}
+	case *TLKeyboardButtonGame:
+		m2, _ := message.(*TLKeyboardButtonGame)
+		m = &KeyboardButton{
+			Payload: &KeyboardButton_KeyboardButtonGame{
+				KeyboardButtonGame: m2,
+			},
+		}
+	case *TLKeyboardButtonBuy:
+		m2, _ := message.(*TLKeyboardButtonBuy)
+		m = &KeyboardButton{
+			Payload: &KeyboardButton_KeyboardButtonBuy{
+				KeyboardButtonBuy: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *KeyboardButtonRow) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5691,6 +9363,19 @@ func (m *KeyboardButtonRow) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeKeyboardButtonRow(message proto.Message) (m *KeyboardButtonRow) {
+	switch message.(type) {
+	case *TLKeyboardButtonRow:
+		m2, _ := message.(*TLKeyboardButtonRow)
+		m = &KeyboardButtonRow{
+			Payload: &KeyboardButtonRow_KeyboardButtonRow{
+				KeyboardButtonRow: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *ReplyMarkup) Encode() (b []byte) {
@@ -5733,6 +9418,40 @@ func (m *ReplyMarkup) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeReplyMarkup(message proto.Message) (m *ReplyMarkup) {
+	switch message.(type) {
+	case *TLReplyKeyboardHide:
+		m2, _ := message.(*TLReplyKeyboardHide)
+		m = &ReplyMarkup{
+			Payload: &ReplyMarkup_ReplyKeyboardHide{
+				ReplyKeyboardHide: m2,
+			},
+		}
+	case *TLReplyKeyboardForceReply:
+		m2, _ := message.(*TLReplyKeyboardForceReply)
+		m = &ReplyMarkup{
+			Payload: &ReplyMarkup_ReplyKeyboardForceReply{
+				ReplyKeyboardForceReply: m2,
+			},
+		}
+	case *TLReplyKeyboardMarkup:
+		m2, _ := message.(*TLReplyKeyboardMarkup)
+		m = &ReplyMarkup{
+			Payload: &ReplyMarkup_ReplyKeyboardMarkup{
+				ReplyKeyboardMarkup: m2,
+			},
+		}
+	case *TLReplyInlineMarkup:
+		m2, _ := message.(*TLReplyInlineMarkup)
+		m = &ReplyMarkup{
+			Payload: &ReplyMarkup_ReplyInlineMarkup{
+				ReplyInlineMarkup: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *MessageEntity) Encode() (b []byte) {
@@ -5840,6 +9559,103 @@ func (m *MessageEntity) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMessageEntity(message proto.Message) (m *MessageEntity) {
+	switch message.(type) {
+	case *TLMessageEntityUnknown:
+		m2, _ := message.(*TLMessageEntityUnknown)
+		m = &MessageEntity{
+			Payload: &MessageEntity_MessageEntityUnknown{
+				MessageEntityUnknown: m2,
+			},
+		}
+	case *TLMessageEntityMention:
+		m2, _ := message.(*TLMessageEntityMention)
+		m = &MessageEntity{
+			Payload: &MessageEntity_MessageEntityMention{
+				MessageEntityMention: m2,
+			},
+		}
+	case *TLMessageEntityHashtag:
+		m2, _ := message.(*TLMessageEntityHashtag)
+		m = &MessageEntity{
+			Payload: &MessageEntity_MessageEntityHashtag{
+				MessageEntityHashtag: m2,
+			},
+		}
+	case *TLMessageEntityBotCommand:
+		m2, _ := message.(*TLMessageEntityBotCommand)
+		m = &MessageEntity{
+			Payload: &MessageEntity_MessageEntityBotCommand{
+				MessageEntityBotCommand: m2,
+			},
+		}
+	case *TLMessageEntityUrl:
+		m2, _ := message.(*TLMessageEntityUrl)
+		m = &MessageEntity{
+			Payload: &MessageEntity_MessageEntityUrl{
+				MessageEntityUrl: m2,
+			},
+		}
+	case *TLMessageEntityEmail:
+		m2, _ := message.(*TLMessageEntityEmail)
+		m = &MessageEntity{
+			Payload: &MessageEntity_MessageEntityEmail{
+				MessageEntityEmail: m2,
+			},
+		}
+	case *TLMessageEntityBold:
+		m2, _ := message.(*TLMessageEntityBold)
+		m = &MessageEntity{
+			Payload: &MessageEntity_MessageEntityBold{
+				MessageEntityBold: m2,
+			},
+		}
+	case *TLMessageEntityItalic:
+		m2, _ := message.(*TLMessageEntityItalic)
+		m = &MessageEntity{
+			Payload: &MessageEntity_MessageEntityItalic{
+				MessageEntityItalic: m2,
+			},
+		}
+	case *TLMessageEntityCode:
+		m2, _ := message.(*TLMessageEntityCode)
+		m = &MessageEntity{
+			Payload: &MessageEntity_MessageEntityCode{
+				MessageEntityCode: m2,
+			},
+		}
+	case *TLMessageEntityPre:
+		m2, _ := message.(*TLMessageEntityPre)
+		m = &MessageEntity{
+			Payload: &MessageEntity_MessageEntityPre{
+				MessageEntityPre: m2,
+			},
+		}
+	case *TLMessageEntityTextUrl:
+		m2, _ := message.(*TLMessageEntityTextUrl)
+		m = &MessageEntity{
+			Payload: &MessageEntity_MessageEntityTextUrl{
+				MessageEntityTextUrl: m2,
+			},
+		}
+	case *TLMessageEntityMentionName:
+		m2, _ := message.(*TLMessageEntityMentionName)
+		m = &MessageEntity{
+			Payload: &MessageEntity_MessageEntityMentionName{
+				MessageEntityMentionName: m2,
+			},
+		}
+	case *TLInputMessageEntityMentionName:
+		m2, _ := message.(*TLInputMessageEntityMentionName)
+		m = &MessageEntity{
+			Payload: &MessageEntity_InputMessageEntityMentionName{
+				InputMessageEntityMentionName: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *InputChannel) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5868,6 +9684,26 @@ func (m *InputChannel) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputChannel(message proto.Message) (m *InputChannel) {
+	switch message.(type) {
+	case *TLInputChannelEmpty:
+		m2, _ := message.(*TLInputChannelEmpty)
+		m = &InputChannel{
+			Payload: &InputChannel_InputChannelEmpty{
+				InputChannelEmpty: m2,
+			},
+		}
+	case *TLInputChannel:
+		m2, _ := message.(*TLInputChannel)
+		m = &InputChannel{
+			Payload: &InputChannel_InputChannel{
+				InputChannel: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Contacts_ResolvedPeer) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5889,6 +9725,19 @@ func (m *Contacts_ResolvedPeer) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeContacts_ResolvedPeer(message proto.Message) (m *Contacts_ResolvedPeer) {
+	switch message.(type) {
+	case *TLContactsResolvedPeer:
+		m2, _ := message.(*TLContactsResolvedPeer)
+		m = &Contacts_ResolvedPeer{
+			Payload: &Contacts_ResolvedPeer_ContactsResolvedPeer{
+				ContactsResolvedPeer: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *MessageRange) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5908,6 +9757,19 @@ func (m *MessageRange) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessageRange(message proto.Message) (m *MessageRange) {
+	switch message.(type) {
+	case *TLMessageRange:
+		m2, _ := message.(*TLMessageRange)
+		m = &MessageRange{
+			Payload: &MessageRange_MessageRange{
+				MessageRange: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Updates_ChannelDifference) Encode() (b []byte) {
@@ -5945,6 +9807,33 @@ func (m *Updates_ChannelDifference) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeUpdates_ChannelDifference(message proto.Message) (m *Updates_ChannelDifference) {
+	switch message.(type) {
+	case *TLUpdatesChannelDifferenceEmpty:
+		m2, _ := message.(*TLUpdatesChannelDifferenceEmpty)
+		m = &Updates_ChannelDifference{
+			Payload: &Updates_ChannelDifference_UpdatesChannelDifferenceEmpty{
+				UpdatesChannelDifferenceEmpty: m2,
+			},
+		}
+	case *TLUpdatesChannelDifferenceTooLong:
+		m2, _ := message.(*TLUpdatesChannelDifferenceTooLong)
+		m = &Updates_ChannelDifference{
+			Payload: &Updates_ChannelDifference_UpdatesChannelDifferenceTooLong{
+				UpdatesChannelDifferenceTooLong: m2,
+			},
+		}
+	case *TLUpdatesChannelDifference:
+		m2, _ := message.(*TLUpdatesChannelDifference)
+		m = &Updates_ChannelDifference{
+			Payload: &Updates_ChannelDifference_UpdatesChannelDifference{
+				UpdatesChannelDifference: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *ChannelMessagesFilter) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -5971,6 +9860,26 @@ func (m *ChannelMessagesFilter) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeChannelMessagesFilter(message proto.Message) (m *ChannelMessagesFilter) {
+	switch message.(type) {
+	case *TLChannelMessagesFilterEmpty:
+		m2, _ := message.(*TLChannelMessagesFilterEmpty)
+		m = &ChannelMessagesFilter{
+			Payload: &ChannelMessagesFilter_ChannelMessagesFilterEmpty{
+				ChannelMessagesFilterEmpty: m2,
+			},
+		}
+	case *TLChannelMessagesFilter:
+		m2, _ := message.(*TLChannelMessagesFilter)
+		m = &ChannelMessagesFilter{
+			Payload: &ChannelMessagesFilter_ChannelMessagesFilter{
+				ChannelMessagesFilter: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *ChannelParticipant) Encode() (b []byte) {
@@ -6020,6 +9929,47 @@ func (m *ChannelParticipant) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeChannelParticipant(message proto.Message) (m *ChannelParticipant) {
+	switch message.(type) {
+	case *TLChannelParticipant:
+		m2, _ := message.(*TLChannelParticipant)
+		m = &ChannelParticipant{
+			Payload: &ChannelParticipant_ChannelParticipant{
+				ChannelParticipant: m2,
+			},
+		}
+	case *TLChannelParticipantSelf:
+		m2, _ := message.(*TLChannelParticipantSelf)
+		m = &ChannelParticipant{
+			Payload: &ChannelParticipant_ChannelParticipantSelf{
+				ChannelParticipantSelf: m2,
+			},
+		}
+	case *TLChannelParticipantCreator:
+		m2, _ := message.(*TLChannelParticipantCreator)
+		m = &ChannelParticipant{
+			Payload: &ChannelParticipant_ChannelParticipantCreator{
+				ChannelParticipantCreator: m2,
+			},
+		}
+	case *TLChannelParticipantAdmin:
+		m2, _ := message.(*TLChannelParticipantAdmin)
+		m = &ChannelParticipant{
+			Payload: &ChannelParticipant_ChannelParticipantAdmin{
+				ChannelParticipantAdmin: m2,
+			},
+		}
+	case *TLChannelParticipantBanned:
+		m2, _ := message.(*TLChannelParticipantBanned)
+		m = &ChannelParticipant{
+			Payload: &ChannelParticipant_ChannelParticipantBanned{
+				ChannelParticipantBanned: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *ChannelParticipantsFilter) Encode() (b []byte) {
@@ -6078,6 +10028,54 @@ func (m *ChannelParticipantsFilter) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeChannelParticipantsFilter(message proto.Message) (m *ChannelParticipantsFilter) {
+	switch message.(type) {
+	case *TLChannelParticipantsRecent:
+		m2, _ := message.(*TLChannelParticipantsRecent)
+		m = &ChannelParticipantsFilter{
+			Payload: &ChannelParticipantsFilter_ChannelParticipantsRecent{
+				ChannelParticipantsRecent: m2,
+			},
+		}
+	case *TLChannelParticipantsAdmins:
+		m2, _ := message.(*TLChannelParticipantsAdmins)
+		m = &ChannelParticipantsFilter{
+			Payload: &ChannelParticipantsFilter_ChannelParticipantsAdmins{
+				ChannelParticipantsAdmins: m2,
+			},
+		}
+	case *TLChannelParticipantsKicked:
+		m2, _ := message.(*TLChannelParticipantsKicked)
+		m = &ChannelParticipantsFilter{
+			Payload: &ChannelParticipantsFilter_ChannelParticipantsKicked{
+				ChannelParticipantsKicked: m2,
+			},
+		}
+	case *TLChannelParticipantsBots:
+		m2, _ := message.(*TLChannelParticipantsBots)
+		m = &ChannelParticipantsFilter{
+			Payload: &ChannelParticipantsFilter_ChannelParticipantsBots{
+				ChannelParticipantsBots: m2,
+			},
+		}
+	case *TLChannelParticipantsBanned:
+		m2, _ := message.(*TLChannelParticipantsBanned)
+		m = &ChannelParticipantsFilter{
+			Payload: &ChannelParticipantsFilter_ChannelParticipantsBanned{
+				ChannelParticipantsBanned: m2,
+			},
+		}
+	case *TLChannelParticipantsSearch:
+		m2, _ := message.(*TLChannelParticipantsSearch)
+		m = &ChannelParticipantsFilter{
+			Payload: &ChannelParticipantsFilter_ChannelParticipantsSearch{
+				ChannelParticipantsSearch: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Channels_ChannelParticipants) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6097,6 +10095,19 @@ func (m *Channels_ChannelParticipants) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeChannels_ChannelParticipants(message proto.Message) (m *Channels_ChannelParticipants) {
+	switch message.(type) {
+	case *TLChannelsChannelParticipants:
+		m2, _ := message.(*TLChannelsChannelParticipants)
+		m = &Channels_ChannelParticipants{
+			Payload: &Channels_ChannelParticipants_ChannelsChannelParticipants{
+				ChannelsChannelParticipants: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Channels_ChannelParticipant) Encode() (b []byte) {
@@ -6120,6 +10131,19 @@ func (m *Channels_ChannelParticipant) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeChannels_ChannelParticipant(message proto.Message) (m *Channels_ChannelParticipant) {
+	switch message.(type) {
+	case *TLChannelsChannelParticipant:
+		m2, _ := message.(*TLChannelsChannelParticipant)
+		m = &Channels_ChannelParticipant{
+			Payload: &Channels_ChannelParticipant_ChannelsChannelParticipant{
+				ChannelsChannelParticipant: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Help_TermsOfService) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6139,6 +10163,19 @@ func (m *Help_TermsOfService) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeHelp_TermsOfService(message proto.Message) (m *Help_TermsOfService) {
+	switch message.(type) {
+	case *TLHelpTermsOfService:
+		m2, _ := message.(*TLHelpTermsOfService)
+		m = &Help_TermsOfService{
+			Payload: &Help_TermsOfService_HelpTermsOfService{
+				HelpTermsOfService: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *FoundGif) Encode() (b []byte) {
@@ -6169,6 +10206,26 @@ func (m *FoundGif) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeFoundGif(message proto.Message) (m *FoundGif) {
+	switch message.(type) {
+	case *TLFoundGif:
+		m2, _ := message.(*TLFoundGif)
+		m = &FoundGif{
+			Payload: &FoundGif_FoundGif{
+				FoundGif: m2,
+			},
+		}
+	case *TLFoundGifCached:
+		m2, _ := message.(*TLFoundGifCached)
+		m = &FoundGif{
+			Payload: &FoundGif_FoundGifCached{
+				FoundGifCached: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Messages_FoundGifs) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6188,6 +10245,19 @@ func (m *Messages_FoundGifs) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessages_FoundGifs(message proto.Message) (m *Messages_FoundGifs) {
+	switch message.(type) {
+	case *TLMessagesFoundGifs:
+		m2, _ := message.(*TLMessagesFoundGifs)
+		m = &Messages_FoundGifs{
+			Payload: &Messages_FoundGifs_MessagesFoundGifs{
+				MessagesFoundGifs: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Messages_SavedGifs) Encode() (b []byte) {
@@ -6216,6 +10286,26 @@ func (m *Messages_SavedGifs) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessages_SavedGifs(message proto.Message) (m *Messages_SavedGifs) {
+	switch message.(type) {
+	case *TLMessagesSavedGifsNotModified:
+		m2, _ := message.(*TLMessagesSavedGifsNotModified)
+		m = &Messages_SavedGifs{
+			Payload: &Messages_SavedGifs_MessagesSavedGifsNotModified{
+				MessagesSavedGifsNotModified: m2,
+			},
+		}
+	case *TLMessagesSavedGifs:
+		m2, _ := message.(*TLMessagesSavedGifs)
+		m = &Messages_SavedGifs{
+			Payload: &Messages_SavedGifs_MessagesSavedGifs{
+				MessagesSavedGifs: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InputBotInlineMessage) Encode() (b []byte) {
@@ -6274,6 +10364,54 @@ func (m *InputBotInlineMessage) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputBotInlineMessage(message proto.Message) (m *InputBotInlineMessage) {
+	switch message.(type) {
+	case *TLInputBotInlineMessageMediaAuto:
+		m2, _ := message.(*TLInputBotInlineMessageMediaAuto)
+		m = &InputBotInlineMessage{
+			Payload: &InputBotInlineMessage_InputBotInlineMessageMediaAuto{
+				InputBotInlineMessageMediaAuto: m2,
+			},
+		}
+	case *TLInputBotInlineMessageText:
+		m2, _ := message.(*TLInputBotInlineMessageText)
+		m = &InputBotInlineMessage{
+			Payload: &InputBotInlineMessage_InputBotInlineMessageText{
+				InputBotInlineMessageText: m2,
+			},
+		}
+	case *TLInputBotInlineMessageMediaGeo:
+		m2, _ := message.(*TLInputBotInlineMessageMediaGeo)
+		m = &InputBotInlineMessage{
+			Payload: &InputBotInlineMessage_InputBotInlineMessageMediaGeo{
+				InputBotInlineMessageMediaGeo: m2,
+			},
+		}
+	case *TLInputBotInlineMessageMediaVenue:
+		m2, _ := message.(*TLInputBotInlineMessageMediaVenue)
+		m = &InputBotInlineMessage{
+			Payload: &InputBotInlineMessage_InputBotInlineMessageMediaVenue{
+				InputBotInlineMessageMediaVenue: m2,
+			},
+		}
+	case *TLInputBotInlineMessageMediaContact:
+		m2, _ := message.(*TLInputBotInlineMessageMediaContact)
+		m = &InputBotInlineMessage{
+			Payload: &InputBotInlineMessage_InputBotInlineMessageMediaContact{
+				InputBotInlineMessageMediaContact: m2,
+			},
+		}
+	case *TLInputBotInlineMessageGame:
+		m2, _ := message.(*TLInputBotInlineMessageGame)
+		m = &InputBotInlineMessage{
+			Payload: &InputBotInlineMessage_InputBotInlineMessageGame{
+				InputBotInlineMessageGame: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *InputBotInlineResult) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6314,6 +10452,40 @@ func (m *InputBotInlineResult) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeInputBotInlineResult(message proto.Message) (m *InputBotInlineResult) {
+	switch message.(type) {
+	case *TLInputBotInlineResult:
+		m2, _ := message.(*TLInputBotInlineResult)
+		m = &InputBotInlineResult{
+			Payload: &InputBotInlineResult_InputBotInlineResult{
+				InputBotInlineResult: m2,
+			},
+		}
+	case *TLInputBotInlineResultPhoto:
+		m2, _ := message.(*TLInputBotInlineResultPhoto)
+		m = &InputBotInlineResult{
+			Payload: &InputBotInlineResult_InputBotInlineResultPhoto{
+				InputBotInlineResultPhoto: m2,
+			},
+		}
+	case *TLInputBotInlineResultDocument:
+		m2, _ := message.(*TLInputBotInlineResultDocument)
+		m = &InputBotInlineResult{
+			Payload: &InputBotInlineResult_InputBotInlineResultDocument{
+				InputBotInlineResultDocument: m2,
+			},
+		}
+	case *TLInputBotInlineResultGame:
+		m2, _ := message.(*TLInputBotInlineResultGame)
+		m = &InputBotInlineResult{
+			Payload: &InputBotInlineResult_InputBotInlineResultGame{
+				InputBotInlineResultGame: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *BotInlineMessage) Encode() (b []byte) {
@@ -6365,6 +10537,47 @@ func (m *BotInlineMessage) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeBotInlineMessage(message proto.Message) (m *BotInlineMessage) {
+	switch message.(type) {
+	case *TLBotInlineMessageMediaAuto:
+		m2, _ := message.(*TLBotInlineMessageMediaAuto)
+		m = &BotInlineMessage{
+			Payload: &BotInlineMessage_BotInlineMessageMediaAuto{
+				BotInlineMessageMediaAuto: m2,
+			},
+		}
+	case *TLBotInlineMessageText:
+		m2, _ := message.(*TLBotInlineMessageText)
+		m = &BotInlineMessage{
+			Payload: &BotInlineMessage_BotInlineMessageText{
+				BotInlineMessageText: m2,
+			},
+		}
+	case *TLBotInlineMessageMediaGeo:
+		m2, _ := message.(*TLBotInlineMessageMediaGeo)
+		m = &BotInlineMessage{
+			Payload: &BotInlineMessage_BotInlineMessageMediaGeo{
+				BotInlineMessageMediaGeo: m2,
+			},
+		}
+	case *TLBotInlineMessageMediaVenue:
+		m2, _ := message.(*TLBotInlineMessageMediaVenue)
+		m = &BotInlineMessage{
+			Payload: &BotInlineMessage_BotInlineMessageMediaVenue{
+				BotInlineMessageMediaVenue: m2,
+			},
+		}
+	case *TLBotInlineMessageMediaContact:
+		m2, _ := message.(*TLBotInlineMessageMediaContact)
+		m = &BotInlineMessage{
+			Payload: &BotInlineMessage_BotInlineMessageMediaContact{
+				BotInlineMessageMediaContact: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *BotInlineResult) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6393,6 +10606,26 @@ func (m *BotInlineResult) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeBotInlineResult(message proto.Message) (m *BotInlineResult) {
+	switch message.(type) {
+	case *TLBotInlineResult:
+		m2, _ := message.(*TLBotInlineResult)
+		m = &BotInlineResult{
+			Payload: &BotInlineResult_BotInlineResult{
+				BotInlineResult: m2,
+			},
+		}
+	case *TLBotInlineMediaResult:
+		m2, _ := message.(*TLBotInlineMediaResult)
+		m = &BotInlineResult{
+			Payload: &BotInlineResult_BotInlineMediaResult{
+				BotInlineMediaResult: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Messages_BotResults) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6412,6 +10645,19 @@ func (m *Messages_BotResults) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessages_BotResults(message proto.Message) (m *Messages_BotResults) {
+	switch message.(type) {
+	case *TLMessagesBotResults:
+		m2, _ := message.(*TLMessagesBotResults)
+		m = &Messages_BotResults{
+			Payload: &Messages_BotResults_MessagesBotResults{
+				MessagesBotResults: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *ExportedMessageLink) Encode() (b []byte) {
@@ -6435,6 +10681,19 @@ func (m *ExportedMessageLink) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeExportedMessageLink(message proto.Message) (m *ExportedMessageLink) {
+	switch message.(type) {
+	case *TLExportedMessageLink:
+		m2, _ := message.(*TLExportedMessageLink)
+		m = &ExportedMessageLink{
+			Payload: &ExportedMessageLink_ExportedMessageLink{
+				ExportedMessageLink: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *MessageFwdHeader) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6454,6 +10713,19 @@ func (m *MessageFwdHeader) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessageFwdHeader(message proto.Message) (m *MessageFwdHeader) {
+	switch message.(type) {
+	case *TLMessageFwdHeader:
+		m2, _ := message.(*TLMessageFwdHeader)
+		m = &MessageFwdHeader{
+			Payload: &MessageFwdHeader_MessageFwdHeader{
+				MessageFwdHeader: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Auth_CodeType) Encode() (b []byte) {
@@ -6489,6 +10761,33 @@ func (m *Auth_CodeType) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeAuth_CodeType(message proto.Message) (m *Auth_CodeType) {
+	switch message.(type) {
+	case *TLAuthCodeTypeSms:
+		m2, _ := message.(*TLAuthCodeTypeSms)
+		m = &Auth_CodeType{
+			Payload: &Auth_CodeType_AuthCodeTypeSms{
+				AuthCodeTypeSms: m2,
+			},
+		}
+	case *TLAuthCodeTypeCall:
+		m2, _ := message.(*TLAuthCodeTypeCall)
+		m = &Auth_CodeType{
+			Payload: &Auth_CodeType_AuthCodeTypeCall{
+				AuthCodeTypeCall: m2,
+			},
+		}
+	case *TLAuthCodeTypeFlashCall:
+		m2, _ := message.(*TLAuthCodeTypeFlashCall)
+		m = &Auth_CodeType{
+			Payload: &Auth_CodeType_AuthCodeTypeFlashCall{
+				AuthCodeTypeFlashCall: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Auth_SentCodeType) Encode() (b []byte) {
@@ -6533,6 +10832,40 @@ func (m *Auth_SentCodeType) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeAuth_SentCodeType(message proto.Message) (m *Auth_SentCodeType) {
+	switch message.(type) {
+	case *TLAuthSentCodeTypeApp:
+		m2, _ := message.(*TLAuthSentCodeTypeApp)
+		m = &Auth_SentCodeType{
+			Payload: &Auth_SentCodeType_AuthSentCodeTypeApp{
+				AuthSentCodeTypeApp: m2,
+			},
+		}
+	case *TLAuthSentCodeTypeSms:
+		m2, _ := message.(*TLAuthSentCodeTypeSms)
+		m = &Auth_SentCodeType{
+			Payload: &Auth_SentCodeType_AuthSentCodeTypeSms{
+				AuthSentCodeTypeSms: m2,
+			},
+		}
+	case *TLAuthSentCodeTypeCall:
+		m2, _ := message.(*TLAuthSentCodeTypeCall)
+		m = &Auth_SentCodeType{
+			Payload: &Auth_SentCodeType_AuthSentCodeTypeCall{
+				AuthSentCodeTypeCall: m2,
+			},
+		}
+	case *TLAuthSentCodeTypeFlashCall:
+		m2, _ := message.(*TLAuthSentCodeTypeFlashCall)
+		m = &Auth_SentCodeType{
+			Payload: &Auth_SentCodeType_AuthSentCodeTypeFlashCall{
+				AuthSentCodeTypeFlashCall: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Messages_BotCallbackAnswer) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6552,6 +10885,19 @@ func (m *Messages_BotCallbackAnswer) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessages_BotCallbackAnswer(message proto.Message) (m *Messages_BotCallbackAnswer) {
+	switch message.(type) {
+	case *TLMessagesBotCallbackAnswer:
+		m2, _ := message.(*TLMessagesBotCallbackAnswer)
+		m = &Messages_BotCallbackAnswer{
+			Payload: &Messages_BotCallbackAnswer_MessagesBotCallbackAnswer{
+				MessagesBotCallbackAnswer: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Messages_MessageEditData) Encode() (b []byte) {
@@ -6575,6 +10921,19 @@ func (m *Messages_MessageEditData) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMessages_MessageEditData(message proto.Message) (m *Messages_MessageEditData) {
+	switch message.(type) {
+	case *TLMessagesMessageEditData:
+		m2, _ := message.(*TLMessagesMessageEditData)
+		m = &Messages_MessageEditData{
+			Payload: &Messages_MessageEditData_MessagesMessageEditData{
+				MessagesMessageEditData: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *InputBotInlineMessageID) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6594,6 +10953,19 @@ func (m *InputBotInlineMessageID) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeInputBotInlineMessageID(message proto.Message) (m *InputBotInlineMessageID) {
+	switch message.(type) {
+	case *TLInputBotInlineMessageID:
+		m2, _ := message.(*TLInputBotInlineMessageID)
+		m = &InputBotInlineMessageID{
+			Payload: &InputBotInlineMessageID_InputBotInlineMessageID{
+				InputBotInlineMessageID: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InlineBotSwitchPM) Encode() (b []byte) {
@@ -6617,6 +10989,19 @@ func (m *InlineBotSwitchPM) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInlineBotSwitchPM(message proto.Message) (m *InlineBotSwitchPM) {
+	switch message.(type) {
+	case *TLInlineBotSwitchPM:
+		m2, _ := message.(*TLInlineBotSwitchPM)
+		m = &InlineBotSwitchPM{
+			Payload: &InlineBotSwitchPM_InlineBotSwitchPM{
+				InlineBotSwitchPM: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Messages_PeerDialogs) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6638,6 +11023,19 @@ func (m *Messages_PeerDialogs) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMessages_PeerDialogs(message proto.Message) (m *Messages_PeerDialogs) {
+	switch message.(type) {
+	case *TLMessagesPeerDialogs:
+		m2, _ := message.(*TLMessagesPeerDialogs)
+		m = &Messages_PeerDialogs{
+			Payload: &Messages_PeerDialogs_MessagesPeerDialogs{
+				MessagesPeerDialogs: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *TopPeer) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6657,6 +11055,19 @@ func (m *TopPeer) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeTopPeer(message proto.Message) (m *TopPeer) {
+	switch message.(type) {
+	case *TLTopPeer:
+		m2, _ := message.(*TLTopPeer)
+		m = &TopPeer{
+			Payload: &TopPeer_TopPeer{
+				TopPeer: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *TopPeerCategory) Encode() (b []byte) {
@@ -6715,6 +11126,54 @@ func (m *TopPeerCategory) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeTopPeerCategory(message proto.Message) (m *TopPeerCategory) {
+	switch message.(type) {
+	case *TLTopPeerCategoryBotsPM:
+		m2, _ := message.(*TLTopPeerCategoryBotsPM)
+		m = &TopPeerCategory{
+			Payload: &TopPeerCategory_TopPeerCategoryBotsPM{
+				TopPeerCategoryBotsPM: m2,
+			},
+		}
+	case *TLTopPeerCategoryBotsInline:
+		m2, _ := message.(*TLTopPeerCategoryBotsInline)
+		m = &TopPeerCategory{
+			Payload: &TopPeerCategory_TopPeerCategoryBotsInline{
+				TopPeerCategoryBotsInline: m2,
+			},
+		}
+	case *TLTopPeerCategoryCorrespondents:
+		m2, _ := message.(*TLTopPeerCategoryCorrespondents)
+		m = &TopPeerCategory{
+			Payload: &TopPeerCategory_TopPeerCategoryCorrespondents{
+				TopPeerCategoryCorrespondents: m2,
+			},
+		}
+	case *TLTopPeerCategoryGroups:
+		m2, _ := message.(*TLTopPeerCategoryGroups)
+		m = &TopPeerCategory{
+			Payload: &TopPeerCategory_TopPeerCategoryGroups{
+				TopPeerCategoryGroups: m2,
+			},
+		}
+	case *TLTopPeerCategoryChannels:
+		m2, _ := message.(*TLTopPeerCategoryChannels)
+		m = &TopPeerCategory{
+			Payload: &TopPeerCategory_TopPeerCategoryChannels{
+				TopPeerCategoryChannels: m2,
+			},
+		}
+	case *TLTopPeerCategoryPhoneCalls:
+		m2, _ := message.(*TLTopPeerCategoryPhoneCalls)
+		m = &TopPeerCategory{
+			Payload: &TopPeerCategory_TopPeerCategoryPhoneCalls{
+				TopPeerCategoryPhoneCalls: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *TopPeerCategoryPeers) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6734,6 +11193,19 @@ func (m *TopPeerCategoryPeers) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeTopPeerCategoryPeers(message proto.Message) (m *TopPeerCategoryPeers) {
+	switch message.(type) {
+	case *TLTopPeerCategoryPeers:
+		m2, _ := message.(*TLTopPeerCategoryPeers)
+		m = &TopPeerCategoryPeers{
+			Payload: &TopPeerCategoryPeers_TopPeerCategoryPeers{
+				TopPeerCategoryPeers: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Contacts_TopPeers) Encode() (b []byte) {
@@ -6764,6 +11236,26 @@ func (m *Contacts_TopPeers) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeContacts_TopPeers(message proto.Message) (m *Contacts_TopPeers) {
+	switch message.(type) {
+	case *TLContactsTopPeersNotModified:
+		m2, _ := message.(*TLContactsTopPeersNotModified)
+		m = &Contacts_TopPeers{
+			Payload: &Contacts_TopPeers_ContactsTopPeersNotModified{
+				ContactsTopPeersNotModified: m2,
+			},
+		}
+	case *TLContactsTopPeers:
+		m2, _ := message.(*TLContactsTopPeers)
+		m = &Contacts_TopPeers{
+			Payload: &Contacts_TopPeers_ContactsTopPeers{
+				ContactsTopPeers: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *DraftMessage) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6790,6 +11282,26 @@ func (m *DraftMessage) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeDraftMessage(message proto.Message) (m *DraftMessage) {
+	switch message.(type) {
+	case *TLDraftMessageEmpty:
+		m2, _ := message.(*TLDraftMessageEmpty)
+		m = &DraftMessage{
+			Payload: &DraftMessage_DraftMessageEmpty{
+				DraftMessageEmpty: m2,
+			},
+		}
+	case *TLDraftMessage:
+		m2, _ := message.(*TLDraftMessage)
+		m = &DraftMessage{
+			Payload: &DraftMessage_DraftMessage{
+				DraftMessage: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Messages_FeaturedStickers) Encode() (b []byte) {
@@ -6820,6 +11332,26 @@ func (m *Messages_FeaturedStickers) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMessages_FeaturedStickers(message proto.Message) (m *Messages_FeaturedStickers) {
+	switch message.(type) {
+	case *TLMessagesFeaturedStickersNotModified:
+		m2, _ := message.(*TLMessagesFeaturedStickersNotModified)
+		m = &Messages_FeaturedStickers{
+			Payload: &Messages_FeaturedStickers_MessagesFeaturedStickersNotModified{
+				MessagesFeaturedStickersNotModified: m2,
+			},
+		}
+	case *TLMessagesFeaturedStickers:
+		m2, _ := message.(*TLMessagesFeaturedStickers)
+		m = &Messages_FeaturedStickers{
+			Payload: &Messages_FeaturedStickers_MessagesFeaturedStickers{
+				MessagesFeaturedStickers: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Messages_RecentStickers) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6848,6 +11380,26 @@ func (m *Messages_RecentStickers) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMessages_RecentStickers(message proto.Message) (m *Messages_RecentStickers) {
+	switch message.(type) {
+	case *TLMessagesRecentStickersNotModified:
+		m2, _ := message.(*TLMessagesRecentStickersNotModified)
+		m = &Messages_RecentStickers{
+			Payload: &Messages_RecentStickers_MessagesRecentStickersNotModified{
+				MessagesRecentStickersNotModified: m2,
+			},
+		}
+	case *TLMessagesRecentStickers:
+		m2, _ := message.(*TLMessagesRecentStickers)
+		m = &Messages_RecentStickers{
+			Payload: &Messages_RecentStickers_MessagesRecentStickers{
+				MessagesRecentStickers: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Messages_ArchivedStickers) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6867,6 +11419,19 @@ func (m *Messages_ArchivedStickers) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessages_ArchivedStickers(message proto.Message) (m *Messages_ArchivedStickers) {
+	switch message.(type) {
+	case *TLMessagesArchivedStickers:
+		m2, _ := message.(*TLMessagesArchivedStickers)
+		m = &Messages_ArchivedStickers{
+			Payload: &Messages_ArchivedStickers_MessagesArchivedStickers{
+				MessagesArchivedStickers: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Messages_StickerSetInstallResult) Encode() (b []byte) {
@@ -6897,6 +11462,26 @@ func (m *Messages_StickerSetInstallResult) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeMessages_StickerSetInstallResult(message proto.Message) (m *Messages_StickerSetInstallResult) {
+	switch message.(type) {
+	case *TLMessagesStickerSetInstallResultSuccess:
+		m2, _ := message.(*TLMessagesStickerSetInstallResultSuccess)
+		m = &Messages_StickerSetInstallResult{
+			Payload: &Messages_StickerSetInstallResult_MessagesStickerSetInstallResultSuccess{
+				MessagesStickerSetInstallResultSuccess: m2,
+			},
+		}
+	case *TLMessagesStickerSetInstallResultArchive:
+		m2, _ := message.(*TLMessagesStickerSetInstallResultArchive)
+		m = &Messages_StickerSetInstallResult{
+			Payload: &Messages_StickerSetInstallResult_MessagesStickerSetInstallResultArchive{
+				MessagesStickerSetInstallResultArchive: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *StickerSetCovered) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6925,6 +11510,26 @@ func (m *StickerSetCovered) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeStickerSetCovered(message proto.Message) (m *StickerSetCovered) {
+	switch message.(type) {
+	case *TLStickerSetCovered:
+		m2, _ := message.(*TLStickerSetCovered)
+		m = &StickerSetCovered{
+			Payload: &StickerSetCovered_StickerSetCovered{
+				StickerSetCovered: m2,
+			},
+		}
+	case *TLStickerSetMultiCovered:
+		m2, _ := message.(*TLStickerSetMultiCovered)
+		m = &StickerSetCovered{
+			Payload: &StickerSetCovered_StickerSetMultiCovered{
+				StickerSetMultiCovered: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *MaskCoords) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6944,6 +11549,19 @@ func (m *MaskCoords) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMaskCoords(message proto.Message) (m *MaskCoords) {
+	switch message.(type) {
+	case *TLMaskCoords:
+		m2, _ := message.(*TLMaskCoords)
+		m = &MaskCoords{
+			Payload: &MaskCoords_MaskCoords{
+				MaskCoords: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InputStickeredMedia) Encode() (b []byte) {
@@ -6974,6 +11592,26 @@ func (m *InputStickeredMedia) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputStickeredMedia(message proto.Message) (m *InputStickeredMedia) {
+	switch message.(type) {
+	case *TLInputStickeredMediaPhoto:
+		m2, _ := message.(*TLInputStickeredMediaPhoto)
+		m = &InputStickeredMedia{
+			Payload: &InputStickeredMedia_InputStickeredMediaPhoto{
+				InputStickeredMediaPhoto: m2,
+			},
+		}
+	case *TLInputStickeredMediaDocument:
+		m2, _ := message.(*TLInputStickeredMediaDocument)
+		m = &InputStickeredMedia{
+			Payload: &InputStickeredMedia_InputStickeredMediaDocument{
+				InputStickeredMediaDocument: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Game) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -6993,6 +11631,19 @@ func (m *Game) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeGame(message proto.Message) (m *Game) {
+	switch message.(type) {
+	case *TLGame:
+		m2, _ := message.(*TLGame)
+		m = &Game{
+			Payload: &Game_Game{
+				Game: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InputGame) Encode() (b []byte) {
@@ -7023,6 +11674,26 @@ func (m *InputGame) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputGame(message proto.Message) (m *InputGame) {
+	switch message.(type) {
+	case *TLInputGameID:
+		m2, _ := message.(*TLInputGameID)
+		m = &InputGame{
+			Payload: &InputGame_InputGameID{
+				InputGameID: m2,
+			},
+		}
+	case *TLInputGameShortName:
+		m2, _ := message.(*TLInputGameShortName)
+		m = &InputGame{
+			Payload: &InputGame_InputGameShortName{
+				InputGameShortName: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *HighScore) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7044,6 +11715,19 @@ func (m *HighScore) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeHighScore(message proto.Message) (m *HighScore) {
+	switch message.(type) {
+	case *TLHighScore:
+		m2, _ := message.(*TLHighScore)
+		m = &HighScore{
+			Payload: &HighScore_HighScore{
+				HighScore: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Messages_HighScores) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7063,6 +11747,19 @@ func (m *Messages_HighScores) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessages_HighScores(message proto.Message) (m *Messages_HighScores) {
+	switch message.(type) {
+	case *TLMessagesHighScores:
+		m2, _ := message.(*TLMessagesHighScores)
+		m = &Messages_HighScores{
+			Payload: &Messages_HighScores_MessagesHighScores{
+				MessagesHighScores: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *RichText) Encode() (b []byte) {
@@ -7147,6 +11844,82 @@ func (m *RichText) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeRichText(message proto.Message) (m *RichText) {
+	switch message.(type) {
+	case *TLTextEmpty:
+		m2, _ := message.(*TLTextEmpty)
+		m = &RichText{
+			Payload: &RichText_TextEmpty{
+				TextEmpty: m2,
+			},
+		}
+	case *TLTextPlain:
+		m2, _ := message.(*TLTextPlain)
+		m = &RichText{
+			Payload: &RichText_TextPlain{
+				TextPlain: m2,
+			},
+		}
+	case *TLTextBold:
+		m2, _ := message.(*TLTextBold)
+		m = &RichText{
+			Payload: &RichText_TextBold{
+				TextBold: m2,
+			},
+		}
+	case *TLTextItalic:
+		m2, _ := message.(*TLTextItalic)
+		m = &RichText{
+			Payload: &RichText_TextItalic{
+				TextItalic: m2,
+			},
+		}
+	case *TLTextUnderline:
+		m2, _ := message.(*TLTextUnderline)
+		m = &RichText{
+			Payload: &RichText_TextUnderline{
+				TextUnderline: m2,
+			},
+		}
+	case *TLTextStrike:
+		m2, _ := message.(*TLTextStrike)
+		m = &RichText{
+			Payload: &RichText_TextStrike{
+				TextStrike: m2,
+			},
+		}
+	case *TLTextFixed:
+		m2, _ := message.(*TLTextFixed)
+		m = &RichText{
+			Payload: &RichText_TextFixed{
+				TextFixed: m2,
+			},
+		}
+	case *TLTextUrl:
+		m2, _ := message.(*TLTextUrl)
+		m = &RichText{
+			Payload: &RichText_TextUrl{
+				TextUrl: m2,
+			},
+		}
+	case *TLTextEmail:
+		m2, _ := message.(*TLTextEmail)
+		m = &RichText{
+			Payload: &RichText_TextEmail{
+				TextEmail: m2,
+			},
+		}
+	case *TLTextConcat:
+		m2, _ := message.(*TLTextConcat)
+		m = &RichText{
+			Payload: &RichText_TextConcat{
+				TextConcat: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *PageBlock) Encode() (b []byte) {
@@ -7324,6 +12097,173 @@ func (m *PageBlock) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakePageBlock(message proto.Message) (m *PageBlock) {
+	switch message.(type) {
+	case *TLPageBlockUnsupported:
+		m2, _ := message.(*TLPageBlockUnsupported)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockUnsupported{
+				PageBlockUnsupported: m2,
+			},
+		}
+	case *TLPageBlockTitle:
+		m2, _ := message.(*TLPageBlockTitle)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockTitle{
+				PageBlockTitle: m2,
+			},
+		}
+	case *TLPageBlockSubtitle:
+		m2, _ := message.(*TLPageBlockSubtitle)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockSubtitle{
+				PageBlockSubtitle: m2,
+			},
+		}
+	case *TLPageBlockAuthorDate:
+		m2, _ := message.(*TLPageBlockAuthorDate)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockAuthorDate{
+				PageBlockAuthorDate: m2,
+			},
+		}
+	case *TLPageBlockHeader:
+		m2, _ := message.(*TLPageBlockHeader)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockHeader{
+				PageBlockHeader: m2,
+			},
+		}
+	case *TLPageBlockSubheader:
+		m2, _ := message.(*TLPageBlockSubheader)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockSubheader{
+				PageBlockSubheader: m2,
+			},
+		}
+	case *TLPageBlockParagraph:
+		m2, _ := message.(*TLPageBlockParagraph)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockParagraph{
+				PageBlockParagraph: m2,
+			},
+		}
+	case *TLPageBlockPreformatted:
+		m2, _ := message.(*TLPageBlockPreformatted)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockPreformatted{
+				PageBlockPreformatted: m2,
+			},
+		}
+	case *TLPageBlockFooter:
+		m2, _ := message.(*TLPageBlockFooter)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockFooter{
+				PageBlockFooter: m2,
+			},
+		}
+	case *TLPageBlockDivider:
+		m2, _ := message.(*TLPageBlockDivider)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockDivider{
+				PageBlockDivider: m2,
+			},
+		}
+	case *TLPageBlockAnchor:
+		m2, _ := message.(*TLPageBlockAnchor)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockAnchor{
+				PageBlockAnchor: m2,
+			},
+		}
+	case *TLPageBlockList:
+		m2, _ := message.(*TLPageBlockList)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockList{
+				PageBlockList: m2,
+			},
+		}
+	case *TLPageBlockBlockquote:
+		m2, _ := message.(*TLPageBlockBlockquote)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockBlockquote{
+				PageBlockBlockquote: m2,
+			},
+		}
+	case *TLPageBlockPullquote:
+		m2, _ := message.(*TLPageBlockPullquote)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockPullquote{
+				PageBlockPullquote: m2,
+			},
+		}
+	case *TLPageBlockPhoto:
+		m2, _ := message.(*TLPageBlockPhoto)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockPhoto{
+				PageBlockPhoto: m2,
+			},
+		}
+	case *TLPageBlockVideo:
+		m2, _ := message.(*TLPageBlockVideo)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockVideo{
+				PageBlockVideo: m2,
+			},
+		}
+	case *TLPageBlockCover:
+		m2, _ := message.(*TLPageBlockCover)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockCover{
+				PageBlockCover: m2,
+			},
+		}
+	case *TLPageBlockEmbed:
+		m2, _ := message.(*TLPageBlockEmbed)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockEmbed{
+				PageBlockEmbed: m2,
+			},
+		}
+	case *TLPageBlockEmbedPost:
+		m2, _ := message.(*TLPageBlockEmbedPost)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockEmbedPost{
+				PageBlockEmbedPost: m2,
+			},
+		}
+	case *TLPageBlockCollage:
+		m2, _ := message.(*TLPageBlockCollage)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockCollage{
+				PageBlockCollage: m2,
+			},
+		}
+	case *TLPageBlockSlideshow:
+		m2, _ := message.(*TLPageBlockSlideshow)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockSlideshow{
+				PageBlockSlideshow: m2,
+			},
+		}
+	case *TLPageBlockChannel:
+		m2, _ := message.(*TLPageBlockChannel)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockChannel{
+				PageBlockChannel: m2,
+			},
+		}
+	case *TLPageBlockAudio:
+		m2, _ := message.(*TLPageBlockAudio)
+		m = &PageBlock{
+			Payload: &PageBlock_PageBlockAudio{
+				PageBlockAudio: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Page) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7350,6 +12290,26 @@ func (m *Page) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakePage(message proto.Message) (m *Page) {
+	switch message.(type) {
+	case *TLPagePart:
+		m2, _ := message.(*TLPagePart)
+		m = &Page{
+			Payload: &Page_PagePart{
+				PagePart: m2,
+			},
+		}
+	case *TLPageFull:
+		m2, _ := message.(*TLPageFull)
+		m = &Page{
+			Payload: &Page_PageFull{
+				PageFull: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *PhoneCallDiscardReason) Encode() (b []byte) {
@@ -7394,6 +12354,40 @@ func (m *PhoneCallDiscardReason) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakePhoneCallDiscardReason(message proto.Message) (m *PhoneCallDiscardReason) {
+	switch message.(type) {
+	case *TLPhoneCallDiscardReasonMissed:
+		m2, _ := message.(*TLPhoneCallDiscardReasonMissed)
+		m = &PhoneCallDiscardReason{
+			Payload: &PhoneCallDiscardReason_PhoneCallDiscardReasonMissed{
+				PhoneCallDiscardReasonMissed: m2,
+			},
+		}
+	case *TLPhoneCallDiscardReasonDisconnect:
+		m2, _ := message.(*TLPhoneCallDiscardReasonDisconnect)
+		m = &PhoneCallDiscardReason{
+			Payload: &PhoneCallDiscardReason_PhoneCallDiscardReasonDisconnect{
+				PhoneCallDiscardReasonDisconnect: m2,
+			},
+		}
+	case *TLPhoneCallDiscardReasonHangup:
+		m2, _ := message.(*TLPhoneCallDiscardReasonHangup)
+		m = &PhoneCallDiscardReason{
+			Payload: &PhoneCallDiscardReason_PhoneCallDiscardReasonHangup{
+				PhoneCallDiscardReasonHangup: m2,
+			},
+		}
+	case *TLPhoneCallDiscardReasonBusy:
+		m2, _ := message.(*TLPhoneCallDiscardReasonBusy)
+		m = &PhoneCallDiscardReason{
+			Payload: &PhoneCallDiscardReason_PhoneCallDiscardReasonBusy{
+				PhoneCallDiscardReasonBusy: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *DataJSON) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7413,6 +12407,19 @@ func (m *DataJSON) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeDataJSON(message proto.Message) (m *DataJSON) {
+	switch message.(type) {
+	case *TLDataJSON:
+		m2, _ := message.(*TLDataJSON)
+		m = &DataJSON{
+			Payload: &DataJSON_DataJSON{
+				DataJSON: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *LabeledPrice) Encode() (b []byte) {
@@ -7436,6 +12443,19 @@ func (m *LabeledPrice) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeLabeledPrice(message proto.Message) (m *LabeledPrice) {
+	switch message.(type) {
+	case *TLLabeledPrice:
+		m2, _ := message.(*TLLabeledPrice)
+		m = &LabeledPrice{
+			Payload: &LabeledPrice_LabeledPrice{
+				LabeledPrice: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Invoice) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7455,6 +12475,19 @@ func (m *Invoice) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeInvoice(message proto.Message) (m *Invoice) {
+	switch message.(type) {
+	case *TLInvoice:
+		m2, _ := message.(*TLInvoice)
+		m = &Invoice{
+			Payload: &Invoice_Invoice{
+				Invoice: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *PaymentCharge) Encode() (b []byte) {
@@ -7478,6 +12511,19 @@ func (m *PaymentCharge) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakePaymentCharge(message proto.Message) (m *PaymentCharge) {
+	switch message.(type) {
+	case *TLPaymentCharge:
+		m2, _ := message.(*TLPaymentCharge)
+		m = &PaymentCharge{
+			Payload: &PaymentCharge_PaymentCharge{
+				PaymentCharge: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *PostAddress) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7497,6 +12543,19 @@ func (m *PostAddress) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakePostAddress(message proto.Message) (m *PostAddress) {
+	switch message.(type) {
+	case *TLPostAddress:
+		m2, _ := message.(*TLPostAddress)
+		m = &PostAddress{
+			Payload: &PostAddress_PostAddress{
+				PostAddress: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *PaymentRequestedInfo) Encode() (b []byte) {
@@ -7520,6 +12579,19 @@ func (m *PaymentRequestedInfo) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakePaymentRequestedInfo(message proto.Message) (m *PaymentRequestedInfo) {
+	switch message.(type) {
+	case *TLPaymentRequestedInfo:
+		m2, _ := message.(*TLPaymentRequestedInfo)
+		m = &PaymentRequestedInfo{
+			Payload: &PaymentRequestedInfo_PaymentRequestedInfo{
+				PaymentRequestedInfo: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *PaymentSavedCredentials) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7539,6 +12611,19 @@ func (m *PaymentSavedCredentials) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakePaymentSavedCredentials(message proto.Message) (m *PaymentSavedCredentials) {
+	switch message.(type) {
+	case *TLPaymentSavedCredentialsCard:
+		m2, _ := message.(*TLPaymentSavedCredentialsCard)
+		m = &PaymentSavedCredentials{
+			Payload: &PaymentSavedCredentials_PaymentSavedCredentialsCard{
+				PaymentSavedCredentialsCard: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *WebDocument) Encode() (b []byte) {
@@ -7562,6 +12647,19 @@ func (m *WebDocument) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeWebDocument(message proto.Message) (m *WebDocument) {
+	switch message.(type) {
+	case *TLWebDocument:
+		m2, _ := message.(*TLWebDocument)
+		m = &WebDocument{
+			Payload: &WebDocument_WebDocument{
+				WebDocument: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *InputWebDocument) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7581,6 +12679,19 @@ func (m *InputWebDocument) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeInputWebDocument(message proto.Message) (m *InputWebDocument) {
+	switch message.(type) {
+	case *TLInputWebDocument:
+		m2, _ := message.(*TLInputWebDocument)
+		m = &InputWebDocument{
+			Payload: &InputWebDocument_InputWebDocument{
+				InputWebDocument: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InputWebFileLocation) Encode() (b []byte) {
@@ -7604,6 +12715,19 @@ func (m *InputWebFileLocation) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputWebFileLocation(message proto.Message) (m *InputWebFileLocation) {
+	switch message.(type) {
+	case *TLInputWebFileLocation:
+		m2, _ := message.(*TLInputWebFileLocation)
+		m = &InputWebFileLocation{
+			Payload: &InputWebFileLocation_InputWebFileLocation{
+				InputWebFileLocation: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Upload_WebFile) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7623,6 +12747,19 @@ func (m *Upload_WebFile) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeUpload_WebFile(message proto.Message) (m *Upload_WebFile) {
+	switch message.(type) {
+	case *TLUploadWebFile:
+		m2, _ := message.(*TLUploadWebFile)
+		m = &Upload_WebFile{
+			Payload: &Upload_WebFile_UploadWebFile{
+				UploadWebFile: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Payments_PaymentForm) Encode() (b []byte) {
@@ -7646,6 +12783,19 @@ func (m *Payments_PaymentForm) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakePayments_PaymentForm(message proto.Message) (m *Payments_PaymentForm) {
+	switch message.(type) {
+	case *TLPaymentsPaymentForm:
+		m2, _ := message.(*TLPaymentsPaymentForm)
+		m = &Payments_PaymentForm{
+			Payload: &Payments_PaymentForm_PaymentsPaymentForm{
+				PaymentsPaymentForm: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Payments_ValidatedRequestedInfo) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7665,6 +12815,19 @@ func (m *Payments_ValidatedRequestedInfo) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakePayments_ValidatedRequestedInfo(message proto.Message) (m *Payments_ValidatedRequestedInfo) {
+	switch message.(type) {
+	case *TLPaymentsValidatedRequestedInfo:
+		m2, _ := message.(*TLPaymentsValidatedRequestedInfo)
+		m = &Payments_ValidatedRequestedInfo{
+			Payload: &Payments_ValidatedRequestedInfo_PaymentsValidatedRequestedInfo{
+				PaymentsValidatedRequestedInfo: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Payments_PaymentResult) Encode() (b []byte) {
@@ -7695,6 +12858,26 @@ func (m *Payments_PaymentResult) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakePayments_PaymentResult(message proto.Message) (m *Payments_PaymentResult) {
+	switch message.(type) {
+	case *TLPaymentsPaymentResult:
+		m2, _ := message.(*TLPaymentsPaymentResult)
+		m = &Payments_PaymentResult{
+			Payload: &Payments_PaymentResult_PaymentsPaymentResult{
+				PaymentsPaymentResult: m2,
+			},
+		}
+	case *TLPaymentsPaymentVerficationNeeded:
+		m2, _ := message.(*TLPaymentsPaymentVerficationNeeded)
+		m = &Payments_PaymentResult{
+			Payload: &Payments_PaymentResult_PaymentsPaymentVerficationNeeded{
+				PaymentsPaymentVerficationNeeded: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Payments_PaymentReceipt) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7716,6 +12899,19 @@ func (m *Payments_PaymentReceipt) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakePayments_PaymentReceipt(message proto.Message) (m *Payments_PaymentReceipt) {
+	switch message.(type) {
+	case *TLPaymentsPaymentReceipt:
+		m2, _ := message.(*TLPaymentsPaymentReceipt)
+		m = &Payments_PaymentReceipt{
+			Payload: &Payments_PaymentReceipt_PaymentsPaymentReceipt{
+				PaymentsPaymentReceipt: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Payments_SavedInfo) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7735,6 +12931,19 @@ func (m *Payments_SavedInfo) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakePayments_SavedInfo(message proto.Message) (m *Payments_SavedInfo) {
+	switch message.(type) {
+	case *TLPaymentsSavedInfo:
+		m2, _ := message.(*TLPaymentsSavedInfo)
+		m = &Payments_SavedInfo{
+			Payload: &Payments_SavedInfo_PaymentsSavedInfo{
+				PaymentsSavedInfo: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *InputPaymentCredentials) Encode() (b []byte) {
@@ -7765,6 +12974,26 @@ func (m *InputPaymentCredentials) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputPaymentCredentials(message proto.Message) (m *InputPaymentCredentials) {
+	switch message.(type) {
+	case *TLInputPaymentCredentialsSaved:
+		m2, _ := message.(*TLInputPaymentCredentialsSaved)
+		m = &InputPaymentCredentials{
+			Payload: &InputPaymentCredentials_InputPaymentCredentialsSaved{
+				InputPaymentCredentialsSaved: m2,
+			},
+		}
+	case *TLInputPaymentCredentials:
+		m2, _ := message.(*TLInputPaymentCredentials)
+		m = &InputPaymentCredentials{
+			Payload: &InputPaymentCredentials_InputPaymentCredentials{
+				InputPaymentCredentials: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Account_TmpPassword) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7784,6 +13013,19 @@ func (m *Account_TmpPassword) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeAccount_TmpPassword(message proto.Message) (m *Account_TmpPassword) {
+	switch message.(type) {
+	case *TLAccountTmpPassword:
+		m2, _ := message.(*TLAccountTmpPassword)
+		m = &Account_TmpPassword{
+			Payload: &Account_TmpPassword_AccountTmpPassword{
+				AccountTmpPassword: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *ShippingOption) Encode() (b []byte) {
@@ -7807,6 +13049,19 @@ func (m *ShippingOption) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeShippingOption(message proto.Message) (m *ShippingOption) {
+	switch message.(type) {
+	case *TLShippingOption:
+		m2, _ := message.(*TLShippingOption)
+		m = &ShippingOption{
+			Payload: &ShippingOption_ShippingOption{
+				ShippingOption: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *InputStickerSetItem) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7828,6 +13083,19 @@ func (m *InputStickerSetItem) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeInputStickerSetItem(message proto.Message) (m *InputStickerSetItem) {
+	switch message.(type) {
+	case *TLInputStickerSetItem:
+		m2, _ := message.(*TLInputStickerSetItem)
+		m = &InputStickerSetItem{
+			Payload: &InputStickerSetItem_InputStickerSetItem{
+				InputStickerSetItem: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *InputPhoneCall) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7847,6 +13115,19 @@ func (m *InputPhoneCall) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeInputPhoneCall(message proto.Message) (m *InputPhoneCall) {
+	switch message.(type) {
+	case *TLInputPhoneCall:
+		m2, _ := message.(*TLInputPhoneCall)
+		m = &InputPhoneCall{
+			Payload: &InputPhoneCall_InputPhoneCall{
+				InputPhoneCall: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *PhoneCall) Encode() (b []byte) {
@@ -7905,6 +13186,54 @@ func (m *PhoneCall) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakePhoneCall(message proto.Message) (m *PhoneCall) {
+	switch message.(type) {
+	case *TLPhoneCallEmpty:
+		m2, _ := message.(*TLPhoneCallEmpty)
+		m = &PhoneCall{
+			Payload: &PhoneCall_PhoneCallEmpty{
+				PhoneCallEmpty: m2,
+			},
+		}
+	case *TLPhoneCallWaiting:
+		m2, _ := message.(*TLPhoneCallWaiting)
+		m = &PhoneCall{
+			Payload: &PhoneCall_PhoneCallWaiting{
+				PhoneCallWaiting: m2,
+			},
+		}
+	case *TLPhoneCallRequested:
+		m2, _ := message.(*TLPhoneCallRequested)
+		m = &PhoneCall{
+			Payload: &PhoneCall_PhoneCallRequested{
+				PhoneCallRequested: m2,
+			},
+		}
+	case *TLPhoneCallAccepted:
+		m2, _ := message.(*TLPhoneCallAccepted)
+		m = &PhoneCall{
+			Payload: &PhoneCall_PhoneCallAccepted{
+				PhoneCallAccepted: m2,
+			},
+		}
+	case *TLPhoneCall:
+		m2, _ := message.(*TLPhoneCall)
+		m = &PhoneCall{
+			Payload: &PhoneCall_PhoneCall{
+				PhoneCall: m2,
+			},
+		}
+	case *TLPhoneCallDiscarded:
+		m2, _ := message.(*TLPhoneCallDiscarded)
+		m = &PhoneCall{
+			Payload: &PhoneCall_PhoneCallDiscarded{
+				PhoneCallDiscarded: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *PhoneConnection) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7924,6 +13253,19 @@ func (m *PhoneConnection) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakePhoneConnection(message proto.Message) (m *PhoneConnection) {
+	switch message.(type) {
+	case *TLPhoneConnection:
+		m2, _ := message.(*TLPhoneConnection)
+		m = &PhoneConnection{
+			Payload: &PhoneConnection_PhoneConnection{
+				PhoneConnection: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *PhoneCallProtocol) Encode() (b []byte) {
@@ -7947,6 +13289,19 @@ func (m *PhoneCallProtocol) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakePhoneCallProtocol(message proto.Message) (m *PhoneCallProtocol) {
+	switch message.(type) {
+	case *TLPhoneCallProtocol:
+		m2, _ := message.(*TLPhoneCallProtocol)
+		m = &PhoneCallProtocol{
+			Payload: &PhoneCallProtocol_PhoneCallProtocol{
+				PhoneCallProtocol: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *Phone_PhoneCall) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -7966,6 +13321,19 @@ func (m *Phone_PhoneCall) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakePhone_PhoneCall(message proto.Message) (m *Phone_PhoneCall) {
+	switch message.(type) {
+	case *TLPhonePhoneCall:
+		m2, _ := message.(*TLPhonePhoneCall)
+		m = &Phone_PhoneCall{
+			Payload: &Phone_PhoneCall_PhonePhoneCall{
+				PhonePhoneCall: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Upload_CdnFile) Encode() (b []byte) {
@@ -7996,6 +13364,26 @@ func (m *Upload_CdnFile) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeUpload_CdnFile(message proto.Message) (m *Upload_CdnFile) {
+	switch message.(type) {
+	case *TLUploadCdnFileReuploadNeeded:
+		m2, _ := message.(*TLUploadCdnFileReuploadNeeded)
+		m = &Upload_CdnFile{
+			Payload: &Upload_CdnFile_UploadCdnFileReuploadNeeded{
+				UploadCdnFileReuploadNeeded: m2,
+			},
+		}
+	case *TLUploadCdnFile:
+		m2, _ := message.(*TLUploadCdnFile)
+		m = &Upload_CdnFile{
+			Payload: &Upload_CdnFile_UploadCdnFile{
+				UploadCdnFile: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *CdnPublicKey) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -8017,6 +13405,19 @@ func (m *CdnPublicKey) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeCdnPublicKey(message proto.Message) (m *CdnPublicKey) {
+	switch message.(type) {
+	case *TLCdnPublicKey:
+		m2, _ := message.(*TLCdnPublicKey)
+		m = &CdnPublicKey{
+			Payload: &CdnPublicKey_CdnPublicKey{
+				CdnPublicKey: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *CdnConfig) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -8036,6 +13437,19 @@ func (m *CdnConfig) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeCdnConfig(message proto.Message) (m *CdnConfig) {
+	switch message.(type) {
+	case *TLCdnConfig:
+		m2, _ := message.(*TLCdnConfig)
+		m = &CdnConfig{
+			Payload: &CdnConfig_CdnConfig{
+				CdnConfig: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *LangPackString) Encode() (b []byte) {
@@ -8073,6 +13487,33 @@ func (m *LangPackString) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeLangPackString(message proto.Message) (m *LangPackString) {
+	switch message.(type) {
+	case *TLLangPackString:
+		m2, _ := message.(*TLLangPackString)
+		m = &LangPackString{
+			Payload: &LangPackString_LangPackString{
+				LangPackString: m2,
+			},
+		}
+	case *TLLangPackStringPluralized:
+		m2, _ := message.(*TLLangPackStringPluralized)
+		m = &LangPackString{
+			Payload: &LangPackString_LangPackStringPluralized{
+				LangPackStringPluralized: m2,
+			},
+		}
+	case *TLLangPackStringDeleted:
+		m2, _ := message.(*TLLangPackStringDeleted)
+		m = &LangPackString{
+			Payload: &LangPackString_LangPackStringDeleted{
+				LangPackStringDeleted: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *LangPackDifference) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -8092,6 +13533,19 @@ func (m *LangPackDifference) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeLangPackDifference(message proto.Message) (m *LangPackDifference) {
+	switch message.(type) {
+	case *TLLangPackDifference:
+		m2, _ := message.(*TLLangPackDifference)
+		m = &LangPackDifference{
+			Payload: &LangPackDifference_LangPackDifference{
+				LangPackDifference: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *LangPackLanguage) Encode() (b []byte) {
@@ -8115,6 +13569,19 @@ func (m *LangPackLanguage) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeLangPackLanguage(message proto.Message) (m *LangPackLanguage) {
+	switch message.(type) {
+	case *TLLangPackLanguage:
+		m2, _ := message.(*TLLangPackLanguage)
+		m = &LangPackLanguage{
+			Payload: &LangPackLanguage_LangPackLanguage{
+				LangPackLanguage: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *ChannelAdminRights) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -8136,6 +13603,19 @@ func (m *ChannelAdminRights) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeChannelAdminRights(message proto.Message) (m *ChannelAdminRights) {
+	switch message.(type) {
+	case *TLChannelAdminRights:
+		m2, _ := message.(*TLChannelAdminRights)
+		m = &ChannelAdminRights{
+			Payload: &ChannelAdminRights_ChannelAdminRights{
+				ChannelAdminRights: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *ChannelBannedRights) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -8155,6 +13635,19 @@ func (m *ChannelBannedRights) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeChannelBannedRights(message proto.Message) (m *ChannelBannedRights) {
+	switch message.(type) {
+	case *TLChannelBannedRights:
+		m2, _ := message.(*TLChannelBannedRights)
+		m = &ChannelBannedRights{
+			Payload: &ChannelBannedRights_ChannelBannedRights{
+				ChannelBannedRights: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *ChannelAdminLogEventAction) Encode() (b []byte) {
@@ -8276,6 +13769,117 @@ func (m *ChannelAdminLogEventAction) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeChannelAdminLogEventAction(message proto.Message) (m *ChannelAdminLogEventAction) {
+	switch message.(type) {
+	case *TLChannelAdminLogEventActionChangeTitle:
+		m2, _ := message.(*TLChannelAdminLogEventActionChangeTitle)
+		m = &ChannelAdminLogEventAction{
+			Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeTitle{
+				ChannelAdminLogEventActionChangeTitle: m2,
+			},
+		}
+	case *TLChannelAdminLogEventActionChangeAbout:
+		m2, _ := message.(*TLChannelAdminLogEventActionChangeAbout)
+		m = &ChannelAdminLogEventAction{
+			Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeAbout{
+				ChannelAdminLogEventActionChangeAbout: m2,
+			},
+		}
+	case *TLChannelAdminLogEventActionChangeUsername:
+		m2, _ := message.(*TLChannelAdminLogEventActionChangeUsername)
+		m = &ChannelAdminLogEventAction{
+			Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeUsername{
+				ChannelAdminLogEventActionChangeUsername: m2,
+			},
+		}
+	case *TLChannelAdminLogEventActionChangePhoto:
+		m2, _ := message.(*TLChannelAdminLogEventActionChangePhoto)
+		m = &ChannelAdminLogEventAction{
+			Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionChangePhoto{
+				ChannelAdminLogEventActionChangePhoto: m2,
+			},
+		}
+	case *TLChannelAdminLogEventActionToggleInvites:
+		m2, _ := message.(*TLChannelAdminLogEventActionToggleInvites)
+		m = &ChannelAdminLogEventAction{
+			Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionToggleInvites{
+				ChannelAdminLogEventActionToggleInvites: m2,
+			},
+		}
+	case *TLChannelAdminLogEventActionToggleSignatures:
+		m2, _ := message.(*TLChannelAdminLogEventActionToggleSignatures)
+		m = &ChannelAdminLogEventAction{
+			Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionToggleSignatures{
+				ChannelAdminLogEventActionToggleSignatures: m2,
+			},
+		}
+	case *TLChannelAdminLogEventActionUpdatePinned:
+		m2, _ := message.(*TLChannelAdminLogEventActionUpdatePinned)
+		m = &ChannelAdminLogEventAction{
+			Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionUpdatePinned{
+				ChannelAdminLogEventActionUpdatePinned: m2,
+			},
+		}
+	case *TLChannelAdminLogEventActionEditMessage:
+		m2, _ := message.(*TLChannelAdminLogEventActionEditMessage)
+		m = &ChannelAdminLogEventAction{
+			Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionEditMessage{
+				ChannelAdminLogEventActionEditMessage: m2,
+			},
+		}
+	case *TLChannelAdminLogEventActionDeleteMessage:
+		m2, _ := message.(*TLChannelAdminLogEventActionDeleteMessage)
+		m = &ChannelAdminLogEventAction{
+			Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionDeleteMessage{
+				ChannelAdminLogEventActionDeleteMessage: m2,
+			},
+		}
+	case *TLChannelAdminLogEventActionParticipantJoin:
+		m2, _ := message.(*TLChannelAdminLogEventActionParticipantJoin)
+		m = &ChannelAdminLogEventAction{
+			Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantJoin{
+				ChannelAdminLogEventActionParticipantJoin: m2,
+			},
+		}
+	case *TLChannelAdminLogEventActionParticipantLeave:
+		m2, _ := message.(*TLChannelAdminLogEventActionParticipantLeave)
+		m = &ChannelAdminLogEventAction{
+			Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantLeave{
+				ChannelAdminLogEventActionParticipantLeave: m2,
+			},
+		}
+	case *TLChannelAdminLogEventActionParticipantInvite:
+		m2, _ := message.(*TLChannelAdminLogEventActionParticipantInvite)
+		m = &ChannelAdminLogEventAction{
+			Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantInvite{
+				ChannelAdminLogEventActionParticipantInvite: m2,
+			},
+		}
+	case *TLChannelAdminLogEventActionParticipantToggleBan:
+		m2, _ := message.(*TLChannelAdminLogEventActionParticipantToggleBan)
+		m = &ChannelAdminLogEventAction{
+			Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantToggleBan{
+				ChannelAdminLogEventActionParticipantToggleBan: m2,
+			},
+		}
+	case *TLChannelAdminLogEventActionParticipantToggleAdmin:
+		m2, _ := message.(*TLChannelAdminLogEventActionParticipantToggleAdmin)
+		m = &ChannelAdminLogEventAction{
+			Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantToggleAdmin{
+				ChannelAdminLogEventActionParticipantToggleAdmin: m2,
+			},
+		}
+	case *TLChannelAdminLogEventActionChangeStickerSet:
+		m2, _ := message.(*TLChannelAdminLogEventActionChangeStickerSet)
+		m = &ChannelAdminLogEventAction{
+			Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeStickerSet{
+				ChannelAdminLogEventActionChangeStickerSet: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *ChannelAdminLogEvent) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -8295,6 +13899,19 @@ func (m *ChannelAdminLogEvent) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeChannelAdminLogEvent(message proto.Message) (m *ChannelAdminLogEvent) {
+	switch message.(type) {
+	case *TLChannelAdminLogEvent:
+		m2, _ := message.(*TLChannelAdminLogEvent)
+		m = &ChannelAdminLogEvent{
+			Payload: &ChannelAdminLogEvent_ChannelAdminLogEvent{
+				ChannelAdminLogEvent: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Channels_AdminLogResults) Encode() (b []byte) {
@@ -8318,6 +13935,19 @@ func (m *Channels_AdminLogResults) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakeChannels_AdminLogResults(message proto.Message) (m *Channels_AdminLogResults) {
+	switch message.(type) {
+	case *TLChannelsAdminLogResults:
+		m2, _ := message.(*TLChannelsAdminLogResults)
+		m = &Channels_AdminLogResults{
+			Payload: &Channels_AdminLogResults_ChannelsAdminLogResults{
+				ChannelsAdminLogResults: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *ChannelAdminLogEventsFilter) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -8337,6 +13967,19 @@ func (m *ChannelAdminLogEventsFilter) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeChannelAdminLogEventsFilter(message proto.Message) (m *ChannelAdminLogEventsFilter) {
+	switch message.(type) {
+	case *TLChannelAdminLogEventsFilter:
+		m2, _ := message.(*TLChannelAdminLogEventsFilter)
+		m = &ChannelAdminLogEventsFilter{
+			Payload: &ChannelAdminLogEventsFilter_ChannelAdminLogEventsFilter{
+				ChannelAdminLogEventsFilter: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *PopularContact) Encode() (b []byte) {
@@ -8360,6 +14003,19 @@ func (m *PopularContact) Decode(dbuf *DecodeBuf) error {
 	return dbuf.err
 }
 
+func MakePopularContact(message proto.Message) (m *PopularContact) {
+	switch message.(type) {
+	case *TLPopularContact:
+		m2, _ := message.(*TLPopularContact)
+		m = &PopularContact{
+			Payload: &PopularContact_PopularContact{
+				PopularContact: m2,
+			},
+		}
+	}
+	return
+}
+
 func (m *CdnFileHash) Encode() (b []byte) {
 	b = nil
 	switch m.Payload.(type) {
@@ -8379,6 +14035,19 @@ func (m *CdnFileHash) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeCdnFileHash(message proto.Message) (m *CdnFileHash) {
+	switch message.(type) {
+	case *TLCdnFileHash:
+		m2, _ := message.(*TLCdnFileHash)
+		m = &CdnFileHash{
+			Payload: &CdnFileHash_CdnFileHash{
+				CdnFileHash: m2,
+			},
+		}
+	}
+	return
 }
 
 func (m *Messages_FavedStickers) Encode() (b []byte) {
@@ -8407,6 +14076,26 @@ func (m *Messages_FavedStickers) Decode(dbuf *DecodeBuf) error {
 		m.Payload = &m2
 	}
 	return dbuf.err
+}
+
+func MakeMessages_FavedStickers(message proto.Message) (m *Messages_FavedStickers) {
+	switch message.(type) {
+	case *TLMessagesFavedStickersNotModified:
+		m2, _ := message.(*TLMessagesFavedStickersNotModified)
+		m = &Messages_FavedStickers{
+			Payload: &Messages_FavedStickers_MessagesFavedStickersNotModified{
+				MessagesFavedStickersNotModified: m2,
+			},
+		}
+	case *TLMessagesFavedStickers:
+		m2, _ := message.(*TLMessagesFavedStickers)
+		m = &Messages_FavedStickers{
+			Payload: &Messages_FavedStickers_MessagesFavedStickers{
+				MessagesFavedStickers: m2,
+			},
+		}
+	}
+	return
 }
 
 // resPQ#05162463 nonce:int128 server_nonce:int128 pq:string server_public_key_fingerprints:Vector<long> = ResPQ;
@@ -8831,7 +14520,7 @@ func (m *TLFutureSalts) Encode() []byte {
 	x.Int(m.Now)
 	// x.VectorMessage(m.Salts);
 	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
 	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Salts)))
 	for _, v := range m.Salts {
 		x.buf = append(x.buf, (*v).Encode()...)
@@ -8843,10 +14532,10 @@ func (m *TLFutureSalts) Decode(dbuf *DecodeBuf) error {
 	m.ReqMsgId = dbuf.Long()
 	m.Now = dbuf.Int()
 	// x.VectorMessage(m.Salts);
-	c3 := dbuf.Int()
-	if c3 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c3)
-	}
+	// c3 := dbuf.Int()
+	// if c3 != int32(TLConstructor_CRC32_vector) {
+	//   return fmt.Errorf("Not vector, classID: ", c3)
+	// }
 	l3 := dbuf.Int()
 	m.Salts = make([]*TLFutureSalt, l3)
 	for i := 0; i < int(l3); i++ {
@@ -8957,7 +14646,7 @@ func (m *TLHelpConfigSimple) Encode() []byte {
 	x.Int(m.DcId)
 	// x.VectorMessage(m.IpPortList);
 	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
 	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.IpPortList)))
 	for _, v := range m.IpPortList {
 		x.buf = append(x.buf, (*v).Encode()...)
@@ -8970,10 +14659,10 @@ func (m *TLHelpConfigSimple) Decode(dbuf *DecodeBuf) error {
 	m.Expires = dbuf.Int()
 	m.DcId = dbuf.Int()
 	// x.VectorMessage(m.IpPortList);
-	c4 := dbuf.Int()
-	if c4 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c4)
-	}
+	// c4 := dbuf.Int()
+	// if c4 != int32(TLConstructor_CRC32_vector) {
+	//   return fmt.Errorf("Not vector, classID: ", c4)
+	// }
 	l4 := dbuf.Int()
 	m.IpPortList = make([]*TLIpPort, l4)
 	for i := 0; i < int(l4); i++ {
@@ -9216,37 +14905,54 @@ func (m *TLInputMediaEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaUploadedPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaUploadedPhoto))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Stickers != nil {
+		flags |= 1 << 0
+	}
+	if m.TtlSeconds != 0 {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
 	x.Bytes(m.File.Encode())
 	x.String(m.Caption)
-	// x.VectorMessage(m.Stickers);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Stickers)))
-	for _, v := range m.Stickers {
-		x.buf = append(x.buf, (*v).Encode()...)
+	if (flags & (1 << 0)) != 0 {
+		// x.VectorMessage(m.Stickers);
+		x3 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Stickers)))
+		for _, v := range m.Stickers {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
 	}
-	x.Int(m.TtlSeconds)
+	if (flags & (1 << 1)) != 0 {
+		x.Int(m.TtlSeconds)
+	}
 	return x.buf
 }
 
 func (m *TLInputMediaUploadedPhoto) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.File = &InputFile{}
 	m.Decode(dbuf)
 	m.Caption = dbuf.String()
-	// x.VectorMessage(m.Stickers);
-	c4 := dbuf.Int()
-	if c4 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c4)
+	if (flags & (1 << 0)) != 0 {
+		// x.VectorMessage(m.Stickers);
+		c3 := dbuf.Int()
+		if c3 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c3)
+		}
+		l3 := dbuf.Int()
+		m.Stickers = make([]*InputDocument, l3)
+		for i := 0; i < int(l3); i++ {
+			m.Stickers[i] = &InputDocument{}
+			(*m.Stickers[i]).Decode(dbuf)
+		}
 	}
-	l4 := dbuf.Int()
-	m.Stickers = make([]*InputDocument, l4)
-	for i := 0; i < int(l4); i++ {
-		m.Stickers[i] = &InputDocument{}
-		(*m.Stickers[i]).Decode(dbuf)
+	if (flags & (1 << 1)) != 0 {
+		m.TtlSeconds = dbuf.Int()
 	}
-	m.TtlSeconds = dbuf.Int()
 	return dbuf.err
 }
 
@@ -9254,19 +14960,29 @@ func (m *TLInputMediaUploadedPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaPhoto))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.TtlSeconds != 0 {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
 	x.Bytes(m.Id.Encode())
 	x.String(m.Caption)
-	x.Int(m.TtlSeconds)
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.TtlSeconds)
+	}
 	return x.buf
 }
 
 func (m *TLInputMediaPhoto) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Id = &InputPhoto{}
 	m.Decode(dbuf)
 	m.Caption = dbuf.String()
-	m.TtlSeconds = dbuf.Int()
+	if (flags & (1 << 0)) != 0 {
+		m.TtlSeconds = dbuf.Int()
+	}
 	return dbuf.err
 }
 
@@ -9305,60 +15021,84 @@ func (m *TLInputMediaContact) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaUploadedDocument) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaUploadedDocument))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Thumb != nil {
+		flags |= 1 << 2
+	}
+	if m.Stickers != nil {
+		flags |= 1 << 0
+	}
+	if m.TtlSeconds != 0 {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
 	x.Bytes(m.File.Encode())
-	x.Bytes(m.Thumb.Encode())
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.Thumb.Encode())
+	}
 	x.String(m.MimeType)
 	// x.VectorMessage(m.Attributes);
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Attributes)))
+	x4 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Attributes)))
 	for _, v := range m.Attributes {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	x.String(m.Caption)
-	// x.VectorMessage(m.Stickers);
-	x7 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x7, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x7[4:], uint32(len(m.Stickers)))
-	for _, v := range m.Stickers {
-		x.buf = append(x.buf, (*v).Encode()...)
+	if (flags & (1 << 0)) != 0 {
+		// x.VectorMessage(m.Stickers);
+		x6 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Stickers)))
+		for _, v := range m.Stickers {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
 	}
-	x.Int(m.TtlSeconds)
+	if (flags & (1 << 1)) != 0 {
+		x.Int(m.TtlSeconds)
+	}
 	return x.buf
 }
 
 func (m *TLInputMediaUploadedDocument) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.File = &InputFile{}
 	m.Decode(dbuf)
-	m.Thumb = &InputFile{}
-	m.Decode(dbuf)
+	if (flags & (1 << 2)) != 0 {
+		m.Thumb = &InputFile{}
+		m.Decode(dbuf)
+	}
 	m.MimeType = dbuf.String()
 	// x.VectorMessage(m.Attributes);
-	c5 := dbuf.Int()
-	if c5 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c5)
+	c4 := dbuf.Int()
+	if c4 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c4)
 	}
-	l5 := dbuf.Int()
-	m.Attributes = make([]*DocumentAttribute, l5)
-	for i := 0; i < int(l5); i++ {
+	l4 := dbuf.Int()
+	m.Attributes = make([]*DocumentAttribute, l4)
+	for i := 0; i < int(l4); i++ {
 		m.Attributes[i] = &DocumentAttribute{}
 		(*m.Attributes[i]).Decode(dbuf)
 	}
 	m.Caption = dbuf.String()
-	// x.VectorMessage(m.Stickers);
-	c7 := dbuf.Int()
-	if c7 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c7)
+	if (flags & (1 << 0)) != 0 {
+		// x.VectorMessage(m.Stickers);
+		c6 := dbuf.Int()
+		if c6 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c6)
+		}
+		l6 := dbuf.Int()
+		m.Stickers = make([]*InputDocument, l6)
+		for i := 0; i < int(l6); i++ {
+			m.Stickers[i] = &InputDocument{}
+			(*m.Stickers[i]).Decode(dbuf)
+		}
 	}
-	l7 := dbuf.Int()
-	m.Stickers = make([]*InputDocument, l7)
-	for i := 0; i < int(l7); i++ {
-		m.Stickers[i] = &InputDocument{}
-		(*m.Stickers[i]).Decode(dbuf)
+	if (flags & (1 << 1)) != 0 {
+		m.TtlSeconds = dbuf.Int()
 	}
-	m.TtlSeconds = dbuf.Int()
 	return dbuf.err
 }
 
@@ -9366,19 +15106,29 @@ func (m *TLInputMediaUploadedDocument) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaDocument) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaDocument))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.TtlSeconds != 0 {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
 	x.Bytes(m.Id.Encode())
 	x.String(m.Caption)
-	x.Int(m.TtlSeconds)
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.TtlSeconds)
+	}
 	return x.buf
 }
 
 func (m *TLInputMediaDocument) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Id = &InputDocument{}
 	m.Decode(dbuf)
 	m.Caption = dbuf.String()
-	m.TtlSeconds = dbuf.Int()
+	if (flags & (1 << 0)) != 0 {
+		m.TtlSeconds = dbuf.Int()
+	}
 	return dbuf.err
 }
 
@@ -9423,18 +15173,28 @@ func (m *TLInputMediaGifExternal) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaPhotoExternal) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaPhotoExternal))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.TtlSeconds != 0 {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
 	x.String(m.Url)
 	x.String(m.Caption)
-	x.Int(m.TtlSeconds)
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.TtlSeconds)
+	}
 	return x.buf
 }
 
 func (m *TLInputMediaPhotoExternal) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Url = dbuf.String()
 	m.Caption = dbuf.String()
-	m.TtlSeconds = dbuf.Int()
+	if (flags & (1 << 0)) != 0 {
+		m.TtlSeconds = dbuf.Int()
+	}
 	return dbuf.err
 }
 
@@ -9442,18 +15202,28 @@ func (m *TLInputMediaPhotoExternal) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaDocumentExternal) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaDocumentExternal))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.TtlSeconds != 0 {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
 	x.String(m.Url)
 	x.String(m.Caption)
-	x.Int(m.TtlSeconds)
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.TtlSeconds)
+	}
 	return x.buf
 }
 
 func (m *TLInputMediaDocumentExternal) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Url = dbuf.String()
 	m.Caption = dbuf.String()
-	m.TtlSeconds = dbuf.Int()
+	if (flags & (1 << 0)) != 0 {
+		m.TtlSeconds = dbuf.Int()
+	}
 	return dbuf.err
 }
 
@@ -9475,10 +15245,18 @@ func (m *TLInputMediaGame) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaInvoice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaInvoice))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Photo != nil {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
 	x.String(m.Title)
 	x.String(m.Description)
-	x.Bytes(m.Photo.Encode())
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.Photo.Encode())
+	}
 	x.Bytes(m.Invoice.Encode())
 	x.StringBytes(m.Payload)
 	x.String(m.Provider)
@@ -9487,11 +15265,13 @@ func (m *TLInputMediaInvoice) Encode() []byte {
 }
 
 func (m *TLInputMediaInvoice) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Title = dbuf.String()
 	m.Description = dbuf.String()
-	m.Photo = &InputWebDocument{}
-	m.Decode(dbuf)
+	if (flags & (1 << 0)) != 0 {
+		m.Photo = &InputWebDocument{}
+		m.Decode(dbuf)
+	}
 	m.Invoice = &Invoice{}
 	m.Decode(dbuf)
 	m.Payload = dbuf.StringBytes()
@@ -9861,38 +15641,217 @@ func (m *TLUserEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLUser) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_user))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Self == true {
+		flags |= 1 << 10
+	}
+	if m.Contact == true {
+		flags |= 1 << 11
+	}
+	if m.MutualContact == true {
+		flags |= 1 << 12
+	}
+	if m.Deleted == true {
+		flags |= 1 << 13
+	}
+	if m.Bot == true {
+		flags |= 1 << 14
+	}
+	if m.BotChatHistory == true {
+		flags |= 1 << 15
+	}
+	if m.BotNochats == true {
+		flags |= 1 << 16
+	}
+	if m.Verified == true {
+		flags |= 1 << 17
+	}
+	if m.Restricted == true {
+		flags |= 1 << 18
+	}
+	if m.Min == true {
+		flags |= 1 << 20
+	}
+	if m.BotInlineGeo == true {
+		flags |= 1 << 21
+	}
+	if m.AccessHash != 0 {
+		flags |= 1 << 0
+	}
+	if m.FirstName != "" {
+		flags |= 1 << 1
+	}
+	if m.LastName != "" {
+		flags |= 1 << 2
+	}
+	if m.Username != "" {
+		flags |= 1 << 3
+	}
+	if m.Phone != "" {
+		flags |= 1 << 4
+	}
+	if m.Photo != nil {
+		flags |= 1 << 5
+	}
+	if m.Status != nil {
+		flags |= 1 << 6
+	}
+	if m.BotInfoVersion != 0 {
+		flags |= 1 << 14
+	}
+	if m.RestrictionReason != "" {
+		flags |= 1 << 18
+	}
+	if m.BotInlinePlaceholder != "" {
+		flags |= 1 << 19
+	}
+	if m.LangCode != "" {
+		flags |= 1 << 22
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 10)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 11)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 12)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 13)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 14)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 15)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 16)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 17)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 18)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 20)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 21)) != 0 {
+		// ignore
+	}
 	x.Int(m.Id)
-	x.Long(m.AccessHash)
-	x.String(m.FirstName)
-	x.String(m.LastName)
-	x.String(m.Username)
-	x.String(m.Phone)
-	x.Bytes(m.Photo.Encode())
-	x.Bytes(m.Status.Encode())
-	x.Int(m.BotInfoVersion)
-	x.String(m.RestrictionReason)
-	x.String(m.BotInlinePlaceholder)
-	x.String(m.LangCode)
+	if (flags & (1 << 0)) != 0 {
+		x.Long(m.AccessHash)
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.FirstName)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.String(m.LastName)
+	}
+	if (flags & (1 << 3)) != 0 {
+		x.String(m.Username)
+	}
+	if (flags & (1 << 4)) != 0 {
+		x.String(m.Phone)
+	}
+	if (flags & (1 << 5)) != 0 {
+		x.Bytes(m.Photo.Encode())
+	}
+	if (flags & (1 << 6)) != 0 {
+		x.Bytes(m.Status.Encode())
+	}
+	if (flags & (1 << 14)) != 0 {
+		x.Int(m.BotInfoVersion)
+	}
+	if (flags & (1 << 18)) != 0 {
+		x.String(m.RestrictionReason)
+	}
+	if (flags & (1 << 19)) != 0 {
+		x.String(m.BotInlinePlaceholder)
+	}
+	if (flags & (1 << 22)) != 0 {
+		x.String(m.LangCode)
+	}
 	return x.buf
 }
 
 func (m *TLUser) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 10)) != 0 {
+		m.Self = true
+	}
+	if (flags & (1 << 11)) != 0 {
+		m.Contact = true
+	}
+	if (flags & (1 << 12)) != 0 {
+		m.MutualContact = true
+	}
+	if (flags & (1 << 13)) != 0 {
+		m.Deleted = true
+	}
+	if (flags & (1 << 14)) != 0 {
+		m.Bot = true
+	}
+	if (flags & (1 << 15)) != 0 {
+		m.BotChatHistory = true
+	}
+	if (flags & (1 << 16)) != 0 {
+		m.BotNochats = true
+	}
+	if (flags & (1 << 17)) != 0 {
+		m.Verified = true
+	}
+	if (flags & (1 << 18)) != 0 {
+		m.Restricted = true
+	}
+	if (flags & (1 << 20)) != 0 {
+		m.Min = true
+	}
+	if (flags & (1 << 21)) != 0 {
+		m.BotInlineGeo = true
+	}
 	m.Id = dbuf.Int()
-	m.AccessHash = dbuf.Long()
-	m.FirstName = dbuf.String()
-	m.LastName = dbuf.String()
-	m.Username = dbuf.String()
-	m.Phone = dbuf.String()
-	m.Photo = &UserProfilePhoto{}
-	m.Decode(dbuf)
-	m.Status = &UserStatus{}
-	m.Decode(dbuf)
-	m.BotInfoVersion = dbuf.Int()
-	m.RestrictionReason = dbuf.String()
-	m.BotInlinePlaceholder = dbuf.String()
-	m.LangCode = dbuf.String()
+	if (flags & (1 << 0)) != 0 {
+		m.AccessHash = dbuf.Long()
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.FirstName = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.LastName = dbuf.String()
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.Username = dbuf.String()
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.Phone = dbuf.String()
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.Photo = &UserProfilePhoto{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 6)) != 0 {
+		m.Status = &UserStatus{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 14)) != 0 {
+		m.BotInfoVersion = dbuf.Int()
+	}
+	if (flags & (1 << 18)) != 0 {
+		m.RestrictionReason = dbuf.String()
+	}
+	if (flags & (1 << 19)) != 0 {
+		m.BotInlinePlaceholder = dbuf.String()
+	}
+	if (flags & (1 << 22)) != 0 {
+		m.LangCode = dbuf.String()
+	}
 	return dbuf.err
 }
 
@@ -10013,19 +15972,81 @@ func (m *TLChatEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLChat) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chat))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Creator == true {
+		flags |= 1 << 0
+	}
+	if m.Kicked == true {
+		flags |= 1 << 1
+	}
+	if m.Left == true {
+		flags |= 1 << 2
+	}
+	if m.AdminsEnabled == true {
+		flags |= 1 << 3
+	}
+	if m.Admin == true {
+		flags |= 1 << 4
+	}
+	if m.Deactivated == true {
+		flags |= 1 << 5
+	}
+	if m.MigratedTo != nil {
+		flags |= 1 << 6
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 2)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 3)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 4)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 5)) != 0 {
+		// ignore
+	}
 	x.Int(m.Id)
 	x.String(m.Title)
 	x.Bytes(m.Photo.Encode())
 	x.Int(m.ParticipantsCount)
 	x.Int(m.Date)
 	x.Int(m.Version)
-	x.Bytes(m.MigratedTo.Encode())
+	if (flags & (1 << 6)) != 0 {
+		x.Bytes(m.MigratedTo.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLChat) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Creator = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Kicked = true
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Left = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.AdminsEnabled = true
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.Admin = true
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.Deactivated = true
+	}
 	m.Id = dbuf.Int()
 	m.Title = dbuf.String()
 	m.Photo = &ChatPhoto{}
@@ -10033,8 +16054,10 @@ func (m *TLChat) Decode(dbuf *DecodeBuf) error {
 	m.ParticipantsCount = dbuf.Int()
 	m.Date = dbuf.Int()
 	m.Version = dbuf.Int()
-	m.MigratedTo = &InputChannel{}
-	m.Decode(dbuf)
+	if (flags & (1 << 6)) != 0 {
+		m.MigratedTo = &InputChannel{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -10057,35 +16080,163 @@ func (m *TLChatForbidden) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannel) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channel))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Creator == true {
+		flags |= 1 << 0
+	}
+	if m.Left == true {
+		flags |= 1 << 2
+	}
+	if m.Editor == true {
+		flags |= 1 << 3
+	}
+	if m.Broadcast == true {
+		flags |= 1 << 5
+	}
+	if m.Verified == true {
+		flags |= 1 << 7
+	}
+	if m.Megagroup == true {
+		flags |= 1 << 8
+	}
+	if m.Restricted == true {
+		flags |= 1 << 9
+	}
+	if m.Democracy == true {
+		flags |= 1 << 10
+	}
+	if m.Signatures == true {
+		flags |= 1 << 11
+	}
+	if m.Min == true {
+		flags |= 1 << 12
+	}
+	if m.AccessHash != 0 {
+		flags |= 1 << 13
+	}
+	if m.Username != "" {
+		flags |= 1 << 6
+	}
+	if m.RestrictionReason != "" {
+		flags |= 1 << 9
+	}
+	if m.AdminRights != nil {
+		flags |= 1 << 14
+	}
+	if m.BannedRights != nil {
+		flags |= 1 << 15
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 2)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 3)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 5)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 7)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 8)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 9)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 10)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 11)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 12)) != 0 {
+		// ignore
+	}
 	x.Int(m.Id)
-	x.Long(m.AccessHash)
+	if (flags & (1 << 13)) != 0 {
+		x.Long(m.AccessHash)
+	}
 	x.String(m.Title)
-	x.String(m.Username)
+	if (flags & (1 << 6)) != 0 {
+		x.String(m.Username)
+	}
 	x.Bytes(m.Photo.Encode())
 	x.Int(m.Date)
 	x.Int(m.Version)
-	x.String(m.RestrictionReason)
-	x.Bytes(m.AdminRights.Encode())
-	x.Bytes(m.BannedRights.Encode())
+	if (flags & (1 << 9)) != 0 {
+		x.String(m.RestrictionReason)
+	}
+	if (flags & (1 << 14)) != 0 {
+		x.Bytes(m.AdminRights.Encode())
+	}
+	if (flags & (1 << 15)) != 0 {
+		x.Bytes(m.BannedRights.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLChannel) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Creator = true
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Left = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.Editor = true
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.Broadcast = true
+	}
+	if (flags & (1 << 7)) != 0 {
+		m.Verified = true
+	}
+	if (flags & (1 << 8)) != 0 {
+		m.Megagroup = true
+	}
+	if (flags & (1 << 9)) != 0 {
+		m.Restricted = true
+	}
+	if (flags & (1 << 10)) != 0 {
+		m.Democracy = true
+	}
+	if (flags & (1 << 11)) != 0 {
+		m.Signatures = true
+	}
+	if (flags & (1 << 12)) != 0 {
+		m.Min = true
+	}
 	m.Id = dbuf.Int()
-	m.AccessHash = dbuf.Long()
+	if (flags & (1 << 13)) != 0 {
+		m.AccessHash = dbuf.Long()
+	}
 	m.Title = dbuf.String()
-	m.Username = dbuf.String()
+	if (flags & (1 << 6)) != 0 {
+		m.Username = dbuf.String()
+	}
 	m.Photo = &ChatPhoto{}
 	m.Decode(dbuf)
 	m.Date = dbuf.Int()
 	m.Version = dbuf.Int()
-	m.RestrictionReason = dbuf.String()
-	m.AdminRights = &ChannelAdminRights{}
-	m.Decode(dbuf)
-	m.BannedRights = &ChannelBannedRights{}
-	m.Decode(dbuf)
+	if (flags & (1 << 9)) != 0 {
+		m.RestrictionReason = dbuf.String()
+	}
+	if (flags & (1 << 14)) != 0 {
+		m.AdminRights = &ChannelAdminRights{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 15)) != 0 {
+		m.BannedRights = &ChannelBannedRights{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -10093,20 +16244,48 @@ func (m *TLChannel) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelForbidden) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelForbidden))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Broadcast == true {
+		flags |= 1 << 5
+	}
+	if m.Megagroup == true {
+		flags |= 1 << 8
+	}
+	if m.UntilDate != 0 {
+		flags |= 1 << 16
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 5)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 8)) != 0 {
+		// ignore
+	}
 	x.Int(m.Id)
 	x.Long(m.AccessHash)
 	x.String(m.Title)
-	x.Int(m.UntilDate)
+	if (flags & (1 << 16)) != 0 {
+		x.Int(m.UntilDate)
+	}
 	return x.buf
 }
 
 func (m *TLChannelForbidden) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 5)) != 0 {
+		m.Broadcast = true
+	}
+	if (flags & (1 << 8)) != 0 {
+		m.Megagroup = true
+	}
 	m.Id = dbuf.Int()
 	m.AccessHash = dbuf.Long()
 	m.Title = dbuf.String()
-	m.UntilDate = dbuf.Int()
+	if (flags & (1 << 16)) != 0 {
+		m.UntilDate = dbuf.Int()
+	}
 	return dbuf.err
 }
 
@@ -10157,13 +16336,66 @@ func (m *TLChatFull) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelFull) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelFull))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.CanViewParticipants == true {
+		flags |= 1 << 3
+	}
+	if m.CanSetUsername == true {
+		flags |= 1 << 6
+	}
+	if m.CanSetStickers == true {
+		flags |= 1 << 7
+	}
+	if m.ParticipantsCount != 0 {
+		flags |= 1 << 0
+	}
+	if m.AdminsCount != 0 {
+		flags |= 1 << 1
+	}
+	if m.KickedCount != 0 {
+		flags |= 1 << 2
+	}
+	if m.BannedCount != 0 {
+		flags |= 1 << 2
+	}
+	if m.MigratedFromChatId != 0 {
+		flags |= 1 << 4
+	}
+	if m.MigratedFromMaxId != 0 {
+		flags |= 1 << 4
+	}
+	if m.PinnedMsgId != 0 {
+		flags |= 1 << 5
+	}
+	if m.Stickerset != nil {
+		flags |= 1 << 8
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 3)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 6)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 7)) != 0 {
+		// ignore
+	}
 	x.Int(m.Id)
 	x.String(m.About)
-	x.Int(m.ParticipantsCount)
-	x.Int(m.AdminsCount)
-	x.Int(m.KickedCount)
-	x.Int(m.BannedCount)
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.ParticipantsCount)
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.Int(m.AdminsCount)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.Int(m.KickedCount)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.Int(m.BannedCount)
+	}
 	x.Int(m.ReadInboxMaxId)
 	x.Int(m.ReadOutboxMaxId)
 	x.Int(m.UnreadCount)
@@ -10171,27 +16403,52 @@ func (m *TLChannelFull) Encode() []byte {
 	x.Bytes(m.NotifySettings.Encode())
 	x.Bytes(m.ExportedInvite.Encode())
 	// x.VectorMessage(m.BotInfo);
-	x17 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x17, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x17[4:], uint32(len(m.BotInfo)))
+	x16 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x16, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x16[4:], uint32(len(m.BotInfo)))
 	for _, v := range m.BotInfo {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
-	x.Int(m.MigratedFromChatId)
-	x.Int(m.MigratedFromMaxId)
-	x.Int(m.PinnedMsgId)
-	x.Bytes(m.Stickerset.Encode())
+	if (flags & (1 << 4)) != 0 {
+		x.Int(m.MigratedFromChatId)
+	}
+	if (flags & (1 << 4)) != 0 {
+		x.Int(m.MigratedFromMaxId)
+	}
+	if (flags & (1 << 5)) != 0 {
+		x.Int(m.PinnedMsgId)
+	}
+	if (flags & (1 << 8)) != 0 {
+		x.Bytes(m.Stickerset.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLChannelFull) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 3)) != 0 {
+		m.CanViewParticipants = true
+	}
+	if (flags & (1 << 6)) != 0 {
+		m.CanSetUsername = true
+	}
+	if (flags & (1 << 7)) != 0 {
+		m.CanSetStickers = true
+	}
 	m.Id = dbuf.Int()
 	m.About = dbuf.String()
-	m.ParticipantsCount = dbuf.Int()
-	m.AdminsCount = dbuf.Int()
-	m.KickedCount = dbuf.Int()
-	m.BannedCount = dbuf.Int()
+	if (flags & (1 << 0)) != 0 {
+		m.ParticipantsCount = dbuf.Int()
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.AdminsCount = dbuf.Int()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.KickedCount = dbuf.Int()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.BannedCount = dbuf.Int()
+	}
 	m.ReadInboxMaxId = dbuf.Int()
 	m.ReadOutboxMaxId = dbuf.Int()
 	m.UnreadCount = dbuf.Int()
@@ -10202,21 +16459,29 @@ func (m *TLChannelFull) Decode(dbuf *DecodeBuf) error {
 	m.ExportedInvite = &ExportedChatInvite{}
 	m.Decode(dbuf)
 	// x.VectorMessage(m.BotInfo);
-	c17 := dbuf.Int()
-	if c17 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c17)
+	c16 := dbuf.Int()
+	if c16 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c16)
 	}
-	l17 := dbuf.Int()
-	m.BotInfo = make([]*BotInfo, l17)
-	for i := 0; i < int(l17); i++ {
+	l16 := dbuf.Int()
+	m.BotInfo = make([]*BotInfo, l16)
+	for i := 0; i < int(l16); i++ {
 		m.BotInfo[i] = &BotInfo{}
 		(*m.BotInfo[i]).Decode(dbuf)
 	}
-	m.MigratedFromChatId = dbuf.Int()
-	m.MigratedFromMaxId = dbuf.Int()
-	m.PinnedMsgId = dbuf.Int()
-	m.Stickerset = &StickerSet{}
-	m.Decode(dbuf)
+	if (flags & (1 << 4)) != 0 {
+		m.MigratedFromChatId = dbuf.Int()
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.MigratedFromMaxId = dbuf.Int()
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.PinnedMsgId = dbuf.Int()
+	}
+	if (flags & (1 << 8)) != 0 {
+		m.Stickerset = &StickerSet{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -10271,17 +16536,27 @@ func (m *TLChatParticipantAdmin) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatParticipantsForbidden) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatParticipantsForbidden))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.SelfParticipant != nil {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
 	x.Int(m.ChatId)
-	x.Bytes(m.SelfParticipant.Encode())
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.SelfParticipant.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLChatParticipantsForbidden) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.ChatId = dbuf.Int()
-	m.SelfParticipant = &ChatParticipant{}
-	m.Decode(dbuf)
+	if (flags & (1 << 0)) != 0 {
+		m.SelfParticipant = &ChatParticipant{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -10363,60 +16638,178 @@ func (m *TLMessageEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_message))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Out == true {
+		flags |= 1 << 1
+	}
+	if m.Mentioned == true {
+		flags |= 1 << 4
+	}
+	if m.MediaUnread == true {
+		flags |= 1 << 5
+	}
+	if m.Silent == true {
+		flags |= 1 << 13
+	}
+	if m.Post == true {
+		flags |= 1 << 14
+	}
+	if m.FromId != 0 {
+		flags |= 1 << 8
+	}
+	if m.FwdFrom != nil {
+		flags |= 1 << 2
+	}
+	if m.ViaBotId != 0 {
+		flags |= 1 << 11
+	}
+	if m.ReplyToMsgId != 0 {
+		flags |= 1 << 3
+	}
+	if m.Media != nil {
+		flags |= 1 << 9
+	}
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 6
+	}
+	if m.Entities != nil {
+		flags |= 1 << 7
+	}
+	if m.Views != 0 {
+		flags |= 1 << 10
+	}
+	if m.EditDate != 0 {
+		flags |= 1 << 15
+	}
+	if m.PostAuthor != "" {
+		flags |= 1 << 16
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 4)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 5)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 13)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 14)) != 0 {
+		// ignore
+	}
 	x.Int(m.Id)
-	x.Int(m.FromId)
+	if (flags & (1 << 8)) != 0 {
+		x.Int(m.FromId)
+	}
 	x.Bytes(m.ToId.Encode())
-	x.Bytes(m.FwdFrom.Encode())
-	x.Int(m.ViaBotId)
-	x.Int(m.ReplyToMsgId)
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.FwdFrom.Encode())
+	}
+	if (flags & (1 << 11)) != 0 {
+		x.Int(m.ViaBotId)
+	}
+	if (flags & (1 << 3)) != 0 {
+		x.Int(m.ReplyToMsgId)
+	}
 	x.Int(m.Date)
 	x.String(m.Message)
-	x.Bytes(m.Media.Encode())
-	x.Bytes(m.ReplyMarkup.Encode())
-	// x.VectorMessage(m.Entities);
-	x17 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x17, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x17[4:], uint32(len(m.Entities)))
-	for _, v := range m.Entities {
-		x.buf = append(x.buf, (*v).Encode()...)
+	if (flags & (1 << 9)) != 0 {
+		x.Bytes(m.Media.Encode())
 	}
-	x.Int(m.Views)
-	x.Int(m.EditDate)
-	x.String(m.PostAuthor)
+	if (flags & (1 << 6)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
+	if (flags & (1 << 7)) != 0 {
+		// x.VectorMessage(m.Entities);
+		x16 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x16, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x16[4:], uint32(len(m.Entities)))
+		for _, v := range m.Entities {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
+	}
+	if (flags & (1 << 10)) != 0 {
+		x.Int(m.Views)
+	}
+	if (flags & (1 << 15)) != 0 {
+		x.Int(m.EditDate)
+	}
+	if (flags & (1 << 16)) != 0 {
+		x.String(m.PostAuthor)
+	}
 	return x.buf
 }
 
 func (m *TLMessage) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.Out = true
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.Mentioned = true
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.MediaUnread = true
+	}
+	if (flags & (1 << 13)) != 0 {
+		m.Silent = true
+	}
+	if (flags & (1 << 14)) != 0 {
+		m.Post = true
+	}
 	m.Id = dbuf.Int()
-	m.FromId = dbuf.Int()
+	if (flags & (1 << 8)) != 0 {
+		m.FromId = dbuf.Int()
+	}
 	m.ToId = &Peer{}
 	m.Decode(dbuf)
-	m.FwdFrom = &MessageFwdHeader{}
-	m.Decode(dbuf)
-	m.ViaBotId = dbuf.Int()
-	m.ReplyToMsgId = dbuf.Int()
+	if (flags & (1 << 2)) != 0 {
+		m.FwdFrom = &MessageFwdHeader{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 11)) != 0 {
+		m.ViaBotId = dbuf.Int()
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.ReplyToMsgId = dbuf.Int()
+	}
 	m.Date = dbuf.Int()
 	m.Message = dbuf.String()
-	m.Media = &MessageMedia{}
-	m.Decode(dbuf)
-	m.ReplyMarkup = &ReplyMarkup{}
-	m.Decode(dbuf)
-	// x.VectorMessage(m.Entities);
-	c17 := dbuf.Int()
-	if c17 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c17)
+	if (flags & (1 << 9)) != 0 {
+		m.Media = &MessageMedia{}
+		m.Decode(dbuf)
 	}
-	l17 := dbuf.Int()
-	m.Entities = make([]*MessageEntity, l17)
-	for i := 0; i < int(l17); i++ {
-		m.Entities[i] = &MessageEntity{}
-		(*m.Entities[i]).Decode(dbuf)
+	if (flags & (1 << 6)) != 0 {
+		m.ReplyMarkup = &ReplyMarkup{}
+		m.Decode(dbuf)
 	}
-	m.Views = dbuf.Int()
-	m.EditDate = dbuf.Int()
-	m.PostAuthor = dbuf.String()
+	if (flags & (1 << 7)) != 0 {
+		// x.VectorMessage(m.Entities);
+		c16 := dbuf.Int()
+		if c16 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c16)
+		}
+		l16 := dbuf.Int()
+		m.Entities = make([]*MessageEntity, l16)
+		for i := 0; i < int(l16); i++ {
+			m.Entities[i] = &MessageEntity{}
+			(*m.Entities[i]).Decode(dbuf)
+		}
+	}
+	if (flags & (1 << 10)) != 0 {
+		m.Views = dbuf.Int()
+	}
+	if (flags & (1 << 15)) != 0 {
+		m.EditDate = dbuf.Int()
+	}
+	if (flags & (1 << 16)) != 0 {
+		m.PostAuthor = dbuf.String()
+	}
 	return dbuf.err
 }
 
@@ -10424,23 +16817,85 @@ func (m *TLMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageService) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageService))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Out == true {
+		flags |= 1 << 1
+	}
+	if m.Mentioned == true {
+		flags |= 1 << 4
+	}
+	if m.MediaUnread == true {
+		flags |= 1 << 5
+	}
+	if m.Silent == true {
+		flags |= 1 << 13
+	}
+	if m.Post == true {
+		flags |= 1 << 14
+	}
+	if m.FromId != 0 {
+		flags |= 1 << 8
+	}
+	if m.ReplyToMsgId != 0 {
+		flags |= 1 << 3
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 4)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 5)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 13)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 14)) != 0 {
+		// ignore
+	}
 	x.Int(m.Id)
-	x.Int(m.FromId)
+	if (flags & (1 << 8)) != 0 {
+		x.Int(m.FromId)
+	}
 	x.Bytes(m.ToId.Encode())
-	x.Int(m.ReplyToMsgId)
+	if (flags & (1 << 3)) != 0 {
+		x.Int(m.ReplyToMsgId)
+	}
 	x.Int(m.Date)
 	x.Bytes(m.Action.Encode())
 	return x.buf
 }
 
 func (m *TLMessageService) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.Out = true
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.Mentioned = true
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.MediaUnread = true
+	}
+	if (flags & (1 << 13)) != 0 {
+		m.Silent = true
+	}
+	if (flags & (1 << 14)) != 0 {
+		m.Post = true
+	}
 	m.Id = dbuf.Int()
-	m.FromId = dbuf.Int()
+	if (flags & (1 << 8)) != 0 {
+		m.FromId = dbuf.Int()
+	}
 	m.ToId = &Peer{}
 	m.Decode(dbuf)
-	m.ReplyToMsgId = dbuf.Int()
+	if (flags & (1 << 3)) != 0 {
+		m.ReplyToMsgId = dbuf.Int()
+	}
 	m.Date = dbuf.Int()
 	m.Action = &MessageAction{}
 	m.Decode(dbuf)
@@ -10462,19 +16917,43 @@ func (m *TLMessageMediaEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageMediaPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageMediaPhoto))
-	x.Int(m.Flags)
-	x.Bytes(m.Photo.Encode())
-	x.String(m.Caption)
-	x.Int(m.TtlSeconds)
+
+	var flags uint32 = 0
+	if m.Photo != nil {
+		flags |= 1 << 0
+	}
+	if m.Caption != "" {
+		flags |= 1 << 1
+	}
+	if m.TtlSeconds != 0 {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.Photo.Encode())
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.Caption)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.Int(m.TtlSeconds)
+	}
 	return x.buf
 }
 
 func (m *TLMessageMediaPhoto) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.Photo = &Photo{}
-	m.Decode(dbuf)
-	m.Caption = dbuf.String()
-	m.TtlSeconds = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Photo = &Photo{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Caption = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.TtlSeconds = dbuf.Int()
+	}
 	return dbuf.err
 }
 
@@ -10526,19 +17005,43 @@ func (m *TLMessageMediaUnsupported) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageMediaDocument) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageMediaDocument))
-	x.Int(m.Flags)
-	x.Bytes(m.Document.Encode())
-	x.String(m.Caption)
-	x.Int(m.TtlSeconds)
+
+	var flags uint32 = 0
+	if m.Document != nil {
+		flags |= 1 << 0
+	}
+	if m.Caption != "" {
+		flags |= 1 << 1
+	}
+	if m.TtlSeconds != 0 {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.Document.Encode())
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.Caption)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.Int(m.TtlSeconds)
+	}
 	return x.buf
 }
 
 func (m *TLMessageMediaDocument) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.Document = &Document{}
-	m.Decode(dbuf)
-	m.Caption = dbuf.String()
-	m.TtlSeconds = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Document = &Document{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Caption = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.TtlSeconds = dbuf.Int()
+	}
 	return dbuf.err
 }
 
@@ -10596,11 +17099,36 @@ func (m *TLMessageMediaGame) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageMediaInvoice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageMediaInvoice))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ShippingAddressRequested == true {
+		flags |= 1 << 1
+	}
+	if m.Test == true {
+		flags |= 1 << 3
+	}
+	if m.Photo != nil {
+		flags |= 1 << 0
+	}
+	if m.ReceiptMsgId != 0 {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 3)) != 0 {
+		// ignore
+	}
 	x.String(m.Title)
 	x.String(m.Description)
-	x.Bytes(m.Photo.Encode())
-	x.Int(m.ReceiptMsgId)
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.Photo.Encode())
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.Int(m.ReceiptMsgId)
+	}
 	x.String(m.Currency)
 	x.Long(m.TotalAmount)
 	x.String(m.StartParam)
@@ -10608,12 +17136,22 @@ func (m *TLMessageMediaInvoice) Encode() []byte {
 }
 
 func (m *TLMessageMediaInvoice) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.ShippingAddressRequested = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.Test = true
+	}
 	m.Title = dbuf.String()
 	m.Description = dbuf.String()
-	m.Photo = &WebDocument{}
-	m.Decode(dbuf)
-	m.ReceiptMsgId = dbuf.Int()
+	if (flags & (1 << 0)) != 0 {
+		m.Photo = &WebDocument{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.ReceiptMsgId = dbuf.Int()
+	}
 	m.Currency = dbuf.String()
 	m.TotalAmount = dbuf.Long()
 	m.StartParam = dbuf.String()
@@ -10805,24 +17343,41 @@ func (m *TLMessageActionGameScore) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionPaymentSentMe) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionPaymentSentMe))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Info != nil {
+		flags |= 1 << 0
+	}
+	if m.ShippingOptionId != "" {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
 	x.String(m.Currency)
 	x.Long(m.TotalAmount)
 	x.StringBytes(m.Payload)
-	x.Bytes(m.Info.Encode())
-	x.String(m.ShippingOptionId)
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.Info.Encode())
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.ShippingOptionId)
+	}
 	x.Bytes(m.Charge.Encode())
 	return x.buf
 }
 
 func (m *TLMessageActionPaymentSentMe) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Currency = dbuf.String()
 	m.TotalAmount = dbuf.Long()
 	m.Payload = dbuf.StringBytes()
-	m.Info = &PaymentRequestedInfo{}
-	m.Decode(dbuf)
-	m.ShippingOptionId = dbuf.String()
+	if (flags & (1 << 0)) != 0 {
+		m.Info = &PaymentRequestedInfo{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.ShippingOptionId = dbuf.String()
+	}
 	m.Charge = &PaymentCharge{}
 	m.Decode(dbuf)
 	return dbuf.err
@@ -10847,19 +17402,36 @@ func (m *TLMessageActionPaymentSent) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionPhoneCall) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionPhoneCall))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Reason != nil {
+		flags |= 1 << 0
+	}
+	if m.Duration != 0 {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
 	x.Long(m.CallId)
-	x.Bytes(m.Reason.Encode())
-	x.Int(m.Duration)
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.Reason.Encode())
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.Int(m.Duration)
+	}
 	return x.buf
 }
 
 func (m *TLMessageActionPhoneCall) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.CallId = dbuf.Long()
-	m.Reason = &PhoneCallDiscardReason{}
-	m.Decode(dbuf)
-	m.Duration = dbuf.Int()
+	if (flags & (1 << 0)) != 0 {
+		m.Reason = &PhoneCallDiscardReason{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Duration = dbuf.Int()
+	}
 	return dbuf.err
 }
 
@@ -10878,7 +17450,22 @@ func (m *TLMessageActionScreenshotTaken) Decode(dbuf *DecodeBuf) error {
 func (m *TLDialog) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_dialog))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Pinned == true {
+		flags |= 1 << 2
+	}
+	if m.Pts != 0 {
+		flags |= 1 << 0
+	}
+	if m.Draft != nil {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 2)) != 0 {
+		// ignore
+	}
 	x.Bytes(m.Peer.Encode())
 	x.Int(m.TopMessage)
 	x.Int(m.ReadInboxMaxId)
@@ -10886,13 +17473,20 @@ func (m *TLDialog) Encode() []byte {
 	x.Int(m.UnreadCount)
 	x.Int(m.UnreadMentionsCount)
 	x.Bytes(m.NotifySettings.Encode())
-	x.Int(m.Pts)
-	x.Bytes(m.Draft.Encode())
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.Pts)
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.Bytes(m.Draft.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLDialog) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 2)) != 0 {
+		m.Pinned = true
+	}
 	m.Peer = &Peer{}
 	m.Decode(dbuf)
 	m.TopMessage = dbuf.Int()
@@ -10902,9 +17496,13 @@ func (m *TLDialog) Decode(dbuf *DecodeBuf) error {
 	m.UnreadMentionsCount = dbuf.Int()
 	m.NotifySettings = &PeerNotifySettings{}
 	m.Decode(dbuf)
-	m.Pts = dbuf.Int()
-	m.Draft = &DraftMessage{}
-	m.Decode(dbuf)
+	if (flags & (1 << 0)) != 0 {
+		m.Pts = dbuf.Int()
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Draft = &DraftMessage{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -10925,14 +17523,23 @@ func (m *TLPhotoEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_photo))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.HasStickers == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	x.Long(m.Id)
 	x.Long(m.AccessHash)
 	x.Int(m.Date)
 	// x.VectorMessage(m.Sizes);
-	x6 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Sizes)))
+	x5 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Sizes)))
 	for _, v := range m.Sizes {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -10940,18 +17547,21 @@ func (m *TLPhoto) Encode() []byte {
 }
 
 func (m *TLPhoto) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.HasStickers = true
+	}
 	m.Id = dbuf.Long()
 	m.AccessHash = dbuf.Long()
 	m.Date = dbuf.Int()
 	// x.VectorMessage(m.Sizes);
-	c6 := dbuf.Int()
-	if c6 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c6)
+	c5 := dbuf.Int()
+	if c5 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c5)
 	}
-	l6 := dbuf.Int()
-	m.Sizes = make([]*PhotoSize, l6)
-	for i := 0; i < int(l6); i++ {
+	l5 := dbuf.Int()
+	m.Sizes = make([]*PhotoSize, l5)
+	for i := 0; i < int(l5); i++ {
 		m.Sizes[i] = &PhotoSize{}
 		(*m.Sizes[i]).Decode(dbuf)
 	}
@@ -11059,22 +17669,48 @@ func (m *TLAuthCheckedPhone) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthSentCode) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_sentCode))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.PhoneRegistered == true {
+		flags |= 1 << 0
+	}
+	if m.NextType != nil {
+		flags |= 1 << 1
+	}
+	if m.Timeout != 0 {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	x.Bytes(m.Type.Encode())
 	x.String(m.PhoneCodeHash)
-	x.Bytes(m.NextType.Encode())
-	x.Int(m.Timeout)
+	if (flags & (1 << 1)) != 0 {
+		x.Bytes(m.NextType.Encode())
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.Int(m.Timeout)
+	}
 	return x.buf
 }
 
 func (m *TLAuthSentCode) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.PhoneRegistered = true
+	}
 	m.Type = &Auth_SentCodeType{}
 	m.Decode(dbuf)
 	m.PhoneCodeHash = dbuf.String()
-	m.NextType = &Auth_CodeType{}
-	m.Decode(dbuf)
-	m.Timeout = dbuf.Int()
+	if (flags & (1 << 1)) != 0 {
+		m.NextType = &Auth_CodeType{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Timeout = dbuf.Int()
+	}
 	return dbuf.err
 }
 
@@ -11082,15 +17718,25 @@ func (m *TLAuthSentCode) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthAuthorization) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_authorization))
-	x.Int(m.Flags)
-	x.Int(m.TmpSessions)
+
+	var flags uint32 = 0
+	if m.TmpSessions != 0 {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.TmpSessions)
+	}
 	x.Bytes(m.User.Encode())
 	return x.buf
 }
 
 func (m *TLAuthAuthorization) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.TmpSessions = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.TmpSessions = dbuf.Int()
+	}
 	m.User = &User{}
 	m.Decode(dbuf)
 	return dbuf.err
@@ -11184,14 +17830,35 @@ func (m *TLInputPeerNotifyEventsAll) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPeerNotifySettings) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPeerNotifySettings))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ShowPreviews == true {
+		flags |= 1 << 0
+	}
+	if m.Silent == true {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
 	x.Int(m.MuteUntil)
 	x.String(m.Sound)
 	return x.buf
 }
 
 func (m *TLInputPeerNotifySettings) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.ShowPreviews = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Silent = true
+	}
 	m.MuteUntil = dbuf.Int()
 	m.Sound = dbuf.String()
 	return dbuf.err
@@ -11234,14 +17901,35 @@ func (m *TLPeerNotifySettingsEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLPeerNotifySettings) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_peerNotifySettings))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ShowPreviews == true {
+		flags |= 1 << 0
+	}
+	if m.Silent == true {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
 	x.Int(m.MuteUntil)
 	x.String(m.Sound)
 	return x.buf
 }
 
 func (m *TLPeerNotifySettings) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.ShowPreviews = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Silent = true
+	}
 	m.MuteUntil = dbuf.Int()
 	m.Sound = dbuf.String()
 	return dbuf.err
@@ -11251,12 +17939,24 @@ func (m *TLPeerNotifySettings) Decode(dbuf *DecodeBuf) error {
 func (m *TLPeerSettings) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_peerSettings))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ReportSpam == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	return x.buf
 }
 
 func (m *TLPeerSettings) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.ReportSpam = true
+	}
 	return dbuf.err
 }
 
@@ -11364,30 +18064,81 @@ func (m *TLInputReportReasonOther) Decode(dbuf *DecodeBuf) error {
 func (m *TLUserFull) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_userFull))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Blocked == true {
+		flags |= 1 << 0
+	}
+	if m.PhoneCallsAvailable == true {
+		flags |= 1 << 4
+	}
+	if m.PhoneCallsPrivate == true {
+		flags |= 1 << 5
+	}
+	if m.About != "" {
+		flags |= 1 << 1
+	}
+	if m.ProfilePhoto != nil {
+		flags |= 1 << 2
+	}
+	if m.BotInfo != nil {
+		flags |= 1 << 3
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 4)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 5)) != 0 {
+		// ignore
+	}
 	x.Bytes(m.User.Encode())
-	x.String(m.About)
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.About)
+	}
 	x.Bytes(m.Link.Encode())
-	x.Bytes(m.ProfilePhoto.Encode())
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ProfilePhoto.Encode())
+	}
 	x.Bytes(m.NotifySettings.Encode())
-	x.Bytes(m.BotInfo.Encode())
+	if (flags & (1 << 3)) != 0 {
+		x.Bytes(m.BotInfo.Encode())
+	}
 	x.Int(m.CommonChatsCount)
 	return x.buf
 }
 
 func (m *TLUserFull) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Blocked = true
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.PhoneCallsAvailable = true
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.PhoneCallsPrivate = true
+	}
 	m.User = &User{}
 	m.Decode(dbuf)
-	m.About = dbuf.String()
+	if (flags & (1 << 1)) != 0 {
+		m.About = dbuf.String()
+	}
 	m.Link = &Contacts_Link{}
 	m.Decode(dbuf)
-	m.ProfilePhoto = &Photo{}
-	m.Decode(dbuf)
+	if (flags & (1 << 2)) != 0 {
+		m.ProfilePhoto = &Photo{}
+		m.Decode(dbuf)
+	}
 	m.NotifySettings = &PeerNotifySettings{}
 	m.Decode(dbuf)
-	m.BotInfo = &BotInfo{}
-	m.Decode(dbuf)
+	if (flags & (1 << 3)) != 0 {
+		m.BotInfo = &BotInfo{}
+		m.Decode(dbuf)
+	}
 	m.CommonChatsCount = dbuf.Int()
 	return dbuf.err
 }
@@ -12001,27 +18752,30 @@ func (m *TLMessagesMessagesSlice) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesChannelMessages) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_channelMessages))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	x.UInt(flags)
+
 	x.Int(m.Pts)
 	x.Int(m.Count)
 	// x.VectorMessage(m.Messages);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Messages)))
+	x3 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Messages)))
 	for _, v := range m.Messages {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Chats)))
+	x4 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x6 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Users)))
+	x5 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -12029,39 +18783,41 @@ func (m *TLMessagesChannelMessages) Encode() []byte {
 }
 
 func (m *TLMessagesChannelMessages) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if flags != 0 {
+	}
 	m.Pts = dbuf.Int()
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Messages);
+	c3 := dbuf.Int()
+	if c3 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c3)
+	}
+	l3 := dbuf.Int()
+	m.Messages = make([]*Message, l3)
+	for i := 0; i < int(l3); i++ {
+		m.Messages[i] = &Message{}
+		(*m.Messages[i]).Decode(dbuf)
+	}
+	// x.VectorMessage(m.Chats);
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
 	}
 	l4 := dbuf.Int()
-	m.Messages = make([]*Message, l4)
+	m.Chats = make([]*Chat, l4)
 	for i := 0; i < int(l4); i++ {
-		m.Messages[i] = &Message{}
-		(*m.Messages[i]).Decode(dbuf)
+		m.Chats[i] = &Chat{}
+		(*m.Chats[i]).Decode(dbuf)
 	}
-	// x.VectorMessage(m.Chats);
+	// x.VectorMessage(m.Users);
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
 	}
 	l5 := dbuf.Int()
-	m.Chats = make([]*Chat, l5)
+	m.Users = make([]*User, l5)
 	for i := 0; i < int(l5); i++ {
-		m.Chats[i] = &Chat{}
-		(*m.Chats[i]).Decode(dbuf)
-	}
-	// x.VectorMessage(m.Users);
-	c6 := dbuf.Int()
-	if c6 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c6)
-	}
-	l6 := dbuf.Int()
-	m.Users = make([]*User, l6)
-	for i := 0; i < int(l6); i++ {
 		m.Users[i] = &User{}
 		(*m.Users[i]).Decode(dbuf)
 	}
@@ -12320,12 +19076,24 @@ func (m *TLInputMessagesFilterChatPhotos) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessagesFilterPhoneCalls) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterPhoneCalls))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Missed == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	return x.buf
 }
 
 func (m *TLInputMessagesFilterPhoneCalls) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Missed = true
+	}
 	return dbuf.err
 }
 
@@ -12716,15 +19484,29 @@ func (m *TLUpdateNotifySettings) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateServiceNotification) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateServiceNotification))
-	x.Int(m.Flags)
-	x.Int(m.InboxDate)
+
+	var flags uint32 = 0
+	if m.Popup == true {
+		flags |= 1 << 0
+	}
+	if m.InboxDate != 0 {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.Int(m.InboxDate)
+	}
 	x.String(m.Type)
 	x.String(m.Message)
 	x.Bytes(m.Media.Encode())
 	// x.VectorMessage(m.Entities);
-	x7 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x7, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x7[4:], uint32(len(m.Entities)))
+	x6 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Entities)))
 	for _, v := range m.Entities {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -12732,20 +19514,25 @@ func (m *TLUpdateServiceNotification) Encode() []byte {
 }
 
 func (m *TLUpdateServiceNotification) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.InboxDate = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Popup = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.InboxDate = dbuf.Int()
+	}
 	m.Type = dbuf.String()
 	m.Message = dbuf.String()
 	m.Media = &MessageMedia{}
 	m.Decode(dbuf)
 	// x.VectorMessage(m.Entities);
-	c7 := dbuf.Int()
-	if c7 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c7)
+	c6 := dbuf.Int()
+	if c6 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c6)
 	}
-	l7 := dbuf.Int()
-	m.Entities = make([]*MessageEntity, l7)
-	for i := 0; i < int(l7); i++ {
+	l6 := dbuf.Int()
+	m.Entities = make([]*MessageEntity, l6)
+	for i := 0; i < int(l6); i++ {
 		m.Entities[i] = &MessageEntity{}
 		(*m.Entities[i]).Decode(dbuf)
 	}
@@ -12878,16 +19665,26 @@ func (m *TLUpdateReadMessagesContents) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateChannelTooLong) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateChannelTooLong))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Pts != 0 {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
 	x.Int(m.ChannelId)
-	x.Int(m.Pts)
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.Pts)
+	}
 	return x.buf
 }
 
 func (m *TLUpdateChannelTooLong) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.ChannelId = dbuf.Int()
-	m.Pts = dbuf.Int()
+	if (flags & (1 << 0)) != 0 {
+		m.Pts = dbuf.Int()
+	}
 	return dbuf.err
 }
 
@@ -13029,13 +19826,25 @@ func (m *TLUpdateNewStickerSet) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateStickerSetsOrder) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateStickerSetsOrder))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Masks == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	x.VectorLong(m.Order)
 	return x.buf
 }
 
 func (m *TLUpdateStickerSetsOrder) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Masks = true
+	}
 	m.Order = dbuf.VectorLong()
 	return dbuf.err
 }
@@ -13066,22 +19875,32 @@ func (m *TLUpdateSavedGifs) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateBotInlineQuery) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateBotInlineQuery))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Geo != nil {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
 	x.Long(m.QueryId)
 	x.Int(m.UserId)
 	x.String(m.Query)
-	x.Bytes(m.Geo.Encode())
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.Geo.Encode())
+	}
 	x.String(m.Offset)
 	return x.buf
 }
 
 func (m *TLUpdateBotInlineQuery) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.QueryId = dbuf.Long()
 	m.UserId = dbuf.Int()
 	m.Query = dbuf.String()
-	m.Geo = &GeoPoint{}
-	m.Decode(dbuf)
+	if (flags & (1 << 0)) != 0 {
+		m.Geo = &GeoPoint{}
+		m.Decode(dbuf)
+	}
 	m.Offset = dbuf.String()
 	return dbuf.err
 }
@@ -13090,24 +19909,41 @@ func (m *TLUpdateBotInlineQuery) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateBotInlineSend) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateBotInlineSend))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Geo != nil {
+		flags |= 1 << 0
+	}
+	if m.MsgId != nil {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
 	x.Int(m.UserId)
 	x.String(m.Query)
-	x.Bytes(m.Geo.Encode())
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.Geo.Encode())
+	}
 	x.String(m.Id)
-	x.Bytes(m.MsgId.Encode())
+	if (flags & (1 << 1)) != 0 {
+		x.Bytes(m.MsgId.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLUpdateBotInlineSend) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.UserId = dbuf.Int()
 	m.Query = dbuf.String()
-	m.Geo = &GeoPoint{}
-	m.Decode(dbuf)
+	if (flags & (1 << 0)) != 0 {
+		m.Geo = &GeoPoint{}
+		m.Decode(dbuf)
+	}
 	m.Id = dbuf.String()
-	m.MsgId = &InputBotInlineMessageID{}
-	m.Decode(dbuf)
+	if (flags & (1 << 1)) != 0 {
+		m.MsgId = &InputBotInlineMessageID{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -13148,27 +19984,44 @@ func (m *TLUpdateChannelPinnedMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateBotCallbackQuery) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateBotCallbackQuery))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Data != nil {
+		flags |= 1 << 0
+	}
+	if m.GameShortName != "" {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
 	x.Long(m.QueryId)
 	x.Int(m.UserId)
 	x.Bytes(m.Peer.Encode())
 	x.Int(m.MsgId)
 	x.Long(m.ChatInstance)
-	x.StringBytes(m.Data)
-	x.String(m.GameShortName)
+	if (flags & (1 << 0)) != 0 {
+		x.StringBytes(m.Data)
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.GameShortName)
+	}
 	return x.buf
 }
 
 func (m *TLUpdateBotCallbackQuery) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.QueryId = dbuf.Long()
 	m.UserId = dbuf.Int()
 	m.Peer = &Peer{}
 	m.Decode(dbuf)
 	m.MsgId = dbuf.Int()
 	m.ChatInstance = dbuf.Long()
-	m.Data = dbuf.StringBytes()
-	m.GameShortName = dbuf.String()
+	if (flags & (1 << 0)) != 0 {
+		m.Data = dbuf.StringBytes()
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.GameShortName = dbuf.String()
+	}
 	return dbuf.err
 }
 
@@ -13194,25 +20047,42 @@ func (m *TLUpdateEditMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateInlineBotCallbackQuery) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateInlineBotCallbackQuery))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Data != nil {
+		flags |= 1 << 0
+	}
+	if m.GameShortName != "" {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
 	x.Long(m.QueryId)
 	x.Int(m.UserId)
 	x.Bytes(m.MsgId.Encode())
 	x.Long(m.ChatInstance)
-	x.StringBytes(m.Data)
-	x.String(m.GameShortName)
+	if (flags & (1 << 0)) != 0 {
+		x.StringBytes(m.Data)
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.GameShortName)
+	}
 	return x.buf
 }
 
 func (m *TLUpdateInlineBotCallbackQuery) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.QueryId = dbuf.Long()
 	m.UserId = dbuf.Int()
 	m.MsgId = &InputBotInlineMessageID{}
 	m.Decode(dbuf)
 	m.ChatInstance = dbuf.Long()
-	m.Data = dbuf.StringBytes()
-	m.GameShortName = dbuf.String()
+	if (flags & (1 << 0)) != 0 {
+		m.Data = dbuf.StringBytes()
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.GameShortName = dbuf.String()
+	}
 	return dbuf.err
 }
 
@@ -13316,13 +20186,25 @@ func (m *TLUpdateChannelWebPage) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateDialogPinned) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateDialogPinned))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Pinned == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	x.Bytes(m.Peer.Encode())
 	return x.buf
 }
 
 func (m *TLUpdateDialogPinned) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Pinned = true
+	}
 	m.Peer = &Peer{}
 	m.Decode(dbuf)
 	return dbuf.err
@@ -13332,29 +20214,39 @@ func (m *TLUpdateDialogPinned) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatePinnedDialogs) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updatePinnedDialogs))
-	x.Int(m.Flags)
-	// x.VectorMessage(m.Order);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Order)))
-	for _, v := range m.Order {
-		x.buf = append(x.buf, (*v).Encode()...)
+
+	var flags uint32 = 0
+	if m.Order != nil {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// x.VectorMessage(m.Order);
+		x1 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Order)))
+		for _, v := range m.Order {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
 	}
 	return x.buf
 }
 
 func (m *TLUpdatePinnedDialogs) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	// x.VectorMessage(m.Order);
-	c2 := dbuf.Int()
-	if c2 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c2)
-	}
-	l2 := dbuf.Int()
-	m.Order = make([]*Peer, l2)
-	for i := 0; i < int(l2); i++ {
-		m.Order[i] = &Peer{}
-		(*m.Order[i]).Decode(dbuf)
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		// x.VectorMessage(m.Order);
+		c1 := dbuf.Int()
+		if c1 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c1)
+		}
+		l1 := dbuf.Int()
+		m.Order = make([]*Peer, l1)
+		for i := 0; i < int(l1); i++ {
+			m.Order[i] = &Peer{}
+			(*m.Order[i]).Decode(dbuf)
+		}
 	}
 	return dbuf.err
 }
@@ -13415,25 +20307,42 @@ func (m *TLUpdateBotShippingQuery) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateBotPrecheckoutQuery) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateBotPrecheckoutQuery))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Info != nil {
+		flags |= 1 << 0
+	}
+	if m.ShippingOptionId != "" {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
 	x.Long(m.QueryId)
 	x.Int(m.UserId)
 	x.StringBytes(m.Payload)
-	x.Bytes(m.Info.Encode())
-	x.String(m.ShippingOptionId)
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.Info.Encode())
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.ShippingOptionId)
+	}
 	x.String(m.Currency)
 	x.Long(m.TotalAmount)
 	return x.buf
 }
 
 func (m *TLUpdateBotPrecheckoutQuery) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.QueryId = dbuf.Long()
 	m.UserId = dbuf.Int()
 	m.Payload = dbuf.StringBytes()
-	m.Info = &PaymentRequestedInfo{}
-	m.Decode(dbuf)
-	m.ShippingOptionId = dbuf.String()
+	if (flags & (1 << 0)) != 0 {
+		m.Info = &PaymentRequestedInfo{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.ShippingOptionId = dbuf.String()
+	}
 	m.Currency = dbuf.String()
 	m.TotalAmount = dbuf.Long()
 	return dbuf.err
@@ -13787,48 +20696,115 @@ func (m *TLUpdatesTooLong) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateShortMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateShortMessage))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Out == true {
+		flags |= 1 << 1
+	}
+	if m.Mentioned == true {
+		flags |= 1 << 4
+	}
+	if m.MediaUnread == true {
+		flags |= 1 << 5
+	}
+	if m.Silent == true {
+		flags |= 1 << 13
+	}
+	if m.FwdFrom != nil {
+		flags |= 1 << 2
+	}
+	if m.ViaBotId != 0 {
+		flags |= 1 << 11
+	}
+	if m.ReplyToMsgId != 0 {
+		flags |= 1 << 3
+	}
+	if m.Entities != nil {
+		flags |= 1 << 7
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 4)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 5)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 13)) != 0 {
+		// ignore
+	}
 	x.Int(m.Id)
 	x.Int(m.UserId)
 	x.String(m.Message)
 	x.Int(m.Pts)
 	x.Int(m.PtsCount)
 	x.Int(m.Date)
-	x.Bytes(m.FwdFrom.Encode())
-	x.Int(m.ViaBotId)
-	x.Int(m.ReplyToMsgId)
-	// x.VectorMessage(m.Entities);
-	x15 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x15, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x15[4:], uint32(len(m.Entities)))
-	for _, v := range m.Entities {
-		x.buf = append(x.buf, (*v).Encode()...)
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.FwdFrom.Encode())
+	}
+	if (flags & (1 << 11)) != 0 {
+		x.Int(m.ViaBotId)
+	}
+	if (flags & (1 << 3)) != 0 {
+		x.Int(m.ReplyToMsgId)
+	}
+	if (flags & (1 << 7)) != 0 {
+		// x.VectorMessage(m.Entities);
+		x14 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x14, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x14[4:], uint32(len(m.Entities)))
+		for _, v := range m.Entities {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
 	}
 	return x.buf
 }
 
 func (m *TLUpdateShortMessage) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.Out = true
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.Mentioned = true
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.MediaUnread = true
+	}
+	if (flags & (1 << 13)) != 0 {
+		m.Silent = true
+	}
 	m.Id = dbuf.Int()
 	m.UserId = dbuf.Int()
 	m.Message = dbuf.String()
 	m.Pts = dbuf.Int()
 	m.PtsCount = dbuf.Int()
 	m.Date = dbuf.Int()
-	m.FwdFrom = &MessageFwdHeader{}
-	m.Decode(dbuf)
-	m.ViaBotId = dbuf.Int()
-	m.ReplyToMsgId = dbuf.Int()
-	// x.VectorMessage(m.Entities);
-	c15 := dbuf.Int()
-	if c15 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c15)
+	if (flags & (1 << 2)) != 0 {
+		m.FwdFrom = &MessageFwdHeader{}
+		m.Decode(dbuf)
 	}
-	l15 := dbuf.Int()
-	m.Entities = make([]*MessageEntity, l15)
-	for i := 0; i < int(l15); i++ {
-		m.Entities[i] = &MessageEntity{}
-		(*m.Entities[i]).Decode(dbuf)
+	if (flags & (1 << 11)) != 0 {
+		m.ViaBotId = dbuf.Int()
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.ReplyToMsgId = dbuf.Int()
+	}
+	if (flags & (1 << 7)) != 0 {
+		// x.VectorMessage(m.Entities);
+		c14 := dbuf.Int()
+		if c14 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c14)
+		}
+		l14 := dbuf.Int()
+		m.Entities = make([]*MessageEntity, l14)
+		for i := 0; i < int(l14); i++ {
+			m.Entities[i] = &MessageEntity{}
+			(*m.Entities[i]).Decode(dbuf)
+		}
 	}
 	return dbuf.err
 }
@@ -13837,7 +20813,46 @@ func (m *TLUpdateShortMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateShortChatMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateShortChatMessage))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Out == true {
+		flags |= 1 << 1
+	}
+	if m.Mentioned == true {
+		flags |= 1 << 4
+	}
+	if m.MediaUnread == true {
+		flags |= 1 << 5
+	}
+	if m.Silent == true {
+		flags |= 1 << 13
+	}
+	if m.FwdFrom != nil {
+		flags |= 1 << 2
+	}
+	if m.ViaBotId != 0 {
+		flags |= 1 << 11
+	}
+	if m.ReplyToMsgId != 0 {
+		flags |= 1 << 3
+	}
+	if m.Entities != nil {
+		flags |= 1 << 7
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 4)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 5)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 13)) != 0 {
+		// ignore
+	}
 	x.Int(m.Id)
 	x.Int(m.FromId)
 	x.Int(m.ChatId)
@@ -13845,21 +20860,41 @@ func (m *TLUpdateShortChatMessage) Encode() []byte {
 	x.Int(m.Pts)
 	x.Int(m.PtsCount)
 	x.Int(m.Date)
-	x.Bytes(m.FwdFrom.Encode())
-	x.Int(m.ViaBotId)
-	x.Int(m.ReplyToMsgId)
-	// x.VectorMessage(m.Entities);
-	x16 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x16, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x16[4:], uint32(len(m.Entities)))
-	for _, v := range m.Entities {
-		x.buf = append(x.buf, (*v).Encode()...)
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.FwdFrom.Encode())
+	}
+	if (flags & (1 << 11)) != 0 {
+		x.Int(m.ViaBotId)
+	}
+	if (flags & (1 << 3)) != 0 {
+		x.Int(m.ReplyToMsgId)
+	}
+	if (flags & (1 << 7)) != 0 {
+		// x.VectorMessage(m.Entities);
+		x15 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x15, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x15[4:], uint32(len(m.Entities)))
+		for _, v := range m.Entities {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
 	}
 	return x.buf
 }
 
 func (m *TLUpdateShortChatMessage) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.Out = true
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.Mentioned = true
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.MediaUnread = true
+	}
+	if (flags & (1 << 13)) != 0 {
+		m.Silent = true
+	}
 	m.Id = dbuf.Int()
 	m.FromId = dbuf.Int()
 	m.ChatId = dbuf.Int()
@@ -13867,20 +20902,28 @@ func (m *TLUpdateShortChatMessage) Decode(dbuf *DecodeBuf) error {
 	m.Pts = dbuf.Int()
 	m.PtsCount = dbuf.Int()
 	m.Date = dbuf.Int()
-	m.FwdFrom = &MessageFwdHeader{}
-	m.Decode(dbuf)
-	m.ViaBotId = dbuf.Int()
-	m.ReplyToMsgId = dbuf.Int()
-	// x.VectorMessage(m.Entities);
-	c16 := dbuf.Int()
-	if c16 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c16)
+	if (flags & (1 << 2)) != 0 {
+		m.FwdFrom = &MessageFwdHeader{}
+		m.Decode(dbuf)
 	}
-	l16 := dbuf.Int()
-	m.Entities = make([]*MessageEntity, l16)
-	for i := 0; i < int(l16); i++ {
-		m.Entities[i] = &MessageEntity{}
-		(*m.Entities[i]).Decode(dbuf)
+	if (flags & (1 << 11)) != 0 {
+		m.ViaBotId = dbuf.Int()
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.ReplyToMsgId = dbuf.Int()
+	}
+	if (flags & (1 << 7)) != 0 {
+		// x.VectorMessage(m.Entities);
+		c15 := dbuf.Int()
+		if c15 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c15)
+		}
+		l15 := dbuf.Int()
+		m.Entities = make([]*MessageEntity, l15)
+		for i := 0; i < int(l15); i++ {
+			m.Entities[i] = &MessageEntity{}
+			(*m.Entities[i]).Decode(dbuf)
+		}
 	}
 	return dbuf.err
 }
@@ -14045,40 +21088,66 @@ func (m *TLUpdates) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateShortSentMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateShortSentMessage))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Out == true {
+		flags |= 1 << 1
+	}
+	if m.Media != nil {
+		flags |= 1 << 9
+	}
+	if m.Entities != nil {
+		flags |= 1 << 7
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
 	x.Int(m.Id)
 	x.Int(m.Pts)
 	x.Int(m.PtsCount)
 	x.Int(m.Date)
-	x.Bytes(m.Media.Encode())
-	// x.VectorMessage(m.Entities);
-	x8 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x8, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x8[4:], uint32(len(m.Entities)))
-	for _, v := range m.Entities {
-		x.buf = append(x.buf, (*v).Encode()...)
+	if (flags & (1 << 9)) != 0 {
+		x.Bytes(m.Media.Encode())
+	}
+	if (flags & (1 << 7)) != 0 {
+		// x.VectorMessage(m.Entities);
+		x7 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x7, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x7[4:], uint32(len(m.Entities)))
+		for _, v := range m.Entities {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
 	}
 	return x.buf
 }
 
 func (m *TLUpdateShortSentMessage) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.Out = true
+	}
 	m.Id = dbuf.Int()
 	m.Pts = dbuf.Int()
 	m.PtsCount = dbuf.Int()
 	m.Date = dbuf.Int()
-	m.Media = &MessageMedia{}
-	m.Decode(dbuf)
-	// x.VectorMessage(m.Entities);
-	c8 := dbuf.Int()
-	if c8 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c8)
+	if (flags & (1 << 9)) != 0 {
+		m.Media = &MessageMedia{}
+		m.Decode(dbuf)
 	}
-	l8 := dbuf.Int()
-	m.Entities = make([]*MessageEntity, l8)
-	for i := 0; i < int(l8); i++ {
-		m.Entities[i] = &MessageEntity{}
-		(*m.Entities[i]).Decode(dbuf)
+	if (flags & (1 << 7)) != 0 {
+		// x.VectorMessage(m.Entities);
+		c7 := dbuf.Int()
+		if c7 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c7)
+		}
+		l7 := dbuf.Int()
+		m.Entities = make([]*MessageEntity, l7)
+		for i := 0; i < int(l7); i++ {
+			m.Entities[i] = &MessageEntity{}
+			(*m.Entities[i]).Decode(dbuf)
+		}
 	}
 	return dbuf.err
 }
@@ -14270,7 +21339,40 @@ func (m *TLUploadFileCdnRedirect) Decode(dbuf *DecodeBuf) error {
 func (m *TLDcOption) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_dcOption))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Ipv6 == true {
+		flags |= 1 << 0
+	}
+	if m.MediaOnly == true {
+		flags |= 1 << 1
+	}
+	if m.TcpoOnly == true {
+		flags |= 1 << 2
+	}
+	if m.Cdn == true {
+		flags |= 1 << 3
+	}
+	if m.Static == true {
+		flags |= 1 << 4
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 2)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 3)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 4)) != 0 {
+		// ignore
+	}
 	x.Int(m.Id)
 	x.String(m.IpAddress)
 	x.Int(m.Port)
@@ -14278,7 +21380,22 @@ func (m *TLDcOption) Encode() []byte {
 }
 
 func (m *TLDcOption) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Ipv6 = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.MediaOnly = true
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.TcpoOnly = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.Cdn = true
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.Static = true
+	}
 	m.Id = dbuf.Int()
 	m.IpAddress = dbuf.String()
 	m.Port = dbuf.Int()
@@ -14289,15 +21406,33 @@ func (m *TLDcOption) Decode(dbuf *DecodeBuf) error {
 func (m *TLConfig) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_config))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.PhonecallsEnabled == true {
+		flags |= 1 << 1
+	}
+	if m.TmpSessions != 0 {
+		flags |= 1 << 0
+	}
+	if m.SuggestedLangCode != "" {
+		flags |= 1 << 2
+	}
+	if m.LangPackVersion != 0 {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
 	x.Int(m.Date)
 	x.Int(m.Expires)
 	x.Bytes(m.TestMode.Encode())
 	x.Int(m.ThisDc)
 	// x.VectorMessage(m.DcOptions);
-	x7 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x7, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x7[4:], uint32(len(m.DcOptions)))
+	x6 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.DcOptions)))
 	for _, v := range m.DcOptions {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -14318,19 +21453,25 @@ func (m *TLConfig) Encode() []byte {
 	x.Int(m.RatingEDecay)
 	x.Int(m.StickersRecentLimit)
 	x.Int(m.StickersFavedLimit)
-	x.Int(m.TmpSessions)
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.TmpSessions)
+	}
 	x.Int(m.PinnedDialogsCountMax)
 	x.Int(m.CallReceiveTimeoutMs)
 	x.Int(m.CallRingTimeoutMs)
 	x.Int(m.CallConnectTimeoutMs)
 	x.Int(m.CallPacketTimeoutMs)
 	x.String(m.MeUrlPrefix)
-	x.String(m.SuggestedLangCode)
-	x.Int(m.LangPackVersion)
+	if (flags & (1 << 2)) != 0 {
+		x.String(m.SuggestedLangCode)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.Int(m.LangPackVersion)
+	}
 	// x.VectorMessage(m.DisabledFeatures);
-	x34 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x34, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x34[4:], uint32(len(m.DisabledFeatures)))
+	x33 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x33, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x33[4:], uint32(len(m.DisabledFeatures)))
 	for _, v := range m.DisabledFeatures {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -14338,20 +21479,23 @@ func (m *TLConfig) Encode() []byte {
 }
 
 func (m *TLConfig) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.PhonecallsEnabled = true
+	}
 	m.Date = dbuf.Int()
 	m.Expires = dbuf.Int()
 	m.TestMode = &Bool{}
 	m.Decode(dbuf)
 	m.ThisDc = dbuf.Int()
 	// x.VectorMessage(m.DcOptions);
-	c7 := dbuf.Int()
-	if c7 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c7)
+	c6 := dbuf.Int()
+	if c6 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c6)
 	}
-	l7 := dbuf.Int()
-	m.DcOptions = make([]*DcOption, l7)
-	for i := 0; i < int(l7); i++ {
+	l6 := dbuf.Int()
+	m.DcOptions = make([]*DcOption, l6)
+	for i := 0; i < int(l6); i++ {
 		m.DcOptions[i] = &DcOption{}
 		(*m.DcOptions[i]).Decode(dbuf)
 	}
@@ -14372,23 +21516,29 @@ func (m *TLConfig) Decode(dbuf *DecodeBuf) error {
 	m.RatingEDecay = dbuf.Int()
 	m.StickersRecentLimit = dbuf.Int()
 	m.StickersFavedLimit = dbuf.Int()
-	m.TmpSessions = dbuf.Int()
+	if (flags & (1 << 0)) != 0 {
+		m.TmpSessions = dbuf.Int()
+	}
 	m.PinnedDialogsCountMax = dbuf.Int()
 	m.CallReceiveTimeoutMs = dbuf.Int()
 	m.CallRingTimeoutMs = dbuf.Int()
 	m.CallConnectTimeoutMs = dbuf.Int()
 	m.CallPacketTimeoutMs = dbuf.Int()
 	m.MeUrlPrefix = dbuf.String()
-	m.SuggestedLangCode = dbuf.String()
-	m.LangPackVersion = dbuf.Int()
-	// x.VectorMessage(m.DisabledFeatures);
-	c34 := dbuf.Int()
-	if c34 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c34)
+	if (flags & (1 << 2)) != 0 {
+		m.SuggestedLangCode = dbuf.String()
 	}
-	l34 := dbuf.Int()
-	m.DisabledFeatures = make([]*DisabledFeature, l34)
-	for i := 0; i < int(l34); i++ {
+	if (flags & (1 << 2)) != 0 {
+		m.LangPackVersion = dbuf.Int()
+	}
+	// x.VectorMessage(m.DisabledFeatures);
+	c33 := dbuf.Int()
+	if c33 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c33)
+	}
+	l33 := dbuf.Int()
+	m.DisabledFeatures = make([]*DisabledFeature, l33)
+	for i := 0; i < int(l33); i++ {
 		m.DisabledFeatures[i] = &DisabledFeature{}
 		(*m.DisabledFeatures[i]).Decode(dbuf)
 	}
@@ -15456,20 +22606,39 @@ func (m *TLDocumentAttributeAnimated) Decode(dbuf *DecodeBuf) error {
 func (m *TLDocumentAttributeSticker) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_documentAttributeSticker))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Mask == true {
+		flags |= 1 << 1
+	}
+	if m.MaskCoords != nil {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
 	x.String(m.Alt)
 	x.Bytes(m.Stickerset.Encode())
-	x.Bytes(m.MaskCoords.Encode())
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.MaskCoords.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLDocumentAttributeSticker) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.Mask = true
+	}
 	m.Alt = dbuf.String()
 	m.Stickerset = &InputStickerSet{}
 	m.Decode(dbuf)
-	m.MaskCoords = &MaskCoords{}
-	m.Decode(dbuf)
+	if (flags & (1 << 0)) != 0 {
+		m.MaskCoords = &MaskCoords{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -15477,7 +22646,16 @@ func (m *TLDocumentAttributeSticker) Decode(dbuf *DecodeBuf) error {
 func (m *TLDocumentAttributeVideo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_documentAttributeVideo))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.RoundMessage == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	x.Int(m.Duration)
 	x.Int(m.W)
 	x.Int(m.H)
@@ -15485,7 +22663,10 @@ func (m *TLDocumentAttributeVideo) Encode() []byte {
 }
 
 func (m *TLDocumentAttributeVideo) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.RoundMessage = true
+	}
 	m.Duration = dbuf.Int()
 	m.W = dbuf.Int()
 	m.H = dbuf.Int()
@@ -15496,20 +22677,53 @@ func (m *TLDocumentAttributeVideo) Decode(dbuf *DecodeBuf) error {
 func (m *TLDocumentAttributeAudio) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_documentAttributeAudio))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Voice == true {
+		flags |= 1 << 10
+	}
+	if m.Title != "" {
+		flags |= 1 << 0
+	}
+	if m.Performer != "" {
+		flags |= 1 << 1
+	}
+	if m.Waveform != nil {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 10)) != 0 {
+		// ignore
+	}
 	x.Int(m.Duration)
-	x.String(m.Title)
-	x.String(m.Performer)
-	x.StringBytes(m.Waveform)
+	if (flags & (1 << 0)) != 0 {
+		x.String(m.Title)
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.Performer)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.StringBytes(m.Waveform)
+	}
 	return x.buf
 }
 
 func (m *TLDocumentAttributeAudio) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 10)) != 0 {
+		m.Voice = true
+	}
 	m.Duration = dbuf.Int()
-	m.Title = dbuf.String()
-	m.Performer = dbuf.String()
-	m.Waveform = dbuf.StringBytes()
+	if (flags & (1 << 0)) != 0 {
+		m.Title = dbuf.String()
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Performer = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Waveform = dbuf.StringBytes()
+	}
 	return dbuf.err
 }
 
@@ -15742,49 +22956,143 @@ func (m *TLWebPagePending) Decode(dbuf *DecodeBuf) error {
 func (m *TLWebPage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_webPage))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Type != "" {
+		flags |= 1 << 0
+	}
+	if m.SiteName != "" {
+		flags |= 1 << 1
+	}
+	if m.Title != "" {
+		flags |= 1 << 2
+	}
+	if m.Description != "" {
+		flags |= 1 << 3
+	}
+	if m.Photo != nil {
+		flags |= 1 << 4
+	}
+	if m.EmbedUrl != "" {
+		flags |= 1 << 5
+	}
+	if m.EmbedType != "" {
+		flags |= 1 << 5
+	}
+	if m.EmbedWidth != 0 {
+		flags |= 1 << 6
+	}
+	if m.EmbedHeight != 0 {
+		flags |= 1 << 6
+	}
+	if m.Duration != 0 {
+		flags |= 1 << 7
+	}
+	if m.Author != "" {
+		flags |= 1 << 8
+	}
+	if m.Document != nil {
+		flags |= 1 << 9
+	}
+	if m.CachedPage != nil {
+		flags |= 1 << 10
+	}
+	x.UInt(flags)
+
 	x.Long(m.Id)
 	x.String(m.Url)
 	x.String(m.DisplayUrl)
 	x.Int(m.Hash)
-	x.String(m.Type)
-	x.String(m.SiteName)
-	x.String(m.Title)
-	x.String(m.Description)
-	x.Bytes(m.Photo.Encode())
-	x.String(m.EmbedUrl)
-	x.String(m.EmbedType)
-	x.Int(m.EmbedWidth)
-	x.Int(m.EmbedHeight)
-	x.Int(m.Duration)
-	x.String(m.Author)
-	x.Bytes(m.Document.Encode())
-	x.Bytes(m.CachedPage.Encode())
+	if (flags & (1 << 0)) != 0 {
+		x.String(m.Type)
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.SiteName)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.String(m.Title)
+	}
+	if (flags & (1 << 3)) != 0 {
+		x.String(m.Description)
+	}
+	if (flags & (1 << 4)) != 0 {
+		x.Bytes(m.Photo.Encode())
+	}
+	if (flags & (1 << 5)) != 0 {
+		x.String(m.EmbedUrl)
+	}
+	if (flags & (1 << 5)) != 0 {
+		x.String(m.EmbedType)
+	}
+	if (flags & (1 << 6)) != 0 {
+		x.Int(m.EmbedWidth)
+	}
+	if (flags & (1 << 6)) != 0 {
+		x.Int(m.EmbedHeight)
+	}
+	if (flags & (1 << 7)) != 0 {
+		x.Int(m.Duration)
+	}
+	if (flags & (1 << 8)) != 0 {
+		x.String(m.Author)
+	}
+	if (flags & (1 << 9)) != 0 {
+		x.Bytes(m.Document.Encode())
+	}
+	if (flags & (1 << 10)) != 0 {
+		x.Bytes(m.CachedPage.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLWebPage) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Id = dbuf.Long()
 	m.Url = dbuf.String()
 	m.DisplayUrl = dbuf.String()
 	m.Hash = dbuf.Int()
-	m.Type = dbuf.String()
-	m.SiteName = dbuf.String()
-	m.Title = dbuf.String()
-	m.Description = dbuf.String()
-	m.Photo = &Photo{}
-	m.Decode(dbuf)
-	m.EmbedUrl = dbuf.String()
-	m.EmbedType = dbuf.String()
-	m.EmbedWidth = dbuf.Int()
-	m.EmbedHeight = dbuf.Int()
-	m.Duration = dbuf.Int()
-	m.Author = dbuf.String()
-	m.Document = &Document{}
-	m.Decode(dbuf)
-	m.CachedPage = &Page{}
-	m.Decode(dbuf)
+	if (flags & (1 << 0)) != 0 {
+		m.Type = dbuf.String()
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.SiteName = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Title = dbuf.String()
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.Description = dbuf.String()
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.Photo = &Photo{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.EmbedUrl = dbuf.String()
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.EmbedType = dbuf.String()
+	}
+	if (flags & (1 << 6)) != 0 {
+		m.EmbedWidth = dbuf.Int()
+	}
+	if (flags & (1 << 6)) != 0 {
+		m.EmbedHeight = dbuf.Int()
+	}
+	if (flags & (1 << 7)) != 0 {
+		m.Duration = dbuf.Int()
+	}
+	if (flags & (1 << 8)) != 0 {
+		m.Author = dbuf.String()
+	}
+	if (flags & (1 << 9)) != 0 {
+		m.Document = &Document{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 10)) != 0 {
+		m.CachedPage = &Page{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -15804,7 +23112,6 @@ func (m *TLAuthorization) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_authorization))
 	x.Long(m.Hash)
-	x.Int(m.Flags)
 	x.String(m.DeviceModel)
 	x.String(m.Platform)
 	x.String(m.SystemVersion)
@@ -15821,7 +23128,6 @@ func (m *TLAuthorization) Encode() []byte {
 
 func (m *TLAuthorization) Decode(dbuf *DecodeBuf) error {
 	m.Hash = dbuf.Long()
-	m.Flags = dbuf.Int()
 	m.DeviceModel = dbuf.String()
 	m.Platform = dbuf.String()
 	m.SystemVersion = dbuf.String()
@@ -15919,20 +23225,51 @@ func (m *TLAccountPasswordSettings) Decode(dbuf *DecodeBuf) error {
 func (m *TLAccountPasswordInputSettings) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_account_passwordInputSettings))
-	x.Int(m.Flags)
-	x.StringBytes(m.NewSalt)
-	x.StringBytes(m.NewPasswordHash)
-	x.String(m.Hint)
-	x.String(m.Email)
+
+	var flags uint32 = 0
+	if m.NewSalt != nil {
+		flags |= 1 << 0
+	}
+	if m.NewPasswordHash != nil {
+		flags |= 1 << 0
+	}
+	if m.Hint != "" {
+		flags |= 1 << 0
+	}
+	if m.Email != "" {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		x.StringBytes(m.NewSalt)
+	}
+	if (flags & (1 << 0)) != 0 {
+		x.StringBytes(m.NewPasswordHash)
+	}
+	if (flags & (1 << 0)) != 0 {
+		x.String(m.Hint)
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.Email)
+	}
 	return x.buf
 }
 
 func (m *TLAccountPasswordInputSettings) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.NewSalt = dbuf.StringBytes()
-	m.NewPasswordHash = dbuf.StringBytes()
-	m.Hint = dbuf.String()
-	m.Email = dbuf.String()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.NewSalt = dbuf.StringBytes()
+	}
+	if (flags & (1 << 0)) != 0 {
+		m.NewPasswordHash = dbuf.StringBytes()
+	}
+	if (flags & (1 << 0)) != 0 {
+		m.Hint = dbuf.String()
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Email = dbuf.String()
+	}
 	return dbuf.err
 }
 
@@ -15954,13 +23291,11 @@ func (m *TLReceivedNotifyMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_receivedNotifyMessage))
 	x.Int(m.Id)
-	x.Int(m.Flags)
 	return x.buf
 }
 
 func (m *TLReceivedNotifyMessage) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.Int()
-	m.Flags = dbuf.Int()
 	return dbuf.err
 }
 
@@ -16006,36 +23341,82 @@ func (m *TLChatInviteAlready) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatInvite) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatInvite))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Channel == true {
+		flags |= 1 << 0
+	}
+	if m.Broadcast == true {
+		flags |= 1 << 1
+	}
+	if m.Public == true {
+		flags |= 1 << 2
+	}
+	if m.Megagroup == true {
+		flags |= 1 << 3
+	}
+	if m.Participants != nil {
+		flags |= 1 << 4
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 2)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 3)) != 0 {
+		// ignore
+	}
 	x.String(m.Title)
 	x.Bytes(m.Photo.Encode())
 	x.Int(m.ParticipantsCount)
-	// x.VectorMessage(m.Participants);
-	x9 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x9, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x9[4:], uint32(len(m.Participants)))
-	for _, v := range m.Participants {
-		x.buf = append(x.buf, (*v).Encode()...)
+	if (flags & (1 << 4)) != 0 {
+		// x.VectorMessage(m.Participants);
+		x8 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x8, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x8[4:], uint32(len(m.Participants)))
+		for _, v := range m.Participants {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
 	}
 	return x.buf
 }
 
 func (m *TLChatInvite) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Channel = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Broadcast = true
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Public = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.Megagroup = true
+	}
 	m.Title = dbuf.String()
 	m.Photo = &ChatPhoto{}
 	m.Decode(dbuf)
 	m.ParticipantsCount = dbuf.Int()
-	// x.VectorMessage(m.Participants);
-	c9 := dbuf.Int()
-	if c9 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c9)
-	}
-	l9 := dbuf.Int()
-	m.Participants = make([]*User, l9)
-	for i := 0; i < int(l9); i++ {
-		m.Participants[i] = &User{}
-		(*m.Participants[i]).Decode(dbuf)
+	if (flags & (1 << 4)) != 0 {
+		// x.VectorMessage(m.Participants);
+		c8 := dbuf.Int()
+		if c8 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c8)
+		}
+		l8 := dbuf.Int()
+		m.Participants = make([]*User, l8)
+		for i := 0; i < int(l8); i++ {
+			m.Participants[i] = &User{}
+			(*m.Participants[i]).Decode(dbuf)
+		}
 	}
 	return dbuf.err
 }
@@ -16083,7 +23464,34 @@ func (m *TLInputStickerSetShortName) Decode(dbuf *DecodeBuf) error {
 func (m *TLStickerSet) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_stickerSet))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Installed == true {
+		flags |= 1 << 0
+	}
+	if m.Archived == true {
+		flags |= 1 << 1
+	}
+	if m.Official == true {
+		flags |= 1 << 2
+	}
+	if m.Masks == true {
+		flags |= 1 << 3
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 2)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 3)) != 0 {
+		// ignore
+	}
 	x.Long(m.Id)
 	x.Long(m.AccessHash)
 	x.String(m.Title)
@@ -16094,7 +23502,19 @@ func (m *TLStickerSet) Encode() []byte {
 }
 
 func (m *TLStickerSet) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Installed = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Archived = true
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Official = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.Masks = true
+	}
 	m.Id = dbuf.Long()
 	m.AccessHash = dbuf.Long()
 	m.Title = dbuf.String()
@@ -16275,14 +23695,26 @@ func (m *TLKeyboardButtonRequestGeoLocation) Decode(dbuf *DecodeBuf) error {
 func (m *TLKeyboardButtonSwitchInline) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_keyboardButtonSwitchInline))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.SamePeer == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	x.String(m.Text)
 	x.String(m.Query)
 	return x.buf
 }
 
 func (m *TLKeyboardButtonSwitchInline) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.SamePeer = true
+	}
 	m.Text = dbuf.String()
 	m.Query = dbuf.String()
 	return dbuf.err
@@ -16347,12 +23779,24 @@ func (m *TLKeyboardButtonRow) Decode(dbuf *DecodeBuf) error {
 func (m *TLReplyKeyboardHide) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_replyKeyboardHide))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Selective == true {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 2)) != 0 {
+		// ignore
+	}
 	return x.buf
 }
 
 func (m *TLReplyKeyboardHide) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 2)) != 0 {
+		m.Selective = true
+	}
 	return dbuf.err
 }
 
@@ -16360,12 +23804,33 @@ func (m *TLReplyKeyboardHide) Decode(dbuf *DecodeBuf) error {
 func (m *TLReplyKeyboardForceReply) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_replyKeyboardForceReply))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.SingleUse == true {
+		flags |= 1 << 1
+	}
+	if m.Selective == true {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 2)) != 0 {
+		// ignore
+	}
 	return x.buf
 }
 
 func (m *TLReplyKeyboardForceReply) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.SingleUse = true
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Selective = true
+	}
 	return dbuf.err
 }
 
@@ -16373,11 +23838,32 @@ func (m *TLReplyKeyboardForceReply) Decode(dbuf *DecodeBuf) error {
 func (m *TLReplyKeyboardMarkup) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_replyKeyboardMarkup))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Resize == true {
+		flags |= 1 << 0
+	}
+	if m.SingleUse == true {
+		flags |= 1 << 1
+	}
+	if m.Selective == true {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 2)) != 0 {
+		// ignore
+	}
 	// x.VectorMessage(m.Rows);
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Rows)))
+	x4 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Rows)))
 	for _, v := range m.Rows {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -16385,15 +23871,24 @@ func (m *TLReplyKeyboardMarkup) Encode() []byte {
 }
 
 func (m *TLReplyKeyboardMarkup) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	// x.VectorMessage(m.Rows);
-	c5 := dbuf.Int()
-	if c5 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c5)
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Resize = true
 	}
-	l5 := dbuf.Int()
-	m.Rows = make([]*KeyboardButtonRow, l5)
-	for i := 0; i < int(l5); i++ {
+	if (flags & (1 << 1)) != 0 {
+		m.SingleUse = true
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Selective = true
+	}
+	// x.VectorMessage(m.Rows);
+	c4 := dbuf.Int()
+	if c4 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c4)
+	}
+	l4 := dbuf.Int()
+	m.Rows = make([]*KeyboardButtonRow, l4)
+	for i := 0; i < int(l4); i++ {
 		m.Rows[i] = &KeyboardButtonRow{}
 		(*m.Rows[i]).Decode(dbuf)
 	}
@@ -16728,16 +24223,35 @@ func (m *TLMessageRange) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatesChannelDifferenceEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates_channelDifferenceEmpty))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Final == true {
+		flags |= 1 << 0
+	}
+	if m.Timeout != 0 {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	x.Int(m.Pts)
-	x.Int(m.Timeout)
+	if (flags & (1 << 1)) != 0 {
+		x.Int(m.Timeout)
+	}
 	return x.buf
 }
 
 func (m *TLUpdatesChannelDifferenceEmpty) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Final = true
+	}
 	m.Pts = dbuf.Int()
-	m.Timeout = dbuf.Int()
+	if (flags & (1 << 1)) != 0 {
+		m.Timeout = dbuf.Int()
+	}
 	return dbuf.err
 }
 
@@ -16745,32 +24259,46 @@ func (m *TLUpdatesChannelDifferenceEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatesChannelDifferenceTooLong) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates_channelDifferenceTooLong))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Final == true {
+		flags |= 1 << 0
+	}
+	if m.Timeout != 0 {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	x.Int(m.Pts)
-	x.Int(m.Timeout)
+	if (flags & (1 << 1)) != 0 {
+		x.Int(m.Timeout)
+	}
 	x.Int(m.TopMessage)
 	x.Int(m.ReadInboxMaxId)
 	x.Int(m.ReadOutboxMaxId)
 	x.Int(m.UnreadCount)
 	x.Int(m.UnreadMentionsCount)
 	// x.VectorMessage(m.Messages);
-	x10 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x10, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x10[4:], uint32(len(m.Messages)))
+	x9 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x9, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x9[4:], uint32(len(m.Messages)))
 	for _, v := range m.Messages {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x11 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x11, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x11[4:], uint32(len(m.Chats)))
+	x10 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x10, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x10[4:], uint32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x12 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x12, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x12[4:], uint32(len(m.Users)))
+	x11 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x11, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x11[4:], uint32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -16778,44 +24306,49 @@ func (m *TLUpdatesChannelDifferenceTooLong) Encode() []byte {
 }
 
 func (m *TLUpdatesChannelDifferenceTooLong) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Final = true
+	}
 	m.Pts = dbuf.Int()
-	m.Timeout = dbuf.Int()
+	if (flags & (1 << 1)) != 0 {
+		m.Timeout = dbuf.Int()
+	}
 	m.TopMessage = dbuf.Int()
 	m.ReadInboxMaxId = dbuf.Int()
 	m.ReadOutboxMaxId = dbuf.Int()
 	m.UnreadCount = dbuf.Int()
 	m.UnreadMentionsCount = dbuf.Int()
 	// x.VectorMessage(m.Messages);
+	c9 := dbuf.Int()
+	if c9 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c9)
+	}
+	l9 := dbuf.Int()
+	m.Messages = make([]*Message, l9)
+	for i := 0; i < int(l9); i++ {
+		m.Messages[i] = &Message{}
+		(*m.Messages[i]).Decode(dbuf)
+	}
+	// x.VectorMessage(m.Chats);
 	c10 := dbuf.Int()
 	if c10 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c10)
 	}
 	l10 := dbuf.Int()
-	m.Messages = make([]*Message, l10)
+	m.Chats = make([]*Chat, l10)
 	for i := 0; i < int(l10); i++ {
-		m.Messages[i] = &Message{}
-		(*m.Messages[i]).Decode(dbuf)
+		m.Chats[i] = &Chat{}
+		(*m.Chats[i]).Decode(dbuf)
 	}
-	// x.VectorMessage(m.Chats);
+	// x.VectorMessage(m.Users);
 	c11 := dbuf.Int()
 	if c11 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c11)
 	}
 	l11 := dbuf.Int()
-	m.Chats = make([]*Chat, l11)
+	m.Users = make([]*User, l11)
 	for i := 0; i < int(l11); i++ {
-		m.Chats[i] = &Chat{}
-		(*m.Chats[i]).Decode(dbuf)
-	}
-	// x.VectorMessage(m.Users);
-	c12 := dbuf.Int()
-	if c12 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c12)
-	}
-	l12 := dbuf.Int()
-	m.Users = make([]*User, l12)
-	for i := 0; i < int(l12); i++ {
 		m.Users[i] = &User{}
 		(*m.Users[i]).Decode(dbuf)
 	}
@@ -16826,34 +24359,48 @@ func (m *TLUpdatesChannelDifferenceTooLong) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatesChannelDifference) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates_channelDifference))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Final == true {
+		flags |= 1 << 0
+	}
+	if m.Timeout != 0 {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	x.Int(m.Pts)
-	x.Int(m.Timeout)
+	if (flags & (1 << 1)) != 0 {
+		x.Int(m.Timeout)
+	}
 	// x.VectorMessage(m.NewMessages);
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.NewMessages)))
+	x4 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.NewMessages)))
 	for _, v := range m.NewMessages {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.OtherUpdates);
-	x6 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.OtherUpdates)))
+	x5 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.OtherUpdates)))
 	for _, v := range m.OtherUpdates {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x7 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x7, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x7[4:], uint32(len(m.Chats)))
+	x6 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x8 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x8, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x8[4:], uint32(len(m.Users)))
+	x7 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x7, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x7[4:], uint32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -16861,50 +24408,55 @@ func (m *TLUpdatesChannelDifference) Encode() []byte {
 }
 
 func (m *TLUpdatesChannelDifference) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Final = true
+	}
 	m.Pts = dbuf.Int()
-	m.Timeout = dbuf.Int()
+	if (flags & (1 << 1)) != 0 {
+		m.Timeout = dbuf.Int()
+	}
 	// x.VectorMessage(m.NewMessages);
+	c4 := dbuf.Int()
+	if c4 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c4)
+	}
+	l4 := dbuf.Int()
+	m.NewMessages = make([]*Message, l4)
+	for i := 0; i < int(l4); i++ {
+		m.NewMessages[i] = &Message{}
+		(*m.NewMessages[i]).Decode(dbuf)
+	}
+	// x.VectorMessage(m.OtherUpdates);
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
 	}
 	l5 := dbuf.Int()
-	m.NewMessages = make([]*Message, l5)
+	m.OtherUpdates = make([]*Update, l5)
 	for i := 0; i < int(l5); i++ {
-		m.NewMessages[i] = &Message{}
-		(*m.NewMessages[i]).Decode(dbuf)
+		m.OtherUpdates[i] = &Update{}
+		(*m.OtherUpdates[i]).Decode(dbuf)
 	}
-	// x.VectorMessage(m.OtherUpdates);
+	// x.VectorMessage(m.Chats);
 	c6 := dbuf.Int()
 	if c6 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c6)
 	}
 	l6 := dbuf.Int()
-	m.OtherUpdates = make([]*Update, l6)
+	m.Chats = make([]*Chat, l6)
 	for i := 0; i < int(l6); i++ {
-		m.OtherUpdates[i] = &Update{}
-		(*m.OtherUpdates[i]).Decode(dbuf)
+		m.Chats[i] = &Chat{}
+		(*m.Chats[i]).Decode(dbuf)
 	}
-	// x.VectorMessage(m.Chats);
+	// x.VectorMessage(m.Users);
 	c7 := dbuf.Int()
 	if c7 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c7)
 	}
 	l7 := dbuf.Int()
-	m.Chats = make([]*Chat, l7)
+	m.Users = make([]*User, l7)
 	for i := 0; i < int(l7); i++ {
-		m.Chats[i] = &Chat{}
-		(*m.Chats[i]).Decode(dbuf)
-	}
-	// x.VectorMessage(m.Users);
-	c8 := dbuf.Int()
-	if c8 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c8)
-	}
-	l8 := dbuf.Int()
-	m.Users = make([]*User, l8)
-	for i := 0; i < int(l8); i++ {
 		m.Users[i] = &User{}
 		(*m.Users[i]).Decode(dbuf)
 	}
@@ -16926,11 +24478,20 @@ func (m *TLChannelMessagesFilterEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelMessagesFilter) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelMessagesFilter))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ExcludeNewMessages == true {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
 	// x.VectorMessage(m.Ranges);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Ranges)))
+	x2 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Ranges)))
 	for _, v := range m.Ranges {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -16938,15 +24499,18 @@ func (m *TLChannelMessagesFilter) Encode() []byte {
 }
 
 func (m *TLChannelMessagesFilter) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	// x.VectorMessage(m.Ranges);
-	c3 := dbuf.Int()
-	if c3 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c3)
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.ExcludeNewMessages = true
 	}
-	l3 := dbuf.Int()
-	m.Ranges = make([]*MessageRange, l3)
-	for i := 0; i < int(l3); i++ {
+	// x.VectorMessage(m.Ranges);
+	c2 := dbuf.Int()
+	if c2 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c2)
+	}
+	l2 := dbuf.Int()
+	m.Ranges = make([]*MessageRange, l2)
+	for i := 0; i < int(l2); i++ {
 		m.Ranges[i] = &MessageRange{}
 		(*m.Ranges[i]).Decode(dbuf)
 	}
@@ -17002,7 +24566,16 @@ func (m *TLChannelParticipantCreator) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelParticipantAdmin) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelParticipantAdmin))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.CanEdit == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	x.Int(m.UserId)
 	x.Int(m.InviterId)
 	x.Int(m.PromotedBy)
@@ -17012,7 +24585,10 @@ func (m *TLChannelParticipantAdmin) Encode() []byte {
 }
 
 func (m *TLChannelParticipantAdmin) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.CanEdit = true
+	}
 	m.UserId = dbuf.Int()
 	m.InviterId = dbuf.Int()
 	m.PromotedBy = dbuf.Int()
@@ -17026,7 +24602,16 @@ func (m *TLChannelParticipantAdmin) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelParticipantBanned) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelParticipantBanned))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Left == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	x.Int(m.UserId)
 	x.Int(m.KickedBy)
 	x.Int(m.Date)
@@ -17035,7 +24620,10 @@ func (m *TLChannelParticipantBanned) Encode() []byte {
 }
 
 func (m *TLChannelParticipantBanned) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Left = true
+	}
 	m.UserId = dbuf.Int()
 	m.KickedBy = dbuf.Int()
 	m.Date = dbuf.Int()
@@ -17329,17 +24917,27 @@ func (m *TLMessagesSavedGifs) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineMessageMediaAuto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineMessageMediaAuto))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
 	x.String(m.Caption)
-	x.Bytes(m.ReplyMarkup.Encode())
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLInputBotInlineMessageMediaAuto) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Caption = dbuf.String()
-	m.ReplyMarkup = &ReplyMarkup{}
-	m.Decode(dbuf)
+	if (flags & (1 << 2)) != 0 {
+		m.ReplyMarkup = &ReplyMarkup{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -17347,35 +24945,61 @@ func (m *TLInputBotInlineMessageMediaAuto) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineMessageText) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineMessageText))
-	x.Int(m.Flags)
-	x.String(m.Message)
-	// x.VectorMessage(m.Entities);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Entities)))
-	for _, v := range m.Entities {
-		x.buf = append(x.buf, (*v).Encode()...)
+
+	var flags uint32 = 0
+	if m.NoWebpage == true {
+		flags |= 1 << 0
 	}
-	x.Bytes(m.ReplyMarkup.Encode())
+	if m.Entities != nil {
+		flags |= 1 << 1
+	}
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	x.String(m.Message)
+	if (flags & (1 << 1)) != 0 {
+		// x.VectorMessage(m.Entities);
+		x3 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Entities)))
+		for _, v := range m.Entities {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLInputBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.NoWebpage = true
+	}
 	m.Message = dbuf.String()
-	// x.VectorMessage(m.Entities);
-	c4 := dbuf.Int()
-	if c4 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c4)
+	if (flags & (1 << 1)) != 0 {
+		// x.VectorMessage(m.Entities);
+		c3 := dbuf.Int()
+		if c3 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c3)
+		}
+		l3 := dbuf.Int()
+		m.Entities = make([]*MessageEntity, l3)
+		for i := 0; i < int(l3); i++ {
+			m.Entities[i] = &MessageEntity{}
+			(*m.Entities[i]).Decode(dbuf)
+		}
 	}
-	l4 := dbuf.Int()
-	m.Entities = make([]*MessageEntity, l4)
-	for i := 0; i < int(l4); i++ {
-		m.Entities[i] = &MessageEntity{}
-		(*m.Entities[i]).Decode(dbuf)
+	if (flags & (1 << 2)) != 0 {
+		m.ReplyMarkup = &ReplyMarkup{}
+		m.Decode(dbuf)
 	}
-	m.ReplyMarkup = &ReplyMarkup{}
-	m.Decode(dbuf)
 	return dbuf.err
 }
 
@@ -17383,18 +25007,28 @@ func (m *TLInputBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineMessageMediaGeo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineMessageMediaGeo))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
 	x.Bytes(m.GeoPoint.Encode())
-	x.Bytes(m.ReplyMarkup.Encode())
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLInputBotInlineMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.GeoPoint = &InputGeoPoint{}
 	m.Decode(dbuf)
-	m.ReplyMarkup = &ReplyMarkup{}
-	m.Decode(dbuf)
+	if (flags & (1 << 2)) != 0 {
+		m.ReplyMarkup = &ReplyMarkup{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -17402,26 +25036,36 @@ func (m *TLInputBotInlineMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineMessageMediaVenue) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineMessageMediaVenue))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
 	x.Bytes(m.GeoPoint.Encode())
 	x.String(m.Title)
 	x.String(m.Address)
 	x.String(m.Provider)
 	x.String(m.VenueId)
-	x.Bytes(m.ReplyMarkup.Encode())
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLInputBotInlineMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.GeoPoint = &InputGeoPoint{}
 	m.Decode(dbuf)
 	m.Title = dbuf.String()
 	m.Address = dbuf.String()
 	m.Provider = dbuf.String()
 	m.VenueId = dbuf.String()
-	m.ReplyMarkup = &ReplyMarkup{}
-	m.Decode(dbuf)
+	if (flags & (1 << 2)) != 0 {
+		m.ReplyMarkup = &ReplyMarkup{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -17429,21 +25073,31 @@ func (m *TLInputBotInlineMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineMessageMediaContact) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineMessageMediaContact))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
 	x.String(m.PhoneNumber)
 	x.String(m.FirstName)
 	x.String(m.LastName)
-	x.Bytes(m.ReplyMarkup.Encode())
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLInputBotInlineMessageMediaContact) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.PhoneNumber = dbuf.String()
 	m.FirstName = dbuf.String()
 	m.LastName = dbuf.String()
-	m.ReplyMarkup = &ReplyMarkup{}
-	m.Decode(dbuf)
+	if (flags & (1 << 2)) != 0 {
+		m.ReplyMarkup = &ReplyMarkup{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -17451,15 +25105,25 @@ func (m *TLInputBotInlineMessageMediaContact) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineMessageGame) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineMessageGame))
-	x.Int(m.Flags)
-	x.Bytes(m.ReplyMarkup.Encode())
+
+	var flags uint32 = 0
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLInputBotInlineMessageGame) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.ReplyMarkup = &ReplyMarkup{}
-	m.Decode(dbuf)
+	flags := dbuf.UInt()
+	if (flags & (1 << 2)) != 0 {
+		m.ReplyMarkup = &ReplyMarkup{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -17467,35 +25131,101 @@ func (m *TLInputBotInlineMessageGame) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineResult) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineResult))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Title != "" {
+		flags |= 1 << 1
+	}
+	if m.Description != "" {
+		flags |= 1 << 2
+	}
+	if m.Url != "" {
+		flags |= 1 << 3
+	}
+	if m.ThumbUrl != "" {
+		flags |= 1 << 4
+	}
+	if m.ContentUrl != "" {
+		flags |= 1 << 5
+	}
+	if m.ContentType != "" {
+		flags |= 1 << 5
+	}
+	if m.W != 0 {
+		flags |= 1 << 6
+	}
+	if m.H != 0 {
+		flags |= 1 << 6
+	}
+	if m.Duration != 0 {
+		flags |= 1 << 7
+	}
+	x.UInt(flags)
+
 	x.String(m.Id)
 	x.String(m.Type)
-	x.String(m.Title)
-	x.String(m.Description)
-	x.String(m.Url)
-	x.String(m.ThumbUrl)
-	x.String(m.ContentUrl)
-	x.String(m.ContentType)
-	x.Int(m.W)
-	x.Int(m.H)
-	x.Int(m.Duration)
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.Title)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.String(m.Description)
+	}
+	if (flags & (1 << 3)) != 0 {
+		x.String(m.Url)
+	}
+	if (flags & (1 << 4)) != 0 {
+		x.String(m.ThumbUrl)
+	}
+	if (flags & (1 << 5)) != 0 {
+		x.String(m.ContentUrl)
+	}
+	if (flags & (1 << 5)) != 0 {
+		x.String(m.ContentType)
+	}
+	if (flags & (1 << 6)) != 0 {
+		x.Int(m.W)
+	}
+	if (flags & (1 << 6)) != 0 {
+		x.Int(m.H)
+	}
+	if (flags & (1 << 7)) != 0 {
+		x.Int(m.Duration)
+	}
 	x.Bytes(m.SendMessage.Encode())
 	return x.buf
 }
 
 func (m *TLInputBotInlineResult) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Id = dbuf.String()
 	m.Type = dbuf.String()
-	m.Title = dbuf.String()
-	m.Description = dbuf.String()
-	m.Url = dbuf.String()
-	m.ThumbUrl = dbuf.String()
-	m.ContentUrl = dbuf.String()
-	m.ContentType = dbuf.String()
-	m.W = dbuf.Int()
-	m.H = dbuf.Int()
-	m.Duration = dbuf.Int()
+	if (flags & (1 << 1)) != 0 {
+		m.Title = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Description = dbuf.String()
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.Url = dbuf.String()
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.ThumbUrl = dbuf.String()
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.ContentUrl = dbuf.String()
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.ContentType = dbuf.String()
+	}
+	if (flags & (1 << 6)) != 0 {
+		m.W = dbuf.Int()
+	}
+	if (flags & (1 << 6)) != 0 {
+		m.H = dbuf.Int()
+	}
+	if (flags & (1 << 7)) != 0 {
+		m.Duration = dbuf.Int()
+	}
 	m.SendMessage = &InputBotInlineMessage{}
 	m.Decode(dbuf)
 	return dbuf.err
@@ -17526,22 +25256,39 @@ func (m *TLInputBotInlineResultPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineResultDocument) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineResultDocument))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Title != "" {
+		flags |= 1 << 1
+	}
+	if m.Description != "" {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
 	x.String(m.Id)
 	x.String(m.Type)
-	x.String(m.Title)
-	x.String(m.Description)
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.Title)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.String(m.Description)
+	}
 	x.Bytes(m.Document.Encode())
 	x.Bytes(m.SendMessage.Encode())
 	return x.buf
 }
 
 func (m *TLInputBotInlineResultDocument) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Id = dbuf.String()
 	m.Type = dbuf.String()
-	m.Title = dbuf.String()
-	m.Description = dbuf.String()
+	if (flags & (1 << 1)) != 0 {
+		m.Title = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Description = dbuf.String()
+	}
 	m.Document = &InputDocument{}
 	m.Decode(dbuf)
 	m.SendMessage = &InputBotInlineMessage{}
@@ -17571,17 +25318,27 @@ func (m *TLInputBotInlineResultGame) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotInlineMessageMediaAuto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botInlineMessageMediaAuto))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
 	x.String(m.Caption)
-	x.Bytes(m.ReplyMarkup.Encode())
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLBotInlineMessageMediaAuto) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Caption = dbuf.String()
-	m.ReplyMarkup = &ReplyMarkup{}
-	m.Decode(dbuf)
+	if (flags & (1 << 2)) != 0 {
+		m.ReplyMarkup = &ReplyMarkup{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -17589,35 +25346,61 @@ func (m *TLBotInlineMessageMediaAuto) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotInlineMessageText) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botInlineMessageText))
-	x.Int(m.Flags)
-	x.String(m.Message)
-	// x.VectorMessage(m.Entities);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Entities)))
-	for _, v := range m.Entities {
-		x.buf = append(x.buf, (*v).Encode()...)
+
+	var flags uint32 = 0
+	if m.NoWebpage == true {
+		flags |= 1 << 0
 	}
-	x.Bytes(m.ReplyMarkup.Encode())
+	if m.Entities != nil {
+		flags |= 1 << 1
+	}
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	x.String(m.Message)
+	if (flags & (1 << 1)) != 0 {
+		// x.VectorMessage(m.Entities);
+		x3 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Entities)))
+		for _, v := range m.Entities {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.NoWebpage = true
+	}
 	m.Message = dbuf.String()
-	// x.VectorMessage(m.Entities);
-	c4 := dbuf.Int()
-	if c4 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c4)
+	if (flags & (1 << 1)) != 0 {
+		// x.VectorMessage(m.Entities);
+		c3 := dbuf.Int()
+		if c3 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c3)
+		}
+		l3 := dbuf.Int()
+		m.Entities = make([]*MessageEntity, l3)
+		for i := 0; i < int(l3); i++ {
+			m.Entities[i] = &MessageEntity{}
+			(*m.Entities[i]).Decode(dbuf)
+		}
 	}
-	l4 := dbuf.Int()
-	m.Entities = make([]*MessageEntity, l4)
-	for i := 0; i < int(l4); i++ {
-		m.Entities[i] = &MessageEntity{}
-		(*m.Entities[i]).Decode(dbuf)
+	if (flags & (1 << 2)) != 0 {
+		m.ReplyMarkup = &ReplyMarkup{}
+		m.Decode(dbuf)
 	}
-	m.ReplyMarkup = &ReplyMarkup{}
-	m.Decode(dbuf)
 	return dbuf.err
 }
 
@@ -17625,18 +25408,28 @@ func (m *TLBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotInlineMessageMediaGeo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botInlineMessageMediaGeo))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
 	x.Bytes(m.Geo.Encode())
-	x.Bytes(m.ReplyMarkup.Encode())
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLBotInlineMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Geo = &GeoPoint{}
 	m.Decode(dbuf)
-	m.ReplyMarkup = &ReplyMarkup{}
-	m.Decode(dbuf)
+	if (flags & (1 << 2)) != 0 {
+		m.ReplyMarkup = &ReplyMarkup{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -17644,26 +25437,36 @@ func (m *TLBotInlineMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotInlineMessageMediaVenue) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botInlineMessageMediaVenue))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
 	x.Bytes(m.Geo.Encode())
 	x.String(m.Title)
 	x.String(m.Address)
 	x.String(m.Provider)
 	x.String(m.VenueId)
-	x.Bytes(m.ReplyMarkup.Encode())
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLBotInlineMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Geo = &GeoPoint{}
 	m.Decode(dbuf)
 	m.Title = dbuf.String()
 	m.Address = dbuf.String()
 	m.Provider = dbuf.String()
 	m.VenueId = dbuf.String()
-	m.ReplyMarkup = &ReplyMarkup{}
-	m.Decode(dbuf)
+	if (flags & (1 << 2)) != 0 {
+		m.ReplyMarkup = &ReplyMarkup{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -17671,21 +25474,31 @@ func (m *TLBotInlineMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotInlineMessageMediaContact) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botInlineMessageMediaContact))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
 	x.String(m.PhoneNumber)
 	x.String(m.FirstName)
 	x.String(m.LastName)
-	x.Bytes(m.ReplyMarkup.Encode())
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLBotInlineMessageMediaContact) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.PhoneNumber = dbuf.String()
 	m.FirstName = dbuf.String()
 	m.LastName = dbuf.String()
-	m.ReplyMarkup = &ReplyMarkup{}
-	m.Decode(dbuf)
+	if (flags & (1 << 2)) != 0 {
+		m.ReplyMarkup = &ReplyMarkup{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -17693,35 +25506,101 @@ func (m *TLBotInlineMessageMediaContact) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotInlineResult) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botInlineResult))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Title != "" {
+		flags |= 1 << 1
+	}
+	if m.Description != "" {
+		flags |= 1 << 2
+	}
+	if m.Url != "" {
+		flags |= 1 << 3
+	}
+	if m.ThumbUrl != "" {
+		flags |= 1 << 4
+	}
+	if m.ContentUrl != "" {
+		flags |= 1 << 5
+	}
+	if m.ContentType != "" {
+		flags |= 1 << 5
+	}
+	if m.W != 0 {
+		flags |= 1 << 6
+	}
+	if m.H != 0 {
+		flags |= 1 << 6
+	}
+	if m.Duration != 0 {
+		flags |= 1 << 7
+	}
+	x.UInt(flags)
+
 	x.String(m.Id)
 	x.String(m.Type)
-	x.String(m.Title)
-	x.String(m.Description)
-	x.String(m.Url)
-	x.String(m.ThumbUrl)
-	x.String(m.ContentUrl)
-	x.String(m.ContentType)
-	x.Int(m.W)
-	x.Int(m.H)
-	x.Int(m.Duration)
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.Title)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.String(m.Description)
+	}
+	if (flags & (1 << 3)) != 0 {
+		x.String(m.Url)
+	}
+	if (flags & (1 << 4)) != 0 {
+		x.String(m.ThumbUrl)
+	}
+	if (flags & (1 << 5)) != 0 {
+		x.String(m.ContentUrl)
+	}
+	if (flags & (1 << 5)) != 0 {
+		x.String(m.ContentType)
+	}
+	if (flags & (1 << 6)) != 0 {
+		x.Int(m.W)
+	}
+	if (flags & (1 << 6)) != 0 {
+		x.Int(m.H)
+	}
+	if (flags & (1 << 7)) != 0 {
+		x.Int(m.Duration)
+	}
 	x.Bytes(m.SendMessage.Encode())
 	return x.buf
 }
 
 func (m *TLBotInlineResult) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Id = dbuf.String()
 	m.Type = dbuf.String()
-	m.Title = dbuf.String()
-	m.Description = dbuf.String()
-	m.Url = dbuf.String()
-	m.ThumbUrl = dbuf.String()
-	m.ContentUrl = dbuf.String()
-	m.ContentType = dbuf.String()
-	m.W = dbuf.Int()
-	m.H = dbuf.Int()
-	m.Duration = dbuf.Int()
+	if (flags & (1 << 1)) != 0 {
+		m.Title = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Description = dbuf.String()
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.Url = dbuf.String()
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.ThumbUrl = dbuf.String()
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.ContentUrl = dbuf.String()
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.ContentType = dbuf.String()
+	}
+	if (flags & (1 << 6)) != 0 {
+		m.W = dbuf.Int()
+	}
+	if (flags & (1 << 6)) != 0 {
+		m.H = dbuf.Int()
+	}
+	if (flags & (1 << 7)) != 0 {
+		m.Duration = dbuf.Int()
+	}
 	m.SendMessage = &BotInlineMessage{}
 	m.Decode(dbuf)
 	return dbuf.err
@@ -17731,27 +25610,58 @@ func (m *TLBotInlineResult) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotInlineMediaResult) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botInlineMediaResult))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Photo != nil {
+		flags |= 1 << 0
+	}
+	if m.Document != nil {
+		flags |= 1 << 1
+	}
+	if m.Title != "" {
+		flags |= 1 << 2
+	}
+	if m.Description != "" {
+		flags |= 1 << 3
+	}
+	x.UInt(flags)
+
 	x.String(m.Id)
 	x.String(m.Type)
-	x.Bytes(m.Photo.Encode())
-	x.Bytes(m.Document.Encode())
-	x.String(m.Title)
-	x.String(m.Description)
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.Photo.Encode())
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.Bytes(m.Document.Encode())
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.String(m.Title)
+	}
+	if (flags & (1 << 3)) != 0 {
+		x.String(m.Description)
+	}
 	x.Bytes(m.SendMessage.Encode())
 	return x.buf
 }
 
 func (m *TLBotInlineMediaResult) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Id = dbuf.String()
 	m.Type = dbuf.String()
-	m.Photo = &Photo{}
-	m.Decode(dbuf)
-	m.Document = &Document{}
-	m.Decode(dbuf)
-	m.Title = dbuf.String()
-	m.Description = dbuf.String()
+	if (flags & (1 << 0)) != 0 {
+		m.Photo = &Photo{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Document = &Document{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Title = dbuf.String()
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.Description = dbuf.String()
+	}
 	m.SendMessage = &BotInlineMessage{}
 	m.Decode(dbuf)
 	return dbuf.err
@@ -17761,14 +25671,33 @@ func (m *TLBotInlineMediaResult) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesBotResults) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_botResults))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Gallery == true {
+		flags |= 1 << 0
+	}
+	if m.NextOffset != "" {
+		flags |= 1 << 1
+	}
+	if m.SwitchPm != nil {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	x.Long(m.QueryId)
-	x.String(m.NextOffset)
-	x.Bytes(m.SwitchPm.Encode())
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.NextOffset)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.SwitchPm.Encode())
+	}
 	// x.VectorMessage(m.Results);
-	x6 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Results)))
+	x5 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Results)))
 	for _, v := range m.Results {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -17777,19 +25706,26 @@ func (m *TLMessagesBotResults) Encode() []byte {
 }
 
 func (m *TLMessagesBotResults) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.QueryId = dbuf.Long()
-	m.NextOffset = dbuf.String()
-	m.SwitchPm = &InlineBotSwitchPM{}
-	m.Decode(dbuf)
-	// x.VectorMessage(m.Results);
-	c6 := dbuf.Int()
-	if c6 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c6)
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Gallery = true
 	}
-	l6 := dbuf.Int()
-	m.Results = make([]*BotInlineResult, l6)
-	for i := 0; i < int(l6); i++ {
+	m.QueryId = dbuf.Long()
+	if (flags & (1 << 1)) != 0 {
+		m.NextOffset = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.SwitchPm = &InlineBotSwitchPM{}
+		m.Decode(dbuf)
+	}
+	// x.VectorMessage(m.Results);
+	c5 := dbuf.Int()
+	if c5 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c5)
+	}
+	l5 := dbuf.Int()
+	m.Results = make([]*BotInlineResult, l5)
+	for i := 0; i < int(l5); i++ {
 		m.Results[i] = &BotInlineResult{}
 		(*m.Results[i]).Decode(dbuf)
 	}
@@ -17814,22 +25750,53 @@ func (m *TLExportedMessageLink) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageFwdHeader) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageFwdHeader))
-	x.Int(m.Flags)
-	x.Int(m.FromId)
+
+	var flags uint32 = 0
+	if m.FromId != 0 {
+		flags |= 1 << 0
+	}
+	if m.ChannelId != 0 {
+		flags |= 1 << 1
+	}
+	if m.ChannelPost != 0 {
+		flags |= 1 << 2
+	}
+	if m.PostAuthor != "" {
+		flags |= 1 << 3
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.FromId)
+	}
 	x.Int(m.Date)
-	x.Int(m.ChannelId)
-	x.Int(m.ChannelPost)
-	x.String(m.PostAuthor)
+	if (flags & (1 << 1)) != 0 {
+		x.Int(m.ChannelId)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.Int(m.ChannelPost)
+	}
+	if (flags & (1 << 3)) != 0 {
+		x.String(m.PostAuthor)
+	}
 	return x.buf
 }
 
 func (m *TLMessageFwdHeader) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.FromId = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.FromId = dbuf.Int()
+	}
 	m.Date = dbuf.Int()
-	m.ChannelId = dbuf.Int()
-	m.ChannelPost = dbuf.Int()
-	m.PostAuthor = dbuf.String()
+	if (flags & (1 << 1)) != 0 {
+		m.ChannelId = dbuf.Int()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.ChannelPost = dbuf.Int()
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.PostAuthor = dbuf.String()
+	}
 	return dbuf.err
 }
 
@@ -17922,17 +25889,52 @@ func (m *TLAuthSentCodeTypeFlashCall) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesBotCallbackAnswer) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_botCallbackAnswer))
-	x.Int(m.Flags)
-	x.String(m.Message)
-	x.String(m.Url)
+
+	var flags uint32 = 0
+	if m.Alert == true {
+		flags |= 1 << 1
+	}
+	if m.HasUrl == true {
+		flags |= 1 << 3
+	}
+	if m.Message != "" {
+		flags |= 1 << 0
+	}
+	if m.Url != "" {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 3)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 0)) != 0 {
+		x.String(m.Message)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.String(m.Url)
+	}
 	x.Int(m.CacheTime)
 	return x.buf
 }
 
 func (m *TLMessagesBotCallbackAnswer) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.Message = dbuf.String()
-	m.Url = dbuf.String()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.Alert = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.HasUrl = true
+	}
+	if (flags & (1 << 0)) != 0 {
+		m.Message = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Url = dbuf.String()
+	}
 	m.CacheTime = dbuf.Int()
 	return dbuf.err
 }
@@ -17941,12 +25943,24 @@ func (m *TLMessagesBotCallbackAnswer) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesMessageEditData) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_messageEditData))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Caption == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	return x.buf
 }
 
 func (m *TLMessagesMessageEditData) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Caption = true
+	}
 	return dbuf.err
 }
 
@@ -18275,34 +26289,60 @@ func (m *TLDraftMessageEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLDraftMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_draftMessage))
-	x.Int(m.Flags)
-	x.Int(m.ReplyToMsgId)
+
+	var flags uint32 = 0
+	if m.NoWebpage == true {
+		flags |= 1 << 1
+	}
+	if m.ReplyToMsgId != 0 {
+		flags |= 1 << 0
+	}
+	if m.Entities != nil {
+		flags |= 1 << 3
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.ReplyToMsgId)
+	}
 	x.String(m.Message)
-	// x.VectorMessage(m.Entities);
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Entities)))
-	for _, v := range m.Entities {
-		x.buf = append(x.buf, (*v).Encode()...)
+	if (flags & (1 << 3)) != 0 {
+		// x.VectorMessage(m.Entities);
+		x4 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Entities)))
+		for _, v := range m.Entities {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
 	}
 	x.Int(m.Date)
 	return x.buf
 }
 
 func (m *TLDraftMessage) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.ReplyToMsgId = dbuf.Int()
-	m.Message = dbuf.String()
-	// x.VectorMessage(m.Entities);
-	c5 := dbuf.Int()
-	if c5 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c5)
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.NoWebpage = true
 	}
-	l5 := dbuf.Int()
-	m.Entities = make([]*MessageEntity, l5)
-	for i := 0; i < int(l5); i++ {
-		m.Entities[i] = &MessageEntity{}
-		(*m.Entities[i]).Decode(dbuf)
+	if (flags & (1 << 0)) != 0 {
+		m.ReplyToMsgId = dbuf.Int()
+	}
+	m.Message = dbuf.String()
+	if (flags & (1 << 3)) != 0 {
+		// x.VectorMessage(m.Entities);
+		c4 := dbuf.Int()
+		if c4 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c4)
+		}
+		l4 := dbuf.Int()
+		m.Entities = make([]*MessageEntity, l4)
+		for i := 0; i < int(l4); i++ {
+			m.Entities[i] = &MessageEntity{}
+			(*m.Entities[i]).Decode(dbuf)
+		}
 	}
 	m.Date = dbuf.Int()
 	return dbuf.err
@@ -18565,19 +26605,27 @@ func (m *TLInputStickeredMediaDocument) Decode(dbuf *DecodeBuf) error {
 func (m *TLGame) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_game))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Document != nil {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
 	x.Long(m.Id)
 	x.Long(m.AccessHash)
 	x.String(m.ShortName)
 	x.String(m.Title)
 	x.String(m.Description)
 	x.Bytes(m.Photo.Encode())
-	x.Bytes(m.Document.Encode())
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.Document.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLGame) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Id = dbuf.Long()
 	m.AccessHash = dbuf.Long()
 	m.ShortName = dbuf.String()
@@ -18585,8 +26633,10 @@ func (m *TLGame) Decode(dbuf *DecodeBuf) error {
 	m.Description = dbuf.String()
 	m.Photo = &Photo{}
 	m.Decode(dbuf)
-	m.Document = &Document{}
-	m.Decode(dbuf)
+	if (flags & (1 << 0)) != 0 {
+		m.Document = &Document{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -19079,14 +27129,35 @@ func (m *TLPageBlockPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockVideo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockVideo))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Autoplay == true {
+		flags |= 1 << 0
+	}
+	if m.Loop == true {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
 	x.Long(m.VideoId)
 	x.Bytes(m.Caption.Encode())
 	return x.buf
 }
 
 func (m *TLPageBlockVideo) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Autoplay = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Loop = true
+	}
 	m.VideoId = dbuf.Long()
 	m.Caption = &RichText{}
 	m.Decode(dbuf)
@@ -19111,10 +27182,40 @@ func (m *TLPageBlockCover) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockEmbed) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockEmbed))
-	x.Int(m.Flags)
-	x.String(m.Url)
-	x.String(m.Html)
-	x.Long(m.PosterPhotoId)
+
+	var flags uint32 = 0
+	if m.FullWidth == true {
+		flags |= 1 << 0
+	}
+	if m.AllowScrolling == true {
+		flags |= 1 << 3
+	}
+	if m.Url != "" {
+		flags |= 1 << 1
+	}
+	if m.Html != "" {
+		flags |= 1 << 2
+	}
+	if m.PosterPhotoId != 0 {
+		flags |= 1 << 4
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 3)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.Url)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.String(m.Html)
+	}
+	if (flags & (1 << 4)) != 0 {
+		x.Long(m.PosterPhotoId)
+	}
 	x.Int(m.W)
 	x.Int(m.H)
 	x.Bytes(m.Caption.Encode())
@@ -19122,10 +27223,22 @@ func (m *TLPageBlockEmbed) Encode() []byte {
 }
 
 func (m *TLPageBlockEmbed) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.Url = dbuf.String()
-	m.Html = dbuf.String()
-	m.PosterPhotoId = dbuf.Long()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.FullWidth = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.AllowScrolling = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Url = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Html = dbuf.String()
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.PosterPhotoId = dbuf.Long()
+	}
 	m.W = dbuf.Int()
 	m.H = dbuf.Int()
 	m.Caption = &RichText{}
@@ -19475,12 +27588,51 @@ func (m *TLLabeledPrice) Decode(dbuf *DecodeBuf) error {
 func (m *TLInvoice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_invoice))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Test == true {
+		flags |= 1 << 0
+	}
+	if m.NameRequested == true {
+		flags |= 1 << 1
+	}
+	if m.PhoneRequested == true {
+		flags |= 1 << 2
+	}
+	if m.EmailRequested == true {
+		flags |= 1 << 3
+	}
+	if m.ShippingAddressRequested == true {
+		flags |= 1 << 4
+	}
+	if m.Flexible == true {
+		flags |= 1 << 5
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 2)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 3)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 4)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 5)) != 0 {
+		// ignore
+	}
 	x.String(m.Currency)
 	// x.VectorMessage(m.Prices);
-	x9 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x9, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x9[4:], uint32(len(m.Prices)))
+	x8 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x8, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x8[4:], uint32(len(m.Prices)))
 	for _, v := range m.Prices {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -19488,16 +27640,34 @@ func (m *TLInvoice) Encode() []byte {
 }
 
 func (m *TLInvoice) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Test = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.NameRequested = true
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.PhoneRequested = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.EmailRequested = true
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.ShippingAddressRequested = true
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.Flexible = true
+	}
 	m.Currency = dbuf.String()
 	// x.VectorMessage(m.Prices);
-	c9 := dbuf.Int()
-	if c9 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c9)
+	c8 := dbuf.Int()
+	if c8 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c8)
 	}
-	l9 := dbuf.Int()
-	m.Prices = make([]*LabeledPrice, l9)
-	for i := 0; i < int(l9); i++ {
+	l8 := dbuf.Int()
+	m.Prices = make([]*LabeledPrice, l8)
+	for i := 0; i < int(l8); i++ {
 		m.Prices[i] = &LabeledPrice{}
 		(*m.Prices[i]).Decode(dbuf)
 	}
@@ -19546,21 +27716,52 @@ func (m *TLPostAddress) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentRequestedInfo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_paymentRequestedInfo))
-	x.Int(m.Flags)
-	x.String(m.Name)
-	x.String(m.Phone)
-	x.String(m.Email)
-	x.Bytes(m.ShippingAddress.Encode())
+
+	var flags uint32 = 0
+	if m.Name != "" {
+		flags |= 1 << 0
+	}
+	if m.Phone != "" {
+		flags |= 1 << 1
+	}
+	if m.Email != "" {
+		flags |= 1 << 2
+	}
+	if m.ShippingAddress != nil {
+		flags |= 1 << 3
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		x.String(m.Name)
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.Phone)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.String(m.Email)
+	}
+	if (flags & (1 << 3)) != 0 {
+		x.Bytes(m.ShippingAddress.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLPaymentRequestedInfo) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.Name = dbuf.String()
-	m.Phone = dbuf.String()
-	m.Email = dbuf.String()
-	m.ShippingAddress = &PostAddress{}
-	m.Decode(dbuf)
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Name = dbuf.String()
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Phone = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Email = dbuf.String()
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.ShippingAddress = &PostAddress{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -19694,19 +27895,54 @@ func (m *TLUploadWebFile) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentsPaymentForm) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_payments_paymentForm))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.CanSaveCredentials == true {
+		flags |= 1 << 2
+	}
+	if m.PasswordMissing == true {
+		flags |= 1 << 3
+	}
+	if m.NativeProvider != "" {
+		flags |= 1 << 4
+	}
+	if m.NativeParams != nil {
+		flags |= 1 << 4
+	}
+	if m.SavedInfo != nil {
+		flags |= 1 << 0
+	}
+	if m.SavedCredentials != nil {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 2)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 3)) != 0 {
+		// ignore
+	}
 	x.Int(m.BotId)
 	x.Bytes(m.Invoice.Encode())
 	x.Int(m.ProviderId)
 	x.String(m.Url)
-	x.String(m.NativeProvider)
-	x.Bytes(m.NativeParams.Encode())
-	x.Bytes(m.SavedInfo.Encode())
-	x.Bytes(m.SavedCredentials.Encode())
+	if (flags & (1 << 4)) != 0 {
+		x.String(m.NativeProvider)
+	}
+	if (flags & (1 << 4)) != 0 {
+		x.Bytes(m.NativeParams.Encode())
+	}
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.SavedInfo.Encode())
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.Bytes(m.SavedCredentials.Encode())
+	}
 	// x.VectorMessage(m.Users);
-	x12 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x12, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x12[4:], uint32(len(m.Users)))
+	x11 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x11, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x11[4:], uint32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -19714,27 +27950,41 @@ func (m *TLPaymentsPaymentForm) Encode() []byte {
 }
 
 func (m *TLPaymentsPaymentForm) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 2)) != 0 {
+		m.CanSaveCredentials = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.PasswordMissing = true
+	}
 	m.BotId = dbuf.Int()
 	m.Invoice = &Invoice{}
 	m.Decode(dbuf)
 	m.ProviderId = dbuf.Int()
 	m.Url = dbuf.String()
-	m.NativeProvider = dbuf.String()
-	m.NativeParams = &DataJSON{}
-	m.Decode(dbuf)
-	m.SavedInfo = &PaymentRequestedInfo{}
-	m.Decode(dbuf)
-	m.SavedCredentials = &PaymentSavedCredentials{}
-	m.Decode(dbuf)
-	// x.VectorMessage(m.Users);
-	c12 := dbuf.Int()
-	if c12 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c12)
+	if (flags & (1 << 4)) != 0 {
+		m.NativeProvider = dbuf.String()
 	}
-	l12 := dbuf.Int()
-	m.Users = make([]*User, l12)
-	for i := 0; i < int(l12); i++ {
+	if (flags & (1 << 4)) != 0 {
+		m.NativeParams = &DataJSON{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 0)) != 0 {
+		m.SavedInfo = &PaymentRequestedInfo{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.SavedCredentials = &PaymentSavedCredentials{}
+		m.Decode(dbuf)
+	}
+	// x.VectorMessage(m.Users);
+	c11 := dbuf.Int()
+	if c11 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c11)
+	}
+	l11 := dbuf.Int()
+	m.Users = make([]*User, l11)
+	for i := 0; i < int(l11); i++ {
 		m.Users[i] = &User{}
 		(*m.Users[i]).Decode(dbuf)
 	}
@@ -19745,31 +27995,48 @@ func (m *TLPaymentsPaymentForm) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentsValidatedRequestedInfo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_payments_validatedRequestedInfo))
-	x.Int(m.Flags)
-	x.String(m.Id)
-	// x.VectorMessage(m.ShippingOptions);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.ShippingOptions)))
-	for _, v := range m.ShippingOptions {
-		x.buf = append(x.buf, (*v).Encode()...)
+
+	var flags uint32 = 0
+	if m.Id != "" {
+		flags |= 1 << 0
+	}
+	if m.ShippingOptions != nil {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		x.String(m.Id)
+	}
+	if (flags & (1 << 1)) != 0 {
+		// x.VectorMessage(m.ShippingOptions);
+		x2 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.ShippingOptions)))
+		for _, v := range m.ShippingOptions {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
 	}
 	return x.buf
 }
 
 func (m *TLPaymentsValidatedRequestedInfo) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.Id = dbuf.String()
-	// x.VectorMessage(m.ShippingOptions);
-	c3 := dbuf.Int()
-	if c3 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c3)
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Id = dbuf.String()
 	}
-	l3 := dbuf.Int()
-	m.ShippingOptions = make([]*ShippingOption, l3)
-	for i := 0; i < int(l3); i++ {
-		m.ShippingOptions[i] = &ShippingOption{}
-		(*m.ShippingOptions[i]).Decode(dbuf)
+	if (flags & (1 << 1)) != 0 {
+		// x.VectorMessage(m.ShippingOptions);
+		c2 := dbuf.Int()
+		if c2 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c2)
+		}
+		l2 := dbuf.Int()
+		m.ShippingOptions = make([]*ShippingOption, l2)
+		for i := 0; i < int(l2); i++ {
+			m.ShippingOptions[i] = &ShippingOption{}
+			(*m.ShippingOptions[i]).Decode(dbuf)
+		}
 	}
 	return dbuf.err
 }
@@ -19805,20 +28072,33 @@ func (m *TLPaymentsPaymentVerficationNeeded) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentsPaymentReceipt) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_payments_paymentReceipt))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Info != nil {
+		flags |= 1 << 0
+	}
+	if m.Shipping != nil {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
 	x.Int(m.Date)
 	x.Int(m.BotId)
 	x.Bytes(m.Invoice.Encode())
 	x.Int(m.ProviderId)
-	x.Bytes(m.Info.Encode())
-	x.Bytes(m.Shipping.Encode())
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.Info.Encode())
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.Bytes(m.Shipping.Encode())
+	}
 	x.String(m.Currency)
 	x.Long(m.TotalAmount)
 	x.String(m.CredentialsTitle)
 	// x.VectorMessage(m.Users);
-	x11 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x11, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x11[4:], uint32(len(m.Users)))
+	x10 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x10, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x10[4:], uint32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -19826,27 +28106,31 @@ func (m *TLPaymentsPaymentReceipt) Encode() []byte {
 }
 
 func (m *TLPaymentsPaymentReceipt) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Date = dbuf.Int()
 	m.BotId = dbuf.Int()
 	m.Invoice = &Invoice{}
 	m.Decode(dbuf)
 	m.ProviderId = dbuf.Int()
-	m.Info = &PaymentRequestedInfo{}
-	m.Decode(dbuf)
-	m.Shipping = &ShippingOption{}
-	m.Decode(dbuf)
+	if (flags & (1 << 0)) != 0 {
+		m.Info = &PaymentRequestedInfo{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Shipping = &ShippingOption{}
+		m.Decode(dbuf)
+	}
 	m.Currency = dbuf.String()
 	m.TotalAmount = dbuf.Long()
 	m.CredentialsTitle = dbuf.String()
 	// x.VectorMessage(m.Users);
-	c11 := dbuf.Int()
-	if c11 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c11)
+	c10 := dbuf.Int()
+	if c10 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c10)
 	}
-	l11 := dbuf.Int()
-	m.Users = make([]*User, l11)
-	for i := 0; i < int(l11); i++ {
+	l10 := dbuf.Int()
+	m.Users = make([]*User, l10)
+	for i := 0; i < int(l10); i++ {
 		m.Users[i] = &User{}
 		(*m.Users[i]).Decode(dbuf)
 	}
@@ -19857,15 +28141,34 @@ func (m *TLPaymentsPaymentReceipt) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentsSavedInfo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_payments_savedInfo))
-	x.Int(m.Flags)
-	x.Bytes(m.SavedInfo.Encode())
+
+	var flags uint32 = 0
+	if m.HasSavedCredentials == true {
+		flags |= 1 << 1
+	}
+	if m.SavedInfo != nil {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.SavedInfo.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLPaymentsSavedInfo) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.SavedInfo = &PaymentRequestedInfo{}
-	m.Decode(dbuf)
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.HasSavedCredentials = true
+	}
+	if (flags & (1 << 0)) != 0 {
+		m.SavedInfo = &PaymentRequestedInfo{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -19888,13 +28191,25 @@ func (m *TLInputPaymentCredentialsSaved) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPaymentCredentials) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPaymentCredentials))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Save == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
 	x.Bytes(m.Data.Encode())
 	return x.buf
 }
 
 func (m *TLInputPaymentCredentials) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Save = true
+	}
 	m.Data = &DataJSON{}
 	m.Decode(dbuf)
 	return dbuf.err
@@ -19952,20 +28267,30 @@ func (m *TLShippingOption) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputStickerSetItem) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputStickerSetItem))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.MaskCoords != nil {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
 	x.Bytes(m.Document.Encode())
 	x.String(m.Emoji)
-	x.Bytes(m.MaskCoords.Encode())
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.MaskCoords.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLInputStickerSetItem) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Document = &InputDocument{}
 	m.Decode(dbuf)
 	m.Emoji = dbuf.String()
-	m.MaskCoords = &MaskCoords{}
-	m.Decode(dbuf)
+	if (flags & (1 << 0)) != 0 {
+		m.MaskCoords = &MaskCoords{}
+		m.Decode(dbuf)
+	}
 	return dbuf.err
 }
 
@@ -20001,19 +28326,27 @@ func (m *TLPhoneCallEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoneCallWaiting) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phoneCallWaiting))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ReceiveDate != 0 {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
 	x.Long(m.Id)
 	x.Long(m.AccessHash)
 	x.Int(m.Date)
 	x.Int(m.AdminId)
 	x.Int(m.ParticipantId)
 	x.Bytes(m.Protocol.Encode())
-	x.Int(m.ReceiveDate)
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.ReceiveDate)
+	}
 	return x.buf
 }
 
 func (m *TLPhoneCallWaiting) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Id = dbuf.Long()
 	m.AccessHash = dbuf.Long()
 	m.Date = dbuf.Int()
@@ -20021,7 +28354,9 @@ func (m *TLPhoneCallWaiting) Decode(dbuf *DecodeBuf) error {
 	m.ParticipantId = dbuf.Int()
 	m.Protocol = &PhoneCallProtocol{}
 	m.Decode(dbuf)
-	m.ReceiveDate = dbuf.Int()
+	if (flags & (1 << 0)) != 0 {
+		m.ReceiveDate = dbuf.Int()
+	}
 	return dbuf.err
 }
 
@@ -20132,19 +28467,54 @@ func (m *TLPhoneCall) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoneCallDiscarded) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phoneCallDiscarded))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.NeedRating == true {
+		flags |= 1 << 2
+	}
+	if m.NeedDebug == true {
+		flags |= 1 << 3
+	}
+	if m.Reason != nil {
+		flags |= 1 << 0
+	}
+	if m.Duration != 0 {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 2)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 3)) != 0 {
+		// ignore
+	}
 	x.Long(m.Id)
-	x.Bytes(m.Reason.Encode())
-	x.Int(m.Duration)
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.Reason.Encode())
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.Int(m.Duration)
+	}
 	return x.buf
 }
 
 func (m *TLPhoneCallDiscarded) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 2)) != 0 {
+		m.NeedRating = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.NeedDebug = true
+	}
 	m.Id = dbuf.Long()
-	m.Reason = &PhoneCallDiscardReason{}
-	m.Decode(dbuf)
-	m.Duration = dbuf.Int()
+	if (flags & (1 << 0)) != 0 {
+		m.Reason = &PhoneCallDiscardReason{}
+		m.Decode(dbuf)
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Duration = dbuf.Int()
+	}
 	return dbuf.err
 }
 
@@ -20173,14 +28543,35 @@ func (m *TLPhoneConnection) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoneCallProtocol) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phoneCallProtocol))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.UdpP2P == true {
+		flags |= 1 << 0
+	}
+	if m.UdpReflector == true {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
 	x.Int(m.MinLayer)
 	x.Int(m.MaxLayer)
 	return x.buf
 }
 
 func (m *TLPhoneCallProtocol) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.UdpP2P = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.UdpReflector = true
+	}
 	m.MinLayer = dbuf.Int()
 	m.MaxLayer = dbuf.Int()
 	return dbuf.err
@@ -20307,25 +28698,63 @@ func (m *TLLangPackString) Decode(dbuf *DecodeBuf) error {
 func (m *TLLangPackStringPluralized) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_langPackStringPluralized))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ZeroValue != "" {
+		flags |= 1 << 0
+	}
+	if m.OneValue != "" {
+		flags |= 1 << 1
+	}
+	if m.TwoValue != "" {
+		flags |= 1 << 2
+	}
+	if m.FewValue != "" {
+		flags |= 1 << 3
+	}
+	if m.ManyValue != "" {
+		flags |= 1 << 4
+	}
+	x.UInt(flags)
+
 	x.String(m.Key)
-	x.String(m.ZeroValue)
-	x.String(m.OneValue)
-	x.String(m.TwoValue)
-	x.String(m.FewValue)
-	x.String(m.ManyValue)
+	if (flags & (1 << 0)) != 0 {
+		x.String(m.ZeroValue)
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.OneValue)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.String(m.TwoValue)
+	}
+	if (flags & (1 << 3)) != 0 {
+		x.String(m.FewValue)
+	}
+	if (flags & (1 << 4)) != 0 {
+		x.String(m.ManyValue)
+	}
 	x.String(m.OtherValue)
 	return x.buf
 }
 
 func (m *TLLangPackStringPluralized) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Key = dbuf.String()
-	m.ZeroValue = dbuf.String()
-	m.OneValue = dbuf.String()
-	m.TwoValue = dbuf.String()
-	m.FewValue = dbuf.String()
-	m.ManyValue = dbuf.String()
+	if (flags & (1 << 0)) != 0 {
+		m.ZeroValue = dbuf.String()
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.OneValue = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.TwoValue = dbuf.String()
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.FewValue = dbuf.String()
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.ManyValue = dbuf.String()
+	}
 	m.OtherValue = dbuf.String()
 	return dbuf.err
 }
@@ -20399,12 +28828,96 @@ func (m *TLLangPackLanguage) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelAdminRights) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminRights))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ChangeInfo == true {
+		flags |= 1 << 0
+	}
+	if m.PostMessages == true {
+		flags |= 1 << 1
+	}
+	if m.EditMessages == true {
+		flags |= 1 << 2
+	}
+	if m.DeleteMessages == true {
+		flags |= 1 << 3
+	}
+	if m.BanUsers == true {
+		flags |= 1 << 4
+	}
+	if m.InviteUsers == true {
+		flags |= 1 << 5
+	}
+	if m.InviteLink == true {
+		flags |= 1 << 6
+	}
+	if m.PinMessages == true {
+		flags |= 1 << 7
+	}
+	if m.AddAdmins == true {
+		flags |= 1 << 9
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 2)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 3)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 4)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 5)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 6)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 7)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 9)) != 0 {
+		// ignore
+	}
 	return x.buf
 }
 
 func (m *TLChannelAdminRights) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.ChangeInfo = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.PostMessages = true
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.EditMessages = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.DeleteMessages = true
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.BanUsers = true
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.InviteUsers = true
+	}
+	if (flags & (1 << 6)) != 0 {
+		m.InviteLink = true
+	}
+	if (flags & (1 << 7)) != 0 {
+		m.PinMessages = true
+	}
+	if (flags & (1 << 9)) != 0 {
+		m.AddAdmins = true
+	}
 	return dbuf.err
 }
 
@@ -20412,13 +28925,88 @@ func (m *TLChannelAdminRights) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelBannedRights) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelBannedRights))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ViewMessages == true {
+		flags |= 1 << 0
+	}
+	if m.SendMessages == true {
+		flags |= 1 << 1
+	}
+	if m.SendMedia == true {
+		flags |= 1 << 2
+	}
+	if m.SendStickers == true {
+		flags |= 1 << 3
+	}
+	if m.SendGifs == true {
+		flags |= 1 << 4
+	}
+	if m.SendGames == true {
+		flags |= 1 << 5
+	}
+	if m.SendInline == true {
+		flags |= 1 << 6
+	}
+	if m.EmbedLinks == true {
+		flags |= 1 << 7
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 2)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 3)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 4)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 5)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 6)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 7)) != 0 {
+		// ignore
+	}
 	x.Int(m.UntilDate)
 	return x.buf
 }
 
 func (m *TLChannelBannedRights) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.ViewMessages = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.SendMessages = true
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.SendMedia = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.SendStickers = true
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.SendGifs = true
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.SendGames = true
+	}
+	if (flags & (1 << 6)) != 0 {
+		m.SendInline = true
+	}
+	if (flags & (1 << 7)) != 0 {
+		m.EmbedLinks = true
+	}
 	m.UntilDate = dbuf.Int()
 	return dbuf.err
 }
@@ -20734,12 +29322,141 @@ func (m *TLChannelsAdminLogResults) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelAdminLogEventsFilter) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventsFilter))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Join == true {
+		flags |= 1 << 0
+	}
+	if m.Leave == true {
+		flags |= 1 << 1
+	}
+	if m.Invite == true {
+		flags |= 1 << 2
+	}
+	if m.Ban == true {
+		flags |= 1 << 3
+	}
+	if m.Unban == true {
+		flags |= 1 << 4
+	}
+	if m.Kick == true {
+		flags |= 1 << 5
+	}
+	if m.Unkick == true {
+		flags |= 1 << 6
+	}
+	if m.Promote == true {
+		flags |= 1 << 7
+	}
+	if m.Demote == true {
+		flags |= 1 << 8
+	}
+	if m.Info == true {
+		flags |= 1 << 9
+	}
+	if m.Settings == true {
+		flags |= 1 << 10
+	}
+	if m.Pinned == true {
+		flags |= 1 << 11
+	}
+	if m.Edit == true {
+		flags |= 1 << 12
+	}
+	if m.Delete == true {
+		flags |= 1 << 13
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 1)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 2)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 3)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 4)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 5)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 6)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 7)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 8)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 9)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 10)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 11)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 12)) != 0 {
+		// ignore
+	}
+	if (flags & (1 << 13)) != 0 {
+		// ignore
+	}
 	return x.buf
 }
 
 func (m *TLChannelAdminLogEventsFilter) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Join = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Leave = true
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Invite = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.Ban = true
+	}
+	if (flags & (1 << 4)) != 0 {
+		m.Unban = true
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.Kick = true
+	}
+	if (flags & (1 << 6)) != 0 {
+		m.Unkick = true
+	}
+	if (flags & (1 << 7)) != 0 {
+		m.Promote = true
+	}
+	if (flags & (1 << 8)) != 0 {
+		m.Demote = true
+	}
+	if (flags & (1 << 9)) != 0 {
+		m.Info = true
+	}
+	if (flags & (1 << 10)) != 0 {
+		m.Settings = true
+	}
+	if (flags & (1 << 11)) != 0 {
+		m.Pinned = true
+	}
+	if (flags & (1 << 12)) != 0 {
+		m.Edit = true
+	}
+	if (flags & (1 << 13)) != 0 {
+		m.Delete = true
+	}
 	return dbuf.err
 }
 
@@ -21463,13 +30180,25 @@ func (m *TLMessagesEditChatAdmin) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesReorderStickerSets) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_reorderStickerSets))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Masks == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Masks = true
+	}
 	x.VectorLong(m.Order)
 	return x.buf
 }
 
 func (m *TLMessagesReorderStickerSets) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Masks = true
+	}
 	m.Order = dbuf.VectorLong()
 	return dbuf.err
 }
@@ -21493,38 +30222,73 @@ func (m *TLMessagesSaveGif) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSetInlineBotResults) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_setInlineBotResults))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Gallery == true {
+		flags |= 1 << 0
+	}
+	if m.Private == true {
+		flags |= 1 << 1
+	}
+	if m.NextOffset != "" {
+		flags |= 1 << 2
+	}
+	if m.SwitchPm != nil {
+		flags |= 1 << 3
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Gallery = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		//  m.Private = true
+	}
 	x.Long(m.QueryId)
 	// x.VectorMessage(m.Results)
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Results)))
+	x4 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Results)))
 	for _, v := range m.Results {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	x.Int(m.CacheTime)
-	x.String(m.NextOffset)
-	x.Bytes(m.SwitchPm.Encode())
+	if (flags & (1 << 2)) != 0 {
+		x.String(m.NextOffset)
+	}
+	if (flags & (1 << 3)) != 0 {
+		x.Bytes(m.SwitchPm.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLMessagesSetInlineBotResults) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Gallery = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Private = true
+	}
 	m.QueryId = dbuf.Long()
 	// x.VectorMessage(m.Results)
-	c5 := dbuf.Int()
-	if c5 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c5)
+	c4 := dbuf.Int()
+	if c4 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c4)
 	}
-	l5 := dbuf.Int()
-	m.Results = make([]*InputBotInlineResult, l5)
-	for i := 0; i < int(l5); i++ {
+	l4 := dbuf.Int()
+	m.Results = make([]*InputBotInlineResult, l4)
+	for i := 0; i < int(l4); i++ {
 		m.Results[i] = &InputBotInlineResult{}
 		(*m.Results[i]).Decode(dbuf)
 	}
 	m.CacheTime = dbuf.Int()
-	m.NextOffset = dbuf.String()
-	// x.Bytes(m.SwitchPm.Encode())
+	if (flags & (1 << 2)) != 0 {
+		m.NextOffset = dbuf.String()
+	}
+	if (flags & (1 << 3)) != 0 {
+		// x.Bytes(m.SwitchPm.Encode())
+	}
 	return dbuf.err
 }
 
@@ -21532,35 +30296,68 @@ func (m *TLMessagesSetInlineBotResults) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesEditInlineBotMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_editInlineBotMessage))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.NoWebpage == true {
+		flags |= 1 << 1
+	}
+	if m.Message != "" {
+		flags |= 1 << 11
+	}
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 2
+	}
+	if m.Entities != nil {
+		flags |= 1 << 3
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		//  m.NoWebpage = true
+	}
 	x.Bytes(m.Id.Encode())
-	x.String(m.Message)
-	x.Bytes(m.ReplyMarkup.Encode())
-	// x.VectorMessage(m.Entities)
-	x6 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Entities)))
-	for _, v := range m.Entities {
-		x.buf = append(x.buf, (*v).Encode()...)
+	if (flags & (1 << 11)) != 0 {
+		x.String(m.Message)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
+	if (flags & (1 << 3)) != 0 {
+		// x.VectorMessage(m.Entities)
+		x5 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Entities)))
+		for _, v := range m.Entities {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
 	}
 	return x.buf
 }
 
 func (m *TLMessagesEditInlineBotMessage) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	// x.Bytes(m.Id.Encode())
-	m.Message = dbuf.String()
-	// x.Bytes(m.ReplyMarkup.Encode())
-	// x.VectorMessage(m.Entities)
-	c6 := dbuf.Int()
-	if c6 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c6)
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.NoWebpage = true
 	}
-	l6 := dbuf.Int()
-	m.Entities = make([]*MessageEntity, l6)
-	for i := 0; i < int(l6); i++ {
-		m.Entities[i] = &MessageEntity{}
-		(*m.Entities[i]).Decode(dbuf)
+	// x.Bytes(m.Id.Encode())
+	if (flags & (1 << 11)) != 0 {
+		m.Message = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		// x.Bytes(m.ReplyMarkup.Encode())
+	}
+	if (flags & (1 << 3)) != 0 {
+		// x.VectorMessage(m.Entities)
+		c5 := dbuf.Int()
+		if c5 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c5)
+		}
+		l5 := dbuf.Int()
+		m.Entities = make([]*MessageEntity, l5)
+		for i := 0; i < int(l5); i++ {
+			m.Entities[i] = &MessageEntity{}
+			(*m.Entities[i]).Decode(dbuf)
+		}
 	}
 	return dbuf.err
 }
@@ -21569,19 +30366,45 @@ func (m *TLMessagesEditInlineBotMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSetBotCallbackAnswer) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_setBotCallbackAnswer))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Alert == true {
+		flags |= 1 << 1
+	}
+	if m.Message != "" {
+		flags |= 1 << 0
+	}
+	if m.Url != "" {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		//  m.Alert = true
+	}
 	x.Long(m.QueryId)
-	x.String(m.Message)
-	x.String(m.Url)
+	if (flags & (1 << 0)) != 0 {
+		x.String(m.Message)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.String(m.Url)
+	}
 	x.Int(m.CacheTime)
 	return x.buf
 }
 
 func (m *TLMessagesSetBotCallbackAnswer) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.Alert = true
+	}
 	m.QueryId = dbuf.Long()
-	m.Message = dbuf.String()
-	m.Url = dbuf.String()
+	if (flags & (1 << 0)) != 0 {
+		m.Message = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.Url = dbuf.String()
+	}
 	m.CacheTime = dbuf.Int()
 	return dbuf.err
 }
@@ -21590,35 +30413,61 @@ func (m *TLMessagesSetBotCallbackAnswer) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSaveDraft) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_saveDraft))
-	x.Int(m.Flags)
-	x.Int(m.ReplyToMsgId)
+
+	var flags uint32 = 0
+	if m.NoWebpage == true {
+		flags |= 1 << 1
+	}
+	if m.ReplyToMsgId != 0 {
+		flags |= 1 << 0
+	}
+	if m.Entities != nil {
+		flags |= 1 << 3
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		//  m.NoWebpage = true
+	}
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.ReplyToMsgId)
+	}
 	x.Bytes(m.Peer.Encode())
 	x.String(m.Message)
-	// x.VectorMessage(m.Entities)
-	x6 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Entities)))
-	for _, v := range m.Entities {
-		x.buf = append(x.buf, (*v).Encode()...)
+	if (flags & (1 << 3)) != 0 {
+		// x.VectorMessage(m.Entities)
+		x5 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Entities)))
+		for _, v := range m.Entities {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
 	}
 	return x.buf
 }
 
 func (m *TLMessagesSaveDraft) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.ReplyToMsgId = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.NoWebpage = true
+	}
+	if (flags & (1 << 0)) != 0 {
+		m.ReplyToMsgId = dbuf.Int()
+	}
 	// x.Bytes(m.Peer.Encode())
 	m.Message = dbuf.String()
-	// x.VectorMessage(m.Entities)
-	c6 := dbuf.Int()
-	if c6 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c6)
-	}
-	l6 := dbuf.Int()
-	m.Entities = make([]*MessageEntity, l6)
-	for i := 0; i < int(l6); i++ {
-		m.Entities[i] = &MessageEntity{}
-		(*m.Entities[i]).Decode(dbuf)
+	if (flags & (1 << 3)) != 0 {
+		// x.VectorMessage(m.Entities)
+		c5 := dbuf.Int()
+		if c5 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c5)
+		}
+		l5 := dbuf.Int()
+		m.Entities = make([]*MessageEntity, l5)
+		for i := 0; i < int(l5); i++ {
+			m.Entities[i] = &MessageEntity{}
+			(*m.Entities[i]).Decode(dbuf)
+		}
 	}
 	return dbuf.err
 }
@@ -21640,14 +30489,26 @@ func (m *TLMessagesReadFeaturedStickers) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSaveRecentSticker) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_saveRecentSticker))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Attached == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Attached = true
+	}
 	x.Bytes(m.Id.Encode())
 	x.Bytes(m.Unsave.Encode())
 	return x.buf
 }
 
 func (m *TLMessagesSaveRecentSticker) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Attached = true
+	}
 	// x.Bytes(m.Id.Encode())
 	// x.Bytes(m.Unsave.Encode())
 	return dbuf.err
@@ -21657,12 +30518,24 @@ func (m *TLMessagesSaveRecentSticker) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesClearRecentStickers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_clearRecentStickers))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Attached == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Attached = true
+	}
 	return x.buf
 }
 
 func (m *TLMessagesClearRecentStickers) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Attached = true
+	}
 	return dbuf.err
 }
 
@@ -21670,7 +30543,22 @@ func (m *TLMessagesClearRecentStickers) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSetInlineGameScore) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_setInlineGameScore))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.EditMessage == true {
+		flags |= 1 << 0
+	}
+	if m.Force == true {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.EditMessage = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		//  m.Force = true
+	}
 	x.Bytes(m.Id.Encode())
 	x.Bytes(m.UserId.Encode())
 	x.Int(m.Score)
@@ -21678,7 +30566,13 @@ func (m *TLMessagesSetInlineGameScore) Encode() []byte {
 }
 
 func (m *TLMessagesSetInlineGameScore) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.EditMessage = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Force = true
+	}
 	// x.Bytes(m.Id.Encode())
 	// x.Bytes(m.UserId.Encode())
 	m.Score = dbuf.Int()
@@ -21689,13 +30583,25 @@ func (m *TLMessagesSetInlineGameScore) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesToggleDialogPin) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_toggleDialogPin))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Pinned == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Pinned = true
+	}
 	x.Bytes(m.Peer.Encode())
 	return x.buf
 }
 
 func (m *TLMessagesToggleDialogPin) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Pinned = true
+	}
 	// x.Bytes(m.Peer.Encode())
 	return dbuf.err
 }
@@ -21704,11 +30610,20 @@ func (m *TLMessagesToggleDialogPin) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesReorderPinnedDialogs) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_reorderPinnedDialogs))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Force == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Force = true
+	}
 	// x.VectorMessage(m.Order)
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Order)))
+	x2 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Order)))
 	for _, v := range m.Order {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -21716,15 +30631,18 @@ func (m *TLMessagesReorderPinnedDialogs) Encode() []byte {
 }
 
 func (m *TLMessagesReorderPinnedDialogs) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	// x.VectorMessage(m.Order)
-	c3 := dbuf.Int()
-	if c3 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c3)
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Force = true
 	}
-	l3 := dbuf.Int()
-	m.Order = make([]*InputPeer, l3)
-	for i := 0; i < int(l3); i++ {
+	// x.VectorMessage(m.Order)
+	c2 := dbuf.Int()
+	if c2 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c2)
+	}
+	l2 := dbuf.Int()
+	m.Order = make([]*InputPeer, l2)
+	for i := 0; i < int(l2); i++ {
 		m.Order[i] = &InputPeer{}
 		(*m.Order[i]).Decode(dbuf)
 	}
@@ -21735,33 +30653,50 @@ func (m *TLMessagesReorderPinnedDialogs) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSetBotShippingResults) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_setBotShippingResults))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Error != "" {
+		flags |= 1 << 0
+	}
+	if m.ShippingOptions != nil {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
 	x.Long(m.QueryId)
-	x.String(m.Error)
-	// x.VectorMessage(m.ShippingOptions)
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.ShippingOptions)))
-	for _, v := range m.ShippingOptions {
-		x.buf = append(x.buf, (*v).Encode()...)
+	if (flags & (1 << 0)) != 0 {
+		x.String(m.Error)
+	}
+	if (flags & (1 << 1)) != 0 {
+		// x.VectorMessage(m.ShippingOptions)
+		x3 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.ShippingOptions)))
+		for _, v := range m.ShippingOptions {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
 	}
 	return x.buf
 }
 
 func (m *TLMessagesSetBotShippingResults) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.QueryId = dbuf.Long()
-	m.Error = dbuf.String()
-	// x.VectorMessage(m.ShippingOptions)
-	c4 := dbuf.Int()
-	if c4 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c4)
+	if (flags & (1 << 0)) != 0 {
+		m.Error = dbuf.String()
 	}
-	l4 := dbuf.Int()
-	m.ShippingOptions = make([]*ShippingOption, l4)
-	for i := 0; i < int(l4); i++ {
-		m.ShippingOptions[i] = &ShippingOption{}
-		(*m.ShippingOptions[i]).Decode(dbuf)
+	if (flags & (1 << 1)) != 0 {
+		// x.VectorMessage(m.ShippingOptions)
+		c3 := dbuf.Int()
+		if c3 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c3)
+		}
+		l3 := dbuf.Int()
+		m.ShippingOptions = make([]*ShippingOption, l3)
+		for i := 0; i < int(l3); i++ {
+			m.ShippingOptions[i] = &ShippingOption{}
+			(*m.ShippingOptions[i]).Decode(dbuf)
+		}
 	}
 	return dbuf.err
 }
@@ -21770,16 +30705,35 @@ func (m *TLMessagesSetBotShippingResults) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSetBotPrecheckoutResults) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_setBotPrecheckoutResults))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Success == true {
+		flags |= 1 << 1
+	}
+	if m.Error != "" {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		//  m.Success = true
+	}
 	x.Long(m.QueryId)
-	x.String(m.Error)
+	if (flags & (1 << 0)) != 0 {
+		x.String(m.Error)
+	}
 	return x.buf
 }
 
 func (m *TLMessagesSetBotPrecheckoutResults) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.Success = true
+	}
 	m.QueryId = dbuf.Long()
-	m.Error = dbuf.String()
+	if (flags & (1 << 0)) != 0 {
+		m.Error = dbuf.String()
+	}
 	return dbuf.err
 }
 
@@ -22004,12 +30958,33 @@ func (m *TLBotsAnswerWebhookJSONQuery) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentsClearSavedInfo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_payments_clearSavedInfo))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Credentials == true {
+		flags |= 1 << 0
+	}
+	if m.Info == true {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Credentials = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		//  m.Info = true
+	}
 	return x.buf
 }
 
 func (m *TLPaymentsClearSavedInfo) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Credentials = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Info = true
+	}
 	return dbuf.err
 }
 
@@ -22153,18 +31128,37 @@ func (m *TLAuthCheckPhone) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthSendCode) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_sendCode))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.AllowFlashcall == true {
+		flags |= 1 << 0
+	}
+	if m.CurrentNumber != nil {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.AllowFlashcall = true
+	}
 	x.String(m.PhoneNumber)
-	x.Bytes(m.CurrentNumber.Encode())
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.CurrentNumber.Encode())
+	}
 	x.Int(m.ApiId)
 	x.String(m.ApiHash)
 	return x.buf
 }
 
 func (m *TLAuthSendCode) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.AllowFlashcall = true
+	}
 	m.PhoneNumber = dbuf.String()
-	// x.Bytes(m.CurrentNumber.Encode())
+	if (flags & (1 << 0)) != 0 {
+		// x.Bytes(m.CurrentNumber.Encode())
+	}
 	m.ApiId = dbuf.Int()
 	m.ApiHash = dbuf.String()
 	return dbuf.err
@@ -22189,16 +31183,35 @@ func (m *TLAuthResendCode) Decode(dbuf *DecodeBuf) error {
 func (m *TLAccountSendChangePhoneCode) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_account_sendChangePhoneCode))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.AllowFlashcall == true {
+		flags |= 1 << 0
+	}
+	if m.CurrentNumber != nil {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.AllowFlashcall = true
+	}
 	x.String(m.PhoneNumber)
-	x.Bytes(m.CurrentNumber.Encode())
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.CurrentNumber.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLAccountSendChangePhoneCode) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.AllowFlashcall = true
+	}
 	m.PhoneNumber = dbuf.String()
-	// x.Bytes(m.CurrentNumber.Encode())
+	if (flags & (1 << 0)) != 0 {
+		// x.Bytes(m.CurrentNumber.Encode())
+	}
 	return dbuf.err
 }
 
@@ -22206,16 +31219,35 @@ func (m *TLAccountSendChangePhoneCode) Decode(dbuf *DecodeBuf) error {
 func (m *TLAccountSendConfirmPhoneCode) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_account_sendConfirmPhoneCode))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.AllowFlashcall == true {
+		flags |= 1 << 0
+	}
+	if m.CurrentNumber != nil {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.AllowFlashcall = true
+	}
 	x.String(m.Hash)
-	x.Bytes(m.CurrentNumber.Encode())
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.CurrentNumber.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLAccountSendConfirmPhoneCode) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.AllowFlashcall = true
+	}
 	m.Hash = dbuf.String()
-	// x.Bytes(m.CurrentNumber.Encode())
+	if (flags & (1 << 0)) != 0 {
+		// x.Bytes(m.CurrentNumber.Encode())
+	}
 	return dbuf.err
 }
 
@@ -22276,7 +31308,6 @@ func (m *TLAuthImportAuthorization) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthImportBotAuthorization) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_importBotAuthorization))
-	x.Int(m.Flags)
 	x.Int(m.ApiId)
 	x.String(m.ApiHash)
 	x.String(m.BotAuthToken)
@@ -22284,7 +31315,6 @@ func (m *TLAuthImportBotAuthorization) Encode() []byte {
 }
 
 func (m *TLAuthImportBotAuthorization) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
 	m.ApiId = dbuf.Int()
 	m.ApiHash = dbuf.String()
 	m.BotAuthToken = dbuf.String()
@@ -22358,18 +31388,42 @@ func (m *TLAccountGetNotifySettings) Decode(dbuf *DecodeBuf) error {
 func (m *TLAccountUpdateProfile) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_account_updateProfile))
-	x.Int(m.Flags)
-	x.String(m.FirstName)
-	x.String(m.LastName)
-	x.String(m.About)
+
+	var flags uint32 = 0
+	if m.FirstName != "" {
+		flags |= 1 << 0
+	}
+	if m.LastName != "" {
+		flags |= 1 << 1
+	}
+	if m.About != "" {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		x.String(m.FirstName)
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.LastName)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.String(m.About)
+	}
 	return x.buf
 }
 
 func (m *TLAccountUpdateProfile) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
-	m.FirstName = dbuf.String()
-	m.LastName = dbuf.String()
-	m.About = dbuf.String()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.FirstName = dbuf.String()
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.LastName = dbuf.String()
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.About = dbuf.String()
+	}
 	return dbuf.err
 }
 
@@ -22715,7 +31769,46 @@ func (m *TLContactsResolveUsername) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactsGetTopPeers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_getTopPeers))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Correspondents == true {
+		flags |= 1 << 0
+	}
+	if m.BotsPm == true {
+		flags |= 1 << 1
+	}
+	if m.BotsInline == true {
+		flags |= 1 << 2
+	}
+	if m.PhoneCalls == true {
+		flags |= 1 << 3
+	}
+	if m.Groups == true {
+		flags |= 1 << 10
+	}
+	if m.Channels == true {
+		flags |= 1 << 15
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Correspondents = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		//  m.BotsPm = true
+	}
+	if (flags & (1 << 2)) != 0 {
+		//  m.BotsInline = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		//  m.PhoneCalls = true
+	}
+	if (flags & (1 << 10)) != 0 {
+		//  m.Groups = true
+	}
+	if (flags & (1 << 15)) != 0 {
+		//  m.Channels = true
+	}
 	x.Int(m.Offset)
 	x.Int(m.Limit)
 	x.Int(m.Hash)
@@ -22723,7 +31816,25 @@ func (m *TLContactsGetTopPeers) Encode() []byte {
 }
 
 func (m *TLContactsGetTopPeers) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Correspondents = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.BotsPm = true
+	}
+	if (flags & (1 << 2)) != 0 {
+		m.BotsInline = true
+	}
+	if (flags & (1 << 3)) != 0 {
+		m.PhoneCalls = true
+	}
+	if (flags & (1 << 10)) != 0 {
+		m.Groups = true
+	}
+	if (flags & (1 << 15)) != 0 {
+		m.Channels = true
+	}
 	m.Offset = dbuf.Int()
 	m.Limit = dbuf.Int()
 	m.Hash = dbuf.Int()
@@ -22772,10 +31883,18 @@ func (m *TLMessagesGetHistory) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSearch) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_search))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.FromId != nil {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
 	x.Bytes(m.Peer.Encode())
 	x.String(m.Q)
-	x.Bytes(m.FromId.Encode())
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.FromId.Encode())
+	}
 	x.Bytes(m.Filter.Encode())
 	x.Int(m.MinDate)
 	x.Int(m.MaxDate)
@@ -22788,10 +31907,12 @@ func (m *TLMessagesSearch) Encode() []byte {
 }
 
 func (m *TLMessagesSearch) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	// x.Bytes(m.Peer.Encode())
 	m.Q = dbuf.String()
-	// x.Bytes(m.FromId.Encode())
+	if (flags & (1 << 0)) != 0 {
+		// x.Bytes(m.FromId.Encode())
+	}
 	// x.Bytes(m.Filter.Encode())
 	m.MinDate = dbuf.Int()
 	m.MaxDate = dbuf.Int()
@@ -22866,7 +31987,16 @@ func (m *TLChannelsGetMessages) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesGetDialogs) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_getDialogs))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.ExcludePinned == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.ExcludePinned = true
+	}
 	x.Int(m.OffsetDate)
 	x.Int(m.OffsetId)
 	x.Bytes(m.OffsetPeer.Encode())
@@ -22875,7 +32005,10 @@ func (m *TLMessagesGetDialogs) Encode() []byte {
 }
 
 func (m *TLMessagesGetDialogs) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.ExcludePinned = true
+	}
 	m.OffsetDate = dbuf.Int()
 	m.OffsetId = dbuf.Int()
 	// x.Bytes(m.OffsetPeer.Encode())
@@ -22902,13 +32035,25 @@ func (m *TLMessagesReadHistory) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesDeleteMessages) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_deleteMessages))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Revoke == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Revoke = true
+	}
 	x.VectorInt(m.Id)
 	return x.buf
 }
 
 func (m *TLMessagesDeleteMessages) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Revoke = true
+	}
 	m.Id = dbuf.VectorInt()
 	return dbuf.err
 }
@@ -22945,14 +32090,26 @@ func (m *TLChannelsDeleteMessages) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesDeleteHistory) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_deleteHistory))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.JustClear == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.JustClear = true
+	}
 	x.Bytes(m.Peer.Encode())
 	x.Int(m.MaxId)
 	return x.buf
 }
 
 func (m *TLMessagesDeleteHistory) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.JustClear = true
+	}
 	// x.Bytes(m.Peer.Encode())
 	m.MaxId = dbuf.Int()
 	return dbuf.err
@@ -22990,39 +32147,99 @@ func (m *TLMessagesReceivedMessages) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSendMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_sendMessage))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.NoWebpage == true {
+		flags |= 1 << 1
+	}
+	if m.Silent == true {
+		flags |= 1 << 5
+	}
+	if m.Background == true {
+		flags |= 1 << 6
+	}
+	if m.ClearDraft == true {
+		flags |= 1 << 7
+	}
+	if m.ReplyToMsgId != 0 {
+		flags |= 1 << 0
+	}
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 2
+	}
+	if m.Entities != nil {
+		flags |= 1 << 3
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		//  m.NoWebpage = true
+	}
+	if (flags & (1 << 5)) != 0 {
+		//  m.Silent = true
+	}
+	if (flags & (1 << 6)) != 0 {
+		//  m.Background = true
+	}
+	if (flags & (1 << 7)) != 0 {
+		//  m.ClearDraft = true
+	}
 	x.Bytes(m.Peer.Encode())
-	x.Int(m.ReplyToMsgId)
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.ReplyToMsgId)
+	}
 	x.String(m.Message)
 	x.Long(m.RandomId)
-	x.Bytes(m.ReplyMarkup.Encode())
-	// x.VectorMessage(m.Entities)
-	x11 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x11, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x11[4:], uint32(len(m.Entities)))
-	for _, v := range m.Entities {
-		x.buf = append(x.buf, (*v).Encode()...)
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
+	if (flags & (1 << 3)) != 0 {
+		// x.VectorMessage(m.Entities)
+		x10 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x10, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x10[4:], uint32(len(m.Entities)))
+		for _, v := range m.Entities {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
 	}
 	return x.buf
 }
 
 func (m *TLMessagesSendMessage) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.NoWebpage = true
+	}
+	if (flags & (1 << 5)) != 0 {
+		m.Silent = true
+	}
+	if (flags & (1 << 6)) != 0 {
+		m.Background = true
+	}
+	if (flags & (1 << 7)) != 0 {
+		m.ClearDraft = true
+	}
 	// x.Bytes(m.Peer.Encode())
-	m.ReplyToMsgId = dbuf.Int()
+	if (flags & (1 << 0)) != 0 {
+		m.ReplyToMsgId = dbuf.Int()
+	}
 	m.Message = dbuf.String()
 	m.RandomId = dbuf.Long()
-	// x.Bytes(m.ReplyMarkup.Encode())
-	// x.VectorMessage(m.Entities)
-	c11 := dbuf.Int()
-	if c11 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c11)
+	if (flags & (1 << 2)) != 0 {
+		// x.Bytes(m.ReplyMarkup.Encode())
 	}
-	l11 := dbuf.Int()
-	m.Entities = make([]*MessageEntity, l11)
-	for i := 0; i < int(l11); i++ {
-		m.Entities[i] = &MessageEntity{}
-		(*m.Entities[i]).Decode(dbuf)
+	if (flags & (1 << 3)) != 0 {
+		// x.VectorMessage(m.Entities)
+		c10 := dbuf.Int()
+		if c10 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c10)
+		}
+		l10 := dbuf.Int()
+		m.Entities = make([]*MessageEntity, l10)
+		for i := 0; i < int(l10); i++ {
+			m.Entities[i] = &MessageEntity{}
+			(*m.Entities[i]).Decode(dbuf)
+		}
 	}
 	return dbuf.err
 }
@@ -23031,22 +32248,66 @@ func (m *TLMessagesSendMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSendMedia) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_sendMedia))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Silent == true {
+		flags |= 1 << 5
+	}
+	if m.Background == true {
+		flags |= 1 << 6
+	}
+	if m.ClearDraft == true {
+		flags |= 1 << 7
+	}
+	if m.ReplyToMsgId != 0 {
+		flags |= 1 << 0
+	}
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 2
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 5)) != 0 {
+		//  m.Silent = true
+	}
+	if (flags & (1 << 6)) != 0 {
+		//  m.Background = true
+	}
+	if (flags & (1 << 7)) != 0 {
+		//  m.ClearDraft = true
+	}
 	x.Bytes(m.Peer.Encode())
-	x.Int(m.ReplyToMsgId)
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.ReplyToMsgId)
+	}
 	x.Bytes(m.Media.Encode())
 	x.Long(m.RandomId)
-	x.Bytes(m.ReplyMarkup.Encode())
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
 	return x.buf
 }
 
 func (m *TLMessagesSendMedia) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 5)) != 0 {
+		m.Silent = true
+	}
+	if (flags & (1 << 6)) != 0 {
+		m.Background = true
+	}
+	if (flags & (1 << 7)) != 0 {
+		m.ClearDraft = true
+	}
 	// x.Bytes(m.Peer.Encode())
-	m.ReplyToMsgId = dbuf.Int()
+	if (flags & (1 << 0)) != 0 {
+		m.ReplyToMsgId = dbuf.Int()
+	}
 	// x.Bytes(m.Media.Encode())
 	m.RandomId = dbuf.Long()
-	// x.Bytes(m.ReplyMarkup.Encode())
+	if (flags & (1 << 2)) != 0 {
+		// x.Bytes(m.ReplyMarkup.Encode())
+	}
 	return dbuf.err
 }
 
@@ -23054,7 +32315,28 @@ func (m *TLMessagesSendMedia) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesForwardMessages) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_forwardMessages))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Silent == true {
+		flags |= 1 << 5
+	}
+	if m.Background == true {
+		flags |= 1 << 6
+	}
+	if m.WithMyScore == true {
+		flags |= 1 << 8
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 5)) != 0 {
+		//  m.Silent = true
+	}
+	if (flags & (1 << 6)) != 0 {
+		//  m.Background = true
+	}
+	if (flags & (1 << 8)) != 0 {
+		//  m.WithMyScore = true
+	}
 	x.Bytes(m.FromPeer.Encode())
 	x.VectorInt(m.Id)
 	x.VectorLong(m.RandomId)
@@ -23063,7 +32345,16 @@ func (m *TLMessagesForwardMessages) Encode() []byte {
 }
 
 func (m *TLMessagesForwardMessages) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 5)) != 0 {
+		m.Silent = true
+	}
+	if (flags & (1 << 6)) != 0 {
+		m.Background = true
+	}
+	if (flags & (1 << 8)) != 0 {
+		m.WithMyScore = true
+	}
 	// x.Bytes(m.FromPeer.Encode())
 	m.Id = dbuf.VectorInt()
 	m.RandomId = dbuf.VectorLong()
@@ -23245,9 +32536,35 @@ func (m *TLMessagesMigrateChat) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSendInlineBotResult) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_sendInlineBotResult))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Silent == true {
+		flags |= 1 << 5
+	}
+	if m.Background == true {
+		flags |= 1 << 6
+	}
+	if m.ClearDraft == true {
+		flags |= 1 << 7
+	}
+	if m.ReplyToMsgId != 0 {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 5)) != 0 {
+		//  m.Silent = true
+	}
+	if (flags & (1 << 6)) != 0 {
+		//  m.Background = true
+	}
+	if (flags & (1 << 7)) != 0 {
+		//  m.ClearDraft = true
+	}
 	x.Bytes(m.Peer.Encode())
-	x.Int(m.ReplyToMsgId)
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.ReplyToMsgId)
+	}
 	x.Long(m.RandomId)
 	x.Long(m.QueryId)
 	x.String(m.Id)
@@ -23255,9 +32572,20 @@ func (m *TLMessagesSendInlineBotResult) Encode() []byte {
 }
 
 func (m *TLMessagesSendInlineBotResult) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 5)) != 0 {
+		m.Silent = true
+	}
+	if (flags & (1 << 6)) != 0 {
+		m.Background = true
+	}
+	if (flags & (1 << 7)) != 0 {
+		m.ClearDraft = true
+	}
 	// x.Bytes(m.Peer.Encode())
-	m.ReplyToMsgId = dbuf.Int()
+	if (flags & (1 << 0)) != 0 {
+		m.ReplyToMsgId = dbuf.Int()
+	}
 	m.RandomId = dbuf.Long()
 	m.QueryId = dbuf.Long()
 	m.Id = dbuf.String()
@@ -23268,37 +32596,70 @@ func (m *TLMessagesSendInlineBotResult) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesEditMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_editMessage))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.NoWebpage == true {
+		flags |= 1 << 1
+	}
+	if m.Message != "" {
+		flags |= 1 << 11
+	}
+	if m.ReplyMarkup != nil {
+		flags |= 1 << 2
+	}
+	if m.Entities != nil {
+		flags |= 1 << 3
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		//  m.NoWebpage = true
+	}
 	x.Bytes(m.Peer.Encode())
 	x.Int(m.Id)
-	x.String(m.Message)
-	x.Bytes(m.ReplyMarkup.Encode())
-	// x.VectorMessage(m.Entities)
-	x7 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x7, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x7[4:], uint32(len(m.Entities)))
-	for _, v := range m.Entities {
-		x.buf = append(x.buf, (*v).Encode()...)
+	if (flags & (1 << 11)) != 0 {
+		x.String(m.Message)
+	}
+	if (flags & (1 << 2)) != 0 {
+		x.Bytes(m.ReplyMarkup.Encode())
+	}
+	if (flags & (1 << 3)) != 0 {
+		// x.VectorMessage(m.Entities)
+		x6 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Entities)))
+		for _, v := range m.Entities {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
 	}
 	return x.buf
 }
 
 func (m *TLMessagesEditMessage) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.NoWebpage = true
+	}
 	// x.Bytes(m.Peer.Encode())
 	m.Id = dbuf.Int()
-	m.Message = dbuf.String()
-	// x.Bytes(m.ReplyMarkup.Encode())
-	// x.VectorMessage(m.Entities)
-	c7 := dbuf.Int()
-	if c7 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c7)
+	if (flags & (1 << 11)) != 0 {
+		m.Message = dbuf.String()
 	}
-	l7 := dbuf.Int()
-	m.Entities = make([]*MessageEntity, l7)
-	for i := 0; i < int(l7); i++ {
-		m.Entities[i] = &MessageEntity{}
-		(*m.Entities[i]).Decode(dbuf)
+	if (flags & (1 << 2)) != 0 {
+		// x.Bytes(m.ReplyMarkup.Encode())
+	}
+	if (flags & (1 << 3)) != 0 {
+		// x.VectorMessage(m.Entities)
+		c6 := dbuf.Int()
+		if c6 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c6)
+		}
+		l6 := dbuf.Int()
+		m.Entities = make([]*MessageEntity, l6)
+		for i := 0; i < int(l6); i++ {
+			m.Entities[i] = &MessageEntity{}
+			(*m.Entities[i]).Decode(dbuf)
+		}
 	}
 	return dbuf.err
 }
@@ -23318,7 +32679,22 @@ func (m *TLMessagesGetAllDrafts) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSetGameScore) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_setGameScore))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.EditMessage == true {
+		flags |= 1 << 0
+	}
+	if m.Force == true {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.EditMessage = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		//  m.Force = true
+	}
 	x.Bytes(m.Peer.Encode())
 	x.Int(m.Id)
 	x.Bytes(m.UserId.Encode())
@@ -23327,7 +32703,13 @@ func (m *TLMessagesSetGameScore) Encode() []byte {
 }
 
 func (m *TLMessagesSetGameScore) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.EditMessage = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Force = true
+	}
 	// x.Bytes(m.Peer.Encode())
 	m.Id = dbuf.Int()
 	// x.Bytes(m.UserId.Encode())
@@ -23369,14 +32751,35 @@ func (m *TLHelpGetAppChangelog) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelsCreateChannel) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channels_createChannel))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Broadcast == true {
+		flags |= 1 << 0
+	}
+	if m.Megagroup == true {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Broadcast = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		//  m.Megagroup = true
+	}
 	x.String(m.Title)
 	x.String(m.About)
 	return x.buf
 }
 
 func (m *TLChannelsCreateChannel) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Broadcast = true
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.Megagroup = true
+	}
 	m.Title = dbuf.String()
 	m.About = dbuf.String()
 	return dbuf.err
@@ -23533,14 +32936,26 @@ func (m *TLChannelsToggleSignatures) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelsUpdatePinnedMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channels_updatePinnedMessage))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Silent == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Silent = true
+	}
 	x.Bytes(m.Channel.Encode())
 	x.Int(m.Id)
 	return x.buf
 }
 
 func (m *TLChannelsUpdatePinnedMessage) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Silent = true
+	}
 	// x.Bytes(m.Channel.Encode())
 	m.Id = dbuf.Int()
 	return dbuf.err
@@ -23975,14 +33390,23 @@ func (m *TLMessagesGetStickerSet) Decode(dbuf *DecodeBuf) error {
 func (m *TLStickersCreateStickerSet) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_stickers_createStickerSet))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Masks == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Masks = true
+	}
 	x.Bytes(m.UserId.Encode())
 	x.String(m.Title)
 	x.String(m.ShortName)
 	// x.VectorMessage(m.Stickers)
-	x6 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Stickers)))
+	x5 := make([]byte, 8)
+	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Stickers)))
 	for _, v := range m.Stickers {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -23990,18 +33414,21 @@ func (m *TLStickersCreateStickerSet) Encode() []byte {
 }
 
 func (m *TLStickersCreateStickerSet) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Masks = true
+	}
 	// x.Bytes(m.UserId.Encode())
 	m.Title = dbuf.String()
 	m.ShortName = dbuf.String()
 	// x.VectorMessage(m.Stickers)
-	c6 := dbuf.Int()
-	if c6 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c6)
+	c5 := dbuf.Int()
+	if c5 != int32(TLConstructor_CRC32_vector) {
+		return fmt.Errorf("Not vector, classID: ", c5)
 	}
-	l6 := dbuf.Int()
-	m.Stickers = make([]*InputStickerSetItem, l6)
-	for i := 0; i < int(l6); i++ {
+	l5 := dbuf.Int()
+	m.Stickers = make([]*InputStickerSetItem, l5)
+	for i := 0; i < int(l5); i++ {
 		m.Stickers[i] = &InputStickerSetItem{}
 		(*m.Stickers[i]).Decode(dbuf)
 	}
@@ -24115,20 +33542,30 @@ func (m *TLMessagesGetSavedGifs) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesGetInlineBotResults) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_getInlineBotResults))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.GeoPoint != nil {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
 	x.Bytes(m.Bot.Encode())
 	x.Bytes(m.Peer.Encode())
-	x.Bytes(m.GeoPoint.Encode())
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.GeoPoint.Encode())
+	}
 	x.String(m.Query)
 	x.String(m.Offset)
 	return x.buf
 }
 
 func (m *TLMessagesGetInlineBotResults) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	// x.Bytes(m.Bot.Encode())
 	// x.Bytes(m.Peer.Encode())
-	// x.Bytes(m.GeoPoint.Encode())
+	if (flags & (1 << 0)) != 0 {
+		// x.Bytes(m.GeoPoint.Encode())
+	}
 	m.Query = dbuf.String()
 	m.Offset = dbuf.String()
 	return dbuf.err
@@ -24153,18 +33590,37 @@ func (m *TLMessagesGetMessageEditData) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesGetBotCallbackAnswer) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_getBotCallbackAnswer))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Game == true {
+		flags |= 1 << 1
+	}
+	if m.Data != nil {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 1)) != 0 {
+		//  m.Game = true
+	}
 	x.Bytes(m.Peer.Encode())
 	x.Int(m.MsgId)
-	x.StringBytes(m.Data)
+	if (flags & (1 << 0)) != 0 {
+		x.StringBytes(m.Data)
+	}
 	return x.buf
 }
 
 func (m *TLMessagesGetBotCallbackAnswer) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 1)) != 0 {
+		m.Game = true
+	}
 	// x.Bytes(m.Peer.Encode())
 	m.MsgId = dbuf.Int()
-	m.Data = dbuf.StringBytes()
+	if (flags & (1 << 0)) != 0 {
+		m.Data = dbuf.StringBytes()
+	}
 	return dbuf.err
 }
 
@@ -24225,13 +33681,25 @@ func (m *TLMessagesGetFeaturedStickers) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesGetRecentStickers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_getRecentStickers))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Attached == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Attached = true
+	}
 	x.Int(m.Hash)
 	return x.buf
 }
 
 func (m *TLMessagesGetRecentStickers) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Attached = true
+	}
 	m.Hash = dbuf.Int()
 	return dbuf.err
 }
@@ -24240,14 +33708,26 @@ func (m *TLMessagesGetRecentStickers) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesGetArchivedStickers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_getArchivedStickers))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Masks == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Masks = true
+	}
 	x.Long(m.OffsetId)
 	x.Int(m.Limit)
 	return x.buf
 }
 
 func (m *TLMessagesGetArchivedStickers) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Masks = true
+	}
 	m.OffsetId = dbuf.Long()
 	m.Limit = dbuf.Int()
 	return dbuf.err
@@ -24341,18 +33821,28 @@ func (m *TLUpdatesGetState) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatesGetDifference) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates_getDifference))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.PtsTotalLimit != 0 {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
 	x.Int(m.Pts)
-	x.Int(m.PtsTotalLimit)
+	if (flags & (1 << 0)) != 0 {
+		x.Int(m.PtsTotalLimit)
+	}
 	x.Int(m.Date)
 	x.Int(m.Qts)
 	return x.buf
 }
 
 func (m *TLUpdatesGetDifference) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.Pts = dbuf.Int()
-	m.PtsTotalLimit = dbuf.Int()
+	if (flags & (1 << 0)) != 0 {
+		m.PtsTotalLimit = dbuf.Int()
+	}
 	m.Date = dbuf.Int()
 	m.Qts = dbuf.Int()
 	return dbuf.err
@@ -24362,7 +33852,16 @@ func (m *TLUpdatesGetDifference) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatesGetChannelDifference) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates_getChannelDifference))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Force == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Force = true
+	}
 	x.Bytes(m.Channel.Encode())
 	x.Bytes(m.Filter.Encode())
 	x.Int(m.Pts)
@@ -24371,7 +33870,10 @@ func (m *TLUpdatesGetChannelDifference) Encode() []byte {
 }
 
 func (m *TLUpdatesGetChannelDifference) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Force = true
+	}
 	// x.Bytes(m.Channel.Encode())
 	// x.Bytes(m.Filter.Encode())
 	m.Pts = dbuf.Int()
@@ -24635,16 +34137,29 @@ func (m *TLChannelsExportMessageLink) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelsGetAdminLog) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channels_getAdminLog))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.EventsFilter != nil {
+		flags |= 1 << 0
+	}
+	if m.Admins != nil {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
 	x.Bytes(m.Channel.Encode())
 	x.String(m.Q)
-	x.Bytes(m.EventsFilter.Encode())
-	// x.VectorMessage(m.Admins)
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Admins)))
-	for _, v := range m.Admins {
-		x.buf = append(x.buf, (*v).Encode()...)
+	if (flags & (1 << 0)) != 0 {
+		x.Bytes(m.EventsFilter.Encode())
+	}
+	if (flags & (1 << 1)) != 0 {
+		// x.VectorMessage(m.Admins)
+		x4 := make([]byte, 8)
+		binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+		binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Admins)))
+		for _, v := range m.Admins {
+			x.buf = append(x.buf, (*v).Encode()...)
+		}
 	}
 	x.Long(m.MaxId)
 	x.Long(m.MinId)
@@ -24653,20 +34168,24 @@ func (m *TLChannelsGetAdminLog) Encode() []byte {
 }
 
 func (m *TLChannelsGetAdminLog) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	// x.Bytes(m.Channel.Encode())
 	m.Q = dbuf.String()
-	// x.Bytes(m.EventsFilter.Encode())
-	// x.VectorMessage(m.Admins)
-	c5 := dbuf.Int()
-	if c5 != int32(TLConstructor_CRC32_vector) {
-		return fmt.Errorf("Not vector, classID: ", c5)
+	if (flags & (1 << 0)) != 0 {
+		// x.Bytes(m.EventsFilter.Encode())
 	}
-	l5 := dbuf.Int()
-	m.Admins = make([]*InputUser, l5)
-	for i := 0; i < int(l5); i++ {
-		m.Admins[i] = &InputUser{}
-		(*m.Admins[i]).Decode(dbuf)
+	if (flags & (1 << 1)) != 0 {
+		// x.VectorMessage(m.Admins)
+		c4 := dbuf.Int()
+		if c4 != int32(TLConstructor_CRC32_vector) {
+			return fmt.Errorf("Not vector, classID: ", c4)
+		}
+		l4 := dbuf.Int()
+		m.Admins = make([]*InputUser, l4)
+		for i := 0; i < int(l4); i++ {
+			m.Admins[i] = &InputUser{}
+			(*m.Admins[i]).Decode(dbuf)
+		}
 	}
 	m.MaxId = dbuf.Long()
 	m.MinId = dbuf.Long()
@@ -24730,14 +34249,26 @@ func (m *TLPaymentsGetPaymentReceipt) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentsValidateRequestedInfo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_payments_validateRequestedInfo))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.Save == true {
+		flags |= 1 << 0
+	}
+	x.UInt(flags)
+
+	if (flags & (1 << 0)) != 0 {
+		//  m.Save = true
+	}
 	x.Int(m.MsgId)
 	x.Bytes(m.Info.Encode())
 	return x.buf
 }
 
 func (m *TLPaymentsValidateRequestedInfo) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
+	if (flags & (1 << 0)) != 0 {
+		m.Save = true
+	}
 	m.MsgId = dbuf.Int()
 	// x.Bytes(m.Info.Encode())
 	return dbuf.err
@@ -24747,19 +34278,36 @@ func (m *TLPaymentsValidateRequestedInfo) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentsSendPaymentForm) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_payments_sendPaymentForm))
-	x.Int(m.Flags)
+
+	var flags uint32 = 0
+	if m.RequestedInfoId != "" {
+		flags |= 1 << 0
+	}
+	if m.ShippingOptionId != "" {
+		flags |= 1 << 1
+	}
+	x.UInt(flags)
+
 	x.Int(m.MsgId)
-	x.String(m.RequestedInfoId)
-	x.String(m.ShippingOptionId)
+	if (flags & (1 << 0)) != 0 {
+		x.String(m.RequestedInfoId)
+	}
+	if (flags & (1 << 1)) != 0 {
+		x.String(m.ShippingOptionId)
+	}
 	x.Bytes(m.Credentials.Encode())
 	return x.buf
 }
 
 func (m *TLPaymentsSendPaymentForm) Decode(dbuf *DecodeBuf) error {
-	m.Flags = dbuf.Int()
+	flags := dbuf.UInt()
 	m.MsgId = dbuf.Int()
-	m.RequestedInfoId = dbuf.String()
-	m.ShippingOptionId = dbuf.String()
+	if (flags & (1 << 0)) != 0 {
+		m.RequestedInfoId = dbuf.String()
+	}
+	if (flags & (1 << 1)) != 0 {
+		m.ShippingOptionId = dbuf.String()
+	}
 	// x.Bytes(m.Credentials.Encode())
 	return dbuf.err
 }

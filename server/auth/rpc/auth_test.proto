@@ -1,0 +1,123 @@
+/*
+ * WARNING! All changes made in this file will be lost!
+ * Created from 'scheme.tl' by 'codegen_proto.py'
+ *
+ *  Copyright (c) 2017, https://github.com/nebulaim
+ *  All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package rpc;
+
+option java_package = "com.nebulaim.engine.mtproto";
+option java_outer_classname = "MTProto";
+option optimize_for = CODE_SIZE;
+
+// auth.sendCode#86aef0ec flags:# allow_flashcall:flags.0?true phone_number:string current_number:flags.0?Bool api_id:int api_hash:string = auth.SentCode;
+message TL_auth_sendCode {
+    bool allow_flashcall = 1;
+    string phone_number = 2;
+    Bool current_number = 3;
+    int32 api_id = 4;
+    string api_hash = 5;
+};
+
+// auth.sentCode#5e002502 flags:# phone_registered:flags.0?true type:auth.SentCodeType phone_code_hash:string next_type:flags.1?auth.CodeType timeout:flags.2?int = auth.SentCode;
+message TL_auth_sentCode {
+    bool phone_registered = 1;
+    auth_SentCodeType type = 2;
+    string phone_code_hash = 3;
+    auth_CodeType next_type = 4;
+    int32 timeout = 5;
+}
+
+message auth_SentCode {
+    oneof payload {
+        TL_auth_sentCode auth_sentCode = 1;
+    }
+}
+
+message Bool {
+    oneof payload {
+        TL_boolFalse boolFalse = 1;
+        TL_boolTrue boolTrue = 2;
+    }
+}
+
+// boolFalse#bc799737 = Bool;
+message TL_boolFalse {
+}
+
+// boolTrue#997275b5 = Bool;
+message TL_boolTrue {
+}
+
+// true#3fedd339 = True;
+message TL_true {
+}
+
+// auth.sentCodeTypeApp#3dbb5986 length:int = auth.SentCodeType;
+message TL_auth_sentCodeTypeApp {
+    int32 length = 1;
+}
+
+// auth.sentCodeTypeSms#c000bba2 length:int = auth.SentCodeType;
+message TL_auth_sentCodeTypeSms {
+    int32 length = 1;
+}
+
+// auth.sentCodeTypeCall#5353e5a7 length:int = auth.SentCodeType;
+message TL_auth_sentCodeTypeCall {
+    int32 length = 1;
+}
+
+// auth.sentCodeTypeFlashCall#ab03c6d9 pattern:string = auth.SentCodeType;
+message TL_auth_sentCodeTypeFlashCall {
+    string pattern = 1;
+}
+
+message auth_SentCodeType {
+    oneof payload {
+        TL_auth_sentCodeTypeApp auth_sentCodeTypeApp = 1;
+        TL_auth_sentCodeTypeSms auth_sentCodeTypeSms = 2;
+        TL_auth_sentCodeTypeCall auth_sentCodeTypeCall = 3;
+        TL_auth_sentCodeTypeFlashCall auth_sentCodeTypeFlashCall = 4;
+    }
+}
+
+message auth_CodeType {
+    oneof payload {
+        TL_auth_codeTypeSms auth_codeTypeSms = 1;
+        TL_auth_codeTypeCall auth_codeTypeCall = 2;
+        TL_auth_codeTypeFlashCall auth_codeTypeFlashCall = 3;
+    }
+}
+
+// auth.codeTypeSms#72a3158c = auth.CodeType;
+message TL_auth_codeTypeSms {
+}
+
+// auth.codeTypeCall#741cd3e3 = auth.CodeType;
+message TL_auth_codeTypeCall {
+}
+
+// auth.codeTypeFlashCall#226ccefb = auth.CodeType;
+message TL_auth_codeTypeFlashCall {
+}
+
+service Auth {
+    rpc  auth_sentCode(TL_auth_sendCode) returns (auth_SentCode) {}
+}

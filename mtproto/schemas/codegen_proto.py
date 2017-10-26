@@ -470,6 +470,9 @@ for restype in typesList:
 
     ii = 1;
     for paramName in prmsList:
+      if (paramName == 'flags'):
+        continue;
+
       paramType = prms[paramName];
       if (paramType == 'bool'):
         # classTypesTexts += '';
@@ -512,9 +515,12 @@ for restype in funcsList:
 
     ii = 1;
     for paramName in prmsList:
+      if (paramName == 'flags'):
+        continue;
+
       paramType = prms[paramName];
       if (paramType == 'bool'):
-        classTypesTexts += ' bool ' + paramName + ' = ' + str(ii) + ';\n';
+        classTypesTexts += '  bool ' + paramName + ' = ' + str(ii) + ';\n';
       elif (paramType in ['int32', 'int64', 'double']):
         classTypesTexts += '  ' +  paramType + ' ' + paramName + ' = ' + str(ii) + ';\n';
       elif (paramType in TypesList):
@@ -534,6 +540,48 @@ for restype in funcsList:
       ii += 1;
 
     classTypesTexts += '};\n\n';
+
+innerRPC=[]
+innerRPC.append('req_pq')
+innerRPC.append('req_DH_params')
+innerRPC.append('set_client_DH_params')
+innerRPC.append('destroy_auth_key')
+innerRPC.append('rpc_drop_answer')
+innerRPC.append('get_future_salts')
+innerRPC.append('ping')
+innerRPC.append('ping_delay_disconnect')
+innerRPC.append('destroy_session')
+innerRPC.append('contest.saveDeveloperInfo')
+innerRPC.append('contest_saveDeveloperInfo')
+innerRPC.append('invokeAfterMsg')
+innerRPC.append('invokeAfterMsgs')
+innerRPC.append('initConnection')
+innerRPC.append('invokeWithLayer')
+innerRPC.append('invokeWithoutUpdates')
+
+'''
+service Auth {
+  rpc  auth_sentCode(TL_auth_sendCode) returns (auth_SentCode) {}
+}
+'''
+
+classTypesTexts += 'service RPCQuery {\n'
+for restype in funcsList:
+  v = funcsDict[restype];
+  for data in v:
+    name = data[0]
+
+    if (name in innerRPC):
+      continue
+
+    #resType2 = TypesDict[''.restype]
+    resType = FuncsDict[restype]
+    if (resType.find('Vector') >= 0):
+      classTypesTexts += '  // rpc ' + name + '(TL_' + name + ') returns (' + resType + ') {}\n'
+    else:
+      classTypesTexts += '  rpc ' + name + '(TL_' + name + ') returns (' + resType + ') {}\n'
+
+classTypesTexts += '};\n\n';
 
 proto_file = '\
 /*\n\

@@ -54,7 +54,10 @@ if output_path == '':
   sys.exit(1)
 
 def to_proto_go_name(name):
-  ss = name.split("_")
+  name2 = name
+  if (name == 'udp_p2p'):
+    name2 = 'UdpP2P'
+  ss = name2.split("_")
   for i in range(len(ss)):
     s = ss[i]
     if i!=0 and s[0:1].isupper():
@@ -94,6 +97,7 @@ textSerializeMethods = '';
 classTypesTexts = '';
 resClassTypesTexts = '';
 resClassTypesTexts2 = '';
+resClassTypesTexts3 = '';
 classFuncsTexts = '';
 registers = [];
 
@@ -460,7 +464,8 @@ for restype in typesList:
   #  print(v)
 
   resClassTypesTexts2 = ''
-  
+  resClassTypesTexts3 = ''
+
   resClassTypesTexts += 'func (m *' + to_proto_go_name(resType) + ') Encode() (b []byte) {\n'
   resClassTypesTexts += '  b = nil\n'
   resClassTypesTexts += '  switch m.Payload.(type) {\n';
@@ -468,6 +473,9 @@ for restype in typesList:
   resClassTypesTexts2 += 'func (m *' + to_proto_go_name(resType) + ') Decode(dbuf *DecodeBuf) error {\n'
   resClassTypesTexts2 += '  classId := dbuf.Int()\n'
   resClassTypesTexts2 += '  switch classId {\n'
+
+  resClassTypesTexts3 += 'func Make' + to_proto_go_name(resType) + '(message proto.Message) (m *' + to_proto_go_name(resType) + ') {\n'
+  resClassTypesTexts3 += '  switch message.(type) {\n'
 
   #### resClassTypesTexts += '  oneof payload {\n';
 
@@ -500,14 +508,59 @@ for restype in typesList:
     resClassTypesTexts2 += '      m2.' + to_proto_go_name(name) + '.Decode(dbuf)\n'
     resClassTypesTexts2 += '      m.Payload = &m2\n'
 
+    resClassTypesTexts3 += '    case *TL' + to_proto_go_name(name) +':\n'
+    resClassTypesTexts3 += '      m2, _ := message.(*TL' + to_proto_go_name(name) + ')\n'
+    resClassTypesTexts3 += '      m = &' + to_proto_go_name(resType) + '{\n'
+    resClassTypesTexts3 += '         Payload: &' + to_proto_go_name(resType) + '_' + to_proto_go_name(name) + '{\n'
+    resClassTypesTexts3 += '           ' + to_proto_go_name(name) + ': m2,\n'
+    resClassTypesTexts3 += '         },\n'
+    resClassTypesTexts3 += '      }\n'
+
     ij += 1;
 
     ii = 1;
+
+    if (hasFlags):
+      classTypesTexts += '\n  var flags uint32 = 0\n';
+
+  ## Encode()
+
     for paramName in prmsList:
       paramType = prms[paramName];
+
+      if (paramName in conditionsList):
+        if (paramType in ['bool']):
+          # print '  if m.' + to_proto_go_name(paramName) + ' == true {'
+          classTypesTexts += '  if m.' + to_proto_go_name(paramName) + ' == true {\n';
+        elif (paramType in ['int32', 'int64']):
+          #print '  if  m.' + to_proto_go_name(paramName) + ' != 0 {'
+          classTypesTexts += '  if  m.' + to_proto_go_name(paramName) + ' != 0 {\n';
+        elif (paramType in ['string']):
+          #print '  if  m.' + to_proto_go_name(paramName) + ' != "" {'
+          classTypesTexts += '  if  m.' + to_proto_go_name(paramName) + ' != "" {\n';
+        else:
+          #print '  if m.' + to_proto_go_name(paramName) + ' != nil {'
+          classTypesTexts += '  if m.' + to_proto_go_name(paramName) + ' != nil {\n';
+
+        classTypesTexts += '    flags |= 1<<' + conditions[paramName] + '\n';
+        classTypesTexts += '  }\n';
+
+    if (hasFlags):
+      classTypesTexts += '  x.UInt(flags)\n\n'
+
+    for paramName in prmsList:
+      if (paramName == 'flags'):
+        continue;
+
+      paramType = prms[paramName];
+
+      if (paramName in conditionsList):
+        classTypesTexts += '  if (flags & (1 << ' + conditions[paramName] + ')) != 0 {\n';
+
       if (paramType == 'bool'):
-        classTypesTexts += '';
-        # classTypesTexts += '  bool ' + paramName + ' = ' + str(ii) + ';\n';
+        classTypesTexts += '  // ignore\n';
+        # classTypesTexts += '  if (flags & (1 << ' + conditions[paramName] + ')) != 0 {\n';
+
       elif (paramType =='int32'):
         classTypesTexts += '  x.Int(m.' +  to_proto_go_name(paramName) + ')\n';
       elif (paramType == 'int64'):
@@ -535,7 +588,7 @@ for restype in typesList:
         classTypesTexts += '  // x.VectorMessage(m.' + to_proto_go_name(paramName) + ');\n';
 
         classTypesTexts += '  x%d := make([]byte, 8)\n' % (ii)
-        classTypesTexts += '  binary.LittleEndian.PutUint32(x%d, uint32(TLConstructor_CRC32_vector))\n' % (ii)
+        classTypesTexts += '  // binary.LittleEndian.PutUint32(x%d, uint32(TLConstructor_CRC32_vector))\n' % (ii)
         classTypesTexts += '  binary.LittleEndian.PutUint32(x%d[4:], uint32(len(m.%s)))\n' % (ii, to_proto_go_name(paramName))
         classTypesTexts += '  for _, v := range m.' + to_proto_go_name(paramName) + ' {\n'
         classTypesTexts += '     x.buf = append(x.buf, (*v).Encode()...)\n'
@@ -556,22 +609,41 @@ for restype in typesList:
         # classTypesTexts += '  // 2. ' + paramType + ' ' + paramName + ' = ' + str(ii) + ';\n';
         classTypesTexts += '  x.Bytes(m.' + to_proto_go_name(paramName) + '.Encode())\n';
 
+      if (paramName in conditionsList):
+        classTypesTexts += '  }\n';
+
       ii += 1;
 
     classTypesTexts += '  return x.buf\n'
     classTypesTexts += '}\n\n';
 
 
+    ## Decode()
     # classTypesTexts += 'message Z' + name + ' : public ' + resType + ' {\n'; # type class declaration
     classTypesTexts += 'func (m* TL' + to_proto_go_name(name) + ') Decode(dbuf *DecodeBuf) error {\n'; # type class declaration
     # classTypesTexts += '  x.Int(int32(TLConstructor_CRC32_' + name + '))\n'
 
     ii = 1;
+    if (hasFlags):
+      classTypesTexts += '  flags := dbuf.UInt()\n'
+      if (name=='messages_channelMessages'):
+        classTypesTexts += '  if flags != 0 {}\n'
+
     for paramName in prmsList:
+      if (paramName == 'flags'):
+        continue;
+
       paramType = prms[paramName];
+
+      if (paramName in conditionsList):
+        classTypesTexts += '  if (flags & (1 << ' + conditions[paramName] + ')) != 0 {\n';
+
       if (paramType == 'bool'):
-        classTypesTexts += '';
-        # classTypesTexts += '  bool ' + paramName + ' = ' + str(ii) + ';\n';
+        if (paramName in conditionsList):
+          # classTypesTexts += '';
+          classTypesTexts += '    m.' + to_proto_go_name(paramName) + ' = true\n';
+
+          # classTypesTexts += '  bool ' + paramName + ' = ' + str(ii) + ';\n';
       elif (paramType =='int32'):
         classTypesTexts += '  m.' +  to_proto_go_name(paramName) + ' = dbuf.Int()\n';
       elif (paramType == 'int64'):
@@ -600,10 +672,10 @@ for restype in typesList:
         eptype = txt_wrap_by('<', '*', paramType);
         classTypesTexts += '  // x.VectorMessage(m.' + to_proto_go_name(paramName) + ');\n';
 
-        classTypesTexts += '  c%d := dbuf.Int()\n' % (ii)
-        classTypesTexts += '  if c%d != int32(TLConstructor_CRC32_vector) {\n' % (ii)
-        classTypesTexts += '    return fmt.Errorf("Not vector, classID: ", c%d)\n' % (ii)
-        classTypesTexts += '  }\n'
+        classTypesTexts += '  // c%d := dbuf.Int()\n' % (ii)
+        classTypesTexts += '  // if c%d != int32(TLConstructor_CRC32_vector) {\n' % (ii)
+        classTypesTexts += '  //   return fmt.Errorf("Not vector, classID: ", c%d)\n' % (ii)
+        classTypesTexts += '  // }\n'
         classTypesTexts += '  l%d := dbuf.Int()\n' % (ii)
         classTypesTexts += '  m.%s = make([]*%s, l%d)\n' % (to_proto_go_name(paramName), to_proto_go_name(eptype), ii)
 
@@ -643,6 +715,9 @@ for restype in typesList:
         # classTypesTexts += '  // 2. ' + paramType + ' ' + paramName + ' = ' + str(ii) + ';\n';
         classTypesTexts += '  // other!!!! x.Bytes(m.' + to_proto_go_name(paramName) + '.Encode())\n';
 
+      if (paramName in conditionsList):
+        classTypesTexts += '  }\n';
+
       ii += 1;
 
     classTypesTexts += '  return dbuf.err\n'
@@ -656,7 +731,11 @@ for restype in typesList:
   resClassTypesTexts2 += '  return dbuf.err\n'
   resClassTypesTexts2 += '}\n\n'
 
-  resClassTypesTexts += resClassTypesTexts2
+  resClassTypesTexts3 += '  }\n'
+  resClassTypesTexts3 += '  return\n'
+  resClassTypesTexts3 += '}\n\n'
+
+  resClassTypesTexts = resClassTypesTexts + resClassTypesTexts2 + resClassTypesTexts3
 
 classTypesTexts += '\n// RPC\n';
 for restype in funcsList:
@@ -679,11 +758,45 @@ for restype in funcsList:
     classTypesTexts += '  x.Int(int32(TLConstructor_CRC32_' + name + '))\n'
 
     ii = 1;
+
+    if (hasFlags):
+      classTypesTexts += '\n  var flags uint32 = 0\n';
+
     for paramName in prmsList:
       paramType = prms[paramName];
+      if (paramName in conditionsList):
+        if (paramType in ['bool']):
+          #print '  if m.' + to_proto_go_name(paramName) + ' == true {'
+          classTypesTexts += '  if m.' + to_proto_go_name(paramName) + ' == true {\n';
+        elif (paramType in ['int32', 'int64']):
+          #print '  if  m.' + to_proto_go_name(paramName) + ' != 0 {'
+          classTypesTexts += '  if  m.' + to_proto_go_name(paramName) + ' != 0 {\n';
+        elif (paramType in ['string']):
+          #print '  if  m.' + to_proto_go_name(paramName) + ' != "" {'
+          classTypesTexts += '  if  m.' + to_proto_go_name(paramName) + ' != "" {\n';
+        else:
+          #print '  if m.' + to_proto_go_name(paramName) + ' != nil {'
+          classTypesTexts += '  if m.' + to_proto_go_name(paramName) + ' != nil {\n';
+
+        classTypesTexts += '    flags |= 1<<' + conditions[paramName] + '\n';
+        classTypesTexts += '  }\n';
+
+    if (hasFlags):
+      classTypesTexts += '  x.UInt(flags)\n\n'
+
+    for paramName in prmsList:
+      if (paramName == 'flags'):
+        continue;
+
+      paramType = prms[paramName];
+
+      if (paramName in conditionsList):
+        classTypesTexts += '  if (flags & (1 << ' + conditions[paramName] + ')) != 0 {\n';
+
       if (paramType == 'bool'):
-        classTypesTexts += ''
-        #classTypesTexts += ' bool ' + paramName + ' = ' + str(ii) + ';\n';
+        if (paramName in conditionsList):
+          # classTypesTexts += '';
+          classTypesTexts += '   //  m.' + to_proto_go_name(paramName) + ' = true\n';
       elif (paramType =='int32'):
         classTypesTexts += '  x.Int(m.' +  to_proto_go_name(paramName) + ')\n';
       elif (paramType == 'int64'):
@@ -715,7 +828,7 @@ for restype in funcsList:
           classTypesTexts += '  // x.VectorMessage(m.' + to_proto_go_name(paramName) + ')\n';
 
           classTypesTexts += '  x%d := make([]byte, 8)\n' % (ii)
-          classTypesTexts += '  binary.LittleEndian.PutUint32(x%d, uint32(TLConstructor_CRC32_vector))\n' % (ii)
+          classTypesTexts += '  // binary.LittleEndian.PutUint32(x%d, uint32(TLConstructor_CRC32_vector))\n' % (ii)
           classTypesTexts += '  binary.LittleEndian.PutUint32(x%d[4:], uint32(len(m.%s)))\n' % (ii, to_proto_go_name(paramName))
           classTypesTexts += '  for _, v := range m.' + to_proto_go_name(paramName) + ' {\n'
           classTypesTexts += '     x.buf = append(x.buf, (*v).Encode()...)\n'
@@ -736,6 +849,9 @@ for restype in funcsList:
           # classTypesTexts += '  // 2. ' + paramType + ' ' + paramName + ' = ' + str(ii) + ';\n';
           classTypesTexts += '  x.Bytes(m.' + to_proto_go_name(paramName) + '.Encode())\n';
 
+      if (paramName in conditionsList):
+        classTypesTexts += '  }\n';
+
       ii += 1;
 
     classTypesTexts += '  return x.buf\n'
@@ -743,12 +859,24 @@ for restype in funcsList:
 
     classTypesTexts += 'func (m* TL' + to_proto_go_name(name) + ') Decode(dbuf *DecodeBuf) error {\n'; # type class declaration
 
+    if (hasFlags):
+      classTypesTexts += '  flags := dbuf.UInt()\n'
+      if (name=='messages_channelMessages'):
+        classTypesTexts += '  if flags != 0 {}\n'
+
     ii = 1;
     for paramName in prmsList:
       paramType = prms[paramName];
+      if (paramName == 'flags'):
+        continue;
+
+      if (paramName in conditionsList):
+        classTypesTexts += '  if (flags & (1 << ' + conditions[paramName] + ')) != 0 {\n';
+
       if (paramType == 'bool'):
-        classTypesTexts += ''
-        #classTypesTexts += ' bool ' + paramName + ' = ' + str(ii) + ';\n';
+        if (paramName in conditionsList):
+          # classTypesTexts += '';
+          classTypesTexts += '    m.' + to_proto_go_name(paramName) + ' = true\n';
       elif (paramType =='int32'):
         classTypesTexts += '  m.' +  to_proto_go_name(paramName) + ' = dbuf.Int()\n';
       elif (paramType == 'int64'):
@@ -782,9 +910,9 @@ for restype in funcsList:
           classTypesTexts += '  // x.VectorMessage(m.' + to_proto_go_name(paramName) + ')\n';
 
           classTypesTexts += '  c%d := dbuf.Int()\n' % (ii)
-          classTypesTexts += '  if c%d != int32(TLConstructor_CRC32_vector) {\n' % (ii)
-          classTypesTexts += '    return fmt.Errorf("Not vector, classID: ", c%d)\n' % (ii)
-          classTypesTexts += '  }\n'
+          classTypesTexts += '  // if c%d != int32(TLConstructor_CRC32_vector) {\n' % (ii)
+          classTypesTexts += '  //   return fmt.Errorf("Not vector, classID: ", c%d)\n' % (ii)
+          classTypesTexts += '  // }\n'
           classTypesTexts += '  l%d := dbuf.Int()\n' % (ii)
           classTypesTexts += '  m.%s = make([]*%s, l%d)\n' % (to_proto_go_name(paramName), to_proto_go_name(eptype), ii)
 
@@ -824,6 +952,9 @@ for restype in funcsList:
           # classTypesTexts += '  // 2. ' + paramType + ' ' + paramName + ' = ' + str(ii) + ';\n';
           classTypesTexts += '  // other!!!! x.Bytes(m.' + to_proto_go_name(paramName) + '.Encode())\n';
 
+      if (paramName in conditionsList):
+        classTypesTexts += '  }\n';
+
       ii += 1;
 
     classTypesTexts += '  return dbuf.err\n'
@@ -853,6 +984,7 @@ package mtproto\n\n\
 import ( \n\
   "encoding/binary" \n\
   "fmt" \n\
+  "github.com/golang/protobuf/proto"\n\
 )\n\n\
 type newTLObjectFunc func() TLObject\n\n\
 var registers2 = map[int32]newTLObjectFunc {\n\
