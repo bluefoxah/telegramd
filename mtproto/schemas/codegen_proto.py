@@ -53,7 +53,7 @@ if output_path == '':
   print('Output path required.')
   sys.exit(1)
 
-output_proto = output_path + '/schema.tl.proto'
+output_proto = output_path # + '/schema.tl.proto'
 
 # this is a map (key flags -> map (flag name -> flag bit))
 # each key flag of parentFlags should be a subset of the value flag here

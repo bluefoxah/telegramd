@@ -66,7 +66,7 @@ def to_proto_go_name(name):
       ss[i] = s[0:1].upper() + s[1:]
   return ''.join(ss)
 
-output_proto = output_path + '/codec_schema.tl.pb.go'
+output_proto = output_path # + '/codec_schema.tl.pb.go'
 
 # this is a map (key flags -> map (flag name -> flag bit))
 # each key flag of parentFlags should be a subset of the value flag here

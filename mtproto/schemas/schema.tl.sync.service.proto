@@ -1,0 +1,304 @@
+/*
+ * WARNING! All changes made in this file will be lost!
+ * Created from 'scheme.tl' by 'codegen_proto.py'
+ *
+ *  Copyright (c) 2017, https://github.com/nebulaim
+ *  All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3"; 
+
+package mtproto; 
+
+option java_package = "com.nebulaim.engine.mtproto";
+option java_outer_classname = "MTProto";
+option optimize_for = CODE_SIZE;
+
+import "schema.tl.core_types.proto";
+import "schema.tl.sync.proto";
+
+service RPCAuth {
+  rpc auth_checkPhone(TL_auth_checkPhone) returns (auth_CheckedPhone) {}
+  rpc auth_sendCode(TL_auth_sendCode) returns (auth_SentCode) {}
+  rpc auth_resendCode(TL_auth_resendCode) returns (auth_SentCode) {}
+  rpc auth_signUp(TL_auth_signUp) returns (auth_Authorization) {}
+  rpc auth_signIn(TL_auth_signIn) returns (auth_Authorization) {}
+  rpc auth_importAuthorization(TL_auth_importAuthorization) returns (auth_Authorization) {}
+  rpc auth_importBotAuthorization(TL_auth_importBotAuthorization) returns (auth_Authorization) {}
+  rpc auth_checkPassword(TL_auth_checkPassword) returns (auth_Authorization) {}
+  rpc auth_recoverPassword(TL_auth_recoverPassword) returns (auth_Authorization) {}
+  rpc auth_logOut(TL_auth_logOut) returns (Bool) {}
+  rpc auth_resetAuthorizations(TL_auth_resetAuthorizations) returns (Bool) {}
+  rpc auth_sendInvites(TL_auth_sendInvites) returns (Bool) {}
+  rpc auth_bindTempAuthKey(TL_auth_bindTempAuthKey) returns (Bool) {}
+  rpc auth_cancelCode(TL_auth_cancelCode) returns (Bool) {}
+  rpc auth_dropTempAuthKeys(TL_auth_dropTempAuthKeys) returns (Bool) {}
+  rpc auth_exportAuthorization(TL_auth_exportAuthorization) returns (auth_ExportedAuthorization) {}
+  rpc auth_requestPasswordRecovery(TL_auth_requestPasswordRecovery) returns (auth_PasswordRecovery) {}
+}
+
+service RPCAccount {
+  rpc account_sendChangePhoneCode(TL_account_sendChangePhoneCode) returns (auth_SentCode) {}
+  rpc account_sendConfirmPhoneCode(TL_account_sendConfirmPhoneCode) returns (auth_SentCode) {}
+  rpc account_registerDevice(TL_account_registerDevice) returns (Bool) {}
+  rpc account_unregisterDevice(TL_account_unregisterDevice) returns (Bool) {}
+  rpc account_updateNotifySettings(TL_account_updateNotifySettings) returns (Bool) {}
+  rpc account_resetNotifySettings(TL_account_resetNotifySettings) returns (Bool) {}
+  rpc account_updateStatus(TL_account_updateStatus) returns (Bool) {}
+  rpc account_reportPeer(TL_account_reportPeer) returns (Bool) {}
+  rpc account_checkUsername(TL_account_checkUsername) returns (Bool) {}
+  rpc account_deleteAccount(TL_account_deleteAccount) returns (Bool) {}
+  rpc account_setAccountTTL(TL_account_setAccountTTL) returns (Bool) {}
+  rpc account_updateDeviceLocked(TL_account_updateDeviceLocked) returns (Bool) {}
+  rpc account_resetAuthorization(TL_account_resetAuthorization) returns (Bool) {}
+  rpc account_updatePasswordSettings(TL_account_updatePasswordSettings) returns (Bool) {}
+  rpc account_confirmPhone(TL_account_confirmPhone) returns (Bool) {}
+  rpc account_getNotifySettings(TL_account_getNotifySettings) returns (PeerNotifySettings) {}
+  rpc account_updateProfile(TL_account_updateProfile) returns (User) {}
+  rpc account_updateUsername(TL_account_updateUsername) returns (User) {}
+  rpc account_changePhone(TL_account_changePhone) returns (User) {}
+  rpc contacts_importCard(TL_contacts_importCard) returns (User) {}
+  // rpc account_getWallPapers(TL_account_getWallPapers) returns (Vector<WallPaper>) {}
+  rpc account_getPrivacy(TL_account_getPrivacy) returns (account_PrivacyRules) {}
+  rpc account_setPrivacy(TL_account_setPrivacy) returns (account_PrivacyRules) {}
+  rpc account_getAccountTTL(TL_account_getAccountTTL) returns (AccountDaysTTL) {}
+  rpc account_getAuthorizations(TL_account_getAuthorizations) returns (account_Authorizations) {}
+  rpc account_getPassword(TL_account_getPassword) returns (account_Password) {}
+  rpc account_getPasswordSettings(TL_account_getPasswordSettings) returns (account_PasswordSettings) {}
+  rpc account_getTmpPassword(TL_account_getTmpPassword) returns (account_TmpPassword) {}
+}
+
+service RPCContacts {
+  rpc contacts_deleteContacts(TL_contacts_deleteContacts) returns (Bool) {}
+  rpc contacts_block(TL_contacts_block) returns (Bool) {}
+  rpc contacts_unblock(TL_contacts_unblock) returns (Bool) {}
+  rpc contacts_resetTopPeerRating(TL_contacts_resetTopPeerRating) returns (Bool) {}
+  rpc contacts_resetSaved(TL_contacts_resetSaved) returns (Bool) {}
+  // rpc contacts_getStatuses(TL_contacts_getStatuses) returns (Vector<ContactStatus>) {}
+  rpc contacts_getContacts(TL_contacts_getContacts) returns (contacts_Contacts) {}
+  rpc contacts_importContacts(TL_contacts_importContacts) returns (contacts_ImportedContacts) {}
+  rpc contacts_deleteContact(TL_contacts_deleteContact) returns (contacts_Link) {}
+  rpc contacts_getBlocked(TL_contacts_getBlocked) returns (contacts_Blocked) {}
+  // rpc contacts_exportCard(TL_contacts_exportCard) returns (Vector<int32_t>) {}
+  rpc contacts_search(TL_contacts_search) returns (contacts_Found) {}
+  rpc contacts_resolveUsername(TL_contacts_resolveUsername) returns (contacts_ResolvedPeer) {}
+  rpc contacts_getTopPeers(TL_contacts_getTopPeers) returns (contacts_TopPeers) {}
+}
+
+service RPCMessages {
+  rpc messages_setTyping(TL_messages_setTyping) returns (Bool) {}
+  rpc messages_reportSpam(TL_messages_reportSpam) returns (Bool) {}
+  rpc messages_hideReportSpam(TL_messages_hideReportSpam) returns (Bool) {}
+  rpc messages_discardEncryption(TL_messages_discardEncryption) returns (Bool) {}
+  rpc messages_setEncryptedTyping(TL_messages_setEncryptedTyping) returns (Bool) {}
+  rpc messages_readEncryptedHistory(TL_messages_readEncryptedHistory) returns (Bool) {}
+  rpc messages_reportEncryptedSpam(TL_messages_reportEncryptedSpam) returns (Bool) {}
+  rpc messages_uninstallStickerSet(TL_messages_uninstallStickerSet) returns (Bool) {}
+  rpc messages_editChatAdmin(TL_messages_editChatAdmin) returns (Bool) {}
+  rpc messages_reorderStickerSets(TL_messages_reorderStickerSets) returns (Bool) {}
+  rpc messages_saveGif(TL_messages_saveGif) returns (Bool) {}
+  rpc messages_setInlineBotResults(TL_messages_setInlineBotResults) returns (Bool) {}
+  rpc messages_editInlineBotMessage(TL_messages_editInlineBotMessage) returns (Bool) {}
+  rpc messages_setBotCallbackAnswer(TL_messages_setBotCallbackAnswer) returns (Bool) {}
+  rpc messages_saveDraft(TL_messages_saveDraft) returns (Bool) {}
+  rpc messages_readFeaturedStickers(TL_messages_readFeaturedStickers) returns (Bool) {}
+  rpc messages_saveRecentSticker(TL_messages_saveRecentSticker) returns (Bool) {}
+  rpc messages_clearRecentStickers(TL_messages_clearRecentStickers) returns (Bool) {}
+  rpc messages_setInlineGameScore(TL_messages_setInlineGameScore) returns (Bool) {}
+  rpc messages_toggleDialogPin(TL_messages_toggleDialogPin) returns (Bool) {}
+  rpc messages_reorderPinnedDialogs(TL_messages_reorderPinnedDialogs) returns (Bool) {}
+  rpc messages_setBotShippingResults(TL_messages_setBotShippingResults) returns (Bool) {}
+  rpc messages_setBotPrecheckoutResults(TL_messages_setBotPrecheckoutResults) returns (Bool) {}
+  rpc messages_faveSticker(TL_messages_faveSticker) returns (Bool) {}
+  // rpc messages_getMessagesViews(TL_messages_getMessagesViews) returns (Vector<int32_t>) {}
+  rpc messages_getMessages(TL_messages_getMessages) returns (messages_Messages) {}
+  rpc messages_getHistory(TL_messages_getHistory) returns (messages_Messages) {}
+  rpc messages_search(TL_messages_search) returns (messages_Messages) {}
+  rpc messages_searchGlobal(TL_messages_searchGlobal) returns (messages_Messages) {}
+  rpc messages_getUnreadMentions(TL_messages_getUnreadMentions) returns (messages_Messages) {}
+  rpc messages_getDialogs(TL_messages_getDialogs) returns (messages_Dialogs) {}
+  rpc messages_readHistory(TL_messages_readHistory) returns (messages_AffectedMessages) {}
+  rpc messages_deleteMessages(TL_messages_deleteMessages) returns (messages_AffectedMessages) {}
+  rpc messages_readMessageContents(TL_messages_readMessageContents) returns (messages_AffectedMessages) {}
+  rpc messages_deleteHistory(TL_messages_deleteHistory) returns (messages_AffectedHistory) {}
+  // rpc messages_receivedMessages(TL_messages_receivedMessages) returns (Vector<ReceivedNotifyMessage>) {}
+  rpc messages_sendMessage(TL_messages_sendMessage) returns (Updates) {}
+  rpc messages_sendMedia(TL_messages_sendMedia) returns (Updates) {}
+  rpc messages_forwardMessages(TL_messages_forwardMessages) returns (Updates) {}
+  rpc messages_editChatTitle(TL_messages_editChatTitle) returns (Updates) {}
+  rpc messages_editChatPhoto(TL_messages_editChatPhoto) returns (Updates) {}
+  rpc messages_addChatUser(TL_messages_addChatUser) returns (Updates) {}
+  rpc messages_deleteChatUser(TL_messages_deleteChatUser) returns (Updates) {}
+  rpc messages_createChat(TL_messages_createChat) returns (Updates) {}
+  rpc messages_forwardMessage(TL_messages_forwardMessage) returns (Updates) {}
+  rpc messages_importChatInvite(TL_messages_importChatInvite) returns (Updates) {}
+  rpc messages_startBot(TL_messages_startBot) returns (Updates) {}
+  rpc messages_toggleChatAdmins(TL_messages_toggleChatAdmins) returns (Updates) {}
+  rpc messages_migrateChat(TL_messages_migrateChat) returns (Updates) {}
+  rpc messages_sendInlineBotResult(TL_messages_sendInlineBotResult) returns (Updates) {}
+  rpc messages_editMessage(TL_messages_editMessage) returns (Updates) {}
+  rpc messages_getAllDrafts(TL_messages_getAllDrafts) returns (Updates) {}
+  rpc messages_setGameScore(TL_messages_setGameScore) returns (Updates) {}
+  rpc messages_sendScreenshotNotification(TL_messages_sendScreenshotNotification) returns (Updates) {}
+  rpc messages_getPeerSettings(TL_messages_getPeerSettings) returns (PeerSettings) {}
+  rpc messages_getChats(TL_messages_getChats) returns (messages_Chats) {}
+  rpc messages_getCommonChats(TL_messages_getCommonChats) returns (messages_Chats) {}
+  rpc messages_getAllChats(TL_messages_getAllChats) returns (messages_Chats) {}
+  rpc messages_getFullChat(TL_messages_getFullChat) returns (messages_ChatFull) {}
+  rpc messages_getDhConfig(TL_messages_getDhConfig) returns (messages_DhConfig) {}
+  rpc messages_requestEncryption(TL_messages_requestEncryption) returns (EncryptedChat) {}
+  rpc messages_acceptEncryption(TL_messages_acceptEncryption) returns (EncryptedChat) {}
+  rpc messages_sendEncrypted(TL_messages_sendEncrypted) returns (messages_SentEncryptedMessage) {}
+  rpc messages_sendEncryptedFile(TL_messages_sendEncryptedFile) returns (messages_SentEncryptedMessage) {}
+  rpc messages_sendEncryptedService(TL_messages_sendEncryptedService) returns (messages_SentEncryptedMessage) {}
+  // rpc messages_receivedQueue(TL_messages_receivedQueue) returns (Vector<int64_t>) {}
+  rpc messages_getAllStickers(TL_messages_getAllStickers) returns (messages_AllStickers) {}
+  rpc messages_getMaskStickers(TL_messages_getMaskStickers) returns (messages_AllStickers) {}
+  rpc messages_getWebPagePreview(TL_messages_getWebPagePreview) returns (MessageMedia) {}
+  rpc messages_uploadMedia(TL_messages_uploadMedia) returns (MessageMedia) {}
+  rpc messages_exportChatInvite(TL_messages_exportChatInvite) returns (ExportedChatInvite) {}
+  rpc messages_checkChatInvite(TL_messages_checkChatInvite) returns (ChatInvite) {}
+  rpc messages_getStickerSet(TL_messages_getStickerSet) returns (messages_StickerSet) {}
+  rpc messages_installStickerSet(TL_messages_installStickerSet) returns (messages_StickerSetInstallResult) {}
+  rpc messages_getDocumentByHash(TL_messages_getDocumentByHash) returns (Document) {}
+  rpc messages_searchGifs(TL_messages_searchGifs) returns (messages_FoundGifs) {}
+  rpc messages_getSavedGifs(TL_messages_getSavedGifs) returns (messages_SavedGifs) {}
+  rpc messages_getInlineBotResults(TL_messages_getInlineBotResults) returns (messages_BotResults) {}
+  rpc messages_getMessageEditData(TL_messages_getMessageEditData) returns (messages_MessageEditData) {}
+  rpc messages_getBotCallbackAnswer(TL_messages_getBotCallbackAnswer) returns (messages_BotCallbackAnswer) {}
+  rpc messages_getPeerDialogs(TL_messages_getPeerDialogs) returns (messages_PeerDialogs) {}
+  rpc messages_getPinnedDialogs(TL_messages_getPinnedDialogs) returns (messages_PeerDialogs) {}
+  rpc messages_getFeaturedStickers(TL_messages_getFeaturedStickers) returns (messages_FeaturedStickers) {}
+  rpc messages_getRecentStickers(TL_messages_getRecentStickers) returns (messages_RecentStickers) {}
+  rpc messages_getArchivedStickers(TL_messages_getArchivedStickers) returns (messages_ArchivedStickers) {}
+  // rpc messages_getAttachedStickers(TL_messages_getAttachedStickers) returns (Vector<StickerSetCovered>) {}
+  rpc messages_getGameHighScores(TL_messages_getGameHighScores) returns (messages_HighScores) {}
+  rpc messages_getInlineGameHighScores(TL_messages_getInlineGameHighScores) returns (messages_HighScores) {}
+  rpc messages_getWebPage(TL_messages_getWebPage) returns (WebPage) {}
+  rpc messages_getFavedStickers(TL_messages_getFavedStickers) returns (messages_FavedStickers) {}
+}
+
+service RPCUpload {
+  rpc upload_saveFilePart(TL_upload_saveFilePart) returns (Bool) {}
+  rpc upload_saveBigFilePart(TL_upload_saveBigFilePart) returns (Bool) {}
+  rpc upload_getFile(TL_upload_getFile) returns (upload_File) {}
+  rpc upload_getWebFile(TL_upload_getWebFile) returns (upload_WebFile) {}
+  rpc upload_getCdnFile(TL_upload_getCdnFile) returns (upload_CdnFile) {}
+  // rpc upload_reuploadCdnFile(TL_upload_reuploadCdnFile) returns (Vector<CdnFileHash>) {}
+  // rpc upload_getCdnFileHashes(TL_upload_getCdnFileHashes) returns (Vector<CdnFileHash>) {}
+}
+
+service RPCHelp {
+  rpc help_saveAppLog(TL_help_saveAppLog) returns (Bool) {}
+  rpc help_setBotUpdatesStatus(TL_help_setBotUpdatesStatus) returns (Bool) {}
+  rpc help_getAppChangelog(TL_help_getAppChangelog) returns (Updates) {}
+  rpc help_getConfig(TL_help_getConfig) returns (Config) {}
+  rpc help_getNearestDc(TL_help_getNearestDc) returns (NearestDc) {}
+  rpc help_getAppUpdate(TL_help_getAppUpdate) returns (help_AppUpdate) {}
+  rpc help_getInviteText(TL_help_getInviteText) returns (help_InviteText) {}
+  rpc help_getSupport(TL_help_getSupport) returns (help_Support) {}
+  rpc help_getTermsOfService(TL_help_getTermsOfService) returns (help_TermsOfService) {}
+  rpc help_getCdnConfig(TL_help_getCdnConfig) returns (CdnConfig) {}
+}
+
+service RPCChannels {
+  rpc channels_readHistory(TL_channels_readHistory) returns (Bool) {}
+  rpc channels_reportSpam(TL_channels_reportSpam) returns (Bool) {}
+  rpc channels_editAbout(TL_channels_editAbout) returns (Bool) {}
+  rpc channels_checkUsername(TL_channels_checkUsername) returns (Bool) {}
+  rpc channels_updateUsername(TL_channels_updateUsername) returns (Bool) {}
+  rpc channels_setStickers(TL_channels_setStickers) returns (Bool) {}
+  rpc channels_readMessageContents(TL_channels_readMessageContents) returns (Bool) {}
+  rpc channels_getMessages(TL_channels_getMessages) returns (messages_Messages) {}
+  rpc channels_deleteMessages(TL_channels_deleteMessages) returns (messages_AffectedMessages) {}
+  rpc channels_deleteUserHistory(TL_channels_deleteUserHistory) returns (messages_AffectedHistory) {}
+  rpc channels_createChannel(TL_channels_createChannel) returns (Updates) {}
+  rpc channels_editAdmin(TL_channels_editAdmin) returns (Updates) {}
+  rpc channels_editTitle(TL_channels_editTitle) returns (Updates) {}
+  rpc channels_editPhoto(TL_channels_editPhoto) returns (Updates) {}
+  rpc channels_joinChannel(TL_channels_joinChannel) returns (Updates) {}
+  rpc channels_leaveChannel(TL_channels_leaveChannel) returns (Updates) {}
+  rpc channels_inviteToChannel(TL_channels_inviteToChannel) returns (Updates) {}
+  rpc channels_deleteChannel(TL_channels_deleteChannel) returns (Updates) {}
+  rpc channels_toggleInvites(TL_channels_toggleInvites) returns (Updates) {}
+  rpc channels_toggleSignatures(TL_channels_toggleSignatures) returns (Updates) {}
+  rpc channels_updatePinnedMessage(TL_channels_updatePinnedMessage) returns (Updates) {}
+  rpc channels_editBanned(TL_channels_editBanned) returns (Updates) {}
+  rpc channels_getChannels(TL_channels_getChannels) returns (messages_Chats) {}
+  rpc channels_getAdminedPublicChannels(TL_channels_getAdminedPublicChannels) returns (messages_Chats) {}
+  rpc channels_getFullChannel(TL_channels_getFullChannel) returns (messages_ChatFull) {}
+  rpc channels_exportInvite(TL_channels_exportInvite) returns (ExportedChatInvite) {}
+  rpc channels_getParticipants(TL_channels_getParticipants) returns (channels_ChannelParticipants) {}
+  rpc channels_getParticipant(TL_channels_getParticipant) returns (channels_ChannelParticipant) {}
+  rpc channels_exportMessageLink(TL_channels_exportMessageLink) returns (ExportedMessageLink) {}
+  rpc channels_getAdminLog(TL_channels_getAdminLog) returns (channels_AdminLogResults) {}
+}
+
+service RPCBots {
+  rpc bots_answerWebhookJSONQuery(TL_bots_answerWebhookJSONQuery) returns (Bool) {}
+  rpc bots_sendCustomRequest(TL_bots_sendCustomRequest) returns (DataJSON) {}
+}
+
+service RPCPayments {
+  rpc payments_clearSavedInfo(TL_payments_clearSavedInfo) returns (Bool) {}
+  rpc payments_getPaymentForm(TL_payments_getPaymentForm) returns (payments_PaymentForm) {}
+  rpc payments_getPaymentReceipt(TL_payments_getPaymentReceipt) returns (payments_PaymentReceipt) {}
+  rpc payments_validateRequestedInfo(TL_payments_validateRequestedInfo) returns (payments_ValidatedRequestedInfo) {}
+  rpc payments_sendPaymentForm(TL_payments_sendPaymentForm) returns (payments_PaymentResult) {}
+  rpc payments_getSavedInfo(TL_payments_getSavedInfo) returns (payments_SavedInfo) {}
+}
+
+service RPCPhone {
+  rpc phone_receivedCall(TL_phone_receivedCall) returns (Bool) {}
+  rpc phone_saveCallDebug(TL_phone_saveCallDebug) returns (Bool) {}
+  rpc phone_discardCall(TL_phone_discardCall) returns (Updates) {}
+  rpc phone_setCallRating(TL_phone_setCallRating) returns (Updates) {}
+  rpc phone_getCallConfig(TL_phone_getCallConfig) returns (DataJSON) {}
+  rpc phone_requestCall(TL_phone_requestCall) returns (phone_PhoneCall) {}
+  rpc phone_acceptCall(TL_phone_acceptCall) returns (phone_PhoneCall) {}
+  rpc phone_confirmCall(TL_phone_confirmCall) returns (phone_PhoneCall) {}
+}
+
+service RPCUsers {
+  // rpc users_getUsers(TL_users_getUsers) returns (Vector<User>) {}
+  rpc users_getFullUser(TL_users_getFullUser) returns (UserFull) {}
+}
+
+service RPCPhotos {
+  // rpc photos_deletePhotos(TL_photos_deletePhotos) returns (Vector<int64_t>) {}
+  rpc photos_updateProfilePhoto(TL_photos_updateProfilePhoto) returns (UserProfilePhoto) {}
+  rpc photos_uploadProfilePhoto(TL_photos_uploadProfilePhoto) returns (photos_Photo) {}
+  rpc photos_getUserPhotos(TL_photos_getUserPhotos) returns (photos_Photos) {}
+}
+
+service RPCStickers {
+  rpc stickers_createStickerSet(TL_stickers_createStickerSet) returns (messages_StickerSet) {}
+  rpc stickers_removeStickerFromSet(TL_stickers_removeStickerFromSet) returns (messages_StickerSet) {}
+  rpc stickers_changeStickerPosition(TL_stickers_changeStickerPosition) returns (messages_StickerSet) {}
+  rpc stickers_addStickerToSet(TL_stickers_addStickerToSet) returns (messages_StickerSet) {}
+}
+
+service RPCUpdates {
+  rpc updates_getState(TL_updates_getState) returns (updates_State) {}
+  rpc updates_getDifference(TL_updates_getDifference) returns (updates_Difference) {}
+  rpc updates_getChannelDifference(TL_updates_getChannelDifference) returns (updates_ChannelDifference) {}
+}
+
+service RPCLangpack {
+  rpc langpack_getLangPack(TL_langpack_getLangPack) returns (LangPackDifference) {}
+  rpc langpack_getDifference(TL_langpack_getDifference) returns (LangPackDifference) {}
+  // rpc langpack_getStrings(TL_langpack_getStrings) returns (Vector<LangPackString>) {}
+  // rpc langpack_getLanguages(TL_langpack_getLanguages) returns (Vector<LangPackLanguage>) {}
+}

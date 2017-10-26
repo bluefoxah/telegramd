@@ -1,0 +1,311 @@
+/*
+ * WARNING! All changes made in this file will be lost!
+ * Created from 'scheme.tl' by 'codegen_proto.py'
+ *
+ *  Copyright (c) 2017, https://github.com/nebulaim
+ *  All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3"; 
+
+package mtproto; 
+
+option java_package = "com.nebulaim.engine.mtproto";
+option java_outer_classname = "MTProto";
+option optimize_for = CODE_SIZE;
+
+// Type forward declarations
+message MsgsAck {
+  oneof payload {
+    TL_msgs_ack msgs_ack = 1;
+  }
+}
+
+message BadMsgNotification {
+  oneof payload {
+    TL_bad_msg_notification bad_msg_notification = 1;
+    TL_bad_server_salt bad_server_salt = 2;
+  }
+}
+
+message MsgsStateReq {
+  oneof payload {
+    TL_msgs_state_req msgs_state_req = 1;
+  }
+}
+
+message MsgsStateInfo {
+  oneof payload {
+    TL_msgs_state_info msgs_state_info = 1;
+  }
+}
+
+message MsgsAllInfo {
+  oneof payload {
+    TL_msgs_all_info msgs_all_info = 1;
+  }
+}
+
+message MsgDetailedInfo {
+  oneof payload {
+    TL_msg_detailed_info msg_detailed_info = 1;
+    TL_msg_new_detailed_info msg_new_detailed_info = 2;
+  }
+}
+
+message MsgResendReq {
+  oneof payload {
+    TL_msg_resend_req msg_resend_req = 1;
+  }
+}
+
+message RpcError {
+  oneof payload {
+    TL_rpc_error rpc_error = 1;
+  }
+}
+
+message RpcDropAnswer {
+  oneof payload {
+    TL_rpc_answer_unknown rpc_answer_unknown = 1;
+    TL_rpc_answer_dropped_running rpc_answer_dropped_running = 2;
+    TL_rpc_answer_dropped rpc_answer_dropped = 3;
+  }
+}
+
+message FutureSalt {
+  oneof payload {
+    TL_future_salt future_salt = 1;
+  }
+}
+
+message FutureSalts {
+  oneof payload {
+    TL_future_salts future_salts = 1;
+  }
+}
+
+message Pong {
+  oneof payload {
+    TL_pong pong = 1;
+  }
+}
+
+message DestroySessionRes {
+  oneof payload {
+    TL_destroy_session_ok destroy_session_ok = 1;
+    TL_destroy_session_none destroy_session_none = 2;
+  }
+}
+
+message NewSession {
+  oneof payload {
+    TL_new_session_created new_session_created = 1;
+  }
+}
+
+message HttpWait {
+  oneof payload {
+    TL_http_wait http_wait = 1;
+  }
+}
+
+message IpPort {
+  oneof payload {
+    TL_ipPort ipPort = 1;
+  }
+}
+
+message help_ConfigSimple {
+  oneof payload {
+    TL_help_configSimple help_configSimple = 1;
+  }
+}
+
+
+
+// msgs_ack#62d6b459 msg_ids:Vector<long> = MsgsAck;
+message TL_msgs_ack {
+  repeated int64 msg_ids = 1;
+}
+
+// bad_msg_notification#a7eff811 bad_msg_id:long bad_msg_seqno:int error_code:int = BadMsgNotification;
+message TL_bad_msg_notification {
+  int64 bad_msg_id = 1;
+  int32 bad_msg_seqno = 2;
+  int32 error_code = 3;
+}
+
+// bad_server_salt#edab447b bad_msg_id:long bad_msg_seqno:int error_code:int new_server_salt:long = BadMsgNotification;
+message TL_bad_server_salt {
+  int64 bad_msg_id = 1;
+  int32 bad_msg_seqno = 2;
+  int32 error_code = 3;
+  int64 new_server_salt = 4;
+}
+
+// msgs_state_req#da69fb52 msg_ids:Vector<long> = MsgsStateReq;
+message TL_msgs_state_req {
+  repeated int64 msg_ids = 1;
+}
+
+// msgs_state_info#04deb57d req_msg_id:long info:string = MsgsStateInfo;
+message TL_msgs_state_info {
+  int64 req_msg_id = 1;
+  string info = 2;
+}
+
+// msgs_all_info#8cc0d131 msg_ids:Vector<long> info:string = MsgsAllInfo;
+message TL_msgs_all_info {
+  repeated int64 msg_ids = 1;
+  string info = 2;
+}
+
+// msg_detailed_info#276d3ec6 msg_id:long answer_msg_id:long bytes:int status:int = MsgDetailedInfo;
+message TL_msg_detailed_info {
+  int64 msg_id = 1;
+  int64 answer_msg_id = 2;
+  int32 bytes = 3;
+  int32 status = 4;
+}
+
+// msg_new_detailed_info#809db6df answer_msg_id:long bytes:int status:int = MsgDetailedInfo;
+message TL_msg_new_detailed_info {
+  int64 answer_msg_id = 1;
+  int32 bytes = 2;
+  int32 status = 3;
+}
+
+// msg_resend_req#7d861a08 msg_ids:Vector<long> = MsgResendReq;
+message TL_msg_resend_req {
+  repeated int64 msg_ids = 1;
+}
+
+// rpc_error#2144ca19 error_code:int error_message:string = RpcError;
+message TL_rpc_error {
+  int32 error_code = 1;
+  string error_message = 2;
+}
+
+// rpc_answer_unknown#5e2ad36e = RpcDropAnswer;
+message TL_rpc_answer_unknown {
+}
+
+// rpc_answer_dropped_running#cd78e586 = RpcDropAnswer;
+message TL_rpc_answer_dropped_running {
+}
+
+// rpc_answer_dropped#a43ad8b7 msg_id:long seq_no:int bytes:int = RpcDropAnswer;
+message TL_rpc_answer_dropped {
+  int64 msg_id = 1;
+  int32 seq_no = 2;
+  int32 bytes = 3;
+}
+
+// future_salt#0949d9dc valid_since:int valid_until:int salt:long = FutureSalt;
+message TL_future_salt {
+  int32 valid_since = 1;
+  int32 valid_until = 2;
+  int64 salt = 3;
+}
+
+// future_salts#ae500895 req_msg_id:long now:int salts:vector<future_salt> = FutureSalts;
+message TL_future_salts {
+  int64 req_msg_id = 1;
+  int32 now = 2;
+  repeated TL_future_salt salts = 3;
+}
+
+// pong#347773c5 msg_id:long ping_id:long = Pong;
+message TL_pong {
+  int64 msg_id = 1;
+  int64 ping_id = 2;
+}
+
+// destroy_session_ok#e22045fc session_id:long = DestroySessionRes;
+message TL_destroy_session_ok {
+  int64 session_id = 1;
+}
+
+// destroy_session_none#62d350c9 session_id:long = DestroySessionRes;
+message TL_destroy_session_none {
+  int64 session_id = 1;
+}
+
+// new_session_created#9ec20908 first_msg_id:long unique_id:long server_salt:long = NewSession;
+message TL_new_session_created {
+  int64 first_msg_id = 1;
+  int64 unique_id = 2;
+  int64 server_salt = 3;
+}
+
+// http_wait#9299359f max_delay:int wait_after:int max_wait:int = HttpWait;
+message TL_http_wait {
+  int32 max_delay = 1;
+  int32 wait_after = 2;
+  int32 max_wait = 3;
+}
+
+// ipPort#d433ad73 ipv4:int port:int = IpPort;
+message TL_ipPort {
+  int32 ipv4 = 1;
+  int32 port = 2;
+}
+
+// help.configSimple#d997c3c5 date:int expires:int dc_id:int ip_port_list:Vector<ipPort> = help.ConfigSimple;
+message TL_help_configSimple {
+  int32 date = 1;
+  int32 expires = 2;
+  int32 dc_id = 3;
+  repeated TL_ipPort ip_port_list = 4;
+}
+
+
+// RPC
+// rpc_drop_answer#58e4a740 req_msg_id:long = RpcDropAnswer;
+message TL_rpc_drop_answer {
+  int64 req_msg_id = 1;
+};
+
+// get_future_salts#b921bd04 num:int = FutureSalts;
+message TL_get_future_salts {
+  int32 num = 1;
+};
+
+// ping#7abe77ec ping_id:long = Pong;
+message TL_ping {
+  int64 ping_id = 1;
+};
+
+// ping_delay_disconnect#f3427b8c ping_id:long disconnect_delay:int = Pong;
+message TL_ping_delay_disconnect {
+  int64 ping_id = 1;
+  int32 disconnect_delay = 2;
+};
+
+// destroy_session#e7512126 session_id:long = DestroySessionRes;
+message TL_destroy_session {
+  int64 session_id = 1;
+};
+
+// contest.saveDeveloperInfo#9a5f6e95 vk_id:int name:string phone_number:string age:int city:string = Bool;
+message TL_contest_saveDeveloperInfo {
+  int32 vk_id = 1;
+  string name = 2;
+  string phone_number = 3;
+  int32 age = 4;
+  string city = 5;
+};
+
