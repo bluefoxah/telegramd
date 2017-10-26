@@ -21,24 +21,9 @@ import (
 	"github.com/golang/glog"
 	net2 "github.com/nebulaim/telegramd/net"
 	. "github.com/nebulaim/telegramd/mtproto"
-	"github.com/nebulaim/telegramd/base/crypto"
 	"github.com/nebulaim/telegramd/server/frontend/client"
 	"net"
-	"bytes"
-	"errors"
-	"math/big"
-	"time"
-	"crypto/sha1"
-	"encoding/hex"
-	"encoding/binary"
-	"fmt"
 )
-
-const (
-	SHA_DIGEST_LENGTH = 20
-)
-
-var rsa = crypto.NewRSACryptor()
 
 type Server struct {
 	Server        *net2.Server
@@ -140,7 +125,7 @@ func mtprotoSessionLoop(session *net2.Session) {
 			 CODEC_dh_gen_fail:
 
 			m, _ := msg.(*UnencryptedMessage)
-			err = processHandshake(client, m)
+			err = client.OnHandshake(m)
 			if err != nil {
 				return
 			}
@@ -149,10 +134,10 @@ func mtprotoSessionLoop(session *net2.Session) {
 			switch msg.(type) {
 			case *EncryptedMessage2:
 				m, _ := msg.(*EncryptedMessage2)
-				err = processEncryptedMessage(client, m)
+				err = client.OnEncryptedMessage(m)
 			case *UnencryptedMessage:
 				m, _ := msg.(*UnencryptedMessage)
-				err = processUnencryptedMessage(client, m)
+				err = client.OnUnencryptedMessage(m)
 			}
 
 			if err!= nil {
@@ -166,6 +151,7 @@ func mtprotoSessionLoop(session *net2.Session) {
 	}
 }
 
+/*
 // MsgsAck
 func processUnencryptedMessage(client *client.Client, request *UnencryptedMessage) error {
 	// var rspObject TLObject
@@ -659,3 +645,4 @@ func processGzipPacked(client *client.Client, request *EncryptedMessage2) error 
 
 	return nil
 }
+*/

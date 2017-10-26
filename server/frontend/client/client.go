@@ -23,6 +23,7 @@ import (
 	"net"
 	"github.com/golang/glog"
 	"math/big"
+	"errors"
 )
 //CODEC_UNKNOWN = iota
 //CODEC_req_pq
@@ -67,16 +68,88 @@ func NewClient(session *net2.Session) (c *Client) {
 	return c
 }
 
-func (c *Client) ProcessMessage(message *MTProtoMessage) error {
-	glog.Info("ProcessMessage")
-	//panic(message)
-	//// 状态
-	//switch message () {
-	//case 1:
-	//
-	//}
-	//if c.Codec.State == mtproto.CODEC_req_pq {
-	//}
+// handshake
+func (c *Client) OnHandshake(request *UnencryptedMessage) error {
+	var rspObject TLObject
+	switch request.Object.(type) {
+	case *TLMsgsAck:
+		msg_acks, _ := request.Object.(*TLMsgsAck)
+		c.onHandshakeMsgsAck(msg_acks)
+		return nil
+	case *TLReqPq:
+		rspObject = c.onReqPq(request)
+	case *TLReq_DHParams:
+		rspObject = c.onReq_DHParams(request)
+	case *TLSetClient_DHParams:
+		rspObject = c.onSetClient_DHParams(request)
+	default:
+		glog.Errorf("Invalid request!!!!")
+		rspObject = nil
+	}
 
+	if rspObject == nil {
+		return errors.New("handshake: process error!")
+	}
+
+	m := &UnencryptedMessage{
+		NeedAck : false,
+		Object:		rspObject,
+	}
+
+	return c.Session.Send(m)
+}
+
+// MsgsAck
+func (c *Client) OnUnencryptedMessage(request *UnencryptedMessage) error {
+	// var rspObject TLObject
+	switch request.Object.(type) {
+	case *TLMsgsAck:
+		msg_acks, _ := request.Object.(*TLMsgsAck)
+		c.onMsgsAck(msg_acks)
+	default:
+		glog.Info("processUnencryptedMessage - Recv authKey created message: ", *request)
+	}
 	return nil
+}
+
+func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
+	var rspObject TLObject
+
+	switch request.Object.(type) {
+	case *TLPing:
+		rspObject = c.onPing(request)
+	case *TLPingDelayDisconnect:
+		rspObject = c.onPingDelayDisconnect(request)
+	case *TLDestroySession:
+		rspObject = c.onDestroySession(request)
+	case *TLGetFutureSalts:
+		rspObject = c.onGetFutureSalts(request)
+	case *TLRpcDropAnswer:
+		rspObject = c.onRpcDropAnswer(request)
+	case *TLContestSaveDeveloperInfo:
+		rspObject = c.onContestSaveDeveloperInfo(request)
+	case *TLInvokeWithLayer:
+		return c.onInvokeWithLayer(request)
+	case *TLInvokeAfterMsg:
+		return c.onInvokeAfterMsg(request)
+	case *TLMsgContainer:
+		return c.onMsgContainer(request)
+	case *TLGzipPacked:
+		return c.onGzipPacked(request)
+	default:
+		glog.Error("processEncryptedMessage - Not impl processor")
+		rspObject = nil
+	}
+
+	if rspObject == nil {
+		return errors.New("processEncryptedMessage - process error!")
+	}
+
+	m := &EncryptedMessage2{
+		NeedAck : false,
+		SeqNo:	  request.SeqNo,
+		Object:   rspObject,
+	}
+
+	return c.Session.Send(m)
 }
