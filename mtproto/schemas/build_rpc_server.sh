@@ -26,3 +26,5 @@ gofmt -w ./server/updates_service_impl.go
 gofmt -w ./server/upload_service_impl.go
 ./codegen_rpc_server.py users -i ./scheme.tl -o ./server/users_service_impl.go
 gofmt -w ./server/users_service_impl.go
+./codegen_rpc_server.py help -i ./scheme.tl -o ./server/help_service_impl.go
+gofmt -w ./server/help_service_impl.go

@@ -24,7 +24,7 @@ import (
 	"github.com/golang/glog"
 	"math/big"
 	"errors"
-	"github.com/nebulaim/telegramd/server/frontend/rpc"
+	"github.com/nebulaim/telegramd/frontend/rpc"
 )
 //CODEC_UNKNOWN = iota
 //CODEC_req_pq
@@ -105,7 +105,7 @@ func (c *Client) OnUnencryptedMessage(request *UnencryptedMessage) error {
 	switch request.Object.(type) {
 	case *TLMsgsAck:
 		msg_acks, _ := request.Object.(*TLMsgsAck)
-		c.onMsgsAck(msg_acks)
+		c.onMsgsAck(request.MessageId, 0, msg_acks)
 	default:
 		glog.Info("processUnencryptedMessage - Recv authKey created message: ", *request)
 	}
@@ -113,34 +113,38 @@ func (c *Client) OnUnencryptedMessage(request *UnencryptedMessage) error {
 }
 
 func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
+	return c.OnMessage(request.MessageId, request.SeqNo, request.Object)
+}
+
+func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 	var reply TLObject
 	var err error
 
-	switch request.Object.(type) {
+	switch request.(type) {
 	case *TLPing:
-		reply = c.onPing(request)
+		reply = c.onPing(msgId, seqNo, request)
 	case *TLPingDelayDisconnect:
-		reply = c.onPingDelayDisconnect(request)
+		reply = c.onPingDelayDisconnect(msgId, seqNo, request)
 	case *TLDestroySession:
-		reply = c.onDestroySession(request)
+		reply = c.onDestroySession(msgId, seqNo, request)
 	case *TLGetFutureSalts:
-		reply = c.onGetFutureSalts(request)
+		reply = c.onGetFutureSalts(msgId, seqNo, request)
 	case *TLRpcDropAnswer:
-		reply = c.onRpcDropAnswer(request)
+		reply = c.onRpcDropAnswer(msgId, seqNo, request)
 	case *TLContestSaveDeveloperInfo:
-		reply = c.onContestSaveDeveloperInfo(request)
+		reply = c.onContestSaveDeveloperInfo(msgId, seqNo, request)
 	case *TLInvokeWithLayer:
-		return c.onInvokeWithLayer(request)
+		return c.onInvokeWithLayer(msgId, seqNo, request)
 	case *TLInvokeAfterMsg:
-		return c.onInvokeAfterMsg(request)
+		return c.onInvokeAfterMsg(msgId, seqNo, request)
 	case *TLMsgContainer:
-		return c.onMsgContainer(request)
+		return c.onMsgContainer(msgId, seqNo, request)
 	case *TLGzipPacked:
-		return c.onGzipPacked(request)
+		return c.onGzipPacked(msgId, seqNo, request)
 	default:
 		// glog.Error("processEncryptedMessage - Not impl processor")
 		// rspObject = nil
-		reply, err = c.RPCClient.Invoke(request.Object)
+		reply, err = c.RPCClient.Invoke(request)
 		if err != nil {
 			return err
 		}
@@ -152,7 +156,7 @@ func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
 
 	m := &EncryptedMessage2{
 		NeedAck : false,
-		SeqNo:	  request.SeqNo,
+		SeqNo:	  seqNo,
 		Object:   reply,
 	}
 

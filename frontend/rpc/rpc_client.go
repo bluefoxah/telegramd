@@ -23,7 +23,6 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 	"fmt"
 	"context"
-	"errors"
 )
 
 type RPCClient struct {
@@ -51,7 +50,7 @@ func (c* RPCClient) Invoke(object mtproto.TLObject) (mtproto.TLObject, error) {
 	}
 
 	r := t.NewReplyFunc()
-	err := c.conn.Invoke(context.Background(), t.Method, r, r)
+	err := c.conn.Invoke(context.Background(), t.Method, object, r)
 	if err != nil {
 		fmt.Errorf("%v.Invoke(_) = _, %v: \n", c.conn, err)
 	}

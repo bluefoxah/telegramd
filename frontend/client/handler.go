@@ -24,12 +24,12 @@ import (
 	. "github.com/nebulaim/telegramd/mtproto"
 )
 
-func (c *Client) onMsgsAck(request *TLMsgsAck) {
+func (c *Client) onMsgsAck(msgId int64, seqNo int32, request TLObject) {
 	glog.Info("processMsgsAck - request: %s", request.String())
 }
 
-func (c *Client) onPing(request *EncryptedMessage2) (TLObject) {
-	ping, _ := request.Object.(*TLPing)
+func (c *Client) onPing(msgId int64, seqNo int32, request TLObject) (TLObject) {
+	ping, _ := request.(*TLPing)
 	glog.Info("processPing - request data: ", ping.String())
 
 	pong := &TLPong{
@@ -39,8 +39,8 @@ func (c *Client) onPing(request *EncryptedMessage2) (TLObject) {
 	return pong
 }
 
-func (c *Client) onPingDelayDisconnect(request *EncryptedMessage2) (TLObject) {
-	pingDelayDissconnect, _ := request.Object.(*TLPingDelayDisconnect)
+func (c *Client) onPingDelayDisconnect(msgId int64, seqNo int32, request TLObject) (TLObject) {
+	pingDelayDissconnect, _ := request.(*TLPingDelayDisconnect)
 	glog.Info("processPingDelayDisconnect - request data: ", pingDelayDissconnect.String())
 
 	pong := &TLPong{
@@ -50,8 +50,8 @@ func (c *Client) onPingDelayDisconnect(request *EncryptedMessage2) (TLObject) {
 	return pong
 }
 
-func (c *Client) onDestroySession(request *EncryptedMessage2) (TLObject) {
-	destroySession, _ := request.Object.(*TLDestroySession)
+func (c *Client) onDestroySession(msgId int64, seqNo int32, request TLObject) (TLObject) {
+	destroySession, _ := request.(*TLDestroySession)
 	glog.Info("processDestroySession - request data: ", destroySession.String())
 
 	// TODO(@benqi): 实现destroySession处理逻辑
@@ -61,8 +61,8 @@ func (c *Client) onDestroySession(request *EncryptedMessage2) (TLObject) {
 	return destroy_session_ok
 }
 
-func (c *Client) onGetFutureSalts(request *EncryptedMessage2) (TLObject) {
-	getFutureSalts, _ := request.Object.(*TLGetFutureSalts)
+func (c *Client) onGetFutureSalts(msgId int64, seqNo int32, request TLObject) (TLObject) {
+	getFutureSalts, _ := request.(*TLGetFutureSalts)
 	glog.Info("processGetFutureSalts - request data: ", getFutureSalts.String())
 
 	// TODO(@benqi): 实现getFutureSalts处理逻辑
@@ -72,8 +72,8 @@ func (c *Client) onGetFutureSalts(request *EncryptedMessage2) (TLObject) {
 	return futureSalts
 }
 
-func (c *Client) onRpcDropAnswer(request *EncryptedMessage2) (TLObject) {
-	rpcDropAnswer, _ := request.Object.(*TLRpcDropAnswer)
+func (c *Client) onRpcDropAnswer(msgId int64, seqNo int32, request TLObject) (TLObject) {
+	rpcDropAnswer, _ := request.(*TLRpcDropAnswer)
 	glog.Info("processRpcDropAnswer - request data: ", rpcDropAnswer.String())
 
 	// TODO(@benqi): 实现rpcDropAnswer处理逻辑
@@ -81,8 +81,8 @@ func (c *Client) onRpcDropAnswer(request *EncryptedMessage2) (TLObject) {
 	return nil
 }
 
-func (c *Client) onContestSaveDeveloperInfo(request *EncryptedMessage2) (TLObject) {
-	contestSaveDeveloperInfo, _ := request.Object.(*TLContestSaveDeveloperInfo)
+func (c *Client) onContestSaveDeveloperInfo(msgId int64, seqNo int32, request TLObject) (TLObject) {
+	contestSaveDeveloperInfo, _ := request.(*TLContestSaveDeveloperInfo)
 	glog.Info("processGetFutureSalts - request data: ", contestSaveDeveloperInfo.String())
 
 	// TODO(@benqi): 实现scontestSaveDeveloperInfo处理逻辑
@@ -91,8 +91,8 @@ func (c *Client) onContestSaveDeveloperInfo(request *EncryptedMessage2) (TLObjec
 	return r
 }
 
-func (c *Client) onInvokeWithLayer(request *EncryptedMessage2) error {
-	invokeWithLayer, _ := request.Object.(*TLInvokeWithLayer)
+func (c *Client) onInvokeWithLayer(msgId int64, seqNo int32, request TLObject) error {
+	invokeWithLayer, _ := request.(*TLInvokeWithLayer)
 	glog.Info("processInvokeWithLayer - request data: ", invokeWithLayer.String())
 
 	// Check api layer
@@ -123,11 +123,14 @@ func (c *Client) onInvokeWithLayer(request *EncryptedMessage2) error {
 		return fmt.Errorf("Decode query error: %s", hex.EncodeToString(invokeWithLayer.Query))
 	}
 
+	// 
+	c.OnMessage(msgId, seqNo, query)
+
 	return nil
 }
 
-func (c *Client) onInvokeAfterMsg(request *EncryptedMessage2) error {
-	invokeAfterMsg, _ := request.Object.(*TLInvokeAfterMsg)
+func (c *Client) onInvokeAfterMsg(msgId int64, seqNo int32, request TLObject) error {
+	invokeAfterMsg, _ := request.(*TLInvokeAfterMsg)
 	glog.Info("processInvokeAfterMsg - request data: ", invokeAfterMsg.String())
 
 	if invokeAfterMsg.GetQuery() == nil {
@@ -143,15 +146,20 @@ func (c *Client) onInvokeAfterMsg(request *EncryptedMessage2) error {
 	return nil
 }
 
-func (c *Client) onMsgContainer(request *EncryptedMessage2) error {
-	msgContainer, _ := request.Object.(*TLMsgContainer)
+func (c *Client) onMsgContainer(msgId int64, seqNo int32, request TLObject) error {
+	msgContainer, _ := request.(*TLMsgContainer)
 	glog.Info("processMsgContainer - request data: ", msgContainer.String())
+
+
+	for _, m := range msgContainer.Messages {
+		c.OnMessage(m.MsgId, m.Seqno, m.Object)
+	}
 
 	return nil
 }
 
-func (c *Client) onGzipPacked(request *EncryptedMessage2) error {
-	gzipPacked, _ := request.Object.(*TLGzipPacked)
+func (c *Client) onGzipPacked(msgId int64, seqNo int32, request TLObject) error {
+	gzipPacked, _ := request.(*TLGzipPacked)
 	glog.Info("processGzipPacked - request data: ", gzipPacked.String())
 
 	return nil

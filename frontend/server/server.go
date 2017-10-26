@@ -21,9 +21,9 @@ import (
 	"github.com/golang/glog"
 	net2 "github.com/nebulaim/telegramd/net"
 	. "github.com/nebulaim/telegramd/mtproto"
-	"github.com/nebulaim/telegramd/server/frontend/client"
 	"net"
-	"github.com/nebulaim/telegramd/server/frontend/rpc"
+	"github.com/nebulaim/telegramd/frontend/rpc"
+	"github.com/nebulaim/telegramd/frontend/client"
 )
 
 type Server struct {
