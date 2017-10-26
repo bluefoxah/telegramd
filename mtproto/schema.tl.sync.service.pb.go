@@ -7,265 +7,7888 @@ import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import (
+	context "golang.org/x/net/context"
+	grpc "google.golang.org/grpc"
+)
+
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// Client API for RPCAuth service
+
+type RPCAuthClient interface {
+	AuthCheckPhone(ctx context.Context, in *TLAuthCheckPhone, opts ...grpc.CallOption) (*Auth_CheckedPhone, error)
+	AuthSendCode(ctx context.Context, in *TLAuthSendCode, opts ...grpc.CallOption) (*Auth_SentCode, error)
+	AuthResendCode(ctx context.Context, in *TLAuthResendCode, opts ...grpc.CallOption) (*Auth_SentCode, error)
+	AuthSignUp(ctx context.Context, in *TLAuthSignUp, opts ...grpc.CallOption) (*Auth_Authorization, error)
+	AuthSignIn(ctx context.Context, in *TLAuthSignIn, opts ...grpc.CallOption) (*Auth_Authorization, error)
+	AuthImportAuthorization(ctx context.Context, in *TLAuthImportAuthorization, opts ...grpc.CallOption) (*Auth_Authorization, error)
+	AuthImportBotAuthorization(ctx context.Context, in *TLAuthImportBotAuthorization, opts ...grpc.CallOption) (*Auth_Authorization, error)
+	AuthCheckPassword(ctx context.Context, in *TLAuthCheckPassword, opts ...grpc.CallOption) (*Auth_Authorization, error)
+	AuthRecoverPassword(ctx context.Context, in *TLAuthRecoverPassword, opts ...grpc.CallOption) (*Auth_Authorization, error)
+	AuthLogOut(ctx context.Context, in *TLAuthLogOut, opts ...grpc.CallOption) (*Bool, error)
+	AuthResetAuthorizations(ctx context.Context, in *TLAuthResetAuthorizations, opts ...grpc.CallOption) (*Bool, error)
+	AuthSendInvites(ctx context.Context, in *TLAuthSendInvites, opts ...grpc.CallOption) (*Bool, error)
+	AuthBindTempAuthKey(ctx context.Context, in *TLAuthBindTempAuthKey, opts ...grpc.CallOption) (*Bool, error)
+	AuthCancelCode(ctx context.Context, in *TLAuthCancelCode, opts ...grpc.CallOption) (*Bool, error)
+	AuthDropTempAuthKeys(ctx context.Context, in *TLAuthDropTempAuthKeys, opts ...grpc.CallOption) (*Bool, error)
+	AuthExportAuthorization(ctx context.Context, in *TLAuthExportAuthorization, opts ...grpc.CallOption) (*Auth_ExportedAuthorization, error)
+	AuthRequestPasswordRecovery(ctx context.Context, in *TLAuthRequestPasswordRecovery, opts ...grpc.CallOption) (*Auth_PasswordRecovery, error)
+}
+
+type rPCAuthClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRPCAuthClient(cc *grpc.ClientConn) RPCAuthClient {
+	return &rPCAuthClient{cc}
+}
+
+func (c *rPCAuthClient) AuthCheckPhone(ctx context.Context, in *TLAuthCheckPhone, opts ...grpc.CallOption) (*Auth_CheckedPhone, error) {
+	out := new(Auth_CheckedPhone)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_checkPhone", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthSendCode(ctx context.Context, in *TLAuthSendCode, opts ...grpc.CallOption) (*Auth_SentCode, error) {
+	out := new(Auth_SentCode)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_sendCode", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthResendCode(ctx context.Context, in *TLAuthResendCode, opts ...grpc.CallOption) (*Auth_SentCode, error) {
+	out := new(Auth_SentCode)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_resendCode", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthSignUp(ctx context.Context, in *TLAuthSignUp, opts ...grpc.CallOption) (*Auth_Authorization, error) {
+	out := new(Auth_Authorization)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_signUp", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthSignIn(ctx context.Context, in *TLAuthSignIn, opts ...grpc.CallOption) (*Auth_Authorization, error) {
+	out := new(Auth_Authorization)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_signIn", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthImportAuthorization(ctx context.Context, in *TLAuthImportAuthorization, opts ...grpc.CallOption) (*Auth_Authorization, error) {
+	out := new(Auth_Authorization)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_importAuthorization", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthImportBotAuthorization(ctx context.Context, in *TLAuthImportBotAuthorization, opts ...grpc.CallOption) (*Auth_Authorization, error) {
+	out := new(Auth_Authorization)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_importBotAuthorization", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthCheckPassword(ctx context.Context, in *TLAuthCheckPassword, opts ...grpc.CallOption) (*Auth_Authorization, error) {
+	out := new(Auth_Authorization)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_checkPassword", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthRecoverPassword(ctx context.Context, in *TLAuthRecoverPassword, opts ...grpc.CallOption) (*Auth_Authorization, error) {
+	out := new(Auth_Authorization)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_recoverPassword", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthLogOut(ctx context.Context, in *TLAuthLogOut, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_logOut", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthResetAuthorizations(ctx context.Context, in *TLAuthResetAuthorizations, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_resetAuthorizations", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthSendInvites(ctx context.Context, in *TLAuthSendInvites, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_sendInvites", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthBindTempAuthKey(ctx context.Context, in *TLAuthBindTempAuthKey, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_bindTempAuthKey", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthCancelCode(ctx context.Context, in *TLAuthCancelCode, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_cancelCode", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthDropTempAuthKeys(ctx context.Context, in *TLAuthDropTempAuthKeys, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_dropTempAuthKeys", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthExportAuthorization(ctx context.Context, in *TLAuthExportAuthorization, opts ...grpc.CallOption) (*Auth_ExportedAuthorization, error) {
+	out := new(Auth_ExportedAuthorization)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_exportAuthorization", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAuthClient) AuthRequestPasswordRecovery(ctx context.Context, in *TLAuthRequestPasswordRecovery, opts ...grpc.CallOption) (*Auth_PasswordRecovery, error) {
+	out := new(Auth_PasswordRecovery)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAuth/auth_requestPasswordRecovery", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for RPCAuth service
+
+type RPCAuthServer interface {
+	AuthCheckPhone(context.Context, *TLAuthCheckPhone) (*Auth_CheckedPhone, error)
+	AuthSendCode(context.Context, *TLAuthSendCode) (*Auth_SentCode, error)
+	AuthResendCode(context.Context, *TLAuthResendCode) (*Auth_SentCode, error)
+	AuthSignUp(context.Context, *TLAuthSignUp) (*Auth_Authorization, error)
+	AuthSignIn(context.Context, *TLAuthSignIn) (*Auth_Authorization, error)
+	AuthImportAuthorization(context.Context, *TLAuthImportAuthorization) (*Auth_Authorization, error)
+	AuthImportBotAuthorization(context.Context, *TLAuthImportBotAuthorization) (*Auth_Authorization, error)
+	AuthCheckPassword(context.Context, *TLAuthCheckPassword) (*Auth_Authorization, error)
+	AuthRecoverPassword(context.Context, *TLAuthRecoverPassword) (*Auth_Authorization, error)
+	AuthLogOut(context.Context, *TLAuthLogOut) (*Bool, error)
+	AuthResetAuthorizations(context.Context, *TLAuthResetAuthorizations) (*Bool, error)
+	AuthSendInvites(context.Context, *TLAuthSendInvites) (*Bool, error)
+	AuthBindTempAuthKey(context.Context, *TLAuthBindTempAuthKey) (*Bool, error)
+	AuthCancelCode(context.Context, *TLAuthCancelCode) (*Bool, error)
+	AuthDropTempAuthKeys(context.Context, *TLAuthDropTempAuthKeys) (*Bool, error)
+	AuthExportAuthorization(context.Context, *TLAuthExportAuthorization) (*Auth_ExportedAuthorization, error)
+	AuthRequestPasswordRecovery(context.Context, *TLAuthRequestPasswordRecovery) (*Auth_PasswordRecovery, error)
+}
+
+func RegisterRPCAuthServer(s *grpc.Server, srv RPCAuthServer) {
+	s.RegisterService(&_RPCAuth_serviceDesc, srv)
+}
+
+func _RPCAuth_AuthCheckPhone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthCheckPhone)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthCheckPhone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthCheckPhone",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthCheckPhone(ctx, req.(*TLAuthCheckPhone))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthSendCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthSendCode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthSendCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthSendCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthSendCode(ctx, req.(*TLAuthSendCode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthResendCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthResendCode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthResendCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthResendCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthResendCode(ctx, req.(*TLAuthResendCode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthSignUp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthSignUp)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthSignUp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthSignUp",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthSignUp(ctx, req.(*TLAuthSignUp))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthSignIn_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthSignIn)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthSignIn(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthSignIn",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthSignIn(ctx, req.(*TLAuthSignIn))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthImportAuthorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthImportAuthorization)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthImportAuthorization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthImportAuthorization",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthImportAuthorization(ctx, req.(*TLAuthImportAuthorization))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthImportBotAuthorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthImportBotAuthorization)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthImportBotAuthorization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthImportBotAuthorization",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthImportBotAuthorization(ctx, req.(*TLAuthImportBotAuthorization))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthCheckPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthCheckPassword)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthCheckPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthCheckPassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthCheckPassword(ctx, req.(*TLAuthCheckPassword))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthRecoverPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthRecoverPassword)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthRecoverPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthRecoverPassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthRecoverPassword(ctx, req.(*TLAuthRecoverPassword))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthLogOut_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthLogOut)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthLogOut(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthLogOut",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthLogOut(ctx, req.(*TLAuthLogOut))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthResetAuthorizations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthResetAuthorizations)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthResetAuthorizations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthResetAuthorizations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthResetAuthorizations(ctx, req.(*TLAuthResetAuthorizations))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthSendInvites_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthSendInvites)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthSendInvites(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthSendInvites",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthSendInvites(ctx, req.(*TLAuthSendInvites))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthBindTempAuthKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthBindTempAuthKey)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthBindTempAuthKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthBindTempAuthKey",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthBindTempAuthKey(ctx, req.(*TLAuthBindTempAuthKey))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthCancelCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthCancelCode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthCancelCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthCancelCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthCancelCode(ctx, req.(*TLAuthCancelCode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthDropTempAuthKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthDropTempAuthKeys)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthDropTempAuthKeys(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthDropTempAuthKeys",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthDropTempAuthKeys(ctx, req.(*TLAuthDropTempAuthKeys))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthExportAuthorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthExportAuthorization)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthExportAuthorization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthExportAuthorization",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthExportAuthorization(ctx, req.(*TLAuthExportAuthorization))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAuth_AuthRequestPasswordRecovery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAuthRequestPasswordRecovery)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAuthServer).AuthRequestPasswordRecovery(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAuth/AuthRequestPasswordRecovery",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAuthServer).AuthRequestPasswordRecovery(ctx, req.(*TLAuthRequestPasswordRecovery))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RPCAuth_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mtproto.RPCAuth",
+	HandlerType: (*RPCAuthServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "auth_checkPhone",
+			Handler:    _RPCAuth_AuthCheckPhone_Handler,
+		},
+		{
+			MethodName: "auth_sendCode",
+			Handler:    _RPCAuth_AuthSendCode_Handler,
+		},
+		{
+			MethodName: "auth_resendCode",
+			Handler:    _RPCAuth_AuthResendCode_Handler,
+		},
+		{
+			MethodName: "auth_signUp",
+			Handler:    _RPCAuth_AuthSignUp_Handler,
+		},
+		{
+			MethodName: "auth_signIn",
+			Handler:    _RPCAuth_AuthSignIn_Handler,
+		},
+		{
+			MethodName: "auth_importAuthorization",
+			Handler:    _RPCAuth_AuthImportAuthorization_Handler,
+		},
+		{
+			MethodName: "auth_importBotAuthorization",
+			Handler:    _RPCAuth_AuthImportBotAuthorization_Handler,
+		},
+		{
+			MethodName: "auth_checkPassword",
+			Handler:    _RPCAuth_AuthCheckPassword_Handler,
+		},
+		{
+			MethodName: "auth_recoverPassword",
+			Handler:    _RPCAuth_AuthRecoverPassword_Handler,
+		},
+		{
+			MethodName: "auth_logOut",
+			Handler:    _RPCAuth_AuthLogOut_Handler,
+		},
+		{
+			MethodName: "auth_resetAuthorizations",
+			Handler:    _RPCAuth_AuthResetAuthorizations_Handler,
+		},
+		{
+			MethodName: "auth_sendInvites",
+			Handler:    _RPCAuth_AuthSendInvites_Handler,
+		},
+		{
+			MethodName: "auth_bindTempAuthKey",
+			Handler:    _RPCAuth_AuthBindTempAuthKey_Handler,
+		},
+		{
+			MethodName: "auth_cancelCode",
+			Handler:    _RPCAuth_AuthCancelCode_Handler,
+		},
+		{
+			MethodName: "auth_dropTempAuthKeys",
+			Handler:    _RPCAuth_AuthDropTempAuthKeys_Handler,
+		},
+		{
+			MethodName: "auth_exportAuthorization",
+			Handler:    _RPCAuth_AuthExportAuthorization_Handler,
+		},
+		{
+			MethodName: "auth_requestPasswordRecovery",
+			Handler:    _RPCAuth_AuthRequestPasswordRecovery_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "schema.tl.sync.service.proto",
+}
+
+// Client API for RPCAccount service
+
+type RPCAccountClient interface {
+	AccountSendChangePhoneCode(ctx context.Context, in *TLAccountSendChangePhoneCode, opts ...grpc.CallOption) (*Auth_SentCode, error)
+	AccountSendConfirmPhoneCode(ctx context.Context, in *TLAccountSendConfirmPhoneCode, opts ...grpc.CallOption) (*Auth_SentCode, error)
+	AccountRegisterDevice(ctx context.Context, in *TLAccountRegisterDevice, opts ...grpc.CallOption) (*Bool, error)
+	AccountUnregisterDevice(ctx context.Context, in *TLAccountUnregisterDevice, opts ...grpc.CallOption) (*Bool, error)
+	AccountUpdateNotifySettings(ctx context.Context, in *TLAccountUpdateNotifySettings, opts ...grpc.CallOption) (*Bool, error)
+	AccountResetNotifySettings(ctx context.Context, in *TLAccountResetNotifySettings, opts ...grpc.CallOption) (*Bool, error)
+	AccountUpdateStatus(ctx context.Context, in *TLAccountUpdateStatus, opts ...grpc.CallOption) (*Bool, error)
+	AccountReportPeer(ctx context.Context, in *TLAccountReportPeer, opts ...grpc.CallOption) (*Bool, error)
+	AccountCheckUsername(ctx context.Context, in *TLAccountCheckUsername, opts ...grpc.CallOption) (*Bool, error)
+	AccountDeleteAccount(ctx context.Context, in *TLAccountDeleteAccount, opts ...grpc.CallOption) (*Bool, error)
+	AccountSetAccountTTL(ctx context.Context, in *TLAccountSetAccountTTL, opts ...grpc.CallOption) (*Bool, error)
+	AccountUpdateDeviceLocked(ctx context.Context, in *TLAccountUpdateDeviceLocked, opts ...grpc.CallOption) (*Bool, error)
+	AccountResetAuthorization(ctx context.Context, in *TLAccountResetAuthorization, opts ...grpc.CallOption) (*Bool, error)
+	AccountUpdatePasswordSettings(ctx context.Context, in *TLAccountUpdatePasswordSettings, opts ...grpc.CallOption) (*Bool, error)
+	AccountConfirmPhone(ctx context.Context, in *TLAccountConfirmPhone, opts ...grpc.CallOption) (*Bool, error)
+	AccountGetNotifySettings(ctx context.Context, in *TLAccountGetNotifySettings, opts ...grpc.CallOption) (*PeerNotifySettings, error)
+	AccountUpdateProfile(ctx context.Context, in *TLAccountUpdateProfile, opts ...grpc.CallOption) (*User, error)
+	AccountUpdateUsername(ctx context.Context, in *TLAccountUpdateUsername, opts ...grpc.CallOption) (*User, error)
+	AccountChangePhone(ctx context.Context, in *TLAccountChangePhone, opts ...grpc.CallOption) (*User, error)
+	// rpc account_getWallPapers(TL_account_getWallPapers) returns (Vector<WallPaper>) {}
+	AccountGetPrivacy(ctx context.Context, in *TLAccountGetPrivacy, opts ...grpc.CallOption) (*Account_PrivacyRules, error)
+	AccountSetPrivacy(ctx context.Context, in *TLAccountSetPrivacy, opts ...grpc.CallOption) (*Account_PrivacyRules, error)
+	AccountGetAccountTTL(ctx context.Context, in *TLAccountGetAccountTTL, opts ...grpc.CallOption) (*AccountDaysTTL, error)
+	AccountGetAuthorizations(ctx context.Context, in *TLAccountGetAuthorizations, opts ...grpc.CallOption) (*Account_Authorizations, error)
+	AccountGetPassword(ctx context.Context, in *TLAccountGetPassword, opts ...grpc.CallOption) (*Account_Password, error)
+	AccountGetPasswordSettings(ctx context.Context, in *TLAccountGetPasswordSettings, opts ...grpc.CallOption) (*Account_PasswordSettings, error)
+	AccountGetTmpPassword(ctx context.Context, in *TLAccountGetTmpPassword, opts ...grpc.CallOption) (*Account_TmpPassword, error)
+}
+
+type rPCAccountClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRPCAccountClient(cc *grpc.ClientConn) RPCAccountClient {
+	return &rPCAccountClient{cc}
+}
+
+func (c *rPCAccountClient) AccountSendChangePhoneCode(ctx context.Context, in *TLAccountSendChangePhoneCode, opts ...grpc.CallOption) (*Auth_SentCode, error) {
+	out := new(Auth_SentCode)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_sendChangePhoneCode", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountSendConfirmPhoneCode(ctx context.Context, in *TLAccountSendConfirmPhoneCode, opts ...grpc.CallOption) (*Auth_SentCode, error) {
+	out := new(Auth_SentCode)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_sendConfirmPhoneCode", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountRegisterDevice(ctx context.Context, in *TLAccountRegisterDevice, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_registerDevice", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountUnregisterDevice(ctx context.Context, in *TLAccountUnregisterDevice, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_unregisterDevice", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountUpdateNotifySettings(ctx context.Context, in *TLAccountUpdateNotifySettings, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_updateNotifySettings", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountResetNotifySettings(ctx context.Context, in *TLAccountResetNotifySettings, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_resetNotifySettings", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountUpdateStatus(ctx context.Context, in *TLAccountUpdateStatus, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_updateStatus", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountReportPeer(ctx context.Context, in *TLAccountReportPeer, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_reportPeer", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountCheckUsername(ctx context.Context, in *TLAccountCheckUsername, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_checkUsername", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountDeleteAccount(ctx context.Context, in *TLAccountDeleteAccount, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_deleteAccount", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountSetAccountTTL(ctx context.Context, in *TLAccountSetAccountTTL, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_setAccountTTL", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountUpdateDeviceLocked(ctx context.Context, in *TLAccountUpdateDeviceLocked, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_updateDeviceLocked", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountResetAuthorization(ctx context.Context, in *TLAccountResetAuthorization, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_resetAuthorization", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountUpdatePasswordSettings(ctx context.Context, in *TLAccountUpdatePasswordSettings, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_updatePasswordSettings", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountConfirmPhone(ctx context.Context, in *TLAccountConfirmPhone, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_confirmPhone", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountGetNotifySettings(ctx context.Context, in *TLAccountGetNotifySettings, opts ...grpc.CallOption) (*PeerNotifySettings, error) {
+	out := new(PeerNotifySettings)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_getNotifySettings", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountUpdateProfile(ctx context.Context, in *TLAccountUpdateProfile, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_updateProfile", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountUpdateUsername(ctx context.Context, in *TLAccountUpdateUsername, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_updateUsername", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountChangePhone(ctx context.Context, in *TLAccountChangePhone, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_changePhone", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountGetPrivacy(ctx context.Context, in *TLAccountGetPrivacy, opts ...grpc.CallOption) (*Account_PrivacyRules, error) {
+	out := new(Account_PrivacyRules)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_getPrivacy", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountSetPrivacy(ctx context.Context, in *TLAccountSetPrivacy, opts ...grpc.CallOption) (*Account_PrivacyRules, error) {
+	out := new(Account_PrivacyRules)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_setPrivacy", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountGetAccountTTL(ctx context.Context, in *TLAccountGetAccountTTL, opts ...grpc.CallOption) (*AccountDaysTTL, error) {
+	out := new(AccountDaysTTL)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_getAccountTTL", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountGetAuthorizations(ctx context.Context, in *TLAccountGetAuthorizations, opts ...grpc.CallOption) (*Account_Authorizations, error) {
+	out := new(Account_Authorizations)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_getAuthorizations", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountGetPassword(ctx context.Context, in *TLAccountGetPassword, opts ...grpc.CallOption) (*Account_Password, error) {
+	out := new(Account_Password)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_getPassword", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountGetPasswordSettings(ctx context.Context, in *TLAccountGetPasswordSettings, opts ...grpc.CallOption) (*Account_PasswordSettings, error) {
+	out := new(Account_PasswordSettings)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_getPasswordSettings", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCAccountClient) AccountGetTmpPassword(ctx context.Context, in *TLAccountGetTmpPassword, opts ...grpc.CallOption) (*Account_TmpPassword, error) {
+	out := new(Account_TmpPassword)
+	err := grpc.Invoke(ctx, "/mtproto.RPCAccount/account_getTmpPassword", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for RPCAccount service
+
+type RPCAccountServer interface {
+	AccountSendChangePhoneCode(context.Context, *TLAccountSendChangePhoneCode) (*Auth_SentCode, error)
+	AccountSendConfirmPhoneCode(context.Context, *TLAccountSendConfirmPhoneCode) (*Auth_SentCode, error)
+	AccountRegisterDevice(context.Context, *TLAccountRegisterDevice) (*Bool, error)
+	AccountUnregisterDevice(context.Context, *TLAccountUnregisterDevice) (*Bool, error)
+	AccountUpdateNotifySettings(context.Context, *TLAccountUpdateNotifySettings) (*Bool, error)
+	AccountResetNotifySettings(context.Context, *TLAccountResetNotifySettings) (*Bool, error)
+	AccountUpdateStatus(context.Context, *TLAccountUpdateStatus) (*Bool, error)
+	AccountReportPeer(context.Context, *TLAccountReportPeer) (*Bool, error)
+	AccountCheckUsername(context.Context, *TLAccountCheckUsername) (*Bool, error)
+	AccountDeleteAccount(context.Context, *TLAccountDeleteAccount) (*Bool, error)
+	AccountSetAccountTTL(context.Context, *TLAccountSetAccountTTL) (*Bool, error)
+	AccountUpdateDeviceLocked(context.Context, *TLAccountUpdateDeviceLocked) (*Bool, error)
+	AccountResetAuthorization(context.Context, *TLAccountResetAuthorization) (*Bool, error)
+	AccountUpdatePasswordSettings(context.Context, *TLAccountUpdatePasswordSettings) (*Bool, error)
+	AccountConfirmPhone(context.Context, *TLAccountConfirmPhone) (*Bool, error)
+	AccountGetNotifySettings(context.Context, *TLAccountGetNotifySettings) (*PeerNotifySettings, error)
+	AccountUpdateProfile(context.Context, *TLAccountUpdateProfile) (*User, error)
+	AccountUpdateUsername(context.Context, *TLAccountUpdateUsername) (*User, error)
+	AccountChangePhone(context.Context, *TLAccountChangePhone) (*User, error)
+	// rpc account_getWallPapers(TL_account_getWallPapers) returns (Vector<WallPaper>) {}
+	AccountGetPrivacy(context.Context, *TLAccountGetPrivacy) (*Account_PrivacyRules, error)
+	AccountSetPrivacy(context.Context, *TLAccountSetPrivacy) (*Account_PrivacyRules, error)
+	AccountGetAccountTTL(context.Context, *TLAccountGetAccountTTL) (*AccountDaysTTL, error)
+	AccountGetAuthorizations(context.Context, *TLAccountGetAuthorizations) (*Account_Authorizations, error)
+	AccountGetPassword(context.Context, *TLAccountGetPassword) (*Account_Password, error)
+	AccountGetPasswordSettings(context.Context, *TLAccountGetPasswordSettings) (*Account_PasswordSettings, error)
+	AccountGetTmpPassword(context.Context, *TLAccountGetTmpPassword) (*Account_TmpPassword, error)
+}
+
+func RegisterRPCAccountServer(s *grpc.Server, srv RPCAccountServer) {
+	s.RegisterService(&_RPCAccount_serviceDesc, srv)
+}
+
+func _RPCAccount_AccountSendChangePhoneCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountSendChangePhoneCode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountSendChangePhoneCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountSendChangePhoneCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountSendChangePhoneCode(ctx, req.(*TLAccountSendChangePhoneCode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountSendConfirmPhoneCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountSendConfirmPhoneCode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountSendConfirmPhoneCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountSendConfirmPhoneCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountSendConfirmPhoneCode(ctx, req.(*TLAccountSendConfirmPhoneCode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountRegisterDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountRegisterDevice)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountRegisterDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountRegisterDevice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountRegisterDevice(ctx, req.(*TLAccountRegisterDevice))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountUnregisterDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountUnregisterDevice)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountUnregisterDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountUnregisterDevice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountUnregisterDevice(ctx, req.(*TLAccountUnregisterDevice))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountUpdateNotifySettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountUpdateNotifySettings)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountUpdateNotifySettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountUpdateNotifySettings",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountUpdateNotifySettings(ctx, req.(*TLAccountUpdateNotifySettings))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountResetNotifySettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountResetNotifySettings)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountResetNotifySettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountResetNotifySettings",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountResetNotifySettings(ctx, req.(*TLAccountResetNotifySettings))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountUpdateStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountUpdateStatus)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountUpdateStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountUpdateStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountUpdateStatus(ctx, req.(*TLAccountUpdateStatus))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountReportPeer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountReportPeer)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountReportPeer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountReportPeer",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountReportPeer(ctx, req.(*TLAccountReportPeer))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountCheckUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountCheckUsername)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountCheckUsername(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountCheckUsername",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountCheckUsername(ctx, req.(*TLAccountCheckUsername))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountDeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountDeleteAccount)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountDeleteAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountDeleteAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountDeleteAccount(ctx, req.(*TLAccountDeleteAccount))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountSetAccountTTL_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountSetAccountTTL)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountSetAccountTTL(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountSetAccountTTL",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountSetAccountTTL(ctx, req.(*TLAccountSetAccountTTL))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountUpdateDeviceLocked_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountUpdateDeviceLocked)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountUpdateDeviceLocked(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountUpdateDeviceLocked",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountUpdateDeviceLocked(ctx, req.(*TLAccountUpdateDeviceLocked))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountResetAuthorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountResetAuthorization)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountResetAuthorization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountResetAuthorization",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountResetAuthorization(ctx, req.(*TLAccountResetAuthorization))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountUpdatePasswordSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountUpdatePasswordSettings)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountUpdatePasswordSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountUpdatePasswordSettings",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountUpdatePasswordSettings(ctx, req.(*TLAccountUpdatePasswordSettings))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountConfirmPhone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountConfirmPhone)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountConfirmPhone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountConfirmPhone",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountConfirmPhone(ctx, req.(*TLAccountConfirmPhone))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountGetNotifySettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountGetNotifySettings)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountGetNotifySettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountGetNotifySettings",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountGetNotifySettings(ctx, req.(*TLAccountGetNotifySettings))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountUpdateProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountUpdateProfile)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountUpdateProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountUpdateProfile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountUpdateProfile(ctx, req.(*TLAccountUpdateProfile))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountUpdateUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountUpdateUsername)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountUpdateUsername(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountUpdateUsername",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountUpdateUsername(ctx, req.(*TLAccountUpdateUsername))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountChangePhone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountChangePhone)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountChangePhone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountChangePhone",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountChangePhone(ctx, req.(*TLAccountChangePhone))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountGetPrivacy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountGetPrivacy)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountGetPrivacy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountGetPrivacy",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountGetPrivacy(ctx, req.(*TLAccountGetPrivacy))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountSetPrivacy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountSetPrivacy)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountSetPrivacy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountSetPrivacy",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountSetPrivacy(ctx, req.(*TLAccountSetPrivacy))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountGetAccountTTL_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountGetAccountTTL)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountGetAccountTTL(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountGetAccountTTL",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountGetAccountTTL(ctx, req.(*TLAccountGetAccountTTL))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountGetAuthorizations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountGetAuthorizations)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountGetAuthorizations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountGetAuthorizations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountGetAuthorizations(ctx, req.(*TLAccountGetAuthorizations))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountGetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountGetPassword)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountGetPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountGetPassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountGetPassword(ctx, req.(*TLAccountGetPassword))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountGetPasswordSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountGetPasswordSettings)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountGetPasswordSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountGetPasswordSettings",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountGetPasswordSettings(ctx, req.(*TLAccountGetPasswordSettings))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCAccount_AccountGetTmpPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLAccountGetTmpPassword)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCAccountServer).AccountGetTmpPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCAccount/AccountGetTmpPassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCAccountServer).AccountGetTmpPassword(ctx, req.(*TLAccountGetTmpPassword))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RPCAccount_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mtproto.RPCAccount",
+	HandlerType: (*RPCAccountServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "account_sendChangePhoneCode",
+			Handler:    _RPCAccount_AccountSendChangePhoneCode_Handler,
+		},
+		{
+			MethodName: "account_sendConfirmPhoneCode",
+			Handler:    _RPCAccount_AccountSendConfirmPhoneCode_Handler,
+		},
+		{
+			MethodName: "account_registerDevice",
+			Handler:    _RPCAccount_AccountRegisterDevice_Handler,
+		},
+		{
+			MethodName: "account_unregisterDevice",
+			Handler:    _RPCAccount_AccountUnregisterDevice_Handler,
+		},
+		{
+			MethodName: "account_updateNotifySettings",
+			Handler:    _RPCAccount_AccountUpdateNotifySettings_Handler,
+		},
+		{
+			MethodName: "account_resetNotifySettings",
+			Handler:    _RPCAccount_AccountResetNotifySettings_Handler,
+		},
+		{
+			MethodName: "account_updateStatus",
+			Handler:    _RPCAccount_AccountUpdateStatus_Handler,
+		},
+		{
+			MethodName: "account_reportPeer",
+			Handler:    _RPCAccount_AccountReportPeer_Handler,
+		},
+		{
+			MethodName: "account_checkUsername",
+			Handler:    _RPCAccount_AccountCheckUsername_Handler,
+		},
+		{
+			MethodName: "account_deleteAccount",
+			Handler:    _RPCAccount_AccountDeleteAccount_Handler,
+		},
+		{
+			MethodName: "account_setAccountTTL",
+			Handler:    _RPCAccount_AccountSetAccountTTL_Handler,
+		},
+		{
+			MethodName: "account_updateDeviceLocked",
+			Handler:    _RPCAccount_AccountUpdateDeviceLocked_Handler,
+		},
+		{
+			MethodName: "account_resetAuthorization",
+			Handler:    _RPCAccount_AccountResetAuthorization_Handler,
+		},
+		{
+			MethodName: "account_updatePasswordSettings",
+			Handler:    _RPCAccount_AccountUpdatePasswordSettings_Handler,
+		},
+		{
+			MethodName: "account_confirmPhone",
+			Handler:    _RPCAccount_AccountConfirmPhone_Handler,
+		},
+		{
+			MethodName: "account_getNotifySettings",
+			Handler:    _RPCAccount_AccountGetNotifySettings_Handler,
+		},
+		{
+			MethodName: "account_updateProfile",
+			Handler:    _RPCAccount_AccountUpdateProfile_Handler,
+		},
+		{
+			MethodName: "account_updateUsername",
+			Handler:    _RPCAccount_AccountUpdateUsername_Handler,
+		},
+		{
+			MethodName: "account_changePhone",
+			Handler:    _RPCAccount_AccountChangePhone_Handler,
+		},
+		{
+			MethodName: "account_getPrivacy",
+			Handler:    _RPCAccount_AccountGetPrivacy_Handler,
+		},
+		{
+			MethodName: "account_setPrivacy",
+			Handler:    _RPCAccount_AccountSetPrivacy_Handler,
+		},
+		{
+			MethodName: "account_getAccountTTL",
+			Handler:    _RPCAccount_AccountGetAccountTTL_Handler,
+		},
+		{
+			MethodName: "account_getAuthorizations",
+			Handler:    _RPCAccount_AccountGetAuthorizations_Handler,
+		},
+		{
+			MethodName: "account_getPassword",
+			Handler:    _RPCAccount_AccountGetPassword_Handler,
+		},
+		{
+			MethodName: "account_getPasswordSettings",
+			Handler:    _RPCAccount_AccountGetPasswordSettings_Handler,
+		},
+		{
+			MethodName: "account_getTmpPassword",
+			Handler:    _RPCAccount_AccountGetTmpPassword_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "schema.tl.sync.service.proto",
+}
+
+// Client API for RPCContacts service
+
+type RPCContactsClient interface {
+	ContactsDeleteContacts(ctx context.Context, in *TLContactsDeleteContacts, opts ...grpc.CallOption) (*Bool, error)
+	ContactsBlock(ctx context.Context, in *TLContactsBlock, opts ...grpc.CallOption) (*Bool, error)
+	ContactsUnblock(ctx context.Context, in *TLContactsUnblock, opts ...grpc.CallOption) (*Bool, error)
+	ContactsResetTopPeerRating(ctx context.Context, in *TLContactsResetTopPeerRating, opts ...grpc.CallOption) (*Bool, error)
+	ContactsResetSaved(ctx context.Context, in *TLContactsResetSaved, opts ...grpc.CallOption) (*Bool, error)
+	// rpc contacts_getStatuses(TL_contacts_getStatuses) returns (Vector<ContactStatus>) {}
+	ContactsGetContacts(ctx context.Context, in *TLContactsGetContacts, opts ...grpc.CallOption) (*Contacts_Contacts, error)
+	ContactsImportContacts(ctx context.Context, in *TLContactsImportContacts, opts ...grpc.CallOption) (*Contacts_ImportedContacts, error)
+	ContactsDeleteContact(ctx context.Context, in *TLContactsDeleteContact, opts ...grpc.CallOption) (*Contacts_Link, error)
+	ContactsGetBlocked(ctx context.Context, in *TLContactsGetBlocked, opts ...grpc.CallOption) (*Contacts_Blocked, error)
+	// rpc contacts_exportCard(TL_contacts_exportCard) returns (Vector<int32_t>) {}
+	ContactsSearch(ctx context.Context, in *TLContactsSearch, opts ...grpc.CallOption) (*Contacts_Found, error)
+	ContactsResolveUsername(ctx context.Context, in *TLContactsResolveUsername, opts ...grpc.CallOption) (*Contacts_ResolvedPeer, error)
+	ContactsGetTopPeers(ctx context.Context, in *TLContactsGetTopPeers, opts ...grpc.CallOption) (*Contacts_TopPeers, error)
+	ContactsImportCard(ctx context.Context, in *TLContactsImportCard, opts ...grpc.CallOption) (*User, error)
+}
+
+type rPCContactsClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRPCContactsClient(cc *grpc.ClientConn) RPCContactsClient {
+	return &rPCContactsClient{cc}
+}
+
+func (c *rPCContactsClient) ContactsDeleteContacts(ctx context.Context, in *TLContactsDeleteContacts, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCContacts/contacts_deleteContacts", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCContactsClient) ContactsBlock(ctx context.Context, in *TLContactsBlock, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCContacts/contacts_block", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCContactsClient) ContactsUnblock(ctx context.Context, in *TLContactsUnblock, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCContacts/contacts_unblock", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCContactsClient) ContactsResetTopPeerRating(ctx context.Context, in *TLContactsResetTopPeerRating, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCContacts/contacts_resetTopPeerRating", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCContactsClient) ContactsResetSaved(ctx context.Context, in *TLContactsResetSaved, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCContacts/contacts_resetSaved", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCContactsClient) ContactsGetContacts(ctx context.Context, in *TLContactsGetContacts, opts ...grpc.CallOption) (*Contacts_Contacts, error) {
+	out := new(Contacts_Contacts)
+	err := grpc.Invoke(ctx, "/mtproto.RPCContacts/contacts_getContacts", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCContactsClient) ContactsImportContacts(ctx context.Context, in *TLContactsImportContacts, opts ...grpc.CallOption) (*Contacts_ImportedContacts, error) {
+	out := new(Contacts_ImportedContacts)
+	err := grpc.Invoke(ctx, "/mtproto.RPCContacts/contacts_importContacts", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCContactsClient) ContactsDeleteContact(ctx context.Context, in *TLContactsDeleteContact, opts ...grpc.CallOption) (*Contacts_Link, error) {
+	out := new(Contacts_Link)
+	err := grpc.Invoke(ctx, "/mtproto.RPCContacts/contacts_deleteContact", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCContactsClient) ContactsGetBlocked(ctx context.Context, in *TLContactsGetBlocked, opts ...grpc.CallOption) (*Contacts_Blocked, error) {
+	out := new(Contacts_Blocked)
+	err := grpc.Invoke(ctx, "/mtproto.RPCContacts/contacts_getBlocked", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCContactsClient) ContactsSearch(ctx context.Context, in *TLContactsSearch, opts ...grpc.CallOption) (*Contacts_Found, error) {
+	out := new(Contacts_Found)
+	err := grpc.Invoke(ctx, "/mtproto.RPCContacts/contacts_search", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCContactsClient) ContactsResolveUsername(ctx context.Context, in *TLContactsResolveUsername, opts ...grpc.CallOption) (*Contacts_ResolvedPeer, error) {
+	out := new(Contacts_ResolvedPeer)
+	err := grpc.Invoke(ctx, "/mtproto.RPCContacts/contacts_resolveUsername", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCContactsClient) ContactsGetTopPeers(ctx context.Context, in *TLContactsGetTopPeers, opts ...grpc.CallOption) (*Contacts_TopPeers, error) {
+	out := new(Contacts_TopPeers)
+	err := grpc.Invoke(ctx, "/mtproto.RPCContacts/contacts_getTopPeers", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCContactsClient) ContactsImportCard(ctx context.Context, in *TLContactsImportCard, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
+	err := grpc.Invoke(ctx, "/mtproto.RPCContacts/contacts_importCard", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for RPCContacts service
+
+type RPCContactsServer interface {
+	ContactsDeleteContacts(context.Context, *TLContactsDeleteContacts) (*Bool, error)
+	ContactsBlock(context.Context, *TLContactsBlock) (*Bool, error)
+	ContactsUnblock(context.Context, *TLContactsUnblock) (*Bool, error)
+	ContactsResetTopPeerRating(context.Context, *TLContactsResetTopPeerRating) (*Bool, error)
+	ContactsResetSaved(context.Context, *TLContactsResetSaved) (*Bool, error)
+	// rpc contacts_getStatuses(TL_contacts_getStatuses) returns (Vector<ContactStatus>) {}
+	ContactsGetContacts(context.Context, *TLContactsGetContacts) (*Contacts_Contacts, error)
+	ContactsImportContacts(context.Context, *TLContactsImportContacts) (*Contacts_ImportedContacts, error)
+	ContactsDeleteContact(context.Context, *TLContactsDeleteContact) (*Contacts_Link, error)
+	ContactsGetBlocked(context.Context, *TLContactsGetBlocked) (*Contacts_Blocked, error)
+	// rpc contacts_exportCard(TL_contacts_exportCard) returns (Vector<int32_t>) {}
+	ContactsSearch(context.Context, *TLContactsSearch) (*Contacts_Found, error)
+	ContactsResolveUsername(context.Context, *TLContactsResolveUsername) (*Contacts_ResolvedPeer, error)
+	ContactsGetTopPeers(context.Context, *TLContactsGetTopPeers) (*Contacts_TopPeers, error)
+	ContactsImportCard(context.Context, *TLContactsImportCard) (*User, error)
+}
+
+func RegisterRPCContactsServer(s *grpc.Server, srv RPCContactsServer) {
+	s.RegisterService(&_RPCContacts_serviceDesc, srv)
+}
+
+func _RPCContacts_ContactsDeleteContacts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLContactsDeleteContacts)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCContactsServer).ContactsDeleteContacts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCContacts/ContactsDeleteContacts",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCContactsServer).ContactsDeleteContacts(ctx, req.(*TLContactsDeleteContacts))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCContacts_ContactsBlock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLContactsBlock)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCContactsServer).ContactsBlock(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCContacts/ContactsBlock",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCContactsServer).ContactsBlock(ctx, req.(*TLContactsBlock))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCContacts_ContactsUnblock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLContactsUnblock)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCContactsServer).ContactsUnblock(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCContacts/ContactsUnblock",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCContactsServer).ContactsUnblock(ctx, req.(*TLContactsUnblock))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCContacts_ContactsResetTopPeerRating_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLContactsResetTopPeerRating)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCContactsServer).ContactsResetTopPeerRating(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCContacts/ContactsResetTopPeerRating",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCContactsServer).ContactsResetTopPeerRating(ctx, req.(*TLContactsResetTopPeerRating))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCContacts_ContactsResetSaved_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLContactsResetSaved)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCContactsServer).ContactsResetSaved(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCContacts/ContactsResetSaved",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCContactsServer).ContactsResetSaved(ctx, req.(*TLContactsResetSaved))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCContacts_ContactsGetContacts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLContactsGetContacts)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCContactsServer).ContactsGetContacts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCContacts/ContactsGetContacts",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCContactsServer).ContactsGetContacts(ctx, req.(*TLContactsGetContacts))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCContacts_ContactsImportContacts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLContactsImportContacts)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCContactsServer).ContactsImportContacts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCContacts/ContactsImportContacts",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCContactsServer).ContactsImportContacts(ctx, req.(*TLContactsImportContacts))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCContacts_ContactsDeleteContact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLContactsDeleteContact)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCContactsServer).ContactsDeleteContact(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCContacts/ContactsDeleteContact",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCContactsServer).ContactsDeleteContact(ctx, req.(*TLContactsDeleteContact))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCContacts_ContactsGetBlocked_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLContactsGetBlocked)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCContactsServer).ContactsGetBlocked(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCContacts/ContactsGetBlocked",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCContactsServer).ContactsGetBlocked(ctx, req.(*TLContactsGetBlocked))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCContacts_ContactsSearch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLContactsSearch)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCContactsServer).ContactsSearch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCContacts/ContactsSearch",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCContactsServer).ContactsSearch(ctx, req.(*TLContactsSearch))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCContacts_ContactsResolveUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLContactsResolveUsername)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCContactsServer).ContactsResolveUsername(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCContacts/ContactsResolveUsername",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCContactsServer).ContactsResolveUsername(ctx, req.(*TLContactsResolveUsername))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCContacts_ContactsGetTopPeers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLContactsGetTopPeers)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCContactsServer).ContactsGetTopPeers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCContacts/ContactsGetTopPeers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCContactsServer).ContactsGetTopPeers(ctx, req.(*TLContactsGetTopPeers))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCContacts_ContactsImportCard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLContactsImportCard)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCContactsServer).ContactsImportCard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCContacts/ContactsImportCard",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCContactsServer).ContactsImportCard(ctx, req.(*TLContactsImportCard))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RPCContacts_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mtproto.RPCContacts",
+	HandlerType: (*RPCContactsServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "contacts_deleteContacts",
+			Handler:    _RPCContacts_ContactsDeleteContacts_Handler,
+		},
+		{
+			MethodName: "contacts_block",
+			Handler:    _RPCContacts_ContactsBlock_Handler,
+		},
+		{
+			MethodName: "contacts_unblock",
+			Handler:    _RPCContacts_ContactsUnblock_Handler,
+		},
+		{
+			MethodName: "contacts_resetTopPeerRating",
+			Handler:    _RPCContacts_ContactsResetTopPeerRating_Handler,
+		},
+		{
+			MethodName: "contacts_resetSaved",
+			Handler:    _RPCContacts_ContactsResetSaved_Handler,
+		},
+		{
+			MethodName: "contacts_getContacts",
+			Handler:    _RPCContacts_ContactsGetContacts_Handler,
+		},
+		{
+			MethodName: "contacts_importContacts",
+			Handler:    _RPCContacts_ContactsImportContacts_Handler,
+		},
+		{
+			MethodName: "contacts_deleteContact",
+			Handler:    _RPCContacts_ContactsDeleteContact_Handler,
+		},
+		{
+			MethodName: "contacts_getBlocked",
+			Handler:    _RPCContacts_ContactsGetBlocked_Handler,
+		},
+		{
+			MethodName: "contacts_search",
+			Handler:    _RPCContacts_ContactsSearch_Handler,
+		},
+		{
+			MethodName: "contacts_resolveUsername",
+			Handler:    _RPCContacts_ContactsResolveUsername_Handler,
+		},
+		{
+			MethodName: "contacts_getTopPeers",
+			Handler:    _RPCContacts_ContactsGetTopPeers_Handler,
+		},
+		{
+			MethodName: "contacts_importCard",
+			Handler:    _RPCContacts_ContactsImportCard_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "schema.tl.sync.service.proto",
+}
+
+// Client API for RPCMessages service
+
+type RPCMessagesClient interface {
+	MessagesSetTyping(ctx context.Context, in *TLMessagesSetTyping, opts ...grpc.CallOption) (*Bool, error)
+	MessagesReportSpam(ctx context.Context, in *TLMessagesReportSpam, opts ...grpc.CallOption) (*Bool, error)
+	MessagesHideReportSpam(ctx context.Context, in *TLMessagesHideReportSpam, opts ...grpc.CallOption) (*Bool, error)
+	MessagesDiscardEncryption(ctx context.Context, in *TLMessagesDiscardEncryption, opts ...grpc.CallOption) (*Bool, error)
+	MessagesSetEncryptedTyping(ctx context.Context, in *TLMessagesSetEncryptedTyping, opts ...grpc.CallOption) (*Bool, error)
+	MessagesReadEncryptedHistory(ctx context.Context, in *TLMessagesReadEncryptedHistory, opts ...grpc.CallOption) (*Bool, error)
+	MessagesReportEncryptedSpam(ctx context.Context, in *TLMessagesReportEncryptedSpam, opts ...grpc.CallOption) (*Bool, error)
+	MessagesUninstallStickerSet(ctx context.Context, in *TLMessagesUninstallStickerSet, opts ...grpc.CallOption) (*Bool, error)
+	MessagesEditChatAdmin(ctx context.Context, in *TLMessagesEditChatAdmin, opts ...grpc.CallOption) (*Bool, error)
+	MessagesReorderStickerSets(ctx context.Context, in *TLMessagesReorderStickerSets, opts ...grpc.CallOption) (*Bool, error)
+	MessagesSaveGif(ctx context.Context, in *TLMessagesSaveGif, opts ...grpc.CallOption) (*Bool, error)
+	MessagesSetInlineBotResults(ctx context.Context, in *TLMessagesSetInlineBotResults, opts ...grpc.CallOption) (*Bool, error)
+	MessagesEditInlineBotMessage(ctx context.Context, in *TLMessagesEditInlineBotMessage, opts ...grpc.CallOption) (*Bool, error)
+	MessagesSetBotCallbackAnswer(ctx context.Context, in *TLMessagesSetBotCallbackAnswer, opts ...grpc.CallOption) (*Bool, error)
+	MessagesSaveDraft(ctx context.Context, in *TLMessagesSaveDraft, opts ...grpc.CallOption) (*Bool, error)
+	MessagesReadFeaturedStickers(ctx context.Context, in *TLMessagesReadFeaturedStickers, opts ...grpc.CallOption) (*Bool, error)
+	MessagesSaveRecentSticker(ctx context.Context, in *TLMessagesSaveRecentSticker, opts ...grpc.CallOption) (*Bool, error)
+	MessagesClearRecentStickers(ctx context.Context, in *TLMessagesClearRecentStickers, opts ...grpc.CallOption) (*Bool, error)
+	MessagesSetInlineGameScore(ctx context.Context, in *TLMessagesSetInlineGameScore, opts ...grpc.CallOption) (*Bool, error)
+	MessagesToggleDialogPin(ctx context.Context, in *TLMessagesToggleDialogPin, opts ...grpc.CallOption) (*Bool, error)
+	MessagesReorderPinnedDialogs(ctx context.Context, in *TLMessagesReorderPinnedDialogs, opts ...grpc.CallOption) (*Bool, error)
+	MessagesSetBotShippingResults(ctx context.Context, in *TLMessagesSetBotShippingResults, opts ...grpc.CallOption) (*Bool, error)
+	MessagesSetBotPrecheckoutResults(ctx context.Context, in *TLMessagesSetBotPrecheckoutResults, opts ...grpc.CallOption) (*Bool, error)
+	MessagesFaveSticker(ctx context.Context, in *TLMessagesFaveSticker, opts ...grpc.CallOption) (*Bool, error)
+	// rpc messages_getMessagesViews(TL_messages_getMessagesViews) returns (Vector<int32_t>) {}
+	MessagesGetMessages(ctx context.Context, in *TLMessagesGetMessages, opts ...grpc.CallOption) (*Messages_Messages, error)
+	MessagesGetHistory(ctx context.Context, in *TLMessagesGetHistory, opts ...grpc.CallOption) (*Messages_Messages, error)
+	MessagesSearch(ctx context.Context, in *TLMessagesSearch, opts ...grpc.CallOption) (*Messages_Messages, error)
+	MessagesSearchGlobal(ctx context.Context, in *TLMessagesSearchGlobal, opts ...grpc.CallOption) (*Messages_Messages, error)
+	MessagesGetUnreadMentions(ctx context.Context, in *TLMessagesGetUnreadMentions, opts ...grpc.CallOption) (*Messages_Messages, error)
+	MessagesGetDialogs(ctx context.Context, in *TLMessagesGetDialogs, opts ...grpc.CallOption) (*Messages_Dialogs, error)
+	MessagesReadHistory(ctx context.Context, in *TLMessagesReadHistory, opts ...grpc.CallOption) (*Messages_AffectedMessages, error)
+	MessagesDeleteMessages(ctx context.Context, in *TLMessagesDeleteMessages, opts ...grpc.CallOption) (*Messages_AffectedMessages, error)
+	MessagesReadMessageContents(ctx context.Context, in *TLMessagesReadMessageContents, opts ...grpc.CallOption) (*Messages_AffectedMessages, error)
+	MessagesDeleteHistory(ctx context.Context, in *TLMessagesDeleteHistory, opts ...grpc.CallOption) (*Messages_AffectedHistory, error)
+	// rpc messages_receivedMessages(TL_messages_receivedMessages) returns (Vector<ReceivedNotifyMessage>) {}
+	MessagesSendMessage(ctx context.Context, in *TLMessagesSendMessage, opts ...grpc.CallOption) (*Updates, error)
+	MessagesSendMedia(ctx context.Context, in *TLMessagesSendMedia, opts ...grpc.CallOption) (*Updates, error)
+	MessagesForwardMessages(ctx context.Context, in *TLMessagesForwardMessages, opts ...grpc.CallOption) (*Updates, error)
+	MessagesEditChatTitle(ctx context.Context, in *TLMessagesEditChatTitle, opts ...grpc.CallOption) (*Updates, error)
+	MessagesEditChatPhoto(ctx context.Context, in *TLMessagesEditChatPhoto, opts ...grpc.CallOption) (*Updates, error)
+	MessagesAddChatUser(ctx context.Context, in *TLMessagesAddChatUser, opts ...grpc.CallOption) (*Updates, error)
+	MessagesDeleteChatUser(ctx context.Context, in *TLMessagesDeleteChatUser, opts ...grpc.CallOption) (*Updates, error)
+	MessagesCreateChat(ctx context.Context, in *TLMessagesCreateChat, opts ...grpc.CallOption) (*Updates, error)
+	MessagesForwardMessage(ctx context.Context, in *TLMessagesForwardMessage, opts ...grpc.CallOption) (*Updates, error)
+	MessagesImportChatInvite(ctx context.Context, in *TLMessagesImportChatInvite, opts ...grpc.CallOption) (*Updates, error)
+	MessagesStartBot(ctx context.Context, in *TLMessagesStartBot, opts ...grpc.CallOption) (*Updates, error)
+	MessagesToggleChatAdmins(ctx context.Context, in *TLMessagesToggleChatAdmins, opts ...grpc.CallOption) (*Updates, error)
+	MessagesMigrateChat(ctx context.Context, in *TLMessagesMigrateChat, opts ...grpc.CallOption) (*Updates, error)
+	MessagesSendInlineBotResult(ctx context.Context, in *TLMessagesSendInlineBotResult, opts ...grpc.CallOption) (*Updates, error)
+	MessagesEditMessage(ctx context.Context, in *TLMessagesEditMessage, opts ...grpc.CallOption) (*Updates, error)
+	MessagesGetAllDrafts(ctx context.Context, in *TLMessagesGetAllDrafts, opts ...grpc.CallOption) (*Updates, error)
+	MessagesSetGameScore(ctx context.Context, in *TLMessagesSetGameScore, opts ...grpc.CallOption) (*Updates, error)
+	MessagesSendScreenshotNotification(ctx context.Context, in *TLMessagesSendScreenshotNotification, opts ...grpc.CallOption) (*Updates, error)
+	MessagesGetPeerSettings(ctx context.Context, in *TLMessagesGetPeerSettings, opts ...grpc.CallOption) (*PeerSettings, error)
+	MessagesGetChats(ctx context.Context, in *TLMessagesGetChats, opts ...grpc.CallOption) (*Messages_Chats, error)
+	MessagesGetCommonChats(ctx context.Context, in *TLMessagesGetCommonChats, opts ...grpc.CallOption) (*Messages_Chats, error)
+	MessagesGetAllChats(ctx context.Context, in *TLMessagesGetAllChats, opts ...grpc.CallOption) (*Messages_Chats, error)
+	MessagesGetFullChat(ctx context.Context, in *TLMessagesGetFullChat, opts ...grpc.CallOption) (*Messages_ChatFull, error)
+	MessagesGetDhConfig(ctx context.Context, in *TLMessagesGetDhConfig, opts ...grpc.CallOption) (*Messages_DhConfig, error)
+	MessagesRequestEncryption(ctx context.Context, in *TLMessagesRequestEncryption, opts ...grpc.CallOption) (*EncryptedChat, error)
+	MessagesAcceptEncryption(ctx context.Context, in *TLMessagesAcceptEncryption, opts ...grpc.CallOption) (*EncryptedChat, error)
+	MessagesSendEncrypted(ctx context.Context, in *TLMessagesSendEncrypted, opts ...grpc.CallOption) (*Messages_SentEncryptedMessage, error)
+	MessagesSendEncryptedFile(ctx context.Context, in *TLMessagesSendEncryptedFile, opts ...grpc.CallOption) (*Messages_SentEncryptedMessage, error)
+	MessagesSendEncryptedService(ctx context.Context, in *TLMessagesSendEncryptedService, opts ...grpc.CallOption) (*Messages_SentEncryptedMessage, error)
+	// rpc messages_receivedQueue(TL_messages_receivedQueue) returns (Vector<int64_t>) {}
+	MessagesGetAllStickers(ctx context.Context, in *TLMessagesGetAllStickers, opts ...grpc.CallOption) (*Messages_AllStickers, error)
+	MessagesGetMaskStickers(ctx context.Context, in *TLMessagesGetMaskStickers, opts ...grpc.CallOption) (*Messages_AllStickers, error)
+	MessagesGetWebPagePreview(ctx context.Context, in *TLMessagesGetWebPagePreview, opts ...grpc.CallOption) (*MessageMedia, error)
+	MessagesUploadMedia(ctx context.Context, in *TLMessagesUploadMedia, opts ...grpc.CallOption) (*MessageMedia, error)
+	MessagesExportChatInvite(ctx context.Context, in *TLMessagesExportChatInvite, opts ...grpc.CallOption) (*ExportedChatInvite, error)
+	MessagesCheckChatInvite(ctx context.Context, in *TLMessagesCheckChatInvite, opts ...grpc.CallOption) (*ChatInvite, error)
+	MessagesGetStickerSet(ctx context.Context, in *TLMessagesGetStickerSet, opts ...grpc.CallOption) (*Messages_StickerSet, error)
+	MessagesInstallStickerSet(ctx context.Context, in *TLMessagesInstallStickerSet, opts ...grpc.CallOption) (*Messages_StickerSetInstallResult, error)
+	MessagesGetDocumentByHash(ctx context.Context, in *TLMessagesGetDocumentByHash, opts ...grpc.CallOption) (*Document, error)
+	MessagesSearchGifs(ctx context.Context, in *TLMessagesSearchGifs, opts ...grpc.CallOption) (*Messages_FoundGifs, error)
+	MessagesGetSavedGifs(ctx context.Context, in *TLMessagesGetSavedGifs, opts ...grpc.CallOption) (*Messages_SavedGifs, error)
+	MessagesGetInlineBotResults(ctx context.Context, in *TLMessagesGetInlineBotResults, opts ...grpc.CallOption) (*Messages_BotResults, error)
+	MessagesGetMessageEditData(ctx context.Context, in *TLMessagesGetMessageEditData, opts ...grpc.CallOption) (*Messages_MessageEditData, error)
+	MessagesGetBotCallbackAnswer(ctx context.Context, in *TLMessagesGetBotCallbackAnswer, opts ...grpc.CallOption) (*Messages_BotCallbackAnswer, error)
+	MessagesGetPeerDialogs(ctx context.Context, in *TLMessagesGetPeerDialogs, opts ...grpc.CallOption) (*Messages_PeerDialogs, error)
+	MessagesGetPinnedDialogs(ctx context.Context, in *TLMessagesGetPinnedDialogs, opts ...grpc.CallOption) (*Messages_PeerDialogs, error)
+	MessagesGetFeaturedStickers(ctx context.Context, in *TLMessagesGetFeaturedStickers, opts ...grpc.CallOption) (*Messages_FeaturedStickers, error)
+	MessagesGetRecentStickers(ctx context.Context, in *TLMessagesGetRecentStickers, opts ...grpc.CallOption) (*Messages_RecentStickers, error)
+	MessagesGetArchivedStickers(ctx context.Context, in *TLMessagesGetArchivedStickers, opts ...grpc.CallOption) (*Messages_ArchivedStickers, error)
+	// rpc messages_getAttachedStickers(TL_messages_getAttachedStickers) returns (Vector<StickerSetCovered>) {}
+	MessagesGetGameHighScores(ctx context.Context, in *TLMessagesGetGameHighScores, opts ...grpc.CallOption) (*Messages_HighScores, error)
+	MessagesGetInlineGameHighScores(ctx context.Context, in *TLMessagesGetInlineGameHighScores, opts ...grpc.CallOption) (*Messages_HighScores, error)
+	MessagesGetWebPage(ctx context.Context, in *TLMessagesGetWebPage, opts ...grpc.CallOption) (*WebPage, error)
+	MessagesGetFavedStickers(ctx context.Context, in *TLMessagesGetFavedStickers, opts ...grpc.CallOption) (*Messages_FavedStickers, error)
+}
+
+type rPCMessagesClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRPCMessagesClient(cc *grpc.ClientConn) RPCMessagesClient {
+	return &rPCMessagesClient{cc}
+}
+
+func (c *rPCMessagesClient) MessagesSetTyping(ctx context.Context, in *TLMessagesSetTyping, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_setTyping", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesReportSpam(ctx context.Context, in *TLMessagesReportSpam, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_reportSpam", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesHideReportSpam(ctx context.Context, in *TLMessagesHideReportSpam, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_hideReportSpam", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesDiscardEncryption(ctx context.Context, in *TLMessagesDiscardEncryption, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_discardEncryption", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSetEncryptedTyping(ctx context.Context, in *TLMessagesSetEncryptedTyping, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_setEncryptedTyping", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesReadEncryptedHistory(ctx context.Context, in *TLMessagesReadEncryptedHistory, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_readEncryptedHistory", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesReportEncryptedSpam(ctx context.Context, in *TLMessagesReportEncryptedSpam, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_reportEncryptedSpam", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesUninstallStickerSet(ctx context.Context, in *TLMessagesUninstallStickerSet, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_uninstallStickerSet", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesEditChatAdmin(ctx context.Context, in *TLMessagesEditChatAdmin, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_editChatAdmin", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesReorderStickerSets(ctx context.Context, in *TLMessagesReorderStickerSets, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_reorderStickerSets", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSaveGif(ctx context.Context, in *TLMessagesSaveGif, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_saveGif", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSetInlineBotResults(ctx context.Context, in *TLMessagesSetInlineBotResults, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_setInlineBotResults", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesEditInlineBotMessage(ctx context.Context, in *TLMessagesEditInlineBotMessage, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_editInlineBotMessage", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSetBotCallbackAnswer(ctx context.Context, in *TLMessagesSetBotCallbackAnswer, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_setBotCallbackAnswer", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSaveDraft(ctx context.Context, in *TLMessagesSaveDraft, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_saveDraft", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesReadFeaturedStickers(ctx context.Context, in *TLMessagesReadFeaturedStickers, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_readFeaturedStickers", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSaveRecentSticker(ctx context.Context, in *TLMessagesSaveRecentSticker, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_saveRecentSticker", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesClearRecentStickers(ctx context.Context, in *TLMessagesClearRecentStickers, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_clearRecentStickers", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSetInlineGameScore(ctx context.Context, in *TLMessagesSetInlineGameScore, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_setInlineGameScore", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesToggleDialogPin(ctx context.Context, in *TLMessagesToggleDialogPin, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_toggleDialogPin", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesReorderPinnedDialogs(ctx context.Context, in *TLMessagesReorderPinnedDialogs, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_reorderPinnedDialogs", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSetBotShippingResults(ctx context.Context, in *TLMessagesSetBotShippingResults, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_setBotShippingResults", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSetBotPrecheckoutResults(ctx context.Context, in *TLMessagesSetBotPrecheckoutResults, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_setBotPrecheckoutResults", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesFaveSticker(ctx context.Context, in *TLMessagesFaveSticker, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_faveSticker", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetMessages(ctx context.Context, in *TLMessagesGetMessages, opts ...grpc.CallOption) (*Messages_Messages, error) {
+	out := new(Messages_Messages)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getMessages", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetHistory(ctx context.Context, in *TLMessagesGetHistory, opts ...grpc.CallOption) (*Messages_Messages, error) {
+	out := new(Messages_Messages)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getHistory", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSearch(ctx context.Context, in *TLMessagesSearch, opts ...grpc.CallOption) (*Messages_Messages, error) {
+	out := new(Messages_Messages)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_search", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSearchGlobal(ctx context.Context, in *TLMessagesSearchGlobal, opts ...grpc.CallOption) (*Messages_Messages, error) {
+	out := new(Messages_Messages)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_searchGlobal", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetUnreadMentions(ctx context.Context, in *TLMessagesGetUnreadMentions, opts ...grpc.CallOption) (*Messages_Messages, error) {
+	out := new(Messages_Messages)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getUnreadMentions", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetDialogs(ctx context.Context, in *TLMessagesGetDialogs, opts ...grpc.CallOption) (*Messages_Dialogs, error) {
+	out := new(Messages_Dialogs)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getDialogs", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesReadHistory(ctx context.Context, in *TLMessagesReadHistory, opts ...grpc.CallOption) (*Messages_AffectedMessages, error) {
+	out := new(Messages_AffectedMessages)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_readHistory", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesDeleteMessages(ctx context.Context, in *TLMessagesDeleteMessages, opts ...grpc.CallOption) (*Messages_AffectedMessages, error) {
+	out := new(Messages_AffectedMessages)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_deleteMessages", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesReadMessageContents(ctx context.Context, in *TLMessagesReadMessageContents, opts ...grpc.CallOption) (*Messages_AffectedMessages, error) {
+	out := new(Messages_AffectedMessages)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_readMessageContents", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesDeleteHistory(ctx context.Context, in *TLMessagesDeleteHistory, opts ...grpc.CallOption) (*Messages_AffectedHistory, error) {
+	out := new(Messages_AffectedHistory)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_deleteHistory", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSendMessage(ctx context.Context, in *TLMessagesSendMessage, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_sendMessage", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSendMedia(ctx context.Context, in *TLMessagesSendMedia, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_sendMedia", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesForwardMessages(ctx context.Context, in *TLMessagesForwardMessages, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_forwardMessages", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesEditChatTitle(ctx context.Context, in *TLMessagesEditChatTitle, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_editChatTitle", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesEditChatPhoto(ctx context.Context, in *TLMessagesEditChatPhoto, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_editChatPhoto", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesAddChatUser(ctx context.Context, in *TLMessagesAddChatUser, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_addChatUser", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesDeleteChatUser(ctx context.Context, in *TLMessagesDeleteChatUser, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_deleteChatUser", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesCreateChat(ctx context.Context, in *TLMessagesCreateChat, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_createChat", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesForwardMessage(ctx context.Context, in *TLMessagesForwardMessage, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_forwardMessage", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesImportChatInvite(ctx context.Context, in *TLMessagesImportChatInvite, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_importChatInvite", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesStartBot(ctx context.Context, in *TLMessagesStartBot, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_startBot", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesToggleChatAdmins(ctx context.Context, in *TLMessagesToggleChatAdmins, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_toggleChatAdmins", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesMigrateChat(ctx context.Context, in *TLMessagesMigrateChat, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_migrateChat", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSendInlineBotResult(ctx context.Context, in *TLMessagesSendInlineBotResult, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_sendInlineBotResult", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesEditMessage(ctx context.Context, in *TLMessagesEditMessage, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_editMessage", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetAllDrafts(ctx context.Context, in *TLMessagesGetAllDrafts, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getAllDrafts", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSetGameScore(ctx context.Context, in *TLMessagesSetGameScore, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_setGameScore", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSendScreenshotNotification(ctx context.Context, in *TLMessagesSendScreenshotNotification, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_sendScreenshotNotification", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetPeerSettings(ctx context.Context, in *TLMessagesGetPeerSettings, opts ...grpc.CallOption) (*PeerSettings, error) {
+	out := new(PeerSettings)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getPeerSettings", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetChats(ctx context.Context, in *TLMessagesGetChats, opts ...grpc.CallOption) (*Messages_Chats, error) {
+	out := new(Messages_Chats)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getChats", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetCommonChats(ctx context.Context, in *TLMessagesGetCommonChats, opts ...grpc.CallOption) (*Messages_Chats, error) {
+	out := new(Messages_Chats)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getCommonChats", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetAllChats(ctx context.Context, in *TLMessagesGetAllChats, opts ...grpc.CallOption) (*Messages_Chats, error) {
+	out := new(Messages_Chats)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getAllChats", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetFullChat(ctx context.Context, in *TLMessagesGetFullChat, opts ...grpc.CallOption) (*Messages_ChatFull, error) {
+	out := new(Messages_ChatFull)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getFullChat", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetDhConfig(ctx context.Context, in *TLMessagesGetDhConfig, opts ...grpc.CallOption) (*Messages_DhConfig, error) {
+	out := new(Messages_DhConfig)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getDhConfig", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesRequestEncryption(ctx context.Context, in *TLMessagesRequestEncryption, opts ...grpc.CallOption) (*EncryptedChat, error) {
+	out := new(EncryptedChat)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_requestEncryption", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesAcceptEncryption(ctx context.Context, in *TLMessagesAcceptEncryption, opts ...grpc.CallOption) (*EncryptedChat, error) {
+	out := new(EncryptedChat)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_acceptEncryption", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSendEncrypted(ctx context.Context, in *TLMessagesSendEncrypted, opts ...grpc.CallOption) (*Messages_SentEncryptedMessage, error) {
+	out := new(Messages_SentEncryptedMessage)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_sendEncrypted", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSendEncryptedFile(ctx context.Context, in *TLMessagesSendEncryptedFile, opts ...grpc.CallOption) (*Messages_SentEncryptedMessage, error) {
+	out := new(Messages_SentEncryptedMessage)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_sendEncryptedFile", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSendEncryptedService(ctx context.Context, in *TLMessagesSendEncryptedService, opts ...grpc.CallOption) (*Messages_SentEncryptedMessage, error) {
+	out := new(Messages_SentEncryptedMessage)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_sendEncryptedService", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetAllStickers(ctx context.Context, in *TLMessagesGetAllStickers, opts ...grpc.CallOption) (*Messages_AllStickers, error) {
+	out := new(Messages_AllStickers)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getAllStickers", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetMaskStickers(ctx context.Context, in *TLMessagesGetMaskStickers, opts ...grpc.CallOption) (*Messages_AllStickers, error) {
+	out := new(Messages_AllStickers)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getMaskStickers", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetWebPagePreview(ctx context.Context, in *TLMessagesGetWebPagePreview, opts ...grpc.CallOption) (*MessageMedia, error) {
+	out := new(MessageMedia)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getWebPagePreview", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesUploadMedia(ctx context.Context, in *TLMessagesUploadMedia, opts ...grpc.CallOption) (*MessageMedia, error) {
+	out := new(MessageMedia)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_uploadMedia", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesExportChatInvite(ctx context.Context, in *TLMessagesExportChatInvite, opts ...grpc.CallOption) (*ExportedChatInvite, error) {
+	out := new(ExportedChatInvite)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_exportChatInvite", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesCheckChatInvite(ctx context.Context, in *TLMessagesCheckChatInvite, opts ...grpc.CallOption) (*ChatInvite, error) {
+	out := new(ChatInvite)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_checkChatInvite", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetStickerSet(ctx context.Context, in *TLMessagesGetStickerSet, opts ...grpc.CallOption) (*Messages_StickerSet, error) {
+	out := new(Messages_StickerSet)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getStickerSet", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesInstallStickerSet(ctx context.Context, in *TLMessagesInstallStickerSet, opts ...grpc.CallOption) (*Messages_StickerSetInstallResult, error) {
+	out := new(Messages_StickerSetInstallResult)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_installStickerSet", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetDocumentByHash(ctx context.Context, in *TLMessagesGetDocumentByHash, opts ...grpc.CallOption) (*Document, error) {
+	out := new(Document)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getDocumentByHash", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesSearchGifs(ctx context.Context, in *TLMessagesSearchGifs, opts ...grpc.CallOption) (*Messages_FoundGifs, error) {
+	out := new(Messages_FoundGifs)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_searchGifs", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetSavedGifs(ctx context.Context, in *TLMessagesGetSavedGifs, opts ...grpc.CallOption) (*Messages_SavedGifs, error) {
+	out := new(Messages_SavedGifs)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getSavedGifs", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetInlineBotResults(ctx context.Context, in *TLMessagesGetInlineBotResults, opts ...grpc.CallOption) (*Messages_BotResults, error) {
+	out := new(Messages_BotResults)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getInlineBotResults", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetMessageEditData(ctx context.Context, in *TLMessagesGetMessageEditData, opts ...grpc.CallOption) (*Messages_MessageEditData, error) {
+	out := new(Messages_MessageEditData)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getMessageEditData", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetBotCallbackAnswer(ctx context.Context, in *TLMessagesGetBotCallbackAnswer, opts ...grpc.CallOption) (*Messages_BotCallbackAnswer, error) {
+	out := new(Messages_BotCallbackAnswer)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getBotCallbackAnswer", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetPeerDialogs(ctx context.Context, in *TLMessagesGetPeerDialogs, opts ...grpc.CallOption) (*Messages_PeerDialogs, error) {
+	out := new(Messages_PeerDialogs)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getPeerDialogs", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetPinnedDialogs(ctx context.Context, in *TLMessagesGetPinnedDialogs, opts ...grpc.CallOption) (*Messages_PeerDialogs, error) {
+	out := new(Messages_PeerDialogs)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getPinnedDialogs", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetFeaturedStickers(ctx context.Context, in *TLMessagesGetFeaturedStickers, opts ...grpc.CallOption) (*Messages_FeaturedStickers, error) {
+	out := new(Messages_FeaturedStickers)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getFeaturedStickers", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetRecentStickers(ctx context.Context, in *TLMessagesGetRecentStickers, opts ...grpc.CallOption) (*Messages_RecentStickers, error) {
+	out := new(Messages_RecentStickers)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getRecentStickers", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetArchivedStickers(ctx context.Context, in *TLMessagesGetArchivedStickers, opts ...grpc.CallOption) (*Messages_ArchivedStickers, error) {
+	out := new(Messages_ArchivedStickers)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getArchivedStickers", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetGameHighScores(ctx context.Context, in *TLMessagesGetGameHighScores, opts ...grpc.CallOption) (*Messages_HighScores, error) {
+	out := new(Messages_HighScores)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getGameHighScores", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetInlineGameHighScores(ctx context.Context, in *TLMessagesGetInlineGameHighScores, opts ...grpc.CallOption) (*Messages_HighScores, error) {
+	out := new(Messages_HighScores)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getInlineGameHighScores", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetWebPage(ctx context.Context, in *TLMessagesGetWebPage, opts ...grpc.CallOption) (*WebPage, error) {
+	out := new(WebPage)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getWebPage", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCMessagesClient) MessagesGetFavedStickers(ctx context.Context, in *TLMessagesGetFavedStickers, opts ...grpc.CallOption) (*Messages_FavedStickers, error) {
+	out := new(Messages_FavedStickers)
+	err := grpc.Invoke(ctx, "/mtproto.RPCMessages/messages_getFavedStickers", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for RPCMessages service
+
+type RPCMessagesServer interface {
+	MessagesSetTyping(context.Context, *TLMessagesSetTyping) (*Bool, error)
+	MessagesReportSpam(context.Context, *TLMessagesReportSpam) (*Bool, error)
+	MessagesHideReportSpam(context.Context, *TLMessagesHideReportSpam) (*Bool, error)
+	MessagesDiscardEncryption(context.Context, *TLMessagesDiscardEncryption) (*Bool, error)
+	MessagesSetEncryptedTyping(context.Context, *TLMessagesSetEncryptedTyping) (*Bool, error)
+	MessagesReadEncryptedHistory(context.Context, *TLMessagesReadEncryptedHistory) (*Bool, error)
+	MessagesReportEncryptedSpam(context.Context, *TLMessagesReportEncryptedSpam) (*Bool, error)
+	MessagesUninstallStickerSet(context.Context, *TLMessagesUninstallStickerSet) (*Bool, error)
+	MessagesEditChatAdmin(context.Context, *TLMessagesEditChatAdmin) (*Bool, error)
+	MessagesReorderStickerSets(context.Context, *TLMessagesReorderStickerSets) (*Bool, error)
+	MessagesSaveGif(context.Context, *TLMessagesSaveGif) (*Bool, error)
+	MessagesSetInlineBotResults(context.Context, *TLMessagesSetInlineBotResults) (*Bool, error)
+	MessagesEditInlineBotMessage(context.Context, *TLMessagesEditInlineBotMessage) (*Bool, error)
+	MessagesSetBotCallbackAnswer(context.Context, *TLMessagesSetBotCallbackAnswer) (*Bool, error)
+	MessagesSaveDraft(context.Context, *TLMessagesSaveDraft) (*Bool, error)
+	MessagesReadFeaturedStickers(context.Context, *TLMessagesReadFeaturedStickers) (*Bool, error)
+	MessagesSaveRecentSticker(context.Context, *TLMessagesSaveRecentSticker) (*Bool, error)
+	MessagesClearRecentStickers(context.Context, *TLMessagesClearRecentStickers) (*Bool, error)
+	MessagesSetInlineGameScore(context.Context, *TLMessagesSetInlineGameScore) (*Bool, error)
+	MessagesToggleDialogPin(context.Context, *TLMessagesToggleDialogPin) (*Bool, error)
+	MessagesReorderPinnedDialogs(context.Context, *TLMessagesReorderPinnedDialogs) (*Bool, error)
+	MessagesSetBotShippingResults(context.Context, *TLMessagesSetBotShippingResults) (*Bool, error)
+	MessagesSetBotPrecheckoutResults(context.Context, *TLMessagesSetBotPrecheckoutResults) (*Bool, error)
+	MessagesFaveSticker(context.Context, *TLMessagesFaveSticker) (*Bool, error)
+	// rpc messages_getMessagesViews(TL_messages_getMessagesViews) returns (Vector<int32_t>) {}
+	MessagesGetMessages(context.Context, *TLMessagesGetMessages) (*Messages_Messages, error)
+	MessagesGetHistory(context.Context, *TLMessagesGetHistory) (*Messages_Messages, error)
+	MessagesSearch(context.Context, *TLMessagesSearch) (*Messages_Messages, error)
+	MessagesSearchGlobal(context.Context, *TLMessagesSearchGlobal) (*Messages_Messages, error)
+	MessagesGetUnreadMentions(context.Context, *TLMessagesGetUnreadMentions) (*Messages_Messages, error)
+	MessagesGetDialogs(context.Context, *TLMessagesGetDialogs) (*Messages_Dialogs, error)
+	MessagesReadHistory(context.Context, *TLMessagesReadHistory) (*Messages_AffectedMessages, error)
+	MessagesDeleteMessages(context.Context, *TLMessagesDeleteMessages) (*Messages_AffectedMessages, error)
+	MessagesReadMessageContents(context.Context, *TLMessagesReadMessageContents) (*Messages_AffectedMessages, error)
+	MessagesDeleteHistory(context.Context, *TLMessagesDeleteHistory) (*Messages_AffectedHistory, error)
+	// rpc messages_receivedMessages(TL_messages_receivedMessages) returns (Vector<ReceivedNotifyMessage>) {}
+	MessagesSendMessage(context.Context, *TLMessagesSendMessage) (*Updates, error)
+	MessagesSendMedia(context.Context, *TLMessagesSendMedia) (*Updates, error)
+	MessagesForwardMessages(context.Context, *TLMessagesForwardMessages) (*Updates, error)
+	MessagesEditChatTitle(context.Context, *TLMessagesEditChatTitle) (*Updates, error)
+	MessagesEditChatPhoto(context.Context, *TLMessagesEditChatPhoto) (*Updates, error)
+	MessagesAddChatUser(context.Context, *TLMessagesAddChatUser) (*Updates, error)
+	MessagesDeleteChatUser(context.Context, *TLMessagesDeleteChatUser) (*Updates, error)
+	MessagesCreateChat(context.Context, *TLMessagesCreateChat) (*Updates, error)
+	MessagesForwardMessage(context.Context, *TLMessagesForwardMessage) (*Updates, error)
+	MessagesImportChatInvite(context.Context, *TLMessagesImportChatInvite) (*Updates, error)
+	MessagesStartBot(context.Context, *TLMessagesStartBot) (*Updates, error)
+	MessagesToggleChatAdmins(context.Context, *TLMessagesToggleChatAdmins) (*Updates, error)
+	MessagesMigrateChat(context.Context, *TLMessagesMigrateChat) (*Updates, error)
+	MessagesSendInlineBotResult(context.Context, *TLMessagesSendInlineBotResult) (*Updates, error)
+	MessagesEditMessage(context.Context, *TLMessagesEditMessage) (*Updates, error)
+	MessagesGetAllDrafts(context.Context, *TLMessagesGetAllDrafts) (*Updates, error)
+	MessagesSetGameScore(context.Context, *TLMessagesSetGameScore) (*Updates, error)
+	MessagesSendScreenshotNotification(context.Context, *TLMessagesSendScreenshotNotification) (*Updates, error)
+	MessagesGetPeerSettings(context.Context, *TLMessagesGetPeerSettings) (*PeerSettings, error)
+	MessagesGetChats(context.Context, *TLMessagesGetChats) (*Messages_Chats, error)
+	MessagesGetCommonChats(context.Context, *TLMessagesGetCommonChats) (*Messages_Chats, error)
+	MessagesGetAllChats(context.Context, *TLMessagesGetAllChats) (*Messages_Chats, error)
+	MessagesGetFullChat(context.Context, *TLMessagesGetFullChat) (*Messages_ChatFull, error)
+	MessagesGetDhConfig(context.Context, *TLMessagesGetDhConfig) (*Messages_DhConfig, error)
+	MessagesRequestEncryption(context.Context, *TLMessagesRequestEncryption) (*EncryptedChat, error)
+	MessagesAcceptEncryption(context.Context, *TLMessagesAcceptEncryption) (*EncryptedChat, error)
+	MessagesSendEncrypted(context.Context, *TLMessagesSendEncrypted) (*Messages_SentEncryptedMessage, error)
+	MessagesSendEncryptedFile(context.Context, *TLMessagesSendEncryptedFile) (*Messages_SentEncryptedMessage, error)
+	MessagesSendEncryptedService(context.Context, *TLMessagesSendEncryptedService) (*Messages_SentEncryptedMessage, error)
+	// rpc messages_receivedQueue(TL_messages_receivedQueue) returns (Vector<int64_t>) {}
+	MessagesGetAllStickers(context.Context, *TLMessagesGetAllStickers) (*Messages_AllStickers, error)
+	MessagesGetMaskStickers(context.Context, *TLMessagesGetMaskStickers) (*Messages_AllStickers, error)
+	MessagesGetWebPagePreview(context.Context, *TLMessagesGetWebPagePreview) (*MessageMedia, error)
+	MessagesUploadMedia(context.Context, *TLMessagesUploadMedia) (*MessageMedia, error)
+	MessagesExportChatInvite(context.Context, *TLMessagesExportChatInvite) (*ExportedChatInvite, error)
+	MessagesCheckChatInvite(context.Context, *TLMessagesCheckChatInvite) (*ChatInvite, error)
+	MessagesGetStickerSet(context.Context, *TLMessagesGetStickerSet) (*Messages_StickerSet, error)
+	MessagesInstallStickerSet(context.Context, *TLMessagesInstallStickerSet) (*Messages_StickerSetInstallResult, error)
+	MessagesGetDocumentByHash(context.Context, *TLMessagesGetDocumentByHash) (*Document, error)
+	MessagesSearchGifs(context.Context, *TLMessagesSearchGifs) (*Messages_FoundGifs, error)
+	MessagesGetSavedGifs(context.Context, *TLMessagesGetSavedGifs) (*Messages_SavedGifs, error)
+	MessagesGetInlineBotResults(context.Context, *TLMessagesGetInlineBotResults) (*Messages_BotResults, error)
+	MessagesGetMessageEditData(context.Context, *TLMessagesGetMessageEditData) (*Messages_MessageEditData, error)
+	MessagesGetBotCallbackAnswer(context.Context, *TLMessagesGetBotCallbackAnswer) (*Messages_BotCallbackAnswer, error)
+	MessagesGetPeerDialogs(context.Context, *TLMessagesGetPeerDialogs) (*Messages_PeerDialogs, error)
+	MessagesGetPinnedDialogs(context.Context, *TLMessagesGetPinnedDialogs) (*Messages_PeerDialogs, error)
+	MessagesGetFeaturedStickers(context.Context, *TLMessagesGetFeaturedStickers) (*Messages_FeaturedStickers, error)
+	MessagesGetRecentStickers(context.Context, *TLMessagesGetRecentStickers) (*Messages_RecentStickers, error)
+	MessagesGetArchivedStickers(context.Context, *TLMessagesGetArchivedStickers) (*Messages_ArchivedStickers, error)
+	// rpc messages_getAttachedStickers(TL_messages_getAttachedStickers) returns (Vector<StickerSetCovered>) {}
+	MessagesGetGameHighScores(context.Context, *TLMessagesGetGameHighScores) (*Messages_HighScores, error)
+	MessagesGetInlineGameHighScores(context.Context, *TLMessagesGetInlineGameHighScores) (*Messages_HighScores, error)
+	MessagesGetWebPage(context.Context, *TLMessagesGetWebPage) (*WebPage, error)
+	MessagesGetFavedStickers(context.Context, *TLMessagesGetFavedStickers) (*Messages_FavedStickers, error)
+}
+
+func RegisterRPCMessagesServer(s *grpc.Server, srv RPCMessagesServer) {
+	s.RegisterService(&_RPCMessages_serviceDesc, srv)
+}
+
+func _RPCMessages_MessagesSetTyping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSetTyping)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSetTyping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSetTyping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSetTyping(ctx, req.(*TLMessagesSetTyping))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesReportSpam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesReportSpam)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesReportSpam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesReportSpam",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesReportSpam(ctx, req.(*TLMessagesReportSpam))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesHideReportSpam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesHideReportSpam)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesHideReportSpam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesHideReportSpam",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesHideReportSpam(ctx, req.(*TLMessagesHideReportSpam))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesDiscardEncryption_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesDiscardEncryption)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesDiscardEncryption(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesDiscardEncryption",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesDiscardEncryption(ctx, req.(*TLMessagesDiscardEncryption))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSetEncryptedTyping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSetEncryptedTyping)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSetEncryptedTyping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSetEncryptedTyping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSetEncryptedTyping(ctx, req.(*TLMessagesSetEncryptedTyping))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesReadEncryptedHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesReadEncryptedHistory)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesReadEncryptedHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesReadEncryptedHistory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesReadEncryptedHistory(ctx, req.(*TLMessagesReadEncryptedHistory))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesReportEncryptedSpam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesReportEncryptedSpam)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesReportEncryptedSpam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesReportEncryptedSpam",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesReportEncryptedSpam(ctx, req.(*TLMessagesReportEncryptedSpam))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesUninstallStickerSet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesUninstallStickerSet)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesUninstallStickerSet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesUninstallStickerSet",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesUninstallStickerSet(ctx, req.(*TLMessagesUninstallStickerSet))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesEditChatAdmin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesEditChatAdmin)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesEditChatAdmin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesEditChatAdmin",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesEditChatAdmin(ctx, req.(*TLMessagesEditChatAdmin))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesReorderStickerSets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesReorderStickerSets)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesReorderStickerSets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesReorderStickerSets",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesReorderStickerSets(ctx, req.(*TLMessagesReorderStickerSets))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSaveGif_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSaveGif)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSaveGif(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSaveGif",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSaveGif(ctx, req.(*TLMessagesSaveGif))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSetInlineBotResults_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSetInlineBotResults)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSetInlineBotResults(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSetInlineBotResults",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSetInlineBotResults(ctx, req.(*TLMessagesSetInlineBotResults))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesEditInlineBotMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesEditInlineBotMessage)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesEditInlineBotMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesEditInlineBotMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesEditInlineBotMessage(ctx, req.(*TLMessagesEditInlineBotMessage))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSetBotCallbackAnswer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSetBotCallbackAnswer)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSetBotCallbackAnswer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSetBotCallbackAnswer",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSetBotCallbackAnswer(ctx, req.(*TLMessagesSetBotCallbackAnswer))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSaveDraft_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSaveDraft)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSaveDraft(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSaveDraft",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSaveDraft(ctx, req.(*TLMessagesSaveDraft))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesReadFeaturedStickers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesReadFeaturedStickers)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesReadFeaturedStickers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesReadFeaturedStickers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesReadFeaturedStickers(ctx, req.(*TLMessagesReadFeaturedStickers))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSaveRecentSticker_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSaveRecentSticker)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSaveRecentSticker(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSaveRecentSticker",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSaveRecentSticker(ctx, req.(*TLMessagesSaveRecentSticker))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesClearRecentStickers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesClearRecentStickers)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesClearRecentStickers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesClearRecentStickers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesClearRecentStickers(ctx, req.(*TLMessagesClearRecentStickers))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSetInlineGameScore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSetInlineGameScore)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSetInlineGameScore(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSetInlineGameScore",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSetInlineGameScore(ctx, req.(*TLMessagesSetInlineGameScore))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesToggleDialogPin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesToggleDialogPin)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesToggleDialogPin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesToggleDialogPin",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesToggleDialogPin(ctx, req.(*TLMessagesToggleDialogPin))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesReorderPinnedDialogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesReorderPinnedDialogs)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesReorderPinnedDialogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesReorderPinnedDialogs",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesReorderPinnedDialogs(ctx, req.(*TLMessagesReorderPinnedDialogs))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSetBotShippingResults_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSetBotShippingResults)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSetBotShippingResults(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSetBotShippingResults",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSetBotShippingResults(ctx, req.(*TLMessagesSetBotShippingResults))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSetBotPrecheckoutResults_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSetBotPrecheckoutResults)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSetBotPrecheckoutResults(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSetBotPrecheckoutResults",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSetBotPrecheckoutResults(ctx, req.(*TLMessagesSetBotPrecheckoutResults))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesFaveSticker_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesFaveSticker)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesFaveSticker(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesFaveSticker",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesFaveSticker(ctx, req.(*TLMessagesFaveSticker))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetMessages)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetMessages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetMessages",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetMessages(ctx, req.(*TLMessagesGetMessages))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetHistory)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetHistory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetHistory(ctx, req.(*TLMessagesGetHistory))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSearch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSearch)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSearch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSearch",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSearch(ctx, req.(*TLMessagesSearch))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSearchGlobal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSearchGlobal)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSearchGlobal(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSearchGlobal",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSearchGlobal(ctx, req.(*TLMessagesSearchGlobal))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetUnreadMentions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetUnreadMentions)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetUnreadMentions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetUnreadMentions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetUnreadMentions(ctx, req.(*TLMessagesGetUnreadMentions))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetDialogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetDialogs)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetDialogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetDialogs",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetDialogs(ctx, req.(*TLMessagesGetDialogs))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesReadHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesReadHistory)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesReadHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesReadHistory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesReadHistory(ctx, req.(*TLMessagesReadHistory))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesDeleteMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesDeleteMessages)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesDeleteMessages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesDeleteMessages",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesDeleteMessages(ctx, req.(*TLMessagesDeleteMessages))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesReadMessageContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesReadMessageContents)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesReadMessageContents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesReadMessageContents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesReadMessageContents(ctx, req.(*TLMessagesReadMessageContents))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesDeleteHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesDeleteHistory)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesDeleteHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesDeleteHistory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesDeleteHistory(ctx, req.(*TLMessagesDeleteHistory))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSendMessage)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSendMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSendMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSendMessage(ctx, req.(*TLMessagesSendMessage))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSendMedia_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSendMedia)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSendMedia(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSendMedia",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSendMedia(ctx, req.(*TLMessagesSendMedia))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesForwardMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesForwardMessages)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesForwardMessages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesForwardMessages",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesForwardMessages(ctx, req.(*TLMessagesForwardMessages))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesEditChatTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesEditChatTitle)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesEditChatTitle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesEditChatTitle",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesEditChatTitle(ctx, req.(*TLMessagesEditChatTitle))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesEditChatPhoto_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesEditChatPhoto)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesEditChatPhoto(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesEditChatPhoto",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesEditChatPhoto(ctx, req.(*TLMessagesEditChatPhoto))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesAddChatUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesAddChatUser)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesAddChatUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesAddChatUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesAddChatUser(ctx, req.(*TLMessagesAddChatUser))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesDeleteChatUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesDeleteChatUser)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesDeleteChatUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesDeleteChatUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesDeleteChatUser(ctx, req.(*TLMessagesDeleteChatUser))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesCreateChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesCreateChat)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesCreateChat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesCreateChat",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesCreateChat(ctx, req.(*TLMessagesCreateChat))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesForwardMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesForwardMessage)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesForwardMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesForwardMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesForwardMessage(ctx, req.(*TLMessagesForwardMessage))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesImportChatInvite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesImportChatInvite)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesImportChatInvite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesImportChatInvite",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesImportChatInvite(ctx, req.(*TLMessagesImportChatInvite))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesStartBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesStartBot)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesStartBot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesStartBot",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesStartBot(ctx, req.(*TLMessagesStartBot))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesToggleChatAdmins_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesToggleChatAdmins)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesToggleChatAdmins(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesToggleChatAdmins",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesToggleChatAdmins(ctx, req.(*TLMessagesToggleChatAdmins))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesMigrateChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesMigrateChat)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesMigrateChat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesMigrateChat",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesMigrateChat(ctx, req.(*TLMessagesMigrateChat))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSendInlineBotResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSendInlineBotResult)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSendInlineBotResult(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSendInlineBotResult",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSendInlineBotResult(ctx, req.(*TLMessagesSendInlineBotResult))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesEditMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesEditMessage)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesEditMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesEditMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesEditMessage(ctx, req.(*TLMessagesEditMessage))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetAllDrafts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetAllDrafts)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetAllDrafts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetAllDrafts",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetAllDrafts(ctx, req.(*TLMessagesGetAllDrafts))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSetGameScore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSetGameScore)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSetGameScore(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSetGameScore",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSetGameScore(ctx, req.(*TLMessagesSetGameScore))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSendScreenshotNotification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSendScreenshotNotification)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSendScreenshotNotification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSendScreenshotNotification",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSendScreenshotNotification(ctx, req.(*TLMessagesSendScreenshotNotification))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetPeerSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetPeerSettings)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetPeerSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetPeerSettings",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetPeerSettings(ctx, req.(*TLMessagesGetPeerSettings))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetChats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetChats)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetChats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetChats",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetChats(ctx, req.(*TLMessagesGetChats))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetCommonChats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetCommonChats)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetCommonChats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetCommonChats",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetCommonChats(ctx, req.(*TLMessagesGetCommonChats))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetAllChats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetAllChats)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetAllChats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetAllChats",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetAllChats(ctx, req.(*TLMessagesGetAllChats))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetFullChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetFullChat)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetFullChat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetFullChat",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetFullChat(ctx, req.(*TLMessagesGetFullChat))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetDhConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetDhConfig)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetDhConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetDhConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetDhConfig(ctx, req.(*TLMessagesGetDhConfig))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesRequestEncryption_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesRequestEncryption)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesRequestEncryption(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesRequestEncryption",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesRequestEncryption(ctx, req.(*TLMessagesRequestEncryption))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesAcceptEncryption_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesAcceptEncryption)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesAcceptEncryption(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesAcceptEncryption",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesAcceptEncryption(ctx, req.(*TLMessagesAcceptEncryption))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSendEncrypted_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSendEncrypted)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSendEncrypted(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSendEncrypted",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSendEncrypted(ctx, req.(*TLMessagesSendEncrypted))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSendEncryptedFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSendEncryptedFile)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSendEncryptedFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSendEncryptedFile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSendEncryptedFile(ctx, req.(*TLMessagesSendEncryptedFile))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSendEncryptedService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSendEncryptedService)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSendEncryptedService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSendEncryptedService",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSendEncryptedService(ctx, req.(*TLMessagesSendEncryptedService))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetAllStickers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetAllStickers)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetAllStickers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetAllStickers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetAllStickers(ctx, req.(*TLMessagesGetAllStickers))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetMaskStickers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetMaskStickers)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetMaskStickers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetMaskStickers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetMaskStickers(ctx, req.(*TLMessagesGetMaskStickers))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetWebPagePreview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetWebPagePreview)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetWebPagePreview(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetWebPagePreview",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetWebPagePreview(ctx, req.(*TLMessagesGetWebPagePreview))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesUploadMedia_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesUploadMedia)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesUploadMedia(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesUploadMedia",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesUploadMedia(ctx, req.(*TLMessagesUploadMedia))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesExportChatInvite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesExportChatInvite)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesExportChatInvite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesExportChatInvite",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesExportChatInvite(ctx, req.(*TLMessagesExportChatInvite))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesCheckChatInvite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesCheckChatInvite)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesCheckChatInvite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesCheckChatInvite",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesCheckChatInvite(ctx, req.(*TLMessagesCheckChatInvite))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetStickerSet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetStickerSet)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetStickerSet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetStickerSet",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetStickerSet(ctx, req.(*TLMessagesGetStickerSet))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesInstallStickerSet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesInstallStickerSet)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesInstallStickerSet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesInstallStickerSet",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesInstallStickerSet(ctx, req.(*TLMessagesInstallStickerSet))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetDocumentByHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetDocumentByHash)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetDocumentByHash(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetDocumentByHash",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetDocumentByHash(ctx, req.(*TLMessagesGetDocumentByHash))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesSearchGifs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesSearchGifs)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesSearchGifs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesSearchGifs",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesSearchGifs(ctx, req.(*TLMessagesSearchGifs))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetSavedGifs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetSavedGifs)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetSavedGifs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetSavedGifs",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetSavedGifs(ctx, req.(*TLMessagesGetSavedGifs))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetInlineBotResults_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetInlineBotResults)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetInlineBotResults(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetInlineBotResults",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetInlineBotResults(ctx, req.(*TLMessagesGetInlineBotResults))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetMessageEditData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetMessageEditData)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetMessageEditData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetMessageEditData",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetMessageEditData(ctx, req.(*TLMessagesGetMessageEditData))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetBotCallbackAnswer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetBotCallbackAnswer)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetBotCallbackAnswer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetBotCallbackAnswer",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetBotCallbackAnswer(ctx, req.(*TLMessagesGetBotCallbackAnswer))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetPeerDialogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetPeerDialogs)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetPeerDialogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetPeerDialogs",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetPeerDialogs(ctx, req.(*TLMessagesGetPeerDialogs))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetPinnedDialogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetPinnedDialogs)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetPinnedDialogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetPinnedDialogs",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetPinnedDialogs(ctx, req.(*TLMessagesGetPinnedDialogs))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetFeaturedStickers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetFeaturedStickers)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetFeaturedStickers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetFeaturedStickers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetFeaturedStickers(ctx, req.(*TLMessagesGetFeaturedStickers))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetRecentStickers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetRecentStickers)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetRecentStickers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetRecentStickers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetRecentStickers(ctx, req.(*TLMessagesGetRecentStickers))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetArchivedStickers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetArchivedStickers)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetArchivedStickers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetArchivedStickers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetArchivedStickers(ctx, req.(*TLMessagesGetArchivedStickers))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetGameHighScores_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetGameHighScores)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetGameHighScores(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetGameHighScores",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetGameHighScores(ctx, req.(*TLMessagesGetGameHighScores))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetInlineGameHighScores_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetInlineGameHighScores)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetInlineGameHighScores(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetInlineGameHighScores",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetInlineGameHighScores(ctx, req.(*TLMessagesGetInlineGameHighScores))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetWebPage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetWebPage)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetWebPage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetWebPage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetWebPage(ctx, req.(*TLMessagesGetWebPage))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCMessages_MessagesGetFavedStickers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLMessagesGetFavedStickers)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCMessagesServer).MessagesGetFavedStickers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCMessages/MessagesGetFavedStickers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCMessagesServer).MessagesGetFavedStickers(ctx, req.(*TLMessagesGetFavedStickers))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RPCMessages_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mtproto.RPCMessages",
+	HandlerType: (*RPCMessagesServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "messages_setTyping",
+			Handler:    _RPCMessages_MessagesSetTyping_Handler,
+		},
+		{
+			MethodName: "messages_reportSpam",
+			Handler:    _RPCMessages_MessagesReportSpam_Handler,
+		},
+		{
+			MethodName: "messages_hideReportSpam",
+			Handler:    _RPCMessages_MessagesHideReportSpam_Handler,
+		},
+		{
+			MethodName: "messages_discardEncryption",
+			Handler:    _RPCMessages_MessagesDiscardEncryption_Handler,
+		},
+		{
+			MethodName: "messages_setEncryptedTyping",
+			Handler:    _RPCMessages_MessagesSetEncryptedTyping_Handler,
+		},
+		{
+			MethodName: "messages_readEncryptedHistory",
+			Handler:    _RPCMessages_MessagesReadEncryptedHistory_Handler,
+		},
+		{
+			MethodName: "messages_reportEncryptedSpam",
+			Handler:    _RPCMessages_MessagesReportEncryptedSpam_Handler,
+		},
+		{
+			MethodName: "messages_uninstallStickerSet",
+			Handler:    _RPCMessages_MessagesUninstallStickerSet_Handler,
+		},
+		{
+			MethodName: "messages_editChatAdmin",
+			Handler:    _RPCMessages_MessagesEditChatAdmin_Handler,
+		},
+		{
+			MethodName: "messages_reorderStickerSets",
+			Handler:    _RPCMessages_MessagesReorderStickerSets_Handler,
+		},
+		{
+			MethodName: "messages_saveGif",
+			Handler:    _RPCMessages_MessagesSaveGif_Handler,
+		},
+		{
+			MethodName: "messages_setInlineBotResults",
+			Handler:    _RPCMessages_MessagesSetInlineBotResults_Handler,
+		},
+		{
+			MethodName: "messages_editInlineBotMessage",
+			Handler:    _RPCMessages_MessagesEditInlineBotMessage_Handler,
+		},
+		{
+			MethodName: "messages_setBotCallbackAnswer",
+			Handler:    _RPCMessages_MessagesSetBotCallbackAnswer_Handler,
+		},
+		{
+			MethodName: "messages_saveDraft",
+			Handler:    _RPCMessages_MessagesSaveDraft_Handler,
+		},
+		{
+			MethodName: "messages_readFeaturedStickers",
+			Handler:    _RPCMessages_MessagesReadFeaturedStickers_Handler,
+		},
+		{
+			MethodName: "messages_saveRecentSticker",
+			Handler:    _RPCMessages_MessagesSaveRecentSticker_Handler,
+		},
+		{
+			MethodName: "messages_clearRecentStickers",
+			Handler:    _RPCMessages_MessagesClearRecentStickers_Handler,
+		},
+		{
+			MethodName: "messages_setInlineGameScore",
+			Handler:    _RPCMessages_MessagesSetInlineGameScore_Handler,
+		},
+		{
+			MethodName: "messages_toggleDialogPin",
+			Handler:    _RPCMessages_MessagesToggleDialogPin_Handler,
+		},
+		{
+			MethodName: "messages_reorderPinnedDialogs",
+			Handler:    _RPCMessages_MessagesReorderPinnedDialogs_Handler,
+		},
+		{
+			MethodName: "messages_setBotShippingResults",
+			Handler:    _RPCMessages_MessagesSetBotShippingResults_Handler,
+		},
+		{
+			MethodName: "messages_setBotPrecheckoutResults",
+			Handler:    _RPCMessages_MessagesSetBotPrecheckoutResults_Handler,
+		},
+		{
+			MethodName: "messages_faveSticker",
+			Handler:    _RPCMessages_MessagesFaveSticker_Handler,
+		},
+		{
+			MethodName: "messages_getMessages",
+			Handler:    _RPCMessages_MessagesGetMessages_Handler,
+		},
+		{
+			MethodName: "messages_getHistory",
+			Handler:    _RPCMessages_MessagesGetHistory_Handler,
+		},
+		{
+			MethodName: "messages_search",
+			Handler:    _RPCMessages_MessagesSearch_Handler,
+		},
+		{
+			MethodName: "messages_searchGlobal",
+			Handler:    _RPCMessages_MessagesSearchGlobal_Handler,
+		},
+		{
+			MethodName: "messages_getUnreadMentions",
+			Handler:    _RPCMessages_MessagesGetUnreadMentions_Handler,
+		},
+		{
+			MethodName: "messages_getDialogs",
+			Handler:    _RPCMessages_MessagesGetDialogs_Handler,
+		},
+		{
+			MethodName: "messages_readHistory",
+			Handler:    _RPCMessages_MessagesReadHistory_Handler,
+		},
+		{
+			MethodName: "messages_deleteMessages",
+			Handler:    _RPCMessages_MessagesDeleteMessages_Handler,
+		},
+		{
+			MethodName: "messages_readMessageContents",
+			Handler:    _RPCMessages_MessagesReadMessageContents_Handler,
+		},
+		{
+			MethodName: "messages_deleteHistory",
+			Handler:    _RPCMessages_MessagesDeleteHistory_Handler,
+		},
+		{
+			MethodName: "messages_sendMessage",
+			Handler:    _RPCMessages_MessagesSendMessage_Handler,
+		},
+		{
+			MethodName: "messages_sendMedia",
+			Handler:    _RPCMessages_MessagesSendMedia_Handler,
+		},
+		{
+			MethodName: "messages_forwardMessages",
+			Handler:    _RPCMessages_MessagesForwardMessages_Handler,
+		},
+		{
+			MethodName: "messages_editChatTitle",
+			Handler:    _RPCMessages_MessagesEditChatTitle_Handler,
+		},
+		{
+			MethodName: "messages_editChatPhoto",
+			Handler:    _RPCMessages_MessagesEditChatPhoto_Handler,
+		},
+		{
+			MethodName: "messages_addChatUser",
+			Handler:    _RPCMessages_MessagesAddChatUser_Handler,
+		},
+		{
+			MethodName: "messages_deleteChatUser",
+			Handler:    _RPCMessages_MessagesDeleteChatUser_Handler,
+		},
+		{
+			MethodName: "messages_createChat",
+			Handler:    _RPCMessages_MessagesCreateChat_Handler,
+		},
+		{
+			MethodName: "messages_forwardMessage",
+			Handler:    _RPCMessages_MessagesForwardMessage_Handler,
+		},
+		{
+			MethodName: "messages_importChatInvite",
+			Handler:    _RPCMessages_MessagesImportChatInvite_Handler,
+		},
+		{
+			MethodName: "messages_startBot",
+			Handler:    _RPCMessages_MessagesStartBot_Handler,
+		},
+		{
+			MethodName: "messages_toggleChatAdmins",
+			Handler:    _RPCMessages_MessagesToggleChatAdmins_Handler,
+		},
+		{
+			MethodName: "messages_migrateChat",
+			Handler:    _RPCMessages_MessagesMigrateChat_Handler,
+		},
+		{
+			MethodName: "messages_sendInlineBotResult",
+			Handler:    _RPCMessages_MessagesSendInlineBotResult_Handler,
+		},
+		{
+			MethodName: "messages_editMessage",
+			Handler:    _RPCMessages_MessagesEditMessage_Handler,
+		},
+		{
+			MethodName: "messages_getAllDrafts",
+			Handler:    _RPCMessages_MessagesGetAllDrafts_Handler,
+		},
+		{
+			MethodName: "messages_setGameScore",
+			Handler:    _RPCMessages_MessagesSetGameScore_Handler,
+		},
+		{
+			MethodName: "messages_sendScreenshotNotification",
+			Handler:    _RPCMessages_MessagesSendScreenshotNotification_Handler,
+		},
+		{
+			MethodName: "messages_getPeerSettings",
+			Handler:    _RPCMessages_MessagesGetPeerSettings_Handler,
+		},
+		{
+			MethodName: "messages_getChats",
+			Handler:    _RPCMessages_MessagesGetChats_Handler,
+		},
+		{
+			MethodName: "messages_getCommonChats",
+			Handler:    _RPCMessages_MessagesGetCommonChats_Handler,
+		},
+		{
+			MethodName: "messages_getAllChats",
+			Handler:    _RPCMessages_MessagesGetAllChats_Handler,
+		},
+		{
+			MethodName: "messages_getFullChat",
+			Handler:    _RPCMessages_MessagesGetFullChat_Handler,
+		},
+		{
+			MethodName: "messages_getDhConfig",
+			Handler:    _RPCMessages_MessagesGetDhConfig_Handler,
+		},
+		{
+			MethodName: "messages_requestEncryption",
+			Handler:    _RPCMessages_MessagesRequestEncryption_Handler,
+		},
+		{
+			MethodName: "messages_acceptEncryption",
+			Handler:    _RPCMessages_MessagesAcceptEncryption_Handler,
+		},
+		{
+			MethodName: "messages_sendEncrypted",
+			Handler:    _RPCMessages_MessagesSendEncrypted_Handler,
+		},
+		{
+			MethodName: "messages_sendEncryptedFile",
+			Handler:    _RPCMessages_MessagesSendEncryptedFile_Handler,
+		},
+		{
+			MethodName: "messages_sendEncryptedService",
+			Handler:    _RPCMessages_MessagesSendEncryptedService_Handler,
+		},
+		{
+			MethodName: "messages_getAllStickers",
+			Handler:    _RPCMessages_MessagesGetAllStickers_Handler,
+		},
+		{
+			MethodName: "messages_getMaskStickers",
+			Handler:    _RPCMessages_MessagesGetMaskStickers_Handler,
+		},
+		{
+			MethodName: "messages_getWebPagePreview",
+			Handler:    _RPCMessages_MessagesGetWebPagePreview_Handler,
+		},
+		{
+			MethodName: "messages_uploadMedia",
+			Handler:    _RPCMessages_MessagesUploadMedia_Handler,
+		},
+		{
+			MethodName: "messages_exportChatInvite",
+			Handler:    _RPCMessages_MessagesExportChatInvite_Handler,
+		},
+		{
+			MethodName: "messages_checkChatInvite",
+			Handler:    _RPCMessages_MessagesCheckChatInvite_Handler,
+		},
+		{
+			MethodName: "messages_getStickerSet",
+			Handler:    _RPCMessages_MessagesGetStickerSet_Handler,
+		},
+		{
+			MethodName: "messages_installStickerSet",
+			Handler:    _RPCMessages_MessagesInstallStickerSet_Handler,
+		},
+		{
+			MethodName: "messages_getDocumentByHash",
+			Handler:    _RPCMessages_MessagesGetDocumentByHash_Handler,
+		},
+		{
+			MethodName: "messages_searchGifs",
+			Handler:    _RPCMessages_MessagesSearchGifs_Handler,
+		},
+		{
+			MethodName: "messages_getSavedGifs",
+			Handler:    _RPCMessages_MessagesGetSavedGifs_Handler,
+		},
+		{
+			MethodName: "messages_getInlineBotResults",
+			Handler:    _RPCMessages_MessagesGetInlineBotResults_Handler,
+		},
+		{
+			MethodName: "messages_getMessageEditData",
+			Handler:    _RPCMessages_MessagesGetMessageEditData_Handler,
+		},
+		{
+			MethodName: "messages_getBotCallbackAnswer",
+			Handler:    _RPCMessages_MessagesGetBotCallbackAnswer_Handler,
+		},
+		{
+			MethodName: "messages_getPeerDialogs",
+			Handler:    _RPCMessages_MessagesGetPeerDialogs_Handler,
+		},
+		{
+			MethodName: "messages_getPinnedDialogs",
+			Handler:    _RPCMessages_MessagesGetPinnedDialogs_Handler,
+		},
+		{
+			MethodName: "messages_getFeaturedStickers",
+			Handler:    _RPCMessages_MessagesGetFeaturedStickers_Handler,
+		},
+		{
+			MethodName: "messages_getRecentStickers",
+			Handler:    _RPCMessages_MessagesGetRecentStickers_Handler,
+		},
+		{
+			MethodName: "messages_getArchivedStickers",
+			Handler:    _RPCMessages_MessagesGetArchivedStickers_Handler,
+		},
+		{
+			MethodName: "messages_getGameHighScores",
+			Handler:    _RPCMessages_MessagesGetGameHighScores_Handler,
+		},
+		{
+			MethodName: "messages_getInlineGameHighScores",
+			Handler:    _RPCMessages_MessagesGetInlineGameHighScores_Handler,
+		},
+		{
+			MethodName: "messages_getWebPage",
+			Handler:    _RPCMessages_MessagesGetWebPage_Handler,
+		},
+		{
+			MethodName: "messages_getFavedStickers",
+			Handler:    _RPCMessages_MessagesGetFavedStickers_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "schema.tl.sync.service.proto",
+}
+
+// Client API for RPCUpload service
+
+type RPCUploadClient interface {
+	UploadSaveFilePart(ctx context.Context, in *TLUploadSaveFilePart, opts ...grpc.CallOption) (*Bool, error)
+	UploadSaveBigFilePart(ctx context.Context, in *TLUploadSaveBigFilePart, opts ...grpc.CallOption) (*Bool, error)
+	UploadGetFile(ctx context.Context, in *TLUploadGetFile, opts ...grpc.CallOption) (*Upload_File, error)
+	UploadGetWebFile(ctx context.Context, in *TLUploadGetWebFile, opts ...grpc.CallOption) (*Upload_WebFile, error)
+	UploadGetCdnFile(ctx context.Context, in *TLUploadGetCdnFile, opts ...grpc.CallOption) (*Upload_CdnFile, error)
+}
+
+type rPCUploadClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRPCUploadClient(cc *grpc.ClientConn) RPCUploadClient {
+	return &rPCUploadClient{cc}
+}
+
+func (c *rPCUploadClient) UploadSaveFilePart(ctx context.Context, in *TLUploadSaveFilePart, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCUpload/upload_saveFilePart", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCUploadClient) UploadSaveBigFilePart(ctx context.Context, in *TLUploadSaveBigFilePart, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCUpload/upload_saveBigFilePart", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCUploadClient) UploadGetFile(ctx context.Context, in *TLUploadGetFile, opts ...grpc.CallOption) (*Upload_File, error) {
+	out := new(Upload_File)
+	err := grpc.Invoke(ctx, "/mtproto.RPCUpload/upload_getFile", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCUploadClient) UploadGetWebFile(ctx context.Context, in *TLUploadGetWebFile, opts ...grpc.CallOption) (*Upload_WebFile, error) {
+	out := new(Upload_WebFile)
+	err := grpc.Invoke(ctx, "/mtproto.RPCUpload/upload_getWebFile", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCUploadClient) UploadGetCdnFile(ctx context.Context, in *TLUploadGetCdnFile, opts ...grpc.CallOption) (*Upload_CdnFile, error) {
+	out := new(Upload_CdnFile)
+	err := grpc.Invoke(ctx, "/mtproto.RPCUpload/upload_getCdnFile", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for RPCUpload service
+
+type RPCUploadServer interface {
+	UploadSaveFilePart(context.Context, *TLUploadSaveFilePart) (*Bool, error)
+	UploadSaveBigFilePart(context.Context, *TLUploadSaveBigFilePart) (*Bool, error)
+	UploadGetFile(context.Context, *TLUploadGetFile) (*Upload_File, error)
+	UploadGetWebFile(context.Context, *TLUploadGetWebFile) (*Upload_WebFile, error)
+	UploadGetCdnFile(context.Context, *TLUploadGetCdnFile) (*Upload_CdnFile, error)
+}
+
+func RegisterRPCUploadServer(s *grpc.Server, srv RPCUploadServer) {
+	s.RegisterService(&_RPCUpload_serviceDesc, srv)
+}
+
+func _RPCUpload_UploadSaveFilePart_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLUploadSaveFilePart)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCUploadServer).UploadSaveFilePart(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCUpload/UploadSaveFilePart",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCUploadServer).UploadSaveFilePart(ctx, req.(*TLUploadSaveFilePart))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCUpload_UploadSaveBigFilePart_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLUploadSaveBigFilePart)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCUploadServer).UploadSaveBigFilePart(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCUpload/UploadSaveBigFilePart",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCUploadServer).UploadSaveBigFilePart(ctx, req.(*TLUploadSaveBigFilePart))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCUpload_UploadGetFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLUploadGetFile)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCUploadServer).UploadGetFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCUpload/UploadGetFile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCUploadServer).UploadGetFile(ctx, req.(*TLUploadGetFile))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCUpload_UploadGetWebFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLUploadGetWebFile)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCUploadServer).UploadGetWebFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCUpload/UploadGetWebFile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCUploadServer).UploadGetWebFile(ctx, req.(*TLUploadGetWebFile))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCUpload_UploadGetCdnFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLUploadGetCdnFile)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCUploadServer).UploadGetCdnFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCUpload/UploadGetCdnFile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCUploadServer).UploadGetCdnFile(ctx, req.(*TLUploadGetCdnFile))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RPCUpload_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mtproto.RPCUpload",
+	HandlerType: (*RPCUploadServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "upload_saveFilePart",
+			Handler:    _RPCUpload_UploadSaveFilePart_Handler,
+		},
+		{
+			MethodName: "upload_saveBigFilePart",
+			Handler:    _RPCUpload_UploadSaveBigFilePart_Handler,
+		},
+		{
+			MethodName: "upload_getFile",
+			Handler:    _RPCUpload_UploadGetFile_Handler,
+		},
+		{
+			MethodName: "upload_getWebFile",
+			Handler:    _RPCUpload_UploadGetWebFile_Handler,
+		},
+		{
+			MethodName: "upload_getCdnFile",
+			Handler:    _RPCUpload_UploadGetCdnFile_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "schema.tl.sync.service.proto",
+}
+
+// Client API for RPCHelp service
+
+type RPCHelpClient interface {
+	HelpSaveAppLog(ctx context.Context, in *TLHelpSaveAppLog, opts ...grpc.CallOption) (*Bool, error)
+	HelpSetBotUpdatesStatus(ctx context.Context, in *TLHelpSetBotUpdatesStatus, opts ...grpc.CallOption) (*Bool, error)
+	HelpGetAppChangelog(ctx context.Context, in *TLHelpGetAppChangelog, opts ...grpc.CallOption) (*Updates, error)
+	HelpGetConfig(ctx context.Context, in *TLHelpGetConfig, opts ...grpc.CallOption) (*Config, error)
+	HelpGetNearestDc(ctx context.Context, in *TLHelpGetNearestDc, opts ...grpc.CallOption) (*NearestDc, error)
+	HelpGetAppUpdate(ctx context.Context, in *TLHelpGetAppUpdate, opts ...grpc.CallOption) (*Help_AppUpdate, error)
+	HelpGetInviteText(ctx context.Context, in *TLHelpGetInviteText, opts ...grpc.CallOption) (*Help_InviteText, error)
+	HelpGetSupport(ctx context.Context, in *TLHelpGetSupport, opts ...grpc.CallOption) (*Help_Support, error)
+	HelpGetTermsOfService(ctx context.Context, in *TLHelpGetTermsOfService, opts ...grpc.CallOption) (*Help_TermsOfService, error)
+	HelpGetCdnConfig(ctx context.Context, in *TLHelpGetCdnConfig, opts ...grpc.CallOption) (*CdnConfig, error)
+}
+
+type rPCHelpClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRPCHelpClient(cc *grpc.ClientConn) RPCHelpClient {
+	return &rPCHelpClient{cc}
+}
+
+func (c *rPCHelpClient) HelpSaveAppLog(ctx context.Context, in *TLHelpSaveAppLog, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCHelp/help_saveAppLog", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCHelpClient) HelpSetBotUpdatesStatus(ctx context.Context, in *TLHelpSetBotUpdatesStatus, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCHelp/help_setBotUpdatesStatus", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCHelpClient) HelpGetAppChangelog(ctx context.Context, in *TLHelpGetAppChangelog, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCHelp/help_getAppChangelog", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCHelpClient) HelpGetConfig(ctx context.Context, in *TLHelpGetConfig, opts ...grpc.CallOption) (*Config, error) {
+	out := new(Config)
+	err := grpc.Invoke(ctx, "/mtproto.RPCHelp/help_getConfig", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCHelpClient) HelpGetNearestDc(ctx context.Context, in *TLHelpGetNearestDc, opts ...grpc.CallOption) (*NearestDc, error) {
+	out := new(NearestDc)
+	err := grpc.Invoke(ctx, "/mtproto.RPCHelp/help_getNearestDc", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCHelpClient) HelpGetAppUpdate(ctx context.Context, in *TLHelpGetAppUpdate, opts ...grpc.CallOption) (*Help_AppUpdate, error) {
+	out := new(Help_AppUpdate)
+	err := grpc.Invoke(ctx, "/mtproto.RPCHelp/help_getAppUpdate", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCHelpClient) HelpGetInviteText(ctx context.Context, in *TLHelpGetInviteText, opts ...grpc.CallOption) (*Help_InviteText, error) {
+	out := new(Help_InviteText)
+	err := grpc.Invoke(ctx, "/mtproto.RPCHelp/help_getInviteText", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCHelpClient) HelpGetSupport(ctx context.Context, in *TLHelpGetSupport, opts ...grpc.CallOption) (*Help_Support, error) {
+	out := new(Help_Support)
+	err := grpc.Invoke(ctx, "/mtproto.RPCHelp/help_getSupport", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCHelpClient) HelpGetTermsOfService(ctx context.Context, in *TLHelpGetTermsOfService, opts ...grpc.CallOption) (*Help_TermsOfService, error) {
+	out := new(Help_TermsOfService)
+	err := grpc.Invoke(ctx, "/mtproto.RPCHelp/help_getTermsOfService", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCHelpClient) HelpGetCdnConfig(ctx context.Context, in *TLHelpGetCdnConfig, opts ...grpc.CallOption) (*CdnConfig, error) {
+	out := new(CdnConfig)
+	err := grpc.Invoke(ctx, "/mtproto.RPCHelp/help_getCdnConfig", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for RPCHelp service
+
+type RPCHelpServer interface {
+	HelpSaveAppLog(context.Context, *TLHelpSaveAppLog) (*Bool, error)
+	HelpSetBotUpdatesStatus(context.Context, *TLHelpSetBotUpdatesStatus) (*Bool, error)
+	HelpGetAppChangelog(context.Context, *TLHelpGetAppChangelog) (*Updates, error)
+	HelpGetConfig(context.Context, *TLHelpGetConfig) (*Config, error)
+	HelpGetNearestDc(context.Context, *TLHelpGetNearestDc) (*NearestDc, error)
+	HelpGetAppUpdate(context.Context, *TLHelpGetAppUpdate) (*Help_AppUpdate, error)
+	HelpGetInviteText(context.Context, *TLHelpGetInviteText) (*Help_InviteText, error)
+	HelpGetSupport(context.Context, *TLHelpGetSupport) (*Help_Support, error)
+	HelpGetTermsOfService(context.Context, *TLHelpGetTermsOfService) (*Help_TermsOfService, error)
+	HelpGetCdnConfig(context.Context, *TLHelpGetCdnConfig) (*CdnConfig, error)
+}
+
+func RegisterRPCHelpServer(s *grpc.Server, srv RPCHelpServer) {
+	s.RegisterService(&_RPCHelp_serviceDesc, srv)
+}
+
+func _RPCHelp_HelpSaveAppLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLHelpSaveAppLog)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCHelpServer).HelpSaveAppLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCHelp/HelpSaveAppLog",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCHelpServer).HelpSaveAppLog(ctx, req.(*TLHelpSaveAppLog))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCHelp_HelpSetBotUpdatesStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLHelpSetBotUpdatesStatus)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCHelpServer).HelpSetBotUpdatesStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCHelp/HelpSetBotUpdatesStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCHelpServer).HelpSetBotUpdatesStatus(ctx, req.(*TLHelpSetBotUpdatesStatus))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCHelp_HelpGetAppChangelog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLHelpGetAppChangelog)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCHelpServer).HelpGetAppChangelog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCHelp/HelpGetAppChangelog",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCHelpServer).HelpGetAppChangelog(ctx, req.(*TLHelpGetAppChangelog))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCHelp_HelpGetConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLHelpGetConfig)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCHelpServer).HelpGetConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCHelp/HelpGetConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCHelpServer).HelpGetConfig(ctx, req.(*TLHelpGetConfig))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCHelp_HelpGetNearestDc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLHelpGetNearestDc)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCHelpServer).HelpGetNearestDc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCHelp/HelpGetNearestDc",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCHelpServer).HelpGetNearestDc(ctx, req.(*TLHelpGetNearestDc))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCHelp_HelpGetAppUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLHelpGetAppUpdate)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCHelpServer).HelpGetAppUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCHelp/HelpGetAppUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCHelpServer).HelpGetAppUpdate(ctx, req.(*TLHelpGetAppUpdate))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCHelp_HelpGetInviteText_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLHelpGetInviteText)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCHelpServer).HelpGetInviteText(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCHelp/HelpGetInviteText",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCHelpServer).HelpGetInviteText(ctx, req.(*TLHelpGetInviteText))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCHelp_HelpGetSupport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLHelpGetSupport)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCHelpServer).HelpGetSupport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCHelp/HelpGetSupport",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCHelpServer).HelpGetSupport(ctx, req.(*TLHelpGetSupport))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCHelp_HelpGetTermsOfService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLHelpGetTermsOfService)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCHelpServer).HelpGetTermsOfService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCHelp/HelpGetTermsOfService",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCHelpServer).HelpGetTermsOfService(ctx, req.(*TLHelpGetTermsOfService))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCHelp_HelpGetCdnConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLHelpGetCdnConfig)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCHelpServer).HelpGetCdnConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCHelp/HelpGetCdnConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCHelpServer).HelpGetCdnConfig(ctx, req.(*TLHelpGetCdnConfig))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RPCHelp_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mtproto.RPCHelp",
+	HandlerType: (*RPCHelpServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "help_saveAppLog",
+			Handler:    _RPCHelp_HelpSaveAppLog_Handler,
+		},
+		{
+			MethodName: "help_setBotUpdatesStatus",
+			Handler:    _RPCHelp_HelpSetBotUpdatesStatus_Handler,
+		},
+		{
+			MethodName: "help_getAppChangelog",
+			Handler:    _RPCHelp_HelpGetAppChangelog_Handler,
+		},
+		{
+			MethodName: "help_getConfig",
+			Handler:    _RPCHelp_HelpGetConfig_Handler,
+		},
+		{
+			MethodName: "help_getNearestDc",
+			Handler:    _RPCHelp_HelpGetNearestDc_Handler,
+		},
+		{
+			MethodName: "help_getAppUpdate",
+			Handler:    _RPCHelp_HelpGetAppUpdate_Handler,
+		},
+		{
+			MethodName: "help_getInviteText",
+			Handler:    _RPCHelp_HelpGetInviteText_Handler,
+		},
+		{
+			MethodName: "help_getSupport",
+			Handler:    _RPCHelp_HelpGetSupport_Handler,
+		},
+		{
+			MethodName: "help_getTermsOfService",
+			Handler:    _RPCHelp_HelpGetTermsOfService_Handler,
+		},
+		{
+			MethodName: "help_getCdnConfig",
+			Handler:    _RPCHelp_HelpGetCdnConfig_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "schema.tl.sync.service.proto",
+}
+
+// Client API for RPCChannels service
+
+type RPCChannelsClient interface {
+	ChannelsReadHistory(ctx context.Context, in *TLChannelsReadHistory, opts ...grpc.CallOption) (*Bool, error)
+	ChannelsReportSpam(ctx context.Context, in *TLChannelsReportSpam, opts ...grpc.CallOption) (*Bool, error)
+	ChannelsEditAbout(ctx context.Context, in *TLChannelsEditAbout, opts ...grpc.CallOption) (*Bool, error)
+	ChannelsCheckUsername(ctx context.Context, in *TLChannelsCheckUsername, opts ...grpc.CallOption) (*Bool, error)
+	ChannelsUpdateUsername(ctx context.Context, in *TLChannelsUpdateUsername, opts ...grpc.CallOption) (*Bool, error)
+	ChannelsSetStickers(ctx context.Context, in *TLChannelsSetStickers, opts ...grpc.CallOption) (*Bool, error)
+	ChannelsReadMessageContents(ctx context.Context, in *TLChannelsReadMessageContents, opts ...grpc.CallOption) (*Bool, error)
+	ChannelsGetMessages(ctx context.Context, in *TLChannelsGetMessages, opts ...grpc.CallOption) (*Messages_Messages, error)
+	ChannelsDeleteMessages(ctx context.Context, in *TLChannelsDeleteMessages, opts ...grpc.CallOption) (*Messages_AffectedMessages, error)
+	ChannelsDeleteUserHistory(ctx context.Context, in *TLChannelsDeleteUserHistory, opts ...grpc.CallOption) (*Messages_AffectedHistory, error)
+	ChannelsCreateChannel(ctx context.Context, in *TLChannelsCreateChannel, opts ...grpc.CallOption) (*Updates, error)
+	ChannelsEditAdmin(ctx context.Context, in *TLChannelsEditAdmin, opts ...grpc.CallOption) (*Updates, error)
+	ChannelsEditTitle(ctx context.Context, in *TLChannelsEditTitle, opts ...grpc.CallOption) (*Updates, error)
+	ChannelsEditPhoto(ctx context.Context, in *TLChannelsEditPhoto, opts ...grpc.CallOption) (*Updates, error)
+	ChannelsJoinChannel(ctx context.Context, in *TLChannelsJoinChannel, opts ...grpc.CallOption) (*Updates, error)
+	ChannelsLeaveChannel(ctx context.Context, in *TLChannelsLeaveChannel, opts ...grpc.CallOption) (*Updates, error)
+	ChannelsInviteToChannel(ctx context.Context, in *TLChannelsInviteToChannel, opts ...grpc.CallOption) (*Updates, error)
+	ChannelsDeleteChannel(ctx context.Context, in *TLChannelsDeleteChannel, opts ...grpc.CallOption) (*Updates, error)
+	ChannelsToggleInvites(ctx context.Context, in *TLChannelsToggleInvites, opts ...grpc.CallOption) (*Updates, error)
+	ChannelsToggleSignatures(ctx context.Context, in *TLChannelsToggleSignatures, opts ...grpc.CallOption) (*Updates, error)
+	ChannelsUpdatePinnedMessage(ctx context.Context, in *TLChannelsUpdatePinnedMessage, opts ...grpc.CallOption) (*Updates, error)
+	ChannelsEditBanned(ctx context.Context, in *TLChannelsEditBanned, opts ...grpc.CallOption) (*Updates, error)
+	ChannelsGetChannels(ctx context.Context, in *TLChannelsGetChannels, opts ...grpc.CallOption) (*Messages_Chats, error)
+	ChannelsGetAdminedPublicChannels(ctx context.Context, in *TLChannelsGetAdminedPublicChannels, opts ...grpc.CallOption) (*Messages_Chats, error)
+	ChannelsGetFullChannel(ctx context.Context, in *TLChannelsGetFullChannel, opts ...grpc.CallOption) (*Messages_ChatFull, error)
+	ChannelsExportInvite(ctx context.Context, in *TLChannelsExportInvite, opts ...grpc.CallOption) (*ExportedChatInvite, error)
+	ChannelsGetParticipants(ctx context.Context, in *TLChannelsGetParticipants, opts ...grpc.CallOption) (*Channels_ChannelParticipants, error)
+	ChannelsGetParticipant(ctx context.Context, in *TLChannelsGetParticipant, opts ...grpc.CallOption) (*Channels_ChannelParticipant, error)
+	ChannelsExportMessageLink(ctx context.Context, in *TLChannelsExportMessageLink, opts ...grpc.CallOption) (*ExportedMessageLink, error)
+	ChannelsGetAdminLog(ctx context.Context, in *TLChannelsGetAdminLog, opts ...grpc.CallOption) (*Channels_AdminLogResults, error)
+}
+
+type rPCChannelsClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRPCChannelsClient(cc *grpc.ClientConn) RPCChannelsClient {
+	return &rPCChannelsClient{cc}
+}
+
+func (c *rPCChannelsClient) ChannelsReadHistory(ctx context.Context, in *TLChannelsReadHistory, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_readHistory", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsReportSpam(ctx context.Context, in *TLChannelsReportSpam, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_reportSpam", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsEditAbout(ctx context.Context, in *TLChannelsEditAbout, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_editAbout", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsCheckUsername(ctx context.Context, in *TLChannelsCheckUsername, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_checkUsername", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsUpdateUsername(ctx context.Context, in *TLChannelsUpdateUsername, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_updateUsername", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsSetStickers(ctx context.Context, in *TLChannelsSetStickers, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_setStickers", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsReadMessageContents(ctx context.Context, in *TLChannelsReadMessageContents, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_readMessageContents", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsGetMessages(ctx context.Context, in *TLChannelsGetMessages, opts ...grpc.CallOption) (*Messages_Messages, error) {
+	out := new(Messages_Messages)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_getMessages", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsDeleteMessages(ctx context.Context, in *TLChannelsDeleteMessages, opts ...grpc.CallOption) (*Messages_AffectedMessages, error) {
+	out := new(Messages_AffectedMessages)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_deleteMessages", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsDeleteUserHistory(ctx context.Context, in *TLChannelsDeleteUserHistory, opts ...grpc.CallOption) (*Messages_AffectedHistory, error) {
+	out := new(Messages_AffectedHistory)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_deleteUserHistory", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsCreateChannel(ctx context.Context, in *TLChannelsCreateChannel, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_createChannel", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsEditAdmin(ctx context.Context, in *TLChannelsEditAdmin, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_editAdmin", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsEditTitle(ctx context.Context, in *TLChannelsEditTitle, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_editTitle", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsEditPhoto(ctx context.Context, in *TLChannelsEditPhoto, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_editPhoto", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsJoinChannel(ctx context.Context, in *TLChannelsJoinChannel, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_joinChannel", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsLeaveChannel(ctx context.Context, in *TLChannelsLeaveChannel, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_leaveChannel", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsInviteToChannel(ctx context.Context, in *TLChannelsInviteToChannel, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_inviteToChannel", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsDeleteChannel(ctx context.Context, in *TLChannelsDeleteChannel, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_deleteChannel", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsToggleInvites(ctx context.Context, in *TLChannelsToggleInvites, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_toggleInvites", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsToggleSignatures(ctx context.Context, in *TLChannelsToggleSignatures, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_toggleSignatures", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsUpdatePinnedMessage(ctx context.Context, in *TLChannelsUpdatePinnedMessage, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_updatePinnedMessage", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsEditBanned(ctx context.Context, in *TLChannelsEditBanned, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_editBanned", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsGetChannels(ctx context.Context, in *TLChannelsGetChannels, opts ...grpc.CallOption) (*Messages_Chats, error) {
+	out := new(Messages_Chats)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_getChannels", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsGetAdminedPublicChannels(ctx context.Context, in *TLChannelsGetAdminedPublicChannels, opts ...grpc.CallOption) (*Messages_Chats, error) {
+	out := new(Messages_Chats)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_getAdminedPublicChannels", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsGetFullChannel(ctx context.Context, in *TLChannelsGetFullChannel, opts ...grpc.CallOption) (*Messages_ChatFull, error) {
+	out := new(Messages_ChatFull)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_getFullChannel", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsExportInvite(ctx context.Context, in *TLChannelsExportInvite, opts ...grpc.CallOption) (*ExportedChatInvite, error) {
+	out := new(ExportedChatInvite)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_exportInvite", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsGetParticipants(ctx context.Context, in *TLChannelsGetParticipants, opts ...grpc.CallOption) (*Channels_ChannelParticipants, error) {
+	out := new(Channels_ChannelParticipants)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_getParticipants", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsGetParticipant(ctx context.Context, in *TLChannelsGetParticipant, opts ...grpc.CallOption) (*Channels_ChannelParticipant, error) {
+	out := new(Channels_ChannelParticipant)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_getParticipant", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsExportMessageLink(ctx context.Context, in *TLChannelsExportMessageLink, opts ...grpc.CallOption) (*ExportedMessageLink, error) {
+	out := new(ExportedMessageLink)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_exportMessageLink", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCChannelsClient) ChannelsGetAdminLog(ctx context.Context, in *TLChannelsGetAdminLog, opts ...grpc.CallOption) (*Channels_AdminLogResults, error) {
+	out := new(Channels_AdminLogResults)
+	err := grpc.Invoke(ctx, "/mtproto.RPCChannels/channels_getAdminLog", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for RPCChannels service
+
+type RPCChannelsServer interface {
+	ChannelsReadHistory(context.Context, *TLChannelsReadHistory) (*Bool, error)
+	ChannelsReportSpam(context.Context, *TLChannelsReportSpam) (*Bool, error)
+	ChannelsEditAbout(context.Context, *TLChannelsEditAbout) (*Bool, error)
+	ChannelsCheckUsername(context.Context, *TLChannelsCheckUsername) (*Bool, error)
+	ChannelsUpdateUsername(context.Context, *TLChannelsUpdateUsername) (*Bool, error)
+	ChannelsSetStickers(context.Context, *TLChannelsSetStickers) (*Bool, error)
+	ChannelsReadMessageContents(context.Context, *TLChannelsReadMessageContents) (*Bool, error)
+	ChannelsGetMessages(context.Context, *TLChannelsGetMessages) (*Messages_Messages, error)
+	ChannelsDeleteMessages(context.Context, *TLChannelsDeleteMessages) (*Messages_AffectedMessages, error)
+	ChannelsDeleteUserHistory(context.Context, *TLChannelsDeleteUserHistory) (*Messages_AffectedHistory, error)
+	ChannelsCreateChannel(context.Context, *TLChannelsCreateChannel) (*Updates, error)
+	ChannelsEditAdmin(context.Context, *TLChannelsEditAdmin) (*Updates, error)
+	ChannelsEditTitle(context.Context, *TLChannelsEditTitle) (*Updates, error)
+	ChannelsEditPhoto(context.Context, *TLChannelsEditPhoto) (*Updates, error)
+	ChannelsJoinChannel(context.Context, *TLChannelsJoinChannel) (*Updates, error)
+	ChannelsLeaveChannel(context.Context, *TLChannelsLeaveChannel) (*Updates, error)
+	ChannelsInviteToChannel(context.Context, *TLChannelsInviteToChannel) (*Updates, error)
+	ChannelsDeleteChannel(context.Context, *TLChannelsDeleteChannel) (*Updates, error)
+	ChannelsToggleInvites(context.Context, *TLChannelsToggleInvites) (*Updates, error)
+	ChannelsToggleSignatures(context.Context, *TLChannelsToggleSignatures) (*Updates, error)
+	ChannelsUpdatePinnedMessage(context.Context, *TLChannelsUpdatePinnedMessage) (*Updates, error)
+	ChannelsEditBanned(context.Context, *TLChannelsEditBanned) (*Updates, error)
+	ChannelsGetChannels(context.Context, *TLChannelsGetChannels) (*Messages_Chats, error)
+	ChannelsGetAdminedPublicChannels(context.Context, *TLChannelsGetAdminedPublicChannels) (*Messages_Chats, error)
+	ChannelsGetFullChannel(context.Context, *TLChannelsGetFullChannel) (*Messages_ChatFull, error)
+	ChannelsExportInvite(context.Context, *TLChannelsExportInvite) (*ExportedChatInvite, error)
+	ChannelsGetParticipants(context.Context, *TLChannelsGetParticipants) (*Channels_ChannelParticipants, error)
+	ChannelsGetParticipant(context.Context, *TLChannelsGetParticipant) (*Channels_ChannelParticipant, error)
+	ChannelsExportMessageLink(context.Context, *TLChannelsExportMessageLink) (*ExportedMessageLink, error)
+	ChannelsGetAdminLog(context.Context, *TLChannelsGetAdminLog) (*Channels_AdminLogResults, error)
+}
+
+func RegisterRPCChannelsServer(s *grpc.Server, srv RPCChannelsServer) {
+	s.RegisterService(&_RPCChannels_serviceDesc, srv)
+}
+
+func _RPCChannels_ChannelsReadHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsReadHistory)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsReadHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsReadHistory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsReadHistory(ctx, req.(*TLChannelsReadHistory))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsReportSpam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsReportSpam)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsReportSpam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsReportSpam",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsReportSpam(ctx, req.(*TLChannelsReportSpam))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsEditAbout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsEditAbout)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsEditAbout(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsEditAbout",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsEditAbout(ctx, req.(*TLChannelsEditAbout))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsCheckUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsCheckUsername)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsCheckUsername(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsCheckUsername",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsCheckUsername(ctx, req.(*TLChannelsCheckUsername))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsUpdateUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsUpdateUsername)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsUpdateUsername(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsUpdateUsername",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsUpdateUsername(ctx, req.(*TLChannelsUpdateUsername))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsSetStickers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsSetStickers)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsSetStickers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsSetStickers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsSetStickers(ctx, req.(*TLChannelsSetStickers))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsReadMessageContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsReadMessageContents)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsReadMessageContents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsReadMessageContents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsReadMessageContents(ctx, req.(*TLChannelsReadMessageContents))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsGetMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsGetMessages)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsGetMessages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsGetMessages",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsGetMessages(ctx, req.(*TLChannelsGetMessages))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsDeleteMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsDeleteMessages)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsDeleteMessages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsDeleteMessages",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsDeleteMessages(ctx, req.(*TLChannelsDeleteMessages))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsDeleteUserHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsDeleteUserHistory)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsDeleteUserHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsDeleteUserHistory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsDeleteUserHistory(ctx, req.(*TLChannelsDeleteUserHistory))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsCreateChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsCreateChannel)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsCreateChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsCreateChannel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsCreateChannel(ctx, req.(*TLChannelsCreateChannel))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsEditAdmin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsEditAdmin)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsEditAdmin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsEditAdmin",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsEditAdmin(ctx, req.(*TLChannelsEditAdmin))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsEditTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsEditTitle)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsEditTitle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsEditTitle",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsEditTitle(ctx, req.(*TLChannelsEditTitle))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsEditPhoto_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsEditPhoto)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsEditPhoto(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsEditPhoto",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsEditPhoto(ctx, req.(*TLChannelsEditPhoto))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsJoinChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsJoinChannel)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsJoinChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsJoinChannel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsJoinChannel(ctx, req.(*TLChannelsJoinChannel))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsLeaveChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsLeaveChannel)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsLeaveChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsLeaveChannel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsLeaveChannel(ctx, req.(*TLChannelsLeaveChannel))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsInviteToChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsInviteToChannel)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsInviteToChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsInviteToChannel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsInviteToChannel(ctx, req.(*TLChannelsInviteToChannel))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsDeleteChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsDeleteChannel)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsDeleteChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsDeleteChannel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsDeleteChannel(ctx, req.(*TLChannelsDeleteChannel))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsToggleInvites_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsToggleInvites)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsToggleInvites(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsToggleInvites",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsToggleInvites(ctx, req.(*TLChannelsToggleInvites))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsToggleSignatures_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsToggleSignatures)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsToggleSignatures(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsToggleSignatures",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsToggleSignatures(ctx, req.(*TLChannelsToggleSignatures))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsUpdatePinnedMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsUpdatePinnedMessage)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsUpdatePinnedMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsUpdatePinnedMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsUpdatePinnedMessage(ctx, req.(*TLChannelsUpdatePinnedMessage))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsEditBanned_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsEditBanned)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsEditBanned(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsEditBanned",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsEditBanned(ctx, req.(*TLChannelsEditBanned))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsGetChannels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsGetChannels)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsGetChannels(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsGetChannels",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsGetChannels(ctx, req.(*TLChannelsGetChannels))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsGetAdminedPublicChannels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsGetAdminedPublicChannels)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsGetAdminedPublicChannels(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsGetAdminedPublicChannels",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsGetAdminedPublicChannels(ctx, req.(*TLChannelsGetAdminedPublicChannels))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsGetFullChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsGetFullChannel)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsGetFullChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsGetFullChannel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsGetFullChannel(ctx, req.(*TLChannelsGetFullChannel))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsExportInvite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsExportInvite)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsExportInvite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsExportInvite",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsExportInvite(ctx, req.(*TLChannelsExportInvite))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsGetParticipants_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsGetParticipants)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsGetParticipants(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsGetParticipants",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsGetParticipants(ctx, req.(*TLChannelsGetParticipants))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsGetParticipant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsGetParticipant)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsGetParticipant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsGetParticipant",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsGetParticipant(ctx, req.(*TLChannelsGetParticipant))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsExportMessageLink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsExportMessageLink)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsExportMessageLink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsExportMessageLink",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsExportMessageLink(ctx, req.(*TLChannelsExportMessageLink))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCChannels_ChannelsGetAdminLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLChannelsGetAdminLog)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCChannelsServer).ChannelsGetAdminLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCChannels/ChannelsGetAdminLog",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCChannelsServer).ChannelsGetAdminLog(ctx, req.(*TLChannelsGetAdminLog))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RPCChannels_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mtproto.RPCChannels",
+	HandlerType: (*RPCChannelsServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "channels_readHistory",
+			Handler:    _RPCChannels_ChannelsReadHistory_Handler,
+		},
+		{
+			MethodName: "channels_reportSpam",
+			Handler:    _RPCChannels_ChannelsReportSpam_Handler,
+		},
+		{
+			MethodName: "channels_editAbout",
+			Handler:    _RPCChannels_ChannelsEditAbout_Handler,
+		},
+		{
+			MethodName: "channels_checkUsername",
+			Handler:    _RPCChannels_ChannelsCheckUsername_Handler,
+		},
+		{
+			MethodName: "channels_updateUsername",
+			Handler:    _RPCChannels_ChannelsUpdateUsername_Handler,
+		},
+		{
+			MethodName: "channels_setStickers",
+			Handler:    _RPCChannels_ChannelsSetStickers_Handler,
+		},
+		{
+			MethodName: "channels_readMessageContents",
+			Handler:    _RPCChannels_ChannelsReadMessageContents_Handler,
+		},
+		{
+			MethodName: "channels_getMessages",
+			Handler:    _RPCChannels_ChannelsGetMessages_Handler,
+		},
+		{
+			MethodName: "channels_deleteMessages",
+			Handler:    _RPCChannels_ChannelsDeleteMessages_Handler,
+		},
+		{
+			MethodName: "channels_deleteUserHistory",
+			Handler:    _RPCChannels_ChannelsDeleteUserHistory_Handler,
+		},
+		{
+			MethodName: "channels_createChannel",
+			Handler:    _RPCChannels_ChannelsCreateChannel_Handler,
+		},
+		{
+			MethodName: "channels_editAdmin",
+			Handler:    _RPCChannels_ChannelsEditAdmin_Handler,
+		},
+		{
+			MethodName: "channels_editTitle",
+			Handler:    _RPCChannels_ChannelsEditTitle_Handler,
+		},
+		{
+			MethodName: "channels_editPhoto",
+			Handler:    _RPCChannels_ChannelsEditPhoto_Handler,
+		},
+		{
+			MethodName: "channels_joinChannel",
+			Handler:    _RPCChannels_ChannelsJoinChannel_Handler,
+		},
+		{
+			MethodName: "channels_leaveChannel",
+			Handler:    _RPCChannels_ChannelsLeaveChannel_Handler,
+		},
+		{
+			MethodName: "channels_inviteToChannel",
+			Handler:    _RPCChannels_ChannelsInviteToChannel_Handler,
+		},
+		{
+			MethodName: "channels_deleteChannel",
+			Handler:    _RPCChannels_ChannelsDeleteChannel_Handler,
+		},
+		{
+			MethodName: "channels_toggleInvites",
+			Handler:    _RPCChannels_ChannelsToggleInvites_Handler,
+		},
+		{
+			MethodName: "channels_toggleSignatures",
+			Handler:    _RPCChannels_ChannelsToggleSignatures_Handler,
+		},
+		{
+			MethodName: "channels_updatePinnedMessage",
+			Handler:    _RPCChannels_ChannelsUpdatePinnedMessage_Handler,
+		},
+		{
+			MethodName: "channels_editBanned",
+			Handler:    _RPCChannels_ChannelsEditBanned_Handler,
+		},
+		{
+			MethodName: "channels_getChannels",
+			Handler:    _RPCChannels_ChannelsGetChannels_Handler,
+		},
+		{
+			MethodName: "channels_getAdminedPublicChannels",
+			Handler:    _RPCChannels_ChannelsGetAdminedPublicChannels_Handler,
+		},
+		{
+			MethodName: "channels_getFullChannel",
+			Handler:    _RPCChannels_ChannelsGetFullChannel_Handler,
+		},
+		{
+			MethodName: "channels_exportInvite",
+			Handler:    _RPCChannels_ChannelsExportInvite_Handler,
+		},
+		{
+			MethodName: "channels_getParticipants",
+			Handler:    _RPCChannels_ChannelsGetParticipants_Handler,
+		},
+		{
+			MethodName: "channels_getParticipant",
+			Handler:    _RPCChannels_ChannelsGetParticipant_Handler,
+		},
+		{
+			MethodName: "channels_exportMessageLink",
+			Handler:    _RPCChannels_ChannelsExportMessageLink_Handler,
+		},
+		{
+			MethodName: "channels_getAdminLog",
+			Handler:    _RPCChannels_ChannelsGetAdminLog_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "schema.tl.sync.service.proto",
+}
+
+// Client API for RPCBots service
+
+type RPCBotsClient interface {
+	BotsAnswerWebhookJSONQuery(ctx context.Context, in *TLBotsAnswerWebhookJSONQuery, opts ...grpc.CallOption) (*Bool, error)
+	BotsSendCustomRequest(ctx context.Context, in *TLBotsSendCustomRequest, opts ...grpc.CallOption) (*DataJSON, error)
+}
+
+type rPCBotsClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRPCBotsClient(cc *grpc.ClientConn) RPCBotsClient {
+	return &rPCBotsClient{cc}
+}
+
+func (c *rPCBotsClient) BotsAnswerWebhookJSONQuery(ctx context.Context, in *TLBotsAnswerWebhookJSONQuery, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCBots/bots_answerWebhookJSONQuery", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCBotsClient) BotsSendCustomRequest(ctx context.Context, in *TLBotsSendCustomRequest, opts ...grpc.CallOption) (*DataJSON, error) {
+	out := new(DataJSON)
+	err := grpc.Invoke(ctx, "/mtproto.RPCBots/bots_sendCustomRequest", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for RPCBots service
+
+type RPCBotsServer interface {
+	BotsAnswerWebhookJSONQuery(context.Context, *TLBotsAnswerWebhookJSONQuery) (*Bool, error)
+	BotsSendCustomRequest(context.Context, *TLBotsSendCustomRequest) (*DataJSON, error)
+}
+
+func RegisterRPCBotsServer(s *grpc.Server, srv RPCBotsServer) {
+	s.RegisterService(&_RPCBots_serviceDesc, srv)
+}
+
+func _RPCBots_BotsAnswerWebhookJSONQuery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLBotsAnswerWebhookJSONQuery)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCBotsServer).BotsAnswerWebhookJSONQuery(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCBots/BotsAnswerWebhookJSONQuery",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCBotsServer).BotsAnswerWebhookJSONQuery(ctx, req.(*TLBotsAnswerWebhookJSONQuery))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCBots_BotsSendCustomRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLBotsSendCustomRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCBotsServer).BotsSendCustomRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCBots/BotsSendCustomRequest",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCBotsServer).BotsSendCustomRequest(ctx, req.(*TLBotsSendCustomRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RPCBots_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mtproto.RPCBots",
+	HandlerType: (*RPCBotsServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "bots_answerWebhookJSONQuery",
+			Handler:    _RPCBots_BotsAnswerWebhookJSONQuery_Handler,
+		},
+		{
+			MethodName: "bots_sendCustomRequest",
+			Handler:    _RPCBots_BotsSendCustomRequest_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "schema.tl.sync.service.proto",
+}
+
+// Client API for RPCPayments service
+
+type RPCPaymentsClient interface {
+	PaymentsClearSavedInfo(ctx context.Context, in *TLPaymentsClearSavedInfo, opts ...grpc.CallOption) (*Bool, error)
+	PaymentsGetPaymentForm(ctx context.Context, in *TLPaymentsGetPaymentForm, opts ...grpc.CallOption) (*Payments_PaymentForm, error)
+	PaymentsGetPaymentReceipt(ctx context.Context, in *TLPaymentsGetPaymentReceipt, opts ...grpc.CallOption) (*Payments_PaymentReceipt, error)
+	PaymentsValidateRequestedInfo(ctx context.Context, in *TLPaymentsValidateRequestedInfo, opts ...grpc.CallOption) (*Payments_ValidatedRequestedInfo, error)
+	PaymentsSendPaymentForm(ctx context.Context, in *TLPaymentsSendPaymentForm, opts ...grpc.CallOption) (*Payments_PaymentResult, error)
+	PaymentsGetSavedInfo(ctx context.Context, in *TLPaymentsGetSavedInfo, opts ...grpc.CallOption) (*Payments_SavedInfo, error)
+}
+
+type rPCPaymentsClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRPCPaymentsClient(cc *grpc.ClientConn) RPCPaymentsClient {
+	return &rPCPaymentsClient{cc}
+}
+
+func (c *rPCPaymentsClient) PaymentsClearSavedInfo(ctx context.Context, in *TLPaymentsClearSavedInfo, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPayments/payments_clearSavedInfo", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCPaymentsClient) PaymentsGetPaymentForm(ctx context.Context, in *TLPaymentsGetPaymentForm, opts ...grpc.CallOption) (*Payments_PaymentForm, error) {
+	out := new(Payments_PaymentForm)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPayments/payments_getPaymentForm", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCPaymentsClient) PaymentsGetPaymentReceipt(ctx context.Context, in *TLPaymentsGetPaymentReceipt, opts ...grpc.CallOption) (*Payments_PaymentReceipt, error) {
+	out := new(Payments_PaymentReceipt)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPayments/payments_getPaymentReceipt", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCPaymentsClient) PaymentsValidateRequestedInfo(ctx context.Context, in *TLPaymentsValidateRequestedInfo, opts ...grpc.CallOption) (*Payments_ValidatedRequestedInfo, error) {
+	out := new(Payments_ValidatedRequestedInfo)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPayments/payments_validateRequestedInfo", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCPaymentsClient) PaymentsSendPaymentForm(ctx context.Context, in *TLPaymentsSendPaymentForm, opts ...grpc.CallOption) (*Payments_PaymentResult, error) {
+	out := new(Payments_PaymentResult)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPayments/payments_sendPaymentForm", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCPaymentsClient) PaymentsGetSavedInfo(ctx context.Context, in *TLPaymentsGetSavedInfo, opts ...grpc.CallOption) (*Payments_SavedInfo, error) {
+	out := new(Payments_SavedInfo)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPayments/payments_getSavedInfo", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for RPCPayments service
+
+type RPCPaymentsServer interface {
+	PaymentsClearSavedInfo(context.Context, *TLPaymentsClearSavedInfo) (*Bool, error)
+	PaymentsGetPaymentForm(context.Context, *TLPaymentsGetPaymentForm) (*Payments_PaymentForm, error)
+	PaymentsGetPaymentReceipt(context.Context, *TLPaymentsGetPaymentReceipt) (*Payments_PaymentReceipt, error)
+	PaymentsValidateRequestedInfo(context.Context, *TLPaymentsValidateRequestedInfo) (*Payments_ValidatedRequestedInfo, error)
+	PaymentsSendPaymentForm(context.Context, *TLPaymentsSendPaymentForm) (*Payments_PaymentResult, error)
+	PaymentsGetSavedInfo(context.Context, *TLPaymentsGetSavedInfo) (*Payments_SavedInfo, error)
+}
+
+func RegisterRPCPaymentsServer(s *grpc.Server, srv RPCPaymentsServer) {
+	s.RegisterService(&_RPCPayments_serviceDesc, srv)
+}
+
+func _RPCPayments_PaymentsClearSavedInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPaymentsClearSavedInfo)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPaymentsServer).PaymentsClearSavedInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPayments/PaymentsClearSavedInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPaymentsServer).PaymentsClearSavedInfo(ctx, req.(*TLPaymentsClearSavedInfo))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCPayments_PaymentsGetPaymentForm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPaymentsGetPaymentForm)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPaymentsServer).PaymentsGetPaymentForm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPayments/PaymentsGetPaymentForm",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPaymentsServer).PaymentsGetPaymentForm(ctx, req.(*TLPaymentsGetPaymentForm))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCPayments_PaymentsGetPaymentReceipt_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPaymentsGetPaymentReceipt)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPaymentsServer).PaymentsGetPaymentReceipt(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPayments/PaymentsGetPaymentReceipt",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPaymentsServer).PaymentsGetPaymentReceipt(ctx, req.(*TLPaymentsGetPaymentReceipt))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCPayments_PaymentsValidateRequestedInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPaymentsValidateRequestedInfo)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPaymentsServer).PaymentsValidateRequestedInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPayments/PaymentsValidateRequestedInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPaymentsServer).PaymentsValidateRequestedInfo(ctx, req.(*TLPaymentsValidateRequestedInfo))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCPayments_PaymentsSendPaymentForm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPaymentsSendPaymentForm)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPaymentsServer).PaymentsSendPaymentForm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPayments/PaymentsSendPaymentForm",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPaymentsServer).PaymentsSendPaymentForm(ctx, req.(*TLPaymentsSendPaymentForm))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCPayments_PaymentsGetSavedInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPaymentsGetSavedInfo)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPaymentsServer).PaymentsGetSavedInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPayments/PaymentsGetSavedInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPaymentsServer).PaymentsGetSavedInfo(ctx, req.(*TLPaymentsGetSavedInfo))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RPCPayments_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mtproto.RPCPayments",
+	HandlerType: (*RPCPaymentsServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "payments_clearSavedInfo",
+			Handler:    _RPCPayments_PaymentsClearSavedInfo_Handler,
+		},
+		{
+			MethodName: "payments_getPaymentForm",
+			Handler:    _RPCPayments_PaymentsGetPaymentForm_Handler,
+		},
+		{
+			MethodName: "payments_getPaymentReceipt",
+			Handler:    _RPCPayments_PaymentsGetPaymentReceipt_Handler,
+		},
+		{
+			MethodName: "payments_validateRequestedInfo",
+			Handler:    _RPCPayments_PaymentsValidateRequestedInfo_Handler,
+		},
+		{
+			MethodName: "payments_sendPaymentForm",
+			Handler:    _RPCPayments_PaymentsSendPaymentForm_Handler,
+		},
+		{
+			MethodName: "payments_getSavedInfo",
+			Handler:    _RPCPayments_PaymentsGetSavedInfo_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "schema.tl.sync.service.proto",
+}
+
+// Client API for RPCPhone service
+
+type RPCPhoneClient interface {
+	PhoneReceivedCall(ctx context.Context, in *TLPhoneReceivedCall, opts ...grpc.CallOption) (*Bool, error)
+	PhoneSaveCallDebug(ctx context.Context, in *TLPhoneSaveCallDebug, opts ...grpc.CallOption) (*Bool, error)
+	PhoneDiscardCall(ctx context.Context, in *TLPhoneDiscardCall, opts ...grpc.CallOption) (*Updates, error)
+	PhoneSetCallRating(ctx context.Context, in *TLPhoneSetCallRating, opts ...grpc.CallOption) (*Updates, error)
+	PhoneGetCallConfig(ctx context.Context, in *TLPhoneGetCallConfig, opts ...grpc.CallOption) (*DataJSON, error)
+	PhoneRequestCall(ctx context.Context, in *TLPhoneRequestCall, opts ...grpc.CallOption) (*Phone_PhoneCall, error)
+	PhoneAcceptCall(ctx context.Context, in *TLPhoneAcceptCall, opts ...grpc.CallOption) (*Phone_PhoneCall, error)
+	PhoneConfirmCall(ctx context.Context, in *TLPhoneConfirmCall, opts ...grpc.CallOption) (*Phone_PhoneCall, error)
+}
+
+type rPCPhoneClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRPCPhoneClient(cc *grpc.ClientConn) RPCPhoneClient {
+	return &rPCPhoneClient{cc}
+}
+
+func (c *rPCPhoneClient) PhoneReceivedCall(ctx context.Context, in *TLPhoneReceivedCall, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPhone/phone_receivedCall", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCPhoneClient) PhoneSaveCallDebug(ctx context.Context, in *TLPhoneSaveCallDebug, opts ...grpc.CallOption) (*Bool, error) {
+	out := new(Bool)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPhone/phone_saveCallDebug", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCPhoneClient) PhoneDiscardCall(ctx context.Context, in *TLPhoneDiscardCall, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPhone/phone_discardCall", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCPhoneClient) PhoneSetCallRating(ctx context.Context, in *TLPhoneSetCallRating, opts ...grpc.CallOption) (*Updates, error) {
+	out := new(Updates)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPhone/phone_setCallRating", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCPhoneClient) PhoneGetCallConfig(ctx context.Context, in *TLPhoneGetCallConfig, opts ...grpc.CallOption) (*DataJSON, error) {
+	out := new(DataJSON)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPhone/phone_getCallConfig", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCPhoneClient) PhoneRequestCall(ctx context.Context, in *TLPhoneRequestCall, opts ...grpc.CallOption) (*Phone_PhoneCall, error) {
+	out := new(Phone_PhoneCall)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPhone/phone_requestCall", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCPhoneClient) PhoneAcceptCall(ctx context.Context, in *TLPhoneAcceptCall, opts ...grpc.CallOption) (*Phone_PhoneCall, error) {
+	out := new(Phone_PhoneCall)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPhone/phone_acceptCall", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCPhoneClient) PhoneConfirmCall(ctx context.Context, in *TLPhoneConfirmCall, opts ...grpc.CallOption) (*Phone_PhoneCall, error) {
+	out := new(Phone_PhoneCall)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPhone/phone_confirmCall", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for RPCPhone service
+
+type RPCPhoneServer interface {
+	PhoneReceivedCall(context.Context, *TLPhoneReceivedCall) (*Bool, error)
+	PhoneSaveCallDebug(context.Context, *TLPhoneSaveCallDebug) (*Bool, error)
+	PhoneDiscardCall(context.Context, *TLPhoneDiscardCall) (*Updates, error)
+	PhoneSetCallRating(context.Context, *TLPhoneSetCallRating) (*Updates, error)
+	PhoneGetCallConfig(context.Context, *TLPhoneGetCallConfig) (*DataJSON, error)
+	PhoneRequestCall(context.Context, *TLPhoneRequestCall) (*Phone_PhoneCall, error)
+	PhoneAcceptCall(context.Context, *TLPhoneAcceptCall) (*Phone_PhoneCall, error)
+	PhoneConfirmCall(context.Context, *TLPhoneConfirmCall) (*Phone_PhoneCall, error)
+}
+
+func RegisterRPCPhoneServer(s *grpc.Server, srv RPCPhoneServer) {
+	s.RegisterService(&_RPCPhone_serviceDesc, srv)
+}
+
+func _RPCPhone_PhoneReceivedCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPhoneReceivedCall)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPhoneServer).PhoneReceivedCall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPhone/PhoneReceivedCall",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPhoneServer).PhoneReceivedCall(ctx, req.(*TLPhoneReceivedCall))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCPhone_PhoneSaveCallDebug_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPhoneSaveCallDebug)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPhoneServer).PhoneSaveCallDebug(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPhone/PhoneSaveCallDebug",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPhoneServer).PhoneSaveCallDebug(ctx, req.(*TLPhoneSaveCallDebug))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCPhone_PhoneDiscardCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPhoneDiscardCall)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPhoneServer).PhoneDiscardCall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPhone/PhoneDiscardCall",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPhoneServer).PhoneDiscardCall(ctx, req.(*TLPhoneDiscardCall))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCPhone_PhoneSetCallRating_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPhoneSetCallRating)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPhoneServer).PhoneSetCallRating(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPhone/PhoneSetCallRating",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPhoneServer).PhoneSetCallRating(ctx, req.(*TLPhoneSetCallRating))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCPhone_PhoneGetCallConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPhoneGetCallConfig)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPhoneServer).PhoneGetCallConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPhone/PhoneGetCallConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPhoneServer).PhoneGetCallConfig(ctx, req.(*TLPhoneGetCallConfig))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCPhone_PhoneRequestCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPhoneRequestCall)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPhoneServer).PhoneRequestCall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPhone/PhoneRequestCall",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPhoneServer).PhoneRequestCall(ctx, req.(*TLPhoneRequestCall))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCPhone_PhoneAcceptCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPhoneAcceptCall)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPhoneServer).PhoneAcceptCall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPhone/PhoneAcceptCall",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPhoneServer).PhoneAcceptCall(ctx, req.(*TLPhoneAcceptCall))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCPhone_PhoneConfirmCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPhoneConfirmCall)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPhoneServer).PhoneConfirmCall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPhone/PhoneConfirmCall",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPhoneServer).PhoneConfirmCall(ctx, req.(*TLPhoneConfirmCall))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RPCPhone_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mtproto.RPCPhone",
+	HandlerType: (*RPCPhoneServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "phone_receivedCall",
+			Handler:    _RPCPhone_PhoneReceivedCall_Handler,
+		},
+		{
+			MethodName: "phone_saveCallDebug",
+			Handler:    _RPCPhone_PhoneSaveCallDebug_Handler,
+		},
+		{
+			MethodName: "phone_discardCall",
+			Handler:    _RPCPhone_PhoneDiscardCall_Handler,
+		},
+		{
+			MethodName: "phone_setCallRating",
+			Handler:    _RPCPhone_PhoneSetCallRating_Handler,
+		},
+		{
+			MethodName: "phone_getCallConfig",
+			Handler:    _RPCPhone_PhoneGetCallConfig_Handler,
+		},
+		{
+			MethodName: "phone_requestCall",
+			Handler:    _RPCPhone_PhoneRequestCall_Handler,
+		},
+		{
+			MethodName: "phone_acceptCall",
+			Handler:    _RPCPhone_PhoneAcceptCall_Handler,
+		},
+		{
+			MethodName: "phone_confirmCall",
+			Handler:    _RPCPhone_PhoneConfirmCall_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "schema.tl.sync.service.proto",
+}
+
+// Client API for RPCUsers service
+
+type RPCUsersClient interface {
+	// rpc users_getUsers(TL_users_getUsers) returns (Vector<User>) {}
+	UsersGetFullUser(ctx context.Context, in *TLUsersGetFullUser, opts ...grpc.CallOption) (*UserFull, error)
+}
+
+type rPCUsersClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRPCUsersClient(cc *grpc.ClientConn) RPCUsersClient {
+	return &rPCUsersClient{cc}
+}
+
+func (c *rPCUsersClient) UsersGetFullUser(ctx context.Context, in *TLUsersGetFullUser, opts ...grpc.CallOption) (*UserFull, error) {
+	out := new(UserFull)
+	err := grpc.Invoke(ctx, "/mtproto.RPCUsers/users_getFullUser", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for RPCUsers service
+
+type RPCUsersServer interface {
+	// rpc users_getUsers(TL_users_getUsers) returns (Vector<User>) {}
+	UsersGetFullUser(context.Context, *TLUsersGetFullUser) (*UserFull, error)
+}
+
+func RegisterRPCUsersServer(s *grpc.Server, srv RPCUsersServer) {
+	s.RegisterService(&_RPCUsers_serviceDesc, srv)
+}
+
+func _RPCUsers_UsersGetFullUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLUsersGetFullUser)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCUsersServer).UsersGetFullUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCUsers/UsersGetFullUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCUsersServer).UsersGetFullUser(ctx, req.(*TLUsersGetFullUser))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RPCUsers_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mtproto.RPCUsers",
+	HandlerType: (*RPCUsersServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "users_getFullUser",
+			Handler:    _RPCUsers_UsersGetFullUser_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "schema.tl.sync.service.proto",
+}
+
+// Client API for RPCPhotos service
+
+type RPCPhotosClient interface {
+	// rpc photos_deletePhotos(TL_photos_deletePhotos) returns (Vector<int64_t>) {}
+	PhotosUpdateProfilePhoto(ctx context.Context, in *TLPhotosUpdateProfilePhoto, opts ...grpc.CallOption) (*UserProfilePhoto, error)
+	PhotosUploadProfilePhoto(ctx context.Context, in *TLPhotosUploadProfilePhoto, opts ...grpc.CallOption) (*Photos_Photo, error)
+	PhotosGetUserPhotos(ctx context.Context, in *TLPhotosGetUserPhotos, opts ...grpc.CallOption) (*Photos_Photos, error)
+}
+
+type rPCPhotosClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRPCPhotosClient(cc *grpc.ClientConn) RPCPhotosClient {
+	return &rPCPhotosClient{cc}
+}
+
+func (c *rPCPhotosClient) PhotosUpdateProfilePhoto(ctx context.Context, in *TLPhotosUpdateProfilePhoto, opts ...grpc.CallOption) (*UserProfilePhoto, error) {
+	out := new(UserProfilePhoto)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPhotos/photos_updateProfilePhoto", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCPhotosClient) PhotosUploadProfilePhoto(ctx context.Context, in *TLPhotosUploadProfilePhoto, opts ...grpc.CallOption) (*Photos_Photo, error) {
+	out := new(Photos_Photo)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPhotos/photos_uploadProfilePhoto", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCPhotosClient) PhotosGetUserPhotos(ctx context.Context, in *TLPhotosGetUserPhotos, opts ...grpc.CallOption) (*Photos_Photos, error) {
+	out := new(Photos_Photos)
+	err := grpc.Invoke(ctx, "/mtproto.RPCPhotos/photos_getUserPhotos", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for RPCPhotos service
+
+type RPCPhotosServer interface {
+	// rpc photos_deletePhotos(TL_photos_deletePhotos) returns (Vector<int64_t>) {}
+	PhotosUpdateProfilePhoto(context.Context, *TLPhotosUpdateProfilePhoto) (*UserProfilePhoto, error)
+	PhotosUploadProfilePhoto(context.Context, *TLPhotosUploadProfilePhoto) (*Photos_Photo, error)
+	PhotosGetUserPhotos(context.Context, *TLPhotosGetUserPhotos) (*Photos_Photos, error)
+}
+
+func RegisterRPCPhotosServer(s *grpc.Server, srv RPCPhotosServer) {
+	s.RegisterService(&_RPCPhotos_serviceDesc, srv)
+}
+
+func _RPCPhotos_PhotosUpdateProfilePhoto_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPhotosUpdateProfilePhoto)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPhotosServer).PhotosUpdateProfilePhoto(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPhotos/PhotosUpdateProfilePhoto",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPhotosServer).PhotosUpdateProfilePhoto(ctx, req.(*TLPhotosUpdateProfilePhoto))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCPhotos_PhotosUploadProfilePhoto_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPhotosUploadProfilePhoto)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPhotosServer).PhotosUploadProfilePhoto(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPhotos/PhotosUploadProfilePhoto",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPhotosServer).PhotosUploadProfilePhoto(ctx, req.(*TLPhotosUploadProfilePhoto))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCPhotos_PhotosGetUserPhotos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLPhotosGetUserPhotos)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCPhotosServer).PhotosGetUserPhotos(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCPhotos/PhotosGetUserPhotos",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCPhotosServer).PhotosGetUserPhotos(ctx, req.(*TLPhotosGetUserPhotos))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RPCPhotos_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mtproto.RPCPhotos",
+	HandlerType: (*RPCPhotosServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "photos_updateProfilePhoto",
+			Handler:    _RPCPhotos_PhotosUpdateProfilePhoto_Handler,
+		},
+		{
+			MethodName: "photos_uploadProfilePhoto",
+			Handler:    _RPCPhotos_PhotosUploadProfilePhoto_Handler,
+		},
+		{
+			MethodName: "photos_getUserPhotos",
+			Handler:    _RPCPhotos_PhotosGetUserPhotos_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "schema.tl.sync.service.proto",
+}
+
+// Client API for RPCStickers service
+
+type RPCStickersClient interface {
+	StickersCreateStickerSet(ctx context.Context, in *TLStickersCreateStickerSet, opts ...grpc.CallOption) (*Messages_StickerSet, error)
+	StickersRemoveStickerFromSet(ctx context.Context, in *TLStickersRemoveStickerFromSet, opts ...grpc.CallOption) (*Messages_StickerSet, error)
+	StickersChangeStickerPosition(ctx context.Context, in *TLStickersChangeStickerPosition, opts ...grpc.CallOption) (*Messages_StickerSet, error)
+	StickersAddStickerToSet(ctx context.Context, in *TLStickersAddStickerToSet, opts ...grpc.CallOption) (*Messages_StickerSet, error)
+}
+
+type rPCStickersClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRPCStickersClient(cc *grpc.ClientConn) RPCStickersClient {
+	return &rPCStickersClient{cc}
+}
+
+func (c *rPCStickersClient) StickersCreateStickerSet(ctx context.Context, in *TLStickersCreateStickerSet, opts ...grpc.CallOption) (*Messages_StickerSet, error) {
+	out := new(Messages_StickerSet)
+	err := grpc.Invoke(ctx, "/mtproto.RPCStickers/stickers_createStickerSet", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCStickersClient) StickersRemoveStickerFromSet(ctx context.Context, in *TLStickersRemoveStickerFromSet, opts ...grpc.CallOption) (*Messages_StickerSet, error) {
+	out := new(Messages_StickerSet)
+	err := grpc.Invoke(ctx, "/mtproto.RPCStickers/stickers_removeStickerFromSet", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCStickersClient) StickersChangeStickerPosition(ctx context.Context, in *TLStickersChangeStickerPosition, opts ...grpc.CallOption) (*Messages_StickerSet, error) {
+	out := new(Messages_StickerSet)
+	err := grpc.Invoke(ctx, "/mtproto.RPCStickers/stickers_changeStickerPosition", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCStickersClient) StickersAddStickerToSet(ctx context.Context, in *TLStickersAddStickerToSet, opts ...grpc.CallOption) (*Messages_StickerSet, error) {
+	out := new(Messages_StickerSet)
+	err := grpc.Invoke(ctx, "/mtproto.RPCStickers/stickers_addStickerToSet", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for RPCStickers service
+
+type RPCStickersServer interface {
+	StickersCreateStickerSet(context.Context, *TLStickersCreateStickerSet) (*Messages_StickerSet, error)
+	StickersRemoveStickerFromSet(context.Context, *TLStickersRemoveStickerFromSet) (*Messages_StickerSet, error)
+	StickersChangeStickerPosition(context.Context, *TLStickersChangeStickerPosition) (*Messages_StickerSet, error)
+	StickersAddStickerToSet(context.Context, *TLStickersAddStickerToSet) (*Messages_StickerSet, error)
+}
+
+func RegisterRPCStickersServer(s *grpc.Server, srv RPCStickersServer) {
+	s.RegisterService(&_RPCStickers_serviceDesc, srv)
+}
+
+func _RPCStickers_StickersCreateStickerSet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLStickersCreateStickerSet)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCStickersServer).StickersCreateStickerSet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCStickers/StickersCreateStickerSet",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCStickersServer).StickersCreateStickerSet(ctx, req.(*TLStickersCreateStickerSet))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCStickers_StickersRemoveStickerFromSet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLStickersRemoveStickerFromSet)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCStickersServer).StickersRemoveStickerFromSet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCStickers/StickersRemoveStickerFromSet",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCStickersServer).StickersRemoveStickerFromSet(ctx, req.(*TLStickersRemoveStickerFromSet))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCStickers_StickersChangeStickerPosition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLStickersChangeStickerPosition)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCStickersServer).StickersChangeStickerPosition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCStickers/StickersChangeStickerPosition",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCStickersServer).StickersChangeStickerPosition(ctx, req.(*TLStickersChangeStickerPosition))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCStickers_StickersAddStickerToSet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLStickersAddStickerToSet)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCStickersServer).StickersAddStickerToSet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCStickers/StickersAddStickerToSet",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCStickersServer).StickersAddStickerToSet(ctx, req.(*TLStickersAddStickerToSet))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RPCStickers_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mtproto.RPCStickers",
+	HandlerType: (*RPCStickersServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "stickers_createStickerSet",
+			Handler:    _RPCStickers_StickersCreateStickerSet_Handler,
+		},
+		{
+			MethodName: "stickers_removeStickerFromSet",
+			Handler:    _RPCStickers_StickersRemoveStickerFromSet_Handler,
+		},
+		{
+			MethodName: "stickers_changeStickerPosition",
+			Handler:    _RPCStickers_StickersChangeStickerPosition_Handler,
+		},
+		{
+			MethodName: "stickers_addStickerToSet",
+			Handler:    _RPCStickers_StickersAddStickerToSet_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "schema.tl.sync.service.proto",
+}
+
+// Client API for RPCUpdates service
+
+type RPCUpdatesClient interface {
+	UpdatesGetState(ctx context.Context, in *TLUpdatesGetState, opts ...grpc.CallOption) (*Updates_State, error)
+	UpdatesGetDifference(ctx context.Context, in *TLUpdatesGetDifference, opts ...grpc.CallOption) (*Updates_Difference, error)
+	UpdatesGetChannelDifference(ctx context.Context, in *TLUpdatesGetChannelDifference, opts ...grpc.CallOption) (*Updates_ChannelDifference, error)
+}
+
+type rPCUpdatesClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRPCUpdatesClient(cc *grpc.ClientConn) RPCUpdatesClient {
+	return &rPCUpdatesClient{cc}
+}
+
+func (c *rPCUpdatesClient) UpdatesGetState(ctx context.Context, in *TLUpdatesGetState, opts ...grpc.CallOption) (*Updates_State, error) {
+	out := new(Updates_State)
+	err := grpc.Invoke(ctx, "/mtproto.RPCUpdates/updates_getState", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCUpdatesClient) UpdatesGetDifference(ctx context.Context, in *TLUpdatesGetDifference, opts ...grpc.CallOption) (*Updates_Difference, error) {
+	out := new(Updates_Difference)
+	err := grpc.Invoke(ctx, "/mtproto.RPCUpdates/updates_getDifference", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCUpdatesClient) UpdatesGetChannelDifference(ctx context.Context, in *TLUpdatesGetChannelDifference, opts ...grpc.CallOption) (*Updates_ChannelDifference, error) {
+	out := new(Updates_ChannelDifference)
+	err := grpc.Invoke(ctx, "/mtproto.RPCUpdates/updates_getChannelDifference", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for RPCUpdates service
+
+type RPCUpdatesServer interface {
+	UpdatesGetState(context.Context, *TLUpdatesGetState) (*Updates_State, error)
+	UpdatesGetDifference(context.Context, *TLUpdatesGetDifference) (*Updates_Difference, error)
+	UpdatesGetChannelDifference(context.Context, *TLUpdatesGetChannelDifference) (*Updates_ChannelDifference, error)
+}
+
+func RegisterRPCUpdatesServer(s *grpc.Server, srv RPCUpdatesServer) {
+	s.RegisterService(&_RPCUpdates_serviceDesc, srv)
+}
+
+func _RPCUpdates_UpdatesGetState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLUpdatesGetState)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCUpdatesServer).UpdatesGetState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCUpdates/UpdatesGetState",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCUpdatesServer).UpdatesGetState(ctx, req.(*TLUpdatesGetState))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCUpdates_UpdatesGetDifference_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLUpdatesGetDifference)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCUpdatesServer).UpdatesGetDifference(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCUpdates/UpdatesGetDifference",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCUpdatesServer).UpdatesGetDifference(ctx, req.(*TLUpdatesGetDifference))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCUpdates_UpdatesGetChannelDifference_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLUpdatesGetChannelDifference)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCUpdatesServer).UpdatesGetChannelDifference(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCUpdates/UpdatesGetChannelDifference",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCUpdatesServer).UpdatesGetChannelDifference(ctx, req.(*TLUpdatesGetChannelDifference))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RPCUpdates_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mtproto.RPCUpdates",
+	HandlerType: (*RPCUpdatesServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "updates_getState",
+			Handler:    _RPCUpdates_UpdatesGetState_Handler,
+		},
+		{
+			MethodName: "updates_getDifference",
+			Handler:    _RPCUpdates_UpdatesGetDifference_Handler,
+		},
+		{
+			MethodName: "updates_getChannelDifference",
+			Handler:    _RPCUpdates_UpdatesGetChannelDifference_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "schema.tl.sync.service.proto",
+}
+
+// Client API for RPCLangpack service
+
+type RPCLangpackClient interface {
+	LangpackGetLangPack(ctx context.Context, in *TLLangpackGetLangPack, opts ...grpc.CallOption) (*LangPackDifference, error)
+	LangpackGetDifference(ctx context.Context, in *TLLangpackGetDifference, opts ...grpc.CallOption) (*LangPackDifference, error)
+}
+
+type rPCLangpackClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRPCLangpackClient(cc *grpc.ClientConn) RPCLangpackClient {
+	return &rPCLangpackClient{cc}
+}
+
+func (c *rPCLangpackClient) LangpackGetLangPack(ctx context.Context, in *TLLangpackGetLangPack, opts ...grpc.CallOption) (*LangPackDifference, error) {
+	out := new(LangPackDifference)
+	err := grpc.Invoke(ctx, "/mtproto.RPCLangpack/langpack_getLangPack", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rPCLangpackClient) LangpackGetDifference(ctx context.Context, in *TLLangpackGetDifference, opts ...grpc.CallOption) (*LangPackDifference, error) {
+	out := new(LangPackDifference)
+	err := grpc.Invoke(ctx, "/mtproto.RPCLangpack/langpack_getDifference", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for RPCLangpack service
+
+type RPCLangpackServer interface {
+	LangpackGetLangPack(context.Context, *TLLangpackGetLangPack) (*LangPackDifference, error)
+	LangpackGetDifference(context.Context, *TLLangpackGetDifference) (*LangPackDifference, error)
+}
+
+func RegisterRPCLangpackServer(s *grpc.Server, srv RPCLangpackServer) {
+	s.RegisterService(&_RPCLangpack_serviceDesc, srv)
+}
+
+func _RPCLangpack_LangpackGetLangPack_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLLangpackGetLangPack)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCLangpackServer).LangpackGetLangPack(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCLangpack/LangpackGetLangPack",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCLangpackServer).LangpackGetLangPack(ctx, req.(*TLLangpackGetLangPack))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RPCLangpack_LangpackGetDifference_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TLLangpackGetDifference)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RPCLangpackServer).LangpackGetDifference(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mtproto.RPCLangpack/LangpackGetDifference",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RPCLangpackServer).LangpackGetDifference(ctx, req.(*TLLangpackGetDifference))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RPCLangpack_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mtproto.RPCLangpack",
+	HandlerType: (*RPCLangpackServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "langpack_getLangPack",
+			Handler:    _RPCLangpack_LangpackGetLangPack_Handler,
+		},
+		{
+			MethodName: "langpack_getDifference",
+			Handler:    _RPCLangpack_LangpackGetDifference_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "schema.tl.sync.service.proto",
+}
+
 func init() { proto.RegisterFile("schema.tl.sync.service.proto", fileDescriptor4) }
 
 var fileDescriptor4 = []byte{
-	// 4018 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x5c, 0xdf, 0x76, 0xdc, 0x36,
-	0x73, 0xdf, 0x2f, 0xdf, 0x77, 0x3e, 0xb7, 0xc8, 0x49, 0x6c, 0xd3, 0xf2, 0x1f, 0xd1, 0xb2, 0x2d,
-	0xaf, 0x14, 0xc7, 0xf1, 0x69, 0xd4, 0x73, 0xd4, 0x8b, 0x5e, 0xe5, 0xe4, 0xe8, 0x8f, 0x65, 0xcb,
-	0x91, 0xed, 0x8d, 0x76, 0x6d, 0x37, 0x27, 0x4e, 0x15, 0x2c, 0x09, 0x71, 0x69, 0x71, 0xc9, 0x0d,
-	0x89, 0x95, 0xa3, 0xbe, 0x40, 0xfb, 0x04, 0xbd, 0xeb, 0x55, 0x7b, 0xdb, 0xcb, 0xf6, 0x05, 0xfa,
-	0x28, 0xbd, 0x69, 0xef, 0xfb, 0x00, 0x3d, 0x04, 0x40, 0x70, 0x00, 0x0c, 0x48, 0xf9, 0x6e, 0xcd,
-	0xf9, 0xf1, 0x37, 0xe0, 0x60, 0x66, 0x30, 0x18, 0x40, 0x26, 0x6b, 0x55, 0x34, 0x63, 0x73, 0xba,
-	0xc5, 0xb3, 0xad, 0xea, 0x22, 0x8f, 0xb6, 0x2a, 0x56, 0x9e, 0xa7, 0x11, 0xdb, 0x5a, 0x94, 0x05,
-	0x2f, 0x82, 0x2b, 0x73, 0x2e, 0x7e, 0x84, 0x61, 0x0b, 0x8b, 0x8a, 0x92, 0x9d, 0xf0, 0x8b, 0x05,
-	0xab, 0x24, 0x28, 0x5c, 0xb1, 0x28, 0xc4, 0xd3, 0xed, 0xff, 0x21, 0xe4, 0xca, 0xf1, 0x68, 0x6f,
-	0x67, 0xc9, 0x67, 0xc1, 0x11, 0xb9, 0x4a, 0x97, 0x7c, 0x76, 0x12, 0xcd, 0x58, 0x74, 0x36, 0x9a,
-	0x15, 0x39, 0x0b, 0xee, 0x6e, 0x29, 0xea, 0xad, 0xc9, 0xd1, 0x89, 0x25, 0x0c, 0x43, 0x2d, 0x14,
-	0x92, 0xbd, 0x5a, 0xc2, 0x62, 0x21, 0x1b, 0x0e, 0x82, 0x7d, 0xf2, 0x85, 0x78, 0x5c, 0xb1, 0x3c,
-	0xde, 0x2b, 0x62, 0x16, 0xac, 0x3a, 0x5c, 0x8d, 0x28, 0xbc, 0x65, 0x32, 0x8d, 0x59, 0xce, 0xeb,
-	0xe7, 0xc3, 0x41, 0xf0, 0x5c, 0x8d, 0xa9, 0x64, 0x9a, 0xc7, 0x1d, 0x53, 0x2b, 0xec, 0x60, 0x7a,
-	0x4a, 0x3e, 0x97, 0x4a, 0xd3, 0x24, 0x7f, 0xb3, 0x08, 0x6e, 0xbb, 0xa3, 0x11, 0x82, 0xf0, 0xae,
-	0xc9, 0x50, 0x5b, 0xa6, 0x28, 0xd3, 0x7f, 0xa0, 0x3c, 0x2d, 0x72, 0x8b, 0xe6, 0x30, 0xf7, 0xd0,
-	0x1c, 0xe6, 0x7d, 0x34, 0x27, 0xe4, 0x8e, 0x78, 0x9e, 0xce, 0x17, 0x45, 0xc9, 0x0d, 0x69, 0xb0,
-	0xe9, 0x70, 0x22, 0xa8, 0x3e, 0x05, 0x8c, 0xdc, 0x05, 0xaf, 0xee, 0x16, 0x96, 0x8e, 0xaf, 0x3d,
-	0x3a, 0x6c, 0x60, 0x9f, 0x9a, 0x31, 0x09, 0x80, 0x5b, 0xd0, 0xaa, 0xfa, 0x58, 0x94, 0x71, 0x70,
-	0xdf, 0xe3, 0x36, 0x4a, 0xde, 0x47, 0xfa, 0x8e, 0xac, 0xa8, 0x79, 0x8d, 0x8a, 0x73, 0x56, 0x6a,
-	0xda, 0x75, 0x64, 0xe6, 0x0d, 0x44, 0x1f, 0xf1, 0xdf, 0xaa, 0xc9, 0xcb, 0x8a, 0xe4, 0xf5, 0x92,
-	0x23, 0x93, 0x27, 0x05, 0xe1, 0x17, 0x5a, 0xb0, 0x5b, 0x14, 0xd9, 0x70, 0x10, 0xfc, 0xa8, 0xa6,
-	0xab, 0xf6, 0x34, 0xd3, 0x40, 0x15, 0x32, 0x5d, 0x08, 0xca, 0xa5, 0xdc, 0x21, 0xd7, 0x74, 0x10,
-	0x1c, 0xe6, 0xe7, 0x29, 0x67, 0x55, 0xb0, 0x86, 0x86, 0x88, 0x92, 0xba, 0x14, 0x87, 0xca, 0x4e,
-	0xd3, 0x34, 0x8f, 0x27, 0x6c, 0xbe, 0xa8, 0x55, 0xfe, 0xc0, 0x2e, 0x10, 0x3b, 0x59, 0x08, 0x97,
-	0xea, 0xfb, 0x26, 0xf6, 0x69, 0x1e, 0xb1, 0xcc, 0x13, 0x67, 0xad, 0xd0, 0x25, 0xf8, 0x81, 0xdc,
-	0x14, 0x98, 0xb8, 0x2c, 0x16, 0x40, 0x53, 0x15, 0x3c, 0x74, 0x68, 0x6c, 0x88, 0x4b, 0x96, 0x28,
-	0x73, 0xb3, 0xdf, 0x2f, 0x13, 0x1d, 0x08, 0x2a, 0xdc, 0x30, 0x1d, 0xe1, 0xa9, 0x80, 0xb0, 0xd8,
-	0x76, 0x88, 0x0f, 0x64, 0x4d, 0xcd, 0xd8, 0x6f, 0x4b, 0x56, 0xf1, 0xc6, 0x8f, 0x8e, 0xa5, 0x5b,
-	0x5d, 0x04, 0x8f, 0x91, 0xb9, 0x45, 0x91, 0xe1, 0x7d, 0x53, 0xa1, 0x2d, 0x1f, 0x0e, 0xb6, 0xff,
-	0x39, 0x20, 0xa4, 0x4e, 0xb5, 0x51, 0x54, 0x2c, 0x73, 0x1e, 0xfc, 0x4a, 0xee, 0x52, 0xf9, 0x53,
-	0xe6, 0xc1, 0x19, 0xcd, 0x13, 0x26, 0x92, 0xa7, 0xb0, 0xbe, 0x19, 0xa0, 0x7e, 0x60, 0x47, 0xc6,
-	0x9b, 0x92, 0x35, 0xe3, 0xc5, 0x22, 0x3f, 0x4d, 0xcb, 0x79, 0xab, 0xe2, 0xb1, 0x57, 0x85, 0x85,
-	0xec, 0xd0, 0xf1, 0x92, 0xdc, 0x6a, 0xde, 0x2c, 0x59, 0x92, 0x56, 0x9c, 0x95, 0xfb, 0xac, 0x5e,
-	0x9a, 0x82, 0x21, 0xc6, 0x6e, 0x62, 0xf0, 0x38, 0x53, 0xd0, 0x65, 0x6e, 0x11, 0x6e, 0x62, 0x84,
-	0x36, 0xca, 0xa5, 0xfc, 0xa9, 0xb5, 0xc2, 0x72, 0x11, 0x53, 0xce, 0x5e, 0x15, 0x3c, 0x3d, 0xbd,
-	0x18, 0x33, 0xce, 0xd3, 0x3c, 0xa9, 0x70, 0x2b, 0x60, 0x48, 0x97, 0xfa, 0x5d, 0x3b, 0x85, 0x22,
-	0xe4, 0x2d, 0xe6, 0xaf, 0x71, 0x0b, 0x38, 0x40, 0x3c, 0xb0, 0x8d, 0x91, 0x8c, 0x39, 0xe5, 0xcb,
-	0xca, 0x0a, 0x6c, 0x04, 0xe1, 0x52, 0x3d, 0x25, 0x41, 0xab, 0xba, 0x0e, 0x82, 0x11, 0x63, 0xa5,
-	0x95, 0xa0, 0x1d, 0x39, 0x1e, 0xde, 0x0a, 0x26, 0x52, 0xf9, 0x9b, 0x8a, 0x95, 0x39, 0x9d, 0x33,
-	0x2b, 0xbc, 0x31, 0x48, 0x27, 0x59, 0xcc, 0x32, 0xc6, 0x59, 0x13, 0x13, 0x28, 0x99, 0x01, 0xe9,
-	0x24, 0xab, 0xb3, 0xae, 0xfc, 0x39, 0x99, 0x1c, 0xe1, 0x64, 0x06, 0xc4, 0x25, 0x7b, 0x43, 0x42,
-	0xd3, 0xac, 0xd2, 0xab, 0x8e, 0x8a, 0xba, 0xb2, 0x09, 0x1e, 0xf9, 0xcd, 0x0f, 0x71, 0x9d, 0xb4,
-	0xee, 0xda, 0x80, 0xd3, 0xba, 0x38, 0x97, 0xf6, 0x17, 0x72, 0xdf, 0x1c, 0x45, 0x93, 0x75, 0xb4,
-	0x0b, 0x3e, 0xf1, 0x8f, 0xd8, 0xc6, 0x76, 0x7a, 0x61, 0x04, 0x32, 0x02, 0xee, 0x85, 0x10, 0xe1,
-	0x52, 0x51, 0xb2, 0xda, 0x00, 0x13, 0x27, 0x4e, 0xbe, 0xc2, 0xf8, 0x1c, 0x18, 0x58, 0xdb, 0x6b,
-	0x17, 0x35, 0x85, 0xa6, 0x1f, 0xa8, 0x0f, 0x2c, 0x8b, 0xd3, 0x34, 0xf3, 0x78, 0xa8, 0x01, 0x01,
-	0xe3, 0xad, 0x9d, 0xd6, 0x4c, 0x6b, 0x12, 0xa9, 0xfd, 0x7d, 0xe8, 0x67, 0x43, 0x1c, 0x5e, 0xd1,
-	0x3d, 0x23, 0x37, 0xda, 0xd0, 0xd0, 0xe9, 0x3b, 0x78, 0x80, 0xc7, 0x8e, 0x06, 0xa0, 0x44, 0x51,
-	0x91, 0x73, 0x1a, 0xf1, 0x4a, 0x15, 0x6c, 0x7b, 0xb4, 0x8c, 0x4d, 0x22, 0x04, 0xe0, 0x12, 0xbd,
-	0x69, 0xd3, 0x42, 0xc2, 0xf8, 0xa8, 0x4c, 0xcf, 0x69, 0x74, 0x81, 0xa7, 0x85, 0x56, 0x1e, 0xde,
-	0x6b, 0xd7, 0x01, 0x25, 0x54, 0x92, 0xe3, 0x65, 0xc6, 0x2a, 0x93, 0xb6, 0xea, 0xa1, 0xad, 0x3e,
-	0x89, 0xf6, 0x26, 0x18, 0x4d, 0x5f, 0x8c, 0x1b, 0x90, 0xb0, 0x2d, 0xf2, 0xd4, 0xc3, 0x7d, 0x7a,
-	0x51, 0x4d, 0x26, 0x47, 0xa2, 0x46, 0x86, 0x5e, 0x69, 0x95, 0x75, 0x3e, 0xaf, 0xb4, 0xea, 0xba,
-	0x07, 0xce, 0xd8, 0x4d, 0x80, 0xa8, 0x91, 0x6f, 0x40, 0x5b, 0x36, 0xd5, 0xec, 0x03, 0x9f, 0xb1,
-	0x9b, 0x62, 0x76, 0xd5, 0x35, 0x8b, 0x12, 0x0d, 0x07, 0xc1, 0x59, 0xbb, 0xf6, 0x80, 0x77, 0xba,
-	0xd7, 0x1e, 0x04, 0x18, 0x3e, 0xf4, 0x2a, 0x01, 0xb1, 0xf5, 0xbe, 0x0d, 0x87, 0x84, 0xf1, 0xc9,
-	0x7c, 0xa1, 0x3f, 0x62, 0xe8, 0xd1, 0x03, 0x30, 0xe1, 0x9a, 0xa3, 0x02, 0x48, 0x87, 0x83, 0xed,
-	0xff, 0xbb, 0x42, 0x3e, 0x3f, 0x1e, 0xed, 0xed, 0x29, 0xbf, 0x0d, 0x5e, 0x93, 0xdb, 0xda, 0x87,
-	0x65, 0xf2, 0xd7, 0xa2, 0x0d, 0xd4, 0xd1, 0x4d, 0x90, 0x9b, 0x7d, 0xbe, 0x23, 0x5f, 0x6a, 0xec,
-	0x34, 0x2b, 0xa2, 0xb3, 0x20, 0x44, 0x79, 0x84, 0x0c, 0xad, 0xd4, 0x35, 0x64, 0x99, 0x4b, 0x82,
-	0x35, 0x94, 0x40, 0x49, 0xd1, 0x4a, 0x41, 0x83, 0x44, 0x66, 0x9f, 0x14, 0x8b, 0x3a, 0x8b, 0x1d,
-	0xd3, 0xda, 0xc4, 0xe6, 0x6c, 0x75, 0x00, 0x5d, 0x62, 0x98, 0x10, 0x04, 0x7e, 0x4c, 0xcf, 0x99,
-	0x2f, 0x21, 0xb4, 0x00, 0x97, 0xe8, 0x2d, 0x59, 0xd1, 0xb8, 0x84, 0x71, 0x6d, 0xf1, 0x75, 0x94,
-	0x09, 0x20, 0x40, 0x1b, 0x40, 0x8b, 0x1b, 0xd9, 0x70, 0x10, 0xc4, 0x60, 0x32, 0x55, 0x42, 0xea,
-	0x9e, 0x4c, 0x13, 0x14, 0x0e, 0x5d, 0xf6, 0xc3, 0xb9, 0x2c, 0xe6, 0x81, 0x96, 0xb7, 0xe4, 0x16,
-	0xee, 0x0d, 0xa6, 0x83, 0xe2, 0x18, 0x50, 0xde, 0x6a, 0xc0, 0x51, 0x9a, 0x9f, 0xc9, 0xd0, 0x85,
-	0xdf, 0xbc, 0x9b, 0xc9, 0x42, 0xe0, 0x81, 0xcf, 0x28, 0x0a, 0x00, 0x42, 0x57, 0x4b, 0x95, 0x48,
-	0xac, 0xab, 0x57, 0xf5, 0xd3, 0x8a, 0xd1, 0x32, 0x9a, 0x99, 0x7b, 0x2d, 0x4b, 0x08, 0x32, 0x98,
-	0x96, 0x1c, 0x14, 0xcb, 0x3c, 0x16, 0x25, 0xfe, 0x1d, 0x38, 0xbb, 0x45, 0x76, 0xde, 0xae, 0x54,
-	0x9b, 0x3e, 0x1f, 0x80, 0x28, 0xb0, 0x6f, 0xd1, 0x90, 0x63, 0x09, 0x89, 0x6b, 0xbf, 0x73, 0x3d,
-	0x43, 0x39, 0x64, 0x87, 0x67, 0x34, 0x08, 0xcc, 0x33, 0x1a, 0xd9, 0x70, 0xb0, 0xfd, 0x6f, 0xdf,
-	0x89, 0xb0, 0x7f, 0xc9, 0xaa, 0x8a, 0x26, 0xac, 0xaa, 0x2b, 0xd5, 0xb9, 0xfa, 0x5d, 0x2f, 0x0e,
-	0x93, 0x8b, 0x45, 0x1d, 0x1a, 0xc6, 0xda, 0xe1, 0xca, 0xd1, 0x88, 0xd0, 0x30, 0x59, 0xd1, 0x8e,
-	0x17, 0x74, 0x6e, 0x4e, 0x19, 0x02, 0x70, 0x89, 0x5e, 0x93, 0xdb, 0x1a, 0x37, 0x4b, 0x63, 0x76,
-	0xdc, 0x92, 0x6d, 0xa0, 0x64, 0x26, 0x08, 0xad, 0x02, 0x35, 0x36, 0x4e, 0xab, 0x88, 0x96, 0xf1,
-	0xd3, 0x3c, 0x2a, 0x2f, 0x16, 0x6e, 0x15, 0xe8, 0xc7, 0xa1, 0xb9, 0x05, 0xda, 0x45, 0x41, 0x59,
-	0xac, 0x0c, 0xf8, 0xb5, 0xcf, 0x80, 0x16, 0xd0, 0x25, 0xfe, 0x99, 0xdc, 0x03, 0x86, 0xa2, 0xb1,
-	0x7e, 0xe1, 0x79, 0x5a, 0xf1, 0xa2, 0xbc, 0x08, 0xbe, 0xf1, 0xd8, 0xd4, 0x85, 0xa2, 0xdb, 0x32,
-	0x6b, 0x16, 0xf4, 0x3b, 0xc2, 0xc4, 0x8f, 0x3b, 0xe6, 0xcb, 0x40, 0x76, 0x53, 0x2f, 0xf3, 0x34,
-	0xaf, 0x38, 0xcd, 0xb2, 0x31, 0x4f, 0xa3, 0x33, 0x56, 0x8e, 0x19, 0xf7, 0x50, 0x23, 0x48, 0x97,
-	0xfa, 0x25, 0xb9, 0xa5, 0x5f, 0x60, 0x71, 0xca, 0xf7, 0x66, 0x94, 0xef, 0xc4, 0xf3, 0x34, 0x37,
-	0xf3, 0x0c, 0x8e, 0xe9, 0x9e, 0xba, 0x92, 0x15, 0x65, 0xcc, 0xca, 0x56, 0x7b, 0xe5, 0x99, 0x3a,
-	0x17, 0x88, 0x2e, 0x59, 0xed, 0x54, 0xd3, 0x73, 0xf6, 0x2c, 0x3d, 0x35, 0x97, 0x2c, 0x5b, 0xda,
-	0x6d, 0xc5, 0x8a, 0xf1, 0xc3, 0x3c, 0x4b, 0x73, 0xb6, 0x5b, 0xf0, 0x63, 0x56, 0x2d, 0x33, 0x5e,
-	0x79, 0xac, 0x88, 0x20, 0xbb, 0x1d, 0xab, 0xb6, 0x90, 0x7e, 0x43, 0xe5, 0x02, 0x8f, 0x63, 0x61,
-	0xd0, 0x6e, 0xf2, 0x8a, 0xf1, 0xdd, 0x82, 0xef, 0xd1, 0x2c, 0x9b, 0xd2, 0xe8, 0x6c, 0x27, 0xaf,
-	0x3e, 0xb2, 0xd2, 0x43, 0x8e, 0x41, 0xd1, 0xdd, 0xb4, 0x61, 0xb9, 0xfd, 0x92, 0x9e, 0x72, 0x5f,
-	0x8e, 0x6a, 0xe4, 0xfd, 0x91, 0x75, 0xc0, 0x28, 0x5f, 0x96, 0x2c, 0x56, 0x73, 0x5a, 0x75, 0x44,
-	0x96, 0x0d, 0xed, 0x4e, 0x33, 0xf5, 0x18, 0x8e, 0x59, 0xc4, 0x72, 0xae, 0xf0, 0x9e, 0x34, 0xe3,
-	0xe0, 0xba, 0xfd, 0x21, 0xca, 0x18, 0x2d, 0x0d, 0xbc, 0xcf, 0x1f, 0x10, 0x64, 0x6f, 0x06, 0x93,
-	0x73, 0xfc, 0x8c, 0xce, 0xd9, 0x38, 0x2a, 0x4a, 0xe6, 0xcf, 0x60, 0x16, 0x10, 0x6d, 0x27, 0x69,
-	0x3c, 0x2f, 0x92, 0x24, 0x63, 0xfb, 0x29, 0xcd, 0x8a, 0x64, 0x94, 0x5a, 0x7d, 0x44, 0x1f, 0xaa,
-	0x6f, 0xea, 0x44, 0x24, 0x8e, 0xd2, 0x3c, 0x67, 0xb1, 0x7c, 0xc7, 0x3f, 0x75, 0x2e, 0x14, 0xdd,
-	0xd0, 0x5b, 0x0e, 0x39, 0x9e, 0xa5, 0x8b, 0x3a, 0x3b, 0x37, 0x51, 0xf7, 0xa4, 0xc3, 0x79, 0x2d,
-	0xac, 0x4b, 0x1f, 0x91, 0x87, 0xd6, 0x2b, 0xa3, 0x92, 0x89, 0x5e, 0x4d, 0xb1, 0xd4, 0x71, 0xfd,
-	0x6d, 0x87, 0x06, 0x17, 0x8e, 0x76, 0x0d, 0xf4, 0x5b, 0xa7, 0xf4, 0x9c, 0x35, 0x8e, 0xb7, 0x8e,
-	0xf2, 0x02, 0x04, 0x5a, 0x93, 0x6a, 0x60, 0xc2, 0xb8, 0xae, 0x14, 0x70, 0x2a, 0x80, 0x00, 0x95,
-	0x87, 0x16, 0x37, 0xb2, 0xe1, 0x20, 0x98, 0x80, 0x12, 0x21, 0x61, 0xbc, 0x59, 0xce, 0x1e, 0xf8,
-	0x68, 0x9b, 0x45, 0xac, 0x9b, 0xf5, 0x88, 0x5c, 0x05, 0xe6, 0x72, 0xcb, 0x3a, 0x4b, 0xd8, 0xc3,
-	0xf6, 0x77, 0xe4, 0xa6, 0xf5, 0xc2, 0xb3, 0xac, 0x98, 0xd2, 0xcc, 0xdc, 0xf2, 0xa2, 0x90, 0x1e,
-	0xe6, 0x29, 0xc8, 0x0f, 0x09, 0xe3, 0x6f, 0xf2, 0x3a, 0xad, 0xbc, 0x64, 0xb9, 0xdc, 0xf6, 0x3e,
-	0xf2, 0x19, 0xc1, 0xc4, 0xf5, 0xe8, 0x18, 0x9b, 0x16, 0x6e, 0x62, 0xc3, 0x6b, 0xe1, 0x26, 0x22,
-	0x56, 0x5d, 0x56, 0x25, 0x1a, 0x0e, 0x82, 0xbf, 0x07, 0xee, 0x50, 0x8f, 0xa5, 0x99, 0xb7, 0x75,
-	0x6f, 0xb2, 0x6c, 0x26, 0x6e, 0xe8, 0xd2, 0xee, 0x9c, 0x9e, 0xb2, 0x88, 0xb3, 0x18, 0x0c, 0x3a,
-	0x06, 0x05, 0x9f, 0xdc, 0x20, 0x68, 0x8f, 0xc3, 0x0b, 0x3e, 0x13, 0x74, 0x49, 0x2d, 0xb9, 0x51,
-	0xf8, 0xd0, 0x46, 0x54, 0xef, 0x45, 0x58, 0xee, 0x5d, 0x57, 0x11, 0xe4, 0x25, 0xf5, 0x51, 0x50,
-	0xb2, 0xc8, 0x01, 0x37, 0x76, 0x1b, 0x76, 0x7c, 0x54, 0x63, 0xb9, 0x87, 0x7e, 0x1d, 0x0a, 0x22,
-	0x3c, 0x7f, 0x05, 0x38, 0x62, 0xde, 0x68, 0xf7, 0x4c, 0x0c, 0x40, 0x84, 0xd7, 0xda, 0xbe, 0x94,
-	0x68, 0xa1, 0x55, 0xe2, 0xc8, 0x37, 0xb0, 0xb0, 0x71, 0x4a, 0xbd, 0xfb, 0x00, 0x25, 0x47, 0x99,
-	0x26, 0x20, 0xfd, 0x9f, 0x16, 0xe5, 0x47, 0x5a, 0x6a, 0xc3, 0x78, 0xd2, 0xbf, 0x85, 0x42, 0x59,
-	0x47, 0x48, 0x0d, 0x38, 0x49, 0x79, 0xc6, 0x7a, 0x6a, 0x40, 0x81, 0xb9, 0x34, 0xe3, 0x68, 0x56,
-	0xf0, 0xa2, 0x87, 0x51, 0x60, 0x50, 0x46, 0x38, 0x23, 0x34, 0x8e, 0x6b, 0x70, 0xbd, 0xe3, 0xf3,
-	0xcc, 0x08, 0x40, 0xa0, 0x6c, 0xc7, 0x4e, 0x60, 0x68, 0xc2, 0xae, 0xc0, 0xe8, 0xe4, 0x7c, 0x01,
-	0x32, 0x44, 0x54, 0x32, 0x2a, 0xe1, 0x9e, 0x0c, 0xd1, 0x02, 0x7a, 0xc7, 0x67, 0xce, 0xa0, 0x67,
-	0x7c, 0x26, 0x08, 0xe5, 0x7c, 0x4b, 0x56, 0x35, 0x5c, 0xb5, 0x24, 0x66, 0x94, 0xcb, 0xa3, 0x58,
-	0xb3, 0x37, 0xe8, 0x85, 0xa1, 0xbc, 0x07, 0xe4, 0x7a, 0xeb, 0xbd, 0x9c, 0x8a, 0x13, 0xf7, 0xe0,
-	0x1e, 0xee, 0xdc, 0x4a, 0xdc, 0x3b, 0x3e, 0x59, 0xb4, 0xe8, 0x7d, 0x46, 0xe5, 0x19, 0x9f, 0x0d,
-	0xeb, 0xf5, 0x9c, 0x79, 0x9a, 0x94, 0xcd, 0xc4, 0xe0, 0x9e, 0x03, 0x10, 0x28, 0xdb, 0x7b, 0x63,
-	0x13, 0x91, 0xc7, 0xd6, 0xde, 0xc0, 0xbb, 0x89, 0x70, 0x90, 0xbd, 0x63, 0xad, 0x63, 0xa2, 0x3b,
-	0xef, 0x00, 0x04, 0xca, 0xf6, 0x0a, 0xac, 0xb8, 0x09, 0xe3, 0x3b, 0x59, 0x26, 0xaa, 0xf7, 0xca,
-	0xb3, 0xe2, 0x42, 0x48, 0x2f, 0x5f, 0xc5, 0x78, 0x5b, 0xcf, 0xfa, 0x56, 0xf0, 0x16, 0x82, 0xf2,
-	0x7d, 0x20, 0x1b, 0x86, 0x85, 0xc6, 0x51, 0xc9, 0x58, 0x5e, 0xcd, 0x0a, 0x79, 0x50, 0x92, 0x46,
-	0xf2, 0x34, 0xe9, 0xaf, 0xbd, 0x26, 0xc5, 0x5f, 0x40, 0x75, 0xfd, 0x04, 0x32, 0x67, 0xc2, 0xc4,
-	0x99, 0xa0, 0x6e, 0x2d, 0x6f, 0xfa, 0xcc, 0x01, 0x51, 0xe1, 0x4d, 0xe3, 0xb4, 0x06, 0xf4, 0x92,
-	0x5f, 0x82, 0x00, 0x48, 0x98, 0x08, 0x97, 0xca, 0x13, 0x00, 0x8d, 0x18, 0x74, 0xc0, 0xb4, 0x4c,
-	0x08, 0xc4, 0x48, 0x6f, 0x1b, 0xf8, 0x62, 0x3e, 0x2f, 0x72, 0x49, 0xba, 0xe1, 0x25, 0x6d, 0x41,
-	0x5d, 0xd4, 0x63, 0xb3, 0xfc, 0xdc, 0xc9, 0x32, 0xc9, 0xbb, 0xde, 0xe1, 0x0f, 0xbd, 0xa4, 0x56,
-	0x4d, 0x7b, 0xb0, 0x94, 0xef, 0xf8, 0x49, 0x1b, 0x04, 0x56, 0x71, 0xd5, 0xcf, 0x6b, 0xb9, 0xcb,
-	0xbb, 0x3f, 0x13, 0x87, 0xf8, 0x89, 0x9f, 0xb7, 0x41, 0x60, 0xbc, 0x8d, 0x4c, 0x14, 0x5d, 0x21,
-	0x28, 0x42, 0xc4, 0xdd, 0x87, 0xde, 0xa6, 0x95, 0x83, 0x03, 0x1d, 0x56, 0xdd, 0xbb, 0xa9, 0xc7,
-	0x2e, 0x32, 0x44, 0x9b, 0xc7, 0x68, 0x14, 0xb1, 0x05, 0xa4, 0xc7, 0xf3, 0x98, 0x0d, 0xeb, 0x60,
-	0x3f, 0x05, 0x2b, 0x6b, 0x1d, 0x02, 0x5a, 0xee, 0x59, 0x59, 0x0d, 0x4c, 0xf8, 0xc8, 0xb5, 0xcc,
-	0x98, 0xe5, 0x6d, 0xfb, 0x49, 0x65, 0x13, 0x51, 0xd4, 0x85, 0x38, 0xc7, 0x41, 0x9a, 0x31, 0xdf,
-	0x9e, 0xdb, 0xc6, 0x7d, 0x82, 0x3e, 0x6e, 0x34, 0x39, 0x00, 0xcf, 0x58, 0x5e, 0x0c, 0xf4, 0x36,
-	0x39, 0x5c, 0xe8, 0x27, 0x68, 0x3d, 0x31, 0x63, 0x6d, 0x47, 0xf7, 0xca, 0x3a, 0x62, 0x0d, 0x80,
-	0xc0, 0x39, 0x5f, 0x5b, 0x4c, 0xb6, 0x62, 0x51, 0xab, 0x1a, 0x69, 0xe7, 0x25, 0xad, 0xce, 0xb4,
-	0x06, 0x6f, 0xda, 0x81, 0xa8, 0x7e, 0x15, 0xbf, 0x98, 0xbb, 0x9f, 0x77, 0x6c, 0x3a, 0xa2, 0x09,
-	0x1b, 0x95, 0xec, 0x3c, 0x65, 0x1f, 0xfd, 0xbb, 0x1f, 0x13, 0x07, 0xb2, 0x9b, 0xb2, 0x8e, 0x28,
-	0x42, 0x45, 0xc7, 0xa1, 0x0d, 0xc3, 0xe5, 0x22, 0x2b, 0xa8, 0x2a, 0x5f, 0xf1, 0x30, 0x04, 0x08,
-	0x3f, 0x25, 0x05, 0x11, 0x22, 0xaf, 0x3a, 0xf5, 0x56, 0x22, 0x36, 0x0c, 0x9c, 0x9d, 0x37, 0x37,
-	0xa1, 0x5a, 0xa1, 0x68, 0xc0, 0xb4, 0x76, 0x17, 0x1b, 0x7c, 0xa0, 0x01, 0xb7, 0xbb, 0x85, 0x0a,
-	0x6f, 0x68, 0x94, 0x41, 0xfc, 0x1e, 0xc4, 0x5f, 0xc2, 0x38, 0x68, 0xc2, 0x0e, 0x7d, 0x96, 0x06,
-	0xed, 0xd7, 0x35, 0xc4, 0x33, 0xb5, 0x74, 0x38, 0x08, 0x7e, 0x03, 0x73, 0xe9, 0xb6, 0x79, 0xf1,
-	0xb9, 0x74, 0x9b, 0xbc, 0xdf, 0x74, 0x69, 0x39, 0x94, 0x70, 0x59, 0x84, 0x88, 0xe5, 0xc6, 0x70,
-	0x9f, 0xfd, 0x22, 0x5a, 0xce, 0x59, 0xce, 0x77, 0x2f, 0x9e, 0xd3, 0x6a, 0xe6, 0x77, 0x1f, 0x13,
-	0x17, 0x5e, 0xd7, 0xb8, 0x46, 0x20, 0xfa, 0x76, 0x37, 0xec, 0xed, 0x7c, 0x7a, 0xea, 0xdb, 0x33,
-	0xb7, 0x00, 0x30, 0xb7, 0x5a, 0x2a, 0x8e, 0x87, 0x6a, 0xa1, 0x18, 0xb1, 0x51, 0xd6, 0x88, 0xe3,
-	0x3f, 0x41, 0xec, 0x2d, 0x6b, 0x34, 0x04, 0xa3, 0xd6, 0xc2, 0xe1, 0x20, 0x98, 0x81, 0xea, 0x2e,
-	0xb9, 0x74, 0x8b, 0x18, 0x41, 0x62, 0x33, 0xdd, 0x4a, 0xe5, 0x69, 0x37, 0xd2, 0xe7, 0x79, 0x1a,
-	0xa7, 0x7c, 0x9f, 0x72, 0xea, 0xe9, 0x10, 0xba, 0x40, 0x6c, 0x3b, 0x6b, 0x41, 0x84, 0x5b, 0xdd,
-	0x83, 0x1c, 0x97, 0xed, 0x20, 0x63, 0x50, 0x70, 0x0f, 0x11, 0x7e, 0x98, 0x09, 0x72, 0x33, 0x6b,
-	0x5d, 0x32, 0x35, 0x3d, 0x93, 0x8d, 0xae, 0x72, 0xab, 0xe9, 0x9b, 0x20, 0x69, 0x0f, 0x88, 0x45,
-	0xeb, 0x6f, 0xd5, 0x78, 0xd7, 0x68, 0x59, 0x7e, 0xe5, 0x55, 0x61, 0xb4, 0x2b, 0x7b, 0x95, 0xe4,
-	0xa6, 0x3f, 0x38, 0x5d, 0x6d, 0xaf, 0x3f, 0x38, 0x4d, 0x6d, 0xa4, 0xb5, 0x61, 0x63, 0x84, 0xff,
-	0x19, 0xc1, 0x68, 0x35, 0xa4, 0xbd, 0xc1, 0x68, 0xb5, 0xa3, 0xd7, 0x5d, 0x5d, 0x26, 0xc2, 0xfd,
-	0xb2, 0x9d, 0x32, 0x9a, 0xa5, 0xe7, 0x97, 0xf9, 0x32, 0x1b, 0x89, 0x36, 0x6d, 0x2c, 0x8c, 0x68,
-	0x45, 0x19, 0x5f, 0x56, 0x6f, 0x0c, 0x9e, 0xa7, 0xc9, 0x4c, 0x6c, 0x0e, 0x3a, 0xbe, 0xcc, 0xc4,
-	0x61, 0x51, 0xd5, 0x4a, 0x87, 0x83, 0x60, 0x41, 0xd6, 0xdd, 0xa8, 0xb4, 0x74, 0xfd, 0x55, 0x77,
-	0x0c, 0x7f, 0xa2, 0xc6, 0x17, 0x66, 0x5f, 0x50, 0xad, 0xaa, 0xfe, 0xbe, 0xa0, 0x02, 0x80, 0x3d,
-	0x8a, 0x7a, 0x22, 0x6f, 0xef, 0x18, 0x3e, 0x44, 0xe1, 0x84, 0x78, 0x5d, 0xda, 0x80, 0x81, 0xdb,
-	0x3b, 0xad, 0x9f, 0x51, 0x63, 0x2a, 0xb6, 0xff, 0xf1, 0x8f, 0xe4, 0x2f, 0x8f, 0x47, 0x7b, 0x6f,
-	0xc4, 0x52, 0x1d, 0x3c, 0x23, 0x37, 0xe4, 0xa2, 0x2d, 0x8e, 0x4c, 0xea, 0xaa, 0x6d, 0x44, 0x4b,
-	0xab, 0x6d, 0x81, 0x00, 0xd0, 0x93, 0x44, 0x80, 0xdb, 0x4d, 0x13, 0xcd, 0x35, 0xf4, 0x70, 0x01,
-	0x8c, 0x4b, 0xb7, 0x4f, 0xbe, 0x54, 0xd0, 0xfa, 0x1b, 0xeb, 0xa2, 0x33, 0x44, 0x68, 0x94, 0x2c,
-	0x5c, 0xd1, 0x32, 0x25, 0xa8, 0x9f, 0xca, 0xbd, 0x59, 0x8b, 0x7c, 0xc7, 0xa6, 0x82, 0xe8, 0x1e,
-	0x4e, 0xa4, 0xc4, 0x60, 0xaf, 0xa3, 0x64, 0x4a, 0x60, 0xd3, 0xed, 0xc5, 0x79, 0x17, 0x9d, 0x12,
-	0xbb, 0x74, 0x4a, 0x30, 0x1c, 0x6c, 0xff, 0xd3, 0x9f, 0xc5, 0xdf, 0xaa, 0x3c, 0x67, 0xd9, 0x22,
-	0xf8, 0x9e, 0x5c, 0x9d, 0xb1, 0x6c, 0x21, 0x0c, 0xb3, 0xb3, 0x58, 0x1c, 0x15, 0x89, 0xd9, 0x6c,
-	0xb7, 0x84, 0xe8, 0xd1, 0x90, 0xc4, 0x88, 0xac, 0xad, 0x76, 0xbe, 0xea, 0x9a, 0xed, 0xa6, 0xcb,
-	0xe4, 0xa2, 0x5c, 0xca, 0x23, 0xb2, 0x22, 0xc0, 0x75, 0xd8, 0x2f, 0x16, 0xf2, 0x9e, 0x76, 0x56,
-	0x58, 0x5b, 0x30, 0x0c, 0x81, 0x6e, 0xc1, 0xbf, 0x27, 0x5f, 0x36, 0x58, 0xb5, 0x95, 0x0b, 0x31,
-	0x1e, 0xb5, 0x89, 0xbb, 0xda, 0xd6, 0x5f, 0xcd, 0xce, 0xed, 0x39, 0xb9, 0xde, 0x80, 0x5e, 0x31,
-	0x5a, 0xb2, 0x8a, 0xef, 0x47, 0xa6, 0xf5, 0x1d, 0x71, 0x18, 0x68, 0xb1, 0x7e, 0x26, 0xe7, 0x11,
-	0x0c, 0x5b, 0x0e, 0x11, 0x67, 0xd2, 0x62, 0x30, 0x8f, 0x42, 0xa6, 0x05, 0xa2, 0xdd, 0x19, 0x34,
-	0x78, 0x59, 0x28, 0x4e, 0xd8, 0xef, 0xd6, 0x21, 0xaa, 0x2b, 0x0f, 0xef, 0x98, 0x84, 0xad, 0x44,
-	0xdc, 0xf9, 0xb8, 0xda, 0xbc, 0x31, 0x5e, 0x2e, 0xea, 0x02, 0x17, 0xf1, 0x86, 0x56, 0x08, 0x6a,
-	0x6d, 0x21, 0x51, 0x8f, 0x65, 0xbd, 0xda, 0x60, 0x27, 0xac, 0x9c, 0x57, 0xaf, 0x4f, 0x9b, 0x0d,
-	0xd5, 0x10, 0xe3, 0x33, 0x31, 0x20, 0xfb, 0x09, 0x80, 0x29, 0x35, 0x67, 0x64, 0x2f, 0xce, 0xd5,
-	0xac, 0xa2, 0x76, 0xd4, 0x62, 0x30, 0x23, 0xfa, 0xd9, 0x70, 0xb0, 0xfd, 0x9f, 0x2b, 0xf2, 0xca,
-	0xdc, 0x8c, 0xe6, 0x39, 0xcb, 0xaa, 0xe0, 0x90, 0xac, 0x44, 0xea, 0xb7, 0xff, 0x68, 0x04, 0x43,
-	0xe0, 0x37, 0xca, 0x5a, 0x20, 0x7e, 0x7f, 0x06, 0x01, 0xa0, 0x67, 0xe5, 0x1a, 0xc7, 0xe2, 0x94,
-	0xef, 0x4c, 0x8b, 0xa5, 0x35, 0xcd, 0xae, 0x1c, 0x4d, 0x94, 0x1a, 0x66, 0x5e, 0x3d, 0x1f, 0xa2,
-	0x54, 0x3d, 0x77, 0xcf, 0x5f, 0x93, 0xdb, 0x1a, 0x6a, 0x5d, 0xed, 0xdd, 0x40, 0xf9, 0xbc, 0x77,
-	0x7b, 0xdb, 0xf3, 0x4e, 0x8d, 0xad, 0x58, 0x5b, 0x7e, 0xe0, 0xa6, 0x07, 0x08, 0xf4, 0x88, 0xdd,
-	0x98, 0xa3, 0xce, 0xa3, 0xa1, 0x2e, 0x24, 0x7e, 0xbd, 0xaf, 0x79, 0xc1, 0x7b, 0x94, 0x8a, 0x21,
-	0x7a, 0x0e, 0xfa, 0x62, 0x60, 0xce, 0xae, 0x33, 0x33, 0x0f, 0xe8, 0x92, 0x67, 0x58, 0x29, 0x09,
-	0x2d, 0x82, 0x7a, 0x3e, 0x1a, 0x27, 0x7f, 0xd4, 0xa1, 0x08, 0xe0, 0x2e, 0x77, 0x96, 0x35, 0x82,
-	0xee, 0xd6, 0x1c, 0x3b, 0xd4, 0xff, 0xf4, 0xb9, 0x1b, 0xc4, 0xf8, 0xce, 0xb3, 0x4c, 0x3f, 0x17,
-	0xf7, 0x85, 0x3a, 0xe2, 0x40, 0xdc, 0x15, 0xba, 0x0c, 0x93, 0x3c, 0x75, 0xf2, 0x33, 0xf9, 0x4f,
-	0x9c, 0x6c, 0x26, 0x79, 0xda, 0xe4, 0x67, 0xea, 0x3c, 0x69, 0xd2, 0xc8, 0x0f, 0x45, 0x9a, 0x37,
-	0xd6, 0xc2, 0x1d, 0x0b, 0x20, 0x7c, 0x3d, 0x73, 0x8d, 0xcd, 0x18, 0x3d, 0xd7, 0xc6, 0x7f, 0x88,
-	0xd2, 0x41, 0x88, 0xef, 0x04, 0x50, 0x83, 0x53, 0xb9, 0x62, 0x14, 0x0d, 0xe5, 0x26, 0x4a, 0x69,
-	0xa1, 0x7c, 0xe7, 0x75, 0x96, 0x9b, 0x75, 0xfb, 0x88, 0x81, 0xe9, 0x65, 0x94, 0xc7, 0x34, 0xcd,
-	0x9f, 0x04, 0xe2, 0x8c, 0x06, 0xc6, 0x77, 0x3e, 0x64, 0xa1, 0xc7, 0x69, 0x92, 0x8b, 0x2d, 0x94,
-	0x55, 0x1d, 0x7b, 0x61, 0xbe, 0x13, 0x1d, 0x2b, 0x35, 0xca, 0x4d, 0x62, 0x73, 0xf6, 0xf2, 0xb8,
-	0x23, 0x89, 0x1a, 0x48, 0xdf, 0xa9, 0xa0, 0xe1, 0x77, 0xbb, 0xf5, 0xef, 0xd8, 0xb3, 0xf8, 0xb4,
-	0x00, 0x94, 0x6b, 0x6c, 0xa6, 0x3c, 0xbd, 0x56, 0x7a, 0x53, 0x5e, 0x83, 0xe8, 0x6a, 0xdf, 0xcf,
-	0xc9, 0x43, 0xf8, 0x8a, 0x88, 0x55, 0x16, 0x8f, 0x96, 0xd3, 0x2c, 0x8d, 0xb4, 0x86, 0x6f, 0x7d,
-	0x1a, 0x50, 0x78, 0x97, 0xba, 0xf7, 0x20, 0xbd, 0xb6, 0x67, 0x01, 0xc2, 0xd5, 0x36, 0x7c, 0x4a,
-	0x00, 0xa8, 0xe7, 0xcc, 0xe0, 0x27, 0x10, 0x6d, 0xb2, 0x65, 0xa8, 0x7a, 0x7e, 0x78, 0xb4, 0x41,
-	0x48, 0x5f, 0x47, 0x31, 0x05, 0x81, 0x27, 0xfe, 0xec, 0xa0, 0xe4, 0x69, 0x94, 0x2e, 0x68, 0xbd,
-	0x8c, 0x6d, 0xfa, 0x46, 0x0e, 0x51, 0x61, 0xeb, 0xa3, 0x1a, 0xa2, 0xbe, 0x0a, 0xc2, 0x44, 0x8f,
-	0xff, 0xb6, 0x87, 0xc4, 0x6f, 0x23, 0x00, 0x0a, 0x37, 0x2f, 0xa3, 0x48, 0xee, 0xc9, 0x2d, 0x53,
-	0x28, 0x4f, 0x3e, 0x4a, 0xf3, 0x33, 0xcf, 0x22, 0xe4, 0xe0, 0x40, 0x8d, 0xd8, 0xd8, 0x0d, 0x48,
-	0x45, 0x7f, 0x7a, 0xc5, 0xf1, 0x98, 0x23, 0x7b, 0x13, 0x81, 0x21, 0xc0, 0xf2, 0xa6, 0xc5, 0x8d,
-	0x4c, 0x37, 0xd2, 0xb6, 0xff, 0xe3, 0x0f, 0x62, 0x0f, 0xb5, 0x5b, 0xf0, 0x2a, 0x78, 0x47, 0xee,
-	0x4e, 0x0b, 0x5e, 0x9d, 0x50, 0xd1, 0x85, 0x7a, 0xc7, 0xa6, 0xb3, 0xa2, 0x38, 0x7b, 0x31, 0x7e,
-	0xfd, 0xea, 0xc7, 0x25, 0x2b, 0x2f, 0xcc, 0xa6, 0x5a, 0x07, 0x10, 0xdb, 0x5b, 0xdd, 0x12, 0x78,
-	0xf1, 0xb7, 0xa4, 0xcb, 0x8a, 0x17, 0xf3, 0x63, 0x79, 0x22, 0x64, 0x66, 0x33, 0x1c, 0x03, 0x9b,
-	0xa3, 0x94, 0xd3, 0x5a, 0xcd, 0x70, 0xb0, 0xfd, 0xdf, 0x7f, 0x12, 0x05, 0xef, 0x88, 0x5e, 0xcc,
-	0x45, 0x29, 0xf4, 0x9a, 0xdc, 0x5e, 0xa8, 0xdf, 0xf2, 0x8e, 0xa1, 0xe8, 0x4b, 0x1e, 0xe6, 0xa7,
-	0x85, 0x39, 0xe9, 0x1e, 0x90, 0x3b, 0xe6, 0x13, 0x40, 0x28, 0x1c, 0x44, 0xfc, 0x3e, 0x28, 0xca,
-	0xb9, 0x87, 0xd0, 0x04, 0x81, 0xe6, 0x98, 0x46, 0x00, 0xb1, 0x6c, 0x56, 0x21, 0xef, 0x1e, 0xb3,
-	0x88, 0xa5, 0x0b, 0xab, 0x59, 0xed, 0xc7, 0x81, 0x66, 0x95, 0xad, 0x46, 0x21, 0x86, 0x83, 0xe0,
-	0x77, 0x72, 0x5f, 0x0b, 0xcf, 0x69, 0x96, 0xd6, 0x09, 0x51, 0x19, 0x57, 0x99, 0xe8, 0x09, 0xaa,
-	0x0d, 0xc5, 0x86, 0x8f, 0x5d, 0x8d, 0x6f, 0x15, 0x30, 0x36, 0x90, 0xa2, 0xcb, 0x78, 0x47, 0x83,
-	0xea, 0x89, 0x85, 0x56, 0xdc, 0x44, 0x75, 0x5a, 0x28, 0xd0, 0x90, 0x71, 0xbf, 0x4f, 0xb7, 0xe0,
-	0x6f, 0x42, 0x03, 0xb5, 0x13, 0xff, 0xd0, 0x67, 0xc3, 0x76, 0xda, 0xef, 0xba, 0xf4, 0x5a, 0x38,
-	0x1c, 0x6c, 0xff, 0xef, 0x9f, 0xc8, 0x5f, 0xd4, 0x5e, 0x26, 0xfe, 0x3a, 0xef, 0x29, 0x09, 0x16,
-	0xf5, 0x8f, 0x93, 0xb2, 0xb6, 0xec, 0x39, 0x8b, 0xf7, 0x68, 0x96, 0x99, 0x35, 0x92, 0x2b, 0x47,
-	0xf7, 0x53, 0x12, 0x56, 0xd5, 0xb5, 0x0a, 0xcd, 0xb2, 0x7d, 0x36, 0x5d, 0x26, 0xe6, 0x92, 0x86,
-	0x00, 0x5c, 0xa2, 0x03, 0x72, 0x5d, 0xe2, 0xd4, 0xdf, 0x04, 0x88, 0xe1, 0xdc, 0x73, 0x69, 0x80,
-	0xd8, 0xb7, 0xc6, 0x2a, 0x7d, 0x4c, 0x34, 0xa2, 0xd5, 0xdf, 0x20, 0x61, 0x03, 0x82, 0x00, 0x94,
-	0xeb, 0x87, 0x86, 0x2b, 0x91, 0x50, 0xb5, 0xa7, 0x45, 0xb8, 0x0c, 0x00, 0x1a, 0xe3, 0xc1, 0xab,
-	0xe6, 0x03, 0xd5, 0xf9, 0xb1, 0xef, 0x03, 0x81, 0x18, 0x74, 0x05, 0xa4, 0x4c, 0xfe, 0xcd, 0x3a,
-	0xcd, 0x64, 0x3f, 0xe6, 0x9a, 0x7c, 0x28, 0x0f, 0x8c, 0x05, 0xdd, 0x9a, 0x4b, 0xd7, 0x4a, 0x3b,
-	0xd9, 0xf4, 0xe8, 0xd4, 0x5f, 0xba, 0xfa, 0x46, 0x07, 0xc4, 0x5d, 0x7c, 0xdb, 0x63, 0xe1, 0x6a,
-	0xf5, 0xfe, 0xa4, 0x0a, 0x9e, 0x91, 0xeb, 0xcb, 0xfa, 0x47, 0xb3, 0x7c, 0x8b, 0xab, 0x55, 0x66,
-	0xa3, 0xcc, 0x16, 0x03, 0x13, 0xd6, 0xff, 0x94, 0x2b, 0xfa, 0xf6, 0xbf, 0x7c, 0x26, 0x9a, 0x95,
-	0xa2, 0x5c, 0xaf, 0x82, 0x13, 0xb2, 0xba, 0x10, 0xbf, 0xcc, 0x3f, 0x77, 0x95, 0xc5, 0xfe, 0x57,
-	0xd6, 0xd0, 0x71, 0x18, 0xb8, 0x91, 0x59, 0xab, 0x81, 0x22, 0x71, 0x19, 0xba, 0x55, 0x90, 0x15,
-	0x34, 0xbe, 0x84, 0x02, 0x1b, 0x06, 0x7a, 0x31, 0x0a, 0xd3, 0x90, 0x1f, 0x93, 0x15, 0xf5, 0x24,
-	0x61, 0xe2, 0x1e, 0x99, 0xfa, 0xaa, 0x75, 0x84, 0xd7, 0x40, 0x80, 0xfb, 0x00, 0x90, 0xb2, 0x5e,
-	0xfe, 0xfe, 0xfd, 0x8f, 0x62, 0x19, 0xd1, 0x9b, 0xf4, 0x29, 0x59, 0xad, 0xd4, 0x6f, 0xb5, 0x93,
-	0x03, 0x07, 0x88, 0xc6, 0x07, 0x78, 0x61, 0xbd, 0xa7, 0x94, 0x1f, 0xc8, 0x3d, 0xfd, 0x72, 0xc9,
-	0xe6, 0x85, 0xbe, 0xf0, 0x7c, 0x50, 0x16, 0xf3, 0x5a, 0xcf, 0x37, 0xa8, 0x1e, 0x0c, 0xda, 0xab,
-	0x2b, 0x23, 0xf7, 0xdb, 0x81, 0x8a, 0xf6, 0xa2, 0x12, 0x8f, 0x8a, 0x2a, 0x15, 0x57, 0x2a, 0x9e,
-	0xe0, 0x1f, 0x85, 0x61, 0x7b, 0xb5, 0xfd, 0x4a, 0xee, 0x68, 0x06, 0x1a, 0x37, 0x4d, 0xf3, 0x49,
-	0x51, 0x7f, 0xd4, 0x26, 0xaa, 0xc7, 0x42, 0xf5, 0x69, 0xd8, 0xfe, 0xd7, 0xcf, 0xc4, 0xff, 0x99,
-	0xa1, 0x12, 0x4e, 0xf0, 0x82, 0x5c, 0x93, 0x2e, 0xaa, 0x4e, 0x8a, 0x29, 0x67, 0x66, 0x44, 0xdb,
-	0x52, 0xe0, 0x0a, 0x8d, 0x48, 0x3c, 0x97, 0xcb, 0x08, 0x40, 0xef, 0xa7, 0xa7, 0xa7, 0xac, 0x64,
-	0x79, 0x64, 0x15, 0xbf, 0x28, 0x04, 0x2c, 0x23, 0x8d, 0xbc, 0x15, 0xca, 0xd3, 0x22, 0xf0, 0x9e,
-	0x2a, 0x26, 0x81, 0x86, 0xc7, 0x1e, 0x0d, 0x0e, 0x12, 0xb4, 0x47, 0x1a, 0x98, 0x83, 0x19, 0x0e,
-	0xb6, 0xff, 0xeb, 0x0f, 0xc2, 0xab, 0x8f, 0x68, 0x9e, 0x2c, 0x68, 0x74, 0x16, 0xbc, 0x23, 0x2b,
-	0x99, 0xfa, 0x5d, 0xd3, 0xd6, 0xcf, 0x47, 0xf5, 0x73, 0x23, 0x72, 0x30, 0x04, 0xf8, 0xb0, 0xe6,
-	0x91, 0xf1, 0x61, 0x3f, 0x93, 0x5b, 0xf0, 0x35, 0xf0, 0x49, 0x43, 0x1f, 0x35, 0x6a, 0x35, 0x8c,
-	0x7c, 0xf7, 0x31, 0xb9, 0x1b, 0x15, 0xf3, 0xad, 0x9c, 0x4d, 0x97, 0x19, 0x4d, 0xe7, 0x5b, 0x2c,
-	0x4f, 0xd2, 0x9c, 0x35, 0xef, 0xec, 0x5e, 0x79, 0x39, 0x19, 0xd5, 0x3f, 0x9e, 0x7f, 0x36, 0xfd,
-	0xb3, 0x78, 0xf2, 0x37, 0xff, 0x1f, 0x00, 0x00, 0xff, 0xff, 0xe8, 0xc9, 0xd7, 0xf6, 0x16, 0x4b,
-	0x00, 0x00,
+	// 4016 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x5c, 0x4f, 0x73, 0xdc, 0xc6,
+	0x72, 0xdf, 0xe7, 0xf7, 0xea, 0xd9, 0x19, 0x97, 0x2d, 0x09, 0xa2, 0xfe, 0x10, 0xa2, 0x24, 0x6a,
+	0x49, 0xcb, 0xb2, 0x2a, 0x66, 0xaa, 0x98, 0x43, 0x4e, 0x2e, 0x17, 0xff, 0x88, 0x12, 0x65, 0x4a,
+	0x5a, 0x73, 0x57, 0x52, 0x5c, 0x96, 0x43, 0xcf, 0x02, 0x43, 0x2c, 0x44, 0x2c, 0xb0, 0x06, 0x66,
+	0x29, 0x33, 0x5f, 0x20, 0xf9, 0x12, 0x39, 0x25, 0xd7, 0x1c, 0x93, 0x5b, 0x4e, 0x39, 0xe7, 0x53,
+	0xe4, 0x92, 0x7c, 0x8b, 0x57, 0x98, 0x19, 0x0c, 0x7a, 0x66, 0x7a, 0x00, 0xea, 0xb6, 0x42, 0xff,
+	0xf0, 0xeb, 0x41, 0x4f, 0x77, 0x4f, 0x4f, 0xcf, 0x50, 0x64, 0xad, 0x8a, 0x66, 0x6c, 0x4e, 0xb7,
+	0x78, 0xb6, 0x55, 0x5d, 0xe4, 0xd1, 0x56, 0xc5, 0xca, 0xf3, 0x34, 0x62, 0x5b, 0x8b, 0xb2, 0xe0,
+	0x45, 0xf0, 0xe9, 0x9c, 0x8b, 0x1f, 0x61, 0xd8, 0xc2, 0xa2, 0xa2, 0x64, 0x27, 0xfc, 0x62, 0xc1,
+	0x2a, 0x09, 0x0a, 0x57, 0x2c, 0x0a, 0xf1, 0x74, 0xfb, 0xff, 0x08, 0xf9, 0xf4, 0x78, 0xb4, 0xb7,
+	0xb3, 0xe4, 0xb3, 0xe0, 0x88, 0x5c, 0xa1, 0x4b, 0x3e, 0x3b, 0x89, 0x66, 0x2c, 0x3a, 0x1b, 0xcd,
+	0x8a, 0x9c, 0x05, 0x77, 0xb6, 0x14, 0xf5, 0xd6, 0xe4, 0xe8, 0xc4, 0x12, 0x86, 0xa1, 0x16, 0x0a,
+	0xc9, 0x5e, 0x2d, 0x61, 0xb1, 0x90, 0x0d, 0x07, 0xc1, 0x3e, 0xf9, 0x42, 0x3c, 0xae, 0x58, 0x1e,
+	0xef, 0x15, 0x31, 0x0b, 0x56, 0x1d, 0xae, 0x46, 0x14, 0xde, 0x34, 0x99, 0xc6, 0x2c, 0xe7, 0xf5,
+	0xf3, 0xe1, 0x20, 0x78, 0xa6, 0xc6, 0x54, 0x32, 0xcd, 0xe3, 0x8e, 0xa9, 0x15, 0x76, 0x30, 0x3d,
+	0x21, 0x9f, 0x4b, 0xa5, 0x69, 0x92, 0xbf, 0x5e, 0x04, 0xb7, 0xdc, 0xd1, 0x08, 0x41, 0x78, 0xc7,
+	0x64, 0xa8, 0x2d, 0x53, 0x94, 0xe9, 0x3f, 0x52, 0x9e, 0x16, 0xb9, 0x45, 0x73, 0x98, 0x7b, 0x68,
+	0x0e, 0xf3, 0x3e, 0x9a, 0x13, 0x72, 0x5b, 0x3c, 0x4f, 0xe7, 0x8b, 0xa2, 0xe4, 0x86, 0x34, 0xd8,
+	0x74, 0x38, 0x11, 0x54, 0x9f, 0x02, 0x46, 0xee, 0x80, 0x57, 0x77, 0x0b, 0x4b, 0xc7, 0xd7, 0x1e,
+	0x1d, 0x36, 0xb0, 0x4f, 0xcd, 0x98, 0x04, 0xc0, 0x2d, 0x68, 0x55, 0x7d, 0x28, 0xca, 0x38, 0xb8,
+	0xe7, 0x71, 0x1b, 0x25, 0xef, 0x23, 0x7d, 0x4b, 0x56, 0xd4, 0xbc, 0x46, 0xc5, 0x39, 0x2b, 0x35,
+	0xed, 0x3a, 0x32, 0xf3, 0x06, 0xa2, 0x8f, 0xf8, 0xef, 0xd4, 0xe4, 0x65, 0x45, 0xf2, 0x6a, 0xc9,
+	0x91, 0xc9, 0x93, 0x82, 0xf0, 0x0b, 0x2d, 0xd8, 0x2d, 0x8a, 0x6c, 0x38, 0x08, 0x7e, 0x54, 0xd3,
+	0x55, 0x7b, 0x9a, 0x69, 0xa0, 0x0a, 0x99, 0x2e, 0x04, 0xe5, 0x52, 0xee, 0x90, 0xab, 0x3a, 0x08,
+	0x0e, 0xf3, 0xf3, 0x94, 0xb3, 0x2a, 0x58, 0x43, 0x43, 0x44, 0x49, 0x5d, 0x8a, 0x43, 0x65, 0xa7,
+	0x69, 0x9a, 0xc7, 0x13, 0x36, 0x5f, 0xd4, 0x2a, 0x7f, 0x60, 0x17, 0x88, 0x9d, 0x2c, 0x84, 0x4b,
+	0xf5, 0x7d, 0x13, 0xfb, 0x34, 0x8f, 0x58, 0xe6, 0x89, 0xb3, 0x56, 0xe8, 0x12, 0xfc, 0x40, 0x6e,
+	0x08, 0x4c, 0x5c, 0x16, 0x0b, 0xa0, 0xa9, 0x0a, 0x1e, 0x38, 0x34, 0x36, 0xc4, 0x25, 0x4b, 0x94,
+	0xb9, 0xd9, 0xef, 0x97, 0x89, 0x0e, 0x04, 0x15, 0x6e, 0x98, 0x8e, 0xf0, 0x44, 0x40, 0x58, 0x6c,
+	0x3b, 0xc4, 0x7b, 0xb2, 0xa6, 0x66, 0xec, 0xb7, 0x25, 0xab, 0x78, 0xe3, 0x47, 0xc7, 0xd2, 0xad,
+	0x2e, 0x82, 0x47, 0xc8, 0xdc, 0xa2, 0xc8, 0xf0, 0x9e, 0xa9, 0xd0, 0x96, 0x0f, 0x07, 0xdb, 0xff,
+	0x73, 0x8d, 0x90, 0x3a, 0xd5, 0x46, 0x51, 0xb1, 0xcc, 0x79, 0xf0, 0x2b, 0xb9, 0x43, 0xe5, 0x4f,
+	0x99, 0x07, 0x67, 0x34, 0x4f, 0x98, 0x48, 0x9e, 0xc2, 0xfa, 0x66, 0x80, 0xfa, 0x81, 0x1d, 0x19,
+	0x6f, 0x4a, 0xd6, 0x8c, 0x17, 0x8b, 0xfc, 0x34, 0x2d, 0xe7, 0xad, 0x8a, 0x47, 0x5e, 0x15, 0x16,
+	0xb2, 0x43, 0xc7, 0x0b, 0x72, 0xb3, 0x79, 0xb3, 0x64, 0x49, 0x5a, 0x71, 0x56, 0xee, 0xb3, 0x7a,
+	0x69, 0x0a, 0x86, 0x18, 0xbb, 0x89, 0xc1, 0xe3, 0x4c, 0x41, 0x97, 0xb9, 0x45, 0xb8, 0x89, 0x11,
+	0xda, 0x28, 0x97, 0xf2, 0xa7, 0xd6, 0x0a, 0xcb, 0x45, 0x4c, 0x39, 0x7b, 0x59, 0xf0, 0xf4, 0xf4,
+	0x62, 0xcc, 0x38, 0x4f, 0xf3, 0xa4, 0xc2, 0xad, 0x80, 0x21, 0x5d, 0xea, 0xb7, 0xed, 0x14, 0x8a,
+	0x90, 0xb7, 0x98, 0xbf, 0xc6, 0x2d, 0xe0, 0x00, 0xf1, 0xc0, 0x36, 0x46, 0x32, 0xe6, 0x94, 0x2f,
+	0x2b, 0x2b, 0xb0, 0x11, 0x84, 0x4b, 0xf5, 0x84, 0x04, 0xad, 0xea, 0x3a, 0x08, 0x46, 0x8c, 0x95,
+	0x56, 0x82, 0x76, 0xe4, 0x78, 0x78, 0x2b, 0x98, 0x48, 0xe5, 0xaf, 0x2b, 0x56, 0xe6, 0x74, 0xce,
+	0xac, 0xf0, 0xc6, 0x20, 0x9d, 0x64, 0x31, 0xcb, 0x18, 0x67, 0x4d, 0x4c, 0xa0, 0x64, 0x06, 0xa4,
+	0x93, 0xac, 0xce, 0xba, 0xf2, 0xe7, 0x64, 0x72, 0x84, 0x93, 0x19, 0x10, 0x97, 0xec, 0x35, 0x09,
+	0x4d, 0xb3, 0x4a, 0xaf, 0x3a, 0x2a, 0xea, 0xca, 0x26, 0x78, 0xe8, 0x37, 0x3f, 0xc4, 0x75, 0xd2,
+	0xba, 0x6b, 0x03, 0x4e, 0xeb, 0xe2, 0x5c, 0xda, 0x5f, 0xc8, 0x3d, 0x73, 0x14, 0x4d, 0xd6, 0xd1,
+	0x2e, 0xf8, 0xd8, 0x3f, 0x62, 0x1b, 0xdb, 0xe9, 0x85, 0x11, 0xc8, 0x08, 0xb8, 0x17, 0x42, 0x84,
+	0x4b, 0x45, 0xc9, 0x6a, 0x03, 0x4c, 0x9c, 0x38, 0xf9, 0x0a, 0xe3, 0x73, 0x60, 0x60, 0x6d, 0xaf,
+	0x5d, 0xd4, 0x14, 0x9a, 0x7e, 0xa0, 0x3e, 0xb0, 0x2c, 0x4e, 0xd3, 0xcc, 0xe3, 0xa1, 0x06, 0x04,
+	0x8c, 0xb7, 0x76, 0x5a, 0x33, 0xad, 0x49, 0xa4, 0xf6, 0xf7, 0xa1, 0x9f, 0x0d, 0x71, 0x78, 0x45,
+	0xf7, 0x94, 0x5c, 0x6f, 0x43, 0x43, 0xa7, 0xef, 0xe0, 0x3e, 0x1e, 0x3b, 0x1a, 0xe0, 0x12, 0xbd,
+	0x6e, 0xa3, 0x39, 0x61, 0x7c, 0x54, 0xa6, 0xe7, 0x34, 0xba, 0xc0, 0xa3, 0xb9, 0x95, 0x87, 0x77,
+	0xdb, 0xf4, 0xad, 0x84, 0x4a, 0x72, 0xbc, 0xcc, 0x58, 0x65, 0xd2, 0x56, 0x3d, 0xb4, 0xd5, 0x47,
+	0xd1, 0xde, 0x00, 0xa3, 0xe9, 0x0b, 0x4d, 0x03, 0x12, 0xb6, 0xb5, 0x99, 0x7a, 0xb8, 0x4f, 0x2f,
+	0xaa, 0xc9, 0xe4, 0x48, 0x94, 0xb6, 0xd0, 0x99, 0xac, 0x6a, 0xcc, 0xe7, 0x4c, 0x56, 0x39, 0x76,
+	0xdf, 0x19, 0xbb, 0x09, 0x10, 0xa5, 0xed, 0x75, 0x68, 0xcb, 0xa6, 0x08, 0xbd, 0xef, 0x33, 0x76,
+	0x53, 0x83, 0xae, 0xba, 0x66, 0x51, 0xa2, 0xe1, 0x20, 0x38, 0x6b, 0x97, 0x0c, 0xf0, 0x4e, 0xf7,
+	0x92, 0x81, 0x00, 0xc3, 0x07, 0x5e, 0x25, 0x20, 0x24, 0xde, 0xb5, 0x5e, 0x9c, 0x30, 0x3e, 0x99,
+	0x2f, 0xf4, 0x47, 0x0c, 0x3d, 0x7a, 0x00, 0x26, 0x5c, 0x73, 0x54, 0x00, 0xe9, 0x70, 0xb0, 0xfd,
+	0x5f, 0x9f, 0x91, 0xcf, 0x8f, 0x47, 0x7b, 0x7b, 0x45, 0xce, 0x69, 0xc4, 0xab, 0xe0, 0x15, 0xb9,
+	0x15, 0xa9, 0xdf, 0x2a, 0x67, 0x6b, 0xd1, 0x06, 0x54, 0xe7, 0x01, 0xb9, 0x49, 0xe3, 0x3b, 0xf2,
+	0xa5, 0xc6, 0x4e, 0xb3, 0x22, 0x3a, 0x0b, 0x42, 0x94, 0x47, 0xc8, 0xd0, 0x02, 0x5b, 0x43, 0x96,
+	0xb9, 0x24, 0x58, 0x43, 0x09, 0x94, 0x14, 0x5d, 0xe0, 0x35, 0x48, 0x24, 0xe4, 0x49, 0xb1, 0xa8,
+	0x93, 0xcf, 0x31, 0xad, 0x4d, 0x6c, 0xce, 0x56, 0x07, 0xd0, 0x25, 0x7e, 0x4a, 0xae, 0x9b, 0xf8,
+	0x31, 0x3d, 0x67, 0x96, 0x6f, 0x21, 0x00, 0x97, 0xe8, 0x0d, 0x59, 0xd1, 0xb8, 0x84, 0x71, 0x6d,
+	0xf1, 0x75, 0x94, 0x09, 0x20, 0xc0, 0xee, 0x5d, 0x8b, 0x1b, 0xd9, 0x70, 0x10, 0xc4, 0x60, 0x32,
+	0xe5, 0xce, 0xb0, 0x67, 0x32, 0x4d, 0x50, 0x38, 0x74, 0xd9, 0x0f, 0xe7, 0xb2, 0x06, 0x07, 0x5a,
+	0xde, 0x90, 0x9b, 0xb8, 0x37, 0x98, 0x0e, 0x8a, 0x63, 0x40, 0x55, 0xaa, 0x01, 0x47, 0x69, 0x7e,
+	0x26, 0x43, 0x17, 0x7e, 0xf3, 0x6e, 0x26, 0xd7, 0xef, 0xfb, 0x3e, 0xa3, 0x28, 0x00, 0x08, 0x5d,
+	0x2d, 0x55, 0x22, 0xb1, 0x1c, 0x5e, 0xd1, 0x4f, 0x2b, 0x46, 0xcb, 0x68, 0x66, 0x6e, 0x91, 0x2c,
+	0x21, 0xc8, 0x60, 0x5a, 0x72, 0x50, 0x2c, 0xf3, 0x58, 0x54, 0xe6, 0xb7, 0xe1, 0xec, 0x16, 0xd9,
+	0x79, 0xbb, 0xc0, 0x6c, 0xfa, 0x7c, 0x00, 0xa2, 0xc0, 0x76, 0x43, 0x43, 0x8e, 0x25, 0x24, 0xae,
+	0xfd, 0xce, 0xf5, 0x0c, 0xe5, 0x90, 0x1d, 0x9e, 0xd1, 0x20, 0x30, 0xcf, 0x68, 0x64, 0x96, 0xeb,
+	0xaa, 0x49, 0xa7, 0xa5, 0xcf, 0xb6, 0x2d, 0xc0, 0x59, 0xcb, 0xb6, 0xff, 0xed, 0x3b, 0x91, 0x3f,
+	0x5e, 0xb0, 0xaa, 0xa2, 0x09, 0xab, 0xea, 0x4a, 0x75, 0xae, 0x7e, 0xd7, 0xab, 0xcc, 0xe4, 0x62,
+	0x51, 0xc7, 0x98, 0xb1, 0x08, 0xb9, 0x72, 0x34, 0xb4, 0x34, 0x4c, 0x56, 0xb4, 0xe3, 0x05, 0x9d,
+	0x9b, 0xe3, 0x43, 0x00, 0x2e, 0xd1, 0x2b, 0x72, 0x4b, 0xe3, 0x66, 0x69, 0xcc, 0x8e, 0x5b, 0xb2,
+	0x0d, 0x94, 0xcc, 0x04, 0xa1, 0x55, 0xa0, 0xc6, 0xc6, 0x69, 0x15, 0xd1, 0x32, 0x7e, 0x92, 0x47,
+	0xe5, 0xc5, 0xc2, 0xad, 0x02, 0xfd, 0x38, 0x34, 0x49, 0x41, 0xbb, 0x28, 0x28, 0x8b, 0x95, 0x01,
+	0xbf, 0xf6, 0x19, 0xd0, 0x02, 0xba, 0xc4, 0x3f, 0x93, 0xbb, 0xc0, 0x50, 0x34, 0xd6, 0x2f, 0x3c,
+	0x4b, 0x2b, 0x5e, 0x94, 0x17, 0xc1, 0x37, 0x1e, 0x9b, 0xba, 0x50, 0x74, 0x5b, 0x66, 0xcd, 0x82,
+	0x7e, 0x47, 0x98, 0xf8, 0x51, 0xc7, 0x7c, 0x19, 0xc8, 0x6e, 0xea, 0x65, 0x9e, 0xe6, 0x15, 0xa7,
+	0x59, 0x36, 0xe6, 0x69, 0x74, 0xc6, 0xca, 0x31, 0xe3, 0x1e, 0x6a, 0x04, 0xe9, 0x52, 0xbf, 0x20,
+	0x37, 0xf5, 0x0b, 0x2c, 0x4e, 0xf9, 0xde, 0x8c, 0xf2, 0x9d, 0x78, 0x9e, 0xe6, 0x66, 0xc2, 0xc2,
+	0x31, 0xdd, 0x53, 0x57, 0xb2, 0xa2, 0x8c, 0x59, 0xd9, 0x6a, 0xaf, 0x3c, 0x53, 0xe7, 0x02, 0xd1,
+	0xb5, 0xaf, 0x9d, 0x6a, 0x7a, 0xce, 0x9e, 0xa6, 0xa7, 0xe6, 0xda, 0x67, 0x4b, 0xbb, 0xad, 0x58,
+	0x31, 0x7e, 0x98, 0x67, 0x69, 0xce, 0x76, 0x0b, 0x7e, 0xcc, 0xaa, 0x65, 0xc6, 0x2b, 0x8f, 0x15,
+	0x11, 0x64, 0xb7, 0x63, 0xd5, 0x16, 0xd2, 0x6f, 0xa8, 0x5c, 0xe0, 0x71, 0x2c, 0x0c, 0xda, 0x4d,
+	0x5e, 0x31, 0xbe, 0x5b, 0xf0, 0x3d, 0x9a, 0x65, 0x53, 0x1a, 0x9d, 0xed, 0xe4, 0xd5, 0x07, 0x56,
+	0x7a, 0xc8, 0x31, 0x28, 0xba, 0x9b, 0x36, 0x2c, 0xb7, 0x5f, 0xd2, 0x53, 0xee, 0xcb, 0x51, 0x8d,
+	0xbc, 0x3f, 0xb2, 0x0e, 0x18, 0xe5, 0xcb, 0x92, 0xc5, 0x6a, 0x4e, 0xab, 0x8e, 0xc8, 0xb2, 0xa1,
+	0xdd, 0x69, 0xa6, 0x1e, 0xc3, 0x31, 0x8b, 0x58, 0xce, 0x15, 0xde, 0x93, 0x66, 0x1c, 0x5c, 0xb7,
+	0x3f, 0x44, 0x19, 0xa3, 0xa5, 0x81, 0xf7, 0xf9, 0x03, 0x82, 0xec, 0xcd, 0x60, 0x72, 0x8e, 0x9f,
+	0xd2, 0x39, 0x1b, 0x47, 0x45, 0xc9, 0xfc, 0x19, 0xcc, 0x02, 0xa2, 0xed, 0x24, 0x8d, 0xe7, 0x45,
+	0x92, 0x64, 0x6c, 0x3f, 0xa5, 0x59, 0x91, 0x8c, 0x52, 0xab, 0x8f, 0xe8, 0x43, 0xf5, 0x4d, 0x9d,
+	0x88, 0xc4, 0x51, 0x9a, 0xe7, 0x2c, 0x96, 0xef, 0xf8, 0xa7, 0xce, 0x85, 0xa2, 0x1b, 0x7a, 0xcb,
+	0x21, 0xc7, 0xb3, 0x74, 0x51, 0x67, 0xe7, 0x26, 0xea, 0x1e, 0x77, 0x38, 0xaf, 0x85, 0x75, 0xe9,
+	0x23, 0xf2, 0xc0, 0x7a, 0x65, 0x54, 0x32, 0xd1, 0xab, 0x29, 0x96, 0x3a, 0xae, 0xbf, 0xed, 0xd0,
+	0xe0, 0xc2, 0xd1, 0xae, 0x81, 0x7e, 0xeb, 0x94, 0x9e, 0xb3, 0xc6, 0xf1, 0xd6, 0x51, 0x5e, 0x80,
+	0x40, 0x8b, 0x5b, 0x0d, 0x4c, 0x18, 0xd7, 0x95, 0x02, 0x4e, 0x05, 0x10, 0xa0, 0x84, 0xd1, 0xe2,
+	0x46, 0x36, 0x1c, 0x04, 0x13, 0x50, 0x22, 0x24, 0x8c, 0x37, 0xcb, 0xd9, 0x7d, 0x1f, 0x6d, 0xb3,
+	0x88, 0x75, 0xb3, 0x1e, 0x91, 0x2b, 0xc0, 0x5c, 0x6e, 0x7d, 0x68, 0x09, 0x7b, 0xd8, 0xfe, 0x9e,
+	0xdc, 0xb0, 0x5e, 0x78, 0x9a, 0x15, 0x53, 0x9a, 0x99, 0x7b, 0x67, 0x14, 0xd2, 0xc3, 0x3c, 0x05,
+	0xf9, 0x21, 0x61, 0xfc, 0x75, 0x5e, 0xa7, 0x95, 0x17, 0x2c, 0x97, 0xfb, 0xe7, 0x87, 0x3e, 0x23,
+	0x98, 0xb8, 0x1e, 0x1d, 0x63, 0xd3, 0xc2, 0x4d, 0x6c, 0x78, 0x2d, 0xdc, 0x44, 0xc4, 0xaa, 0xcb,
+	0xaa, 0x44, 0xc3, 0x41, 0xf0, 0x0f, 0xc0, 0x1d, 0xea, 0xb1, 0x34, 0xf3, 0xb6, 0xee, 0x4d, 0x96,
+	0xcd, 0xc4, 0x0d, 0x5d, 0xda, 0x9d, 0xd3, 0x53, 0x16, 0x71, 0x16, 0x83, 0x41, 0xc7, 0xa0, 0xe0,
+	0x93, 0x3b, 0x0d, 0xed, 0x71, 0x78, 0xc1, 0x67, 0x82, 0x2e, 0xa9, 0x25, 0x37, 0x0a, 0x1f, 0xda,
+	0x88, 0xea, 0x4d, 0x0d, 0xcb, 0xbd, 0xeb, 0x2a, 0x82, 0xbc, 0xa4, 0x3e, 0x0a, 0x4a, 0x16, 0x39,
+	0xe0, 0xc6, 0x6e, 0xc3, 0x8e, 0x8f, 0x6a, 0x2c, 0xf7, 0xc0, 0xaf, 0x43, 0x41, 0x84, 0xe7, 0xaf,
+	0x00, 0x47, 0xcc, 0x1b, 0xed, 0x9e, 0x89, 0x01, 0x88, 0xf0, 0x6a, 0xbb, 0x29, 0x10, 0x2d, 0xb4,
+	0x4a, 0x1c, 0xf9, 0x06, 0x16, 0x36, 0x4e, 0xa9, 0x77, 0x1f, 0xa0, 0xe4, 0x28, 0xd3, 0x04, 0xa4,
+	0xff, 0xd3, 0xa2, 0xfc, 0x40, 0x4b, 0x6d, 0x18, 0x4f, 0xfa, 0xb7, 0x50, 0x28, 0xeb, 0x08, 0xa9,
+	0x01, 0x27, 0x29, 0xcf, 0x58, 0x4f, 0x0d, 0x28, 0x30, 0x97, 0x66, 0x1c, 0xcd, 0x0a, 0x5e, 0xf4,
+	0x30, 0x0a, 0x0c, 0xca, 0x08, 0x67, 0x84, 0xc6, 0x71, 0x0d, 0xae, 0x77, 0x5d, 0x9e, 0x19, 0x01,
+	0x08, 0x94, 0xed, 0xd8, 0x09, 0x0c, 0x4d, 0xd8, 0x15, 0x18, 0x9d, 0x9c, 0xcf, 0x41, 0x86, 0x88,
+	0x4a, 0x46, 0x25, 0xdc, 0x93, 0x21, 0x5a, 0x40, 0xef, 0xf8, 0xcc, 0x19, 0xf4, 0x8c, 0xcf, 0x04,
+	0xa1, 0x9c, 0x6f, 0xc8, 0xaa, 0x86, 0xab, 0x5d, 0xec, 0x8c, 0x72, 0x79, 0x14, 0x6b, 0x36, 0x19,
+	0xbd, 0x30, 0x94, 0xf7, 0x80, 0x5c, 0x6b, 0xbd, 0x97, 0x53, 0x71, 0xe2, 0x1e, 0xdc, 0xc5, 0x9d,
+	0x5b, 0x89, 0x7b, 0xc7, 0x27, 0x8b, 0x16, 0xbd, 0xcf, 0xa8, 0x3c, 0xe3, 0xb3, 0x61, 0xbd, 0x9e,
+	0x33, 0x4f, 0x93, 0xb2, 0x99, 0x18, 0xdc, 0x73, 0x00, 0x02, 0x65, 0x7b, 0x67, 0x6c, 0x22, 0xf2,
+	0xd8, 0xda, 0x1b, 0x78, 0x37, 0x11, 0x0e, 0xb2, 0x77, 0xac, 0x75, 0x4c, 0x74, 0xe7, 0x1d, 0x80,
+	0x40, 0xd9, 0x5e, 0x82, 0x15, 0x37, 0x61, 0x7c, 0x27, 0xcb, 0x44, 0xf5, 0x5e, 0x79, 0x56, 0x5c,
+	0x08, 0xe9, 0xe5, 0xab, 0x18, 0x6f, 0xeb, 0x59, 0xdf, 0x0a, 0xde, 0x42, 0x50, 0xbe, 0xf7, 0x64,
+	0xc3, 0xb0, 0xd0, 0x38, 0x2a, 0x19, 0xcb, 0xab, 0x59, 0x21, 0x0f, 0x4a, 0xd2, 0x48, 0x9e, 0x26,
+	0xfd, 0x8d, 0xd7, 0xa4, 0xf8, 0x0b, 0xa8, 0xae, 0x9f, 0x40, 0xe6, 0x4c, 0x98, 0x38, 0x13, 0xd4,
+	0x3d, 0xea, 0x4d, 0x9f, 0x39, 0x20, 0x2a, 0xbc, 0x61, 0x9c, 0xd6, 0x80, 0xa6, 0xf4, 0x0b, 0x10,
+	0x00, 0x09, 0x13, 0xe1, 0x52, 0x79, 0x02, 0xa0, 0x11, 0x83, 0x56, 0x9a, 0x96, 0x09, 0x81, 0x18,
+	0xe9, 0x2d, 0x03, 0x5f, 0xcc, 0xe7, 0x45, 0x2e, 0x49, 0x37, 0xbc, 0xa4, 0x2d, 0xa8, 0x8b, 0x7a,
+	0x6c, 0x96, 0x9f, 0x3b, 0x59, 0x26, 0x79, 0xd7, 0x3b, 0xfc, 0xa1, 0x97, 0xd4, 0xaa, 0x69, 0x0f,
+	0x96, 0xf2, 0x1d, 0x3f, 0x69, 0x83, 0xc0, 0x2a, 0xae, 0xfa, 0x79, 0x2d, 0x77, 0x79, 0xf7, 0x67,
+	0xe2, 0x10, 0x3f, 0xf1, 0xf3, 0x36, 0x08, 0x8c, 0xb7, 0x91, 0x89, 0xa2, 0x2b, 0x04, 0x45, 0x88,
+	0xb8, 0xfb, 0xd0, 0xdb, 0xb4, 0x72, 0x70, 0xa0, 0x55, 0xab, 0x7b, 0x37, 0xf5, 0xd8, 0x45, 0x86,
+	0x68, 0xf3, 0x18, 0x8d, 0x22, 0xb6, 0x80, 0xf4, 0x78, 0x1e, 0xb3, 0x61, 0x1d, 0xec, 0xa7, 0x60,
+	0x65, 0xad, 0x43, 0x40, 0xcb, 0x3d, 0x2b, 0xab, 0x81, 0x09, 0x1f, 0xba, 0x96, 0x19, 0xb3, 0xbc,
+	0x6d, 0x3f, 0xa9, 0x6c, 0x22, 0x8a, 0xba, 0x10, 0xe7, 0x38, 0x48, 0x33, 0xe6, 0xdb, 0x73, 0xdb,
+	0xb8, 0x8f, 0xd0, 0xc7, 0x8d, 0x26, 0x07, 0xe0, 0x19, 0xcb, 0x8b, 0x81, 0xde, 0x26, 0x87, 0x0b,
+	0xfd, 0x08, 0xad, 0x27, 0x66, 0xac, 0xed, 0xe8, 0x5e, 0x59, 0x47, 0xac, 0x01, 0x10, 0x38, 0x30,
+	0x6c, 0x8b, 0xc9, 0x56, 0x2c, 0x6a, 0x55, 0x23, 0xed, 0xbc, 0xa0, 0xd5, 0x99, 0xd6, 0xe0, 0x4d,
+	0x3b, 0x10, 0xd5, 0xaf, 0xe2, 0x17, 0x73, 0xf7, 0xf3, 0x96, 0x4d, 0x47, 0x34, 0x61, 0xa3, 0x92,
+	0x9d, 0xa7, 0xec, 0x83, 0x7f, 0xf7, 0x63, 0xe2, 0x40, 0x76, 0x53, 0xd6, 0x11, 0x45, 0xa8, 0xe8,
+	0x38, 0xb4, 0x61, 0xb8, 0x5c, 0x64, 0x05, 0x55, 0xe5, 0x2b, 0x1e, 0x86, 0x00, 0xe1, 0xa7, 0xa4,
+	0x20, 0x42, 0xe4, 0x55, 0xa7, 0xde, 0x4a, 0xc4, 0x86, 0x81, 0xb3, 0xf3, 0xe6, 0x26, 0x54, 0x2b,
+	0x14, 0x0d, 0x98, 0xd6, 0xee, 0x62, 0x83, 0x0f, 0x34, 0xe0, 0x76, 0xb7, 0x50, 0xe1, 0x75, 0x8d,
+	0x32, 0x88, 0xdf, 0x81, 0xf8, 0x4b, 0x18, 0x07, 0x4d, 0xd8, 0xa1, 0xcf, 0xd2, 0xa0, 0xfd, 0xba,
+	0x86, 0x78, 0xa6, 0x96, 0x0e, 0x07, 0xc1, 0x6f, 0x60, 0x2e, 0xdd, 0x36, 0x2f, 0x3e, 0x97, 0x6e,
+	0x93, 0xf7, 0x9b, 0x2e, 0x2d, 0x87, 0x12, 0x2e, 0x8b, 0x10, 0xb1, 0xdc, 0x18, 0xee, 0xb3, 0x5f,
+	0x44, 0xcb, 0x39, 0xcb, 0xf9, 0xee, 0xc5, 0x33, 0x5a, 0xcd, 0xfc, 0xee, 0x63, 0xe2, 0xc2, 0x6b,
+	0x1a, 0xd7, 0x08, 0x44, 0xdf, 0xee, 0xba, 0xbd, 0x9d, 0x4f, 0x4f, 0x7d, 0x7b, 0xe6, 0x16, 0x00,
+	0xe6, 0x56, 0x4b, 0xc5, 0x39, 0x53, 0x2d, 0x14, 0x23, 0x36, 0xca, 0x1a, 0x71, 0x8e, 0x28, 0x88,
+	0xbd, 0x65, 0x8d, 0x86, 0x60, 0xd4, 0x5a, 0x38, 0x1c, 0x04, 0x33, 0x50, 0xdd, 0x25, 0x97, 0x6e,
+	0x11, 0x23, 0x48, 0x6c, 0xa6, 0x5b, 0xa9, 0x3c, 0x36, 0x47, 0xfa, 0x3c, 0x4f, 0xe2, 0x94, 0xef,
+	0x53, 0x4e, 0x3d, 0x1d, 0x42, 0x17, 0x88, 0x6d, 0x67, 0x2d, 0x88, 0x70, 0xab, 0xbb, 0x90, 0xe3,
+	0xb2, 0x1d, 0x64, 0x0c, 0x0a, 0xee, 0x21, 0xc2, 0x0f, 0x33, 0x41, 0x6e, 0x66, 0xad, 0x4b, 0xa6,
+	0xa6, 0x67, 0xb2, 0xd1, 0x55, 0x6e, 0x35, 0x7d, 0x13, 0x24, 0xed, 0x01, 0xb1, 0x68, 0xfd, 0xad,
+	0x1a, 0xef, 0x1a, 0x2d, 0xcb, 0xaf, 0xbc, 0x2a, 0x8c, 0x76, 0x65, 0xaf, 0x92, 0xdc, 0xf4, 0x07,
+	0xa7, 0xab, 0xed, 0xf5, 0x07, 0xa7, 0xa9, 0x8d, 0xb4, 0x36, 0x6c, 0x8c, 0xf0, 0x3f, 0x23, 0x18,
+	0xad, 0x86, 0xb4, 0x37, 0x18, 0xad, 0x76, 0xf4, 0xba, 0xab, 0xcb, 0x44, 0xb8, 0x5f, 0xb6, 0x53,
+	0x46, 0xb3, 0xf4, 0xfc, 0x32, 0x5f, 0x66, 0x23, 0xd1, 0xa6, 0x8d, 0x85, 0x11, 0xad, 0x28, 0xe3,
+	0xcb, 0xea, 0x8d, 0xc1, 0xb3, 0x34, 0x99, 0x89, 0xcd, 0x41, 0xc7, 0x97, 0x99, 0x38, 0x2c, 0xaa,
+	0x5a, 0xe9, 0x70, 0x10, 0x2c, 0xc8, 0xba, 0x1b, 0x95, 0x96, 0xae, 0xbf, 0xee, 0x8e, 0xe1, 0x8f,
+	0xd4, 0xf8, 0xdc, 0xec, 0x0b, 0xaa, 0x55, 0xd5, 0xdf, 0x17, 0x54, 0x00, 0xb0, 0x47, 0x51, 0x4f,
+	0xe4, 0x35, 0x20, 0xc3, 0x87, 0x28, 0x9c, 0x10, 0xaf, 0x4b, 0x1b, 0x30, 0x70, 0x0d, 0xa8, 0xf5,
+	0x33, 0x6a, 0x4c, 0xc5, 0xf6, 0x3f, 0xfd, 0x91, 0xfc, 0xd5, 0xf1, 0x68, 0xef, 0xb5, 0x58, 0xaa,
+	0x83, 0xa7, 0xe4, 0xba, 0x5c, 0xb4, 0xc5, 0x91, 0x49, 0x5d, 0xb5, 0x8d, 0x68, 0x69, 0xb5, 0x2d,
+	0x10, 0x00, 0x7a, 0x92, 0x08, 0x70, 0xbb, 0x69, 0xa2, 0xb9, 0x86, 0x1e, 0x2e, 0x80, 0x71, 0xe9,
+	0xf6, 0xc9, 0x97, 0x0a, 0x5a, 0x7f, 0x63, 0x5d, 0x74, 0x86, 0x08, 0x8d, 0x92, 0x85, 0x2b, 0x5a,
+	0xa6, 0x04, 0xf5, 0x53, 0xb9, 0x37, 0x6b, 0x91, 0x6f, 0xd9, 0x54, 0x10, 0xdd, 0xc5, 0x89, 0x94,
+	0x18, 0xec, 0x75, 0x94, 0x4c, 0x09, 0x6c, 0xba, 0xbd, 0x38, 0xef, 0xa2, 0x53, 0x62, 0x97, 0x4e,
+	0x09, 0x86, 0x83, 0xed, 0x7f, 0xfe, 0xb3, 0xf8, 0x5b, 0x95, 0x67, 0x2c, 0x5b, 0x04, 0xdf, 0x93,
+	0x2b, 0x33, 0x96, 0x2d, 0x84, 0x61, 0x76, 0x16, 0x8b, 0xa3, 0x22, 0x31, 0x9b, 0xed, 0x96, 0x10,
+	0x3d, 0x1a, 0x92, 0x18, 0x91, 0xb5, 0xd5, 0xce, 0x57, 0x5d, 0xb3, 0xdd, 0x74, 0x99, 0x5c, 0x94,
+	0x4b, 0x79, 0x44, 0x56, 0x04, 0xb8, 0x0e, 0xfb, 0xc5, 0x42, 0xde, 0xd3, 0xce, 0x0a, 0x6b, 0x0b,
+	0x86, 0x21, 0xd0, 0x2d, 0xf8, 0xf7, 0xe4, 0xcb, 0x06, 0xab, 0xb6, 0x72, 0x21, 0xc6, 0xa3, 0x36,
+	0x71, 0x57, 0xda, 0xfa, 0xab, 0xd9, 0xb9, 0x3d, 0x23, 0xd7, 0x1a, 0xd0, 0x4b, 0x46, 0x4b, 0x56,
+	0xf1, 0xfd, 0xc8, 0xb4, 0xbe, 0x23, 0x0e, 0x03, 0x2d, 0xd6, 0xcf, 0xe4, 0x3c, 0x82, 0x61, 0xcb,
+	0x21, 0xe2, 0x4c, 0x5a, 0x0c, 0xe6, 0x51, 0xc8, 0xb4, 0x40, 0xb4, 0x3b, 0x83, 0x06, 0x2f, 0x0b,
+	0xc5, 0x09, 0xfb, 0xdd, 0x3a, 0x44, 0x75, 0xe5, 0xe1, 0x6d, 0x93, 0xb0, 0x95, 0x88, 0x3b, 0x1f,
+	0x57, 0x9a, 0x37, 0xc6, 0xcb, 0x45, 0x5d, 0xe0, 0x22, 0xde, 0xd0, 0x0a, 0x41, 0xad, 0x2d, 0x24,
+	0xea, 0xb1, 0xac, 0x57, 0x1b, 0xec, 0x84, 0x95, 0xf3, 0xea, 0xd5, 0x69, 0xb3, 0xa1, 0x1a, 0x62,
+	0x7c, 0x26, 0x06, 0x64, 0x3f, 0x01, 0x30, 0xa5, 0xe6, 0x8c, 0xec, 0xc5, 0xb9, 0x9a, 0x55, 0xd4,
+	0x8e, 0x5a, 0x0c, 0x66, 0x44, 0x3f, 0x1b, 0x0e, 0xb6, 0xff, 0x73, 0x45, 0xde, 0xbd, 0x9b, 0xd1,
+	0x3c, 0x67, 0x59, 0x15, 0x1c, 0x92, 0x95, 0x48, 0xfd, 0xf6, 0x1f, 0x8d, 0x60, 0x08, 0xfc, 0x6a,
+	0x5a, 0x0b, 0xc4, 0xef, 0xcf, 0x20, 0x00, 0xf4, 0xac, 0x5c, 0xe3, 0x58, 0x9c, 0xf2, 0x9d, 0x69,
+	0xb1, 0xb4, 0xa6, 0xd9, 0x95, 0xa3, 0x89, 0x52, 0xc3, 0xcc, 0xab, 0xe7, 0x43, 0x94, 0xaa, 0xe7,
+	0xee, 0xf9, 0x2b, 0x72, 0x4b, 0x43, 0xad, 0xab, 0xbd, 0x1b, 0x28, 0x9f, 0xf7, 0x6e, 0x6f, 0x7b,
+	0xde, 0xa9, 0xb1, 0x15, 0x6b, 0xcb, 0x0f, 0xdc, 0xf4, 0x00, 0x81, 0x1e, 0xb1, 0x1b, 0x73, 0xd4,
+	0x79, 0x34, 0xd4, 0x85, 0xc4, 0xef, 0x09, 0x36, 0x2f, 0x78, 0x8f, 0x52, 0x31, 0x44, 0xcf, 0x41,
+	0x5f, 0x0c, 0xcc, 0xd9, 0x75, 0x66, 0xe6, 0x01, 0x5d, 0xf2, 0x0c, 0x2b, 0x25, 0xa1, 0x45, 0x50,
+	0xcf, 0x47, 0xe3, 0xe4, 0x0f, 0x3b, 0x14, 0x01, 0xdc, 0xe5, 0xce, 0xb2, 0x46, 0xd0, 0xdd, 0x9a,
+	0x63, 0x87, 0xfa, 0x9f, 0x3e, 0x77, 0x83, 0x18, 0xdf, 0x79, 0x96, 0xe9, 0xe7, 0xe2, 0xbe, 0x50,
+	0x47, 0x1c, 0x88, 0xbb, 0x42, 0x97, 0x61, 0x92, 0xa7, 0x4e, 0x7e, 0x26, 0xff, 0x89, 0x93, 0xcd,
+	0x24, 0x4f, 0x9b, 0xfc, 0x4c, 0x9d, 0x27, 0x4d, 0x1a, 0xf9, 0xbe, 0x48, 0xf3, 0xc6, 0x5a, 0xb8,
+	0x63, 0x01, 0x84, 0xaf, 0x67, 0xae, 0xb1, 0x19, 0xa3, 0xe7, 0xda, 0xf8, 0x0f, 0x50, 0x3a, 0x08,
+	0xf1, 0x9d, 0x00, 0x6a, 0x70, 0x2a, 0x57, 0x8c, 0xa2, 0xa1, 0xdc, 0x44, 0x29, 0x2d, 0x94, 0xef,
+	0xbc, 0xce, 0x72, 0xb3, 0x6e, 0x1f, 0x31, 0x30, 0xbd, 0x8c, 0xf2, 0x98, 0xa6, 0xf9, 0x93, 0x40,
+	0x9c, 0xd1, 0xc0, 0xf8, 0xce, 0x87, 0x2c, 0xf4, 0x38, 0x4d, 0x72, 0xb1, 0x85, 0xb2, 0xaa, 0x63,
+	0x2f, 0xcc, 0x77, 0xa2, 0x63, 0xa5, 0x46, 0xb9, 0x49, 0x6c, 0xce, 0x5e, 0x1e, 0x75, 0x24, 0x51,
+	0x03, 0xe9, 0x3b, 0x15, 0x34, 0xfc, 0x6e, 0xb7, 0xfe, 0x1d, 0x7b, 0x16, 0x9f, 0x16, 0x80, 0x72,
+	0x8d, 0xcd, 0x94, 0xa7, 0xd7, 0x4a, 0x6f, 0xca, 0x6b, 0x10, 0x5d, 0xed, 0xfb, 0x39, 0x79, 0x00,
+	0x5f, 0x11, 0xb1, 0xca, 0xe2, 0xd1, 0x72, 0x9a, 0xa5, 0x91, 0xd6, 0xf0, 0xad, 0x4f, 0x03, 0x0a,
+	0xef, 0x52, 0xf7, 0x0e, 0xa4, 0xd7, 0xf6, 0x2c, 0x40, 0xb8, 0xda, 0x86, 0x4f, 0x09, 0x00, 0xf5,
+	0x9c, 0x19, 0xfc, 0x04, 0xa2, 0x4d, 0xb6, 0x0c, 0x55, 0xcf, 0x0f, 0x8f, 0x36, 0x08, 0xe9, 0xeb,
+	0x28, 0xa6, 0x20, 0xf0, 0xc4, 0xdf, 0x2f, 0x94, 0x3c, 0x8d, 0xd2, 0x05, 0xad, 0x97, 0xb1, 0x4d,
+	0xdf, 0xc8, 0x21, 0x2a, 0x6c, 0x7d, 0x54, 0x43, 0xd4, 0x57, 0x41, 0x98, 0xe8, 0xf1, 0xdf, 0xf2,
+	0x90, 0xf8, 0x6d, 0x04, 0x40, 0xe1, 0xe6, 0x65, 0x14, 0xc9, 0x3d, 0xb9, 0x65, 0x0a, 0xe5, 0xc9,
+	0x47, 0x69, 0x7e, 0xe6, 0x59, 0x84, 0x1c, 0x1c, 0xa8, 0x11, 0x1b, 0xbb, 0x01, 0xa9, 0xe8, 0x4f,
+	0xaf, 0x38, 0x1e, 0x73, 0x64, 0x6f, 0x22, 0x30, 0x04, 0x58, 0xde, 0xb4, 0xb8, 0x91, 0xe9, 0x46,
+	0xda, 0xf6, 0x7f, 0xfc, 0x41, 0xec, 0xa1, 0x76, 0x0b, 0x5e, 0x05, 0x6f, 0xc9, 0x9d, 0x69, 0xc1,
+	0xab, 0x13, 0x2a, 0xba, 0x50, 0x6f, 0xd9, 0x74, 0x56, 0x14, 0x67, 0xcf, 0xc7, 0xaf, 0x5e, 0xfe,
+	0xb8, 0x64, 0xe5, 0x85, 0xd9, 0x54, 0xeb, 0x00, 0x62, 0x7b, 0xab, 0x9b, 0x02, 0x2f, 0xfe, 0x96,
+	0x74, 0x59, 0xf1, 0x62, 0x7e, 0x2c, 0x4f, 0x84, 0xcc, 0x6c, 0x86, 0x63, 0x60, 0x73, 0x94, 0x72,
+	0x5a, 0xab, 0x19, 0x0e, 0xb6, 0xff, 0xf7, 0x4f, 0xa2, 0xe0, 0x1d, 0xd1, 0x8b, 0xb9, 0x28, 0x85,
+	0x5e, 0x91, 0x5b, 0x0b, 0xf5, 0x5b, 0xde, 0x31, 0x14, 0x7d, 0xc9, 0xc3, 0xfc, 0xb4, 0x30, 0x27,
+	0xdd, 0x03, 0x72, 0xc7, 0x7c, 0x02, 0x08, 0x85, 0x83, 0x88, 0xdf, 0x07, 0x45, 0x39, 0xf7, 0x10,
+	0x9a, 0x20, 0xd0, 0x1c, 0xd3, 0x08, 0x20, 0x96, 0xcd, 0x2a, 0xe4, 0xdd, 0x63, 0x16, 0xb1, 0x74,
+	0x61, 0x35, 0xab, 0xfd, 0x38, 0xd0, 0xac, 0xb2, 0xd5, 0x28, 0xc4, 0x70, 0x10, 0xfc, 0x4e, 0xee,
+	0x69, 0xe1, 0x39, 0xcd, 0xd2, 0x3a, 0x21, 0x2a, 0xe3, 0x2a, 0x13, 0x3d, 0x46, 0xb5, 0xa1, 0xd8,
+	0xf0, 0x91, 0xab, 0xf1, 0x8d, 0x02, 0xc6, 0x06, 0x52, 0x74, 0x19, 0x6f, 0x6b, 0x50, 0x3d, 0xb1,
+	0xd0, 0x8a, 0x9b, 0xa8, 0x4e, 0x0b, 0x05, 0x1a, 0x32, 0xee, 0xf7, 0xe9, 0x16, 0xfc, 0x0d, 0x68,
+	0xa0, 0x76, 0xe2, 0x1f, 0xf8, 0x6c, 0xd8, 0x4e, 0xfb, 0x1d, 0x97, 0x5e, 0x0b, 0x87, 0x83, 0xed,
+	0xff, 0xff, 0x13, 0xf9, 0xac, 0xf6, 0x32, 0xf1, 0xd7, 0x79, 0x4f, 0x48, 0xb0, 0xa8, 0x7f, 0x9c,
+	0x94, 0xb5, 0x65, 0xcf, 0x59, 0xbc, 0x47, 0xb3, 0xcc, 0xac, 0x91, 0x5c, 0x39, 0xba, 0x9f, 0x92,
+	0xb0, 0xaa, 0xae, 0x55, 0x68, 0x96, 0xed, 0xb3, 0xe9, 0x32, 0x31, 0x97, 0x34, 0x04, 0xe0, 0x12,
+	0x1d, 0x90, 0x6b, 0x12, 0xa7, 0xfe, 0x26, 0x40, 0x0c, 0xe7, 0xae, 0x4b, 0x03, 0xc4, 0xbe, 0x35,
+	0x56, 0xe9, 0x63, 0xa2, 0x11, 0xad, 0xfe, 0x98, 0x09, 0x1b, 0x10, 0x04, 0xa0, 0x5c, 0x3f, 0x34,
+	0x5c, 0x89, 0x84, 0xaa, 0x3d, 0x2d, 0xc2, 0x65, 0x00, 0xd0, 0x18, 0x0f, 0x5e, 0x36, 0x1f, 0xa8,
+	0xce, 0x8f, 0x7d, 0x1f, 0x08, 0xc4, 0xa0, 0x2b, 0x20, 0x65, 0xf2, 0x6f, 0xd6, 0x69, 0x26, 0xfb,
+	0x31, 0x57, 0xe5, 0x43, 0x79, 0x60, 0x2c, 0xe8, 0xd6, 0x5c, 0xba, 0x56, 0xda, 0xc9, 0xa6, 0x47,
+	0xa7, 0xfe, 0xd2, 0xd5, 0x37, 0x3a, 0x20, 0xee, 0xe2, 0xdb, 0x1e, 0x0b, 0x57, 0xab, 0xf7, 0x27,
+	0x55, 0xf0, 0x94, 0x5c, 0x5b, 0xd6, 0x3f, 0x9a, 0xe5, 0x5b, 0x5c, 0xad, 0x32, 0x1b, 0x65, 0xb6,
+	0x18, 0x98, 0xb0, 0xfe, 0xa7, 0x5c, 0xd1, 0xb7, 0xff, 0xe5, 0x13, 0xd1, 0xac, 0x14, 0xe5, 0x7a,
+	0x15, 0x9c, 0x90, 0xd5, 0x85, 0xf8, 0x65, 0xfe, 0xb9, 0xab, 0x2c, 0xf6, 0xbf, 0xb2, 0x86, 0x8e,
+	0xc3, 0xc0, 0x8d, 0xcc, 0x5a, 0x0d, 0x14, 0x89, 0xcb, 0xd0, 0xad, 0x82, 0xac, 0xa0, 0xf1, 0x25,
+	0x14, 0xd8, 0x30, 0xd0, 0x8b, 0x51, 0x98, 0x86, 0xfc, 0x98, 0xac, 0xa8, 0x27, 0x09, 0x13, 0xf7,
+	0xc8, 0xd4, 0x57, 0xad, 0x23, 0xbc, 0x06, 0x02, 0xdc, 0x07, 0x80, 0x94, 0xf5, 0xf2, 0xf7, 0xef,
+	0x7f, 0x14, 0xcb, 0x88, 0xde, 0xa4, 0x4f, 0xc9, 0x6a, 0xa5, 0x7e, 0xab, 0x9d, 0x1c, 0x38, 0x40,
+	0x34, 0x3e, 0xc0, 0x0b, 0xeb, 0x3d, 0xa5, 0x7c, 0x4f, 0xee, 0xea, 0x97, 0x4b, 0x36, 0x2f, 0xf4,
+	0x85, 0xe7, 0x83, 0xb2, 0x98, 0xd7, 0x7a, 0xbe, 0x41, 0xf5, 0x60, 0xd0, 0x5e, 0x5d, 0x19, 0xb9,
+	0xd7, 0x0e, 0x54, 0xb4, 0x17, 0x95, 0x78, 0x54, 0x54, 0xa9, 0xb8, 0x52, 0xf1, 0x18, 0xff, 0x28,
+	0x0c, 0xdb, 0xab, 0xed, 0x57, 0x72, 0x5b, 0x33, 0xd0, 0xb8, 0x69, 0x9a, 0x4f, 0x8a, 0xfa, 0xa3,
+	0x36, 0x51, 0x3d, 0x16, 0xaa, 0x4f, 0xc3, 0xf6, 0xbf, 0x7e, 0x22, 0xfe, 0xcf, 0x0c, 0x95, 0x70,
+	0x82, 0xe7, 0xe4, 0xaa, 0x74, 0x51, 0x75, 0x52, 0x4c, 0x39, 0x33, 0x23, 0xda, 0x96, 0x02, 0x57,
+	0x68, 0x44, 0xe2, 0xb9, 0x5c, 0x46, 0x00, 0x7a, 0x3f, 0x3d, 0x3d, 0x65, 0x25, 0xcb, 0x23, 0xab,
+	0xf8, 0x45, 0x21, 0x60, 0x19, 0x69, 0xe4, 0xad, 0x50, 0x9e, 0x16, 0x81, 0xf7, 0x54, 0x31, 0x09,
+	0x34, 0x3c, 0xf2, 0x68, 0x70, 0x90, 0xa0, 0x3d, 0xd2, 0xc0, 0x1c, 0xcc, 0x70, 0xb0, 0xfd, 0xdf,
+	0x7f, 0x10, 0x5e, 0x7d, 0x44, 0xf3, 0x64, 0x41, 0xa3, 0xb3, 0xe0, 0x2d, 0x59, 0xc9, 0xd4, 0xef,
+	0x9a, 0xb6, 0x7e, 0x3e, 0xaa, 0x9f, 0x1b, 0x91, 0x83, 0x21, 0xc0, 0x87, 0x35, 0x8f, 0x8c, 0x0f,
+	0xfb, 0x99, 0xdc, 0x84, 0xaf, 0x81, 0x4f, 0x1a, 0xfa, 0xa8, 0x51, 0xab, 0x61, 0xe4, 0xbb, 0x8f,
+	0xc8, 0x9d, 0xa8, 0x98, 0x6f, 0xe5, 0x6c, 0xba, 0xcc, 0x68, 0x3a, 0xdf, 0x62, 0x79, 0x92, 0xe6,
+	0xac, 0x79, 0x67, 0xf7, 0xd3, 0x17, 0x93, 0x51, 0xfd, 0xe3, 0xd9, 0x27, 0xd3, 0x3f, 0x8b, 0x27,
+	0x7f, 0xfb, 0x97, 0x00, 0x00, 0x00, 0xff, 0xff, 0x63, 0x13, 0x40, 0x9e, 0x16, 0x4b, 0x00, 0x00,
 }

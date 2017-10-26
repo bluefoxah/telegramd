@@ -23,53 +23,47 @@ import (
 	. "github.com/nebulaim/telegramd/mtproto"
 	"github.com/nebulaim/telegramd/server/frontend/client"
 	"net"
+	"github.com/nebulaim/telegramd/server/frontend/rpc"
 )
 
 type Server struct {
-	Server        *net2.Server
+	Server      *net2.Server
 }
 
 func NewServer(addr string) (s *Server) {
 	mtproto := NewMTProto()
 	lsn := listen("server", "0.0.0.0:12345")
-	server := net2.NewServer(lsn, mtproto, 1024, net2.HandlerFunc(mtprotoSessionLoop))
+	server := net2.NewServer(lsn, mtproto, 1024, net2.HandlerFunc(emptySessionLoop))
 
 	s = &Server{
-		Server: server,
+		Server: 	server,
 	}
 	return
 }
 
-func (s* Server) Serve() {
-	glog.Info("loop")
-	s.Server.Serve()
-}
+func (s* Server) Serve(rpcClient *rpc.RPCClient) {
+	glog.Info("Serve...")
 
-func listen(who, addr string) net.Listener {
-	var lsn net.Listener
-	var err error
-
-	lsn, err = net.Listen("tcp", addr)
-
-	if err != nil {
-		glog.Fatal("setup ", who, " listener at ", addr, " failed - ", err)
+	for {
+		session, err := s.Server.Accept2()
+		if err != nil {
+			glog.Error(err)
+		}
+		glog.Info("a new client ", session.ID())
+		c := client.NewClient(session, rpcClient)
+		go s.sessionLoop(c)
 	}
 
-	lsn, _ = Listen(func() (net.Listener, error) {
-		return lsn, nil
-	})
-
-	glog.Info("setup ", who, " listener at - ", lsn.Addr())
-	return lsn
+	// s.Server.Serve()
 }
 
-func mtprotoSessionLoop(session *net2.Session) {
-	client := client.NewClient(session)
-	glog.Info("NewClient, sessionId: ", session.ID(), ", addr: ", client.RemoteAddr)
+func (s* Server) sessionLoop(c *client.Client) {
+	// client := client.NewClient(c)
+	// .Info("NewClient, sessionId: ", session.ID(), ", addr: ", client.RemoteAddr)
 
 	for {
 		// 接收数据包
-		msg, err := client.Session.Receive()
+		msg, err := c.Session.Receive()
 		if err != nil {
 			glog.Error(err)
 			return
@@ -89,22 +83,22 @@ func mtprotoSessionLoop(session *net2.Session) {
 		// mtprotoMessage := &mtprotoMessage2
 		//m1, ok1 := msg.(EncryptedMessage2)
 		//m2, _ := msg.(UnencryptedMessage)
- 		if client.Codec.State == CODEC_CONNECTED {
+ 		if c.Codec.State == CODEC_CONNECTED {
 			switch msg.(type) {
 			case *EncryptedMessage2:
 				// 第一个包
 				// Encrypted
 				// 第一个包为加密包，则可推断出key已经创建
-				client.Codec.State = CODEC_AUTH_KEY_OK
+				c.Codec.State = CODEC_AUTH_KEY_OK
 			case *UnencryptedMessage:
 				m, _ := msg.(*UnencryptedMessage)
 				switch m.Object.(type) {
 				case *TLReqPq:
-					client.Codec.State = CODEC_req_pq
+					c.Codec.State = CODEC_req_pq
 				default:
 					// 未加密第一个包不是TL_req_pq，那么能推断出是RPC消息，key也已经创建
 					// Encrypted
-					client.Codec.State = CODEC_AUTH_KEY_OK
+					c.Codec.State = CODEC_AUTH_KEY_OK
 				}
 			default:
 				// 不可能发生
@@ -113,7 +107,7 @@ func mtprotoSessionLoop(session *net2.Session) {
 			}
 		}
 
-		switch client.Codec.State {
+		switch c.Codec.State {
 		case CODEC_req_pq,
 			 CODEC_resPQ,
 			 CODEC_req_DH_params,
@@ -125,7 +119,7 @@ func mtprotoSessionLoop(session *net2.Session) {
 			 CODEC_dh_gen_fail:
 
 			m, _ := msg.(*UnencryptedMessage)
-			err = client.OnHandshake(m)
+			err = c.OnHandshake(m)
 			if err != nil {
 				return
 			}
@@ -134,10 +128,10 @@ func mtprotoSessionLoop(session *net2.Session) {
 			switch msg.(type) {
 			case *EncryptedMessage2:
 				m, _ := msg.(*EncryptedMessage2)
-				err = client.OnEncryptedMessage(m)
+				err = c.OnEncryptedMessage(m)
 			case *UnencryptedMessage:
 				m, _ := msg.(*UnencryptedMessage)
-				err = client.OnUnencryptedMessage(m)
+				err = c.OnUnencryptedMessage(m)
 			}
 
 			if err!= nil {
@@ -145,8 +139,30 @@ func mtprotoSessionLoop(session *net2.Session) {
 			}
 
 		default:
-			glog.Errorf("Invalid state: ", client.Codec.State)
+			glog.Errorf("Invalid state: ", c.Codec.State)
 			return
 		}
 	}
+}
+
+func emptySessionLoop(session *net2.Session) {
+}
+
+// TODO(@benqi): 移植到API层
+func listen(who, addr string) net.Listener {
+	var lsn net.Listener
+	var err error
+
+	lsn, err = net.Listen("tcp", addr)
+
+	if err != nil {
+		glog.Fatal("setup ", who, " listener at ", addr, " failed - ", err)
+	}
+
+	lsn, _ = Listen(func() (net.Listener, error) {
+		return lsn, nil
+	})
+
+	glog.Info("setup ", who, " listener at - ", lsn.Addr())
+	return lsn
 }

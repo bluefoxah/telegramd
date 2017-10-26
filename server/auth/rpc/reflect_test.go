@@ -15,16 +15,23 @@
  * limitations under the License.
  */
 
-package main
+package rpc
 
 import (
-	server2 "github.com/nebulaim/telegramd/server/frontend/server"
-	"github.com/nebulaim/telegramd/server/frontend/rpc"
+	"testing"
+	"reflect"
+	// "github.com/nebulaim/telegramd/mtproto"
+	"fmt"
+	// "github.com/nebulaim/telegramd/mtproto"
 )
 
-func main() {
-	// flag.Parse()
-	server := server2.NewServer("0.0.0.0:12345")
-	client, _ := rpc.NewRPCClient("127.0.0.1:10001")
-	server.Serve(client)
+func TestReflectTLObject(t *testing.T)  {
+	authSendCode := &TLAuthSendCode{}
+
+	rt := reflect.TypeOf(authSendCode)
+	if rt.Kind() == reflect.Ptr {
+		rt = rt.Elem()
+	}
+
+	fmt.Println(rt.Name())
 }

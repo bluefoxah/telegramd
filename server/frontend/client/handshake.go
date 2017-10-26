@@ -35,6 +35,7 @@ const (
 
 var rsa = crypto.NewRSACryptor()
 
+// TODO(@benqi): 单独的handshake处理器
 func (c *Client) onHandshakeMsgsAck(request *TLMsgsAck) {
 	glog.Info("processHandshakeMsgsAck - request: %s", request.String())
 }

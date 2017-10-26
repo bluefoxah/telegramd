@@ -24,6 +24,7 @@ import (
 	"github.com/golang/glog"
 	"math/big"
 	"errors"
+	"github.com/nebulaim/telegramd/server/frontend/rpc"
 )
 //CODEC_UNKNOWN = iota
 //CODEC_req_pq
@@ -40,26 +41,25 @@ import (
 
 type Client struct {
 	Session *net2.Session
+	RPCClient *rpc.RPCClient
 	Codec   *MTProtoCodec
+
 	RemoteAddr net.Addr
 	LocalAddr  net.Addr
 
+	// TODO(@benqi): 移到handshake处理器里
 	Nonce []byte			// 每连接缓存客户端生成的Nonce
 	ServerNonce []byte		// 每连接缓存服务生成的ServerNonce
 	NewNonce []byte
 	A *big.Int
 	P *big.Int
-
-	// AuthKeyID uint64
-	// AuthKey   []byte
-	// MessageSessionID int64
 }
 
-func NewClient(session *net2.Session) (c *Client) {
+func NewClient(session *net2.Session, rpcClient *rpc.RPCClient) (c *Client) {
 	c = &Client{
 		Session: 	session,
+		RPCClient:	rpcClient,
 		Codec:		session.Codec().(*MTProtoCodec),
-		// session.Codec().()
 	}
 
 	c.RemoteAddr = c.Codec.RemoteAddr()
@@ -70,30 +70,30 @@ func NewClient(session *net2.Session) (c *Client) {
 
 // handshake
 func (c *Client) OnHandshake(request *UnencryptedMessage) error {
-	var rspObject TLObject
+	var reply TLObject
 	switch request.Object.(type) {
 	case *TLMsgsAck:
 		msg_acks, _ := request.Object.(*TLMsgsAck)
 		c.onHandshakeMsgsAck(msg_acks)
 		return nil
 	case *TLReqPq:
-		rspObject = c.onReqPq(request)
+		reply = c.onReqPq(request)
 	case *TLReq_DHParams:
-		rspObject = c.onReq_DHParams(request)
+		reply = c.onReq_DHParams(request)
 	case *TLSetClient_DHParams:
-		rspObject = c.onSetClient_DHParams(request)
+		reply = c.onSetClient_DHParams(request)
 	default:
 		glog.Errorf("Invalid request!!!!")
-		rspObject = nil
+		reply = nil
 	}
 
-	if rspObject == nil {
+	if reply == nil {
 		return errors.New("handshake: process error!")
 	}
 
 	m := &UnencryptedMessage{
 		NeedAck : false,
-		Object:		rspObject,
+		Object:	  reply,
 	}
 
 	return c.Session.Send(m)
@@ -113,21 +113,22 @@ func (c *Client) OnUnencryptedMessage(request *UnencryptedMessage) error {
 }
 
 func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
-	var rspObject TLObject
+	var reply TLObject
+	var err error
 
 	switch request.Object.(type) {
 	case *TLPing:
-		rspObject = c.onPing(request)
+		reply = c.onPing(request)
 	case *TLPingDelayDisconnect:
-		rspObject = c.onPingDelayDisconnect(request)
+		reply = c.onPingDelayDisconnect(request)
 	case *TLDestroySession:
-		rspObject = c.onDestroySession(request)
+		reply = c.onDestroySession(request)
 	case *TLGetFutureSalts:
-		rspObject = c.onGetFutureSalts(request)
+		reply = c.onGetFutureSalts(request)
 	case *TLRpcDropAnswer:
-		rspObject = c.onRpcDropAnswer(request)
+		reply = c.onRpcDropAnswer(request)
 	case *TLContestSaveDeveloperInfo:
-		rspObject = c.onContestSaveDeveloperInfo(request)
+		reply = c.onContestSaveDeveloperInfo(request)
 	case *TLInvokeWithLayer:
 		return c.onInvokeWithLayer(request)
 	case *TLInvokeAfterMsg:
@@ -137,18 +138,22 @@ func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
 	case *TLGzipPacked:
 		return c.onGzipPacked(request)
 	default:
-		glog.Error("processEncryptedMessage - Not impl processor")
-		rspObject = nil
+		// glog.Error("processEncryptedMessage - Not impl processor")
+		// rspObject = nil
+		reply, err = c.RPCClient.Invoke(request.Object)
+		if err != nil {
+			return err
+		}
 	}
 
-	if rspObject == nil {
+	if reply == nil {
 		return errors.New("processEncryptedMessage - process error!")
 	}
 
 	m := &EncryptedMessage2{
 		NeedAck : false,
 		SeqNo:	  request.SeqNo,
-		Object:   rspObject,
+		Object:   reply,
 	}
 
 	return c.Session.Send(m)

@@ -69,7 +69,6 @@ service RPCAccount {
   rpc account_updateProfile(TL_account_updateProfile) returns (User) {}
   rpc account_updateUsername(TL_account_updateUsername) returns (User) {}
   rpc account_changePhone(TL_account_changePhone) returns (User) {}
-  rpc contacts_importCard(TL_contacts_importCard) returns (User) {}
   // rpc account_getWallPapers(TL_account_getWallPapers) returns (Vector<WallPaper>) {}
   rpc account_getPrivacy(TL_account_getPrivacy) returns (account_PrivacyRules) {}
   rpc account_setPrivacy(TL_account_setPrivacy) returns (account_PrivacyRules) {}
@@ -95,6 +94,7 @@ service RPCContacts {
   rpc contacts_search(TL_contacts_search) returns (contacts_Found) {}
   rpc contacts_resolveUsername(TL_contacts_resolveUsername) returns (contacts_ResolvedPeer) {}
   rpc contacts_getTopPeers(TL_contacts_getTopPeers) returns (contacts_TopPeers) {}
+  rpc contacts_importCard(TL_contacts_importCard) returns (User) {}
 }
 
 service RPCMessages {

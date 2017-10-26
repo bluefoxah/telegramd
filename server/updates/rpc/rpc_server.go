@@ -15,16 +15,24 @@
  * limitations under the License.
  */
 
-package main
+package rpc
 
 import (
-	server2 "github.com/nebulaim/telegramd/server/frontend/server"
-	"github.com/nebulaim/telegramd/server/frontend/rpc"
+	"flag"
+	"github.com/golang/glog"
+	"net"
+	"google.golang.org/grpc"
+	"github.com/nebulaim/telegramd/mtproto"
 )
 
-func main() {
-	// flag.Parse()
-	server := server2.NewServer("0.0.0.0:12345")
-	client, _ := rpc.NewRPCClient("127.0.0.1:10001")
-	server.Serve(client)
+func DoMainServer() {
+	flag.Parse()
+	lis, err := net.Listen("tcp", "localhost:10001")
+	if err != nil {
+		glog.Fatalf("failed to listen: %v", err)
+	}
+	var opts []grpc.ServerOption
+	grpcServer := grpc.NewServer(opts...)
+	mtproto.RegisterRPCUpdatesServer(grpcServer, &UpdatesServiceImpl{})
+	grpcServer.Serve(lis)
 }

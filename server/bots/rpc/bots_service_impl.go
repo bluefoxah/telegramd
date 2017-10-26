@@ -15,16 +15,23 @@
  * limitations under the License.
  */
 
-package main
+package rpc
 
 import (
-	server2 "github.com/nebulaim/telegramd/server/frontend/server"
-	"github.com/nebulaim/telegramd/server/frontend/rpc"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
-func main() {
-	// flag.Parse()
-	server := server2.NewServer("0.0.0.0:12345")
-	client, _ := rpc.NewRPCClient("127.0.0.1:10001")
-	server.Serve(client)
+type BotsServiceImpl struct {
+}
+
+func (s *BotsServiceImpl) BotsAnswerWebhookJSONQuery(ctx context.Context, request *mtproto.TLBotsAnswerWebhookJSONQuery) (*mtproto.Bool, error) {
+	glog.Info("Process: %v", request)
+	return nil, nil
+}
+
+func (s *BotsServiceImpl) BotsSendCustomRequest(ctx context.Context, request *mtproto.TLBotsSendCustomRequest) (*mtproto.DataJSON, error) {
+	glog.Info("Process: %v", request)
+	return nil, nil
 }

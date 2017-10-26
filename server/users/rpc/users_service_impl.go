@@ -15,13 +15,23 @@
  * limitations under the License.
  */
 
-package main
+package rpc
 
 import (
-	server2 "github.com/nebulaim/telegramd/server/frontend/server"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
-func main() {
-	server := server2.NewServer("0.0.0.0:12345")
-	server.Serve()
+type UsersServiceImpl struct {
+}
+
+// func (s *UsersServiceImpl)UsersGetUsers(ctx context.Context,  request *mtproto.TLUsersGetUsers) (*mtproto.Vector<User>, error) {
+//   glog.Info("Process: %v", request)
+//   return nil, nil
+// }
+
+func (s *UsersServiceImpl) UsersGetFullUser(ctx context.Context, request *mtproto.TLUsersGetFullUser) (*mtproto.UserFull, error) {
+	glog.Info("Process: %v", request)
+	return nil, nil
 }

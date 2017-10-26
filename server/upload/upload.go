@@ -17,14 +17,8 @@
 
 package main
 
-import (
-	server2 "github.com/nebulaim/telegramd/server/frontend/server"
-	"github.com/nebulaim/telegramd/server/frontend/rpc"
-)
+import "github.com/nebulaim/telegramd/server/upload/rpc"
 
-func main() {
-	// flag.Parse()
-	server := server2.NewServer("0.0.0.0:12345")
-	client, _ := rpc.NewRPCClient("127.0.0.1:10001")
-	server.Serve(client)
+func main()  {
+	rpc.DoMainServer()
 }

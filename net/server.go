@@ -17,7 +17,9 @@
 
 package net
 
-import "net"
+import (
+	"net"
+)
 
 type Server struct {
 	sessionManager      *SessionManager
@@ -69,6 +71,23 @@ func (server *Server) Serve() error {
 			session := server.sessionManager.NewSession(codec, server.sendChanSize)
 			server.handler.HandleSession(session)
 		}()
+	}
+}
+
+func (server *Server) Accept2() (*Session, error) {
+	for {
+		conn, err := Accept(server.listener)
+		if err != nil {
+			return nil, err
+		}
+
+		codec, err := server.protocol.NewCodec(conn)
+		if err != nil {
+			conn.Close()
+			return nil, err
+		}
+		session := server.sessionManager.NewSession(codec, server.sendChanSize)
+		return session, nil
 	}
 }
 
