@@ -300,10 +300,11 @@ func (c *Client) onSetClient_DHParams(request *UnencryptedMessage) (TLObject) {
 	dhGenOk.ServerNonce = c.ServerNonce
 	dhGenOk.NewNonceHash1 = authKeyAuxHash[len(authKeyAuxHash)-16:len(authKeyAuxHash)]
 
-	c.Codec.AuthKeyId = binary.LittleEndian.Uint64(authKeyAuxHash[len(c.NewNonce)+1+12:len(c.NewNonce)+1+12+8])
+	c.Codec.AuthKeyId = int64(binary.LittleEndian.Uint64(authKeyAuxHash[len(c.NewNonce)+1+12:len(c.NewNonce)+1+12+8]))
 	c.Codec.AuthKey = authKey
 
-	StoreAuthKey(c.Codec.AuthKeyId, c.Codec.AuthKey)
+	// TODO(@benqi): error 处理
+	c.Codec.PutAuthKey(c.Codec.AuthKeyId, c.Codec.AuthKey)
 
 	c.Session.State = CODEC_dh_gen_ok
 

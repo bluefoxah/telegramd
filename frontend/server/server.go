@@ -24,19 +24,22 @@ import (
 	"net"
 	"github.com/nebulaim/telegramd/frontend/rpc"
 	"github.com/nebulaim/telegramd/frontend/client"
+	"github.com/nebulaim/telegramd/frontend/auth_key"
 )
 
 type Server struct {
+	cacheKeys	*auth_key.AuthKeyCacheManager
 	Server      *net2.Server
 }
 
-func NewServer(addr string) (s *Server) {
+func NewServer(addr, dsn string) (s *Server) {
 	mtproto := NewMTProto()
 	lsn := listen("server", "0.0.0.0:12345")
 	server := net2.NewServer(lsn, mtproto, 1024, net2.HandlerFunc(emptySessionLoop))
 
 	s = &Server{
 		Server: 	server,
+		cacheKeys:  auth_key.NewAuthKeyCacheManager(dsn),
 	}
 	return
 }
@@ -50,7 +53,11 @@ func (s* Server) Serve(rpcClient *rpc.RPCClient) {
 			glog.Error(err)
 		}
 		glog.Info("a new client ", session.ID())
+
 		c := client.NewClient(session, rpcClient)
+
+		// 使用很土的办法，注入cacheKeys
+		c.Codec.AuthKeyStorager = s.cacheKeys
 		go s.sessionLoop(c)
 	}
 

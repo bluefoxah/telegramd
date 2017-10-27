@@ -21,57 +21,63 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
+	"errors"
+	"time"
 )
 
 type HelpServiceImpl struct {
 }
 
 func (s *HelpServiceImpl) HelpSaveAppLog(ctx context.Context, request *mtproto.TLHelpSaveAppLog) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *HelpServiceImpl) HelpSetBotUpdatesStatus(ctx context.Context, request *mtproto.TLHelpSetBotUpdatesStatus) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *HelpServiceImpl) HelpGetAppChangelog(ctx context.Context, request *mtproto.TLHelpGetAppChangelog) (*mtproto.Updates, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *HelpServiceImpl) HelpGetConfig(ctx context.Context, request *mtproto.TLHelpGetConfig) (*mtproto.Config, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+
+	config := &mtproto.TLConfig{}
+	config.PhonecallsEnabled = true
+	config.Date = int32(time.Now().Unix())
+	return nil, errors.New("Not impl")
 }
 
 func (s *HelpServiceImpl) HelpGetNearestDc(ctx context.Context, request *mtproto.TLHelpGetNearestDc) (*mtproto.NearestDc, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *HelpServiceImpl) HelpGetAppUpdate(ctx context.Context, request *mtproto.TLHelpGetAppUpdate) (*mtproto.Help_AppUpdate, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *HelpServiceImpl) HelpGetInviteText(ctx context.Context, request *mtproto.TLHelpGetInviteText) (*mtproto.Help_InviteText, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *HelpServiceImpl) HelpGetSupport(ctx context.Context, request *mtproto.TLHelpGetSupport) (*mtproto.Help_Support, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *HelpServiceImpl) HelpGetTermsOfService(ctx context.Context, request *mtproto.TLHelpGetTermsOfService) (*mtproto.Help_TermsOfService, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *HelpServiceImpl) HelpGetCdnConfig(ctx context.Context, request *mtproto.TLHelpGetCdnConfig) (*mtproto.CdnConfig, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }

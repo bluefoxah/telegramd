@@ -22,6 +22,9 @@ import (
 	"fmt"
 	"encoding/hex"
 	. "github.com/nebulaim/telegramd/mtproto"
+	"github.com/nebulaim/telegramd/frontend/auth_key"
+	"github.com/nebulaim/telegramd/frontend/model"
+	"time"
 )
 
 func (c *Client) onMsgsAck(msgId int64, seqNo int32, request TLObject) {
@@ -116,6 +119,24 @@ func (c *Client) onInvokeWithLayer(msgId int64, seqNo int32, request TLObject) e
 		glog.Error("Decode initConnection error: ", err)
 		return err
 	}
+
+	// TODO(@benqi): 客户端保存的initConnection信息推到后台服务存储
+	// 先用最老土的办法实现
+	connectionsModel := &model.AuthConnections{
+		AuthId: c.Codec.AuthKeyId,
+		ApiId:  initConnection.ApiId,
+		DeviceModel: initConnection.DeviceModel,
+		SystemVersion: initConnection.SystemVersion,
+		AppVersion: initConnection.AppVersion,
+		SystemLangCode: initConnection.SystemLangCode,
+		LangPack: initConnection.LangPack,
+		LangCode: initConnection.LangCode,
+		CreatedAt: time.Now().Format("2006-01-02 15:04:05"),
+	}
+
+	// 先这样吧
+	cacheKey, _ := c.Codec.AuthKeyStorager.(*auth_key.AuthKeyCacheManager)
+	cacheKey.ZOrm.InsertOrUpdate(connectionsModel, "auth_id")
 
 	dbuf = NewDecodeBuf(initConnection.Query)
 	query := dbuf.Object()

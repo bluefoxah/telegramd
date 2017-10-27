@@ -21,19 +21,20 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
+	"errors"
 )
 
 type LangpackServiceImpl struct {
 }
 
 func (s *LangpackServiceImpl) LangpackGetLangPack(ctx context.Context, request *mtproto.TLLangpackGetLangPack) (*mtproto.LangPackDifference, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("LangpackGetLangPack - Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *LangpackServiceImpl) LangpackGetDifference(ctx context.Context, request *mtproto.TLLangpackGetDifference) (*mtproto.LangPackDifference, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("LangpackGetDifference - Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 // func (s *LangpackServiceImpl)LangpackGetStrings(ctx context.Context,  request *mtproto.TLLangpackGetStrings) (*mtproto.Vector<LangPackString>, error) {

@@ -31,7 +31,7 @@ func init() {
 func main() {
 	flag.Parse()
 	// flag.Parse()
-	server := server2.NewServer("0.0.0.0:12345")
+	server := server2.NewServer("0.0.0.0:12345", "root:@/nebulaim?charset=utf8")
 	client, _ := rpc.NewRPCClient("127.0.0.1:10001")
 	server.Serve(client)
 }

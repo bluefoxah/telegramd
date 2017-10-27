@@ -52,6 +52,11 @@ func NewMTProto() *MTProto {
 type MTProto struct {
 }
 
+type AuthKeyStorager interface {
+	GetAuthKey(int64) []byte
+	PutAuthKey(int64, []byte) error
+}
+
 func (m *MTProto) NewCodec(rw io.ReadWriter) (net2.Codec, error) {
 	codec := &MTProtoCodec{}
 	codec.rw, _ = rw.(io.ReadWriteCloser)
@@ -62,11 +67,15 @@ func (m *MTProto) NewCodec(rw io.ReadWriter) (net2.Codec, error) {
 type MTProtoCodec struct {
 	rw io.ReadWriteCloser
 
+	// 缓存AuthKey
+	AuthKeyStorager
+
 	State int
 
 	//
-	AuthKeyId uint64
+	AuthKeyId int64
 	AuthKey []byte
+
 	Salt int64
 	SessionId int64
 	SeqNo int32
@@ -121,7 +130,7 @@ func (m *MTProtoCodec) Receive() (interface{}, error) {
 		return nil, fmt.Errorf("Recv QuickAckMessage, ignore!!!! sessionId: ", m.SessionId, ", by client ", m.RemoteAddr())
 	}
 
-	authKeyId := binary.LittleEndian.Uint64(buf)
+	authKeyId := int64(binary.LittleEndian.Uint64(buf))
 	if authKeyId == 0 {
 		// glog.Info("Recv authKeyId is 0")
 		var message = &UnencryptedMessage{}
@@ -143,7 +152,7 @@ func (m *MTProtoCodec) Receive() (interface{}, error) {
 			return nil, fmt.Errorf("Invalid state, is CODEC_AUTH_KEY_OK or CODEC_resPQ, but is %d", m.State)
 		}
 		if m.AuthKeyId == 0 {
-			key := FindAuthKey(uint64(authKeyId))
+			key := m.GetAuthKey(authKeyId)
 			if key == nil {
 				return nil, fmt.Errorf("Can't find authKey by authKeyId %d", authKeyId)
 			}

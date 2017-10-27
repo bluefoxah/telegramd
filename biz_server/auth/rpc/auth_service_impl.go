@@ -21,92 +21,93 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
+	"errors"
 )
 
 type AuthServiceImpl struct {
 }
 
 func (s *AuthServiceImpl) AuthLogOut(ctx context.Context, request *mtproto.TLAuthLogOut) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthResetAuthorizations(ctx context.Context, request *mtproto.TLAuthResetAuthorizations) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthSendInvites(ctx context.Context, request *mtproto.TLAuthSendInvites) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthBindTempAuthKey(ctx context.Context, request *mtproto.TLAuthBindTempAuthKey) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthCancelCode(ctx context.Context, request *mtproto.TLAuthCancelCode) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthDropTempAuthKeys(ctx context.Context, request *mtproto.TLAuthDropTempAuthKeys) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthCheckPhone(ctx context.Context, request *mtproto.TLAuthCheckPhone) (*mtproto.Auth_CheckedPhone, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthSendCode(ctx context.Context, request *mtproto.TLAuthSendCode) (*mtproto.Auth_SentCode, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthResendCode(ctx context.Context, request *mtproto.TLAuthResendCode) (*mtproto.Auth_SentCode, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthSignUp(ctx context.Context, request *mtproto.TLAuthSignUp) (*mtproto.Auth_Authorization, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAuthSignIn) (*mtproto.Auth_Authorization, error) {
-	glog.Info("Process: %v", request)
+	glog.Infof("Process: %v", request)
 	return nil, nil
 }
 
 func (s *AuthServiceImpl) AuthImportAuthorization(ctx context.Context, request *mtproto.TLAuthImportAuthorization) (*mtproto.Auth_Authorization, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthImportBotAuthorization(ctx context.Context, request *mtproto.TLAuthImportBotAuthorization) (*mtproto.Auth_Authorization, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthCheckPassword(ctx context.Context, request *mtproto.TLAuthCheckPassword) (*mtproto.Auth_Authorization, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthRecoverPassword(ctx context.Context, request *mtproto.TLAuthRecoverPassword) (*mtproto.Auth_Authorization, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthExportAuthorization(ctx context.Context, request *mtproto.TLAuthExportAuthorization) (*mtproto.Auth_ExportedAuthorization, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthRequestPasswordRecovery(ctx context.Context, request *mtproto.TLAuthRequestPasswordRecovery) (*mtproto.Auth_PasswordRecovery, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
