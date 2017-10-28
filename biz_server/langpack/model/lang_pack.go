@@ -17,22 +17,12 @@
 
 package model
 
-import (
-	// "fmt"
-	// "github.com/nebulaim/telegramd/base/orm"
-	// _ "github.com/go-sql-driver/mysql" // import your used driver
-	"fmt"
-	"github.com/BurntSushi/toml"
-	"testing"
-)
+import "github.com/nebulaim/telegramd/mtproto"
 
-func TestGetAuthKey(t *testing.T) {
-	var config Config
-
-	if _, err := toml.DecodeFile("./config_test.toml", &config); err != nil {
-		fmt.Errorf("%s\n", err)
-		return
-	}
-
-	fmt.Printf("%v\n", config)
+type LangPacks struct {
+	LangCode    string
+	Version     int32
+	Strings     []*mtproto.TLLangPackString
+	StringPluralizeds []*mtproto.TLLangPackStringPluralized
+	StringDeleteds []*mtproto.TLLangPackStringDeleted
 }

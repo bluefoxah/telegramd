@@ -22,6 +22,13 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
 	"errors"
+	"github.com/BurntSushi/toml"
+	"fmt"
+	"github.com/nebulaim/telegramd/biz_server/langpack/model"
+)
+
+const (
+	LANG_PACK_EN_FILE = "./lang_pack_en.toml"
 )
 
 type LangpackServiceImpl struct {
@@ -29,7 +36,30 @@ type LangpackServiceImpl struct {
 
 func (s *LangpackServiceImpl) LangpackGetLangPack(ctx context.Context, request *mtproto.TLLangpackGetLangPack) (*mtproto.LangPackDifference, error) {
 	glog.Infof("LangpackGetLangPack - Process: %v", request)
-	return nil, errors.New("Not impl")
+
+	var langs model.LangPacks
+
+	if _, err := toml.DecodeFile(LANG_PACK_EN_FILE, &langs); err != nil {
+		fmt.Errorf("%s\n", err)
+		return nil, err
+	}
+
+	diff := &mtproto.TLLangPackDifference{}
+	diff.LangCode = request.LangCode
+	diff.Version = langs.Version
+	diff.FromVersion = 0
+
+	for _, strings := range langs.Strings {
+		diff.Strings = append(diff.Strings, mtproto.MakeLangPackString(strings))
+	}
+
+	for _, stringPluralizeds := range langs.StringPluralizeds {
+		diff.Strings = append(diff.Strings, mtproto.MakeLangPackString(stringPluralizeds))
+	}
+
+	reply := mtproto.MakeLangPackDifference(diff)
+	glog.Infof("LangpackGetLangPack - reply: {%v}\n", reply)
+	return reply, nil
 }
 
 func (s *LangpackServiceImpl) LangpackGetDifference(ctx context.Context, request *mtproto.TLLangpackGetDifference) (*mtproto.LangPackDifference, error) {

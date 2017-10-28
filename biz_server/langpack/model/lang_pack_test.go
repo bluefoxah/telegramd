@@ -26,13 +26,13 @@ import (
 	"testing"
 )
 
-func TestGetAuthKey(t *testing.T) {
-	var config Config
+func TestGetLangPacks(t *testing.T) {
+	var langPacks LangPacks
 
-	if _, err := toml.DecodeFile("./config_test.toml", &config); err != nil {
-		fmt.Errorf("%s\n", err)
+	if _, err := toml.DecodeFile("./lang_pack_en.toml", &langPacks); err != nil {
+		fmt.Printf("%s\n", err)
 		return
 	}
 
-	fmt.Printf("%v\n", config)
+	fmt.Printf("%v\n", langPacks)
 }

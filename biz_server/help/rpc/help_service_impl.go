@@ -18,14 +18,14 @@
 package rpc
 
 import (
+	"errors"
+	"fmt"
+	"github.com/BurntSushi/toml"
 	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/biz_server/help/model"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
-	"errors"
 	"time"
-	"github.com/BurntSushi/toml"
-	"fmt"
-	"github.com/nebulaim/telegramd/biz_server/help/model"
 )
 
 const (
@@ -33,7 +33,7 @@ const (
 
 	// date = 1509066502,    2017/10/27 09:08:22
 	// expires = 1509070295, 2017/10/27 10:11:35
-	EXPIRES_TIMEOUT = 3600		// 超时时间设置为3600秒
+	EXPIRES_TIMEOUT = 3600 // 超时时间设置为3600秒
 )
 
 type HelpServiceImpl struct {
@@ -55,7 +55,7 @@ func (s *HelpServiceImpl) HelpGetAppChangelog(ctx context.Context, request *mtpr
 }
 
 func (s *HelpServiceImpl) HelpGetConfig(ctx context.Context, request *mtproto.TLHelpGetConfig) (*mtproto.Config, error) {
-	glog.Infof("Process: %v", request)
+	glog.Infof("HelpGetConfig - Process: {%v}", request)
 
 	var config model.Config
 
@@ -115,8 +115,8 @@ func (s *HelpServiceImpl) HelpGetConfig(ctx context.Context, request *mtproto.TL
 
 	for _, disabled := range config.DisabledFeatures {
 		disabledFeature := &mtproto.TLDisabledFeature{
-			Feature: 		disabled.Feature,
-			Description: 	disabled.Description,
+			Feature:     disabled.Feature,
+			Description: disabled.Description,
 		}
 		helpConfig.DisabledFeatures = append(helpConfig.DisabledFeatures, mtproto.MakeDisabledFeature(disabledFeature))
 	}
@@ -127,8 +127,16 @@ func (s *HelpServiceImpl) HelpGetConfig(ctx context.Context, request *mtproto.TL
 }
 
 func (s *HelpServiceImpl) HelpGetNearestDc(ctx context.Context, request *mtproto.TLHelpGetNearestDc) (*mtproto.NearestDc, error) {
-	glog.Infof("Process: %v", request)
-	return nil, errors.New("Not impl")
+	glog.Infof("HelpGetNearestDc - Process: {%v}", request)
+
+	dc := &mtproto.TLNearestDc{}
+	dc.Country = "US"
+	dc.ThisDc = 2
+	dc.NearestDc = 2
+
+	reply := mtproto.MakeNearestDc(dc)
+	glog.Infof("HelpGetNearestDc - reply: {%v}\n", reply)
+	return reply, nil
 }
 
 func (s *HelpServiceImpl) HelpGetAppUpdate(ctx context.Context, request *mtproto.TLHelpGetAppUpdate) (*mtproto.Help_AppUpdate, error) {
