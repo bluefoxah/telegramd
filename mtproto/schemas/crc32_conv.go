@@ -24,11 +24,14 @@ func main() {
 	var TLConstructor_CRC32_msg_container uint32 	= 0x73f1f8dc
 	var TLConstructor_CRC32_msg_copy uint32 		= 0xe06046b2
 	var TLConstructor_CRC32_gzip_packed uint32		= 0x3072cfa1
+	var TLConstructor_CRC32_rpc_result uint32		= 0xf35c6d01
+
 
 	fmt.Printf("TLConstructor_CRC32_message2: %d\n", int32(TLConstructor_CRC32_message2))
 	fmt.Printf("TLConstructor_CRC32_msg_container: %d\n", int32(TLConstructor_CRC32_msg_container))
 	fmt.Printf("TLConstructor_CRC32_msg_copy: %d\n", int32(TLConstructor_CRC32_msg_copy))
 	fmt.Printf("TLConstructor_CRC32_gzip_packed: %d\n", int32(TLConstructor_CRC32_gzip_packed))
+	fmt.Printf("TLConstructor_CRC32_rpc_result: %d\n", int32(TLConstructor_CRC32_rpc_result))
 
 
 	var c int32 = 1197350236
@@ -37,4 +40,5 @@ func main() {
 	fmt.Printf("c: %x\n", uint32(TLConstructor_CRC32_msg_container))
 	fmt.Printf("c: %x\n", uint32(TLConstructor_CRC32_msg_copy))
 	fmt.Printf("c: %x\n", uint32(TLConstructor_CRC32_gzip_packed))
+	fmt.Printf("c: %x\n", uint32(TLConstructor_CRC32_rpc_result))
 }

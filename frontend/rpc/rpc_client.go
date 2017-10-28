@@ -49,16 +49,22 @@ func (c* RPCClient) Invoke(object mtproto.TLObject) (mtproto.TLObject, error) {
 		return nil, err
 	}
 
+	glog.Infof("Invoke - object: {%v}\n", t)
 	r := t.NewReplyFunc()
+	glog.Infof("Invoke - NewReplyFunc: {%v}\n", r)
+
 	err := c.conn.Invoke(context.Background(), t.Method, object, r)
 	if err != nil {
-		fmt.Errorf("%v.Invoke(_) = _, %v: \n", c.conn, err)
+		glog.Errorf("%v.Invoke(_) = _, %v: \n", c.conn, err)
+		return nil, err
 	}
 
+	glog.Infof("Invoke - Invoke reply: {%v}\n", r)
 	reply, ok := r.(mtproto.TLObject)
 	if !ok {
-		return reply, nil
+		err = fmt.Errorf("Invalid reply type, maybe server side bug, %v\n", reply)
+		glog.Error(err)
+		return nil, err
 	}
-	err = fmt.Errorf("Invalid reply type, maybe server side bug, %v\n", reply)
-	return nil, err
+	return reply, nil
 }

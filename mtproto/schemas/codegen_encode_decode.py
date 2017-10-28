@@ -105,6 +105,7 @@ registers.append('  int32(TLConstructor_CRC32_message2) : func() (TLObject) { re
 registers.append('  int32(TLConstructor_CRC32_msg_container) : func() (TLObject) { return new(TLMsgContainer) },\n');
 registers.append('  int32(TLConstructor_CRC32_msg_copy) : func() (TLObject) { return new(TLMsgCopy) },\n');
 registers.append('  int32(TLConstructor_CRC32_gzip_packed) : func() (TLObject) { return new(TLGzipPacked) },\n');
+registers.append('  int32(TLConstructor_CRC32_rpc_result) : func() (TLObject) { return new(TLRpcResult) },\n');
 
 with open(input_file) as f:
   for line in f:

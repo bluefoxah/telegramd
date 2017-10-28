@@ -58,6 +58,7 @@ enum TLConstructor {
   CRC32_msg_detailed_info = 661470918;
   CRC32_msg_new_detailed_info = -2137147681;
   CRC32_msg_resend_req = 2105940488;
+  CRC32_rpc_result = -212046591;
   CRC32_rpc_error = 558156313;
   CRC32_rpc_answer_unknown = 1579864942;
   CRC32_rpc_answer_dropped_running = -847714938;

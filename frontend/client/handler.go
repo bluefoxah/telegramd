@@ -25,10 +25,43 @@ import (
 	"github.com/nebulaim/telegramd/frontend/auth_key"
 	"github.com/nebulaim/telegramd/frontend/model"
 	"time"
+	"github.com/nebulaim/telegramd/frontend/id"
 )
 
 func (c *Client) onMsgsAck(msgId int64, seqNo int32, request TLObject) {
 	glog.Info("processMsgsAck - request: %s", request.String())
+}
+
+func (c *Client) onNewSessionCreated(sessionId, msgId int64, seqNo int32) (*TLNewSessionCreated) {
+	// glog.Info("processMsgsAck - request: %s", request.String())
+
+	// TODO(@benqi): 客户端保存的initConnection信息推到后台服务存储
+	// 先用最老土的办法实现
+	authSessions := &model.AuthSessions{
+			AuthId: 	c.Codec.AuthKeyId,
+			SessionId:	sessionId,
+			UniqueId:   id.NextId(),
+		}
+
+	authSalts := &model.AuthSalts{AuthId: 	c.Codec.AuthKeyId,}
+	if c.Codec.Salt == 0 {
+		authSalts.Salt = id.NextId()
+	}
+
+	// 先这样吧
+	cacheKey, _ := c.Codec.AuthKeyStorager.(*auth_key.AuthKeyCacheManager)
+
+	// TODO(@benqi): 检查数据库操作是否成功
+	cacheKey.ZOrm.ReadOrCreate(authSessions, "AuthId", "SessionId")
+	cacheKey.ZOrm.ReadOrCreate(authSalts, "AuthId", "Salt")
+
+	// c.Codec.SessionId =
+	notify := &TLNewSessionCreated{
+		FirstMsgId: msgId,
+		UniqueId:   authSessions.UniqueId,
+		ServerSalt: authSalts.Salt,
+	}
+	return notify
 }
 
 func (c *Client) onPing(msgId int64, seqNo int32, request TLObject) (TLObject) {
@@ -36,6 +69,7 @@ func (c *Client) onPing(msgId int64, seqNo int32, request TLObject) (TLObject) {
 	glog.Info("processPing - request data: ", ping.String())
 
 	pong := &TLPong{
+		MsgId: msgId,
 		PingId: ping.PingId,
 	}
 
@@ -47,6 +81,7 @@ func (c *Client) onPingDelayDisconnect(msgId int64, seqNo int32, request TLObjec
 	glog.Info("processPingDelayDisconnect - request data: ", pingDelayDissconnect.String())
 
 	pong := &TLPong{
+		MsgId: msgId,
 		PingId: pingDelayDissconnect.PingId,
 	}
 

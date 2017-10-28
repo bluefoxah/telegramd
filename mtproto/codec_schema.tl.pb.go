@@ -58,6 +58,7 @@ var registers2 = map[int32]newTLObjectFunc{
 	int32(TLConstructor_CRC32_msg_detailed_info):                                func() TLObject { return new(TLMsgDetailedInfo) },
 	int32(TLConstructor_CRC32_msg_new_detailed_info):                            func() TLObject { return new(TLMsgNewDetailedInfo) },
 	int32(TLConstructor_CRC32_msg_resend_req):                                   func() TLObject { return new(TLMsgResendReq) },
+	int32(TLConstructor_CRC32_rpc_result):                                       func() TLObject { return new(TLRpcResult) },
 	int32(TLConstructor_CRC32_rpc_error):                                        func() TLObject { return new(TLRpcError) },
 	int32(TLConstructor_CRC32_rpc_answer_unknown):                               func() TLObject { return new(TLRpcAnswerUnknown) },
 	int32(TLConstructor_CRC32_rpc_answer_dropped_running):                       func() TLObject { return new(TLRpcAnswerDroppedRunning) },

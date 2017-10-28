@@ -615,6 +615,7 @@ enum TLConstructor {\n\
   CRC32_msg_container = 1945237724;\n\
   CRC32_msg_copy = 530561358;\n\
   CRC32_gzip_packed = 812830625;\n\
+  CRC32_rpc_result = -212046591;\n\
 ' + ''.join(registers) + '}\n\n\
 // Type forward declarations\n\
 ' + resClassTypesTexts + '\n\n\

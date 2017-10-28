@@ -171,7 +171,7 @@ func (m *MTProtoCodec) Receive() (interface{}, error) {
 		}
 
 		if m.State != CODEC_AUTH_KEY_OK {
-			m.SessionId = message.SessionId
+			// m.SessionId = message.SessionId
 			m.State = CODEC_AUTH_KEY_OK
 		}
 
@@ -205,7 +205,9 @@ func (m *MTProtoCodec) Send(msg interface{}) error {
 	case *EncryptedMessage2:
 		encrypedMessage, _ := msg.(*EncryptedMessage2)
 		encrypedMessage.SessionId = m.SessionId
-		encrypedMessage.salt = 0
+		encrypedMessage.salt = m.Salt
+		m.SeqNo = m.SeqNo + 1
+		encrypedMessage.SeqNo = m.SeqNo
 		b, _ := encrypedMessage.encode(int64(m.AuthKeyId), m.AuthKey)
 
 		sb := make([]byte, 4)

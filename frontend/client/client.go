@@ -53,6 +53,9 @@ type Client struct {
 	NewNonce []byte
 	A *big.Int
 	P *big.Int
+
+	// SessionId int64
+	// Salt      int64
 }
 
 func NewClient(session *net2.Session, rpcClient *rpc.RPCClient) (c *Client) {
@@ -83,12 +86,12 @@ func (c *Client) OnHandshake(request *UnencryptedMessage) error {
 	case *TLSetClient_DHParams:
 		reply = c.onSetClient_DHParams(request)
 	default:
-		glog.Errorf("Invalid request!!!!")
+		glog.Errorf("OnHandshake: Invalid request!!!!")
 		reply = nil
 	}
 
 	if reply == nil {
-		return errors.New("handshake: process error!")
+		return errors.New("OnHandshake: process error!")
 	}
 
 	m := &UnencryptedMessage{
@@ -107,24 +110,44 @@ func (c *Client) OnUnencryptedMessage(request *UnencryptedMessage) error {
 		msg_acks, _ := request.Object.(*TLMsgsAck)
 		c.onMsgsAck(request.MessageId, 0, msg_acks)
 	default:
-		glog.Info("processUnencryptedMessage - Recv authKey created message: ", *request)
+		glog.Info("OnUnencryptedMessage - Recv authKey created message: ", *request)
 	}
 	return nil
 }
 
 func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
+	// NewSessionCreated
+	if c.Codec.SessionId == 0 {
+		// 需要创建Session
+		newSessionCreated := c.onNewSessionCreated(request.SessionId, request.MessageId, request.SeqNo)
+		c.Codec.SessionId =  request.SessionId
+		c.Codec.Salt = newSessionCreated.ServerSalt
+
+		m := &EncryptedMessage2{
+			// NeedAck : false,
+			NeedAck : false,
+			Object:   newSessionCreated,
+		}
+
+		c.Session.Send(m)
+	}
 	return c.OnMessage(request.MessageId, request.SeqNo, request.Object)
 }
 
+// TODO(@benqi): 可以不关注seqNo
 func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 	var reply TLObject
-	var err error
+	// var err error
 
 	switch request.(type) {
 	case *TLPing:
 		reply = c.onPing(msgId, seqNo, request)
 	case *TLPingDelayDisconnect:
 		reply = c.onPingDelayDisconnect(msgId, seqNo, request)
+	case *TLMsgsAck:
+		// msg_acks, _ := request.Object.(*TLMsgsAck)
+		c.onMsgsAck(msgId, seqNo, request)
+		return nil
 	case *TLDestroySession:
 		reply = c.onDestroySession(msgId, seqNo, request)
 	case *TLGetFutureSalts:
@@ -144,16 +167,25 @@ func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 	default:
 		// glog.Error("processEncryptedMessage - Not impl processor")
 		// rspObject = nil
-		reply, err = c.RPCClient.Invoke(request)
+		rpcResult, err := c.RPCClient.Invoke(request)
 		if err != nil {
-			return err
+			return nil
+			// return err
+		}
+
+		glog.Infof("OnMessage - rpc_result: {%v}\n", rpcResult)
+		// 构造rpc_result
+		reply = &TLRpcResult{
+			ReqMsgId: msgId,
+			Result: rpcResult,
 		}
 	}
 
 	if reply == nil {
-		return errors.New("processEncryptedMessage - process error!")
+		return errors.New("OnMessage - process error!")
 	}
 
+	// TODO(@benqi): 由底层处理，通过多种策略（gzip, msg_container等）来打包并发送给客户端
 	m := &EncryptedMessage2{
 		NeedAck : false,
 		SeqNo:	  seqNo,

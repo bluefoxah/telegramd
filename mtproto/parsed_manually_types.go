@@ -155,3 +155,27 @@ func (m *TLGzipPacked) Decode(dbuf *DecodeBuf) error {
 	m.PackedData = dbuf.buf
 	return dbuf.err
 }
+
+//rpc_result#f35c6d01 req_msg_id:long result:Object = RpcResult; // parsed manually
+type TLRpcResult struct {
+	ReqMsgId int64
+	Result   TLObject
+}
+
+func (m *TLRpcResult) String() string {
+	return "{rpc_result#f35c6d01: req_msg_id:" + string(m.ReqMsgId) + "}"
+}
+
+func (m *TLRpcResult) Encode() []byte {
+	x := NewEncodeBuf(512)
+	x.Int(int32(TLConstructor_CRC32_rpc_result))
+	x.Long(m.ReqMsgId)
+	x.Bytes(m.Result.Encode())
+	return x.buf
+}
+
+func (m *TLRpcResult) Decode(dbuf *DecodeBuf) error {
+	m.ReqMsgId = dbuf.Long()
+	m.Result = dbuf.Object()
+	return dbuf.err
+}
