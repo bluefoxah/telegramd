@@ -140,6 +140,8 @@ func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 	// var err error
 
 	switch request.(type) {
+	case *TLDestroyAuthKey:
+		reply = c.onDestroyAuthKey(msgId, seqNo, request)
 	case *TLPing:
 		reply = c.onPing(msgId, seqNo, request)
 	case *TLPingDelayDisconnect:

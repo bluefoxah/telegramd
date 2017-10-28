@@ -28,8 +28,13 @@ type AuthServiceImpl struct {
 }
 
 func (s *AuthServiceImpl) AuthLogOut(ctx context.Context, request *mtproto.TLAuthLogOut) (*mtproto.Bool, error) {
-	glog.Infof("Process: %v", request)
-	return nil, errors.New("Not impl")
+	glog.Infof("AuthLogOut - Process: {%v}", request)
+
+	// TODO(@benqi): Logout逻辑
+	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
+
+	glog.Infof("AuthLogOut - reply: {%v}\n", reply)
+	return reply, nil
 }
 
 func (s *AuthServiceImpl) AuthResetAuthorizations(ctx context.Context, request *mtproto.TLAuthResetAuthorizations) (*mtproto.Bool, error) {
@@ -58,13 +63,29 @@ func (s *AuthServiceImpl) AuthDropTempAuthKeys(ctx context.Context, request *mtp
 }
 
 func (s *AuthServiceImpl) AuthCheckPhone(ctx context.Context, request *mtproto.TLAuthCheckPhone) (*mtproto.Auth_CheckedPhone, error) {
-	glog.Infof("Process: %v", request)
-	return nil, errors.New("Not impl")
+	glog.Infof("AuthCheckPhone - Process: {%v}", request)
+
+	// TODO(@benqi): 实现PhoneNumber检查逻辑
+	reply := mtproto.MakeAuth_CheckedPhone(&mtproto.TLAuthCheckedPhone{
+			PhoneRegistered: mtproto.MakeBool(&mtproto.TLBoolTrue{}),
+		})
+
+	glog.Infof("AuthCheckPhone - reply: {%v}\n", reply)
+	return reply, nil
 }
 
 func (s *AuthServiceImpl) AuthSendCode(ctx context.Context, request *mtproto.TLAuthSendCode) (*mtproto.Auth_SentCode, error) {
-	glog.Infof("Process: %v", request)
-	return nil, errors.New("Not impl")
+	glog.Infof("AuthSendCode - Process: {%v}", request)
+
+	authSentCode := &mtproto.TLAuthSentCode{}
+	authSentCode.Type = mtproto.MakeAuth_SentCodeType(&mtproto.TLAuthSentCodeTypeApp{
+		Length: 6,
+	})
+	authSentCode.PhoneCodeHash = "123456";
+
+	reply := mtproto.MakeAuth_SentCode(authSentCode)
+	glog.Infof("AuthSendCode - reply: {%v}\n", reply)
+	return reply, nil
 }
 
 func (s *AuthServiceImpl) AuthResendCode(ctx context.Context, request *mtproto.TLAuthResendCode) (*mtproto.Auth_SentCode, error) {
@@ -78,8 +99,23 @@ func (s *AuthServiceImpl) AuthSignUp(ctx context.Context, request *mtproto.TLAut
 }
 
 func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAuthSignIn) (*mtproto.Auth_Authorization, error) {
-	glog.Infof("Process: %v", request)
-	return nil, nil
+	glog.Infof("AuthSignIn - Process: {%v}", request)
+
+	// TODO(@benqi): 从数据库加载
+	authAuthorization := &mtproto.TLAuthAuthorization{}
+	user := &mtproto.TLUser{}
+	user.Self = true
+	user.Id = 1
+	user.AccessHash = 1
+	user.FirstName = "test1"
+	user.LastName = "test1"
+	user.Username = "test1"
+	user.Phone = "+86 111 1111 1111"
+	authAuthorization.User = mtproto.MakeUser(user)
+
+	reply := mtproto.MakeAuth_Authorization(authAuthorization)
+	glog.Infof("AuthSignIn - reply: {%v}\n", reply)
+	return reply, nil
 }
 
 func (s *AuthServiceImpl) AuthImportAuthorization(ctx context.Context, request *mtproto.TLAuthImportAuthorization) (*mtproto.Auth_Authorization, error) {

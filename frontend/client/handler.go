@@ -76,6 +76,14 @@ func (c *Client) onPing(msgId int64, seqNo int32, request TLObject) (TLObject) {
 	return pong
 }
 
+func (c *Client) onDestroyAuthKey(msgId int64, seqNo int32, request TLObject) (TLObject) {
+	destroyAuthKey, _ := request.(*TLDestroyAuthKey)
+	glog.Info("onDestroyAuthKey - request data: ", destroyAuthKey.String())
+
+	destroyAuthKeyRes := &TLDestroyAuthKeyOk{}
+	return destroyAuthKeyRes
+}
+
 func (c *Client) onPingDelayDisconnect(msgId int64, seqNo int32, request TLObject) (TLObject) {
 	pingDelayDissconnect, _ := request.(*TLPingDelayDisconnect)
 	glog.Info("processPingDelayDisconnect - request data: ", pingDelayDissconnect.String())
