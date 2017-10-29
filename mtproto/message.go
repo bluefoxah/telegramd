@@ -22,7 +22,6 @@ import (
 	"encoding/binary"
 	"bytes"
 	"github.com/golang/glog"
-	"github.com/golang/protobuf/proto"
 	"encoding/hex"
 	"github.com/nebulaim/telegramd/base/crypto"
 )
@@ -84,7 +83,7 @@ func (m *UnencryptedMessage) encode() ([]byte, error) {
 	x.Int(int32(len(b)))
 	x.Bytes(b)
 
-	glog.Info("Encode object: ", m.Object)
+	// glog.Info("Encode object: ", m.Object)
 	return x.buf, nil
 }
 
@@ -112,7 +111,7 @@ func (m *UnencryptedMessage) decode(b []byte) error {
 	}
 
 	// proto.Message()
-	glog.Info("Recved object: ", m.Object.(proto.Message).String())
+	// glog.Info("Recved object: ", m.Object.(proto.Message).String())
 	return dbuf.err
 }
 
@@ -156,7 +155,7 @@ func (m *EncryptedMessage2) encode(authKeyId int64, authKey []byte) ([]byte, err
 	x.Bytes(objData)
 	x.Bytes(crypto.GenerateNonce(additional_size))
 
-	glog.Info("Encode object: ", m.Object)
+	// glog.Info("Encode object: ", m.Object)
 
 	encryptedData, _ := m.encrypt(authKey, x.buf)
 	x2 := NewEncodeBuf(56+len(objData)+additional_size)
@@ -190,17 +189,17 @@ func (m *EncryptedMessage2) decode(authKey []byte, b []byte) error {
 
 	m.SeqNo = dbuf.Int()
 	messageLen := dbuf.Int()
-	// if int(messageLen) > dbuf.size-32 {
-	// 	return fmt.Errorf("Message len: %d (need less than %d)", messageLen, dbuf.size-32)
-	//}
+	if int(messageLen) > dbuf.size-32 {
+		// 	return fmt.Errorf("Message len: %d (need less than %d)", messageLen, dbuf.size-32)
+	}
 
-	glog.Infof("salt: %d, sessionId: %d, messageId: %d, seqNo: %d, messageLen: %d", m.salt, m.SessionId, m.MessageId, m.SeqNo, messageLen)
+	// glog.Infof("salt: %d, sessionId: %d, messageId: %d, seqNo: %d, messageLen: %d", m.salt, m.SessionId, m.MessageId, m.SeqNo, messageLen)
 	m.Object = dbuf.Object()
 	if m.Object == nil {
 		return fmt.Errorf("Decode object is nil")
 	}
 
-	glog.Info("Recved object: ", m.Object.String())
+	// glog.Info("Recved object: ", m.Object.String())
 
 	return nil
 }
@@ -223,7 +222,7 @@ func (m *EncryptedMessage2) descrypt(msgKey, authKey, data []byte) ([]byte, erro
 
 	//// 校验解密后的数据合法性
 	messageLen := binary.LittleEndian.Uint32(x[28:])
-	glog.Info("descrypt - messageLen = ", messageLen)
+	// glog.Info("descrypt - messageLen = ", messageLen)
 	if messageLen+32 > dataLen {
 		// 	return fmt.Errorf("Message len: %d (need less than %d)", messageLen, dbuf.size-32)
 		err = fmt.Errorf("descrypted data error: Wrong message length %d", messageLen)

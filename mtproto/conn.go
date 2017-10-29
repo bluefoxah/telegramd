@@ -23,7 +23,6 @@ import (
 	"github.com/nebulaim/telegramd/base/crypto"
 	"github.com/golang/glog"
 	"sync"
-	"encoding/hex"
 )
 
 // <<effective-go>>的接口检查章节中对这种用法做了解释：
@@ -97,7 +96,7 @@ func (c *MTProtoConn) SetWriteDeadline(t time.Time) error {
 }
 
 func (c *MTProtoConn) Close() error {
-	glog.Info("Close()")
+	// glog.Info("Close()")
 	c.closeOnce.Do(func() {
 		c.closed = true
 		if c.listener != nil {
@@ -112,7 +111,7 @@ func (c *MTProtoConn) Read(b []byte) (n int, err error) {
 	n, err = c.base.Read(b)
 	if err == nil {
 		c.decryptor.Encrypt(b[:])
-		glog.Info("MTProtoConn - Read from ", c.base.RemoteAddr(), " data: ", hex.EncodeToString(b))
+		// glog.Info("MTProtoConn - Read from ", c.base.RemoteAddr(), " data: ", hex.EncodeToString(b))
 		return
 	}
 
@@ -122,7 +121,7 @@ func (c *MTProtoConn) Read(b []byte) (n int, err error) {
 }
 
 func (c *MTProtoConn) Write(b []byte) (n int, err error) {
-	glog.Info("MTProtoConn - Write data, len = ", len(b), " data: ", hex.EncodeToString(b))
+	// glog.Info("MTProtoConn - Write data, len = ", len(b), " data: ", hex.EncodeToString(b))
 	c.encryptor.Encrypt(b[:])
 	// glog.Info("MTProtoConn - Write data, len = ", len(b), " data: ", hex.EncodeToString(b))
 	return c.base.Write(b)

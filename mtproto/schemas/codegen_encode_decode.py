@@ -666,8 +666,9 @@ for restype in typesList:
       elif (paramType == 'repeated string'):
         classTypesTexts += '  m.' +  to_proto_go_name(paramName) + ' = dbuf.VectorString()\n';
       elif (paramType in TypesList):
+        classTypesTexts += '  dbuf.Int()\n'
         classTypesTexts += '  m.' + to_proto_go_name(paramName) + ' = &' + to_proto_go_name(paramType) + '{}\n';
-        classTypesTexts += '  m.Decode(dbuf)\n';
+        classTypesTexts += '  (*m.' + to_proto_go_name(paramName) + ').Decode(dbuf)\n';
 
       elif (paramType.find('std::vector') >= 0):
         eptype = txt_wrap_by('<', '*', paramType);
@@ -682,19 +683,20 @@ for restype in typesList:
 
 
         classTypesTexts += '  for i := 0; i < int(l%d); i++ {\n' % (ii)
+        classTypesTexts += '    dbuf.Int()\n'
         classTypesTexts += '    m.%s[i] = &%s{}\n' % (to_proto_go_name(paramName), to_proto_go_name(eptype))
         if (eptype in TypesList):
-          classTypesTexts += '   (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
+          classTypesTexts += '    (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
         else:
           classTypesTexts += '    (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
           classTypesTexts += '    // TODO(@benqi): Check classID valid!!!\n'
-          classTypesTexts += '    dbuf.Int()\n'
+          classTypesTexts += '    // dbuf.Int()\n'
         classTypesTexts += '  }\n'
 
       elif (paramType.find('TLObjectVector') >= 0):
         eptype = txt_wrap_by('<', '>', paramType);
         classTypesTexts += '  // x.VectorMessage(m.' + to_proto_go_name(paramName) + ');\n';
-
+        classTypesTexts += '    dbuf.Int()\n'
         classTypesTexts += '  c%d := dbuf.Int()\n' % (ii)
         classTypesTexts += '  if c%d != int32(TLConstructor_CRC32_vector) {\n' % (ii)
         classTypesTexts += '    return fmt.Errorf("Not vector, classID: ", c%d)\n' % (ii)
@@ -709,7 +711,7 @@ for restype in typesList:
         else:
           classTypesTexts += '    (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
           classTypesTexts += '    // TODO(@benqi): Check classID valid!!!\n'
-          classTypesTexts += '    dbuf.Int()\n'
+          classTypesTexts += '    // dbuf.Int()\n'
         classTypesTexts += '  }\n'
 
       else:
@@ -899,7 +901,11 @@ for restype in funcsList:
       elif (paramType == 'repeated string'):
         classTypesTexts += '  m.' +  to_proto_go_name(paramName) + ' = dbuf.VectorString()\n';
       elif (paramType in TypesList):
-        classTypesTexts += '  // x.Bytes(m.' + to_proto_go_name(paramName) + '.Encode())\n';
+        # classTypesTexts += '  // x.Bytes(m.' + to_proto_go_name(paramName) + '.Encode())\n';
+        classTypesTexts += '  dbuf.Int()\n'
+        classTypesTexts += '  m.' + to_proto_go_name(paramName) + ' = &' + to_proto_go_name(paramType) + '{}\n';
+        classTypesTexts += '  (*m.' + to_proto_go_name(paramName) + ').Decode(dbuf)\n';
+
       else:
         if (paramType == 'TQueryType'):
           # classTypesTexts += '  bytes ' + paramName + ' = ' + str(ii) + ';\n';
@@ -918,13 +924,14 @@ for restype in funcsList:
           classTypesTexts += '  m.%s = make([]*%s, l%d)\n' % (to_proto_go_name(paramName), to_proto_go_name(eptype), ii)
 
           classTypesTexts += '  for i := 0; i < int(l%d); i++ {\n' % (ii)
+          classTypesTexts += '    dbuf.Int()\n'
           classTypesTexts += '    m.%s[i] = &%s{}\n' % (to_proto_go_name(paramName), to_proto_go_name(eptype))
           if (eptype in TypesList):
             classTypesTexts += '   (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
           else:
             classTypesTexts += '    (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
             classTypesTexts += '    // TODO(@benqi): Check classID valid!!!\n'
-            classTypesTexts += '    dbuf.Int()\n'
+            classTypesTexts += '    // dbuf.Int()\n'
           classTypesTexts += '  }\n'
 
         elif (paramType.find('TLObjectVector') >= 0):
@@ -940,13 +947,14 @@ for restype in funcsList:
           classTypesTexts += '  m.%s = make([]*%s, l%d)\n' % (to_proto_go_name(paramName), to_proto_go_name(eptype), ii)
 
           classTypesTexts += '  for i := 0; i < int(l%d); i++ {\n' % (ii)
+          classTypesTexts += '    dbuf.Int()\n'
           classTypesTexts += '    m.%s[i] = &%s{}\n' % (to_proto_go_name(paramName), to_proto_go_name(eptype))
           if (eptype in TypesList):
             classTypesTexts += '   (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
           else:
             classTypesTexts += '    (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
             classTypesTexts += '    // TODO(@benqi): Check classID valid!!!\n'
-            classTypesTexts += '    dbuf.Int()\n'
+            classTypesTexts += '    // dbuf.Int()\n'
           classTypesTexts += '  }\n'
 
         else:

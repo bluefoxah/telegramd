@@ -33,6 +33,7 @@ var registers2 = map[int32]newTLObjectFunc{
 	int32(TLConstructor_CRC32_msg_container):                                    func() TLObject { return new(TLMsgContainer) },
 	int32(TLConstructor_CRC32_msg_copy):                                         func() TLObject { return new(TLMsgCopy) },
 	int32(TLConstructor_CRC32_gzip_packed):                                      func() TLObject { return new(TLGzipPacked) },
+	int32(TLConstructor_CRC32_rpc_result):                                       func() TLObject { return new(TLRpcResult) },
 	int32(TLConstructor_CRC32_resPQ):                                            func() TLObject { return new(TLResPQ) },
 	int32(TLConstructor_CRC32_p_q_inner_data):                                   func() TLObject { return new(TLPQInnerData) },
 	int32(TLConstructor_CRC32_server_DH_params_fail):                            func() TLObject { return new(TLServer_DHParamsFail) },
@@ -58,7 +59,6 @@ var registers2 = map[int32]newTLObjectFunc{
 	int32(TLConstructor_CRC32_msg_detailed_info):                                func() TLObject { return new(TLMsgDetailedInfo) },
 	int32(TLConstructor_CRC32_msg_new_detailed_info):                            func() TLObject { return new(TLMsgNewDetailedInfo) },
 	int32(TLConstructor_CRC32_msg_resend_req):                                   func() TLObject { return new(TLMsgResendReq) },
-	int32(TLConstructor_CRC32_rpc_result):                                       func() TLObject { return new(TLRpcResult) },
 	int32(TLConstructor_CRC32_rpc_error):                                        func() TLObject { return new(TLRpcError) },
 	int32(TLConstructor_CRC32_rpc_answer_unknown):                               func() TLObject { return new(TLRpcAnswerUnknown) },
 	int32(TLConstructor_CRC32_rpc_answer_dropped_running):                       func() TLObject { return new(TLRpcAnswerDroppedRunning) },
@@ -14540,10 +14540,11 @@ func (m *TLFutureSalts) Decode(dbuf *DecodeBuf) error {
 	l3 := dbuf.Int()
 	m.Salts = make([]*TLFutureSalt, l3)
 	for i := 0; i < int(l3); i++ {
+		dbuf.Int()
 		m.Salts[i] = &TLFutureSalt{}
 		(*m.Salts[i]).Decode(dbuf)
 		// TODO(@benqi): Check classID valid!!!
-		dbuf.Int()
+		// dbuf.Int()
 	}
 	return dbuf.err
 }
@@ -14667,10 +14668,11 @@ func (m *TLHelpConfigSimple) Decode(dbuf *DecodeBuf) error {
 	l4 := dbuf.Int()
 	m.IpPortList = make([]*TLIpPort, l4)
 	for i := 0; i < int(l4); i++ {
+		dbuf.Int()
 		m.IpPortList[i] = &TLIpPort{}
 		(*m.IpPortList[i]).Decode(dbuf)
 		// TODO(@benqi): Check classID valid!!!
-		dbuf.Int()
+		// dbuf.Int()
 	}
 	return dbuf.err
 }
@@ -14935,11 +14937,13 @@ func (m *TLInputMediaUploadedPhoto) Encode() []byte {
 
 func (m *TLInputMediaUploadedPhoto) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
+	dbuf.Int()
 	m.File = &InputFile{}
-	m.Decode(dbuf)
+	(*m.File).Decode(dbuf)
 	m.Caption = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
 		// x.VectorMessage(m.Stickers);
+		dbuf.Int()
 		c3 := dbuf.Int()
 		if c3 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c3)
@@ -14978,8 +14982,9 @@ func (m *TLInputMediaPhoto) Encode() []byte {
 
 func (m *TLInputMediaPhoto) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
+	dbuf.Int()
 	m.Id = &InputPhoto{}
-	m.Decode(dbuf)
+	(*m.Id).Decode(dbuf)
 	m.Caption = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
 		m.TtlSeconds = dbuf.Int()
@@ -14996,8 +15001,9 @@ func (m *TLInputMediaGeoPoint) Encode() []byte {
 }
 
 func (m *TLInputMediaGeoPoint) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.GeoPoint = &InputGeoPoint{}
-	m.Decode(dbuf)
+	(*m.GeoPoint).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -15065,14 +15071,17 @@ func (m *TLInputMediaUploadedDocument) Encode() []byte {
 
 func (m *TLInputMediaUploadedDocument) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
+	dbuf.Int()
 	m.File = &InputFile{}
-	m.Decode(dbuf)
+	(*m.File).Decode(dbuf)
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.Thumb = &InputFile{}
-		m.Decode(dbuf)
+		(*m.Thumb).Decode(dbuf)
 	}
 	m.MimeType = dbuf.String()
 	// x.VectorMessage(m.Attributes);
+	dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -15086,6 +15095,7 @@ func (m *TLInputMediaUploadedDocument) Decode(dbuf *DecodeBuf) error {
 	m.Caption = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
 		// x.VectorMessage(m.Stickers);
+		dbuf.Int()
 		c6 := dbuf.Int()
 		if c6 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c6)
@@ -15124,8 +15134,9 @@ func (m *TLInputMediaDocument) Encode() []byte {
 
 func (m *TLInputMediaDocument) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
+	dbuf.Int()
 	m.Id = &InputDocument{}
-	m.Decode(dbuf)
+	(*m.Id).Decode(dbuf)
 	m.Caption = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
 		m.TtlSeconds = dbuf.Int()
@@ -15146,8 +15157,9 @@ func (m *TLInputMediaVenue) Encode() []byte {
 }
 
 func (m *TLInputMediaVenue) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.GeoPoint = &InputGeoPoint{}
-	m.Decode(dbuf)
+	(*m.GeoPoint).Decode(dbuf)
 	m.Title = dbuf.String()
 	m.Address = dbuf.String()
 	m.Provider = dbuf.String()
@@ -15237,8 +15249,9 @@ func (m *TLInputMediaGame) Encode() []byte {
 }
 
 func (m *TLInputMediaGame) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Id = &InputGame{}
-	m.Decode(dbuf)
+	(*m.Id).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -15270,11 +15283,13 @@ func (m *TLInputMediaInvoice) Decode(dbuf *DecodeBuf) error {
 	m.Title = dbuf.String()
 	m.Description = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.Photo = &InputWebDocument{}
-		m.Decode(dbuf)
+		(*m.Photo).Decode(dbuf)
 	}
+	dbuf.Int()
 	m.Invoice = &Invoice{}
-	m.Decode(dbuf)
+	(*m.Invoice).Decode(dbuf)
 	m.Payload = dbuf.StringBytes()
 	m.Provider = dbuf.String()
 	m.StartParam = dbuf.String()
@@ -15301,8 +15316,9 @@ func (m *TLInputChatUploadedPhoto) Encode() []byte {
 }
 
 func (m *TLInputChatUploadedPhoto) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.File = &InputFile{}
-	m.Decode(dbuf)
+	(*m.File).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -15315,8 +15331,9 @@ func (m *TLInputChatPhoto) Encode() []byte {
 }
 
 func (m *TLInputChatPhoto) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Id = &InputPhoto{}
-	m.Decode(dbuf)
+	(*m.Id).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -15834,12 +15851,14 @@ func (m *TLUser) Decode(dbuf *DecodeBuf) error {
 		m.Phone = dbuf.String()
 	}
 	if (flags & (1 << 5)) != 0 {
+		dbuf.Int()
 		m.Photo = &UserProfilePhoto{}
-		m.Decode(dbuf)
+		(*m.Photo).Decode(dbuf)
 	}
 	if (flags & (1 << 6)) != 0 {
+		dbuf.Int()
 		m.Status = &UserStatus{}
-		m.Decode(dbuf)
+		(*m.Status).Decode(dbuf)
 	}
 	if (flags & (1 << 14)) != 0 {
 		m.BotInfoVersion = dbuf.Int()
@@ -15879,10 +15898,12 @@ func (m *TLUserProfilePhoto) Encode() []byte {
 
 func (m *TLUserProfilePhoto) Decode(dbuf *DecodeBuf) error {
 	m.PhotoId = dbuf.Long()
+	dbuf.Int()
 	m.PhotoSmall = &FileLocation{}
-	m.Decode(dbuf)
+	(*m.PhotoSmall).Decode(dbuf)
+	dbuf.Int()
 	m.PhotoBig = &FileLocation{}
-	m.Decode(dbuf)
+	(*m.PhotoBig).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -16050,14 +16071,16 @@ func (m *TLChat) Decode(dbuf *DecodeBuf) error {
 	}
 	m.Id = dbuf.Int()
 	m.Title = dbuf.String()
+	dbuf.Int()
 	m.Photo = &ChatPhoto{}
-	m.Decode(dbuf)
+	(*m.Photo).Decode(dbuf)
 	m.ParticipantsCount = dbuf.Int()
 	m.Date = dbuf.Int()
 	m.Version = dbuf.Int()
 	if (flags & (1 << 6)) != 0 {
+		dbuf.Int()
 		m.MigratedTo = &InputChannel{}
-		m.Decode(dbuf)
+		(*m.MigratedTo).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -16223,20 +16246,23 @@ func (m *TLChannel) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 6)) != 0 {
 		m.Username = dbuf.String()
 	}
+	dbuf.Int()
 	m.Photo = &ChatPhoto{}
-	m.Decode(dbuf)
+	(*m.Photo).Decode(dbuf)
 	m.Date = dbuf.Int()
 	m.Version = dbuf.Int()
 	if (flags & (1 << 9)) != 0 {
 		m.RestrictionReason = dbuf.String()
 	}
 	if (flags & (1 << 14)) != 0 {
+		dbuf.Int()
 		m.AdminRights = &ChannelAdminRights{}
-		m.Decode(dbuf)
+		(*m.AdminRights).Decode(dbuf)
 	}
 	if (flags & (1 << 15)) != 0 {
+		dbuf.Int()
 		m.BannedRights = &ChannelBannedRights{}
-		m.Decode(dbuf)
+		(*m.BannedRights).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -16311,15 +16337,20 @@ func (m *TLChatFull) Encode() []byte {
 
 func (m *TLChatFull) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.Int()
+	dbuf.Int()
 	m.Participants = &ChatParticipants{}
-	m.Decode(dbuf)
+	(*m.Participants).Decode(dbuf)
+	dbuf.Int()
 	m.ChatPhoto = &Photo{}
-	m.Decode(dbuf)
+	(*m.ChatPhoto).Decode(dbuf)
+	dbuf.Int()
 	m.NotifySettings = &PeerNotifySettings{}
-	m.Decode(dbuf)
+	(*m.NotifySettings).Decode(dbuf)
+	dbuf.Int()
 	m.ExportedInvite = &ExportedChatInvite{}
-	m.Decode(dbuf)
+	(*m.ExportedInvite).Decode(dbuf)
 	// x.VectorMessage(m.BotInfo);
+	dbuf.Int()
 	c6 := dbuf.Int()
 	if c6 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c6)
@@ -16453,13 +16484,17 @@ func (m *TLChannelFull) Decode(dbuf *DecodeBuf) error {
 	m.ReadInboxMaxId = dbuf.Int()
 	m.ReadOutboxMaxId = dbuf.Int()
 	m.UnreadCount = dbuf.Int()
+	dbuf.Int()
 	m.ChatPhoto = &Photo{}
-	m.Decode(dbuf)
+	(*m.ChatPhoto).Decode(dbuf)
+	dbuf.Int()
 	m.NotifySettings = &PeerNotifySettings{}
-	m.Decode(dbuf)
+	(*m.NotifySettings).Decode(dbuf)
+	dbuf.Int()
 	m.ExportedInvite = &ExportedChatInvite{}
-	m.Decode(dbuf)
+	(*m.ExportedInvite).Decode(dbuf)
 	// x.VectorMessage(m.BotInfo);
+	dbuf.Int()
 	c16 := dbuf.Int()
 	if c16 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c16)
@@ -16480,8 +16515,9 @@ func (m *TLChannelFull) Decode(dbuf *DecodeBuf) error {
 		m.PinnedMsgId = dbuf.Int()
 	}
 	if (flags & (1 << 8)) != 0 {
+		dbuf.Int()
 		m.Stickerset = &StickerSet{}
-		m.Decode(dbuf)
+		(*m.Stickerset).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -16555,8 +16591,9 @@ func (m *TLChatParticipantsForbidden) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	m.ChatId = dbuf.Int()
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.SelfParticipant = &ChatParticipant{}
-		m.Decode(dbuf)
+		(*m.SelfParticipant).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -16580,6 +16617,7 @@ func (m *TLChatParticipants) Encode() []byte {
 func (m *TLChatParticipants) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
 	// x.VectorMessage(m.Participants);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -16615,10 +16653,12 @@ func (m *TLChatPhoto) Encode() []byte {
 }
 
 func (m *TLChatPhoto) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.PhotoSmall = &FileLocation{}
-	m.Decode(dbuf)
+	(*m.PhotoSmall).Decode(dbuf)
+	dbuf.Int()
 	m.PhotoBig = &FileLocation{}
-	m.Decode(dbuf)
+	(*m.PhotoBig).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -16767,11 +16807,13 @@ func (m *TLMessage) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 8)) != 0 {
 		m.FromId = dbuf.Int()
 	}
+	dbuf.Int()
 	m.ToId = &Peer{}
-	m.Decode(dbuf)
+	(*m.ToId).Decode(dbuf)
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.FwdFrom = &MessageFwdHeader{}
-		m.Decode(dbuf)
+		(*m.FwdFrom).Decode(dbuf)
 	}
 	if (flags & (1 << 11)) != 0 {
 		m.ViaBotId = dbuf.Int()
@@ -16782,15 +16824,18 @@ func (m *TLMessage) Decode(dbuf *DecodeBuf) error {
 	m.Date = dbuf.Int()
 	m.Message = dbuf.String()
 	if (flags & (1 << 9)) != 0 {
+		dbuf.Int()
 		m.Media = &MessageMedia{}
-		m.Decode(dbuf)
+		(*m.Media).Decode(dbuf)
 	}
 	if (flags & (1 << 6)) != 0 {
+		dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
-		m.Decode(dbuf)
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	if (flags & (1 << 7)) != 0 {
 		// x.VectorMessage(m.Entities);
+		dbuf.Int()
 		c16 := dbuf.Int()
 		if c16 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c16)
@@ -16892,14 +16937,16 @@ func (m *TLMessageService) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 8)) != 0 {
 		m.FromId = dbuf.Int()
 	}
+	dbuf.Int()
 	m.ToId = &Peer{}
-	m.Decode(dbuf)
+	(*m.ToId).Decode(dbuf)
 	if (flags & (1 << 3)) != 0 {
 		m.ReplyToMsgId = dbuf.Int()
 	}
 	m.Date = dbuf.Int()
+	dbuf.Int()
 	m.Action = &MessageAction{}
-	m.Decode(dbuf)
+	(*m.Action).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -16946,8 +16993,9 @@ func (m *TLMessageMediaPhoto) Encode() []byte {
 func (m *TLMessageMediaPhoto) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.Photo = &Photo{}
-		m.Decode(dbuf)
+		(*m.Photo).Decode(dbuf)
 	}
 	if (flags & (1 << 1)) != 0 {
 		m.Caption = dbuf.String()
@@ -16967,8 +17015,9 @@ func (m *TLMessageMediaGeo) Encode() []byte {
 }
 
 func (m *TLMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Geo = &GeoPoint{}
-	m.Decode(dbuf)
+	(*m.Geo).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -17034,8 +17083,9 @@ func (m *TLMessageMediaDocument) Encode() []byte {
 func (m *TLMessageMediaDocument) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.Document = &Document{}
-		m.Decode(dbuf)
+		(*m.Document).Decode(dbuf)
 	}
 	if (flags & (1 << 1)) != 0 {
 		m.Caption = dbuf.String()
@@ -17055,8 +17105,9 @@ func (m *TLMessageMediaWebPage) Encode() []byte {
 }
 
 func (m *TLMessageMediaWebPage) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Webpage = &WebPage{}
-	m.Decode(dbuf)
+	(*m.Webpage).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -17073,8 +17124,9 @@ func (m *TLMessageMediaVenue) Encode() []byte {
 }
 
 func (m *TLMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Geo = &GeoPoint{}
-	m.Decode(dbuf)
+	(*m.Geo).Decode(dbuf)
 	m.Title = dbuf.String()
 	m.Address = dbuf.String()
 	m.Provider = dbuf.String()
@@ -17091,8 +17143,9 @@ func (m *TLMessageMediaGame) Encode() []byte {
 }
 
 func (m *TLMessageMediaGame) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Game = &Game{}
-	m.Decode(dbuf)
+	(*m.Game).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -17147,8 +17200,9 @@ func (m *TLMessageMediaInvoice) Decode(dbuf *DecodeBuf) error {
 	m.Title = dbuf.String()
 	m.Description = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.Photo = &WebDocument{}
-		m.Decode(dbuf)
+		(*m.Photo).Decode(dbuf)
 	}
 	if (flags & (1 << 2)) != 0 {
 		m.ReceiptMsgId = dbuf.Int()
@@ -17207,8 +17261,9 @@ func (m *TLMessageActionChatEditPhoto) Encode() []byte {
 }
 
 func (m *TLMessageActionChatEditPhoto) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Photo = &Photo{}
-	m.Decode(dbuf)
+	(*m.Photo).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -17373,14 +17428,16 @@ func (m *TLMessageActionPaymentSentMe) Decode(dbuf *DecodeBuf) error {
 	m.TotalAmount = dbuf.Long()
 	m.Payload = dbuf.StringBytes()
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.Info = &PaymentRequestedInfo{}
-		m.Decode(dbuf)
+		(*m.Info).Decode(dbuf)
 	}
 	if (flags & (1 << 1)) != 0 {
 		m.ShippingOptionId = dbuf.String()
 	}
+	dbuf.Int()
 	m.Charge = &PaymentCharge{}
-	m.Decode(dbuf)
+	(*m.Charge).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -17427,8 +17484,9 @@ func (m *TLMessageActionPhoneCall) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	m.CallId = dbuf.Long()
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.Reason = &PhoneCallDiscardReason{}
-		m.Decode(dbuf)
+		(*m.Reason).Decode(dbuf)
 	}
 	if (flags & (1 << 1)) != 0 {
 		m.Duration = dbuf.Int()
@@ -17488,21 +17546,24 @@ func (m *TLDialog) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 2)) != 0 {
 		m.Pinned = true
 	}
+	dbuf.Int()
 	m.Peer = &Peer{}
-	m.Decode(dbuf)
+	(*m.Peer).Decode(dbuf)
 	m.TopMessage = dbuf.Int()
 	m.ReadInboxMaxId = dbuf.Int()
 	m.ReadOutboxMaxId = dbuf.Int()
 	m.UnreadCount = dbuf.Int()
 	m.UnreadMentionsCount = dbuf.Int()
+	dbuf.Int()
 	m.NotifySettings = &PeerNotifySettings{}
-	m.Decode(dbuf)
+	(*m.NotifySettings).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
 		m.Pts = dbuf.Int()
 	}
 	if (flags & (1 << 1)) != 0 {
+		dbuf.Int()
 		m.Draft = &DraftMessage{}
-		m.Decode(dbuf)
+		(*m.Draft).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -17556,6 +17617,7 @@ func (m *TLPhoto) Decode(dbuf *DecodeBuf) error {
 	m.AccessHash = dbuf.Long()
 	m.Date = dbuf.Int()
 	// x.VectorMessage(m.Sizes);
+	dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -17596,8 +17658,9 @@ func (m *TLPhotoSize) Encode() []byte {
 
 func (m *TLPhotoSize) Decode(dbuf *DecodeBuf) error {
 	m.Type = dbuf.String()
+	dbuf.Int()
 	m.Location = &FileLocation{}
-	m.Decode(dbuf)
+	(*m.Location).Decode(dbuf)
 	m.W = dbuf.Int()
 	m.H = dbuf.Int()
 	m.Size = dbuf.Int()
@@ -17618,8 +17681,9 @@ func (m *TLPhotoCachedSize) Encode() []byte {
 
 func (m *TLPhotoCachedSize) Decode(dbuf *DecodeBuf) error {
 	m.Type = dbuf.String()
+	dbuf.Int()
 	m.Location = &FileLocation{}
-	m.Decode(dbuf)
+	(*m.Location).Decode(dbuf)
 	m.W = dbuf.Int()
 	m.H = dbuf.Int()
 	m.Bytes = dbuf.StringBytes()
@@ -17661,8 +17725,9 @@ func (m *TLAuthCheckedPhone) Encode() []byte {
 }
 
 func (m *TLAuthCheckedPhone) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.PhoneRegistered = &Bool{}
-	m.Decode(dbuf)
+	(*m.PhoneRegistered).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -17702,12 +17767,14 @@ func (m *TLAuthSentCode) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.PhoneRegistered = true
 	}
+	dbuf.Int()
 	m.Type = &Auth_SentCodeType{}
-	m.Decode(dbuf)
+	(*m.Type).Decode(dbuf)
 	m.PhoneCodeHash = dbuf.String()
 	if (flags & (1 << 1)) != 0 {
+		dbuf.Int()
 		m.NextType = &Auth_CodeType{}
-		m.Decode(dbuf)
+		(*m.NextType).Decode(dbuf)
 	}
 	if (flags & (1 << 2)) != 0 {
 		m.Timeout = dbuf.Int()
@@ -17738,8 +17805,9 @@ func (m *TLAuthAuthorization) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.TmpSessions = dbuf.Int()
 	}
+	dbuf.Int()
 	m.User = &User{}
-	m.Decode(dbuf)
+	(*m.User).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -17767,8 +17835,9 @@ func (m *TLInputNotifyPeer) Encode() []byte {
 }
 
 func (m *TLInputNotifyPeer) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Peer = &InputPeer{}
-	m.Decode(dbuf)
+	(*m.Peer).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -17982,6 +18051,7 @@ func (m *TLWallPaper) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.Int()
 	m.Title = dbuf.String()
 	// x.VectorMessage(m.Sizes);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18123,22 +18193,27 @@ func (m *TLUserFull) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 5)) != 0 {
 		m.PhoneCallsPrivate = true
 	}
+	dbuf.Int()
 	m.User = &User{}
-	m.Decode(dbuf)
+	(*m.User).Decode(dbuf)
 	if (flags & (1 << 1)) != 0 {
 		m.About = dbuf.String()
 	}
+	dbuf.Int()
 	m.Link = &Contacts_Link{}
-	m.Decode(dbuf)
+	(*m.Link).Decode(dbuf)
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.ProfilePhoto = &Photo{}
-		m.Decode(dbuf)
+		(*m.ProfilePhoto).Decode(dbuf)
 	}
+	dbuf.Int()
 	m.NotifySettings = &PeerNotifySettings{}
-	m.Decode(dbuf)
+	(*m.NotifySettings).Decode(dbuf)
 	if (flags & (1 << 3)) != 0 {
+		dbuf.Int()
 		m.BotInfo = &BotInfo{}
-		m.Decode(dbuf)
+		(*m.BotInfo).Decode(dbuf)
 	}
 	m.CommonChatsCount = dbuf.Int()
 	return dbuf.err
@@ -18155,8 +18230,9 @@ func (m *TLContact) Encode() []byte {
 
 func (m *TLContact) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
+	dbuf.Int()
 	m.Mutual = &Bool{}
-	m.Decode(dbuf)
+	(*m.Mutual).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -18201,8 +18277,9 @@ func (m *TLContactStatus) Encode() []byte {
 
 func (m *TLContactStatus) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
+	dbuf.Int()
 	m.Status = &UserStatus{}
-	m.Decode(dbuf)
+	(*m.Status).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -18217,12 +18294,15 @@ func (m *TLContactsLink) Encode() []byte {
 }
 
 func (m *TLContactsLink) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.MyLink = &ContactLink{}
-	m.Decode(dbuf)
+	(*m.MyLink).Decode(dbuf)
+	dbuf.Int()
 	m.ForeignLink = &ContactLink{}
-	m.Decode(dbuf)
+	(*m.ForeignLink).Decode(dbuf)
+	dbuf.Int()
 	m.User = &User{}
-	m.Decode(dbuf)
+	(*m.User).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -18261,6 +18341,7 @@ func (m *TLContactsContacts) Encode() []byte {
 
 func (m *TLContactsContacts) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Contacts);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -18273,6 +18354,7 @@ func (m *TLContactsContacts) Decode(dbuf *DecodeBuf) error {
 	}
 	m.SavedCount = dbuf.Int()
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18317,6 +18399,7 @@ func (m *TLContactsImportedContacts) Encode() []byte {
 
 func (m *TLContactsImportedContacts) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Imported);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -18328,6 +18411,7 @@ func (m *TLContactsImportedContacts) Decode(dbuf *DecodeBuf) error {
 		(*m.Imported[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.PopularInvites);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18340,6 +18424,7 @@ func (m *TLContactsImportedContacts) Decode(dbuf *DecodeBuf) error {
 	}
 	m.RetryContacts = dbuf.VectorLong()
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -18376,6 +18461,7 @@ func (m *TLContactsBlocked) Encode() []byte {
 
 func (m *TLContactsBlocked) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Blocked);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -18387,6 +18473,7 @@ func (m *TLContactsBlocked) Decode(dbuf *DecodeBuf) error {
 		(*m.Blocked[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18425,6 +18512,7 @@ func (m *TLContactsBlockedSlice) Encode() []byte {
 func (m *TLContactsBlockedSlice) Decode(dbuf *DecodeBuf) error {
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Blocked);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18436,6 +18524,7 @@ func (m *TLContactsBlockedSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Blocked[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18486,6 +18575,7 @@ func (m *TLMessagesDialogs) Encode() []byte {
 
 func (m *TLMessagesDialogs) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Dialogs);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -18497,6 +18587,7 @@ func (m *TLMessagesDialogs) Decode(dbuf *DecodeBuf) error {
 		(*m.Dialogs[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Messages);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18508,6 +18599,7 @@ func (m *TLMessagesDialogs) Decode(dbuf *DecodeBuf) error {
 		(*m.Messages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18519,6 +18611,7 @@ func (m *TLMessagesDialogs) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -18571,6 +18664,7 @@ func (m *TLMessagesDialogsSlice) Encode() []byte {
 func (m *TLMessagesDialogsSlice) Decode(dbuf *DecodeBuf) error {
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Dialogs);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18582,6 +18676,7 @@ func (m *TLMessagesDialogsSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Dialogs[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Messages);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18593,6 +18688,7 @@ func (m *TLMessagesDialogsSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Messages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -18604,6 +18700,7 @@ func (m *TLMessagesDialogsSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -18647,6 +18744,7 @@ func (m *TLMessagesMessages) Encode() []byte {
 
 func (m *TLMessagesMessages) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Messages);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -18658,6 +18756,7 @@ func (m *TLMessagesMessages) Decode(dbuf *DecodeBuf) error {
 		(*m.Messages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18669,6 +18768,7 @@ func (m *TLMessagesMessages) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18714,6 +18814,7 @@ func (m *TLMessagesMessagesSlice) Encode() []byte {
 func (m *TLMessagesMessagesSlice) Decode(dbuf *DecodeBuf) error {
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Messages);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18725,6 +18826,7 @@ func (m *TLMessagesMessagesSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Messages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18736,6 +18838,7 @@ func (m *TLMessagesMessagesSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -18790,6 +18893,7 @@ func (m *TLMessagesChannelMessages) Decode(dbuf *DecodeBuf) error {
 	m.Pts = dbuf.Int()
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Messages);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18801,6 +18905,7 @@ func (m *TLMessagesChannelMessages) Decode(dbuf *DecodeBuf) error {
 		(*m.Messages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -18812,6 +18917,7 @@ func (m *TLMessagesChannelMessages) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -18841,6 +18947,7 @@ func (m *TLMessagesChats) Encode() []byte {
 
 func (m *TLMessagesChats) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -18872,6 +18979,7 @@ func (m *TLMessagesChatsSlice) Encode() []byte {
 func (m *TLMessagesChatsSlice) Decode(dbuf *DecodeBuf) error {
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18908,9 +19016,11 @@ func (m *TLMessagesChatFull) Encode() []byte {
 }
 
 func (m *TLMessagesChatFull) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.FullChat = &ChatFull{}
-	m.Decode(dbuf)
+	(*m.FullChat).Decode(dbuf)
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18922,6 +19032,7 @@ func (m *TLMessagesChatFull) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -19142,8 +19253,9 @@ func (m *TLUpdateNewMessage) Encode() []byte {
 }
 
 func (m *TLUpdateNewMessage) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Message = &Message{}
-	m.Decode(dbuf)
+	(*m.Message).Decode(dbuf)
 	m.Pts = dbuf.Int()
 	m.PtsCount = dbuf.Int()
 	return dbuf.err
@@ -19192,8 +19304,9 @@ func (m *TLUpdateUserTyping) Encode() []byte {
 
 func (m *TLUpdateUserTyping) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
+	dbuf.Int()
 	m.Action = &SendMessageAction{}
-	m.Decode(dbuf)
+	(*m.Action).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -19210,8 +19323,9 @@ func (m *TLUpdateChatUserTyping) Encode() []byte {
 func (m *TLUpdateChatUserTyping) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
 	m.UserId = dbuf.Int()
+	dbuf.Int()
 	m.Action = &SendMessageAction{}
-	m.Decode(dbuf)
+	(*m.Action).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -19224,8 +19338,9 @@ func (m *TLUpdateChatParticipants) Encode() []byte {
 }
 
 func (m *TLUpdateChatParticipants) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Participants = &ChatParticipants{}
-	m.Decode(dbuf)
+	(*m.Participants).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -19240,8 +19355,9 @@ func (m *TLUpdateUserStatus) Encode() []byte {
 
 func (m *TLUpdateUserStatus) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
+	dbuf.Int()
 	m.Status = &UserStatus{}
-	m.Decode(dbuf)
+	(*m.Status).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -19278,10 +19394,12 @@ func (m *TLUpdateUserPhoto) Encode() []byte {
 func (m *TLUpdateUserPhoto) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
 	m.Date = dbuf.Int()
+	dbuf.Int()
 	m.Photo = &UserProfilePhoto{}
-	m.Decode(dbuf)
+	(*m.Photo).Decode(dbuf)
+	dbuf.Int()
 	m.Previous = &Bool{}
-	m.Decode(dbuf)
+	(*m.Previous).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -19312,10 +19430,12 @@ func (m *TLUpdateContactLink) Encode() []byte {
 
 func (m *TLUpdateContactLink) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
+	dbuf.Int()
 	m.MyLink = &ContactLink{}
-	m.Decode(dbuf)
+	(*m.MyLink).Decode(dbuf)
+	dbuf.Int()
 	m.ForeignLink = &ContactLink{}
-	m.Decode(dbuf)
+	(*m.ForeignLink).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -19329,8 +19449,9 @@ func (m *TLUpdateNewEncryptedMessage) Encode() []byte {
 }
 
 func (m *TLUpdateNewEncryptedMessage) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Message = &EncryptedMessage{}
-	m.Decode(dbuf)
+	(*m.Message).Decode(dbuf)
 	m.Qts = dbuf.Int()
 	return dbuf.err
 }
@@ -19358,8 +19479,9 @@ func (m *TLUpdateEncryption) Encode() []byte {
 }
 
 func (m *TLUpdateEncryption) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Chat = &EncryptedChat{}
-	m.Decode(dbuf)
+	(*m.Chat).Decode(dbuf)
 	m.Date = dbuf.Int()
 	return dbuf.err
 }
@@ -19435,6 +19557,7 @@ func (m *TLUpdateDcOptions) Encode() []byte {
 
 func (m *TLUpdateDcOptions) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.DcOptions);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -19459,8 +19582,9 @@ func (m *TLUpdateUserBlocked) Encode() []byte {
 
 func (m *TLUpdateUserBlocked) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
+	dbuf.Int()
 	m.Blocked = &Bool{}
-	m.Decode(dbuf)
+	(*m.Blocked).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -19474,10 +19598,12 @@ func (m *TLUpdateNotifySettings) Encode() []byte {
 }
 
 func (m *TLUpdateNotifySettings) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Peer = &NotifyPeer{}
-	m.Decode(dbuf)
+	(*m.Peer).Decode(dbuf)
+	dbuf.Int()
 	m.NotifySettings = &PeerNotifySettings{}
-	m.Decode(dbuf)
+	(*m.NotifySettings).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -19524,9 +19650,11 @@ func (m *TLUpdateServiceNotification) Decode(dbuf *DecodeBuf) error {
 	}
 	m.Type = dbuf.String()
 	m.Message = dbuf.String()
+	dbuf.Int()
 	m.Media = &MessageMedia{}
-	m.Decode(dbuf)
+	(*m.Media).Decode(dbuf)
 	// x.VectorMessage(m.Entities);
+	dbuf.Int()
 	c6 := dbuf.Int()
 	if c6 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c6)
@@ -19556,9 +19684,11 @@ func (m *TLUpdatePrivacy) Encode() []byte {
 }
 
 func (m *TLUpdatePrivacy) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Key = &PrivacyKey{}
-	m.Decode(dbuf)
+	(*m.Key).Decode(dbuf)
 	// x.VectorMessage(m.Rules);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -19599,8 +19729,9 @@ func (m *TLUpdateReadHistoryInbox) Encode() []byte {
 }
 
 func (m *TLUpdateReadHistoryInbox) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Peer = &Peer{}
-	m.Decode(dbuf)
+	(*m.Peer).Decode(dbuf)
 	m.MaxId = dbuf.Int()
 	m.Pts = dbuf.Int()
 	m.PtsCount = dbuf.Int()
@@ -19619,8 +19750,9 @@ func (m *TLUpdateReadHistoryOutbox) Encode() []byte {
 }
 
 func (m *TLUpdateReadHistoryOutbox) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Peer = &Peer{}
-	m.Decode(dbuf)
+	(*m.Peer).Decode(dbuf)
 	m.MaxId = dbuf.Int()
 	m.Pts = dbuf.Int()
 	m.PtsCount = dbuf.Int()
@@ -19638,8 +19770,9 @@ func (m *TLUpdateWebPage) Encode() []byte {
 }
 
 func (m *TLUpdateWebPage) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Webpage = &WebPage{}
-	m.Decode(dbuf)
+	(*m.Webpage).Decode(dbuf)
 	m.Pts = dbuf.Int()
 	m.PtsCount = dbuf.Int()
 	return dbuf.err
@@ -19713,8 +19846,9 @@ func (m *TLUpdateNewChannelMessage) Encode() []byte {
 }
 
 func (m *TLUpdateNewChannelMessage) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Message = &Message{}
-	m.Decode(dbuf)
+	(*m.Message).Decode(dbuf)
 	m.Pts = dbuf.Int()
 	m.PtsCount = dbuf.Int()
 	return dbuf.err
@@ -19783,8 +19917,9 @@ func (m *TLUpdateChatAdmins) Encode() []byte {
 
 func (m *TLUpdateChatAdmins) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
+	dbuf.Int()
 	m.Enabled = &Bool{}
-	m.Decode(dbuf)
+	(*m.Enabled).Decode(dbuf)
 	m.Version = dbuf.Int()
 	return dbuf.err
 }
@@ -19803,8 +19938,9 @@ func (m *TLUpdateChatParticipantAdmin) Encode() []byte {
 func (m *TLUpdateChatParticipantAdmin) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
 	m.UserId = dbuf.Int()
+	dbuf.Int()
 	m.IsAdmin = &Bool{}
-	m.Decode(dbuf)
+	(*m.IsAdmin).Decode(dbuf)
 	m.Version = dbuf.Int()
 	return dbuf.err
 }
@@ -19818,8 +19954,9 @@ func (m *TLUpdateNewStickerSet) Encode() []byte {
 }
 
 func (m *TLUpdateNewStickerSet) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Stickerset = &Messages_StickerSet{}
-	m.Decode(dbuf)
+	(*m.Stickerset).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -19899,8 +20036,9 @@ func (m *TLUpdateBotInlineQuery) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
 	m.Query = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.Geo = &GeoPoint{}
-		m.Decode(dbuf)
+		(*m.Geo).Decode(dbuf)
 	}
 	m.Offset = dbuf.String()
 	return dbuf.err
@@ -19937,13 +20075,15 @@ func (m *TLUpdateBotInlineSend) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
 	m.Query = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.Geo = &GeoPoint{}
-		m.Decode(dbuf)
+		(*m.Geo).Decode(dbuf)
 	}
 	m.Id = dbuf.String()
 	if (flags & (1 << 1)) != 0 {
+		dbuf.Int()
 		m.MsgId = &InputBotInlineMessageID{}
-		m.Decode(dbuf)
+		(*m.MsgId).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -19959,8 +20099,9 @@ func (m *TLUpdateEditChannelMessage) Encode() []byte {
 }
 
 func (m *TLUpdateEditChannelMessage) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Message = &Message{}
-	m.Decode(dbuf)
+	(*m.Message).Decode(dbuf)
 	m.Pts = dbuf.Int()
 	m.PtsCount = dbuf.Int()
 	return dbuf.err
@@ -20013,8 +20154,9 @@ func (m *TLUpdateBotCallbackQuery) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	m.QueryId = dbuf.Long()
 	m.UserId = dbuf.Int()
+	dbuf.Int()
 	m.Peer = &Peer{}
-	m.Decode(dbuf)
+	(*m.Peer).Decode(dbuf)
 	m.MsgId = dbuf.Int()
 	m.ChatInstance = dbuf.Long()
 	if (flags & (1 << 0)) != 0 {
@@ -20037,8 +20179,9 @@ func (m *TLUpdateEditMessage) Encode() []byte {
 }
 
 func (m *TLUpdateEditMessage) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Message = &Message{}
-	m.Decode(dbuf)
+	(*m.Message).Decode(dbuf)
 	m.Pts = dbuf.Int()
 	m.PtsCount = dbuf.Int()
 	return dbuf.err
@@ -20075,8 +20218,9 @@ func (m *TLUpdateInlineBotCallbackQuery) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	m.QueryId = dbuf.Long()
 	m.UserId = dbuf.Int()
+	dbuf.Int()
 	m.MsgId = &InputBotInlineMessageID{}
-	m.Decode(dbuf)
+	(*m.MsgId).Decode(dbuf)
 	m.ChatInstance = dbuf.Long()
 	if (flags & (1 << 0)) != 0 {
 		m.Data = dbuf.StringBytes()
@@ -20112,10 +20256,12 @@ func (m *TLUpdateDraftMessage) Encode() []byte {
 }
 
 func (m *TLUpdateDraftMessage) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Peer = &Peer{}
-	m.Decode(dbuf)
+	(*m.Peer).Decode(dbuf)
+	dbuf.Int()
 	m.Draft = &DraftMessage{}
-	m.Decode(dbuf)
+	(*m.Draft).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -20176,8 +20322,9 @@ func (m *TLUpdateChannelWebPage) Encode() []byte {
 
 func (m *TLUpdateChannelWebPage) Decode(dbuf *DecodeBuf) error {
 	m.ChannelId = dbuf.Int()
+	dbuf.Int()
 	m.Webpage = &WebPage{}
-	m.Decode(dbuf)
+	(*m.Webpage).Decode(dbuf)
 	m.Pts = dbuf.Int()
 	m.PtsCount = dbuf.Int()
 	return dbuf.err
@@ -20206,8 +20353,9 @@ func (m *TLUpdateDialogPinned) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.Pinned = true
 	}
+	dbuf.Int()
 	m.Peer = &Peer{}
-	m.Decode(dbuf)
+	(*m.Peer).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -20238,6 +20386,7 @@ func (m *TLUpdatePinnedDialogs) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	if (flags & (1 << 0)) != 0 {
 		// x.VectorMessage(m.Order);
+		dbuf.Int()
 		c1 := dbuf.Int()
 		if c1 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c1)
@@ -20261,8 +20410,9 @@ func (m *TLUpdateBotWebhookJSON) Encode() []byte {
 }
 
 func (m *TLUpdateBotWebhookJSON) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Data = &DataJSON{}
-	m.Decode(dbuf)
+	(*m.Data).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -20278,8 +20428,9 @@ func (m *TLUpdateBotWebhookJSONQuery) Encode() []byte {
 
 func (m *TLUpdateBotWebhookJSONQuery) Decode(dbuf *DecodeBuf) error {
 	m.QueryId = dbuf.Long()
+	dbuf.Int()
 	m.Data = &DataJSON{}
-	m.Decode(dbuf)
+	(*m.Data).Decode(dbuf)
 	m.Timeout = dbuf.Int()
 	return dbuf.err
 }
@@ -20299,8 +20450,9 @@ func (m *TLUpdateBotShippingQuery) Decode(dbuf *DecodeBuf) error {
 	m.QueryId = dbuf.Long()
 	m.UserId = dbuf.Int()
 	m.Payload = dbuf.StringBytes()
+	dbuf.Int()
 	m.ShippingAddress = &PostAddress{}
-	m.Decode(dbuf)
+	(*m.ShippingAddress).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -20338,8 +20490,9 @@ func (m *TLUpdateBotPrecheckoutQuery) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
 	m.Payload = dbuf.StringBytes()
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.Info = &PaymentRequestedInfo{}
-		m.Decode(dbuf)
+		(*m.Info).Decode(dbuf)
 	}
 	if (flags & (1 << 1)) != 0 {
 		m.ShippingOptionId = dbuf.String()
@@ -20358,8 +20511,9 @@ func (m *TLUpdatePhoneCall) Encode() []byte {
 }
 
 func (m *TLUpdatePhoneCall) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.PhoneCall = &PhoneCall{}
-	m.Decode(dbuf)
+	(*m.PhoneCall).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -20383,8 +20537,9 @@ func (m *TLUpdateLangPack) Encode() []byte {
 }
 
 func (m *TLUpdateLangPack) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Difference = &LangPackDifference{}
-	m.Decode(dbuf)
+	(*m.Difference).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -20506,6 +20661,7 @@ func (m *TLUpdatesDifference) Encode() []byte {
 
 func (m *TLUpdatesDifference) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.NewMessages);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -20517,6 +20673,7 @@ func (m *TLUpdatesDifference) Decode(dbuf *DecodeBuf) error {
 		(*m.NewMessages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.NewEncryptedMessages);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -20528,6 +20685,7 @@ func (m *TLUpdatesDifference) Decode(dbuf *DecodeBuf) error {
 		(*m.NewEncryptedMessages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.OtherUpdates);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -20539,6 +20697,7 @@ func (m *TLUpdatesDifference) Decode(dbuf *DecodeBuf) error {
 		(*m.OtherUpdates[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -20550,6 +20709,7 @@ func (m *TLUpdatesDifference) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -20560,8 +20720,9 @@ func (m *TLUpdatesDifference) Decode(dbuf *DecodeBuf) error {
 		m.Users[i] = &User{}
 		(*m.Users[i]).Decode(dbuf)
 	}
+	dbuf.Int()
 	m.State = &Updates_State{}
-	m.Decode(dbuf)
+	(*m.State).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -20610,6 +20771,7 @@ func (m *TLUpdatesDifferenceSlice) Encode() []byte {
 
 func (m *TLUpdatesDifferenceSlice) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.NewMessages);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -20621,6 +20783,7 @@ func (m *TLUpdatesDifferenceSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.NewMessages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.NewEncryptedMessages);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -20632,6 +20795,7 @@ func (m *TLUpdatesDifferenceSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.NewEncryptedMessages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.OtherUpdates);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -20643,6 +20807,7 @@ func (m *TLUpdatesDifferenceSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.OtherUpdates[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -20654,6 +20819,7 @@ func (m *TLUpdatesDifferenceSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -20664,8 +20830,9 @@ func (m *TLUpdatesDifferenceSlice) Decode(dbuf *DecodeBuf) error {
 		m.Users[i] = &User{}
 		(*m.Users[i]).Decode(dbuf)
 	}
+	dbuf.Int()
 	m.IntermediateState = &Updates_State{}
-	m.Decode(dbuf)
+	(*m.IntermediateState).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -20785,8 +20952,9 @@ func (m *TLUpdateShortMessage) Decode(dbuf *DecodeBuf) error {
 	m.PtsCount = dbuf.Int()
 	m.Date = dbuf.Int()
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.FwdFrom = &MessageFwdHeader{}
-		m.Decode(dbuf)
+		(*m.FwdFrom).Decode(dbuf)
 	}
 	if (flags & (1 << 11)) != 0 {
 		m.ViaBotId = dbuf.Int()
@@ -20796,6 +20964,7 @@ func (m *TLUpdateShortMessage) Decode(dbuf *DecodeBuf) error {
 	}
 	if (flags & (1 << 7)) != 0 {
 		// x.VectorMessage(m.Entities);
+		dbuf.Int()
 		c14 := dbuf.Int()
 		if c14 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c14)
@@ -20904,8 +21073,9 @@ func (m *TLUpdateShortChatMessage) Decode(dbuf *DecodeBuf) error {
 	m.PtsCount = dbuf.Int()
 	m.Date = dbuf.Int()
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.FwdFrom = &MessageFwdHeader{}
-		m.Decode(dbuf)
+		(*m.FwdFrom).Decode(dbuf)
 	}
 	if (flags & (1 << 11)) != 0 {
 		m.ViaBotId = dbuf.Int()
@@ -20915,6 +21085,7 @@ func (m *TLUpdateShortChatMessage) Decode(dbuf *DecodeBuf) error {
 	}
 	if (flags & (1 << 7)) != 0 {
 		// x.VectorMessage(m.Entities);
+		dbuf.Int()
 		c15 := dbuf.Int()
 		if c15 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c15)
@@ -20939,8 +21110,9 @@ func (m *TLUpdateShort) Encode() []byte {
 }
 
 func (m *TLUpdateShort) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Update = &Update{}
-	m.Decode(dbuf)
+	(*m.Update).Decode(dbuf)
 	m.Date = dbuf.Int()
 	return dbuf.err
 }
@@ -20978,6 +21150,7 @@ func (m *TLUpdatesCombined) Encode() []byte {
 
 func (m *TLUpdatesCombined) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Updates);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -20989,6 +21162,7 @@ func (m *TLUpdatesCombined) Decode(dbuf *DecodeBuf) error {
 		(*m.Updates[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -21000,6 +21174,7 @@ func (m *TLUpdatesCombined) Decode(dbuf *DecodeBuf) error {
 		(*m.Users[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -21048,6 +21223,7 @@ func (m *TLUpdates) Encode() []byte {
 
 func (m *TLUpdates) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Updates);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -21059,6 +21235,7 @@ func (m *TLUpdates) Decode(dbuf *DecodeBuf) error {
 		(*m.Updates[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -21070,6 +21247,7 @@ func (m *TLUpdates) Decode(dbuf *DecodeBuf) error {
 		(*m.Users[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -21134,11 +21312,13 @@ func (m *TLUpdateShortSentMessage) Decode(dbuf *DecodeBuf) error {
 	m.PtsCount = dbuf.Int()
 	m.Date = dbuf.Int()
 	if (flags & (1 << 9)) != 0 {
+		dbuf.Int()
 		m.Media = &MessageMedia{}
-		m.Decode(dbuf)
+		(*m.Media).Decode(dbuf)
 	}
 	if (flags & (1 << 7)) != 0 {
 		// x.VectorMessage(m.Entities);
+		dbuf.Int()
 		c7 := dbuf.Int()
 		if c7 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c7)
@@ -21176,6 +21356,7 @@ func (m *TLPhotosPhotos) Encode() []byte {
 
 func (m *TLPhotosPhotos) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Photos);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -21187,6 +21368,7 @@ func (m *TLPhotosPhotos) Decode(dbuf *DecodeBuf) error {
 		(*m.Photos[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -21225,6 +21407,7 @@ func (m *TLPhotosPhotosSlice) Encode() []byte {
 func (m *TLPhotosPhotosSlice) Decode(dbuf *DecodeBuf) error {
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Photos);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -21236,6 +21419,7 @@ func (m *TLPhotosPhotosSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Photos[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -21265,9 +21449,11 @@ func (m *TLPhotosPhoto) Encode() []byte {
 }
 
 func (m *TLPhotosPhoto) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Photo = &Photo{}
-	m.Decode(dbuf)
+	(*m.Photo).Decode(dbuf)
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -21292,8 +21478,9 @@ func (m *TLUploadFile) Encode() []byte {
 }
 
 func (m *TLUploadFile) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Type = &Storage_FileType{}
-	m.Decode(dbuf)
+	(*m.Type).Decode(dbuf)
 	m.Mtime = dbuf.Int()
 	m.Bytes = dbuf.StringBytes()
 	return dbuf.err
@@ -21323,6 +21510,7 @@ func (m *TLUploadFileCdnRedirect) Decode(dbuf *DecodeBuf) error {
 	m.EncryptionKey = dbuf.StringBytes()
 	m.EncryptionIv = dbuf.StringBytes()
 	// x.VectorMessage(m.CdnFileHashes);
+	dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -21486,10 +21674,12 @@ func (m *TLConfig) Decode(dbuf *DecodeBuf) error {
 	}
 	m.Date = dbuf.Int()
 	m.Expires = dbuf.Int()
+	dbuf.Int()
 	m.TestMode = &Bool{}
-	m.Decode(dbuf)
+	(*m.TestMode).Decode(dbuf)
 	m.ThisDc = dbuf.Int()
 	// x.VectorMessage(m.DcOptions);
+	dbuf.Int()
 	c6 := dbuf.Int()
 	if c6 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c6)
@@ -21533,6 +21723,7 @@ func (m *TLConfig) Decode(dbuf *DecodeBuf) error {
 		m.LangPackVersion = dbuf.Int()
 	}
 	// x.VectorMessage(m.DisabledFeatures);
+	dbuf.Int()
 	c33 := dbuf.Int()
 	if c33 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c33)
@@ -21576,8 +21767,9 @@ func (m *TLHelpAppUpdate) Encode() []byte {
 
 func (m *TLHelpAppUpdate) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.Int()
+	dbuf.Int()
 	m.Critical = &Bool{}
-	m.Decode(dbuf)
+	(*m.Critical).Decode(dbuf)
 	m.Url = dbuf.String()
 	m.Text = dbuf.String()
 	return dbuf.err
@@ -21828,8 +22020,9 @@ func (m *TLEncryptedMessage) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
 	m.Date = dbuf.Int()
 	m.Bytes = dbuf.StringBytes()
+	dbuf.Int()
 	m.File = &EncryptedFile{}
-	m.Decode(dbuf)
+	(*m.File).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -21908,8 +22101,9 @@ func (m *TLMessagesSentEncryptedFile) Encode() []byte {
 
 func (m *TLMessagesSentEncryptedFile) Decode(dbuf *DecodeBuf) error {
 	m.Date = dbuf.Int()
+	dbuf.Int()
 	m.File = &EncryptedFile{}
-	m.Decode(dbuf)
+	(*m.File).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -21980,11 +22174,13 @@ func (m *TLDocument) Decode(dbuf *DecodeBuf) error {
 	m.Date = dbuf.Int()
 	m.MimeType = dbuf.String()
 	m.Size = dbuf.Int()
+	dbuf.Int()
 	m.Thumb = &PhotoSize{}
-	m.Decode(dbuf)
+	(*m.Thumb).Decode(dbuf)
 	m.DcId = dbuf.Int()
 	m.Version = dbuf.Int()
 	// x.VectorMessage(m.Attributes);
+	dbuf.Int()
 	c9 := dbuf.Int()
 	if c9 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c9)
@@ -22009,8 +22205,9 @@ func (m *TLHelpSupport) Encode() []byte {
 
 func (m *TLHelpSupport) Decode(dbuf *DecodeBuf) error {
 	m.PhoneNumber = dbuf.String()
+	dbuf.Int()
 	m.User = &User{}
-	m.Decode(dbuf)
+	(*m.User).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -22023,8 +22220,9 @@ func (m *TLNotifyPeer) Encode() []byte {
 }
 
 func (m *TLNotifyPeer) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Peer = &Peer{}
-	m.Decode(dbuf)
+	(*m.Peer).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -22244,6 +22442,7 @@ func (m *TLContactsFound) Encode() []byte {
 
 func (m *TLContactsFound) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Results);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -22255,6 +22454,7 @@ func (m *TLContactsFound) Decode(dbuf *DecodeBuf) error {
 		(*m.Results[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -22266,6 +22466,7 @@ func (m *TLContactsFound) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -22383,6 +22584,7 @@ func (m *TLInputPrivacyValueAllowUsers) Encode() []byte {
 
 func (m *TLInputPrivacyValueAllowUsers) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -22434,6 +22636,7 @@ func (m *TLInputPrivacyValueDisallowUsers) Encode() []byte {
 
 func (m *TLInputPrivacyValueDisallowUsers) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -22540,6 +22743,7 @@ func (m *TLAccountPrivacyRules) Encode() []byte {
 
 func (m *TLAccountPrivacyRules) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Rules);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -22551,6 +22755,7 @@ func (m *TLAccountPrivacyRules) Decode(dbuf *DecodeBuf) error {
 		(*m.Rules[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -22634,11 +22839,13 @@ func (m *TLDocumentAttributeSticker) Decode(dbuf *DecodeBuf) error {
 		m.Mask = true
 	}
 	m.Alt = dbuf.String()
+	dbuf.Int()
 	m.Stickerset = &InputStickerSet{}
-	m.Decode(dbuf)
+	(*m.Stickerset).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.MaskCoords = &MaskCoords{}
-		m.Decode(dbuf)
+		(*m.MaskCoords).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -22781,6 +22988,7 @@ func (m *TLMessagesStickers) Encode() []byte {
 func (m *TLMessagesStickers) Decode(dbuf *DecodeBuf) error {
 	m.Hash = dbuf.String()
 	// x.VectorMessage(m.Stickers);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -22838,6 +23046,7 @@ func (m *TLMessagesAllStickers) Encode() []byte {
 func (m *TLMessagesAllStickers) Decode(dbuf *DecodeBuf) error {
 	m.Hash = dbuf.Int()
 	// x.VectorMessage(m.Sets);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -23065,8 +23274,9 @@ func (m *TLWebPage) Decode(dbuf *DecodeBuf) error {
 		m.Description = dbuf.String()
 	}
 	if (flags & (1 << 4)) != 0 {
+		dbuf.Int()
 		m.Photo = &Photo{}
-		m.Decode(dbuf)
+		(*m.Photo).Decode(dbuf)
 	}
 	if (flags & (1 << 5)) != 0 {
 		m.EmbedUrl = dbuf.String()
@@ -23087,12 +23297,14 @@ func (m *TLWebPage) Decode(dbuf *DecodeBuf) error {
 		m.Author = dbuf.String()
 	}
 	if (flags & (1 << 9)) != 0 {
+		dbuf.Int()
 		m.Document = &Document{}
-		m.Decode(dbuf)
+		(*m.Document).Decode(dbuf)
 	}
 	if (flags & (1 << 10)) != 0 {
+		dbuf.Int()
 		m.CachedPage = &Page{}
-		m.Decode(dbuf)
+		(*m.CachedPage).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -23159,6 +23371,7 @@ func (m *TLAccountAuthorizations) Encode() []byte {
 
 func (m *TLAccountAuthorizations) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Authorizations);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -23203,8 +23416,9 @@ func (m *TLAccountPassword) Decode(dbuf *DecodeBuf) error {
 	m.CurrentSalt = dbuf.StringBytes()
 	m.NewSalt = dbuf.StringBytes()
 	m.Hint = dbuf.String()
+	dbuf.Int()
 	m.HasRecovery = &Bool{}
-	m.Decode(dbuf)
+	(*m.HasRecovery).Decode(dbuf)
 	m.EmailUnconfirmedPattern = dbuf.String()
 	return dbuf.err
 }
@@ -23333,8 +23547,9 @@ func (m *TLChatInviteAlready) Encode() []byte {
 }
 
 func (m *TLChatInviteAlready) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Chat = &Chat{}
-	m.Decode(dbuf)
+	(*m.Chat).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -23403,11 +23618,13 @@ func (m *TLChatInvite) Decode(dbuf *DecodeBuf) error {
 		m.Megagroup = true
 	}
 	m.Title = dbuf.String()
+	dbuf.Int()
 	m.Photo = &ChatPhoto{}
-	m.Decode(dbuf)
+	(*m.Photo).Decode(dbuf)
 	m.ParticipantsCount = dbuf.Int()
 	if (flags & (1 << 4)) != 0 {
 		// x.VectorMessage(m.Participants);
+		dbuf.Int()
 		c8 := dbuf.Int()
 		if c8 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c8)
@@ -23548,9 +23765,11 @@ func (m *TLMessagesStickerSet) Encode() []byte {
 }
 
 func (m *TLMessagesStickerSet) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Set = &StickerSet{}
-	m.Decode(dbuf)
+	(*m.Set).Decode(dbuf)
 	// x.VectorMessage(m.Packs);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -23562,6 +23781,7 @@ func (m *TLMessagesStickerSet) Decode(dbuf *DecodeBuf) error {
 		(*m.Packs[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Documents);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -23610,6 +23830,7 @@ func (m *TLBotInfo) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
 	m.Description = dbuf.String()
 	// x.VectorMessage(m.Commands);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -23763,6 +23984,7 @@ func (m *TLKeyboardButtonRow) Encode() []byte {
 
 func (m *TLKeyboardButtonRow) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Buttons);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -23883,6 +24105,7 @@ func (m *TLReplyKeyboardMarkup) Decode(dbuf *DecodeBuf) error {
 		m.Selective = true
 	}
 	// x.VectorMessage(m.Rows);
+	dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -23912,6 +24135,7 @@ func (m *TLReplyInlineMarkup) Encode() []byte {
 
 func (m *TLReplyInlineMarkup) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Rows);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -24124,8 +24348,9 @@ func (m *TLInputMessageEntityMentionName) Encode() []byte {
 func (m *TLInputMessageEntityMentionName) Decode(dbuf *DecodeBuf) error {
 	m.Offset = dbuf.Int()
 	m.Length = dbuf.Int()
+	dbuf.Int()
 	m.UserId = &InputUser{}
-	m.Decode(dbuf)
+	(*m.UserId).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -24178,9 +24403,11 @@ func (m *TLContactsResolvedPeer) Encode() []byte {
 }
 
 func (m *TLContactsResolvedPeer) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Peer = &Peer{}
-	m.Decode(dbuf)
+	(*m.Peer).Decode(dbuf)
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -24192,6 +24419,7 @@ func (m *TLContactsResolvedPeer) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -24321,6 +24549,7 @@ func (m *TLUpdatesChannelDifferenceTooLong) Decode(dbuf *DecodeBuf) error {
 	m.UnreadCount = dbuf.Int()
 	m.UnreadMentionsCount = dbuf.Int()
 	// x.VectorMessage(m.Messages);
+	dbuf.Int()
 	c9 := dbuf.Int()
 	if c9 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c9)
@@ -24332,6 +24561,7 @@ func (m *TLUpdatesChannelDifferenceTooLong) Decode(dbuf *DecodeBuf) error {
 		(*m.Messages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c10 := dbuf.Int()
 	if c10 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c10)
@@ -24343,6 +24573,7 @@ func (m *TLUpdatesChannelDifferenceTooLong) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c11 := dbuf.Int()
 	if c11 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c11)
@@ -24418,6 +24649,7 @@ func (m *TLUpdatesChannelDifference) Decode(dbuf *DecodeBuf) error {
 		m.Timeout = dbuf.Int()
 	}
 	// x.VectorMessage(m.NewMessages);
+	dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -24429,6 +24661,7 @@ func (m *TLUpdatesChannelDifference) Decode(dbuf *DecodeBuf) error {
 		(*m.NewMessages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.OtherUpdates);
+	dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -24440,6 +24673,7 @@ func (m *TLUpdatesChannelDifference) Decode(dbuf *DecodeBuf) error {
 		(*m.OtherUpdates[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c6 := dbuf.Int()
 	if c6 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c6)
@@ -24451,6 +24685,7 @@ func (m *TLUpdatesChannelDifference) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c7 := dbuf.Int()
 	if c7 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c7)
@@ -24505,6 +24740,7 @@ func (m *TLChannelMessagesFilter) Decode(dbuf *DecodeBuf) error {
 		m.ExcludeNewMessages = true
 	}
 	// x.VectorMessage(m.Ranges);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -24594,8 +24830,9 @@ func (m *TLChannelParticipantAdmin) Decode(dbuf *DecodeBuf) error {
 	m.InviterId = dbuf.Int()
 	m.PromotedBy = dbuf.Int()
 	m.Date = dbuf.Int()
+	dbuf.Int()
 	m.AdminRights = &ChannelAdminRights{}
-	m.Decode(dbuf)
+	(*m.AdminRights).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -24628,8 +24865,9 @@ func (m *TLChannelParticipantBanned) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
 	m.KickedBy = dbuf.Int()
 	m.Date = dbuf.Int()
+	dbuf.Int()
 	m.BannedRights = &ChannelBannedRights{}
-	m.Decode(dbuf)
+	(*m.BannedRights).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -24730,6 +24968,7 @@ func (m *TLChannelsChannelParticipants) Encode() []byte {
 func (m *TLChannelsChannelParticipants) Decode(dbuf *DecodeBuf) error {
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Participants);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -24741,6 +24980,7 @@ func (m *TLChannelsChannelParticipants) Decode(dbuf *DecodeBuf) error {
 		(*m.Participants[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -24770,9 +25010,11 @@ func (m *TLChannelsChannelParticipant) Encode() []byte {
 }
 
 func (m *TLChannelsChannelParticipant) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Participant = &ChannelParticipant{}
-	m.Decode(dbuf)
+	(*m.Participant).Decode(dbuf)
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -24834,10 +25076,12 @@ func (m *TLFoundGifCached) Encode() []byte {
 
 func (m *TLFoundGifCached) Decode(dbuf *DecodeBuf) error {
 	m.Url = dbuf.String()
+	dbuf.Int()
 	m.Photo = &Photo{}
-	m.Decode(dbuf)
+	(*m.Photo).Decode(dbuf)
+	dbuf.Int()
 	m.Document = &Document{}
-	m.Decode(dbuf)
+	(*m.Document).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -24859,6 +25103,7 @@ func (m *TLMessagesFoundGifs) Encode() []byte {
 func (m *TLMessagesFoundGifs) Decode(dbuf *DecodeBuf) error {
 	m.NextOffset = dbuf.Int()
 	// x.VectorMessage(m.Results);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -24901,6 +25146,7 @@ func (m *TLMessagesSavedGifs) Encode() []byte {
 func (m *TLMessagesSavedGifs) Decode(dbuf *DecodeBuf) error {
 	m.Hash = dbuf.Int()
 	// x.VectorMessage(m.Gifs);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -24936,8 +25182,9 @@ func (m *TLInputBotInlineMessageMediaAuto) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	m.Caption = dbuf.String()
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
-		m.Decode(dbuf)
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -24986,6 +25233,7 @@ func (m *TLInputBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
 	m.Message = dbuf.String()
 	if (flags & (1 << 1)) != 0 {
 		// x.VectorMessage(m.Entities);
+		dbuf.Int()
 		c3 := dbuf.Int()
 		if c3 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c3)
@@ -24998,8 +25246,9 @@ func (m *TLInputBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
 		}
 	}
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
-		m.Decode(dbuf)
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -25024,11 +25273,13 @@ func (m *TLInputBotInlineMessageMediaGeo) Encode() []byte {
 
 func (m *TLInputBotInlineMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
+	dbuf.Int()
 	m.GeoPoint = &InputGeoPoint{}
-	m.Decode(dbuf)
+	(*m.GeoPoint).Decode(dbuf)
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
-		m.Decode(dbuf)
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -25057,15 +25308,17 @@ func (m *TLInputBotInlineMessageMediaVenue) Encode() []byte {
 
 func (m *TLInputBotInlineMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
+	dbuf.Int()
 	m.GeoPoint = &InputGeoPoint{}
-	m.Decode(dbuf)
+	(*m.GeoPoint).Decode(dbuf)
 	m.Title = dbuf.String()
 	m.Address = dbuf.String()
 	m.Provider = dbuf.String()
 	m.VenueId = dbuf.String()
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
-		m.Decode(dbuf)
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -25096,8 +25349,9 @@ func (m *TLInputBotInlineMessageMediaContact) Decode(dbuf *DecodeBuf) error {
 	m.FirstName = dbuf.String()
 	m.LastName = dbuf.String()
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
-		m.Decode(dbuf)
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -25122,8 +25376,9 @@ func (m *TLInputBotInlineMessageGame) Encode() []byte {
 func (m *TLInputBotInlineMessageGame) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
-		m.Decode(dbuf)
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -25227,8 +25482,9 @@ func (m *TLInputBotInlineResult) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 7)) != 0 {
 		m.Duration = dbuf.Int()
 	}
+	dbuf.Int()
 	m.SendMessage = &InputBotInlineMessage{}
-	m.Decode(dbuf)
+	(*m.SendMessage).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -25246,10 +25502,12 @@ func (m *TLInputBotInlineResultPhoto) Encode() []byte {
 func (m *TLInputBotInlineResultPhoto) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.String()
 	m.Type = dbuf.String()
+	dbuf.Int()
 	m.Photo = &InputPhoto{}
-	m.Decode(dbuf)
+	(*m.Photo).Decode(dbuf)
+	dbuf.Int()
 	m.SendMessage = &InputBotInlineMessage{}
-	m.Decode(dbuf)
+	(*m.SendMessage).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -25290,10 +25548,12 @@ func (m *TLInputBotInlineResultDocument) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 2)) != 0 {
 		m.Description = dbuf.String()
 	}
+	dbuf.Int()
 	m.Document = &InputDocument{}
-	m.Decode(dbuf)
+	(*m.Document).Decode(dbuf)
+	dbuf.Int()
 	m.SendMessage = &InputBotInlineMessage{}
-	m.Decode(dbuf)
+	(*m.SendMessage).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -25310,8 +25570,9 @@ func (m *TLInputBotInlineResultGame) Encode() []byte {
 func (m *TLInputBotInlineResultGame) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.String()
 	m.ShortName = dbuf.String()
+	dbuf.Int()
 	m.SendMessage = &InputBotInlineMessage{}
-	m.Decode(dbuf)
+	(*m.SendMessage).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -25337,8 +25598,9 @@ func (m *TLBotInlineMessageMediaAuto) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	m.Caption = dbuf.String()
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
-		m.Decode(dbuf)
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -25387,6 +25649,7 @@ func (m *TLBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
 	m.Message = dbuf.String()
 	if (flags & (1 << 1)) != 0 {
 		// x.VectorMessage(m.Entities);
+		dbuf.Int()
 		c3 := dbuf.Int()
 		if c3 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c3)
@@ -25399,8 +25662,9 @@ func (m *TLBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
 		}
 	}
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
-		m.Decode(dbuf)
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -25425,11 +25689,13 @@ func (m *TLBotInlineMessageMediaGeo) Encode() []byte {
 
 func (m *TLBotInlineMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
+	dbuf.Int()
 	m.Geo = &GeoPoint{}
-	m.Decode(dbuf)
+	(*m.Geo).Decode(dbuf)
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
-		m.Decode(dbuf)
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -25458,15 +25724,17 @@ func (m *TLBotInlineMessageMediaVenue) Encode() []byte {
 
 func (m *TLBotInlineMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
+	dbuf.Int()
 	m.Geo = &GeoPoint{}
-	m.Decode(dbuf)
+	(*m.Geo).Decode(dbuf)
 	m.Title = dbuf.String()
 	m.Address = dbuf.String()
 	m.Provider = dbuf.String()
 	m.VenueId = dbuf.String()
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
-		m.Decode(dbuf)
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -25497,8 +25765,9 @@ func (m *TLBotInlineMessageMediaContact) Decode(dbuf *DecodeBuf) error {
 	m.FirstName = dbuf.String()
 	m.LastName = dbuf.String()
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
-		m.Decode(dbuf)
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -25602,8 +25871,9 @@ func (m *TLBotInlineResult) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 7)) != 0 {
 		m.Duration = dbuf.Int()
 	}
+	dbuf.Int()
 	m.SendMessage = &BotInlineMessage{}
-	m.Decode(dbuf)
+	(*m.SendMessage).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -25650,12 +25920,14 @@ func (m *TLBotInlineMediaResult) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.String()
 	m.Type = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.Photo = &Photo{}
-		m.Decode(dbuf)
+		(*m.Photo).Decode(dbuf)
 	}
 	if (flags & (1 << 1)) != 0 {
+		dbuf.Int()
 		m.Document = &Document{}
-		m.Decode(dbuf)
+		(*m.Document).Decode(dbuf)
 	}
 	if (flags & (1 << 2)) != 0 {
 		m.Title = dbuf.String()
@@ -25663,8 +25935,9 @@ func (m *TLBotInlineMediaResult) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 3)) != 0 {
 		m.Description = dbuf.String()
 	}
+	dbuf.Int()
 	m.SendMessage = &BotInlineMessage{}
-	m.Decode(dbuf)
+	(*m.SendMessage).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -25716,10 +25989,12 @@ func (m *TLMessagesBotResults) Decode(dbuf *DecodeBuf) error {
 		m.NextOffset = dbuf.String()
 	}
 	if (flags & (1 << 2)) != 0 {
+		dbuf.Int()
 		m.SwitchPm = &InlineBotSwitchPM{}
-		m.Decode(dbuf)
+		(*m.SwitchPm).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Results);
+	dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -26035,6 +26310,7 @@ func (m *TLMessagesPeerDialogs) Encode() []byte {
 
 func (m *TLMessagesPeerDialogs) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Dialogs);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -26046,6 +26322,7 @@ func (m *TLMessagesPeerDialogs) Decode(dbuf *DecodeBuf) error {
 		(*m.Dialogs[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Messages);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -26057,6 +26334,7 @@ func (m *TLMessagesPeerDialogs) Decode(dbuf *DecodeBuf) error {
 		(*m.Messages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -26068,6 +26346,7 @@ func (m *TLMessagesPeerDialogs) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -26078,8 +26357,9 @@ func (m *TLMessagesPeerDialogs) Decode(dbuf *DecodeBuf) error {
 		m.Users[i] = &User{}
 		(*m.Users[i]).Decode(dbuf)
 	}
+	dbuf.Int()
 	m.State = &Updates_State{}
-	m.Decode(dbuf)
+	(*m.State).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -26093,8 +26373,9 @@ func (m *TLTopPeer) Encode() []byte {
 }
 
 func (m *TLTopPeer) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Peer = &Peer{}
-	m.Decode(dbuf)
+	(*m.Peer).Decode(dbuf)
 	m.Rating = dbuf.Double()
 	return dbuf.err
 }
@@ -26182,10 +26463,12 @@ func (m *TLTopPeerCategoryPeers) Encode() []byte {
 }
 
 func (m *TLTopPeerCategoryPeers) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Category = &TopPeerCategory{}
-	m.Decode(dbuf)
+	(*m.Category).Decode(dbuf)
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Peers);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -26240,6 +26523,7 @@ func (m *TLContactsTopPeers) Encode() []byte {
 
 func (m *TLContactsTopPeers) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Categories);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -26251,6 +26535,7 @@ func (m *TLContactsTopPeers) Decode(dbuf *DecodeBuf) error {
 		(*m.Categories[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -26262,6 +26547,7 @@ func (m *TLContactsTopPeers) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -26334,6 +26620,7 @@ func (m *TLDraftMessage) Decode(dbuf *DecodeBuf) error {
 	m.Message = dbuf.String()
 	if (flags & (1 << 3)) != 0 {
 		// x.VectorMessage(m.Entities);
+		dbuf.Int()
 		c4 := dbuf.Int()
 		if c4 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c4)
@@ -26379,6 +26666,7 @@ func (m *TLMessagesFeaturedStickers) Encode() []byte {
 func (m *TLMessagesFeaturedStickers) Decode(dbuf *DecodeBuf) error {
 	m.Hash = dbuf.Int()
 	// x.VectorMessage(m.Sets);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -26422,6 +26710,7 @@ func (m *TLMessagesRecentStickers) Encode() []byte {
 func (m *TLMessagesRecentStickers) Decode(dbuf *DecodeBuf) error {
 	m.Hash = dbuf.Int()
 	// x.VectorMessage(m.Stickers);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -26453,6 +26742,7 @@ func (m *TLMessagesArchivedStickers) Encode() []byte {
 func (m *TLMessagesArchivedStickers) Decode(dbuf *DecodeBuf) error {
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Sets);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -26493,6 +26783,7 @@ func (m *TLMessagesStickerSetInstallResultArchive) Encode() []byte {
 
 func (m *TLMessagesStickerSetInstallResultArchive) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Sets);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -26516,10 +26807,12 @@ func (m *TLStickerSetCovered) Encode() []byte {
 }
 
 func (m *TLStickerSetCovered) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Set = &StickerSet{}
-	m.Decode(dbuf)
+	(*m.Set).Decode(dbuf)
+	dbuf.Int()
 	m.Cover = &Document{}
-	m.Decode(dbuf)
+	(*m.Cover).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -26539,9 +26832,11 @@ func (m *TLStickerSetMultiCovered) Encode() []byte {
 }
 
 func (m *TLStickerSetMultiCovered) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Set = &StickerSet{}
-	m.Decode(dbuf)
+	(*m.Set).Decode(dbuf)
 	// x.VectorMessage(m.Covers);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -26583,8 +26878,9 @@ func (m *TLInputStickeredMediaPhoto) Encode() []byte {
 }
 
 func (m *TLInputStickeredMediaPhoto) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Id = &InputPhoto{}
-	m.Decode(dbuf)
+	(*m.Id).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -26597,8 +26893,9 @@ func (m *TLInputStickeredMediaDocument) Encode() []byte {
 }
 
 func (m *TLInputStickeredMediaDocument) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Id = &InputDocument{}
-	m.Decode(dbuf)
+	(*m.Id).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -26632,11 +26929,13 @@ func (m *TLGame) Decode(dbuf *DecodeBuf) error {
 	m.ShortName = dbuf.String()
 	m.Title = dbuf.String()
 	m.Description = dbuf.String()
+	dbuf.Int()
 	m.Photo = &Photo{}
-	m.Decode(dbuf)
+	(*m.Photo).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.Document = &Document{}
-		m.Decode(dbuf)
+		(*m.Document).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -26666,8 +26965,9 @@ func (m *TLInputGameShortName) Encode() []byte {
 }
 
 func (m *TLInputGameShortName) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.BotId = &InputUser{}
-	m.Decode(dbuf)
+	(*m.BotId).Decode(dbuf)
 	m.ShortName = dbuf.String()
 	return dbuf.err
 }
@@ -26712,6 +27012,7 @@ func (m *TLMessagesHighScores) Encode() []byte {
 
 func (m *TLMessagesHighScores) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Scores);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -26723,6 +27024,7 @@ func (m *TLMessagesHighScores) Decode(dbuf *DecodeBuf) error {
 		(*m.Scores[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -26769,8 +27071,9 @@ func (m *TLTextBold) Encode() []byte {
 }
 
 func (m *TLTextBold) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -26783,8 +27086,9 @@ func (m *TLTextItalic) Encode() []byte {
 }
 
 func (m *TLTextItalic) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -26797,8 +27101,9 @@ func (m *TLTextUnderline) Encode() []byte {
 }
 
 func (m *TLTextUnderline) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -26811,8 +27116,9 @@ func (m *TLTextStrike) Encode() []byte {
 }
 
 func (m *TLTextStrike) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -26825,8 +27131,9 @@ func (m *TLTextFixed) Encode() []byte {
 }
 
 func (m *TLTextFixed) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -26841,8 +27148,9 @@ func (m *TLTextUrl) Encode() []byte {
 }
 
 func (m *TLTextUrl) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
 	m.Url = dbuf.String()
 	m.WebpageId = dbuf.Long()
 	return dbuf.err
@@ -26858,8 +27166,9 @@ func (m *TLTextEmail) Encode() []byte {
 }
 
 func (m *TLTextEmail) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
 	m.Email = dbuf.String()
 	return dbuf.err
 }
@@ -26880,6 +27189,7 @@ func (m *TLTextConcat) Encode() []byte {
 
 func (m *TLTextConcat) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Texts);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -26913,8 +27223,9 @@ func (m *TLPageBlockTitle) Encode() []byte {
 }
 
 func (m *TLPageBlockTitle) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -26927,8 +27238,9 @@ func (m *TLPageBlockSubtitle) Encode() []byte {
 }
 
 func (m *TLPageBlockSubtitle) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -26942,8 +27254,9 @@ func (m *TLPageBlockAuthorDate) Encode() []byte {
 }
 
 func (m *TLPageBlockAuthorDate) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Author = &RichText{}
-	m.Decode(dbuf)
+	(*m.Author).Decode(dbuf)
 	m.PublishedDate = dbuf.Int()
 	return dbuf.err
 }
@@ -26957,8 +27270,9 @@ func (m *TLPageBlockHeader) Encode() []byte {
 }
 
 func (m *TLPageBlockHeader) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -26971,8 +27285,9 @@ func (m *TLPageBlockSubheader) Encode() []byte {
 }
 
 func (m *TLPageBlockSubheader) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -26985,8 +27300,9 @@ func (m *TLPageBlockParagraph) Encode() []byte {
 }
 
 func (m *TLPageBlockParagraph) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -27000,8 +27316,9 @@ func (m *TLPageBlockPreformatted) Encode() []byte {
 }
 
 func (m *TLPageBlockPreformatted) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
 	m.Language = dbuf.String()
 	return dbuf.err
 }
@@ -27015,8 +27332,9 @@ func (m *TLPageBlockFooter) Encode() []byte {
 }
 
 func (m *TLPageBlockFooter) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -27060,9 +27378,11 @@ func (m *TLPageBlockList) Encode() []byte {
 }
 
 func (m *TLPageBlockList) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Ordered = &Bool{}
-	m.Decode(dbuf)
+	(*m.Ordered).Decode(dbuf)
 	// x.VectorMessage(m.Items);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -27086,10 +27406,12 @@ func (m *TLPageBlockBlockquote) Encode() []byte {
 }
 
 func (m *TLPageBlockBlockquote) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
+	dbuf.Int()
 	m.Caption = &RichText{}
-	m.Decode(dbuf)
+	(*m.Caption).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -27103,10 +27425,12 @@ func (m *TLPageBlockPullquote) Encode() []byte {
 }
 
 func (m *TLPageBlockPullquote) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Text = &RichText{}
-	m.Decode(dbuf)
+	(*m.Text).Decode(dbuf)
+	dbuf.Int()
 	m.Caption = &RichText{}
-	m.Decode(dbuf)
+	(*m.Caption).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -27121,8 +27445,9 @@ func (m *TLPageBlockPhoto) Encode() []byte {
 
 func (m *TLPageBlockPhoto) Decode(dbuf *DecodeBuf) error {
 	m.PhotoId = dbuf.Long()
+	dbuf.Int()
 	m.Caption = &RichText{}
-	m.Decode(dbuf)
+	(*m.Caption).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -27160,8 +27485,9 @@ func (m *TLPageBlockVideo) Decode(dbuf *DecodeBuf) error {
 		m.Loop = true
 	}
 	m.VideoId = dbuf.Long()
+	dbuf.Int()
 	m.Caption = &RichText{}
-	m.Decode(dbuf)
+	(*m.Caption).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -27174,8 +27500,9 @@ func (m *TLPageBlockCover) Encode() []byte {
 }
 
 func (m *TLPageBlockCover) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Cover = &PageBlock{}
-	m.Decode(dbuf)
+	(*m.Cover).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -27242,8 +27569,9 @@ func (m *TLPageBlockEmbed) Decode(dbuf *DecodeBuf) error {
 	}
 	m.W = dbuf.Int()
 	m.H = dbuf.Int()
+	dbuf.Int()
 	m.Caption = &RichText{}
-	m.Decode(dbuf)
+	(*m.Caption).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -27274,6 +27602,7 @@ func (m *TLPageBlockEmbedPost) Decode(dbuf *DecodeBuf) error {
 	m.Author = dbuf.String()
 	m.Date = dbuf.Int()
 	// x.VectorMessage(m.Blocks);
+	dbuf.Int()
 	c6 := dbuf.Int()
 	if c6 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c6)
@@ -27284,8 +27613,9 @@ func (m *TLPageBlockEmbedPost) Decode(dbuf *DecodeBuf) error {
 		m.Blocks[i] = &PageBlock{}
 		(*m.Blocks[i]).Decode(dbuf)
 	}
+	dbuf.Int()
 	m.Caption = &RichText{}
-	m.Decode(dbuf)
+	(*m.Caption).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -27306,6 +27636,7 @@ func (m *TLPageBlockCollage) Encode() []byte {
 
 func (m *TLPageBlockCollage) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Items);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -27316,8 +27647,9 @@ func (m *TLPageBlockCollage) Decode(dbuf *DecodeBuf) error {
 		m.Items[i] = &PageBlock{}
 		(*m.Items[i]).Decode(dbuf)
 	}
+	dbuf.Int()
 	m.Caption = &RichText{}
-	m.Decode(dbuf)
+	(*m.Caption).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -27338,6 +27670,7 @@ func (m *TLPageBlockSlideshow) Encode() []byte {
 
 func (m *TLPageBlockSlideshow) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Items);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -27348,8 +27681,9 @@ func (m *TLPageBlockSlideshow) Decode(dbuf *DecodeBuf) error {
 		m.Items[i] = &PageBlock{}
 		(*m.Items[i]).Decode(dbuf)
 	}
+	dbuf.Int()
 	m.Caption = &RichText{}
-	m.Decode(dbuf)
+	(*m.Caption).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -27362,8 +27696,9 @@ func (m *TLPageBlockChannel) Encode() []byte {
 }
 
 func (m *TLPageBlockChannel) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Channel = &Chat{}
-	m.Decode(dbuf)
+	(*m.Channel).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -27378,8 +27713,9 @@ func (m *TLPageBlockAudio) Encode() []byte {
 
 func (m *TLPageBlockAudio) Decode(dbuf *DecodeBuf) error {
 	m.AudioId = dbuf.Long()
+	dbuf.Int()
 	m.Caption = &RichText{}
-	m.Decode(dbuf)
+	(*m.Caption).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -27413,6 +27749,7 @@ func (m *TLPagePart) Encode() []byte {
 
 func (m *TLPagePart) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Blocks);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -27424,6 +27761,7 @@ func (m *TLPagePart) Decode(dbuf *DecodeBuf) error {
 		(*m.Blocks[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Photos);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -27435,6 +27773,7 @@ func (m *TLPagePart) Decode(dbuf *DecodeBuf) error {
 		(*m.Photos[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Documents);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -27478,6 +27817,7 @@ func (m *TLPageFull) Encode() []byte {
 
 func (m *TLPageFull) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Blocks);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -27489,6 +27829,7 @@ func (m *TLPageFull) Decode(dbuf *DecodeBuf) error {
 		(*m.Blocks[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Photos);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -27500,6 +27841,7 @@ func (m *TLPageFull) Decode(dbuf *DecodeBuf) error {
 		(*m.Photos[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Documents);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -27662,6 +28004,7 @@ func (m *TLInvoice) Decode(dbuf *DecodeBuf) error {
 	}
 	m.Currency = dbuf.String()
 	// x.VectorMessage(m.Prices);
+	dbuf.Int()
 	c8 := dbuf.Int()
 	if c8 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c8)
@@ -27760,8 +28103,9 @@ func (m *TLPaymentRequestedInfo) Decode(dbuf *DecodeBuf) error {
 		m.Email = dbuf.String()
 	}
 	if (flags & (1 << 3)) != 0 {
+		dbuf.Int()
 		m.ShippingAddress = &PostAddress{}
-		m.Decode(dbuf)
+		(*m.ShippingAddress).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -27806,6 +28150,7 @@ func (m *TLWebDocument) Decode(dbuf *DecodeBuf) error {
 	m.Size = dbuf.Int()
 	m.MimeType = dbuf.String()
 	// x.VectorMessage(m.Attributes);
+	dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -27842,6 +28187,7 @@ func (m *TLInputWebDocument) Decode(dbuf *DecodeBuf) error {
 	m.Size = dbuf.Int()
 	m.MimeType = dbuf.String()
 	// x.VectorMessage(m.Attributes);
+	dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -27885,8 +28231,9 @@ func (m *TLUploadWebFile) Encode() []byte {
 func (m *TLUploadWebFile) Decode(dbuf *DecodeBuf) error {
 	m.Size = dbuf.Int()
 	m.MimeType = dbuf.String()
+	dbuf.Int()
 	m.FileType = &Storage_FileType{}
-	m.Decode(dbuf)
+	(*m.FileType).Decode(dbuf)
 	m.Mtime = dbuf.Int()
 	m.Bytes = dbuf.StringBytes()
 	return dbuf.err
@@ -27959,26 +28306,31 @@ func (m *TLPaymentsPaymentForm) Decode(dbuf *DecodeBuf) error {
 		m.PasswordMissing = true
 	}
 	m.BotId = dbuf.Int()
+	dbuf.Int()
 	m.Invoice = &Invoice{}
-	m.Decode(dbuf)
+	(*m.Invoice).Decode(dbuf)
 	m.ProviderId = dbuf.Int()
 	m.Url = dbuf.String()
 	if (flags & (1 << 4)) != 0 {
 		m.NativeProvider = dbuf.String()
 	}
 	if (flags & (1 << 4)) != 0 {
+		dbuf.Int()
 		m.NativeParams = &DataJSON{}
-		m.Decode(dbuf)
+		(*m.NativeParams).Decode(dbuf)
 	}
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.SavedInfo = &PaymentRequestedInfo{}
-		m.Decode(dbuf)
+		(*m.SavedInfo).Decode(dbuf)
 	}
 	if (flags & (1 << 1)) != 0 {
+		dbuf.Int()
 		m.SavedCredentials = &PaymentSavedCredentials{}
-		m.Decode(dbuf)
+		(*m.SavedCredentials).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c11 := dbuf.Int()
 	if c11 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c11)
@@ -28028,6 +28380,7 @@ func (m *TLPaymentsValidatedRequestedInfo) Decode(dbuf *DecodeBuf) error {
 	}
 	if (flags & (1 << 1)) != 0 {
 		// x.VectorMessage(m.ShippingOptions);
+		dbuf.Int()
 		c2 := dbuf.Int()
 		if c2 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c2)
@@ -28051,8 +28404,9 @@ func (m *TLPaymentsPaymentResult) Encode() []byte {
 }
 
 func (m *TLPaymentsPaymentResult) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Updates = &Updates{}
-	m.Decode(dbuf)
+	(*m.Updates).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -28110,21 +28464,25 @@ func (m *TLPaymentsPaymentReceipt) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	m.Date = dbuf.Int()
 	m.BotId = dbuf.Int()
+	dbuf.Int()
 	m.Invoice = &Invoice{}
-	m.Decode(dbuf)
+	(*m.Invoice).Decode(dbuf)
 	m.ProviderId = dbuf.Int()
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.Info = &PaymentRequestedInfo{}
-		m.Decode(dbuf)
+		(*m.Info).Decode(dbuf)
 	}
 	if (flags & (1 << 1)) != 0 {
+		dbuf.Int()
 		m.Shipping = &ShippingOption{}
-		m.Decode(dbuf)
+		(*m.Shipping).Decode(dbuf)
 	}
 	m.Currency = dbuf.String()
 	m.TotalAmount = dbuf.Long()
 	m.CredentialsTitle = dbuf.String()
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c10 := dbuf.Int()
 	if c10 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c10)
@@ -28167,8 +28525,9 @@ func (m *TLPaymentsSavedInfo) Decode(dbuf *DecodeBuf) error {
 		m.HasSavedCredentials = true
 	}
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.SavedInfo = &PaymentRequestedInfo{}
-		m.Decode(dbuf)
+		(*m.SavedInfo).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -28211,8 +28570,9 @@ func (m *TLInputPaymentCredentials) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.Save = true
 	}
+	dbuf.Int()
 	m.Data = &DataJSON{}
-	m.Decode(dbuf)
+	(*m.Data).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -28251,6 +28611,7 @@ func (m *TLShippingOption) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.String()
 	m.Title = dbuf.String()
 	// x.VectorMessage(m.Prices);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -28285,12 +28646,14 @@ func (m *TLInputStickerSetItem) Encode() []byte {
 
 func (m *TLInputStickerSetItem) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
+	dbuf.Int()
 	m.Document = &InputDocument{}
-	m.Decode(dbuf)
+	(*m.Document).Decode(dbuf)
 	m.Emoji = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.MaskCoords = &MaskCoords{}
-		m.Decode(dbuf)
+		(*m.MaskCoords).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -28353,8 +28716,9 @@ func (m *TLPhoneCallWaiting) Decode(dbuf *DecodeBuf) error {
 	m.Date = dbuf.Int()
 	m.AdminId = dbuf.Int()
 	m.ParticipantId = dbuf.Int()
+	dbuf.Int()
 	m.Protocol = &PhoneCallProtocol{}
-	m.Decode(dbuf)
+	(*m.Protocol).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
 		m.ReceiveDate = dbuf.Int()
 	}
@@ -28382,8 +28746,9 @@ func (m *TLPhoneCallRequested) Decode(dbuf *DecodeBuf) error {
 	m.AdminId = dbuf.Int()
 	m.ParticipantId = dbuf.Int()
 	m.GAHash = dbuf.StringBytes()
+	dbuf.Int()
 	m.Protocol = &PhoneCallProtocol{}
-	m.Decode(dbuf)
+	(*m.Protocol).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -28408,8 +28773,9 @@ func (m *TLPhoneCallAccepted) Decode(dbuf *DecodeBuf) error {
 	m.AdminId = dbuf.Int()
 	m.ParticipantId = dbuf.Int()
 	m.GB = dbuf.StringBytes()
+	dbuf.Int()
 	m.Protocol = &PhoneCallProtocol{}
-	m.Decode(dbuf)
+	(*m.Protocol).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -28445,11 +28811,14 @@ func (m *TLPhoneCall) Decode(dbuf *DecodeBuf) error {
 	m.ParticipantId = dbuf.Int()
 	m.GAOrB = dbuf.StringBytes()
 	m.KeyFingerprint = dbuf.Long()
+	dbuf.Int()
 	m.Protocol = &PhoneCallProtocol{}
-	m.Decode(dbuf)
+	(*m.Protocol).Decode(dbuf)
+	dbuf.Int()
 	m.Connection = &PhoneConnection{}
-	m.Decode(dbuf)
+	(*m.Connection).Decode(dbuf)
 	// x.VectorMessage(m.AlternativeConnections);
+	dbuf.Int()
 	c10 := dbuf.Int()
 	if c10 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c10)
@@ -28510,8 +28879,9 @@ func (m *TLPhoneCallDiscarded) Decode(dbuf *DecodeBuf) error {
 	}
 	m.Id = dbuf.Long()
 	if (flags & (1 << 0)) != 0 {
+		dbuf.Int()
 		m.Reason = &PhoneCallDiscardReason{}
-		m.Decode(dbuf)
+		(*m.Reason).Decode(dbuf)
 	}
 	if (flags & (1 << 1)) != 0 {
 		m.Duration = dbuf.Int()
@@ -28594,9 +28964,11 @@ func (m *TLPhonePhoneCall) Encode() []byte {
 }
 
 func (m *TLPhonePhoneCall) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.PhoneCall = &PhoneCall{}
-	m.Decode(dbuf)
+	(*m.PhoneCall).Decode(dbuf)
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -28667,6 +29039,7 @@ func (m *TLCdnConfig) Encode() []byte {
 
 func (m *TLCdnConfig) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.PublicKeys);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -28795,6 +29168,7 @@ func (m *TLLangPackDifference) Decode(dbuf *DecodeBuf) error {
 	m.FromVersion = dbuf.Int()
 	m.Version = dbuf.Int()
 	// x.VectorMessage(m.Strings);
+	dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -29067,10 +29441,12 @@ func (m *TLChannelAdminLogEventActionChangePhoto) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionChangePhoto) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.PrevPhoto = &ChatPhoto{}
-	m.Decode(dbuf)
+	(*m.PrevPhoto).Decode(dbuf)
+	dbuf.Int()
 	m.NewPhoto = &ChatPhoto{}
-	m.Decode(dbuf)
+	(*m.NewPhoto).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29083,8 +29459,9 @@ func (m *TLChannelAdminLogEventActionToggleInvites) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionToggleInvites) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.NewValue = &Bool{}
-	m.Decode(dbuf)
+	(*m.NewValue).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29097,8 +29474,9 @@ func (m *TLChannelAdminLogEventActionToggleSignatures) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionToggleSignatures) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.NewValue = &Bool{}
-	m.Decode(dbuf)
+	(*m.NewValue).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29111,8 +29489,9 @@ func (m *TLChannelAdminLogEventActionUpdatePinned) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionUpdatePinned) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Message = &Message{}
-	m.Decode(dbuf)
+	(*m.Message).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29126,10 +29505,12 @@ func (m *TLChannelAdminLogEventActionEditMessage) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionEditMessage) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.PrevMessage = &Message{}
-	m.Decode(dbuf)
+	(*m.PrevMessage).Decode(dbuf)
+	dbuf.Int()
 	m.NewMessage = &Message{}
-	m.Decode(dbuf)
+	(*m.NewMessage).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29142,8 +29523,9 @@ func (m *TLChannelAdminLogEventActionDeleteMessage) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionDeleteMessage) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Message = &Message{}
-	m.Decode(dbuf)
+	(*m.Message).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29178,8 +29560,9 @@ func (m *TLChannelAdminLogEventActionParticipantInvite) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionParticipantInvite) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.Participant = &ChannelParticipant{}
-	m.Decode(dbuf)
+	(*m.Participant).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29193,10 +29576,12 @@ func (m *TLChannelAdminLogEventActionParticipantToggleBan) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionParticipantToggleBan) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.PrevParticipant = &ChannelParticipant{}
-	m.Decode(dbuf)
+	(*m.PrevParticipant).Decode(dbuf)
+	dbuf.Int()
 	m.NewParticipant = &ChannelParticipant{}
-	m.Decode(dbuf)
+	(*m.NewParticipant).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29210,10 +29595,12 @@ func (m *TLChannelAdminLogEventActionParticipantToggleAdmin) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionParticipantToggleAdmin) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.PrevParticipant = &ChannelParticipant{}
-	m.Decode(dbuf)
+	(*m.PrevParticipant).Decode(dbuf)
+	dbuf.Int()
 	m.NewParticipant = &ChannelParticipant{}
-	m.Decode(dbuf)
+	(*m.NewParticipant).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29227,10 +29614,12 @@ func (m *TLChannelAdminLogEventActionChangeStickerSet) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionChangeStickerSet) Decode(dbuf *DecodeBuf) error {
+	dbuf.Int()
 	m.PrevStickerset = &InputStickerSet{}
-	m.Decode(dbuf)
+	(*m.PrevStickerset).Decode(dbuf)
+	dbuf.Int()
 	m.NewStickerset = &InputStickerSet{}
-	m.Decode(dbuf)
+	(*m.NewStickerset).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29249,8 +29638,9 @@ func (m *TLChannelAdminLogEvent) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.Long()
 	m.Date = dbuf.Int()
 	m.UserId = dbuf.Int()
+	dbuf.Int()
 	m.Action = &ChannelAdminLogEventAction{}
-	m.Decode(dbuf)
+	(*m.Action).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29284,6 +29674,7 @@ func (m *TLChannelsAdminLogResults) Encode() []byte {
 
 func (m *TLChannelsAdminLogResults) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Events);
+	dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -29295,6 +29686,7 @@ func (m *TLChannelsAdminLogResults) Decode(dbuf *DecodeBuf) error {
 		(*m.Events[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -29306,6 +29698,7 @@ func (m *TLChannelsAdminLogResults) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -29529,6 +29922,7 @@ func (m *TLMessagesFavedStickers) Encode() []byte {
 func (m *TLMessagesFavedStickers) Decode(dbuf *DecodeBuf) error {
 	m.Hash = dbuf.Int()
 	// x.VectorMessage(m.Packs);
+	dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -29540,6 +29934,7 @@ func (m *TLMessagesFavedStickers) Decode(dbuf *DecodeBuf) error {
 		(*m.Packs[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Stickers);
+	dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -29830,8 +30225,12 @@ func (m *TLAccountUpdateNotifySettings) Encode() []byte {
 }
 
 func (m *TLAccountUpdateNotifySettings) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
-	// x.Bytes(m.Settings.Encode())
+	dbuf.Int()
+	m.Peer = &InputNotifyPeer{}
+	(*m.Peer).Decode(dbuf)
+	dbuf.Int()
+	m.Settings = &InputPeerNotifySettings{}
+	(*m.Settings).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29855,7 +30254,9 @@ func (m *TLAccountUpdateStatus) Encode() []byte {
 }
 
 func (m *TLAccountUpdateStatus) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Offline.Encode())
+	dbuf.Int()
+	m.Offline = &Bool{}
+	(*m.Offline).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29869,8 +30270,12 @@ func (m *TLAccountReportPeer) Encode() []byte {
 }
 
 func (m *TLAccountReportPeer) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
-	// x.Bytes(m.Reason.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
+	dbuf.Int()
+	m.Reason = &ReportReason{}
+	(*m.Reason).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29909,7 +30314,9 @@ func (m *TLAccountSetAccountTTL) Encode() []byte {
 }
 
 func (m *TLAccountSetAccountTTL) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Ttl.Encode())
+	dbuf.Int()
+	m.Ttl = &AccountDaysTTL{}
+	(*m.Ttl).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29950,7 +30357,9 @@ func (m *TLAccountUpdatePasswordSettings) Encode() []byte {
 
 func (m *TLAccountUpdatePasswordSettings) Decode(dbuf *DecodeBuf) error {
 	m.CurrentPasswordHash = dbuf.StringBytes()
-	// x.Bytes(m.NewSettings.Encode())
+	dbuf.Int()
+	m.NewSettings = &Account_PasswordInputSettings{}
+	(*m.NewSettings).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -29992,6 +30401,7 @@ func (m *TLContactsDeleteContacts) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Id = make([]*InputUser, l1)
 	for i := 0; i < int(l1); i++ {
+		dbuf.Int()
 		m.Id[i] = &InputUser{}
 		(*m.Id[i]).Decode(dbuf)
 	}
@@ -30007,7 +30417,9 @@ func (m *TLContactsBlock) Encode() []byte {
 }
 
 func (m *TLContactsBlock) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Id.Encode())
+	dbuf.Int()
+	m.Id = &InputUser{}
+	(*m.Id).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30020,7 +30432,9 @@ func (m *TLContactsUnblock) Encode() []byte {
 }
 
 func (m *TLContactsUnblock) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Id.Encode())
+	dbuf.Int()
+	m.Id = &InputUser{}
+	(*m.Id).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30034,8 +30448,12 @@ func (m *TLContactsResetTopPeerRating) Encode() []byte {
 }
 
 func (m *TLContactsResetTopPeerRating) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Category.Encode())
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Category = &TopPeerCategory{}
+	(*m.Category).Decode(dbuf)
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30060,8 +30478,12 @@ func (m *TLMessagesSetTyping) Encode() []byte {
 }
 
 func (m *TLMessagesSetTyping) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
-	// x.Bytes(m.Action.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
+	dbuf.Int()
+	m.Action = &SendMessageAction{}
+	(*m.Action).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30074,7 +30496,9 @@ func (m *TLMessagesReportSpam) Encode() []byte {
 }
 
 func (m *TLMessagesReportSpam) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30087,7 +30511,9 @@ func (m *TLMessagesHideReportSpam) Encode() []byte {
 }
 
 func (m *TLMessagesHideReportSpam) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30114,8 +30540,12 @@ func (m *TLMessagesSetEncryptedTyping) Encode() []byte {
 }
 
 func (m *TLMessagesSetEncryptedTyping) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
-	// x.Bytes(m.Typing.Encode())
+	dbuf.Int()
+	m.Peer = &InputEncryptedChat{}
+	(*m.Peer).Decode(dbuf)
+	dbuf.Int()
+	m.Typing = &Bool{}
+	(*m.Typing).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30129,7 +30559,9 @@ func (m *TLMessagesReadEncryptedHistory) Encode() []byte {
 }
 
 func (m *TLMessagesReadEncryptedHistory) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputEncryptedChat{}
+	(*m.Peer).Decode(dbuf)
 	m.MaxDate = dbuf.Int()
 	return dbuf.err
 }
@@ -30143,7 +30575,9 @@ func (m *TLMessagesReportEncryptedSpam) Encode() []byte {
 }
 
 func (m *TLMessagesReportEncryptedSpam) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputEncryptedChat{}
+	(*m.Peer).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30156,7 +30590,9 @@ func (m *TLMessagesUninstallStickerSet) Encode() []byte {
 }
 
 func (m *TLMessagesUninstallStickerSet) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Stickerset.Encode())
+	dbuf.Int()
+	m.Stickerset = &InputStickerSet{}
+	(*m.Stickerset).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30172,8 +30608,12 @@ func (m *TLMessagesEditChatAdmin) Encode() []byte {
 
 func (m *TLMessagesEditChatAdmin) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
-	// x.Bytes(m.UserId.Encode())
-	// x.Bytes(m.IsAdmin.Encode())
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
+	dbuf.Int()
+	m.IsAdmin = &Bool{}
+	(*m.IsAdmin).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30214,8 +30654,12 @@ func (m *TLMessagesSaveGif) Encode() []byte {
 }
 
 func (m *TLMessagesSaveGif) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Id.Encode())
-	// x.Bytes(m.Unsave.Encode())
+	dbuf.Int()
+	m.Id = &InputDocument{}
+	(*m.Id).Decode(dbuf)
+	dbuf.Int()
+	m.Unsave = &Bool{}
+	(*m.Unsave).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30280,6 +30724,7 @@ func (m *TLMessagesSetInlineBotResults) Decode(dbuf *DecodeBuf) error {
 	l4 := dbuf.Int()
 	m.Results = make([]*InputBotInlineResult, l4)
 	for i := 0; i < int(l4); i++ {
+		dbuf.Int()
 		m.Results[i] = &InputBotInlineResult{}
 		(*m.Results[i]).Decode(dbuf)
 	}
@@ -30288,7 +30733,9 @@ func (m *TLMessagesSetInlineBotResults) Decode(dbuf *DecodeBuf) error {
 		m.NextOffset = dbuf.String()
 	}
 	if (flags & (1 << 3)) != 0 {
-		// x.Bytes(m.SwitchPm.Encode())
+		dbuf.Int()
+		m.SwitchPm = &InlineBotSwitchPM{}
+		(*m.SwitchPm).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -30340,12 +30787,16 @@ func (m *TLMessagesEditInlineBotMessage) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 1)) != 0 {
 		m.NoWebpage = true
 	}
-	// x.Bytes(m.Id.Encode())
+	dbuf.Int()
+	m.Id = &InputBotInlineMessageID{}
+	(*m.Id).Decode(dbuf)
 	if (flags & (1 << 11)) != 0 {
 		m.Message = dbuf.String()
 	}
 	if (flags & (1 << 2)) != 0 {
-		// x.Bytes(m.ReplyMarkup.Encode())
+		dbuf.Int()
+		m.ReplyMarkup = &ReplyMarkup{}
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	if (flags & (1 << 3)) != 0 {
 		// x.VectorMessage(m.Entities)
@@ -30356,6 +30807,7 @@ func (m *TLMessagesEditInlineBotMessage) Decode(dbuf *DecodeBuf) error {
 		l5 := dbuf.Int()
 		m.Entities = make([]*MessageEntity, l5)
 		for i := 0; i < int(l5); i++ {
+			dbuf.Int()
 			m.Entities[i] = &MessageEntity{}
 			(*m.Entities[i]).Decode(dbuf)
 		}
@@ -30455,7 +30907,9 @@ func (m *TLMessagesSaveDraft) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.ReplyToMsgId = dbuf.Int()
 	}
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	m.Message = dbuf.String()
 	if (flags & (1 << 3)) != 0 {
 		// x.VectorMessage(m.Entities)
@@ -30466,6 +30920,7 @@ func (m *TLMessagesSaveDraft) Decode(dbuf *DecodeBuf) error {
 		l5 := dbuf.Int()
 		m.Entities = make([]*MessageEntity, l5)
 		for i := 0; i < int(l5); i++ {
+			dbuf.Int()
 			m.Entities[i] = &MessageEntity{}
 			(*m.Entities[i]).Decode(dbuf)
 		}
@@ -30510,8 +30965,12 @@ func (m *TLMessagesSaveRecentSticker) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.Attached = true
 	}
-	// x.Bytes(m.Id.Encode())
-	// x.Bytes(m.Unsave.Encode())
+	dbuf.Int()
+	m.Id = &InputDocument{}
+	(*m.Id).Decode(dbuf)
+	dbuf.Int()
+	m.Unsave = &Bool{}
+	(*m.Unsave).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30574,8 +31033,12 @@ func (m *TLMessagesSetInlineGameScore) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 1)) != 0 {
 		m.Force = true
 	}
-	// x.Bytes(m.Id.Encode())
-	// x.Bytes(m.UserId.Encode())
+	dbuf.Int()
+	m.Id = &InputBotInlineMessageID{}
+	(*m.Id).Decode(dbuf)
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
 	m.Score = dbuf.Int()
 	return dbuf.err
 }
@@ -30603,7 +31066,9 @@ func (m *TLMessagesToggleDialogPin) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.Pinned = true
 	}
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30644,6 +31109,7 @@ func (m *TLMessagesReorderPinnedDialogs) Decode(dbuf *DecodeBuf) error {
 	l2 := dbuf.Int()
 	m.Order = make([]*InputPeer, l2)
 	for i := 0; i < int(l2); i++ {
+		dbuf.Int()
 		m.Order[i] = &InputPeer{}
 		(*m.Order[i]).Decode(dbuf)
 	}
@@ -30695,6 +31161,7 @@ func (m *TLMessagesSetBotShippingResults) Decode(dbuf *DecodeBuf) error {
 		l3 := dbuf.Int()
 		m.ShippingOptions = make([]*ShippingOption, l3)
 		for i := 0; i < int(l3); i++ {
+			dbuf.Int()
 			m.ShippingOptions[i] = &ShippingOption{}
 			(*m.ShippingOptions[i]).Decode(dbuf)
 		}
@@ -30748,8 +31215,12 @@ func (m *TLMessagesFaveSticker) Encode() []byte {
 }
 
 func (m *TLMessagesFaveSticker) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Id.Encode())
-	// x.Bytes(m.Unfave.Encode())
+	dbuf.Int()
+	m.Id = &InputDocument{}
+	(*m.Id).Decode(dbuf)
+	dbuf.Int()
+	m.Unfave = &Bool{}
+	(*m.Unfave).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30812,6 +31283,7 @@ func (m *TLHelpSaveAppLog) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Events = make([]*InputAppEvent, l1)
 	for i := 0; i < int(l1); i++ {
+		dbuf.Int()
 		m.Events[i] = &InputAppEvent{}
 		(*m.Events[i]).Decode(dbuf)
 	}
@@ -30843,7 +31315,9 @@ func (m *TLChannelsReadHistory) Encode() []byte {
 }
 
 func (m *TLChannelsReadHistory) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	m.MaxId = dbuf.Int()
 	return dbuf.err
 }
@@ -30859,8 +31333,12 @@ func (m *TLChannelsReportSpam) Encode() []byte {
 }
 
 func (m *TLChannelsReportSpam) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
-	// x.Bytes(m.UserId.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
 	m.Id = dbuf.VectorInt()
 	return dbuf.err
 }
@@ -30875,7 +31353,9 @@ func (m *TLChannelsEditAbout) Encode() []byte {
 }
 
 func (m *TLChannelsEditAbout) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	m.About = dbuf.String()
 	return dbuf.err
 }
@@ -30890,7 +31370,9 @@ func (m *TLChannelsCheckUsername) Encode() []byte {
 }
 
 func (m *TLChannelsCheckUsername) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	m.Username = dbuf.String()
 	return dbuf.err
 }
@@ -30905,7 +31387,9 @@ func (m *TLChannelsUpdateUsername) Encode() []byte {
 }
 
 func (m *TLChannelsUpdateUsername) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	m.Username = dbuf.String()
 	return dbuf.err
 }
@@ -30920,8 +31404,12 @@ func (m *TLChannelsSetStickers) Encode() []byte {
 }
 
 func (m *TLChannelsSetStickers) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
-	// x.Bytes(m.Stickerset.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
+	dbuf.Int()
+	m.Stickerset = &InputStickerSet{}
+	(*m.Stickerset).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30935,7 +31423,9 @@ func (m *TLChannelsReadMessageContents) Encode() []byte {
 }
 
 func (m *TLChannelsReadMessageContents) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	m.Id = dbuf.VectorInt()
 	return dbuf.err
 }
@@ -30951,7 +31441,9 @@ func (m *TLBotsAnswerWebhookJSONQuery) Encode() []byte {
 
 func (m *TLBotsAnswerWebhookJSONQuery) Decode(dbuf *DecodeBuf) error {
 	m.QueryId = dbuf.Long()
-	// x.Bytes(m.Data.Encode())
+	dbuf.Int()
+	m.Data = &DataJSON{}
+	(*m.Data).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -30998,7 +31490,9 @@ func (m *TLPhoneReceivedCall) Encode() []byte {
 }
 
 func (m *TLPhoneReceivedCall) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPhoneCall{}
+	(*m.Peer).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -31012,8 +31506,12 @@ func (m *TLPhoneSaveCallDebug) Encode() []byte {
 }
 
 func (m *TLPhoneSaveCallDebug) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
-	// x.Bytes(m.Debug.Encode())
+	dbuf.Int()
+	m.Peer = &InputPhoneCall{}
+	(*m.Peer).Decode(dbuf)
+	dbuf.Int()
+	m.Debug = &DataJSON{}
+	(*m.Debug).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -31158,7 +31656,9 @@ func (m *TLAuthSendCode) Decode(dbuf *DecodeBuf) error {
 	}
 	m.PhoneNumber = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		// x.Bytes(m.CurrentNumber.Encode())
+		dbuf.Int()
+		m.CurrentNumber = &Bool{}
+		(*m.CurrentNumber).Decode(dbuf)
 	}
 	m.ApiId = dbuf.Int()
 	m.ApiHash = dbuf.String()
@@ -31211,7 +31711,9 @@ func (m *TLAccountSendChangePhoneCode) Decode(dbuf *DecodeBuf) error {
 	}
 	m.PhoneNumber = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		// x.Bytes(m.CurrentNumber.Encode())
+		dbuf.Int()
+		m.CurrentNumber = &Bool{}
+		(*m.CurrentNumber).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -31247,7 +31749,9 @@ func (m *TLAccountSendConfirmPhoneCode) Decode(dbuf *DecodeBuf) error {
 	}
 	m.Hash = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		// x.Bytes(m.CurrentNumber.Encode())
+		dbuf.Int()
+		m.CurrentNumber = &Bool{}
+		(*m.CurrentNumber).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -31381,7 +31885,9 @@ func (m *TLAccountGetNotifySettings) Encode() []byte {
 }
 
 func (m *TLAccountGetNotifySettings) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputNotifyPeer{}
+	(*m.Peer).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -31491,7 +31997,9 @@ func (m *TLAccountGetPrivacy) Encode() []byte {
 }
 
 func (m *TLAccountGetPrivacy) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Key.Encode())
+	dbuf.Int()
+	m.Key = &InputPrivacyKey{}
+	(*m.Key).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -31511,7 +32019,9 @@ func (m *TLAccountSetPrivacy) Encode() []byte {
 }
 
 func (m *TLAccountSetPrivacy) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Key.Encode())
+	dbuf.Int()
+	m.Key = &InputPrivacyKey{}
+	(*m.Key).Decode(dbuf)
 	// x.VectorMessage(m.Rules)
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
@@ -31520,6 +32030,7 @@ func (m *TLAccountSetPrivacy) Decode(dbuf *DecodeBuf) error {
 	l2 := dbuf.Int()
 	m.Rules = make([]*InputPrivacyRule, l2)
 	for i := 0; i < int(l2); i++ {
+		dbuf.Int()
 		m.Rules[i] = &InputPrivacyRule{}
 		(*m.Rules[i]).Decode(dbuf)
 	}
@@ -31610,6 +32121,7 @@ func (m *TLUsersGetUsers) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Id = make([]*InputUser, l1)
 	for i := 0; i < int(l1); i++ {
+		dbuf.Int()
 		m.Id[i] = &InputUser{}
 		(*m.Id[i]).Decode(dbuf)
 	}
@@ -31625,7 +32137,9 @@ func (m *TLUsersGetFullUser) Encode() []byte {
 }
 
 func (m *TLUsersGetFullUser) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Id.Encode())
+	dbuf.Int()
+	m.Id = &InputUser{}
+	(*m.Id).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -31676,6 +32190,7 @@ func (m *TLContactsImportContacts) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Contacts = make([]*InputContact, l1)
 	for i := 0; i < int(l1); i++ {
+		dbuf.Int()
 		m.Contacts[i] = &InputContact{}
 		(*m.Contacts[i]).Decode(dbuf)
 	}
@@ -31691,7 +32206,9 @@ func (m *TLContactsDeleteContact) Encode() []byte {
 }
 
 func (m *TLContactsDeleteContact) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Id.Encode())
+	dbuf.Int()
+	m.Id = &InputUser{}
+	(*m.Id).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -31732,9 +32249,13 @@ func (m *TLMessagesGetMessagesViews) Encode() []byte {
 }
 
 func (m *TLMessagesGetMessagesViews) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	m.Id = dbuf.VectorInt()
-	// x.Bytes(m.Increment.Encode())
+	dbuf.Int()
+	m.Increment = &Bool{}
+	(*m.Increment).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -31870,7 +32391,9 @@ func (m *TLMessagesGetHistory) Encode() []byte {
 }
 
 func (m *TLMessagesGetHistory) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	m.OffsetId = dbuf.Int()
 	m.OffsetDate = dbuf.Int()
 	m.AddOffset = dbuf.Int()
@@ -31909,12 +32432,18 @@ func (m *TLMessagesSearch) Encode() []byte {
 
 func (m *TLMessagesSearch) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	m.Q = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		// x.Bytes(m.FromId.Encode())
+		dbuf.Int()
+		m.FromId = &InputUser{}
+		(*m.FromId).Decode(dbuf)
 	}
-	// x.Bytes(m.Filter.Encode())
+	dbuf.Int()
+	m.Filter = &MessagesFilter{}
+	(*m.Filter).Decode(dbuf)
 	m.MinDate = dbuf.Int()
 	m.MaxDate = dbuf.Int()
 	m.OffsetId = dbuf.Int()
@@ -31940,7 +32469,9 @@ func (m *TLMessagesSearchGlobal) Encode() []byte {
 func (m *TLMessagesSearchGlobal) Decode(dbuf *DecodeBuf) error {
 	m.Q = dbuf.String()
 	m.OffsetDate = dbuf.Int()
-	// x.Bytes(m.OffsetPeer.Encode())
+	dbuf.Int()
+	m.OffsetPeer = &InputPeer{}
+	(*m.OffsetPeer).Decode(dbuf)
 	m.OffsetId = dbuf.Int()
 	m.Limit = dbuf.Int()
 	return dbuf.err
@@ -31960,7 +32491,9 @@ func (m *TLMessagesGetUnreadMentions) Encode() []byte {
 }
 
 func (m *TLMessagesGetUnreadMentions) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	m.OffsetId = dbuf.Int()
 	m.AddOffset = dbuf.Int()
 	m.Limit = dbuf.Int()
@@ -31979,7 +32512,9 @@ func (m *TLChannelsGetMessages) Encode() []byte {
 }
 
 func (m *TLChannelsGetMessages) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	m.Id = dbuf.VectorInt()
 	return dbuf.err
 }
@@ -32012,7 +32547,9 @@ func (m *TLMessagesGetDialogs) Decode(dbuf *DecodeBuf) error {
 	}
 	m.OffsetDate = dbuf.Int()
 	m.OffsetId = dbuf.Int()
-	// x.Bytes(m.OffsetPeer.Encode())
+	dbuf.Int()
+	m.OffsetPeer = &InputPeer{}
+	(*m.OffsetPeer).Decode(dbuf)
 	m.Limit = dbuf.Int()
 	return dbuf.err
 }
@@ -32027,7 +32564,9 @@ func (m *TLMessagesReadHistory) Encode() []byte {
 }
 
 func (m *TLMessagesReadHistory) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	m.MaxId = dbuf.Int()
 	return dbuf.err
 }
@@ -32082,7 +32621,9 @@ func (m *TLChannelsDeleteMessages) Encode() []byte {
 }
 
 func (m *TLChannelsDeleteMessages) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	m.Id = dbuf.VectorInt()
 	return dbuf.err
 }
@@ -32111,7 +32652,9 @@ func (m *TLMessagesDeleteHistory) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.JustClear = true
 	}
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	m.MaxId = dbuf.Int()
 	return dbuf.err
 }
@@ -32126,8 +32669,12 @@ func (m *TLChannelsDeleteUserHistory) Encode() []byte {
 }
 
 func (m *TLChannelsDeleteUserHistory) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
-	// x.Bytes(m.UserId.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -32220,14 +32767,18 @@ func (m *TLMessagesSendMessage) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 7)) != 0 {
 		m.ClearDraft = true
 	}
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
 		m.ReplyToMsgId = dbuf.Int()
 	}
 	m.Message = dbuf.String()
 	m.RandomId = dbuf.Long()
 	if (flags & (1 << 2)) != 0 {
-		// x.Bytes(m.ReplyMarkup.Encode())
+		dbuf.Int()
+		m.ReplyMarkup = &ReplyMarkup{}
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	if (flags & (1 << 3)) != 0 {
 		// x.VectorMessage(m.Entities)
@@ -32238,6 +32789,7 @@ func (m *TLMessagesSendMessage) Decode(dbuf *DecodeBuf) error {
 		l10 := dbuf.Int()
 		m.Entities = make([]*MessageEntity, l10)
 		for i := 0; i < int(l10); i++ {
+			dbuf.Int()
 			m.Entities[i] = &MessageEntity{}
 			(*m.Entities[i]).Decode(dbuf)
 		}
@@ -32300,14 +32852,20 @@ func (m *TLMessagesSendMedia) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 7)) != 0 {
 		m.ClearDraft = true
 	}
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
 		m.ReplyToMsgId = dbuf.Int()
 	}
-	// x.Bytes(m.Media.Encode())
+	dbuf.Int()
+	m.Media = &InputMedia{}
+	(*m.Media).Decode(dbuf)
 	m.RandomId = dbuf.Long()
 	if (flags & (1 << 2)) != 0 {
-		// x.Bytes(m.ReplyMarkup.Encode())
+		dbuf.Int()
+		m.ReplyMarkup = &ReplyMarkup{}
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	return dbuf.err
 }
@@ -32356,10 +32914,14 @@ func (m *TLMessagesForwardMessages) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 8)) != 0 {
 		m.WithMyScore = true
 	}
-	// x.Bytes(m.FromPeer.Encode())
+	dbuf.Int()
+	m.FromPeer = &InputPeer{}
+	(*m.FromPeer).Decode(dbuf)
 	m.Id = dbuf.VectorInt()
 	m.RandomId = dbuf.VectorLong()
-	// x.Bytes(m.ToPeer.Encode())
+	dbuf.Int()
+	m.ToPeer = &InputPeer{}
+	(*m.ToPeer).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -32389,7 +32951,9 @@ func (m *TLMessagesEditChatPhoto) Encode() []byte {
 
 func (m *TLMessagesEditChatPhoto) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
-	// x.Bytes(m.Photo.Encode())
+	dbuf.Int()
+	m.Photo = &InputChatPhoto{}
+	(*m.Photo).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -32405,7 +32969,9 @@ func (m *TLMessagesAddChatUser) Encode() []byte {
 
 func (m *TLMessagesAddChatUser) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
-	// x.Bytes(m.UserId.Encode())
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
 	m.FwdLimit = dbuf.Int()
 	return dbuf.err
 }
@@ -32421,7 +32987,9 @@ func (m *TLMessagesDeleteChatUser) Encode() []byte {
 
 func (m *TLMessagesDeleteChatUser) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
-	// x.Bytes(m.UserId.Encode())
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -32449,6 +33017,7 @@ func (m *TLMessagesCreateChat) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Users = make([]*InputUser, l1)
 	for i := 0; i < int(l1); i++ {
+		dbuf.Int()
 		m.Users[i] = &InputUser{}
 		(*m.Users[i]).Decode(dbuf)
 	}
@@ -32467,7 +33036,9 @@ func (m *TLMessagesForwardMessage) Encode() []byte {
 }
 
 func (m *TLMessagesForwardMessage) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	m.Id = dbuf.Int()
 	m.RandomId = dbuf.Long()
 	return dbuf.err
@@ -32498,8 +33069,12 @@ func (m *TLMessagesStartBot) Encode() []byte {
 }
 
 func (m *TLMessagesStartBot) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Bot.Encode())
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Bot = &InputUser{}
+	(*m.Bot).Decode(dbuf)
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	m.RandomId = dbuf.Long()
 	m.StartParam = dbuf.String()
 	return dbuf.err
@@ -32516,7 +33091,9 @@ func (m *TLMessagesToggleChatAdmins) Encode() []byte {
 
 func (m *TLMessagesToggleChatAdmins) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
-	// x.Bytes(m.Enabled.Encode())
+	dbuf.Int()
+	m.Enabled = &Bool{}
+	(*m.Enabled).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -32583,7 +33160,9 @@ func (m *TLMessagesSendInlineBotResult) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 7)) != 0 {
 		m.ClearDraft = true
 	}
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
 		m.ReplyToMsgId = dbuf.Int()
 	}
@@ -32641,13 +33220,17 @@ func (m *TLMessagesEditMessage) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 1)) != 0 {
 		m.NoWebpage = true
 	}
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	m.Id = dbuf.Int()
 	if (flags & (1 << 11)) != 0 {
 		m.Message = dbuf.String()
 	}
 	if (flags & (1 << 2)) != 0 {
-		// x.Bytes(m.ReplyMarkup.Encode())
+		dbuf.Int()
+		m.ReplyMarkup = &ReplyMarkup{}
+		(*m.ReplyMarkup).Decode(dbuf)
 	}
 	if (flags & (1 << 3)) != 0 {
 		// x.VectorMessage(m.Entities)
@@ -32658,6 +33241,7 @@ func (m *TLMessagesEditMessage) Decode(dbuf *DecodeBuf) error {
 		l6 := dbuf.Int()
 		m.Entities = make([]*MessageEntity, l6)
 		for i := 0; i < int(l6); i++ {
+			dbuf.Int()
 			m.Entities[i] = &MessageEntity{}
 			(*m.Entities[i]).Decode(dbuf)
 		}
@@ -32711,9 +33295,13 @@ func (m *TLMessagesSetGameScore) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 1)) != 0 {
 		m.Force = true
 	}
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	m.Id = dbuf.Int()
-	// x.Bytes(m.UserId.Encode())
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
 	m.Score = dbuf.Int()
 	return dbuf.err
 }
@@ -32729,7 +33317,9 @@ func (m *TLMessagesSendScreenshotNotification) Encode() []byte {
 }
 
 func (m *TLMessagesSendScreenshotNotification) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	m.ReplyToMsgId = dbuf.Int()
 	m.RandomId = dbuf.Long()
 	return dbuf.err
@@ -32797,9 +33387,15 @@ func (m *TLChannelsEditAdmin) Encode() []byte {
 }
 
 func (m *TLChannelsEditAdmin) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
-	// x.Bytes(m.UserId.Encode())
-	// x.Bytes(m.AdminRights.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
+	dbuf.Int()
+	m.AdminRights = &ChannelAdminRights{}
+	(*m.AdminRights).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -32813,7 +33409,9 @@ func (m *TLChannelsEditTitle) Encode() []byte {
 }
 
 func (m *TLChannelsEditTitle) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	m.Title = dbuf.String()
 	return dbuf.err
 }
@@ -32828,8 +33426,12 @@ func (m *TLChannelsEditPhoto) Encode() []byte {
 }
 
 func (m *TLChannelsEditPhoto) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
-	// x.Bytes(m.Photo.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
+	dbuf.Int()
+	m.Photo = &InputChatPhoto{}
+	(*m.Photo).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -32842,7 +33444,9 @@ func (m *TLChannelsJoinChannel) Encode() []byte {
 }
 
 func (m *TLChannelsJoinChannel) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -32855,7 +33459,9 @@ func (m *TLChannelsLeaveChannel) Encode() []byte {
 }
 
 func (m *TLChannelsLeaveChannel) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -32875,7 +33481,9 @@ func (m *TLChannelsInviteToChannel) Encode() []byte {
 }
 
 func (m *TLChannelsInviteToChannel) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	// x.VectorMessage(m.Users)
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
@@ -32884,6 +33492,7 @@ func (m *TLChannelsInviteToChannel) Decode(dbuf *DecodeBuf) error {
 	l2 := dbuf.Int()
 	m.Users = make([]*InputUser, l2)
 	for i := 0; i < int(l2); i++ {
+		dbuf.Int()
 		m.Users[i] = &InputUser{}
 		(*m.Users[i]).Decode(dbuf)
 	}
@@ -32899,7 +33508,9 @@ func (m *TLChannelsDeleteChannel) Encode() []byte {
 }
 
 func (m *TLChannelsDeleteChannel) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -32913,8 +33524,12 @@ func (m *TLChannelsToggleInvites) Encode() []byte {
 }
 
 func (m *TLChannelsToggleInvites) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
-	// x.Bytes(m.Enabled.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
+	dbuf.Int()
+	m.Enabled = &Bool{}
+	(*m.Enabled).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -32928,8 +33543,12 @@ func (m *TLChannelsToggleSignatures) Encode() []byte {
 }
 
 func (m *TLChannelsToggleSignatures) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
-	// x.Bytes(m.Enabled.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
+	dbuf.Int()
+	m.Enabled = &Bool{}
+	(*m.Enabled).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -32957,7 +33576,9 @@ func (m *TLChannelsUpdatePinnedMessage) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.Silent = true
 	}
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	m.Id = dbuf.Int()
 	return dbuf.err
 }
@@ -32973,9 +33594,15 @@ func (m *TLChannelsEditBanned) Encode() []byte {
 }
 
 func (m *TLChannelsEditBanned) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
-	// x.Bytes(m.UserId.Encode())
-	// x.Bytes(m.BannedRights.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
+	dbuf.Int()
+	m.BannedRights = &ChannelBannedRights{}
+	(*m.BannedRights).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -32991,9 +33618,13 @@ func (m *TLPhoneDiscardCall) Encode() []byte {
 }
 
 func (m *TLPhoneDiscardCall) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPhoneCall{}
+	(*m.Peer).Decode(dbuf)
 	m.Duration = dbuf.Int()
-	// x.Bytes(m.Reason.Encode())
+	dbuf.Int()
+	m.Reason = &PhoneCallDiscardReason{}
+	(*m.Reason).Decode(dbuf)
 	m.ConnectionId = dbuf.Long()
 	return dbuf.err
 }
@@ -33009,7 +33640,9 @@ func (m *TLPhoneSetCallRating) Encode() []byte {
 }
 
 func (m *TLPhoneSetCallRating) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPhoneCall{}
+	(*m.Peer).Decode(dbuf)
 	m.Rating = dbuf.Int()
 	m.Comment = dbuf.String()
 	return dbuf.err
@@ -33024,7 +33657,9 @@ func (m *TLMessagesGetPeerSettings) Encode() []byte {
 }
 
 func (m *TLMessagesGetPeerSettings) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -33052,7 +33687,9 @@ func (m *TLMessagesGetCommonChats) Encode() []byte {
 }
 
 func (m *TLMessagesGetCommonChats) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.UserId.Encode())
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
 	m.MaxId = dbuf.Int()
 	m.Limit = dbuf.Int()
 	return dbuf.err
@@ -33094,6 +33731,7 @@ func (m *TLChannelsGetChannels) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Id = make([]*InputChannel, l1)
 	for i := 0; i < int(l1); i++ {
+		dbuf.Int()
 		m.Id[i] = &InputChannel{}
 		(*m.Id[i]).Decode(dbuf)
 	}
@@ -33133,7 +33771,9 @@ func (m *TLChannelsGetFullChannel) Encode() []byte {
 }
 
 func (m *TLChannelsGetFullChannel) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -33163,7 +33803,9 @@ func (m *TLMessagesRequestEncryption) Encode() []byte {
 }
 
 func (m *TLMessagesRequestEncryption) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.UserId.Encode())
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
 	m.RandomId = dbuf.Int()
 	m.GA = dbuf.StringBytes()
 	return dbuf.err
@@ -33180,7 +33822,9 @@ func (m *TLMessagesAcceptEncryption) Encode() []byte {
 }
 
 func (m *TLMessagesAcceptEncryption) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputEncryptedChat{}
+	(*m.Peer).Decode(dbuf)
 	m.GB = dbuf.StringBytes()
 	m.KeyFingerprint = dbuf.Long()
 	return dbuf.err
@@ -33197,7 +33841,9 @@ func (m *TLMessagesSendEncrypted) Encode() []byte {
 }
 
 func (m *TLMessagesSendEncrypted) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputEncryptedChat{}
+	(*m.Peer).Decode(dbuf)
 	m.RandomId = dbuf.Long()
 	m.Data = dbuf.StringBytes()
 	return dbuf.err
@@ -33215,10 +33861,14 @@ func (m *TLMessagesSendEncryptedFile) Encode() []byte {
 }
 
 func (m *TLMessagesSendEncryptedFile) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputEncryptedChat{}
+	(*m.Peer).Decode(dbuf)
 	m.RandomId = dbuf.Long()
 	m.Data = dbuf.StringBytes()
-	// x.Bytes(m.File.Encode())
+	dbuf.Int()
+	m.File = &InputEncryptedFile{}
+	(*m.File).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -33233,7 +33883,9 @@ func (m *TLMessagesSendEncryptedService) Encode() []byte {
 }
 
 func (m *TLMessagesSendEncryptedService) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputEncryptedChat{}
+	(*m.Peer).Decode(dbuf)
 	m.RandomId = dbuf.Long()
 	m.Data = dbuf.StringBytes()
 	return dbuf.err
@@ -33275,6 +33927,7 @@ func (m *TLPhotosDeletePhotos) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Id = make([]*InputPhoto, l1)
 	for i := 0; i < int(l1); i++ {
+		dbuf.Int()
 		m.Id[i] = &InputPhoto{}
 		(*m.Id[i]).Decode(dbuf)
 	}
@@ -33330,8 +33983,12 @@ func (m *TLMessagesUploadMedia) Encode() []byte {
 }
 
 func (m *TLMessagesUploadMedia) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
-	// x.Bytes(m.Media.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
+	dbuf.Int()
+	m.Media = &InputMedia{}
+	(*m.Media).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -33357,7 +34014,9 @@ func (m *TLChannelsExportInvite) Encode() []byte {
 }
 
 func (m *TLChannelsExportInvite) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -33383,7 +34042,9 @@ func (m *TLMessagesGetStickerSet) Encode() []byte {
 }
 
 func (m *TLMessagesGetStickerSet) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Stickerset.Encode())
+	dbuf.Int()
+	m.Stickerset = &InputStickerSet{}
+	(*m.Stickerset).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -33419,7 +34080,9 @@ func (m *TLStickersCreateStickerSet) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.Masks = true
 	}
-	// x.Bytes(m.UserId.Encode())
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
 	m.Title = dbuf.String()
 	m.ShortName = dbuf.String()
 	// x.VectorMessage(m.Stickers)
@@ -33430,6 +34093,7 @@ func (m *TLStickersCreateStickerSet) Decode(dbuf *DecodeBuf) error {
 	l5 := dbuf.Int()
 	m.Stickers = make([]*InputStickerSetItem, l5)
 	for i := 0; i < int(l5); i++ {
+		dbuf.Int()
 		m.Stickers[i] = &InputStickerSetItem{}
 		(*m.Stickers[i]).Decode(dbuf)
 	}
@@ -33445,7 +34109,9 @@ func (m *TLStickersRemoveStickerFromSet) Encode() []byte {
 }
 
 func (m *TLStickersRemoveStickerFromSet) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Sticker.Encode())
+	dbuf.Int()
+	m.Sticker = &InputDocument{}
+	(*m.Sticker).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -33459,7 +34125,9 @@ func (m *TLStickersChangeStickerPosition) Encode() []byte {
 }
 
 func (m *TLStickersChangeStickerPosition) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Sticker.Encode())
+	dbuf.Int()
+	m.Sticker = &InputDocument{}
+	(*m.Sticker).Decode(dbuf)
 	m.Position = dbuf.Int()
 	return dbuf.err
 }
@@ -33474,8 +34142,12 @@ func (m *TLStickersAddStickerToSet) Encode() []byte {
 }
 
 func (m *TLStickersAddStickerToSet) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Stickerset.Encode())
-	// x.Bytes(m.Sticker.Encode())
+	dbuf.Int()
+	m.Stickerset = &InputStickerSet{}
+	(*m.Stickerset).Decode(dbuf)
+	dbuf.Int()
+	m.Sticker = &InputStickerSetItem{}
+	(*m.Sticker).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -33489,8 +34161,12 @@ func (m *TLMessagesInstallStickerSet) Encode() []byte {
 }
 
 func (m *TLMessagesInstallStickerSet) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Stickerset.Encode())
-	// x.Bytes(m.Archived.Encode())
+	dbuf.Int()
+	m.Stickerset = &InputStickerSet{}
+	(*m.Stickerset).Decode(dbuf)
+	dbuf.Int()
+	m.Archived = &Bool{}
+	(*m.Archived).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -33562,10 +34238,16 @@ func (m *TLMessagesGetInlineBotResults) Encode() []byte {
 
 func (m *TLMessagesGetInlineBotResults) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
-	// x.Bytes(m.Bot.Encode())
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Bot = &InputUser{}
+	(*m.Bot).Decode(dbuf)
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
-		// x.Bytes(m.GeoPoint.Encode())
+		dbuf.Int()
+		m.GeoPoint = &InputGeoPoint{}
+		(*m.GeoPoint).Decode(dbuf)
 	}
 	m.Query = dbuf.String()
 	m.Offset = dbuf.String()
@@ -33582,7 +34264,9 @@ func (m *TLMessagesGetMessageEditData) Encode() []byte {
 }
 
 func (m *TLMessagesGetMessageEditData) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	m.Id = dbuf.Int()
 	return dbuf.err
 }
@@ -33617,7 +34301,9 @@ func (m *TLMessagesGetBotCallbackAnswer) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 1)) != 0 {
 		m.Game = true
 	}
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	m.MsgId = dbuf.Int()
 	if (flags & (1 << 0)) != 0 {
 		m.Data = dbuf.StringBytes()
@@ -33648,6 +34334,7 @@ func (m *TLMessagesGetPeerDialogs) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Peers = make([]*InputPeer, l1)
 	for i := 0; i < int(l1); i++ {
+		dbuf.Int()
 		m.Peers[i] = &InputPeer{}
 		(*m.Peers[i]).Decode(dbuf)
 	}
@@ -33743,7 +34430,9 @@ func (m *TLMessagesGetAttachedStickers) Encode() []byte {
 }
 
 func (m *TLMessagesGetAttachedStickers) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Media.Encode())
+	dbuf.Int()
+	m.Media = &InputStickeredMedia{}
+	(*m.Media).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -33758,9 +34447,13 @@ func (m *TLMessagesGetGameHighScores) Encode() []byte {
 }
 
 func (m *TLMessagesGetGameHighScores) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPeer{}
+	(*m.Peer).Decode(dbuf)
 	m.Id = dbuf.Int()
-	// x.Bytes(m.UserId.Encode())
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -33774,8 +34467,12 @@ func (m *TLMessagesGetInlineGameHighScores) Encode() []byte {
 }
 
 func (m *TLMessagesGetInlineGameHighScores) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Id.Encode())
-	// x.Bytes(m.UserId.Encode())
+	dbuf.Int()
+	m.Id = &InputBotInlineMessageID{}
+	(*m.Id).Decode(dbuf)
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -33875,8 +34572,12 @@ func (m *TLUpdatesGetChannelDifference) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.Force = true
 	}
-	// x.Bytes(m.Channel.Encode())
-	// x.Bytes(m.Filter.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
+	dbuf.Int()
+	m.Filter = &ChannelMessagesFilter{}
+	(*m.Filter).Decode(dbuf)
 	m.Pts = dbuf.Int()
 	m.Limit = dbuf.Int()
 	return dbuf.err
@@ -33891,7 +34592,9 @@ func (m *TLPhotosUpdateProfilePhoto) Encode() []byte {
 }
 
 func (m *TLPhotosUpdateProfilePhoto) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Id.Encode())
+	dbuf.Int()
+	m.Id = &InputPhoto{}
+	(*m.Id).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -33904,7 +34607,9 @@ func (m *TLPhotosUploadProfilePhoto) Encode() []byte {
 }
 
 func (m *TLPhotosUploadProfilePhoto) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.File.Encode())
+	dbuf.Int()
+	m.File = &InputFile{}
+	(*m.File).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -33920,7 +34625,9 @@ func (m *TLPhotosGetUserPhotos) Encode() []byte {
 }
 
 func (m *TLPhotosGetUserPhotos) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.UserId.Encode())
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
 	m.Offset = dbuf.Int()
 	m.MaxId = dbuf.Long()
 	m.Limit = dbuf.Int()
@@ -33938,7 +34645,9 @@ func (m *TLUploadGetFile) Encode() []byte {
 }
 
 func (m *TLUploadGetFile) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Location.Encode())
+	dbuf.Int()
+	m.Location = &InputFileLocation{}
+	(*m.Location).Decode(dbuf)
 	m.Offset = dbuf.Int()
 	m.Limit = dbuf.Int()
 	return dbuf.err
@@ -33955,7 +34664,9 @@ func (m *TLUploadGetWebFile) Encode() []byte {
 }
 
 func (m *TLUploadGetWebFile) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Location.Encode())
+	dbuf.Int()
+	m.Location = &InputWebFileLocation{}
+	(*m.Location).Decode(dbuf)
 	m.Offset = dbuf.Int()
 	m.Limit = dbuf.Int()
 	return dbuf.err
@@ -34097,8 +34808,12 @@ func (m *TLChannelsGetParticipants) Encode() []byte {
 }
 
 func (m *TLChannelsGetParticipants) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
-	// x.Bytes(m.Filter.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
+	dbuf.Int()
+	m.Filter = &ChannelParticipantsFilter{}
+	(*m.Filter).Decode(dbuf)
 	m.Offset = dbuf.Int()
 	m.Limit = dbuf.Int()
 	return dbuf.err
@@ -34114,8 +34829,12 @@ func (m *TLChannelsGetParticipant) Encode() []byte {
 }
 
 func (m *TLChannelsGetParticipant) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
-	// x.Bytes(m.UserId.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -34129,7 +34848,9 @@ func (m *TLChannelsExportMessageLink) Encode() []byte {
 }
 
 func (m *TLChannelsExportMessageLink) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	m.Id = dbuf.Int()
 	return dbuf.err
 }
@@ -34170,10 +34891,14 @@ func (m *TLChannelsGetAdminLog) Encode() []byte {
 
 func (m *TLChannelsGetAdminLog) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
-	// x.Bytes(m.Channel.Encode())
+	dbuf.Int()
+	m.Channel = &InputChannel{}
+	(*m.Channel).Decode(dbuf)
 	m.Q = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		// x.Bytes(m.EventsFilter.Encode())
+		dbuf.Int()
+		m.EventsFilter = &ChannelAdminLogEventsFilter{}
+		(*m.EventsFilter).Decode(dbuf)
 	}
 	if (flags & (1 << 1)) != 0 {
 		// x.VectorMessage(m.Admins)
@@ -34184,6 +34909,7 @@ func (m *TLChannelsGetAdminLog) Decode(dbuf *DecodeBuf) error {
 		l4 := dbuf.Int()
 		m.Admins = make([]*InputUser, l4)
 		for i := 0; i < int(l4); i++ {
+			dbuf.Int()
 			m.Admins[i] = &InputUser{}
 			(*m.Admins[i]).Decode(dbuf)
 		}
@@ -34205,7 +34931,9 @@ func (m *TLBotsSendCustomRequest) Encode() []byte {
 
 func (m *TLBotsSendCustomRequest) Decode(dbuf *DecodeBuf) error {
 	m.CustomMethod = dbuf.String()
-	// x.Bytes(m.Params.Encode())
+	dbuf.Int()
+	m.Params = &DataJSON{}
+	(*m.Params).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -34271,7 +34999,9 @@ func (m *TLPaymentsValidateRequestedInfo) Decode(dbuf *DecodeBuf) error {
 		m.Save = true
 	}
 	m.MsgId = dbuf.Int()
-	// x.Bytes(m.Info.Encode())
+	dbuf.Int()
+	m.Info = &PaymentRequestedInfo{}
+	(*m.Info).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -34309,7 +35039,9 @@ func (m *TLPaymentsSendPaymentForm) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 1)) != 0 {
 		m.ShippingOptionId = dbuf.String()
 	}
-	// x.Bytes(m.Credentials.Encode())
+	dbuf.Int()
+	m.Credentials = &InputPaymentCredentials{}
+	(*m.Credentials).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -34336,10 +35068,14 @@ func (m *TLPhoneRequestCall) Encode() []byte {
 }
 
 func (m *TLPhoneRequestCall) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.UserId.Encode())
+	dbuf.Int()
+	m.UserId = &InputUser{}
+	(*m.UserId).Decode(dbuf)
 	m.RandomId = dbuf.Int()
 	m.GAHash = dbuf.StringBytes()
-	// x.Bytes(m.Protocol.Encode())
+	dbuf.Int()
+	m.Protocol = &PhoneCallProtocol{}
+	(*m.Protocol).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -34354,9 +35090,13 @@ func (m *TLPhoneAcceptCall) Encode() []byte {
 }
 
 func (m *TLPhoneAcceptCall) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPhoneCall{}
+	(*m.Peer).Decode(dbuf)
 	m.GB = dbuf.StringBytes()
-	// x.Bytes(m.Protocol.Encode())
+	dbuf.Int()
+	m.Protocol = &PhoneCallProtocol{}
+	(*m.Protocol).Decode(dbuf)
 	return dbuf.err
 }
 
@@ -34372,10 +35112,14 @@ func (m *TLPhoneConfirmCall) Encode() []byte {
 }
 
 func (m *TLPhoneConfirmCall) Decode(dbuf *DecodeBuf) error {
-	// x.Bytes(m.Peer.Encode())
+	dbuf.Int()
+	m.Peer = &InputPhoneCall{}
+	(*m.Peer).Decode(dbuf)
 	m.GA = dbuf.StringBytes()
 	m.KeyFingerprint = dbuf.Long()
-	// x.Bytes(m.Protocol.Encode())
+	dbuf.Int()
+	m.Protocol = &PhoneCallProtocol{}
+	(*m.Protocol).Decode(dbuf)
 	return dbuf.err
 }
 

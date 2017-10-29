@@ -21,6 +21,7 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
+	"errors"
 )
 
 type MessagesServiceImpl struct {
@@ -432,8 +433,8 @@ func (s *MessagesServiceImpl) MessagesGetPeerDialogs(ctx context.Context, reques
 }
 
 func (s *MessagesServiceImpl) MessagesGetPinnedDialogs(ctx context.Context, request *mtproto.TLMessagesGetPinnedDialogs) (*mtproto.Messages_PeerDialogs, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("MessagesGetPinnedDialogs - Process: {%v}", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *MessagesServiceImpl) MessagesGetFeaturedStickers(ctx context.Context, request *mtproto.TLMessagesGetFeaturedStickers) (*mtproto.Messages_FeaturedStickers, error) {

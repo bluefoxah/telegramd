@@ -25,7 +25,6 @@ import (
 	"net"
 	"github.com/golang/glog"
 	"errors"
-	"encoding/hex"
 )
 
 const (
@@ -137,14 +136,14 @@ func (m *MTProtoCodec) Receive() (interface{}, error) {
 		// glog.Info("Recv authKeyId is 1")
 		message.NeedAck = needAck
 		err = message.decode(buf[8:])
-		glog.Info("UnencryptedMessage decode ended!")
+		// glog.Info("UnencryptedMessage decode ended!")
 		if err != nil {
 			return nil, err
 		}
 		// glog.Info("Recv authKeyId is 3", message)
 		return message, nil
 	} else {
-		glog.Info("Recv authKeyId not 0")
+		// glog.Info("Recv authKeyId not 0")
 
 		// TODO(@benqi): 检查m.State状态，authKeyId不为0时codec状态必须是CODEC_AUTH_KEY_OK或CODEC_resPQ
 		if m.State != CODEC_AUTH_KEY_OK && m.State != CODEC_resPQ && m.State != CODEC_dh_gen_ok {
@@ -158,7 +157,7 @@ func (m *MTProtoCodec) Receive() (interface{}, error) {
 			}
 			m.AuthKeyId = authKeyId
 			m.AuthKey = key
-			glog.Info("Found key, keyId: ", authKeyId, ", key: ", hex.EncodeToString(key))
+			// glog.Info("Found key, keyId: ", authKeyId, ", key: ", hex.EncodeToString(key))
 		} else if m.AuthKeyId != authKeyId {
 			return nil, fmt.Errorf("Key error, cacheKey is ", m.AuthKeyId, ", recved keyId is ", authKeyId)
 		}
