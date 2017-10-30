@@ -21,17 +21,20 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
+	"errors"
+	"github.com/nebulaim/telegramd/base/orm"
 )
 
 type UsersServiceImpl struct {
+	zorm orm.Ormer
 }
 
 // func (s *UsersServiceImpl)UsersGetUsers(ctx context.Context,  request *mtproto.TLUsersGetUsers) (*mtproto.Vector<User>, error) {
-//   glog.Info("Process: %v", request)
-//   return nil, nil
+//	 glog.Infof("UsersGetFullUser - Process: {%v}", request)
+//   return nil, errors.New("UsersGetFullUser - Not impl")
 // }
 
 func (s *UsersServiceImpl) UsersGetFullUser(ctx context.Context, request *mtproto.TLUsersGetFullUser) (*mtproto.UserFull, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("UsersGetFullUser - Process: {%v}", request)
+	return nil, errors.New("UsersGetFullUser - Not impl")
 }

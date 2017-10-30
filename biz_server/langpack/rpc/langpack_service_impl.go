@@ -25,6 +25,7 @@ import (
 	"github.com/BurntSushi/toml"
 	"fmt"
 	"github.com/nebulaim/telegramd/biz_server/langpack/model"
+	"github.com/nebulaim/telegramd/base/orm"
 )
 
 const (
@@ -32,6 +33,7 @@ const (
 )
 
 type LangpackServiceImpl struct {
+	zorm orm.Ormer
 }
 
 func (s *LangpackServiceImpl) LangpackGetLangPack(ctx context.Context, request *mtproto.TLLangpackGetLangPack) (*mtproto.LangPackDifference, error) {
@@ -64,7 +66,7 @@ func (s *LangpackServiceImpl) LangpackGetLangPack(ctx context.Context, request *
 
 func (s *LangpackServiceImpl) LangpackGetDifference(ctx context.Context, request *mtproto.TLLangpackGetDifference) (*mtproto.LangPackDifference, error) {
 	glog.Infof("LangpackGetDifference - Process: %v", request)
-	return nil, errors.New("Not impl")
+	return nil, errors.New("LangpackGetDifference - Not impl")
 }
 
 // func (s *LangpackServiceImpl)LangpackGetStrings(ctx context.Context,  request *mtproto.TLLangpackGetStrings) (*mtproto.Vector<LangPackString>, error) {

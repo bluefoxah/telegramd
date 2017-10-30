@@ -21,22 +21,25 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
+	"errors"
+	"github.com/nebulaim/telegramd/base/orm"
 )
 
 type UpdatesServiceImpl struct {
+	zorm orm.Ormer
 }
 
 func (s *UpdatesServiceImpl) UpdatesGetState(ctx context.Context, request *mtproto.TLUpdatesGetState) (*mtproto.Updates_State, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("UpdatesGetState - Process: {%v}", request)
+	return nil, errors.New("UpdatesGetState - Not impl")
 }
 
 func (s *UpdatesServiceImpl) UpdatesGetDifference(ctx context.Context, request *mtproto.TLUpdatesGetDifference) (*mtproto.Updates_Difference, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("UpdatesGetDifference - Process: {%v}", request)
+	return nil, errors.New("UpdatesGetDifference - Not impl")
 }
 
 func (s *UpdatesServiceImpl) UpdatesGetChannelDifference(ctx context.Context, request *mtproto.TLUpdatesGetChannelDifference) (*mtproto.Updates_ChannelDifference, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("UpdatesGetChannelDifference - Process: {%v}", request)
+	return nil, errors.New("UpdatesGetChannelDifference - Not impl")
 }

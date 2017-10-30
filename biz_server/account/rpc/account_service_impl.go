@@ -21,13 +21,24 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/base/orm"
 )
 
 type AccountServiceImpl struct {
+	zorm orm.Ormer
 }
 
 func (s *AccountServiceImpl) AccountRegisterDevice(ctx context.Context, request *mtproto.TLAccountRegisterDevice) (*mtproto.Bool, error) {
 	glog.Info("Process: %v", request)
+/*
+	1- APNS
+	2- GCM
+	3- MPNS
+	4- 简单推送
+	5- Ubuntu电话
+	6- 黑莓
+ */
+
 	return nil, nil
 }
 
@@ -47,8 +58,13 @@ func (s *AccountServiceImpl) AccountResetNotifySettings(ctx context.Context, req
 }
 
 func (s *AccountServiceImpl) AccountUpdateStatus(ctx context.Context, request *mtproto.TLAccountUpdateStatus) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("AccountUpdateStatus - Process: {%v}", request)
+
+	// TODO(@benqi): 存储在线信息
+	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
+
+	glog.Infof("AccountUpdateStatus - reply: {%v}\n", reply)
+	return reply, nil
 }
 
 func (s *AccountServiceImpl) AccountReportPeer(ctx context.Context, request *mtproto.TLAccountReportPeer) (*mtproto.Bool, error) {

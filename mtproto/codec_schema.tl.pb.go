@@ -14540,8 +14540,8 @@ func (m *TLFutureSalts) Decode(dbuf *DecodeBuf) error {
 	l3 := dbuf.Int()
 	m.Salts = make([]*TLFutureSalt, l3)
 	for i := 0; i < int(l3); i++ {
-		dbuf.Int()
 		m.Salts[i] = &TLFutureSalt{}
+		dbuf.Int()
 		(*m.Salts[i]).Decode(dbuf)
 		// TODO(@benqi): Check classID valid!!!
 		// dbuf.Int()
@@ -14668,8 +14668,8 @@ func (m *TLHelpConfigSimple) Decode(dbuf *DecodeBuf) error {
 	l4 := dbuf.Int()
 	m.IpPortList = make([]*TLIpPort, l4)
 	for i := 0; i < int(l4); i++ {
-		dbuf.Int()
 		m.IpPortList[i] = &TLIpPort{}
+		dbuf.Int()
 		(*m.IpPortList[i]).Decode(dbuf)
 		// TODO(@benqi): Check classID valid!!!
 		// dbuf.Int()
@@ -14937,7 +14937,7 @@ func (m *TLInputMediaUploadedPhoto) Encode() []byte {
 
 func (m *TLInputMediaUploadedPhoto) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
-	dbuf.Int()
+	// dbuf.Int()
 	m.File = &InputFile{}
 	(*m.File).Decode(dbuf)
 	m.Caption = dbuf.String()
@@ -14982,7 +14982,7 @@ func (m *TLInputMediaPhoto) Encode() []byte {
 
 func (m *TLInputMediaPhoto) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputPhoto{}
 	(*m.Id).Decode(dbuf)
 	m.Caption = dbuf.String()
@@ -15001,7 +15001,7 @@ func (m *TLInputMediaGeoPoint) Encode() []byte {
 }
 
 func (m *TLInputMediaGeoPoint) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.GeoPoint = &InputGeoPoint{}
 	(*m.GeoPoint).Decode(dbuf)
 	return dbuf.err
@@ -15071,11 +15071,11 @@ func (m *TLInputMediaUploadedDocument) Encode() []byte {
 
 func (m *TLInputMediaUploadedDocument) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
-	dbuf.Int()
+	// dbuf.Int()
 	m.File = &InputFile{}
 	(*m.File).Decode(dbuf)
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Thumb = &InputFile{}
 		(*m.Thumb).Decode(dbuf)
 	}
@@ -15134,7 +15134,7 @@ func (m *TLInputMediaDocument) Encode() []byte {
 
 func (m *TLInputMediaDocument) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputDocument{}
 	(*m.Id).Decode(dbuf)
 	m.Caption = dbuf.String()
@@ -15157,7 +15157,7 @@ func (m *TLInputMediaVenue) Encode() []byte {
 }
 
 func (m *TLInputMediaVenue) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.GeoPoint = &InputGeoPoint{}
 	(*m.GeoPoint).Decode(dbuf)
 	m.Title = dbuf.String()
@@ -15249,7 +15249,7 @@ func (m *TLInputMediaGame) Encode() []byte {
 }
 
 func (m *TLInputMediaGame) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputGame{}
 	(*m.Id).Decode(dbuf)
 	return dbuf.err
@@ -15283,11 +15283,11 @@ func (m *TLInputMediaInvoice) Decode(dbuf *DecodeBuf) error {
 	m.Title = dbuf.String()
 	m.Description = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Photo = &InputWebDocument{}
 		(*m.Photo).Decode(dbuf)
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Invoice = &Invoice{}
 	(*m.Invoice).Decode(dbuf)
 	m.Payload = dbuf.StringBytes()
@@ -15316,7 +15316,7 @@ func (m *TLInputChatUploadedPhoto) Encode() []byte {
 }
 
 func (m *TLInputChatUploadedPhoto) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.File = &InputFile{}
 	(*m.File).Decode(dbuf)
 	return dbuf.err
@@ -15331,7 +15331,7 @@ func (m *TLInputChatPhoto) Encode() []byte {
 }
 
 func (m *TLInputChatPhoto) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputPhoto{}
 	(*m.Id).Decode(dbuf)
 	return dbuf.err
@@ -15851,12 +15851,12 @@ func (m *TLUser) Decode(dbuf *DecodeBuf) error {
 		m.Phone = dbuf.String()
 	}
 	if (flags & (1 << 5)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Photo = &UserProfilePhoto{}
 		(*m.Photo).Decode(dbuf)
 	}
 	if (flags & (1 << 6)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Status = &UserStatus{}
 		(*m.Status).Decode(dbuf)
 	}
@@ -15898,10 +15898,10 @@ func (m *TLUserProfilePhoto) Encode() []byte {
 
 func (m *TLUserProfilePhoto) Decode(dbuf *DecodeBuf) error {
 	m.PhotoId = dbuf.Long()
-	dbuf.Int()
+	// dbuf.Int()
 	m.PhotoSmall = &FileLocation{}
 	(*m.PhotoSmall).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.PhotoBig = &FileLocation{}
 	(*m.PhotoBig).Decode(dbuf)
 	return dbuf.err
@@ -16071,14 +16071,14 @@ func (m *TLChat) Decode(dbuf *DecodeBuf) error {
 	}
 	m.Id = dbuf.Int()
 	m.Title = dbuf.String()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Photo = &ChatPhoto{}
 	(*m.Photo).Decode(dbuf)
 	m.ParticipantsCount = dbuf.Int()
 	m.Date = dbuf.Int()
 	m.Version = dbuf.Int()
 	if (flags & (1 << 6)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.MigratedTo = &InputChannel{}
 		(*m.MigratedTo).Decode(dbuf)
 	}
@@ -16246,7 +16246,7 @@ func (m *TLChannel) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 6)) != 0 {
 		m.Username = dbuf.String()
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Photo = &ChatPhoto{}
 	(*m.Photo).Decode(dbuf)
 	m.Date = dbuf.Int()
@@ -16255,12 +16255,12 @@ func (m *TLChannel) Decode(dbuf *DecodeBuf) error {
 		m.RestrictionReason = dbuf.String()
 	}
 	if (flags & (1 << 14)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.AdminRights = &ChannelAdminRights{}
 		(*m.AdminRights).Decode(dbuf)
 	}
 	if (flags & (1 << 15)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.BannedRights = &ChannelBannedRights{}
 		(*m.BannedRights).Decode(dbuf)
 	}
@@ -16337,16 +16337,16 @@ func (m *TLChatFull) Encode() []byte {
 
 func (m *TLChatFull) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Participants = &ChatParticipants{}
 	(*m.Participants).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.ChatPhoto = &Photo{}
 	(*m.ChatPhoto).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.NotifySettings = &PeerNotifySettings{}
 	(*m.NotifySettings).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.ExportedInvite = &ExportedChatInvite{}
 	(*m.ExportedInvite).Decode(dbuf)
 	// x.VectorMessage(m.BotInfo);
@@ -16484,13 +16484,13 @@ func (m *TLChannelFull) Decode(dbuf *DecodeBuf) error {
 	m.ReadInboxMaxId = dbuf.Int()
 	m.ReadOutboxMaxId = dbuf.Int()
 	m.UnreadCount = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.ChatPhoto = &Photo{}
 	(*m.ChatPhoto).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.NotifySettings = &PeerNotifySettings{}
 	(*m.NotifySettings).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.ExportedInvite = &ExportedChatInvite{}
 	(*m.ExportedInvite).Decode(dbuf)
 	// x.VectorMessage(m.BotInfo);
@@ -16515,7 +16515,7 @@ func (m *TLChannelFull) Decode(dbuf *DecodeBuf) error {
 		m.PinnedMsgId = dbuf.Int()
 	}
 	if (flags & (1 << 8)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Stickerset = &StickerSet{}
 		(*m.Stickerset).Decode(dbuf)
 	}
@@ -16591,7 +16591,7 @@ func (m *TLChatParticipantsForbidden) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	m.ChatId = dbuf.Int()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.SelfParticipant = &ChatParticipant{}
 		(*m.SelfParticipant).Decode(dbuf)
 	}
@@ -16653,10 +16653,10 @@ func (m *TLChatPhoto) Encode() []byte {
 }
 
 func (m *TLChatPhoto) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.PhotoSmall = &FileLocation{}
 	(*m.PhotoSmall).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.PhotoBig = &FileLocation{}
 	(*m.PhotoBig).Decode(dbuf)
 	return dbuf.err
@@ -16807,11 +16807,11 @@ func (m *TLMessage) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 8)) != 0 {
 		m.FromId = dbuf.Int()
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.ToId = &Peer{}
 	(*m.ToId).Decode(dbuf)
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.FwdFrom = &MessageFwdHeader{}
 		(*m.FwdFrom).Decode(dbuf)
 	}
@@ -16824,12 +16824,12 @@ func (m *TLMessage) Decode(dbuf *DecodeBuf) error {
 	m.Date = dbuf.Int()
 	m.Message = dbuf.String()
 	if (flags & (1 << 9)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Media = &MessageMedia{}
 		(*m.Media).Decode(dbuf)
 	}
 	if (flags & (1 << 6)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -16937,14 +16937,14 @@ func (m *TLMessageService) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 8)) != 0 {
 		m.FromId = dbuf.Int()
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.ToId = &Peer{}
 	(*m.ToId).Decode(dbuf)
 	if (flags & (1 << 3)) != 0 {
 		m.ReplyToMsgId = dbuf.Int()
 	}
 	m.Date = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Action = &MessageAction{}
 	(*m.Action).Decode(dbuf)
 	return dbuf.err
@@ -16993,7 +16993,7 @@ func (m *TLMessageMediaPhoto) Encode() []byte {
 func (m *TLMessageMediaPhoto) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Photo = &Photo{}
 		(*m.Photo).Decode(dbuf)
 	}
@@ -17015,7 +17015,7 @@ func (m *TLMessageMediaGeo) Encode() []byte {
 }
 
 func (m *TLMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Geo = &GeoPoint{}
 	(*m.Geo).Decode(dbuf)
 	return dbuf.err
@@ -17083,7 +17083,7 @@ func (m *TLMessageMediaDocument) Encode() []byte {
 func (m *TLMessageMediaDocument) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Document = &Document{}
 		(*m.Document).Decode(dbuf)
 	}
@@ -17105,7 +17105,7 @@ func (m *TLMessageMediaWebPage) Encode() []byte {
 }
 
 func (m *TLMessageMediaWebPage) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Webpage = &WebPage{}
 	(*m.Webpage).Decode(dbuf)
 	return dbuf.err
@@ -17124,7 +17124,7 @@ func (m *TLMessageMediaVenue) Encode() []byte {
 }
 
 func (m *TLMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Geo = &GeoPoint{}
 	(*m.Geo).Decode(dbuf)
 	m.Title = dbuf.String()
@@ -17143,7 +17143,7 @@ func (m *TLMessageMediaGame) Encode() []byte {
 }
 
 func (m *TLMessageMediaGame) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Game = &Game{}
 	(*m.Game).Decode(dbuf)
 	return dbuf.err
@@ -17200,7 +17200,7 @@ func (m *TLMessageMediaInvoice) Decode(dbuf *DecodeBuf) error {
 	m.Title = dbuf.String()
 	m.Description = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Photo = &WebDocument{}
 		(*m.Photo).Decode(dbuf)
 	}
@@ -17261,7 +17261,7 @@ func (m *TLMessageActionChatEditPhoto) Encode() []byte {
 }
 
 func (m *TLMessageActionChatEditPhoto) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Photo = &Photo{}
 	(*m.Photo).Decode(dbuf)
 	return dbuf.err
@@ -17428,14 +17428,14 @@ func (m *TLMessageActionPaymentSentMe) Decode(dbuf *DecodeBuf) error {
 	m.TotalAmount = dbuf.Long()
 	m.Payload = dbuf.StringBytes()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Info = &PaymentRequestedInfo{}
 		(*m.Info).Decode(dbuf)
 	}
 	if (flags & (1 << 1)) != 0 {
 		m.ShippingOptionId = dbuf.String()
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Charge = &PaymentCharge{}
 	(*m.Charge).Decode(dbuf)
 	return dbuf.err
@@ -17484,7 +17484,7 @@ func (m *TLMessageActionPhoneCall) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	m.CallId = dbuf.Long()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Reason = &PhoneCallDiscardReason{}
 		(*m.Reason).Decode(dbuf)
 	}
@@ -17546,7 +17546,7 @@ func (m *TLDialog) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 2)) != 0 {
 		m.Pinned = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &Peer{}
 	(*m.Peer).Decode(dbuf)
 	m.TopMessage = dbuf.Int()
@@ -17554,14 +17554,14 @@ func (m *TLDialog) Decode(dbuf *DecodeBuf) error {
 	m.ReadOutboxMaxId = dbuf.Int()
 	m.UnreadCount = dbuf.Int()
 	m.UnreadMentionsCount = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.NotifySettings = &PeerNotifySettings{}
 	(*m.NotifySettings).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
 		m.Pts = dbuf.Int()
 	}
 	if (flags & (1 << 1)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Draft = &DraftMessage{}
 		(*m.Draft).Decode(dbuf)
 	}
@@ -17658,7 +17658,7 @@ func (m *TLPhotoSize) Encode() []byte {
 
 func (m *TLPhotoSize) Decode(dbuf *DecodeBuf) error {
 	m.Type = dbuf.String()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Location = &FileLocation{}
 	(*m.Location).Decode(dbuf)
 	m.W = dbuf.Int()
@@ -17681,7 +17681,7 @@ func (m *TLPhotoCachedSize) Encode() []byte {
 
 func (m *TLPhotoCachedSize) Decode(dbuf *DecodeBuf) error {
 	m.Type = dbuf.String()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Location = &FileLocation{}
 	(*m.Location).Decode(dbuf)
 	m.W = dbuf.Int()
@@ -17725,7 +17725,7 @@ func (m *TLAuthCheckedPhone) Encode() []byte {
 }
 
 func (m *TLAuthCheckedPhone) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.PhoneRegistered = &Bool{}
 	(*m.PhoneRegistered).Decode(dbuf)
 	return dbuf.err
@@ -17767,12 +17767,12 @@ func (m *TLAuthSentCode) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.PhoneRegistered = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Type = &Auth_SentCodeType{}
 	(*m.Type).Decode(dbuf)
 	m.PhoneCodeHash = dbuf.String()
 	if (flags & (1 << 1)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.NextType = &Auth_CodeType{}
 		(*m.NextType).Decode(dbuf)
 	}
@@ -17805,7 +17805,7 @@ func (m *TLAuthAuthorization) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.TmpSessions = dbuf.Int()
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.User = &User{}
 	(*m.User).Decode(dbuf)
 	return dbuf.err
@@ -17835,7 +17835,7 @@ func (m *TLInputNotifyPeer) Encode() []byte {
 }
 
 func (m *TLInputNotifyPeer) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	return dbuf.err
@@ -18193,25 +18193,25 @@ func (m *TLUserFull) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 5)) != 0 {
 		m.PhoneCallsPrivate = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.User = &User{}
 	(*m.User).Decode(dbuf)
 	if (flags & (1 << 1)) != 0 {
 		m.About = dbuf.String()
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Link = &Contacts_Link{}
 	(*m.Link).Decode(dbuf)
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ProfilePhoto = &Photo{}
 		(*m.ProfilePhoto).Decode(dbuf)
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.NotifySettings = &PeerNotifySettings{}
 	(*m.NotifySettings).Decode(dbuf)
 	if (flags & (1 << 3)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.BotInfo = &BotInfo{}
 		(*m.BotInfo).Decode(dbuf)
 	}
@@ -18230,7 +18230,7 @@ func (m *TLContact) Encode() []byte {
 
 func (m *TLContact) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Mutual = &Bool{}
 	(*m.Mutual).Decode(dbuf)
 	return dbuf.err
@@ -18277,7 +18277,7 @@ func (m *TLContactStatus) Encode() []byte {
 
 func (m *TLContactStatus) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Status = &UserStatus{}
 	(*m.Status).Decode(dbuf)
 	return dbuf.err
@@ -18294,13 +18294,13 @@ func (m *TLContactsLink) Encode() []byte {
 }
 
 func (m *TLContactsLink) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.MyLink = &ContactLink{}
 	(*m.MyLink).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.ForeignLink = &ContactLink{}
 	(*m.ForeignLink).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.User = &User{}
 	(*m.User).Decode(dbuf)
 	return dbuf.err
@@ -19016,7 +19016,7 @@ func (m *TLMessagesChatFull) Encode() []byte {
 }
 
 func (m *TLMessagesChatFull) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.FullChat = &ChatFull{}
 	(*m.FullChat).Decode(dbuf)
 	// x.VectorMessage(m.Chats);
@@ -19253,7 +19253,7 @@ func (m *TLUpdateNewMessage) Encode() []byte {
 }
 
 func (m *TLUpdateNewMessage) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Message = &Message{}
 	(*m.Message).Decode(dbuf)
 	m.Pts = dbuf.Int()
@@ -19304,7 +19304,7 @@ func (m *TLUpdateUserTyping) Encode() []byte {
 
 func (m *TLUpdateUserTyping) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Action = &SendMessageAction{}
 	(*m.Action).Decode(dbuf)
 	return dbuf.err
@@ -19323,7 +19323,7 @@ func (m *TLUpdateChatUserTyping) Encode() []byte {
 func (m *TLUpdateChatUserTyping) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
 	m.UserId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Action = &SendMessageAction{}
 	(*m.Action).Decode(dbuf)
 	return dbuf.err
@@ -19338,7 +19338,7 @@ func (m *TLUpdateChatParticipants) Encode() []byte {
 }
 
 func (m *TLUpdateChatParticipants) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Participants = &ChatParticipants{}
 	(*m.Participants).Decode(dbuf)
 	return dbuf.err
@@ -19355,7 +19355,7 @@ func (m *TLUpdateUserStatus) Encode() []byte {
 
 func (m *TLUpdateUserStatus) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Status = &UserStatus{}
 	(*m.Status).Decode(dbuf)
 	return dbuf.err
@@ -19394,10 +19394,10 @@ func (m *TLUpdateUserPhoto) Encode() []byte {
 func (m *TLUpdateUserPhoto) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
 	m.Date = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Photo = &UserProfilePhoto{}
 	(*m.Photo).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Previous = &Bool{}
 	(*m.Previous).Decode(dbuf)
 	return dbuf.err
@@ -19430,10 +19430,10 @@ func (m *TLUpdateContactLink) Encode() []byte {
 
 func (m *TLUpdateContactLink) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.MyLink = &ContactLink{}
 	(*m.MyLink).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.ForeignLink = &ContactLink{}
 	(*m.ForeignLink).Decode(dbuf)
 	return dbuf.err
@@ -19449,7 +19449,7 @@ func (m *TLUpdateNewEncryptedMessage) Encode() []byte {
 }
 
 func (m *TLUpdateNewEncryptedMessage) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Message = &EncryptedMessage{}
 	(*m.Message).Decode(dbuf)
 	m.Qts = dbuf.Int()
@@ -19479,7 +19479,7 @@ func (m *TLUpdateEncryption) Encode() []byte {
 }
 
 func (m *TLUpdateEncryption) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Chat = &EncryptedChat{}
 	(*m.Chat).Decode(dbuf)
 	m.Date = dbuf.Int()
@@ -19582,7 +19582,7 @@ func (m *TLUpdateUserBlocked) Encode() []byte {
 
 func (m *TLUpdateUserBlocked) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Blocked = &Bool{}
 	(*m.Blocked).Decode(dbuf)
 	return dbuf.err
@@ -19598,10 +19598,10 @@ func (m *TLUpdateNotifySettings) Encode() []byte {
 }
 
 func (m *TLUpdateNotifySettings) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &NotifyPeer{}
 	(*m.Peer).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.NotifySettings = &PeerNotifySettings{}
 	(*m.NotifySettings).Decode(dbuf)
 	return dbuf.err
@@ -19650,7 +19650,7 @@ func (m *TLUpdateServiceNotification) Decode(dbuf *DecodeBuf) error {
 	}
 	m.Type = dbuf.String()
 	m.Message = dbuf.String()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Media = &MessageMedia{}
 	(*m.Media).Decode(dbuf)
 	// x.VectorMessage(m.Entities);
@@ -19684,7 +19684,7 @@ func (m *TLUpdatePrivacy) Encode() []byte {
 }
 
 func (m *TLUpdatePrivacy) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Key = &PrivacyKey{}
 	(*m.Key).Decode(dbuf)
 	// x.VectorMessage(m.Rules);
@@ -19729,7 +19729,7 @@ func (m *TLUpdateReadHistoryInbox) Encode() []byte {
 }
 
 func (m *TLUpdateReadHistoryInbox) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &Peer{}
 	(*m.Peer).Decode(dbuf)
 	m.MaxId = dbuf.Int()
@@ -19750,7 +19750,7 @@ func (m *TLUpdateReadHistoryOutbox) Encode() []byte {
 }
 
 func (m *TLUpdateReadHistoryOutbox) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &Peer{}
 	(*m.Peer).Decode(dbuf)
 	m.MaxId = dbuf.Int()
@@ -19770,7 +19770,7 @@ func (m *TLUpdateWebPage) Encode() []byte {
 }
 
 func (m *TLUpdateWebPage) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Webpage = &WebPage{}
 	(*m.Webpage).Decode(dbuf)
 	m.Pts = dbuf.Int()
@@ -19846,7 +19846,7 @@ func (m *TLUpdateNewChannelMessage) Encode() []byte {
 }
 
 func (m *TLUpdateNewChannelMessage) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Message = &Message{}
 	(*m.Message).Decode(dbuf)
 	m.Pts = dbuf.Int()
@@ -19917,7 +19917,7 @@ func (m *TLUpdateChatAdmins) Encode() []byte {
 
 func (m *TLUpdateChatAdmins) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Enabled = &Bool{}
 	(*m.Enabled).Decode(dbuf)
 	m.Version = dbuf.Int()
@@ -19938,7 +19938,7 @@ func (m *TLUpdateChatParticipantAdmin) Encode() []byte {
 func (m *TLUpdateChatParticipantAdmin) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
 	m.UserId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.IsAdmin = &Bool{}
 	(*m.IsAdmin).Decode(dbuf)
 	m.Version = dbuf.Int()
@@ -19954,7 +19954,7 @@ func (m *TLUpdateNewStickerSet) Encode() []byte {
 }
 
 func (m *TLUpdateNewStickerSet) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Stickerset = &Messages_StickerSet{}
 	(*m.Stickerset).Decode(dbuf)
 	return dbuf.err
@@ -20036,7 +20036,7 @@ func (m *TLUpdateBotInlineQuery) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
 	m.Query = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Geo = &GeoPoint{}
 		(*m.Geo).Decode(dbuf)
 	}
@@ -20075,13 +20075,13 @@ func (m *TLUpdateBotInlineSend) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
 	m.Query = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Geo = &GeoPoint{}
 		(*m.Geo).Decode(dbuf)
 	}
 	m.Id = dbuf.String()
 	if (flags & (1 << 1)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.MsgId = &InputBotInlineMessageID{}
 		(*m.MsgId).Decode(dbuf)
 	}
@@ -20099,7 +20099,7 @@ func (m *TLUpdateEditChannelMessage) Encode() []byte {
 }
 
 func (m *TLUpdateEditChannelMessage) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Message = &Message{}
 	(*m.Message).Decode(dbuf)
 	m.Pts = dbuf.Int()
@@ -20154,7 +20154,7 @@ func (m *TLUpdateBotCallbackQuery) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	m.QueryId = dbuf.Long()
 	m.UserId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &Peer{}
 	(*m.Peer).Decode(dbuf)
 	m.MsgId = dbuf.Int()
@@ -20179,7 +20179,7 @@ func (m *TLUpdateEditMessage) Encode() []byte {
 }
 
 func (m *TLUpdateEditMessage) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Message = &Message{}
 	(*m.Message).Decode(dbuf)
 	m.Pts = dbuf.Int()
@@ -20218,7 +20218,7 @@ func (m *TLUpdateInlineBotCallbackQuery) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	m.QueryId = dbuf.Long()
 	m.UserId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.MsgId = &InputBotInlineMessageID{}
 	(*m.MsgId).Decode(dbuf)
 	m.ChatInstance = dbuf.Long()
@@ -20256,10 +20256,10 @@ func (m *TLUpdateDraftMessage) Encode() []byte {
 }
 
 func (m *TLUpdateDraftMessage) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &Peer{}
 	(*m.Peer).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Draft = &DraftMessage{}
 	(*m.Draft).Decode(dbuf)
 	return dbuf.err
@@ -20322,7 +20322,7 @@ func (m *TLUpdateChannelWebPage) Encode() []byte {
 
 func (m *TLUpdateChannelWebPage) Decode(dbuf *DecodeBuf) error {
 	m.ChannelId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Webpage = &WebPage{}
 	(*m.Webpage).Decode(dbuf)
 	m.Pts = dbuf.Int()
@@ -20353,7 +20353,7 @@ func (m *TLUpdateDialogPinned) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.Pinned = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &Peer{}
 	(*m.Peer).Decode(dbuf)
 	return dbuf.err
@@ -20410,7 +20410,7 @@ func (m *TLUpdateBotWebhookJSON) Encode() []byte {
 }
 
 func (m *TLUpdateBotWebhookJSON) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Data = &DataJSON{}
 	(*m.Data).Decode(dbuf)
 	return dbuf.err
@@ -20428,7 +20428,7 @@ func (m *TLUpdateBotWebhookJSONQuery) Encode() []byte {
 
 func (m *TLUpdateBotWebhookJSONQuery) Decode(dbuf *DecodeBuf) error {
 	m.QueryId = dbuf.Long()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Data = &DataJSON{}
 	(*m.Data).Decode(dbuf)
 	m.Timeout = dbuf.Int()
@@ -20450,7 +20450,7 @@ func (m *TLUpdateBotShippingQuery) Decode(dbuf *DecodeBuf) error {
 	m.QueryId = dbuf.Long()
 	m.UserId = dbuf.Int()
 	m.Payload = dbuf.StringBytes()
-	dbuf.Int()
+	// dbuf.Int()
 	m.ShippingAddress = &PostAddress{}
 	(*m.ShippingAddress).Decode(dbuf)
 	return dbuf.err
@@ -20490,7 +20490,7 @@ func (m *TLUpdateBotPrecheckoutQuery) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
 	m.Payload = dbuf.StringBytes()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Info = &PaymentRequestedInfo{}
 		(*m.Info).Decode(dbuf)
 	}
@@ -20511,7 +20511,7 @@ func (m *TLUpdatePhoneCall) Encode() []byte {
 }
 
 func (m *TLUpdatePhoneCall) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.PhoneCall = &PhoneCall{}
 	(*m.PhoneCall).Decode(dbuf)
 	return dbuf.err
@@ -20537,7 +20537,7 @@ func (m *TLUpdateLangPack) Encode() []byte {
 }
 
 func (m *TLUpdateLangPack) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Difference = &LangPackDifference{}
 	(*m.Difference).Decode(dbuf)
 	return dbuf.err
@@ -20720,7 +20720,7 @@ func (m *TLUpdatesDifference) Decode(dbuf *DecodeBuf) error {
 		m.Users[i] = &User{}
 		(*m.Users[i]).Decode(dbuf)
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.State = &Updates_State{}
 	(*m.State).Decode(dbuf)
 	return dbuf.err
@@ -20830,7 +20830,7 @@ func (m *TLUpdatesDifferenceSlice) Decode(dbuf *DecodeBuf) error {
 		m.Users[i] = &User{}
 		(*m.Users[i]).Decode(dbuf)
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.IntermediateState = &Updates_State{}
 	(*m.IntermediateState).Decode(dbuf)
 	return dbuf.err
@@ -20952,7 +20952,7 @@ func (m *TLUpdateShortMessage) Decode(dbuf *DecodeBuf) error {
 	m.PtsCount = dbuf.Int()
 	m.Date = dbuf.Int()
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.FwdFrom = &MessageFwdHeader{}
 		(*m.FwdFrom).Decode(dbuf)
 	}
@@ -21073,7 +21073,7 @@ func (m *TLUpdateShortChatMessage) Decode(dbuf *DecodeBuf) error {
 	m.PtsCount = dbuf.Int()
 	m.Date = dbuf.Int()
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.FwdFrom = &MessageFwdHeader{}
 		(*m.FwdFrom).Decode(dbuf)
 	}
@@ -21110,7 +21110,7 @@ func (m *TLUpdateShort) Encode() []byte {
 }
 
 func (m *TLUpdateShort) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Update = &Update{}
 	(*m.Update).Decode(dbuf)
 	m.Date = dbuf.Int()
@@ -21312,7 +21312,7 @@ func (m *TLUpdateShortSentMessage) Decode(dbuf *DecodeBuf) error {
 	m.PtsCount = dbuf.Int()
 	m.Date = dbuf.Int()
 	if (flags & (1 << 9)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Media = &MessageMedia{}
 		(*m.Media).Decode(dbuf)
 	}
@@ -21449,7 +21449,7 @@ func (m *TLPhotosPhoto) Encode() []byte {
 }
 
 func (m *TLPhotosPhoto) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Photo = &Photo{}
 	(*m.Photo).Decode(dbuf)
 	// x.VectorMessage(m.Users);
@@ -21478,7 +21478,7 @@ func (m *TLUploadFile) Encode() []byte {
 }
 
 func (m *TLUploadFile) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Type = &Storage_FileType{}
 	(*m.Type).Decode(dbuf)
 	m.Mtime = dbuf.Int()
@@ -21674,7 +21674,7 @@ func (m *TLConfig) Decode(dbuf *DecodeBuf) error {
 	}
 	m.Date = dbuf.Int()
 	m.Expires = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.TestMode = &Bool{}
 	(*m.TestMode).Decode(dbuf)
 	m.ThisDc = dbuf.Int()
@@ -21767,7 +21767,7 @@ func (m *TLHelpAppUpdate) Encode() []byte {
 
 func (m *TLHelpAppUpdate) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Critical = &Bool{}
 	(*m.Critical).Decode(dbuf)
 	m.Url = dbuf.String()
@@ -22020,7 +22020,7 @@ func (m *TLEncryptedMessage) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
 	m.Date = dbuf.Int()
 	m.Bytes = dbuf.StringBytes()
-	dbuf.Int()
+	// dbuf.Int()
 	m.File = &EncryptedFile{}
 	(*m.File).Decode(dbuf)
 	return dbuf.err
@@ -22101,7 +22101,7 @@ func (m *TLMessagesSentEncryptedFile) Encode() []byte {
 
 func (m *TLMessagesSentEncryptedFile) Decode(dbuf *DecodeBuf) error {
 	m.Date = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.File = &EncryptedFile{}
 	(*m.File).Decode(dbuf)
 	return dbuf.err
@@ -22174,7 +22174,7 @@ func (m *TLDocument) Decode(dbuf *DecodeBuf) error {
 	m.Date = dbuf.Int()
 	m.MimeType = dbuf.String()
 	m.Size = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Thumb = &PhotoSize{}
 	(*m.Thumb).Decode(dbuf)
 	m.DcId = dbuf.Int()
@@ -22205,7 +22205,7 @@ func (m *TLHelpSupport) Encode() []byte {
 
 func (m *TLHelpSupport) Decode(dbuf *DecodeBuf) error {
 	m.PhoneNumber = dbuf.String()
-	dbuf.Int()
+	// dbuf.Int()
 	m.User = &User{}
 	(*m.User).Decode(dbuf)
 	return dbuf.err
@@ -22220,7 +22220,7 @@ func (m *TLNotifyPeer) Encode() []byte {
 }
 
 func (m *TLNotifyPeer) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &Peer{}
 	(*m.Peer).Decode(dbuf)
 	return dbuf.err
@@ -22839,11 +22839,11 @@ func (m *TLDocumentAttributeSticker) Decode(dbuf *DecodeBuf) error {
 		m.Mask = true
 	}
 	m.Alt = dbuf.String()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Stickerset = &InputStickerSet{}
 	(*m.Stickerset).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.MaskCoords = &MaskCoords{}
 		(*m.MaskCoords).Decode(dbuf)
 	}
@@ -23274,7 +23274,7 @@ func (m *TLWebPage) Decode(dbuf *DecodeBuf) error {
 		m.Description = dbuf.String()
 	}
 	if (flags & (1 << 4)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Photo = &Photo{}
 		(*m.Photo).Decode(dbuf)
 	}
@@ -23297,12 +23297,12 @@ func (m *TLWebPage) Decode(dbuf *DecodeBuf) error {
 		m.Author = dbuf.String()
 	}
 	if (flags & (1 << 9)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Document = &Document{}
 		(*m.Document).Decode(dbuf)
 	}
 	if (flags & (1 << 10)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.CachedPage = &Page{}
 		(*m.CachedPage).Decode(dbuf)
 	}
@@ -23416,7 +23416,7 @@ func (m *TLAccountPassword) Decode(dbuf *DecodeBuf) error {
 	m.CurrentSalt = dbuf.StringBytes()
 	m.NewSalt = dbuf.StringBytes()
 	m.Hint = dbuf.String()
-	dbuf.Int()
+	// dbuf.Int()
 	m.HasRecovery = &Bool{}
 	(*m.HasRecovery).Decode(dbuf)
 	m.EmailUnconfirmedPattern = dbuf.String()
@@ -23547,7 +23547,7 @@ func (m *TLChatInviteAlready) Encode() []byte {
 }
 
 func (m *TLChatInviteAlready) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Chat = &Chat{}
 	(*m.Chat).Decode(dbuf)
 	return dbuf.err
@@ -23618,7 +23618,7 @@ func (m *TLChatInvite) Decode(dbuf *DecodeBuf) error {
 		m.Megagroup = true
 	}
 	m.Title = dbuf.String()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Photo = &ChatPhoto{}
 	(*m.Photo).Decode(dbuf)
 	m.ParticipantsCount = dbuf.Int()
@@ -23765,7 +23765,7 @@ func (m *TLMessagesStickerSet) Encode() []byte {
 }
 
 func (m *TLMessagesStickerSet) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Set = &StickerSet{}
 	(*m.Set).Decode(dbuf)
 	// x.VectorMessage(m.Packs);
@@ -24348,7 +24348,7 @@ func (m *TLInputMessageEntityMentionName) Encode() []byte {
 func (m *TLInputMessageEntityMentionName) Decode(dbuf *DecodeBuf) error {
 	m.Offset = dbuf.Int()
 	m.Length = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
 	return dbuf.err
@@ -24403,7 +24403,7 @@ func (m *TLContactsResolvedPeer) Encode() []byte {
 }
 
 func (m *TLContactsResolvedPeer) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &Peer{}
 	(*m.Peer).Decode(dbuf)
 	// x.VectorMessage(m.Chats);
@@ -24830,7 +24830,7 @@ func (m *TLChannelParticipantAdmin) Decode(dbuf *DecodeBuf) error {
 	m.InviterId = dbuf.Int()
 	m.PromotedBy = dbuf.Int()
 	m.Date = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.AdminRights = &ChannelAdminRights{}
 	(*m.AdminRights).Decode(dbuf)
 	return dbuf.err
@@ -24865,7 +24865,7 @@ func (m *TLChannelParticipantBanned) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
 	m.KickedBy = dbuf.Int()
 	m.Date = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.BannedRights = &ChannelBannedRights{}
 	(*m.BannedRights).Decode(dbuf)
 	return dbuf.err
@@ -25010,7 +25010,7 @@ func (m *TLChannelsChannelParticipant) Encode() []byte {
 }
 
 func (m *TLChannelsChannelParticipant) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Participant = &ChannelParticipant{}
 	(*m.Participant).Decode(dbuf)
 	// x.VectorMessage(m.Users);
@@ -25076,10 +25076,10 @@ func (m *TLFoundGifCached) Encode() []byte {
 
 func (m *TLFoundGifCached) Decode(dbuf *DecodeBuf) error {
 	m.Url = dbuf.String()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Photo = &Photo{}
 	(*m.Photo).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Document = &Document{}
 	(*m.Document).Decode(dbuf)
 	return dbuf.err
@@ -25182,7 +25182,7 @@ func (m *TLInputBotInlineMessageMediaAuto) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	m.Caption = dbuf.String()
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -25246,7 +25246,7 @@ func (m *TLInputBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
 		}
 	}
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -25273,11 +25273,11 @@ func (m *TLInputBotInlineMessageMediaGeo) Encode() []byte {
 
 func (m *TLInputBotInlineMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
-	dbuf.Int()
+	// dbuf.Int()
 	m.GeoPoint = &InputGeoPoint{}
 	(*m.GeoPoint).Decode(dbuf)
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -25308,7 +25308,7 @@ func (m *TLInputBotInlineMessageMediaVenue) Encode() []byte {
 
 func (m *TLInputBotInlineMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
-	dbuf.Int()
+	// dbuf.Int()
 	m.GeoPoint = &InputGeoPoint{}
 	(*m.GeoPoint).Decode(dbuf)
 	m.Title = dbuf.String()
@@ -25316,7 +25316,7 @@ func (m *TLInputBotInlineMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
 	m.Provider = dbuf.String()
 	m.VenueId = dbuf.String()
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -25349,7 +25349,7 @@ func (m *TLInputBotInlineMessageMediaContact) Decode(dbuf *DecodeBuf) error {
 	m.FirstName = dbuf.String()
 	m.LastName = dbuf.String()
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -25376,7 +25376,7 @@ func (m *TLInputBotInlineMessageGame) Encode() []byte {
 func (m *TLInputBotInlineMessageGame) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -25482,7 +25482,7 @@ func (m *TLInputBotInlineResult) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 7)) != 0 {
 		m.Duration = dbuf.Int()
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.SendMessage = &InputBotInlineMessage{}
 	(*m.SendMessage).Decode(dbuf)
 	return dbuf.err
@@ -25502,10 +25502,10 @@ func (m *TLInputBotInlineResultPhoto) Encode() []byte {
 func (m *TLInputBotInlineResultPhoto) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.String()
 	m.Type = dbuf.String()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Photo = &InputPhoto{}
 	(*m.Photo).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.SendMessage = &InputBotInlineMessage{}
 	(*m.SendMessage).Decode(dbuf)
 	return dbuf.err
@@ -25548,10 +25548,10 @@ func (m *TLInputBotInlineResultDocument) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 2)) != 0 {
 		m.Description = dbuf.String()
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Document = &InputDocument{}
 	(*m.Document).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.SendMessage = &InputBotInlineMessage{}
 	(*m.SendMessage).Decode(dbuf)
 	return dbuf.err
@@ -25570,7 +25570,7 @@ func (m *TLInputBotInlineResultGame) Encode() []byte {
 func (m *TLInputBotInlineResultGame) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.String()
 	m.ShortName = dbuf.String()
-	dbuf.Int()
+	// dbuf.Int()
 	m.SendMessage = &InputBotInlineMessage{}
 	(*m.SendMessage).Decode(dbuf)
 	return dbuf.err
@@ -25598,7 +25598,7 @@ func (m *TLBotInlineMessageMediaAuto) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	m.Caption = dbuf.String()
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -25662,7 +25662,7 @@ func (m *TLBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
 		}
 	}
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -25689,11 +25689,11 @@ func (m *TLBotInlineMessageMediaGeo) Encode() []byte {
 
 func (m *TLBotInlineMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Geo = &GeoPoint{}
 	(*m.Geo).Decode(dbuf)
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -25724,7 +25724,7 @@ func (m *TLBotInlineMessageMediaVenue) Encode() []byte {
 
 func (m *TLBotInlineMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Geo = &GeoPoint{}
 	(*m.Geo).Decode(dbuf)
 	m.Title = dbuf.String()
@@ -25732,7 +25732,7 @@ func (m *TLBotInlineMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
 	m.Provider = dbuf.String()
 	m.VenueId = dbuf.String()
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -25765,7 +25765,7 @@ func (m *TLBotInlineMessageMediaContact) Decode(dbuf *DecodeBuf) error {
 	m.FirstName = dbuf.String()
 	m.LastName = dbuf.String()
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -25871,7 +25871,7 @@ func (m *TLBotInlineResult) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 7)) != 0 {
 		m.Duration = dbuf.Int()
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.SendMessage = &BotInlineMessage{}
 	(*m.SendMessage).Decode(dbuf)
 	return dbuf.err
@@ -25920,12 +25920,12 @@ func (m *TLBotInlineMediaResult) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.String()
 	m.Type = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Photo = &Photo{}
 		(*m.Photo).Decode(dbuf)
 	}
 	if (flags & (1 << 1)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Document = &Document{}
 		(*m.Document).Decode(dbuf)
 	}
@@ -25935,7 +25935,7 @@ func (m *TLBotInlineMediaResult) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 3)) != 0 {
 		m.Description = dbuf.String()
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.SendMessage = &BotInlineMessage{}
 	(*m.SendMessage).Decode(dbuf)
 	return dbuf.err
@@ -25989,7 +25989,7 @@ func (m *TLMessagesBotResults) Decode(dbuf *DecodeBuf) error {
 		m.NextOffset = dbuf.String()
 	}
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.SwitchPm = &InlineBotSwitchPM{}
 		(*m.SwitchPm).Decode(dbuf)
 	}
@@ -26357,7 +26357,7 @@ func (m *TLMessagesPeerDialogs) Decode(dbuf *DecodeBuf) error {
 		m.Users[i] = &User{}
 		(*m.Users[i]).Decode(dbuf)
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.State = &Updates_State{}
 	(*m.State).Decode(dbuf)
 	return dbuf.err
@@ -26373,7 +26373,7 @@ func (m *TLTopPeer) Encode() []byte {
 }
 
 func (m *TLTopPeer) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &Peer{}
 	(*m.Peer).Decode(dbuf)
 	m.Rating = dbuf.Double()
@@ -26463,7 +26463,7 @@ func (m *TLTopPeerCategoryPeers) Encode() []byte {
 }
 
 func (m *TLTopPeerCategoryPeers) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Category = &TopPeerCategory{}
 	(*m.Category).Decode(dbuf)
 	m.Count = dbuf.Int()
@@ -26807,10 +26807,10 @@ func (m *TLStickerSetCovered) Encode() []byte {
 }
 
 func (m *TLStickerSetCovered) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Set = &StickerSet{}
 	(*m.Set).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Cover = &Document{}
 	(*m.Cover).Decode(dbuf)
 	return dbuf.err
@@ -26832,7 +26832,7 @@ func (m *TLStickerSetMultiCovered) Encode() []byte {
 }
 
 func (m *TLStickerSetMultiCovered) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Set = &StickerSet{}
 	(*m.Set).Decode(dbuf)
 	// x.VectorMessage(m.Covers);
@@ -26878,7 +26878,7 @@ func (m *TLInputStickeredMediaPhoto) Encode() []byte {
 }
 
 func (m *TLInputStickeredMediaPhoto) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputPhoto{}
 	(*m.Id).Decode(dbuf)
 	return dbuf.err
@@ -26893,7 +26893,7 @@ func (m *TLInputStickeredMediaDocument) Encode() []byte {
 }
 
 func (m *TLInputStickeredMediaDocument) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputDocument{}
 	(*m.Id).Decode(dbuf)
 	return dbuf.err
@@ -26929,11 +26929,11 @@ func (m *TLGame) Decode(dbuf *DecodeBuf) error {
 	m.ShortName = dbuf.String()
 	m.Title = dbuf.String()
 	m.Description = dbuf.String()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Photo = &Photo{}
 	(*m.Photo).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Document = &Document{}
 		(*m.Document).Decode(dbuf)
 	}
@@ -26965,7 +26965,7 @@ func (m *TLInputGameShortName) Encode() []byte {
 }
 
 func (m *TLInputGameShortName) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.BotId = &InputUser{}
 	(*m.BotId).Decode(dbuf)
 	m.ShortName = dbuf.String()
@@ -27071,7 +27071,7 @@ func (m *TLTextBold) Encode() []byte {
 }
 
 func (m *TLTextBold) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
 	return dbuf.err
@@ -27086,7 +27086,7 @@ func (m *TLTextItalic) Encode() []byte {
 }
 
 func (m *TLTextItalic) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
 	return dbuf.err
@@ -27101,7 +27101,7 @@ func (m *TLTextUnderline) Encode() []byte {
 }
 
 func (m *TLTextUnderline) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
 	return dbuf.err
@@ -27116,7 +27116,7 @@ func (m *TLTextStrike) Encode() []byte {
 }
 
 func (m *TLTextStrike) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
 	return dbuf.err
@@ -27131,7 +27131,7 @@ func (m *TLTextFixed) Encode() []byte {
 }
 
 func (m *TLTextFixed) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
 	return dbuf.err
@@ -27148,7 +27148,7 @@ func (m *TLTextUrl) Encode() []byte {
 }
 
 func (m *TLTextUrl) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
 	m.Url = dbuf.String()
@@ -27166,7 +27166,7 @@ func (m *TLTextEmail) Encode() []byte {
 }
 
 func (m *TLTextEmail) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
 	m.Email = dbuf.String()
@@ -27223,7 +27223,7 @@ func (m *TLPageBlockTitle) Encode() []byte {
 }
 
 func (m *TLPageBlockTitle) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
 	return dbuf.err
@@ -27238,7 +27238,7 @@ func (m *TLPageBlockSubtitle) Encode() []byte {
 }
 
 func (m *TLPageBlockSubtitle) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
 	return dbuf.err
@@ -27254,7 +27254,7 @@ func (m *TLPageBlockAuthorDate) Encode() []byte {
 }
 
 func (m *TLPageBlockAuthorDate) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Author = &RichText{}
 	(*m.Author).Decode(dbuf)
 	m.PublishedDate = dbuf.Int()
@@ -27270,7 +27270,7 @@ func (m *TLPageBlockHeader) Encode() []byte {
 }
 
 func (m *TLPageBlockHeader) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
 	return dbuf.err
@@ -27285,7 +27285,7 @@ func (m *TLPageBlockSubheader) Encode() []byte {
 }
 
 func (m *TLPageBlockSubheader) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
 	return dbuf.err
@@ -27300,7 +27300,7 @@ func (m *TLPageBlockParagraph) Encode() []byte {
 }
 
 func (m *TLPageBlockParagraph) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
 	return dbuf.err
@@ -27316,7 +27316,7 @@ func (m *TLPageBlockPreformatted) Encode() []byte {
 }
 
 func (m *TLPageBlockPreformatted) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
 	m.Language = dbuf.String()
@@ -27332,7 +27332,7 @@ func (m *TLPageBlockFooter) Encode() []byte {
 }
 
 func (m *TLPageBlockFooter) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
 	return dbuf.err
@@ -27378,7 +27378,7 @@ func (m *TLPageBlockList) Encode() []byte {
 }
 
 func (m *TLPageBlockList) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Ordered = &Bool{}
 	(*m.Ordered).Decode(dbuf)
 	// x.VectorMessage(m.Items);
@@ -27406,10 +27406,10 @@ func (m *TLPageBlockBlockquote) Encode() []byte {
 }
 
 func (m *TLPageBlockBlockquote) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Caption = &RichText{}
 	(*m.Caption).Decode(dbuf)
 	return dbuf.err
@@ -27425,10 +27425,10 @@ func (m *TLPageBlockPullquote) Encode() []byte {
 }
 
 func (m *TLPageBlockPullquote) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Text = &RichText{}
 	(*m.Text).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Caption = &RichText{}
 	(*m.Caption).Decode(dbuf)
 	return dbuf.err
@@ -27445,7 +27445,7 @@ func (m *TLPageBlockPhoto) Encode() []byte {
 
 func (m *TLPageBlockPhoto) Decode(dbuf *DecodeBuf) error {
 	m.PhotoId = dbuf.Long()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Caption = &RichText{}
 	(*m.Caption).Decode(dbuf)
 	return dbuf.err
@@ -27485,7 +27485,7 @@ func (m *TLPageBlockVideo) Decode(dbuf *DecodeBuf) error {
 		m.Loop = true
 	}
 	m.VideoId = dbuf.Long()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Caption = &RichText{}
 	(*m.Caption).Decode(dbuf)
 	return dbuf.err
@@ -27500,7 +27500,7 @@ func (m *TLPageBlockCover) Encode() []byte {
 }
 
 func (m *TLPageBlockCover) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Cover = &PageBlock{}
 	(*m.Cover).Decode(dbuf)
 	return dbuf.err
@@ -27569,7 +27569,7 @@ func (m *TLPageBlockEmbed) Decode(dbuf *DecodeBuf) error {
 	}
 	m.W = dbuf.Int()
 	m.H = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Caption = &RichText{}
 	(*m.Caption).Decode(dbuf)
 	return dbuf.err
@@ -27613,7 +27613,7 @@ func (m *TLPageBlockEmbedPost) Decode(dbuf *DecodeBuf) error {
 		m.Blocks[i] = &PageBlock{}
 		(*m.Blocks[i]).Decode(dbuf)
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Caption = &RichText{}
 	(*m.Caption).Decode(dbuf)
 	return dbuf.err
@@ -27647,7 +27647,7 @@ func (m *TLPageBlockCollage) Decode(dbuf *DecodeBuf) error {
 		m.Items[i] = &PageBlock{}
 		(*m.Items[i]).Decode(dbuf)
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Caption = &RichText{}
 	(*m.Caption).Decode(dbuf)
 	return dbuf.err
@@ -27681,7 +27681,7 @@ func (m *TLPageBlockSlideshow) Decode(dbuf *DecodeBuf) error {
 		m.Items[i] = &PageBlock{}
 		(*m.Items[i]).Decode(dbuf)
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Caption = &RichText{}
 	(*m.Caption).Decode(dbuf)
 	return dbuf.err
@@ -27696,7 +27696,7 @@ func (m *TLPageBlockChannel) Encode() []byte {
 }
 
 func (m *TLPageBlockChannel) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &Chat{}
 	(*m.Channel).Decode(dbuf)
 	return dbuf.err
@@ -27713,7 +27713,7 @@ func (m *TLPageBlockAudio) Encode() []byte {
 
 func (m *TLPageBlockAudio) Decode(dbuf *DecodeBuf) error {
 	m.AudioId = dbuf.Long()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Caption = &RichText{}
 	(*m.Caption).Decode(dbuf)
 	return dbuf.err
@@ -28103,7 +28103,7 @@ func (m *TLPaymentRequestedInfo) Decode(dbuf *DecodeBuf) error {
 		m.Email = dbuf.String()
 	}
 	if (flags & (1 << 3)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ShippingAddress = &PostAddress{}
 		(*m.ShippingAddress).Decode(dbuf)
 	}
@@ -28231,7 +28231,7 @@ func (m *TLUploadWebFile) Encode() []byte {
 func (m *TLUploadWebFile) Decode(dbuf *DecodeBuf) error {
 	m.Size = dbuf.Int()
 	m.MimeType = dbuf.String()
-	dbuf.Int()
+	// dbuf.Int()
 	m.FileType = &Storage_FileType{}
 	(*m.FileType).Decode(dbuf)
 	m.Mtime = dbuf.Int()
@@ -28306,7 +28306,7 @@ func (m *TLPaymentsPaymentForm) Decode(dbuf *DecodeBuf) error {
 		m.PasswordMissing = true
 	}
 	m.BotId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Invoice = &Invoice{}
 	(*m.Invoice).Decode(dbuf)
 	m.ProviderId = dbuf.Int()
@@ -28315,17 +28315,17 @@ func (m *TLPaymentsPaymentForm) Decode(dbuf *DecodeBuf) error {
 		m.NativeProvider = dbuf.String()
 	}
 	if (flags & (1 << 4)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.NativeParams = &DataJSON{}
 		(*m.NativeParams).Decode(dbuf)
 	}
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.SavedInfo = &PaymentRequestedInfo{}
 		(*m.SavedInfo).Decode(dbuf)
 	}
 	if (flags & (1 << 1)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.SavedCredentials = &PaymentSavedCredentials{}
 		(*m.SavedCredentials).Decode(dbuf)
 	}
@@ -28404,7 +28404,7 @@ func (m *TLPaymentsPaymentResult) Encode() []byte {
 }
 
 func (m *TLPaymentsPaymentResult) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Updates = &Updates{}
 	(*m.Updates).Decode(dbuf)
 	return dbuf.err
@@ -28464,17 +28464,17 @@ func (m *TLPaymentsPaymentReceipt) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	m.Date = dbuf.Int()
 	m.BotId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Invoice = &Invoice{}
 	(*m.Invoice).Decode(dbuf)
 	m.ProviderId = dbuf.Int()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Info = &PaymentRequestedInfo{}
 		(*m.Info).Decode(dbuf)
 	}
 	if (flags & (1 << 1)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Shipping = &ShippingOption{}
 		(*m.Shipping).Decode(dbuf)
 	}
@@ -28525,7 +28525,7 @@ func (m *TLPaymentsSavedInfo) Decode(dbuf *DecodeBuf) error {
 		m.HasSavedCredentials = true
 	}
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.SavedInfo = &PaymentRequestedInfo{}
 		(*m.SavedInfo).Decode(dbuf)
 	}
@@ -28570,7 +28570,7 @@ func (m *TLInputPaymentCredentials) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.Save = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Data = &DataJSON{}
 	(*m.Data).Decode(dbuf)
 	return dbuf.err
@@ -28646,12 +28646,12 @@ func (m *TLInputStickerSetItem) Encode() []byte {
 
 func (m *TLInputStickerSetItem) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Document = &InputDocument{}
 	(*m.Document).Decode(dbuf)
 	m.Emoji = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.MaskCoords = &MaskCoords{}
 		(*m.MaskCoords).Decode(dbuf)
 	}
@@ -28716,7 +28716,7 @@ func (m *TLPhoneCallWaiting) Decode(dbuf *DecodeBuf) error {
 	m.Date = dbuf.Int()
 	m.AdminId = dbuf.Int()
 	m.ParticipantId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Protocol = &PhoneCallProtocol{}
 	(*m.Protocol).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
@@ -28746,7 +28746,7 @@ func (m *TLPhoneCallRequested) Decode(dbuf *DecodeBuf) error {
 	m.AdminId = dbuf.Int()
 	m.ParticipantId = dbuf.Int()
 	m.GAHash = dbuf.StringBytes()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Protocol = &PhoneCallProtocol{}
 	(*m.Protocol).Decode(dbuf)
 	return dbuf.err
@@ -28773,7 +28773,7 @@ func (m *TLPhoneCallAccepted) Decode(dbuf *DecodeBuf) error {
 	m.AdminId = dbuf.Int()
 	m.ParticipantId = dbuf.Int()
 	m.GB = dbuf.StringBytes()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Protocol = &PhoneCallProtocol{}
 	(*m.Protocol).Decode(dbuf)
 	return dbuf.err
@@ -28811,10 +28811,10 @@ func (m *TLPhoneCall) Decode(dbuf *DecodeBuf) error {
 	m.ParticipantId = dbuf.Int()
 	m.GAOrB = dbuf.StringBytes()
 	m.KeyFingerprint = dbuf.Long()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Protocol = &PhoneCallProtocol{}
 	(*m.Protocol).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Connection = &PhoneConnection{}
 	(*m.Connection).Decode(dbuf)
 	// x.VectorMessage(m.AlternativeConnections);
@@ -28879,7 +28879,7 @@ func (m *TLPhoneCallDiscarded) Decode(dbuf *DecodeBuf) error {
 	}
 	m.Id = dbuf.Long()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.Reason = &PhoneCallDiscardReason{}
 		(*m.Reason).Decode(dbuf)
 	}
@@ -28964,7 +28964,7 @@ func (m *TLPhonePhoneCall) Encode() []byte {
 }
 
 func (m *TLPhonePhoneCall) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.PhoneCall = &PhoneCall{}
 	(*m.PhoneCall).Decode(dbuf)
 	// x.VectorMessage(m.Users);
@@ -29441,10 +29441,10 @@ func (m *TLChannelAdminLogEventActionChangePhoto) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionChangePhoto) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.PrevPhoto = &ChatPhoto{}
 	(*m.PrevPhoto).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.NewPhoto = &ChatPhoto{}
 	(*m.NewPhoto).Decode(dbuf)
 	return dbuf.err
@@ -29459,7 +29459,7 @@ func (m *TLChannelAdminLogEventActionToggleInvites) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionToggleInvites) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.NewValue = &Bool{}
 	(*m.NewValue).Decode(dbuf)
 	return dbuf.err
@@ -29474,7 +29474,7 @@ func (m *TLChannelAdminLogEventActionToggleSignatures) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionToggleSignatures) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.NewValue = &Bool{}
 	(*m.NewValue).Decode(dbuf)
 	return dbuf.err
@@ -29489,7 +29489,7 @@ func (m *TLChannelAdminLogEventActionUpdatePinned) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionUpdatePinned) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Message = &Message{}
 	(*m.Message).Decode(dbuf)
 	return dbuf.err
@@ -29505,10 +29505,10 @@ func (m *TLChannelAdminLogEventActionEditMessage) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionEditMessage) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.PrevMessage = &Message{}
 	(*m.PrevMessage).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.NewMessage = &Message{}
 	(*m.NewMessage).Decode(dbuf)
 	return dbuf.err
@@ -29523,7 +29523,7 @@ func (m *TLChannelAdminLogEventActionDeleteMessage) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionDeleteMessage) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Message = &Message{}
 	(*m.Message).Decode(dbuf)
 	return dbuf.err
@@ -29560,7 +29560,7 @@ func (m *TLChannelAdminLogEventActionParticipantInvite) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionParticipantInvite) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Participant = &ChannelParticipant{}
 	(*m.Participant).Decode(dbuf)
 	return dbuf.err
@@ -29576,10 +29576,10 @@ func (m *TLChannelAdminLogEventActionParticipantToggleBan) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionParticipantToggleBan) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.PrevParticipant = &ChannelParticipant{}
 	(*m.PrevParticipant).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.NewParticipant = &ChannelParticipant{}
 	(*m.NewParticipant).Decode(dbuf)
 	return dbuf.err
@@ -29595,10 +29595,10 @@ func (m *TLChannelAdminLogEventActionParticipantToggleAdmin) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionParticipantToggleAdmin) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.PrevParticipant = &ChannelParticipant{}
 	(*m.PrevParticipant).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.NewParticipant = &ChannelParticipant{}
 	(*m.NewParticipant).Decode(dbuf)
 	return dbuf.err
@@ -29614,10 +29614,10 @@ func (m *TLChannelAdminLogEventActionChangeStickerSet) Encode() []byte {
 }
 
 func (m *TLChannelAdminLogEventActionChangeStickerSet) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.PrevStickerset = &InputStickerSet{}
 	(*m.PrevStickerset).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.NewStickerset = &InputStickerSet{}
 	(*m.NewStickerset).Decode(dbuf)
 	return dbuf.err
@@ -29638,7 +29638,7 @@ func (m *TLChannelAdminLogEvent) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.Long()
 	m.Date = dbuf.Int()
 	m.UserId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Action = &ChannelAdminLogEventAction{}
 	(*m.Action).Decode(dbuf)
 	return dbuf.err
@@ -30225,10 +30225,10 @@ func (m *TLAccountUpdateNotifySettings) Encode() []byte {
 }
 
 func (m *TLAccountUpdateNotifySettings) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputNotifyPeer{}
 	(*m.Peer).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Settings = &InputPeerNotifySettings{}
 	(*m.Settings).Decode(dbuf)
 	return dbuf.err
@@ -30254,7 +30254,7 @@ func (m *TLAccountUpdateStatus) Encode() []byte {
 }
 
 func (m *TLAccountUpdateStatus) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Offline = &Bool{}
 	(*m.Offline).Decode(dbuf)
 	return dbuf.err
@@ -30270,10 +30270,10 @@ func (m *TLAccountReportPeer) Encode() []byte {
 }
 
 func (m *TLAccountReportPeer) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Reason = &ReportReason{}
 	(*m.Reason).Decode(dbuf)
 	return dbuf.err
@@ -30314,7 +30314,7 @@ func (m *TLAccountSetAccountTTL) Encode() []byte {
 }
 
 func (m *TLAccountSetAccountTTL) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Ttl = &AccountDaysTTL{}
 	(*m.Ttl).Decode(dbuf)
 	return dbuf.err
@@ -30357,7 +30357,7 @@ func (m *TLAccountUpdatePasswordSettings) Encode() []byte {
 
 func (m *TLAccountUpdatePasswordSettings) Decode(dbuf *DecodeBuf) error {
 	m.CurrentPasswordHash = dbuf.StringBytes()
-	dbuf.Int()
+	// dbuf.Int()
 	m.NewSettings = &Account_PasswordInputSettings{}
 	(*m.NewSettings).Decode(dbuf)
 	return dbuf.err
@@ -30401,7 +30401,6 @@ func (m *TLContactsDeleteContacts) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Id = make([]*InputUser, l1)
 	for i := 0; i < int(l1); i++ {
-		dbuf.Int()
 		m.Id[i] = &InputUser{}
 		(*m.Id[i]).Decode(dbuf)
 	}
@@ -30417,7 +30416,7 @@ func (m *TLContactsBlock) Encode() []byte {
 }
 
 func (m *TLContactsBlock) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputUser{}
 	(*m.Id).Decode(dbuf)
 	return dbuf.err
@@ -30432,7 +30431,7 @@ func (m *TLContactsUnblock) Encode() []byte {
 }
 
 func (m *TLContactsUnblock) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputUser{}
 	(*m.Id).Decode(dbuf)
 	return dbuf.err
@@ -30448,10 +30447,10 @@ func (m *TLContactsResetTopPeerRating) Encode() []byte {
 }
 
 func (m *TLContactsResetTopPeerRating) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Category = &TopPeerCategory{}
 	(*m.Category).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	return dbuf.err
@@ -30478,10 +30477,10 @@ func (m *TLMessagesSetTyping) Encode() []byte {
 }
 
 func (m *TLMessagesSetTyping) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Action = &SendMessageAction{}
 	(*m.Action).Decode(dbuf)
 	return dbuf.err
@@ -30496,7 +30495,7 @@ func (m *TLMessagesReportSpam) Encode() []byte {
 }
 
 func (m *TLMessagesReportSpam) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	return dbuf.err
@@ -30511,7 +30510,7 @@ func (m *TLMessagesHideReportSpam) Encode() []byte {
 }
 
 func (m *TLMessagesHideReportSpam) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	return dbuf.err
@@ -30540,10 +30539,10 @@ func (m *TLMessagesSetEncryptedTyping) Encode() []byte {
 }
 
 func (m *TLMessagesSetEncryptedTyping) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputEncryptedChat{}
 	(*m.Peer).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Typing = &Bool{}
 	(*m.Typing).Decode(dbuf)
 	return dbuf.err
@@ -30559,7 +30558,7 @@ func (m *TLMessagesReadEncryptedHistory) Encode() []byte {
 }
 
 func (m *TLMessagesReadEncryptedHistory) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputEncryptedChat{}
 	(*m.Peer).Decode(dbuf)
 	m.MaxDate = dbuf.Int()
@@ -30575,7 +30574,7 @@ func (m *TLMessagesReportEncryptedSpam) Encode() []byte {
 }
 
 func (m *TLMessagesReportEncryptedSpam) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputEncryptedChat{}
 	(*m.Peer).Decode(dbuf)
 	return dbuf.err
@@ -30590,7 +30589,7 @@ func (m *TLMessagesUninstallStickerSet) Encode() []byte {
 }
 
 func (m *TLMessagesUninstallStickerSet) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Stickerset = &InputStickerSet{}
 	(*m.Stickerset).Decode(dbuf)
 	return dbuf.err
@@ -30608,10 +30607,10 @@ func (m *TLMessagesEditChatAdmin) Encode() []byte {
 
 func (m *TLMessagesEditChatAdmin) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.IsAdmin = &Bool{}
 	(*m.IsAdmin).Decode(dbuf)
 	return dbuf.err
@@ -30654,10 +30653,10 @@ func (m *TLMessagesSaveGif) Encode() []byte {
 }
 
 func (m *TLMessagesSaveGif) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputDocument{}
 	(*m.Id).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Unsave = &Bool{}
 	(*m.Unsave).Decode(dbuf)
 	return dbuf.err
@@ -30724,7 +30723,6 @@ func (m *TLMessagesSetInlineBotResults) Decode(dbuf *DecodeBuf) error {
 	l4 := dbuf.Int()
 	m.Results = make([]*InputBotInlineResult, l4)
 	for i := 0; i < int(l4); i++ {
-		dbuf.Int()
 		m.Results[i] = &InputBotInlineResult{}
 		(*m.Results[i]).Decode(dbuf)
 	}
@@ -30733,7 +30731,7 @@ func (m *TLMessagesSetInlineBotResults) Decode(dbuf *DecodeBuf) error {
 		m.NextOffset = dbuf.String()
 	}
 	if (flags & (1 << 3)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.SwitchPm = &InlineBotSwitchPM{}
 		(*m.SwitchPm).Decode(dbuf)
 	}
@@ -30787,14 +30785,14 @@ func (m *TLMessagesEditInlineBotMessage) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 1)) != 0 {
 		m.NoWebpage = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputBotInlineMessageID{}
 	(*m.Id).Decode(dbuf)
 	if (flags & (1 << 11)) != 0 {
 		m.Message = dbuf.String()
 	}
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -30807,7 +30805,6 @@ func (m *TLMessagesEditInlineBotMessage) Decode(dbuf *DecodeBuf) error {
 		l5 := dbuf.Int()
 		m.Entities = make([]*MessageEntity, l5)
 		for i := 0; i < int(l5); i++ {
-			dbuf.Int()
 			m.Entities[i] = &MessageEntity{}
 			(*m.Entities[i]).Decode(dbuf)
 		}
@@ -30907,7 +30904,7 @@ func (m *TLMessagesSaveDraft) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.ReplyToMsgId = dbuf.Int()
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	m.Message = dbuf.String()
@@ -30920,7 +30917,6 @@ func (m *TLMessagesSaveDraft) Decode(dbuf *DecodeBuf) error {
 		l5 := dbuf.Int()
 		m.Entities = make([]*MessageEntity, l5)
 		for i := 0; i < int(l5); i++ {
-			dbuf.Int()
 			m.Entities[i] = &MessageEntity{}
 			(*m.Entities[i]).Decode(dbuf)
 		}
@@ -30965,10 +30961,10 @@ func (m *TLMessagesSaveRecentSticker) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.Attached = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputDocument{}
 	(*m.Id).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Unsave = &Bool{}
 	(*m.Unsave).Decode(dbuf)
 	return dbuf.err
@@ -31033,10 +31029,10 @@ func (m *TLMessagesSetInlineGameScore) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 1)) != 0 {
 		m.Force = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputBotInlineMessageID{}
 	(*m.Id).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
 	m.Score = dbuf.Int()
@@ -31066,7 +31062,7 @@ func (m *TLMessagesToggleDialogPin) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.Pinned = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	return dbuf.err
@@ -31109,7 +31105,6 @@ func (m *TLMessagesReorderPinnedDialogs) Decode(dbuf *DecodeBuf) error {
 	l2 := dbuf.Int()
 	m.Order = make([]*InputPeer, l2)
 	for i := 0; i < int(l2); i++ {
-		dbuf.Int()
 		m.Order[i] = &InputPeer{}
 		(*m.Order[i]).Decode(dbuf)
 	}
@@ -31161,7 +31156,6 @@ func (m *TLMessagesSetBotShippingResults) Decode(dbuf *DecodeBuf) error {
 		l3 := dbuf.Int()
 		m.ShippingOptions = make([]*ShippingOption, l3)
 		for i := 0; i < int(l3); i++ {
-			dbuf.Int()
 			m.ShippingOptions[i] = &ShippingOption{}
 			(*m.ShippingOptions[i]).Decode(dbuf)
 		}
@@ -31215,10 +31209,10 @@ func (m *TLMessagesFaveSticker) Encode() []byte {
 }
 
 func (m *TLMessagesFaveSticker) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputDocument{}
 	(*m.Id).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Unfave = &Bool{}
 	(*m.Unfave).Decode(dbuf)
 	return dbuf.err
@@ -31283,7 +31277,6 @@ func (m *TLHelpSaveAppLog) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Events = make([]*InputAppEvent, l1)
 	for i := 0; i < int(l1); i++ {
-		dbuf.Int()
 		m.Events[i] = &InputAppEvent{}
 		(*m.Events[i]).Decode(dbuf)
 	}
@@ -31315,7 +31308,7 @@ func (m *TLChannelsReadHistory) Encode() []byte {
 }
 
 func (m *TLChannelsReadHistory) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	m.MaxId = dbuf.Int()
@@ -31333,10 +31326,10 @@ func (m *TLChannelsReportSpam) Encode() []byte {
 }
 
 func (m *TLChannelsReportSpam) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
 	m.Id = dbuf.VectorInt()
@@ -31353,7 +31346,7 @@ func (m *TLChannelsEditAbout) Encode() []byte {
 }
 
 func (m *TLChannelsEditAbout) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	m.About = dbuf.String()
@@ -31370,7 +31363,7 @@ func (m *TLChannelsCheckUsername) Encode() []byte {
 }
 
 func (m *TLChannelsCheckUsername) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	m.Username = dbuf.String()
@@ -31387,7 +31380,7 @@ func (m *TLChannelsUpdateUsername) Encode() []byte {
 }
 
 func (m *TLChannelsUpdateUsername) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	m.Username = dbuf.String()
@@ -31404,10 +31397,10 @@ func (m *TLChannelsSetStickers) Encode() []byte {
 }
 
 func (m *TLChannelsSetStickers) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Stickerset = &InputStickerSet{}
 	(*m.Stickerset).Decode(dbuf)
 	return dbuf.err
@@ -31423,7 +31416,7 @@ func (m *TLChannelsReadMessageContents) Encode() []byte {
 }
 
 func (m *TLChannelsReadMessageContents) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	m.Id = dbuf.VectorInt()
@@ -31441,7 +31434,7 @@ func (m *TLBotsAnswerWebhookJSONQuery) Encode() []byte {
 
 func (m *TLBotsAnswerWebhookJSONQuery) Decode(dbuf *DecodeBuf) error {
 	m.QueryId = dbuf.Long()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Data = &DataJSON{}
 	(*m.Data).Decode(dbuf)
 	return dbuf.err
@@ -31490,7 +31483,7 @@ func (m *TLPhoneReceivedCall) Encode() []byte {
 }
 
 func (m *TLPhoneReceivedCall) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPhoneCall{}
 	(*m.Peer).Decode(dbuf)
 	return dbuf.err
@@ -31506,10 +31499,10 @@ func (m *TLPhoneSaveCallDebug) Encode() []byte {
 }
 
 func (m *TLPhoneSaveCallDebug) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPhoneCall{}
 	(*m.Peer).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Debug = &DataJSON{}
 	(*m.Debug).Decode(dbuf)
 	return dbuf.err
@@ -31656,7 +31649,7 @@ func (m *TLAuthSendCode) Decode(dbuf *DecodeBuf) error {
 	}
 	m.PhoneNumber = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.CurrentNumber = &Bool{}
 		(*m.CurrentNumber).Decode(dbuf)
 	}
@@ -31711,7 +31704,7 @@ func (m *TLAccountSendChangePhoneCode) Decode(dbuf *DecodeBuf) error {
 	}
 	m.PhoneNumber = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.CurrentNumber = &Bool{}
 		(*m.CurrentNumber).Decode(dbuf)
 	}
@@ -31749,7 +31742,7 @@ func (m *TLAccountSendConfirmPhoneCode) Decode(dbuf *DecodeBuf) error {
 	}
 	m.Hash = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.CurrentNumber = &Bool{}
 		(*m.CurrentNumber).Decode(dbuf)
 	}
@@ -31885,7 +31878,7 @@ func (m *TLAccountGetNotifySettings) Encode() []byte {
 }
 
 func (m *TLAccountGetNotifySettings) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputNotifyPeer{}
 	(*m.Peer).Decode(dbuf)
 	return dbuf.err
@@ -31997,7 +31990,7 @@ func (m *TLAccountGetPrivacy) Encode() []byte {
 }
 
 func (m *TLAccountGetPrivacy) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Key = &InputPrivacyKey{}
 	(*m.Key).Decode(dbuf)
 	return dbuf.err
@@ -32019,7 +32012,7 @@ func (m *TLAccountSetPrivacy) Encode() []byte {
 }
 
 func (m *TLAccountSetPrivacy) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Key = &InputPrivacyKey{}
 	(*m.Key).Decode(dbuf)
 	// x.VectorMessage(m.Rules)
@@ -32030,7 +32023,6 @@ func (m *TLAccountSetPrivacy) Decode(dbuf *DecodeBuf) error {
 	l2 := dbuf.Int()
 	m.Rules = make([]*InputPrivacyRule, l2)
 	for i := 0; i < int(l2); i++ {
-		dbuf.Int()
 		m.Rules[i] = &InputPrivacyRule{}
 		(*m.Rules[i]).Decode(dbuf)
 	}
@@ -32121,7 +32113,6 @@ func (m *TLUsersGetUsers) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Id = make([]*InputUser, l1)
 	for i := 0; i < int(l1); i++ {
-		dbuf.Int()
 		m.Id[i] = &InputUser{}
 		(*m.Id[i]).Decode(dbuf)
 	}
@@ -32137,7 +32128,7 @@ func (m *TLUsersGetFullUser) Encode() []byte {
 }
 
 func (m *TLUsersGetFullUser) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputUser{}
 	(*m.Id).Decode(dbuf)
 	return dbuf.err
@@ -32190,7 +32181,6 @@ func (m *TLContactsImportContacts) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Contacts = make([]*InputContact, l1)
 	for i := 0; i < int(l1); i++ {
-		dbuf.Int()
 		m.Contacts[i] = &InputContact{}
 		(*m.Contacts[i]).Decode(dbuf)
 	}
@@ -32206,7 +32196,7 @@ func (m *TLContactsDeleteContact) Encode() []byte {
 }
 
 func (m *TLContactsDeleteContact) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputUser{}
 	(*m.Id).Decode(dbuf)
 	return dbuf.err
@@ -32249,11 +32239,11 @@ func (m *TLMessagesGetMessagesViews) Encode() []byte {
 }
 
 func (m *TLMessagesGetMessagesViews) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	m.Id = dbuf.VectorInt()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Increment = &Bool{}
 	(*m.Increment).Decode(dbuf)
 	return dbuf.err
@@ -32391,7 +32381,7 @@ func (m *TLMessagesGetHistory) Encode() []byte {
 }
 
 func (m *TLMessagesGetHistory) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	m.OffsetId = dbuf.Int()
@@ -32432,16 +32422,16 @@ func (m *TLMessagesSearch) Encode() []byte {
 
 func (m *TLMessagesSearch) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	m.Q = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.FromId = &InputUser{}
 		(*m.FromId).Decode(dbuf)
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Filter = &MessagesFilter{}
 	(*m.Filter).Decode(dbuf)
 	m.MinDate = dbuf.Int()
@@ -32469,7 +32459,7 @@ func (m *TLMessagesSearchGlobal) Encode() []byte {
 func (m *TLMessagesSearchGlobal) Decode(dbuf *DecodeBuf) error {
 	m.Q = dbuf.String()
 	m.OffsetDate = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.OffsetPeer = &InputPeer{}
 	(*m.OffsetPeer).Decode(dbuf)
 	m.OffsetId = dbuf.Int()
@@ -32491,7 +32481,7 @@ func (m *TLMessagesGetUnreadMentions) Encode() []byte {
 }
 
 func (m *TLMessagesGetUnreadMentions) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	m.OffsetId = dbuf.Int()
@@ -32512,7 +32502,7 @@ func (m *TLChannelsGetMessages) Encode() []byte {
 }
 
 func (m *TLChannelsGetMessages) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	m.Id = dbuf.VectorInt()
@@ -32547,7 +32537,7 @@ func (m *TLMessagesGetDialogs) Decode(dbuf *DecodeBuf) error {
 	}
 	m.OffsetDate = dbuf.Int()
 	m.OffsetId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.OffsetPeer = &InputPeer{}
 	(*m.OffsetPeer).Decode(dbuf)
 	m.Limit = dbuf.Int()
@@ -32564,7 +32554,7 @@ func (m *TLMessagesReadHistory) Encode() []byte {
 }
 
 func (m *TLMessagesReadHistory) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	m.MaxId = dbuf.Int()
@@ -32621,7 +32611,7 @@ func (m *TLChannelsDeleteMessages) Encode() []byte {
 }
 
 func (m *TLChannelsDeleteMessages) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	m.Id = dbuf.VectorInt()
@@ -32652,7 +32642,7 @@ func (m *TLMessagesDeleteHistory) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.JustClear = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	m.MaxId = dbuf.Int()
@@ -32669,10 +32659,10 @@ func (m *TLChannelsDeleteUserHistory) Encode() []byte {
 }
 
 func (m *TLChannelsDeleteUserHistory) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
 	return dbuf.err
@@ -32767,7 +32757,7 @@ func (m *TLMessagesSendMessage) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 7)) != 0 {
 		m.ClearDraft = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
@@ -32776,7 +32766,7 @@ func (m *TLMessagesSendMessage) Decode(dbuf *DecodeBuf) error {
 	m.Message = dbuf.String()
 	m.RandomId = dbuf.Long()
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -32789,7 +32779,6 @@ func (m *TLMessagesSendMessage) Decode(dbuf *DecodeBuf) error {
 		l10 := dbuf.Int()
 		m.Entities = make([]*MessageEntity, l10)
 		for i := 0; i < int(l10); i++ {
-			dbuf.Int()
 			m.Entities[i] = &MessageEntity{}
 			(*m.Entities[i]).Decode(dbuf)
 		}
@@ -32852,18 +32841,18 @@ func (m *TLMessagesSendMedia) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 7)) != 0 {
 		m.ClearDraft = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
 		m.ReplyToMsgId = dbuf.Int()
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Media = &InputMedia{}
 	(*m.Media).Decode(dbuf)
 	m.RandomId = dbuf.Long()
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -32914,12 +32903,12 @@ func (m *TLMessagesForwardMessages) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 8)) != 0 {
 		m.WithMyScore = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.FromPeer = &InputPeer{}
 	(*m.FromPeer).Decode(dbuf)
 	m.Id = dbuf.VectorInt()
 	m.RandomId = dbuf.VectorLong()
-	dbuf.Int()
+	// dbuf.Int()
 	m.ToPeer = &InputPeer{}
 	(*m.ToPeer).Decode(dbuf)
 	return dbuf.err
@@ -32951,7 +32940,7 @@ func (m *TLMessagesEditChatPhoto) Encode() []byte {
 
 func (m *TLMessagesEditChatPhoto) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Photo = &InputChatPhoto{}
 	(*m.Photo).Decode(dbuf)
 	return dbuf.err
@@ -32969,7 +32958,7 @@ func (m *TLMessagesAddChatUser) Encode() []byte {
 
 func (m *TLMessagesAddChatUser) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
 	m.FwdLimit = dbuf.Int()
@@ -32987,7 +32976,7 @@ func (m *TLMessagesDeleteChatUser) Encode() []byte {
 
 func (m *TLMessagesDeleteChatUser) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
 	return dbuf.err
@@ -33017,7 +33006,6 @@ func (m *TLMessagesCreateChat) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Users = make([]*InputUser, l1)
 	for i := 0; i < int(l1); i++ {
-		dbuf.Int()
 		m.Users[i] = &InputUser{}
 		(*m.Users[i]).Decode(dbuf)
 	}
@@ -33036,7 +33024,7 @@ func (m *TLMessagesForwardMessage) Encode() []byte {
 }
 
 func (m *TLMessagesForwardMessage) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	m.Id = dbuf.Int()
@@ -33069,10 +33057,10 @@ func (m *TLMessagesStartBot) Encode() []byte {
 }
 
 func (m *TLMessagesStartBot) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Bot = &InputUser{}
 	(*m.Bot).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	m.RandomId = dbuf.Long()
@@ -33091,7 +33079,7 @@ func (m *TLMessagesToggleChatAdmins) Encode() []byte {
 
 func (m *TLMessagesToggleChatAdmins) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Enabled = &Bool{}
 	(*m.Enabled).Decode(dbuf)
 	return dbuf.err
@@ -33160,7 +33148,7 @@ func (m *TLMessagesSendInlineBotResult) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 7)) != 0 {
 		m.ClearDraft = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
@@ -33220,7 +33208,7 @@ func (m *TLMessagesEditMessage) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 1)) != 0 {
 		m.NoWebpage = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	m.Id = dbuf.Int()
@@ -33228,7 +33216,7 @@ func (m *TLMessagesEditMessage) Decode(dbuf *DecodeBuf) error {
 		m.Message = dbuf.String()
 	}
 	if (flags & (1 << 2)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.ReplyMarkup = &ReplyMarkup{}
 		(*m.ReplyMarkup).Decode(dbuf)
 	}
@@ -33241,7 +33229,6 @@ func (m *TLMessagesEditMessage) Decode(dbuf *DecodeBuf) error {
 		l6 := dbuf.Int()
 		m.Entities = make([]*MessageEntity, l6)
 		for i := 0; i < int(l6); i++ {
-			dbuf.Int()
 			m.Entities[i] = &MessageEntity{}
 			(*m.Entities[i]).Decode(dbuf)
 		}
@@ -33295,11 +33282,11 @@ func (m *TLMessagesSetGameScore) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 1)) != 0 {
 		m.Force = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	m.Id = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
 	m.Score = dbuf.Int()
@@ -33317,7 +33304,7 @@ func (m *TLMessagesSendScreenshotNotification) Encode() []byte {
 }
 
 func (m *TLMessagesSendScreenshotNotification) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	m.ReplyToMsgId = dbuf.Int()
@@ -33387,13 +33374,13 @@ func (m *TLChannelsEditAdmin) Encode() []byte {
 }
 
 func (m *TLChannelsEditAdmin) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.AdminRights = &ChannelAdminRights{}
 	(*m.AdminRights).Decode(dbuf)
 	return dbuf.err
@@ -33409,7 +33396,7 @@ func (m *TLChannelsEditTitle) Encode() []byte {
 }
 
 func (m *TLChannelsEditTitle) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	m.Title = dbuf.String()
@@ -33426,10 +33413,10 @@ func (m *TLChannelsEditPhoto) Encode() []byte {
 }
 
 func (m *TLChannelsEditPhoto) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Photo = &InputChatPhoto{}
 	(*m.Photo).Decode(dbuf)
 	return dbuf.err
@@ -33444,7 +33431,7 @@ func (m *TLChannelsJoinChannel) Encode() []byte {
 }
 
 func (m *TLChannelsJoinChannel) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	return dbuf.err
@@ -33459,7 +33446,7 @@ func (m *TLChannelsLeaveChannel) Encode() []byte {
 }
 
 func (m *TLChannelsLeaveChannel) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	return dbuf.err
@@ -33481,7 +33468,7 @@ func (m *TLChannelsInviteToChannel) Encode() []byte {
 }
 
 func (m *TLChannelsInviteToChannel) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	// x.VectorMessage(m.Users)
@@ -33492,7 +33479,6 @@ func (m *TLChannelsInviteToChannel) Decode(dbuf *DecodeBuf) error {
 	l2 := dbuf.Int()
 	m.Users = make([]*InputUser, l2)
 	for i := 0; i < int(l2); i++ {
-		dbuf.Int()
 		m.Users[i] = &InputUser{}
 		(*m.Users[i]).Decode(dbuf)
 	}
@@ -33508,7 +33494,7 @@ func (m *TLChannelsDeleteChannel) Encode() []byte {
 }
 
 func (m *TLChannelsDeleteChannel) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	return dbuf.err
@@ -33524,10 +33510,10 @@ func (m *TLChannelsToggleInvites) Encode() []byte {
 }
 
 func (m *TLChannelsToggleInvites) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Enabled = &Bool{}
 	(*m.Enabled).Decode(dbuf)
 	return dbuf.err
@@ -33543,10 +33529,10 @@ func (m *TLChannelsToggleSignatures) Encode() []byte {
 }
 
 func (m *TLChannelsToggleSignatures) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Enabled = &Bool{}
 	(*m.Enabled).Decode(dbuf)
 	return dbuf.err
@@ -33576,7 +33562,7 @@ func (m *TLChannelsUpdatePinnedMessage) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.Silent = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	m.Id = dbuf.Int()
@@ -33594,13 +33580,13 @@ func (m *TLChannelsEditBanned) Encode() []byte {
 }
 
 func (m *TLChannelsEditBanned) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.BannedRights = &ChannelBannedRights{}
 	(*m.BannedRights).Decode(dbuf)
 	return dbuf.err
@@ -33618,11 +33604,11 @@ func (m *TLPhoneDiscardCall) Encode() []byte {
 }
 
 func (m *TLPhoneDiscardCall) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPhoneCall{}
 	(*m.Peer).Decode(dbuf)
 	m.Duration = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Reason = &PhoneCallDiscardReason{}
 	(*m.Reason).Decode(dbuf)
 	m.ConnectionId = dbuf.Long()
@@ -33640,7 +33626,7 @@ func (m *TLPhoneSetCallRating) Encode() []byte {
 }
 
 func (m *TLPhoneSetCallRating) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPhoneCall{}
 	(*m.Peer).Decode(dbuf)
 	m.Rating = dbuf.Int()
@@ -33657,7 +33643,7 @@ func (m *TLMessagesGetPeerSettings) Encode() []byte {
 }
 
 func (m *TLMessagesGetPeerSettings) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	return dbuf.err
@@ -33687,7 +33673,7 @@ func (m *TLMessagesGetCommonChats) Encode() []byte {
 }
 
 func (m *TLMessagesGetCommonChats) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
 	m.MaxId = dbuf.Int()
@@ -33731,7 +33717,6 @@ func (m *TLChannelsGetChannels) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Id = make([]*InputChannel, l1)
 	for i := 0; i < int(l1); i++ {
-		dbuf.Int()
 		m.Id[i] = &InputChannel{}
 		(*m.Id[i]).Decode(dbuf)
 	}
@@ -33771,7 +33756,7 @@ func (m *TLChannelsGetFullChannel) Encode() []byte {
 }
 
 func (m *TLChannelsGetFullChannel) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	return dbuf.err
@@ -33803,7 +33788,7 @@ func (m *TLMessagesRequestEncryption) Encode() []byte {
 }
 
 func (m *TLMessagesRequestEncryption) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
 	m.RandomId = dbuf.Int()
@@ -33822,7 +33807,7 @@ func (m *TLMessagesAcceptEncryption) Encode() []byte {
 }
 
 func (m *TLMessagesAcceptEncryption) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputEncryptedChat{}
 	(*m.Peer).Decode(dbuf)
 	m.GB = dbuf.StringBytes()
@@ -33841,7 +33826,7 @@ func (m *TLMessagesSendEncrypted) Encode() []byte {
 }
 
 func (m *TLMessagesSendEncrypted) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputEncryptedChat{}
 	(*m.Peer).Decode(dbuf)
 	m.RandomId = dbuf.Long()
@@ -33861,12 +33846,12 @@ func (m *TLMessagesSendEncryptedFile) Encode() []byte {
 }
 
 func (m *TLMessagesSendEncryptedFile) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputEncryptedChat{}
 	(*m.Peer).Decode(dbuf)
 	m.RandomId = dbuf.Long()
 	m.Data = dbuf.StringBytes()
-	dbuf.Int()
+	// dbuf.Int()
 	m.File = &InputEncryptedFile{}
 	(*m.File).Decode(dbuf)
 	return dbuf.err
@@ -33883,7 +33868,7 @@ func (m *TLMessagesSendEncryptedService) Encode() []byte {
 }
 
 func (m *TLMessagesSendEncryptedService) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputEncryptedChat{}
 	(*m.Peer).Decode(dbuf)
 	m.RandomId = dbuf.Long()
@@ -33927,7 +33912,6 @@ func (m *TLPhotosDeletePhotos) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Id = make([]*InputPhoto, l1)
 	for i := 0; i < int(l1); i++ {
-		dbuf.Int()
 		m.Id[i] = &InputPhoto{}
 		(*m.Id[i]).Decode(dbuf)
 	}
@@ -33983,10 +33967,10 @@ func (m *TLMessagesUploadMedia) Encode() []byte {
 }
 
 func (m *TLMessagesUploadMedia) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Media = &InputMedia{}
 	(*m.Media).Decode(dbuf)
 	return dbuf.err
@@ -34014,7 +33998,7 @@ func (m *TLChannelsExportInvite) Encode() []byte {
 }
 
 func (m *TLChannelsExportInvite) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	return dbuf.err
@@ -34042,7 +34026,7 @@ func (m *TLMessagesGetStickerSet) Encode() []byte {
 }
 
 func (m *TLMessagesGetStickerSet) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Stickerset = &InputStickerSet{}
 	(*m.Stickerset).Decode(dbuf)
 	return dbuf.err
@@ -34080,7 +34064,7 @@ func (m *TLStickersCreateStickerSet) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.Masks = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
 	m.Title = dbuf.String()
@@ -34093,7 +34077,6 @@ func (m *TLStickersCreateStickerSet) Decode(dbuf *DecodeBuf) error {
 	l5 := dbuf.Int()
 	m.Stickers = make([]*InputStickerSetItem, l5)
 	for i := 0; i < int(l5); i++ {
-		dbuf.Int()
 		m.Stickers[i] = &InputStickerSetItem{}
 		(*m.Stickers[i]).Decode(dbuf)
 	}
@@ -34109,7 +34092,7 @@ func (m *TLStickersRemoveStickerFromSet) Encode() []byte {
 }
 
 func (m *TLStickersRemoveStickerFromSet) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Sticker = &InputDocument{}
 	(*m.Sticker).Decode(dbuf)
 	return dbuf.err
@@ -34125,7 +34108,7 @@ func (m *TLStickersChangeStickerPosition) Encode() []byte {
 }
 
 func (m *TLStickersChangeStickerPosition) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Sticker = &InputDocument{}
 	(*m.Sticker).Decode(dbuf)
 	m.Position = dbuf.Int()
@@ -34142,10 +34125,10 @@ func (m *TLStickersAddStickerToSet) Encode() []byte {
 }
 
 func (m *TLStickersAddStickerToSet) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Stickerset = &InputStickerSet{}
 	(*m.Stickerset).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Sticker = &InputStickerSetItem{}
 	(*m.Sticker).Decode(dbuf)
 	return dbuf.err
@@ -34161,10 +34144,10 @@ func (m *TLMessagesInstallStickerSet) Encode() []byte {
 }
 
 func (m *TLMessagesInstallStickerSet) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Stickerset = &InputStickerSet{}
 	(*m.Stickerset).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Archived = &Bool{}
 	(*m.Archived).Decode(dbuf)
 	return dbuf.err
@@ -34238,14 +34221,14 @@ func (m *TLMessagesGetInlineBotResults) Encode() []byte {
 
 func (m *TLMessagesGetInlineBotResults) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Bot = &InputUser{}
 	(*m.Bot).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.GeoPoint = &InputGeoPoint{}
 		(*m.GeoPoint).Decode(dbuf)
 	}
@@ -34264,7 +34247,7 @@ func (m *TLMessagesGetMessageEditData) Encode() []byte {
 }
 
 func (m *TLMessagesGetMessageEditData) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	m.Id = dbuf.Int()
@@ -34301,7 +34284,7 @@ func (m *TLMessagesGetBotCallbackAnswer) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 1)) != 0 {
 		m.Game = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	m.MsgId = dbuf.Int()
@@ -34334,7 +34317,6 @@ func (m *TLMessagesGetPeerDialogs) Decode(dbuf *DecodeBuf) error {
 	l1 := dbuf.Int()
 	m.Peers = make([]*InputPeer, l1)
 	for i := 0; i < int(l1); i++ {
-		dbuf.Int()
 		m.Peers[i] = &InputPeer{}
 		(*m.Peers[i]).Decode(dbuf)
 	}
@@ -34430,7 +34412,7 @@ func (m *TLMessagesGetAttachedStickers) Encode() []byte {
 }
 
 func (m *TLMessagesGetAttachedStickers) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Media = &InputStickeredMedia{}
 	(*m.Media).Decode(dbuf)
 	return dbuf.err
@@ -34447,11 +34429,11 @@ func (m *TLMessagesGetGameHighScores) Encode() []byte {
 }
 
 func (m *TLMessagesGetGameHighScores) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPeer{}
 	(*m.Peer).Decode(dbuf)
 	m.Id = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
 	return dbuf.err
@@ -34467,10 +34449,10 @@ func (m *TLMessagesGetInlineGameHighScores) Encode() []byte {
 }
 
 func (m *TLMessagesGetInlineGameHighScores) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputBotInlineMessageID{}
 	(*m.Id).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
 	return dbuf.err
@@ -34572,10 +34554,10 @@ func (m *TLUpdatesGetChannelDifference) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 0)) != 0 {
 		m.Force = true
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Filter = &ChannelMessagesFilter{}
 	(*m.Filter).Decode(dbuf)
 	m.Pts = dbuf.Int()
@@ -34592,7 +34574,7 @@ func (m *TLPhotosUpdateProfilePhoto) Encode() []byte {
 }
 
 func (m *TLPhotosUpdateProfilePhoto) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Id = &InputPhoto{}
 	(*m.Id).Decode(dbuf)
 	return dbuf.err
@@ -34607,7 +34589,7 @@ func (m *TLPhotosUploadProfilePhoto) Encode() []byte {
 }
 
 func (m *TLPhotosUploadProfilePhoto) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.File = &InputFile{}
 	(*m.File).Decode(dbuf)
 	return dbuf.err
@@ -34625,7 +34607,7 @@ func (m *TLPhotosGetUserPhotos) Encode() []byte {
 }
 
 func (m *TLPhotosGetUserPhotos) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
 	m.Offset = dbuf.Int()
@@ -34645,7 +34627,7 @@ func (m *TLUploadGetFile) Encode() []byte {
 }
 
 func (m *TLUploadGetFile) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Location = &InputFileLocation{}
 	(*m.Location).Decode(dbuf)
 	m.Offset = dbuf.Int()
@@ -34664,7 +34646,7 @@ func (m *TLUploadGetWebFile) Encode() []byte {
 }
 
 func (m *TLUploadGetWebFile) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Location = &InputWebFileLocation{}
 	(*m.Location).Decode(dbuf)
 	m.Offset = dbuf.Int()
@@ -34808,10 +34790,10 @@ func (m *TLChannelsGetParticipants) Encode() []byte {
 }
 
 func (m *TLChannelsGetParticipants) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.Filter = &ChannelParticipantsFilter{}
 	(*m.Filter).Decode(dbuf)
 	m.Offset = dbuf.Int()
@@ -34829,10 +34811,10 @@ func (m *TLChannelsGetParticipant) Encode() []byte {
 }
 
 func (m *TLChannelsGetParticipant) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
 	return dbuf.err
@@ -34848,7 +34830,7 @@ func (m *TLChannelsExportMessageLink) Encode() []byte {
 }
 
 func (m *TLChannelsExportMessageLink) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	m.Id = dbuf.Int()
@@ -34891,12 +34873,12 @@ func (m *TLChannelsGetAdminLog) Encode() []byte {
 
 func (m *TLChannelsGetAdminLog) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Channel = &InputChannel{}
 	(*m.Channel).Decode(dbuf)
 	m.Q = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
-		dbuf.Int()
+		// dbuf.Int()
 		m.EventsFilter = &ChannelAdminLogEventsFilter{}
 		(*m.EventsFilter).Decode(dbuf)
 	}
@@ -34909,7 +34891,6 @@ func (m *TLChannelsGetAdminLog) Decode(dbuf *DecodeBuf) error {
 		l4 := dbuf.Int()
 		m.Admins = make([]*InputUser, l4)
 		for i := 0; i < int(l4); i++ {
-			dbuf.Int()
 			m.Admins[i] = &InputUser{}
 			(*m.Admins[i]).Decode(dbuf)
 		}
@@ -34931,7 +34912,7 @@ func (m *TLBotsSendCustomRequest) Encode() []byte {
 
 func (m *TLBotsSendCustomRequest) Decode(dbuf *DecodeBuf) error {
 	m.CustomMethod = dbuf.String()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Params = &DataJSON{}
 	(*m.Params).Decode(dbuf)
 	return dbuf.err
@@ -34999,7 +34980,7 @@ func (m *TLPaymentsValidateRequestedInfo) Decode(dbuf *DecodeBuf) error {
 		m.Save = true
 	}
 	m.MsgId = dbuf.Int()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Info = &PaymentRequestedInfo{}
 	(*m.Info).Decode(dbuf)
 	return dbuf.err
@@ -35039,7 +35020,7 @@ func (m *TLPaymentsSendPaymentForm) Decode(dbuf *DecodeBuf) error {
 	if (flags & (1 << 1)) != 0 {
 		m.ShippingOptionId = dbuf.String()
 	}
-	dbuf.Int()
+	// dbuf.Int()
 	m.Credentials = &InputPaymentCredentials{}
 	(*m.Credentials).Decode(dbuf)
 	return dbuf.err
@@ -35068,12 +35049,12 @@ func (m *TLPhoneRequestCall) Encode() []byte {
 }
 
 func (m *TLPhoneRequestCall) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.UserId = &InputUser{}
 	(*m.UserId).Decode(dbuf)
 	m.RandomId = dbuf.Int()
 	m.GAHash = dbuf.StringBytes()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Protocol = &PhoneCallProtocol{}
 	(*m.Protocol).Decode(dbuf)
 	return dbuf.err
@@ -35090,11 +35071,11 @@ func (m *TLPhoneAcceptCall) Encode() []byte {
 }
 
 func (m *TLPhoneAcceptCall) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPhoneCall{}
 	(*m.Peer).Decode(dbuf)
 	m.GB = dbuf.StringBytes()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Protocol = &PhoneCallProtocol{}
 	(*m.Protocol).Decode(dbuf)
 	return dbuf.err
@@ -35112,12 +35093,12 @@ func (m *TLPhoneConfirmCall) Encode() []byte {
 }
 
 func (m *TLPhoneConfirmCall) Decode(dbuf *DecodeBuf) error {
-	dbuf.Int()
+	// dbuf.Int()
 	m.Peer = &InputPhoneCall{}
 	(*m.Peer).Decode(dbuf)
 	m.GA = dbuf.StringBytes()
 	m.KeyFingerprint = dbuf.Long()
-	dbuf.Int()
+	// dbuf.Int()
 	m.Protocol = &PhoneCallProtocol{}
 	(*m.Protocol).Decode(dbuf)
 	return dbuf.err

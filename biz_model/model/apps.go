@@ -15,25 +15,24 @@
  * limitations under the License.
  */
 
-package rpc
+package model
 
-import (
-	"github.com/golang/glog"
-	"github.com/nebulaim/telegramd/mtproto"
-	"golang.org/x/net/context"
-	"github.com/nebulaim/telegramd/base/orm"
-)
+import "github.com/nebulaim/telegramd/base/orm"
 
-type BotsServiceImpl struct {
-	zorm orm.Ormer
+/*
+	400 BAD_REQUEST	PHONE_NUMBER_INVALID	无效的电话号码
+	400 BAD_REQUEST	PHONE_CODE_EMPTY	来自SMS的phone_code是空的
+	400 BAD_REQUEST	PHONE_CODE_EXPIRED	短信过期
+	400 BAD_REQUEST	PHONE_CODE_INVALID	发送无效的短信代码
+	400 BAD_REQUEST	PHONE_NUMBER_UNOCCUPIED	代码有效，但没有注册给定号码的用户
+ */
+
+type Apps struct {
+	Id			int32	`orm:"pk"`
+	ApiId 		int32
+	ApiHash	 	string
 }
 
-func (s *BotsServiceImpl) BotsAnswerWebhookJSONQuery(ctx context.Context, request *mtproto.TLBotsAnswerWebhookJSONQuery) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *BotsServiceImpl) BotsSendCustomRequest(ctx context.Context, request *mtproto.TLBotsSendCustomRequest) (*mtproto.DataJSON, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+func init()  {
+	orm.RegisterModel(new(Apps))
 }

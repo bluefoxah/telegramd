@@ -666,7 +666,7 @@ for restype in typesList:
       elif (paramType == 'repeated string'):
         classTypesTexts += '  m.' +  to_proto_go_name(paramName) + ' = dbuf.VectorString()\n';
       elif (paramType in TypesList):
-        classTypesTexts += '  dbuf.Int()\n'
+        classTypesTexts += '  // dbuf.Int()\n'
         classTypesTexts += '  m.' + to_proto_go_name(paramName) + ' = &' + to_proto_go_name(paramType) + '{}\n';
         classTypesTexts += '  (*m.' + to_proto_go_name(paramName) + ').Decode(dbuf)\n';
 
@@ -683,11 +683,11 @@ for restype in typesList:
 
 
         classTypesTexts += '  for i := 0; i < int(l%d); i++ {\n' % (ii)
-        classTypesTexts += '    dbuf.Int()\n'
         classTypesTexts += '    m.%s[i] = &%s{}\n' % (to_proto_go_name(paramName), to_proto_go_name(eptype))
         if (eptype in TypesList):
           classTypesTexts += '    (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
         else:
+          classTypesTexts += '    dbuf.Int()\n'
           classTypesTexts += '    (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
           classTypesTexts += '    // TODO(@benqi): Check classID valid!!!\n'
           classTypesTexts += '    // dbuf.Int()\n'
@@ -709,6 +709,7 @@ for restype in typesList:
         if (eptype in TypesList):
           classTypesTexts += '   (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
         else:
+          classTypesTexts += '    dbuf.Int()\n'
           classTypesTexts += '    (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
           classTypesTexts += '    // TODO(@benqi): Check classID valid!!!\n'
           classTypesTexts += '    // dbuf.Int()\n'
@@ -902,7 +903,7 @@ for restype in funcsList:
         classTypesTexts += '  m.' +  to_proto_go_name(paramName) + ' = dbuf.VectorString()\n';
       elif (paramType in TypesList):
         # classTypesTexts += '  // x.Bytes(m.' + to_proto_go_name(paramName) + '.Encode())\n';
-        classTypesTexts += '  dbuf.Int()\n'
+        classTypesTexts += '  // dbuf.Int()\n'
         classTypesTexts += '  m.' + to_proto_go_name(paramName) + ' = &' + to_proto_go_name(paramType) + '{}\n';
         classTypesTexts += '  (*m.' + to_proto_go_name(paramName) + ').Decode(dbuf)\n';
 
@@ -924,11 +925,11 @@ for restype in funcsList:
           classTypesTexts += '  m.%s = make([]*%s, l%d)\n' % (to_proto_go_name(paramName), to_proto_go_name(eptype), ii)
 
           classTypesTexts += '  for i := 0; i < int(l%d); i++ {\n' % (ii)
-          classTypesTexts += '    dbuf.Int()\n'
           classTypesTexts += '    m.%s[i] = &%s{}\n' % (to_proto_go_name(paramName), to_proto_go_name(eptype))
           if (eptype in TypesList):
             classTypesTexts += '   (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
           else:
+            classTypesTexts += '    dbuf.Int()\n'
             classTypesTexts += '    (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
             classTypesTexts += '    // TODO(@benqi): Check classID valid!!!\n'
             classTypesTexts += '    // dbuf.Int()\n'
@@ -947,11 +948,11 @@ for restype in funcsList:
           classTypesTexts += '  m.%s = make([]*%s, l%d)\n' % (to_proto_go_name(paramName), to_proto_go_name(eptype), ii)
 
           classTypesTexts += '  for i := 0; i < int(l%d); i++ {\n' % (ii)
-          classTypesTexts += '    dbuf.Int()\n'
           classTypesTexts += '    m.%s[i] = &%s{}\n' % (to_proto_go_name(paramName), to_proto_go_name(eptype))
           if (eptype in TypesList):
             classTypesTexts += '   (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
           else:
+            classTypesTexts += '    dbuf.Int()\n'
             classTypesTexts += '    (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
             classTypesTexts += '    // TODO(@benqi): Check classID valid!!!\n'
             classTypesTexts += '    // dbuf.Int()\n'

@@ -22,9 +22,11 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
 	"errors"
+	"github.com/nebulaim/telegramd/base/orm"
 )
 
 type AuthServiceImpl struct {
+	zorm orm.Ormer
 }
 
 func (s *AuthServiceImpl) AuthLogOut(ctx context.Context, request *mtproto.TLAuthLogOut) (*mtproto.Bool, error) {
@@ -62,6 +64,7 @@ func (s *AuthServiceImpl) AuthDropTempAuthKeys(ctx context.Context, request *mtp
 	return nil, errors.New("Not impl")
 }
 
+// 检查手机号码是否已经注册
 func (s *AuthServiceImpl) AuthCheckPhone(ctx context.Context, request *mtproto.TLAuthCheckPhone) (*mtproto.Auth_CheckedPhone, error) {
 	glog.Infof("AuthCheckPhone - Process: {%v}", request)
 
@@ -74,8 +77,17 @@ func (s *AuthServiceImpl) AuthCheckPhone(ctx context.Context, request *mtproto.T
 	return reply, nil
 }
 
+// auth.sendCode#86aef0ec flags:#
+//  allow_flashcall:flags.0?true
+//  phone_number:string
+//  current_number:flags.0?Bool
+//  api_id:int
+//  api_hash:string
+// = auth.SentCode;
 func (s *AuthServiceImpl) AuthSendCode(ctx context.Context, request *mtproto.TLAuthSendCode) (*mtproto.Auth_SentCode, error) {
 	glog.Infof("AuthSendCode - Process: {%v}", request)
+
+	// Check TLAuthSendCode
 
 	authSentCode := &mtproto.TLAuthSentCode{}
 	authSentCode.Type = mtproto.MakeAuth_SentCodeType(&mtproto.TLAuthSentCodeTypeApp{

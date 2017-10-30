@@ -1,4 +1,16 @@
 # lang_pack_en.toml
+#
+#  result: { langPackDifference
+#     lang_code: "en" [STRING],
+#     from_version: 31 [INT],
+#     version: 32 [INT],
+#     strings: [ vector<0x0>
+#       { langPackString
+#         key: "lng_mute_box_tip" [STRING],
+#         value: "Choose for how long you would like to turn off notifications for the following chat" [STRING],
+#       },
+#     ],
+#  }
 
 langCode = "en"
 version = 31
