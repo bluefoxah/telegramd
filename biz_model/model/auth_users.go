@@ -21,16 +21,14 @@ import (
 	"github.com/nebulaim/telegramd/base/orm"
 )
 
-type Apps struct {
+type AuthUsers struct {
 	Id        int32
-	ApiId     int32
-	ApiHash   string
-	Title     string
-	ShortName string
+	AuthId    int64
+	UserId    int32
 	CreatedAt string
 	DeletedAt string
 }
 
 func init() {
-	orm.RegisterModel(new(Apps))
+	orm.RegisterModel(new(AuthUsers))
 }
