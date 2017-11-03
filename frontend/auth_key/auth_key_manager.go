@@ -18,10 +18,11 @@
 package auth_key
 
 import (
-	"github.com/nebulaim/telegramd/base/orm"
 	_ "github.com/go-sql-driver/mysql" // import your used driver
 	"github.com/golang/glog"
 	"encoding/base64"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
 // Model Struct
@@ -32,48 +33,51 @@ type MasterKeys struct {
 
 // "root:@/nebulaim?charset=utf8"
 // 30
-func NewAuthKeyCacheManager(dsn string) *AuthKeyCacheManager {
-	err := orm.RegisterDriver("mysql", orm.DRMySQL)
-	if err != nil {
-		panic(err)
-	}
-
-	// register model
-	orm.RegisterModel(new(MasterKeys))
-	// set default database
-	err = orm.RegisterDataBase("default", "mysql", dsn, 30)
-	if err != nil {
-		panic(err)
-	}
-
-	return &AuthKeyCacheManager{ orm.NewOrm(), }
+func NewAuthKeyCacheManager(dao* dao.MasterKeysDAO) *AuthKeyCacheManager {
+	//err := orm.RegisterDriver("mysql", orm.DRMySQL)
+	//if err != nil {
+	//	panic(err)
+	//}
+	//
+	//// register model
+	//orm.RegisterModel(new(MasterKeys))
+	//// set default database
+	//err = orm.RegisterDataBase("default", "mysql", dsn, 30)
+	//if err != nil {
+	//	panic(err)
+	//}
+	//
+	return &AuthKeyCacheManager{dao}
 }
 
 type AuthKeyCacheManager struct {
-	ZOrm orm.Ormer
+	// ZOrm orm.Ormer
+	dao *dao.MasterKeysDAO
 }
 
 // TODO(@benqi): 暂时在这里操作数据库，需要改善的地方:
 // 1. 如果数据库连接有问题，尝试存储到本地缓存
-// 2. 所有需要读写数据库和缓存的地方，全部推给后端服务              2
+// 2. 所有需要读写数据库和缓存的地方，全部推给后端服务
 // GetAuthKey(uint64) []byte
 // PutAuthKey(uint64, []byte) error
 func (s *AuthKeyCacheManager) GetAuthKey(keyID int64) (authKey []byte) {
-	k := &MasterKeys{ AuthId: keyID, }
-	err := s.ZOrm.Read(k)
+	// k := &MasterKeys{ AuthId: keyID }
+	do, err := s.dao.SelectByAuthId(keyID)
+	// err := s.ZOrm.Read(k)
 	if err != nil {
 		glog.Errorf("Read keyData error: %s\n", err)
 		return nil
 	}
 
-	authKey, err = base64.RawStdEncoding.DecodeString(k.Body)
+	authKey, err = base64.RawStdEncoding.DecodeString(do.Body)
 	return
 }
 
 func (s *AuthKeyCacheManager) PutAuthKey(keyID int64, key []byte) (err error) {
-	k := &MasterKeys{ AuthId: keyID, }
-	k.Body = base64.RawStdEncoding.EncodeToString(key)
-	_, err = s.ZOrm.Insert(k)
+	do := &dataobject.MasterKeysDO{ AuthId: keyID}
+	// k := &dao.MasterKeysDO{ AuthId: keyID, }
+	do.Body = base64.RawStdEncoding.EncodeToString(key)
+	_, err = s.dao.Insert(do)
 	if err != nil {
 		glog.Errorf("Write keyData error: %s\n", err)
 	}

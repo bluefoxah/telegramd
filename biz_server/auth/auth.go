@@ -17,7 +17,7 @@
 
 package main
 
-import "github.com/nebulaim/telegramd/server/auth/rpc"
+import "github.com/nebulaim/telegramd/biz_server/auth/rpc"
 
 func main() {
 	rpc.RPCServerInit()

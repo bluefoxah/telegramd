@@ -21,11 +21,9 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
-	"github.com/nebulaim/telegramd/base/orm"
 )
 
 type PhoneServiceImpl struct {
-	zorm orm.Ormer
 }
 
 func (s *PhoneServiceImpl) PhoneReceivedCall(ctx context.Context, request *mtproto.TLPhoneReceivedCall) (*mtproto.Bool, error) {

@@ -25,7 +25,10 @@ import (
 	"math/big"
 	"errors"
 	"github.com/nebulaim/telegramd/frontend/rpc"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"fmt"
 )
+
 //CODEC_UNKNOWN = iota
 //CODEC_req_pq
 //CODEC_resPQ
@@ -54,8 +57,8 @@ type Client struct {
 	A *big.Int
 	P *big.Int
 
-	// SessionId int64
-	// Salt      int64
+	authsDAO *dao.AuthsDAO
+	authSaltsDAO *dao.AuthSaltsDAO
 }
 
 func NewClient(session *net2.Session, rpcClient *rpc.RPCClient) (c *Client) {
@@ -120,6 +123,10 @@ func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
 	if c.Codec.SessionId == 0 {
 		// 需要创建Session
 		newSessionCreated := c.onNewSessionCreated(request.SessionId, request.MessageId, request.SeqNo)
+		if newSessionCreated == nil {
+			return fmt.Errorf("onNewSessionCreated error!")
+		}
+
 		c.Codec.SessionId =  request.SessionId
 		c.Codec.Salt = newSessionCreated.ServerSalt
 
@@ -131,6 +138,8 @@ func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
 
 		c.Session.Send(m)
 	}
+
+	// TODO(@benqi): 检查sessionId
 	return c.OnMessage(request.MessageId, request.SeqNo, request.Object)
 }
 

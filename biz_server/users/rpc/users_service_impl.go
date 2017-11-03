@@ -22,11 +22,9 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
 	"errors"
-	"github.com/nebulaim/telegramd/base/orm"
 )
 
 type UsersServiceImpl struct {
-	zorm orm.Ormer
 }
 
 // func (s *UsersServiceImpl)UsersGetUsers(ctx context.Context,  request *mtproto.TLUsersGetUsers) (*mtproto.Vector<User>, error) {

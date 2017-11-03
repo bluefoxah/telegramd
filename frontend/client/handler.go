@@ -22,10 +22,9 @@ import (
 	"fmt"
 	"encoding/hex"
 	. "github.com/nebulaim/telegramd/mtproto"
-	"github.com/nebulaim/telegramd/frontend/auth_key"
-	"github.com/nebulaim/telegramd/frontend/model"
 	"time"
 	"github.com/nebulaim/telegramd/frontend/id"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
 func (c *Client) onMsgsAck(msgId int64, seqNo int32, request TLObject) {
@@ -36,30 +35,30 @@ func (c *Client) onNewSessionCreated(sessionId, msgId int64, seqNo int32) (*TLNe
 	// glog.Info("processMsgsAck - request: %s", request.String())
 
 	// TODO(@benqi): 客户端保存的initConnection信息推到后台服务存储
-	// 先用最老土的办法实现
-	authSessions := &model.AuthSessions{
-			AuthId: 	c.Codec.AuthKeyId,
-			SessionId:	sessionId,
-			UniqueId:   id.NextId(),
-		}
-
-	authSalts := &model.AuthSalts{AuthId: 	c.Codec.AuthKeyId,}
-	if c.Codec.Salt == 0 {
-		authSalts.Salt = id.NextId()
+	authSaltsDO, err := c.authSaltsDAO.SelectByAuthId(c.Codec.AuthKeyId)
+	if err == nil {
+		// TODO(@benqi): 处理数据库出错
+		glog.Error("c.authSaltsDAO.SelectByAuthId - query error: ", err)
+		return nil
 	}
 
-	// 先这样吧
-	cacheKey, _ := c.Codec.AuthKeyStorager.(*auth_key.AuthKeyCacheManager)
-
-	// TODO(@benqi): 检查数据库操作是否成功
-	cacheKey.ZOrm.ReadOrCreate(authSessions, "AuthId", "SessionId")
-	cacheKey.ZOrm.ReadOrCreate(authSalts, "AuthId", "Salt")
+	if authSaltsDO == nil {
+		// salts不存在，插入一条记录
+		authSaltsDO = &dataobject.AuthSaltsDO{ AuthId: c.Codec.AuthKeyId, Salt: id.NextId() }
+		_, err := c.authSaltsDAO.Insert(authSaltsDO)
+		if err != nil {
+			glog.Error("c.authSaltsDAO.Insert - insert error: ", err)
+			return nil
+		}
+	} else {
+		// TODO(@benqi): salts是否已经过有效期
+	}
 
 	// c.Codec.SessionId =
 	notify := &TLNewSessionCreated{
 		FirstMsgId: msgId,
-		UniqueId:   authSessions.UniqueId,
-		ServerSalt: authSalts.Salt,
+		UniqueId: id.NextId(),
+		ServerSalt: authSaltsDO.Salt,
 	}
 	return notify
 }
@@ -164,22 +163,32 @@ func (c *Client) onInvokeWithLayer(msgId int64, seqNo int32, request TLObject) e
 	}
 
 	// TODO(@benqi): 客户端保存的initConnection信息推到后台服务存储
-	// 先用最老土的办法实现
-	connectionsModel := &model.AuthConnections{
-		AuthId: c.Codec.AuthKeyId,
-		ApiId:  initConnection.ApiId,
-		DeviceModel: initConnection.DeviceModel,
-		SystemVersion: initConnection.SystemVersion,
-		AppVersion: initConnection.AppVersion,
-		SystemLangCode: initConnection.SystemLangCode,
-		LangPack: initConnection.LangPack,
-		LangCode: initConnection.LangCode,
-		CreatedAt: time.Now().Format("2006-01-02 15:04:05"),
+	do, err := c.authsDAO.SelectConnectionHashByAuthId(c.Codec.AuthKeyId)
+	if err != nil {
+		glog.Errorf("c.authsDAO.SelectConnectionHashByAuthId: query db error: %s", err)
+		return err
 	}
 
-	// 先这样吧
-	cacheKey, _ := c.Codec.AuthKeyStorager.(*auth_key.AuthKeyCacheManager)
-	cacheKey.ZOrm.InsertOrUpdate(connectionsModel, "auth_id")
+	if do == nil {
+		do = &dataobject.AuthsDO{
+			AuthId: c.Codec.AuthKeyId,
+			ApiId:  initConnection.ApiId,
+			DeviceModel: initConnection.DeviceModel,
+			SystemVersion: initConnection.SystemVersion,
+			AppVersion: initConnection.AppVersion,
+			SystemLangCode: initConnection.SystemLangCode,
+			LangPack: initConnection.LangPack,
+			LangCode: initConnection.LangCode,
+			CreatedAt: time.Now().Format("2006-01-02 15:04:05"),
+		}
+		_, err := c.authsDAO.Insert(do)
+		if err != nil {
+			glog.Errorf("c.authsDAO.SelectConnectionHashByAuthId: query db error: %s", err)
+			return err
+		}
+	} else {
+		// TODO(@benqi): 更新initConnection信息
+	}
 
 	dbuf = NewDecodeBuf(initConnection.Query)
 	query := dbuf.Object()
@@ -187,9 +196,7 @@ func (c *Client) onInvokeWithLayer(msgId int64, seqNo int32, request TLObject) e
 		return fmt.Errorf("Decode query error: %s", hex.EncodeToString(invokeWithLayer.Query))
 	}
 
-	// 
 	c.OnMessage(msgId, seqNo, query)
-
 	return nil
 }
 

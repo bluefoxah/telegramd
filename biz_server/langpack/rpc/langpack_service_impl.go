@@ -25,7 +25,6 @@ import (
 	"github.com/BurntSushi/toml"
 	"fmt"
 	"github.com/nebulaim/telegramd/biz_server/langpack/model"
-	"github.com/nebulaim/telegramd/base/orm"
 )
 
 const (
@@ -33,7 +32,6 @@ const (
 )
 
 type LangpackServiceImpl struct {
-	zorm orm.Ormer
 }
 
 func (s *LangpackServiceImpl) LangpackGetLangPack(ctx context.Context, request *mtproto.TLLangpackGetLangPack) (*mtproto.LangPackDifference, error) {

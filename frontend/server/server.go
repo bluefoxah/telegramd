@@ -25,22 +25,35 @@ import (
 	"github.com/nebulaim/telegramd/frontend/rpc"
 	"github.com/nebulaim/telegramd/frontend/client"
 	"github.com/nebulaim/telegramd/frontend/auth_key"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/jmoiron/sqlx"
+	_ "github.com/go-sql-driver/mysql" // import your used driver
 )
 
 type Server struct {
+	authsDAO *dao.AuthsDAO
+	authSaltsDAO *dao.AuthSaltsDAO
+
 	cacheKeys	*auth_key.AuthKeyCacheManager
 	Server      *net2.Server
 }
 
 func NewServer(addr, dsn string) (s *Server) {
+	db, err := sqlx.Connect("mysql", dsn)
+	if err != nil {
+		glog.Fatalf("Connect mysql %s error: %s", dsn, err)
+		return nil
+	}
+
+	s = &Server{}
+	s.authsDAO = dao.NewAuthsDAO(db)
+	s.authSaltsDAO = dao.NewAuthSaltsDAO(db)
+
 	mtproto := NewMTProto()
 	lsn := listen("server", "0.0.0.0:12345")
-	server := net2.NewServer(lsn, mtproto, 1024, net2.HandlerFunc(emptySessionLoop))
+	s.Server = net2.NewServer(lsn, mtproto, 1024, net2.HandlerFunc(emptySessionLoop))
+	s.cacheKeys = auth_key.NewAuthKeyCacheManager(dao.NewMasterKeysDAO(db))
 
-	s = &Server{
-		Server: 	server,
-		cacheKeys:  auth_key.NewAuthKeyCacheManager(dsn),
-	}
 	return
 }
 
@@ -60,8 +73,6 @@ func (s* Server) Serve(rpcClient *rpc.RPCClient) {
 		c.Codec.AuthKeyStorager = s.cacheKeys
 		go s.sessionLoop(c)
 	}
-
-	// s.Server.Serve()
 }
 
 func (s* Server) sessionLoop(c *client.Client) {

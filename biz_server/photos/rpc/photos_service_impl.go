@@ -21,11 +21,9 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
-	"github.com/nebulaim/telegramd/base/orm"
 )
 
 type PhotosServiceImpl struct {
-	zorm orm.Ormer
 }
 
 // func (s *PhotosServiceImpl)PhotosDeletePhotos(ctx context.Context,  request *mtproto.TLPhotosDeletePhotos) (*mtproto.Vector<int64T>, error) {

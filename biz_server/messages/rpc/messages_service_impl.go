@@ -22,11 +22,9 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
 	"errors"
-	"github.com/nebulaim/telegramd/base/orm"
 )
 
 type MessagesServiceImpl struct {
-	zorm orm.Ormer
 }
 
 func (s *MessagesServiceImpl) MessagesSetTyping(ctx context.Context, request *mtproto.TLMessagesSetTyping) (*mtproto.Bool, error) {

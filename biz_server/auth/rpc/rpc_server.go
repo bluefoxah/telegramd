@@ -18,43 +18,25 @@
 package rpc
 
 import (
-	"flag"
-	"net"
-	"github.com/golang/glog"
-	"google.golang.org/grpc"
-	"golang.org/x/net/context"
+	//"flag"
+	//"net"
+	//"github.com/golang/glog"
+	//"google.golang.org/grpc"
+	//"github.com/nebulaim/telegramd/mtproto"
 )
 
 type RPCServer struct {
 }
 
-func (s *RPCServer)AuthSentCode(ctx context.Context,  sendCode *TLAuthSendCode) (*Auth_SentCode, error) {
-	glog.Infof("Recive AuthSentCode query: {%v}", sendCode)
-
-	return &Auth_SentCode{
-		Payload: &Auth_SentCode_AuthSentCode{
-			AuthSentCode: & TLAuthSentCode{
-				Flags: 1,
-				PhoneRegistered: false,
-				Type: nil,
-				PhoneCodeHash: "12345",
-				NextType: nil,
-				Timeout: 1,
-			},
-		},
-	}, nil
-}
-
 func RPCServerInit() {
-	flag.Parse()
-	lis, err := net.Listen("tcp", ("localhost:10001"))
-	if err != nil {
-		glog.Fatalf("failed to listen: %v", err)
-	}
-	var opts []grpc.ServerOption
-	grpcServer := grpc.NewServer(opts...)
-	RegisterAuthServer(grpcServer, &RPCServer{})
-	grpcServer.Serve(lis)
-
+	//flag.Parse()
+	//lis, err := net.Listen("tcp", "localhost:10001")
+	//if err != nil {
+	//	glog.Fatalf("failed to listen: %v", err)
+	//}
+	//var opts []grpc.ServerOption
+	//grpcServer := grpc.NewServer(opts...)
+	//mtproto.RegisterRPCChannelsServer(grpcServer, &AuthServiceImpl{})
+	//grpcServer.Serve(lis)
 }
 

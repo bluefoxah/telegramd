@@ -26,7 +26,6 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
 	"time"
-	"github.com/nebulaim/telegramd/base/orm"
 )
 
 const (
@@ -38,7 +37,6 @@ const (
 )
 
 type HelpServiceImpl struct {
-	zorm orm.Ormer
 }
 
 func (s *HelpServiceImpl) HelpSaveAppLog(ctx context.Context, request *mtproto.TLHelpSaveAppLog) (*mtproto.Bool, error) {

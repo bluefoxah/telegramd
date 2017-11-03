@@ -22,11 +22,16 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
 	"errors"
-	"github.com/nebulaim/telegramd/base/orm"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"time"
+	"github.com/nebulaim/telegramd/frontend/id"
+	"fmt"
 )
 
 type AuthServiceImpl struct {
-	zorm orm.Ormer
+	UsersDAO *dao.UsersDAO
+	AuthPhoneTransactionsDAO *dao.AuthPhoneTransactionsDAO
 }
 
 func (s *AuthServiceImpl) AuthLogOut(ctx context.Context, request *mtproto.TLAuthLogOut) (*mtproto.Bool, error) {
@@ -68,32 +73,80 @@ func (s *AuthServiceImpl) AuthDropTempAuthKeys(ctx context.Context, request *mtp
 func (s *AuthServiceImpl) AuthCheckPhone(ctx context.Context, request *mtproto.TLAuthCheckPhone) (*mtproto.Auth_CheckedPhone, error) {
 	glog.Infof("AuthCheckPhone - Process: {%v}", request)
 
-	// TODO(@benqi): 实现PhoneNumber检查逻辑
-	reply := mtproto.MakeAuth_CheckedPhone(&mtproto.TLAuthCheckedPhone{
+	// TODO(@benqi): panic/recovery
+	usersDO, err := s.UsersDAO.SelectByPhoneNumber(request.PhoneNumber)
+	if err != nil {
+		glog.Errorf("AuthCheckPhone - s.UsersDAO.SelectUserIdByPhoneNumber: %s", err)
+		return nil, err
+	}
+
+	var reply *mtproto.Auth_CheckedPhone
+
+	if usersDO == nil {
+		// 未注册
+		reply = mtproto.MakeAuth_CheckedPhone(&mtproto.TLAuthCheckedPhone{
+			PhoneRegistered: mtproto.MakeBool(&mtproto.TLBoolFalse{}),
+		})
+	} else {
+		// 已经注册
+		reply = mtproto.MakeAuth_CheckedPhone(&mtproto.TLAuthCheckedPhone{
 			PhoneRegistered: mtproto.MakeBool(&mtproto.TLBoolTrue{}),
 		})
+	}
 
 	glog.Infof("AuthCheckPhone - reply: {%v}\n", reply)
 	return reply, nil
 }
 
-// auth.sendCode#86aef0ec flags:#
-//  allow_flashcall:flags.0?true
-//  phone_number:string
-//  current_number:flags.0?Bool
-//  api_id:int
-//  api_hash:string
-// = auth.SentCode;
 func (s *AuthServiceImpl) AuthSendCode(ctx context.Context, request *mtproto.TLAuthSendCode) (*mtproto.Auth_SentCode, error) {
 	glog.Infof("AuthSendCode - Process: {%v}", request)
 
 	// Check TLAuthSendCode
+	// CurrentNumber: 是否为本机电话号码
+	// 检查数据是否合法
+	//switch request.CurrentNumber.(type) {
+	//case *mtproto.Bool_BoolFalse:
+	//	// 本机电话号码，AllowFlashcall为false
+	//	if request.AllowFlashcall == false {
+	//		// TODO(@benqi): 数据包非法
+	//	}
+	//}
+
+	// TODO(@benqi): 独立出统一消息推送系统
+	// 检查phpne是否存在，若存在是否在线决定是否通过短信发送或通过其他客户端发送
+	// 透传AuthId，UserId，终端类型等
+	// 检查满足条件的TransactionHash是否存在，可能的条件：
+	//  1. is_deleted !=0 and now - created_at < 15 分钟
+	do, err := s.AuthPhoneTransactionsDAO.SelectByPhoneAndApiIdAndHash(request.PhoneNumber, request.ApiId, request.ApiHash)
+	if err != nil {
+		glog.Errorf("AuthSendCode - s.AuthPhoneTransactionsDAO.SelectByPhoneAndApiIdAndHash: %s", err)
+		return nil, err
+	}
+
+	if do == nil {
+		do = &dataobject.AuthPhoneTransactionsDO{}
+		do.ApiId = request.ApiId
+		do.ApiHash = request.ApiHash
+		do.PhoneNumber = request.PhoneNumber
+		do.Code = "123456"
+		do.CreatedAt = time.Now().Format("2006-01-02 15:04:05")
+		// TODO(@benqi): 生成一个32字节的随机字串
+		do.TransactionHash = fmt.Sprintf("%20d", id.NextId())
+
+		_, err := s.AuthPhoneTransactionsDAO.Insert(do)
+		if err != nil {
+			glog.Errorf("AuthSendCode - s.AuthPhoneTransactionsDAO.Insert: %s", err)
+			return nil, err
+		}
+	} else {
+		// TODO(@benqi): 检查是否已经过了失效期
+	}
 
 	authSentCode := &mtproto.TLAuthSentCode{}
 	authSentCode.Type = mtproto.MakeAuth_SentCodeType(&mtproto.TLAuthSentCodeTypeApp{
 		Length: 6,
 	})
-	authSentCode.PhoneCodeHash = "123456";
+	authSentCode.PhoneCodeHash = do.TransactionHash
 
 	reply := mtproto.MakeAuth_SentCode(authSentCode)
 	glog.Infof("AuthSendCode - reply: {%v}\n", reply)
@@ -107,22 +160,45 @@ func (s *AuthServiceImpl) AuthResendCode(ctx context.Context, request *mtproto.T
 
 func (s *AuthServiceImpl) AuthSignUp(ctx context.Context, request *mtproto.TLAuthSignUp) (*mtproto.Auth_Authorization, error) {
 	glog.Infof("Process: %v", request)
+
+	//// auth.signUp#1b067634 phone_number:string phone_code_hash:string phone_code:string first_name:string last_name:string = auth.Authorization;
+	//type TLAuthSignUp struct {
+	//	PhoneNumber   string `protobuf:"bytes,1,opt,name=phone_number,json=phoneNumber" json:"phone_number,omitempty"`
+	//	PhoneCodeHash string `protobuf:"bytes,2,opt,name=phone_code_hash,json=phoneCodeHash" json:"phone_code_hash,omitempty"`
+	//	PhoneCode     string `protobuf:"bytes,3,opt,name=phone_code,json=phoneCode" json:"phone_code,omitempty"`
+	//	FirstName     string `protobuf:"bytes,4,opt,name=first_name,json=firstName" json:"first_name,omitempty"`
+	//	LastName      string `protobuf:"bytes,5,opt,name=last_name,json=lastName" json:"last_name,omitempty"`
+	//}
+
 	return nil, errors.New("Not impl")
 }
 
 func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAuthSignIn) (*mtproto.Auth_Authorization, error) {
 	glog.Infof("AuthSignIn - Process: {%v}", request)
 
+	// Check code
+	do1, err := s.AuthPhoneTransactionsDAO.SelectByPhoneCode(request.PhoneCodeHash, request.PhoneCode, request.PhoneNumber)
+	if do1 == nil {
+		glog.Errorf("AuthSignIn - s.AuthPhoneTransactionsDAO.SelectByPhoneCode: %s", err)
+		return nil, err
+	}
+
+	do2, err := s.UsersDAO.SelectByPhoneNumber(request.PhoneNumber)
+	if do2 == nil {
+		glog.Errorf("AuthSignIn - s.UsersDAO.SelectByPhoneNumber: %s", err)
+		return nil, err
+	}
+
 	// TODO(@benqi): 从数据库加载
 	authAuthorization := &mtproto.TLAuthAuthorization{}
 	user := &mtproto.TLUser{}
 	user.Self = true
-	user.Id = 1
-	user.AccessHash = 1
-	user.FirstName = "test1"
-	user.LastName = "test1"
-	user.Username = "test1"
-	user.Phone = "+86 111 1111 1111"
+	user.Id = do2.Id
+	user.AccessHash = do2.AccessHash
+	user.FirstName = do2.FirstName
+	user.LastName = do2.LastName
+	user.Username = do2.Username
+	user.Phone = request.PhoneNumber
 	authAuthorization.User = mtproto.MakeUser(user)
 
 	reply := mtproto.MakeAuth_Authorization(authAuthorization)

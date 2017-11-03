@@ -22,11 +22,9 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
 	"errors"
-	"github.com/nebulaim/telegramd/base/orm"
 )
 
 type UpdatesServiceImpl struct {
-	zorm orm.Ormer
 }
 
 func (s *UpdatesServiceImpl) UpdatesGetState(ctx context.Context, request *mtproto.TLUpdatesGetState) (*mtproto.Updates_State, error) {

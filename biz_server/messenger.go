@@ -38,33 +38,28 @@ import (
 	updates "github.com/nebulaim/telegramd/biz_server/updates/rpc"
 	upload "github.com/nebulaim/telegramd/biz_server/upload/rpc"
 	users "github.com/nebulaim/telegramd/biz_server/users/rpc"
-	"github.com/nebulaim/telegramd/base/orm"
+	"github.com/jmoiron/sqlx"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	_ "github.com/go-sql-driver/mysql" // import your used driver
 )
 
 func init() {
 	flag.Set("alsologtostderr", "true")
 	flag.Set("log_dir", "false")
 
-
-	err := orm.RegisterDriver("mysql", orm.DRMySQL)
-	if err != nil {
-		panic(err)
-	}
-
-	// TODO(@benqi): 从配置文件载入
-	err = orm.RegisterDataBase("default", "mysql",  "root:@/nebulaim?charset=utf8", 30)
-	if err != nil {
-		panic(err)
-	}
 }
 
 // 整合各服务，方便开发调试
 func main() {
 	flag.Parse()
 
-	zorm := orm.NewOrm()
-	if zorm != nil {
-		glog.Fatal("failed to connect mysql database, dsn: root:@/nebulaim?charset=utf8")
+	// dsl ==> root:@/nebulaim?charset=utf8
+	mysqlDsn := "root:@/nebulaim?charset=utf8"
+
+	db, err := sqlx.Connect("mysql", mysqlDsn)
+	if err != nil {
+		glog.Fatalf("Connect mysql %s error: %s", mysqlDsn, err)
+		return
 	}
 
 	lis, err := net.Listen("tcp", "0.0.0.0:10001")
@@ -74,21 +69,27 @@ func main() {
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
 
-	mtproto.RegisterRPCAccountServer(grpcServer, &account.AccountServiceImpl{zorm})
-	mtproto.RegisterRPCAuthServer(grpcServer, &auth.AuthServiceImpl{zorm})
-	mtproto.RegisterRPCBotsServer(grpcServer, &bots.BotsServiceImpl{zorm})
-	mtproto.RegisterRPCChannelsServer(grpcServer, &channels.ChannelsServiceImpl{zorm})
-	mtproto.RegisterRPCContactsServer(grpcServer, &contacts.ContactsServiceImpl{zorm})
-	mtproto.RegisterRPCHelpServer(grpcServer, &help.HelpServiceImpl{zorm})
-	mtproto.RegisterRPCLangpackServer(grpcServer, &langpack.LangpackServiceImpl{zorm})
-	mtproto.RegisterRPCMessagesServer(grpcServer, &messages.MessagesServiceImpl{zorm})
-	mtproto.RegisterRPCPaymentsServer(grpcServer, &payments.PaymentsServiceImpl{zorm})
-	mtproto.RegisterRPCPhoneServer(grpcServer, &phone.PhoneServiceImpl{zorm})
-	mtproto.RegisterRPCPhotosServer(grpcServer, &photos.PhotosServiceImpl{zorm})
-	mtproto.RegisterRPCStickersServer(grpcServer, &stickers.StickersServiceImpl{zorm})
-	mtproto.RegisterRPCUpdatesServer(grpcServer, &updates.UpdatesServiceImpl{zorm})
-	mtproto.RegisterRPCUploadServer(grpcServer, &upload.UploadServiceImpl{zorm})
-	mtproto.RegisterRPCUsersServer(grpcServer, &users.UsersServiceImpl{zorm})
+	mtproto.RegisterRPCAccountServer(grpcServer, &account.AccountServiceImpl{})
+
+	// authServiceImpl
+	authServiceImpl := &auth.AuthServiceImpl{}
+	authServiceImpl.UsersDAO = dao.NewUsersDAO(db)
+	authServiceImpl.AuthPhoneTransactionsDAO = dao.NewAuthPhoneTransactionsDAO(db)
+	mtproto.RegisterRPCAuthServer(grpcServer, authServiceImpl)
+
+	mtproto.RegisterRPCBotsServer(grpcServer, &bots.BotsServiceImpl{})
+	mtproto.RegisterRPCChannelsServer(grpcServer, &channels.ChannelsServiceImpl{})
+	mtproto.RegisterRPCContactsServer(grpcServer, &contacts.ContactsServiceImpl{})
+	mtproto.RegisterRPCHelpServer(grpcServer, &help.HelpServiceImpl{})
+	mtproto.RegisterRPCLangpackServer(grpcServer, &langpack.LangpackServiceImpl{})
+	mtproto.RegisterRPCMessagesServer(grpcServer, &messages.MessagesServiceImpl{})
+	mtproto.RegisterRPCPaymentsServer(grpcServer, &payments.PaymentsServiceImpl{})
+	mtproto.RegisterRPCPhoneServer(grpcServer, &phone.PhoneServiceImpl{})
+	mtproto.RegisterRPCPhotosServer(grpcServer, &photos.PhotosServiceImpl{})
+	mtproto.RegisterRPCStickersServer(grpcServer, &stickers.StickersServiceImpl{})
+	mtproto.RegisterRPCUpdatesServer(grpcServer, &updates.UpdatesServiceImpl{})
+	mtproto.RegisterRPCUploadServer(grpcServer, &upload.UploadServiceImpl{})
+	mtproto.RegisterRPCUsersServer(grpcServer, &users.UsersServiceImpl{})
 
 	glog.Info("NewRPCServer in 0.0.0.0:10001.")
 

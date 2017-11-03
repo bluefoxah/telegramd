@@ -21,11 +21,9 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
-	"github.com/nebulaim/telegramd/base/orm"
 )
 
 type PaymentsServiceImpl struct {
-	zorm orm.Ormer
 }
 
 func (s *PaymentsServiceImpl) PaymentsClearSavedInfo(ctx context.Context, request *mtproto.TLPaymentsClearSavedInfo) (*mtproto.Bool, error) {
