@@ -48,11 +48,12 @@ func NewServer(addr, dsn string) (s *Server) {
 	s = &Server{}
 	s.authsDAO = dao.NewAuthsDAO(db)
 	s.authSaltsDAO = dao.NewAuthSaltsDAO(db)
+	masterKeysDAO := dao.NewMasterKeysDAO(db)
 
 	mtproto := NewMTProto()
 	lsn := listen("server", "0.0.0.0:12345")
 	s.Server = net2.NewServer(lsn, mtproto, 1024, net2.HandlerFunc(emptySessionLoop))
-	s.cacheKeys = auth_key.NewAuthKeyCacheManager(dao.NewMasterKeysDAO(db))
+	s.cacheKeys = auth_key.NewAuthKeyCacheManager(masterKeysDAO)
 
 	return
 }
@@ -71,6 +72,9 @@ func (s* Server) Serve(rpcClient *rpc.RPCClient) {
 
 		// 使用很土的办法，注入cacheKeys
 		c.Codec.AuthKeyStorager = s.cacheKeys
+		c.AuthsDAO = s.authsDAO
+		c.AuthSaltsDAO = s.authSaltsDAO
+
 		go s.sessionLoop(c)
 	}
 }

@@ -47,8 +47,8 @@ type Client struct {
 	A *big.Int
 	P *big.Int
 
-	authsDAO *dao.AuthsDAO
-	authSaltsDAO *dao.AuthSaltsDAO
+	AuthsDAO *dao.AuthsDAO
+	AuthSaltsDAO *dao.AuthSaltsDAO
 }
 
 func NewClient(session *net2.Session, rpcClient *rpc.RPCClient) (c *Client) {

@@ -35,8 +35,8 @@ func (c *Client) onNewSessionCreated(sessionId, msgId int64, seqNo int32) (*TLNe
 	// glog.Info("processMsgsAck - request: %s", request.String())
 
 	// TODO(@benqi): 客户端保存的initConnection信息推到后台服务存储
-	authSaltsDO, err := c.authSaltsDAO.SelectByAuthId(c.Codec.AuthKeyId)
-	if err == nil {
+	authSaltsDO, err := c.AuthSaltsDAO.SelectByAuthId(c.Codec.AuthKeyId)
+	if err != nil {
 		// TODO(@benqi): 处理数据库出错
 		glog.Error("c.authSaltsDAO.SelectByAuthId - query error: ", err)
 		return nil
@@ -45,7 +45,7 @@ func (c *Client) onNewSessionCreated(sessionId, msgId int64, seqNo int32) (*TLNe
 	if authSaltsDO == nil {
 		// salts不存在，插入一条记录
 		authSaltsDO = &dataobject.AuthSaltsDO{ AuthId: c.Codec.AuthKeyId, Salt: id.NextId() }
-		_, err := c.authSaltsDAO.Insert(authSaltsDO)
+		_, err := c.AuthSaltsDAO.Insert(authSaltsDO)
 		if err != nil {
 			glog.Error("c.authSaltsDAO.Insert - insert error: ", err)
 			return nil
@@ -163,7 +163,7 @@ func (c *Client) onInvokeWithLayer(msgId int64, seqNo int32, request TLObject) e
 	}
 
 	// TODO(@benqi): 客户端保存的initConnection信息推到后台服务存储
-	do, err := c.authsDAO.SelectConnectionHashByAuthId(c.Codec.AuthKeyId)
+	do, err := c.AuthsDAO.SelectConnectionHashByAuthId(c.Codec.AuthKeyId)
 	if err != nil {
 		glog.Errorf("c.authsDAO.SelectConnectionHashByAuthId: query db error: %s", err)
 		return err
@@ -181,7 +181,7 @@ func (c *Client) onInvokeWithLayer(msgId int64, seqNo int32, request TLObject) e
 			LangCode: initConnection.LangCode,
 			CreatedAt: time.Now().Format("2006-01-02 15:04:05"),
 		}
-		_, err := c.authsDAO.Insert(do)
+		_, err := c.AuthsDAO.Insert(do)
 		if err != nil {
 			glog.Errorf("c.authsDAO.SelectConnectionHashByAuthId: query db error: %s", err)
 			return err

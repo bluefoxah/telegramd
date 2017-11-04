@@ -25,28 +25,9 @@ import (
 	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
-// Model Struct
-type MasterKeys struct {
-	AuthId   int64    	`orm:"pk"`
-	Body     string
-}
-
 // "root:@/nebulaim?charset=utf8"
 // 30
 func NewAuthKeyCacheManager(dao* dao.MasterKeysDAO) *AuthKeyCacheManager {
-	//err := orm.RegisterDriver("mysql", orm.DRMySQL)
-	//if err != nil {
-	//	panic(err)
-	//}
-	//
-	//// register model
-	//orm.RegisterModel(new(MasterKeys))
-	//// set default database
-	//err = orm.RegisterDataBase("default", "mysql", dsn, 30)
-	//if err != nil {
-	//	panic(err)
-	//}
-	//
 	return &AuthKeyCacheManager{dao}
 }
 
@@ -66,6 +47,11 @@ func (s *AuthKeyCacheManager) GetAuthKey(keyID int64) (authKey []byte) {
 	// err := s.ZOrm.Read(k)
 	if err != nil {
 		glog.Errorf("Read keyData error: %s\n", err)
+		return nil
+	}
+
+	if do == nil {
+		glog.Errorf("Read keyData error: not find keyId\n")
 		return nil
 	}
 
