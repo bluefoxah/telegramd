@@ -20,17 +20,19 @@ package grpc_testing
 import (
 	"flag"
 	"net"
-	"github.com/golang/glog"
 	"google.golang.org/grpc"
 	"golang.org/x/net/context"
 	"testing"
+	"google.golang.org/grpc/metadata"
+	"fmt"
 )
 
 type TestRPCServer struct {
 }
 
 func (s *TestRPCServer)AuthSentCode(ctx context.Context,  sendCode *TLAuthSendCode) (*Auth_SentCode, error) {
-	glog.Infof("Recive AuthSentCode query: {%v}", sendCode)
+	md, _ := metadata.FromIncomingContext(ctx)
+	fmt.Printf("Recive AuthSentCode: md: {%v}, query: {%v}\n", md, sendCode)
 
 	return &Auth_SentCode{
 		Payload: &Auth_SentCode_AuthSentCode{
@@ -50,7 +52,7 @@ func TestRPCServer2(t *testing.T) {
 	flag.Parse()
 	lis, err := net.Listen("tcp", ("localhost:10001"))
 	if err != nil {
-		glog.Fatalf("failed to listen: %v", err)
+		fmt.Printf("failed to listen: %v", err)
 	}
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)

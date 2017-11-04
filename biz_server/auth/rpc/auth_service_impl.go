@@ -37,7 +37,7 @@ type AuthServiceImpl struct {
 func (s *AuthServiceImpl) AuthLogOut(ctx context.Context, request *mtproto.TLAuthLogOut) (*mtproto.Bool, error) {
 	glog.Infof("AuthLogOut - Process: {%v}", request)
 
-	// TODO(@benqi): Logout逻辑
+	// TODO(@benqi): Logout逻辑处理，失效AuthKey
 	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
 
 	glog.Infof("AuthLogOut - reply: {%v}\n", reply)

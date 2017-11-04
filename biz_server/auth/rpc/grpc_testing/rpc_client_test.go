@@ -23,6 +23,7 @@ import (
 	"context"
 	"testing"
 	"fmt"
+	"google.golang.org/grpc/metadata"
 )
 
 func TestRPCClient(t *testing.T)  {
@@ -33,9 +34,22 @@ func TestRPCClient(t *testing.T)  {
 	}
 	defer conn.Close()
 	client := NewAuthClient(conn)
-	authSendCode := &TLAuthSendCode{}
+	authSendCode := &TLAuthSendCode{
+		Flags: 1,
+		AllowFlashcall: false,
+		PhoneNumber: "+86 111 1111 1111",
+		// CurrentNumber: &Bool{Payload:&TLBoolTrue{}},
+		ApiId: 1,
+		ApiHash: "1",
+	}
+
+	md := metadata.Pairs("key1", "val1_1", "key2", "val2", "key3", "val3", "key1", "val1_2")
+	// create a new context with this metadata
+	ctx := metadata.NewOutgoingContext(context.Background(), md)
+
+
 	// glog.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
-	auth_SentCode, err := client.AuthSentCode(context.Background(), authSendCode)
+	auth_SentCode, err := client.AuthSentCode(ctx, authSendCode)
 	if err != nil {
 		fmt.Errorf("%v.AuthSentCode(_) = _, %v: \n", client, err)
 	}

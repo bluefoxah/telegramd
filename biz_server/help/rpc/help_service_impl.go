@@ -19,7 +19,6 @@ package rpc
 
 import (
 	"errors"
-	"fmt"
 	"github.com/BurntSushi/toml"
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/biz_server/help/model"
@@ -35,6 +34,14 @@ const (
 	// expires = 1509070295, 2017/10/27 10:11:35
 	EXPIRES_TIMEOUT = 3600 // 超时时间设置为3600秒
 )
+
+var config model.Config
+
+func init()  {
+	if _, err := toml.DecodeFile(CONFIG_FILE, &config); err != nil {
+		panic(err)
+	}
+}
 
 type HelpServiceImpl struct {
 }
@@ -56,13 +63,6 @@ func (s *HelpServiceImpl) HelpGetAppChangelog(ctx context.Context, request *mtpr
 
 func (s *HelpServiceImpl) HelpGetConfig(ctx context.Context, request *mtproto.TLHelpGetConfig) (*mtproto.Config, error) {
 	glog.Infof("HelpGetConfig - Process: {%v}", request)
-
-	var config model.Config
-
-	if _, err := toml.DecodeFile(CONFIG_FILE, &config); err != nil {
-		fmt.Errorf("%s\n", err)
-		return nil, err
-	}
 
 	// TODO(@benqi): 设置Reply对象累死人了, 得想个办法实现model和mtproto的自动转换
 	helpConfig := &mtproto.TLConfig{}

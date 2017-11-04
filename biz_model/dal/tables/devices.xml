@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table sqlname="devices">
+    <operation name="Insert">
+        <sql>
+            INSERT INTO devices (user_id, token_type, token, state) VALUES (:user_id, :token_type, :token, :state)
+        </sql>
+    </operation>
+    <operation name="SelectIdByAuthId">
+        <sql>
+            SELECT id FROM devices WHERE user_id in (SELECT id FROM auth_users WHERE auth_id = :auth_id limit 1) AND token_type = :token_type AND token = :token limit 1
+        </sql>
+    </operation>
+    <operation name="UpdateStateById">
+        <sql>
+            UPDATE devices SET state = :state WHERE id = :id
+        </sql>
+    </operation>
+    <operation name="UpdateStateByAuthId">
+        <sql>
+            UPDATE devices SET state=1 WHERE id = :id
+        </sql>
+    </operation>
+</table>

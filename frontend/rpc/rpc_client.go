@@ -23,6 +23,8 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 	"fmt"
 	"context"
+	"google.golang.org/grpc/metadata"
+	"time"
 )
 
 type RPCClient struct {
@@ -42,7 +44,7 @@ func NewRPCClient(target string) (c *RPCClient, err error) {
 }
 
 // 通用grpc转发器
-func (c* RPCClient) Invoke(object mtproto.TLObject) (mtproto.TLObject, error) {
+func (c* RPCClient) Invoke(rpcMetaData *mtproto.RpcMetaData, object mtproto.TLObject) (mtproto.TLObject, error) {
 	t := mtproto.FindRPCContextTuple(object)
 	if t == nil {
 		err := fmt.Errorf("Invoke error: %v not regist!\n", object)
@@ -53,7 +55,8 @@ func (c* RPCClient) Invoke(object mtproto.TLObject) (mtproto.TLObject, error) {
 	r := t.NewReplyFunc()
 	glog.Infof("Invoke - NewReplyFunc: {%v}\n", r)
 
-	err := c.conn.Invoke(context.Background(), t.Method, object, r)
+	ctx := metadata.NewOutgoingContext(context.Background(), rpcMetaData.Encode())
+	err := c.conn.Invoke(ctx, t.Method, object, r)
 	if err != nil {
 		glog.Errorf("%v.Invoke(_) = _, %v: \n", c.conn, err)
 		return nil, err
@@ -61,6 +64,9 @@ func (c* RPCClient) Invoke(object mtproto.TLObject) (mtproto.TLObject, error) {
 
 	glog.Infof("Invoke - Invoke reply: {%v}\n", r)
 	reply, ok := r.(mtproto.TLObject)
+
+	glog.Infof("Invoke %s time: %d", t.Method, (time.Now().Unix() - rpcMetaData.ReceiveTime))
+
 	if !ok {
 		err = fmt.Errorf("Invalid reply type, maybe server side bug, %v\n", reply)
 		glog.Error(err)

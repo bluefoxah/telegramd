@@ -28,14 +28,24 @@ func GenerateMessageId() int64 {
 
 	messageId := ((unixnano / nano) << 32) | ((unixnano % nano) & -4)
 	for {
+		//rpc_response
 		if (messageId % 4) != 1 {
 			messageId += 1
 		} else {
 			break
 		}
+
+		/****************************
+		 * // rpc_request
+		 * if (messageId % 4) != 3 {
+		 * 	messageId += 1
+		 * } else {
+		 * 	break
+		 * }
+		 */
 	}
 
-	return messageId;
+	return messageId
 }
 
 func generateMessageKey(msgKey, authKey []byte, incoming bool) (aesKey, aesIV []byte) {

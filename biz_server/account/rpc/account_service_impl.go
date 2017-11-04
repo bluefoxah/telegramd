@@ -21,44 +21,124 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"google.golang.org/grpc/metadata"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+)
+
+const (
+	TOKEN_TYPE_APNS = 1
+	TOKEN_TYPE_GCM = 2
+	TOKEN_TYPE_MPNS = 3
+	TOKEN_TYPE_SIMPLE_PUSH = 4
+	TOKEN_TYPE_UBUNTU_PHONE = 5
+	TOKEN_TYPE_BLACKBERRY = 6
 )
 
 type AccountServiceImpl struct {
+	UsersDAO *dao.UsersDAO
+	DeviceDAO *dao.DevicesDAO
 }
 
 func (s *AccountServiceImpl) AccountRegisterDevice(ctx context.Context, request *mtproto.TLAccountRegisterDevice) (*mtproto.Bool, error) {
 	glog.Info("Process: %v", request)
-/*
-	1- APNS
-	2- GCM
-	3- MPNS
-	4- 简单推送
-	5- Ubuntu电话
-	6- 黑莓
- */
 
-	return nil, nil
+	// 查出来
+	md, _ := metadata.FromIncomingContext(ctx)
+	rpcMetaData := mtproto.RpcMetaData{}
+	rpcMetaData.Decode(md)
+
+	// TODO(@benqi): check token_type
+
+	do, err := s.DeviceDAO.SelectIdByAuthId(rpcMetaData.AuthId, int8(request.TokenType), request.Token)
+	if err != nil {
+		glog.Errorf("AccountRegisterDevice - s.DeviceDAO.SelectIdByAuthId error: %s", err)
+		return nil, err
+	}
+
+	if do == nil {
+		//
+		do = &dataobject.DevicesDO{
+			UserId: rpcMetaData.UserId,
+			TokenType: int8(request.TokenType),
+			Token: request.Token,
+		}
+
+		_, err := s.DeviceDAO.Insert(do)
+		if err != nil {
+			glog.Errorf("AccountRegisterDevice - s.DeviceDAO.Insert error: %s", err)
+			return nil, err
+		}
+	} else {
+		_, err := s.DeviceDAO.UpdateStateById(0, do.Id)
+		if err != nil {
+			glog.Errorf("AccountRegisterDevice - s.DeviceDAO.UpdateStateById error: %s", err)
+			return nil, err
+		}
+	}
+
+	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
+	glog.Infof("AccountRegisterDevice - reply: {%v}\n", reply)
+
+	return reply, nil
 }
 
 func (s *AccountServiceImpl) AccountUnregisterDevice(ctx context.Context, request *mtproto.TLAccountUnregisterDevice) (*mtproto.Bool, error) {
 	glog.Info("Process: %v", request)
-	return nil, nil
+
+	// 查出来
+	md, _ := metadata.FromIncomingContext(ctx)
+	rpcMetaData := mtproto.RpcMetaData{}
+	rpcMetaData.Decode(md)
+
+	// TODO(@benqi): check token_type
+
+	do, err := s.DeviceDAO.SelectIdByAuthId(rpcMetaData.AuthId, int8(request.TokenType), request.Token)
+	if err != nil {
+		glog.Errorf("AccountRegisterDevice - s.DeviceDAO.SelectIdByAuthId error: %s", err)
+		return nil, err
+	}
+
+	if do == nil {
+		// glog.Errorf("AccountUnregisterDevice - s.DeviceDAO.Insert error: %s", err)
+	} else {
+		_, err := s.DeviceDAO.UpdateStateById(1, do.Id)
+		if err != nil {
+			glog.Errorf("AccountRegisterDevice - s.DeviceDAO.UpdateStateById error: %s", err)
+			return nil, err
+		}
+	}
+
+	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
+	glog.Infof("AccountRegisterDevice - reply: {%v}\n", reply)
+
+	return reply, nil
 }
 
 func (s *AccountServiceImpl) AccountUpdateNotifySettings(ctx context.Context, request *mtproto.TLAccountUpdateNotifySettings) (*mtproto.Bool, error) {
 	glog.Info("Process: %v", request)
-	return nil, nil
+
+	// TODO(@benqi): 实现逻辑
+	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
+
+	glog.Infof("AccountUpdateNotifySettings - reply: {%v}\n", reply)
+	return reply, nil
 }
 
 func (s *AccountServiceImpl) AccountResetNotifySettings(ctx context.Context, request *mtproto.TLAccountResetNotifySettings) (*mtproto.Bool, error) {
 	glog.Info("Process: %v", request)
-	return nil, nil
+
+	// TODO(@benqi): 实现逻辑
+	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
+
+	glog.Infof("AccountResetNotifySettings - reply: {%v}\n", reply)
+	return reply, nil
 }
 
 func (s *AccountServiceImpl) AccountUpdateStatus(ctx context.Context, request *mtproto.TLAccountUpdateStatus) (*mtproto.Bool, error) {
 	glog.Infof("AccountUpdateStatus - Process: {%v}", request)
 
-	// TODO(@benqi): 存储在线信息
+	// TODO(@benqi): 实现逻辑
 	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
 
 	glog.Infof("AccountUpdateStatus - reply: {%v}\n", reply)
@@ -67,7 +147,12 @@ func (s *AccountServiceImpl) AccountUpdateStatus(ctx context.Context, request *m
 
 func (s *AccountServiceImpl) AccountReportPeer(ctx context.Context, request *mtproto.TLAccountReportPeer) (*mtproto.Bool, error) {
 	glog.Info("Process: %v", request)
-	return nil, nil
+
+	// TODO(@benqi): 实现逻辑
+	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
+
+	glog.Infof("AccountReportPeer - reply: {%v}\n", reply)
+	return reply, nil
 }
 
 func (s *AccountServiceImpl) AccountCheckUsername(ctx context.Context, request *mtproto.TLAccountCheckUsername) (*mtproto.Bool, error) {

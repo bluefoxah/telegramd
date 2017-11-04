@@ -88,6 +88,17 @@ func (m *MTProtoCodec) LocalAddr() (net.Addr) {
 	return m.rw.(net.Conn).LocalAddr()
 }
 
+func (m *MTProtoCodec) getSeqNo(increment bool) int32 {
+	value := m.SeqNo
+	if increment {
+		m.SeqNo += 1
+	}
+	v := int32(0)
+	if increment { v = int32(1) }
+
+	return value * 2 + v
+}
+
 func (m *MTProtoCodec) Receive() (interface{}, error) {
 	var size int
 	var n int
@@ -205,8 +216,7 @@ func (m *MTProtoCodec) Send(msg interface{}) error {
 		encrypedMessage, _ := msg.(*EncryptedMessage2)
 		encrypedMessage.SessionId = m.SessionId
 		encrypedMessage.salt = m.Salt
-		m.SeqNo = m.SeqNo + 1
-		encrypedMessage.SeqNo = m.SeqNo
+		encrypedMessage.SeqNo = m.getSeqNo(true)
 		b, _ := encrypedMessage.encode(int64(m.AuthKeyId), m.AuthKey)
 
 		sb := make([]byte, 4)

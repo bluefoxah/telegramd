@@ -69,13 +69,24 @@ func main() {
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
 
-	mtproto.RegisterRPCAccountServer(grpcServer, &account.AccountServiceImpl{})
+	usersDAO := dao.NewUsersDAO(db)
+	devicesDAO := dao.NewDevicesDAO(db)
 
-	// authServiceImpl
-	authServiceImpl := &auth.AuthServiceImpl{}
-	authServiceImpl.UsersDAO = dao.NewUsersDAO(db)
-	authServiceImpl.AuthPhoneTransactionsDAO = dao.NewAuthPhoneTransactionsDAO(db)
-	mtproto.RegisterRPCAuthServer(grpcServer, authServiceImpl)
+	// masterKeysDAO := dao.NewMasterKeysDAO(db)
+	authPhoneTransactionsDAO := dao.NewAuthPhoneTransactionsDAO(db)
+	// authsDAO := dao.NewAuthsDAO(db)
+	// authSaltsDAO := dao.NewAuthSaltsDAO(db)
+	// appsDAO := dao.NewAppsDAO(db)
+
+	mtproto.RegisterRPCAccountServer(grpcServer, &account.AccountServiceImpl{
+		UsersDAO: usersDAO,
+		DeviceDAO: devicesDAO,
+	})
+
+	mtproto.RegisterRPCAuthServer(grpcServer, &auth.AuthServiceImpl{
+		UsersDAO: usersDAO,
+		AuthPhoneTransactionsDAO:	authPhoneTransactionsDAO,
+	})
 
 	mtproto.RegisterRPCBotsServer(grpcServer, &bots.BotsServiceImpl{})
 	mtproto.RegisterRPCChannelsServer(grpcServer, &channels.ChannelsServiceImpl{})

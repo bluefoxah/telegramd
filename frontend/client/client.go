@@ -27,20 +27,10 @@ import (
 	"github.com/nebulaim/telegramd/frontend/rpc"
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"fmt"
+	"github.com/nebulaim/telegramd/frontend/id"
+	"time"
 )
 
-//CODEC_UNKNOWN = iota
-//CODEC_req_pq
-//CODEC_resPQ
-//CODEC_req_DH_params
-//CODEC_Server_DH_Params_OK
-//CODEC_Server_DH_Params_FAILED
-//CODEC_set_client_DH_params
-//CODEC_dh_gen_ok
-//CODEC_dh_gen_retry
-//CODEC_dh_gen_fail
-//CODEC_AUTH_KEY_OK
-//CODEC_ERROR
 
 type Client struct {
 	Session *net2.Session
@@ -178,7 +168,36 @@ func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 	default:
 		// glog.Error("processEncryptedMessage - Not impl processor")
 		// rspObject = nil
-		rpcResult, err := c.RPCClient.Invoke(request)
+
+		// TODO(@benqi): [权限判断](https://core.telegram.org/api/auth)
+		/*
+		 *	Only a small portion of the API methods are available to unauthorized users:
+	     *
+		 *	- auth.sendCode
+		 *	- auth.sendCall
+		 *	- auth.checkPhone
+		 *	- auth.signUp
+		 *	- auth.signIn
+		 *	- auth.importAuthorization
+		 *	- help.getConfig
+		 *	- help.getNearestDc
+		 *
+		 *	Other methods will result in an error: 401 UNAUTHORIZED.
+		 */
+
+		// TODO(@benqi): 透传UserID
+		// 初始化metadata
+		rpcMetadata := &RpcMetaData{}
+		rpcMetadata.ServerId = 1
+		rpcMetadata.AuthId = c.Codec.AuthKeyId
+		rpcMetadata.SessionId = c.Codec.SessionId
+		rpcMetadata.ClientAddr = c.Codec.RemoteAddr().String()
+		rpcMetadata.TraceId = id.NextId()
+		rpcMetadata.SpanId = id.NextId()
+		rpcMetadata.ReceiveTime = time.Now().Unix()
+
+		rpcResult, err := c.RPCClient.Invoke(rpcMetadata, request)
+
 		if err != nil {
 			return nil
 			// return err
