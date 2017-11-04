@@ -23,39 +23,39 @@ import (
 	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
-type AuthSaltsDAO struct {
+type AuthUsersDAO struct {
 	db *sqlx.DB
 }
 
-func NewAuthSaltsDAO(db *sqlx.DB) *AuthSaltsDAO {
-	return &AuthSaltsDAO{db}
+func NewAuthUsersDAO(db *sqlx.DB) *AuthUsersDAO {
+	return &AuthUsersDAO{db}
 }
 
-func (dao *AuthSaltsDAO) Insert(do *do.AuthSaltsDO) (id int64, err error) {
+func (dao *AuthUsersDAO) Insert(do *do.AuthUsersDO) (id int64, err error) {
 	// TODO(@benqi): sqlmap
 	id = 0
 
-	var sql = "insert into auth_salts(auth_id, salt) values (:auth_id, :salt)"
+	var sql = "insert into auth_users(auth_id, user_id) values (:auth_id, :user_id)"
 	r, err := dao.db.NamedExec(sql, do)
 	if err != nil {
-		glog.Error("AuthSaltsDAO/Insert error: ", err)
+		glog.Error("AuthUsersDAO/Insert error: ", err)
 		return
 	}
 
 	id, err = r.LastInsertId()
 	if err != nil {
-		glog.Error("AuthSaltsDAO/LastInsertId error: ", err)
+		glog.Error("AuthUsersDAO/LastInsertId error: ", err)
 	}
 	return
 }
 
-func (dao *AuthSaltsDAO) SelectByAuthId(auth_id int64) (*do.AuthSaltsDO, error) {
+func (dao *AuthUsersDAO) SelectByAuthId(auth_id int64) (*do.AuthUsersDO, error) {
 	// TODO(@benqi): sqlmap
-	var sql = "select auth_id, salt from auth_salts where auth_id = :auth_id"
-	do := &do.AuthSaltsDO{AuthId: auth_id}
+	var sql = "select id, user_id from auth_users where auth_id = :auth_id"
+	do := &do.AuthUsersDO{AuthId: auth_id}
 	rows, err := dao.db.NamedQuery(sql, do)
 	if err != nil {
-		glog.Error("AuthSaltsDAO/SelectById error: ", err)
+		glog.Error("AuthUsersDAO/SelectById error: ", err)
 		return nil, err
 	}
 
@@ -64,7 +64,7 @@ func (dao *AuthSaltsDAO) SelectByAuthId(auth_id int64) (*do.AuthSaltsDO, error) 
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("AuthSaltsDAO/SelectById error: ", err)
+			glog.Error("AuthUsersDAO/SelectById error: ", err)
 			return nil, err
 		}
 	} else {

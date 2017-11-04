@@ -33,30 +33,38 @@ func NewAuthsDAO(db *sqlx.DB) *AuthsDAO {
 
 func (dao *AuthsDAO) Insert(do *do.AuthsDO) (id int64, err error) {
 	// TODO(@benqi): sqlmap
+	id = 0
+
 	var sql = "insert into auths(auth_id, api_id, device_model, system_version, system_lang_code, lang_pack, lang_code, connection_hash) values (:auth_id, :api_id, :device_model, :system_version, :system_lang_code, :lang_pack, :lang_code, :connection_hash)"
 	r, err := dao.db.NamedExec(sql, do)
 	if err != nil {
 		glog.Error("AuthsDAO/Insert error: ", err)
-		return 0, nil
+		return
 	}
 
-	return r.LastInsertId()
+	id, err = r.LastInsertId()
+	if err != nil {
+		glog.Error("AuthsDAO/LastInsertId error: ", err)
+	}
+	return
 }
 
 func (dao *AuthsDAO) SelectConnectionHashByAuthId(auth_id int64) (*do.AuthsDO, error) {
 	// TODO(@benqi): sqlmap
 	var sql = "select connection_hash from auths where auth_id = :auth_id"
 	do := &do.AuthsDO{AuthId: auth_id}
-	r, err := dao.db.NamedQuery(sql, do)
+	rows, err := dao.db.NamedQuery(sql, do)
 	if err != nil {
-		glog.Error("AppsDAO/SelectById error: ", err)
+		glog.Error("AuthsDAO/SelectById error: ", err)
 		return nil, err
 	}
 
-	if r.Next() {
-		err = r.StructScan(do)
+	defer rows.Close()
+
+	if rows.Next() {
+		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("AppsDAO/SelectById error: ", err)
+			glog.Error("AuthsDAO/SelectById error: ", err)
 			return nil, err
 		}
 	} else {

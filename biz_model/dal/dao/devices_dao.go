@@ -53,14 +53,16 @@ func (dao *DevicesDAO) SelectIdByAuthId(auth_id int64, token_type int8, token st
 	// TODO(@benqi): sqlmap
 	var sql = "select id from devices where user_id in (select id from auth_users where auth_id = :auth_id limit 1) and token_type = :token_type and token = :token limit 1"
 	do := &do.DevicesDO{AuthId: auth_id, TokenType: token_type, Token: token}
-	r, err := dao.db.NamedQuery(sql, do)
+	rows, err := dao.db.NamedQuery(sql, do)
 	if err != nil {
 		glog.Error("DevicesDAO/SelectById error: ", err)
 		return nil, err
 	}
 
-	if r.Next() {
-		err = r.StructScan(do)
+	defer rows.Close()
+
+	if rows.Next() {
+		err = rows.StructScan(do)
 		if err != nil {
 			glog.Error("DevicesDAO/SelectById error: ", err)
 			return nil, err

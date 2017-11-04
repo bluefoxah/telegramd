@@ -2,12 +2,12 @@
 <table sqlname="auth_users">
     <operation name="Insert">
         <sql>
-            INSERT INTO master_keys (auth_id, body) VALUES (:auth_id, :body)
+            INSERT INTO auth_users (auth_id, user_id) VALUES (:auth_id, :user_id)
         </sql>
     </operation>
     <operation name="SelectByAuthId">
         <sql>
-            SELECT body FROM master_keys WHERE auth_id=:auth_id
+            SELECT id, user_id FROM auth_users WHERE auth_id=:auth_id
         </sql>
     </operation>
 </table>

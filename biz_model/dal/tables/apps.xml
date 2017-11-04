@@ -2,7 +2,7 @@
 <table sqlname="apps">
     <operation name="Insert">
         <sql>
-            INSERT INTO apps (api_id, api_hash, title, short_name）VALUES (:api_id, :api_hash, :title, :short_name)
+            INSERT INTO apps (api_id, api_hash, title, short_name) VALUES (:api_id, :api_hash, :title, :short_name)
         </sql>
     </operation>
     <operation name="SelectById">

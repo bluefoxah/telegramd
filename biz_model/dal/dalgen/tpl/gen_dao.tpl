@@ -68,14 +68,16 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if n
 	// TODO(@benqi): sqlmap
 	var sql = "{{.Sql}}"
 	do := &do.{{.TableName}}DO{ {{ range $i, $v := .Params }} {{.Name}} : {{.FieldName}}, {{end}} }
-	r, err := dao.db.NamedQuery(sql, do)
+	rows, err := dao.db.NamedQuery(sql, do)
 	if err != nil {
 		glog.Error("{{.TableName}}DAO/SelectById error: ", err)
 		return nil, err
 	}
 
-	if r.Next() {
-		err = r.StructScan(do)
+	defer rows.Close()
+
+	if rows.Next() {
+		err = rows.StructScan(do)
 		if err != nil {
 			glog.Error("{{.TableName}}DAO/SelectById error: ", err)
 			return nil, err

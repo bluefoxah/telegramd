@@ -33,28 +33,36 @@ func NewAuthPhoneTransactionsDAO(db *sqlx.DB) *AuthPhoneTransactionsDAO {
 
 func (dao *AuthPhoneTransactionsDAO) Insert(do *do.AuthPhoneTransactionsDO) (id int64, err error) {
 	// TODO(@benqi): sqlmap
+	id = 0
+
 	var sql = "insert into auth_phone_transactions(transaction_hash, api_id, api_hash, phone_number, code, created_at) values (:transaction_hash, :api_id, :api_hash, :phone_number, :code, :created_at)"
 	r, err := dao.db.NamedExec(sql, do)
 	if err != nil {
 		glog.Error("AuthPhoneTransactionsDAO/Insert error: ", err)
-		return 0, nil
+		return
 	}
 
-	return r.LastInsertId()
+	id, err = r.LastInsertId()
+	if err != nil {
+		glog.Error("AuthPhoneTransactionsDAO/LastInsertId error: ", err)
+	}
+	return
 }
 
-func (dao *AuthPhoneTransactionsDAO) SelectByPhoneAndApiIdAndHash(phone_number string, api_id int32, api_hash string) (*do.AuthPhoneTransactionsDO, error) {
+func (dao *AuthPhoneTransactionsDAO) SelectByPhoneAndApiIdAndHash(api_id int32, api_hash string, phone_number string) (*do.AuthPhoneTransactionsDO, error) {
 	// TODO(@benqi): sqlmap
 	var sql = "select transaction_hash from auth_phone_transactions where phone_number = :phone_number and api_id = :api_id and api_hash = :api_hash"
-	do := &do.AuthPhoneTransactionsDO{PhoneNumber: phone_number, ApiId: api_id, ApiHash: api_hash}
-	r, err := dao.db.NamedQuery(sql, do)
+	do := &do.AuthPhoneTransactionsDO{ApiId: api_id, ApiHash: api_hash, PhoneNumber: phone_number}
+	rows, err := dao.db.NamedQuery(sql, do)
 	if err != nil {
 		glog.Error("AuthPhoneTransactionsDAO/SelectById error: ", err)
 		return nil, err
 	}
 
-	if r.Next() {
-		err = r.StructScan(do)
+	defer rows.Close()
+
+	if rows.Next() {
+		err = rows.StructScan(do)
 		if err != nil {
 			glog.Error("AuthPhoneTransactionsDAO/SelectById error: ", err)
 			return nil, err
@@ -70,14 +78,16 @@ func (dao *AuthPhoneTransactionsDAO) SelectByPhoneCode(transaction_hash string, 
 	// TODO(@benqi): sqlmap
 	var sql = "select id from auth_phone_transactions where transaction_hash = :transaction_hash and code = :code and phone_number = :phone_number"
 	do := &do.AuthPhoneTransactionsDO{TransactionHash: transaction_hash, Code: code, PhoneNumber: phone_number}
-	r, err := dao.db.NamedQuery(sql, do)
+	rows, err := dao.db.NamedQuery(sql, do)
 	if err != nil {
 		glog.Error("AuthPhoneTransactionsDAO/SelectById error: ", err)
 		return nil, err
 	}
 
-	if r.Next() {
-		err = r.StructScan(do)
+	defer rows.Close()
+
+	if rows.Next() {
+		err = rows.StructScan(do)
 		if err != nil {
 			glog.Error("AuthPhoneTransactionsDAO/SelectById error: ", err)
 			return nil, err

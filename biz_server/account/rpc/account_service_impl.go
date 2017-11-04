@@ -24,6 +24,7 @@ import (
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"google.golang.org/grpc/metadata"
 	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/cosiner/gohper/errors"
 )
 
 const (
@@ -156,68 +157,68 @@ func (s *AccountServiceImpl) AccountReportPeer(ctx context.Context, request *mtp
 }
 
 func (s *AccountServiceImpl) AccountCheckUsername(ctx context.Context, request *mtproto.TLAccountCheckUsername) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountDeleteAccount(ctx context.Context, request *mtproto.TLAccountDeleteAccount) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountSetAccountTTL(ctx context.Context, request *mtproto.TLAccountSetAccountTTL) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountUpdateDeviceLocked(ctx context.Context, request *mtproto.TLAccountUpdateDeviceLocked) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountResetAuthorization(ctx context.Context, request *mtproto.TLAccountResetAuthorization) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountUpdatePasswordSettings(ctx context.Context, request *mtproto.TLAccountUpdatePasswordSettings) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountConfirmPhone(ctx context.Context, request *mtproto.TLAccountConfirmPhone) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountSendChangePhoneCode(ctx context.Context, request *mtproto.TLAccountSendChangePhoneCode) (*mtproto.Auth_SentCode, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountSendConfirmPhoneCode(ctx context.Context, request *mtproto.TLAccountSendConfirmPhoneCode) (*mtproto.Auth_SentCode, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountGetNotifySettings(ctx context.Context, request *mtproto.TLAccountGetNotifySettings) (*mtproto.PeerNotifySettings, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountUpdateProfile(ctx context.Context, request *mtproto.TLAccountUpdateProfile) (*mtproto.User, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountUpdateUsername(ctx context.Context, request *mtproto.TLAccountUpdateUsername) (*mtproto.User, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountChangePhone(ctx context.Context, request *mtproto.TLAccountChangePhone) (*mtproto.User, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 // func (s *AccountServiceImpl)AccountGetWallPapers(ctx context.Context,  request *mtproto.TLAccountGetWallPapers) (*mtproto.Vector<WallPaper>, error) {
@@ -226,36 +227,36 @@ func (s *AccountServiceImpl) AccountChangePhone(ctx context.Context, request *mt
 // }
 
 func (s *AccountServiceImpl) AccountGetPrivacy(ctx context.Context, request *mtproto.TLAccountGetPrivacy) (*mtproto.Account_PrivacyRules, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountSetPrivacy(ctx context.Context, request *mtproto.TLAccountSetPrivacy) (*mtproto.Account_PrivacyRules, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountGetAccountTTL(ctx context.Context, request *mtproto.TLAccountGetAccountTTL) (*mtproto.AccountDaysTTL, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountGetAuthorizations(ctx context.Context, request *mtproto.TLAccountGetAuthorizations) (*mtproto.Account_Authorizations, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountGetPassword(ctx context.Context, request *mtproto.TLAccountGetPassword) (*mtproto.Account_Password, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountGetPasswordSettings(ctx context.Context, request *mtproto.TLAccountGetPasswordSettings) (*mtproto.Account_PasswordSettings, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountGetTmpPassword(ctx context.Context, request *mtproto.TLAccountGetTmpPassword) (*mtproto.Account_TmpPassword, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("Process: %v", request)
+	return nil, errors.New("Not impl")
 }

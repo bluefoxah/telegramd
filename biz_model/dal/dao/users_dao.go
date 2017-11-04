@@ -33,28 +33,36 @@ func NewUsersDAO(db *sqlx.DB) *UsersDAO {
 
 func (dao *UsersDAO) Insert(do *do.UsersDO) (id int64, err error) {
 	// TODO(@benqi): sqlmap
+	id = 0
+
 	var sql = "insert into users(phone) values (:phone)"
 	r, err := dao.db.NamedExec(sql, do)
 	if err != nil {
 		glog.Error("UsersDAO/Insert error: ", err)
-		return 0, nil
+		return
 	}
 
-	return r.LastInsertId()
+	id, err = r.LastInsertId()
+	if err != nil {
+		glog.Error("UsersDAO/LastInsertId error: ", err)
+	}
+	return
 }
 
 func (dao *UsersDAO) SelectByPhoneNumber(phone string) (*do.UsersDO, error) {
 	// TODO(@benqi): sqlmap
 	var sql = "select id, access_hash, first_name, last_name, username from users where phone = :phone limit 1"
 	do := &do.UsersDO{Phone: phone}
-	r, err := dao.db.NamedQuery(sql, do)
+	rows, err := dao.db.NamedQuery(sql, do)
 	if err != nil {
 		glog.Error("UsersDAO/SelectById error: ", err)
 		return nil, err
 	}
 
-	if r.Next() {
-		err = r.StructScan(do)
+	defer rows.Close()
+
+	if rows.Next() {
+		err = rows.StructScan(do)
 		if err != nil {
 			glog.Error("UsersDAO/SelectById error: ", err)
 			return nil, err
