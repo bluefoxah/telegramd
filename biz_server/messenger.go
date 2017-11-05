@@ -71,18 +71,21 @@ func main() {
 
 	usersDAO := dao.NewUsersDAO(db)
 	devicesDAO := dao.NewDevicesDAO(db)
-
 	// masterKeysDAO := dao.NewMasterKeysDAO(db)
+	authUsersDAO := dao.NewAuthUsersDAO(db)
 	authPhoneTransactionsDAO := dao.NewAuthPhoneTransactionsDAO(db)
 	// authsDAO := dao.NewAuthsDAO(db)
 	// authSaltsDAO := dao.NewAuthSaltsDAO(db)
 	// appsDAO := dao.NewAppsDAO(db)
+	userDialogsDAO := dao.NewUserDialogsDAO(db)
 
+	// AccountServiceImpl
 	mtproto.RegisterRPCAccountServer(grpcServer, &account.AccountServiceImpl{
 		UsersDAO: usersDAO,
 		DeviceDAO: devicesDAO,
 	})
 
+	// AuthServiceImpl
 	mtproto.RegisterRPCAuthServer(grpcServer, &auth.AuthServiceImpl{
 		UsersDAO: usersDAO,
 		AuthPhoneTransactionsDAO:	authPhoneTransactionsDAO,
@@ -93,7 +96,13 @@ func main() {
 	mtproto.RegisterRPCContactsServer(grpcServer, &contacts.ContactsServiceImpl{})
 	mtproto.RegisterRPCHelpServer(grpcServer, &help.HelpServiceImpl{})
 	mtproto.RegisterRPCLangpackServer(grpcServer, &langpack.LangpackServiceImpl{})
-	mtproto.RegisterRPCMessagesServer(grpcServer, &messages.MessagesServiceImpl{})
+
+	// MessagesServiceImpl
+	mtproto.RegisterRPCMessagesServer(grpcServer, &messages.MessagesServiceImpl{
+		AuthUsersDAO: authUsersDAO,
+		UserDialogsDAO:	userDialogsDAO,
+	})
+
 	mtproto.RegisterRPCPaymentsServer(grpcServer, &payments.PaymentsServiceImpl{})
 	mtproto.RegisterRPCPhoneServer(grpcServer, &phone.PhoneServiceImpl{})
 	mtproto.RegisterRPCPhotosServer(grpcServer, &photos.PhotosServiceImpl{})

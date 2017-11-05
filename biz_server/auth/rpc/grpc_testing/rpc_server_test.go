@@ -34,6 +34,12 @@ func (s *TestRPCServer)AuthSentCode(ctx context.Context,  sendCode *TLAuthSendCo
 	md, _ := metadata.FromIncomingContext(ctx)
 	fmt.Printf("Recive AuthSentCode: md: {%v}, query: {%v}\n", md, sendCode)
 
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println(err)
+		}
+	}()
+
 	return &Auth_SentCode{
 		Payload: &Auth_SentCode_AuthSentCode{
 			AuthSentCode: & TLAuthSentCode{

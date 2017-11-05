@@ -53,9 +53,10 @@ func (c* RPCClient) Invoke(rpcMetaData *mtproto.RpcMetaData, object mtproto.TLOb
 
 	glog.Infof("Invoke - object: {%v}\n", t)
 	r := t.NewReplyFunc()
-	glog.Infof("Invoke - NewReplyFunc: {%v}\n", r)
+	// glog.Infof("Invoke - NewReplyFunc: {%v}\n", r)
 
 	ctx := metadata.NewOutgoingContext(context.Background(), rpcMetaData.Encode())
+	// ctx := context.Background()
 	err := c.conn.Invoke(ctx, t.Method, object, r)
 	if err != nil {
 		glog.Errorf("%v.Invoke(_) = _, %v: \n", c.conn, err)

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table sqlname="user_dialogs">
+    <operation name="Insert">
+        <sql>
+            INSERT INTO user_dialogs (user_id, peer_type, peer_id, created_at) VALUES (:user_id, peer_type, peer_id, created_at)
+        </sql>
+    </operation>
+    <operation name="SelectPinnedDialogs" result_set="list">
+        <sql>
+            SELECT peer_type, peer_id FROM user_dialogs WHERE user_id=:user_id AND is_pinned = 1
+        </sql>
+    </operation>
+</table>

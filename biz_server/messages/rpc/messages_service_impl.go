@@ -21,10 +21,14 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
-	"errors"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"google.golang.org/grpc/metadata"
+	"time"
 )
 
 type MessagesServiceImpl struct {
+	AuthUsersDAO *dao.AuthUsersDAO
+	UserDialogsDAO *dao.UserDialogsDAO
 }
 
 func (s *MessagesServiceImpl) MessagesSetTyping(ctx context.Context, request *mtproto.TLMessagesSetTyping) (*mtproto.Bool, error) {
@@ -434,7 +438,29 @@ func (s *MessagesServiceImpl) MessagesGetPeerDialogs(ctx context.Context, reques
 
 func (s *MessagesServiceImpl) MessagesGetPinnedDialogs(ctx context.Context, request *mtproto.TLMessagesGetPinnedDialogs) (*mtproto.Messages_PeerDialogs, error) {
 	glog.Infof("MessagesGetPinnedDialogs - Process: {%v}", request)
-	return nil, errors.New("Not impl")
+
+	// 查出来
+	md, _ := metadata.FromIncomingContext(ctx)
+	rpcMetaData := mtproto.RpcMetaData{}
+	rpcMetaData.Decode(md)
+
+	// TODO(@benqi): check error!
+	// authUsersDO, _ := s.AuthUsersDAO.SelectByAuthId(rpcMetaData.AuthId)
+	// glog.Info("user_id: ", authUsersDO)
+	// userDialogsDO, _ := s.UserDialogsDAO.SelectPinnedDialogs(authUsersDO.UserId)
+	userDialogsDO, _ := s.UserDialogsDAO.SelectPinnedDialogs(1)
+	_ = userDialogsDO
+
+	peerDialogs := &mtproto.TLMessagesPeerDialogs{}
+	state := &mtproto.TLUpdatesState{}
+	state.Date = int32(time.Now().Unix())
+
+	peerDialogs.State = mtproto.MakeUpdates_State(state)
+
+	reply := mtproto.MakeMessages_PeerDialogs(peerDialogs)
+	glog.Infof("MessagesGetPinnedDialogs - reply: {%v}\n", reply)
+
+	return reply, nil
 }
 
 func (s *MessagesServiceImpl) MessagesGetFeaturedStickers(ctx context.Context, request *mtproto.TLMessagesGetFeaturedStickers) (*mtproto.Messages_FeaturedStickers, error) {

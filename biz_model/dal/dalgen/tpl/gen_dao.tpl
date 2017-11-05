@@ -34,8 +34,10 @@ func New{{.Name}}DAO(db* sqlx.DB) *{{.Name}}DAO {
 {{range $i, $v := .Funcs }}
 {{if eq .QueryType "INSERT"}}
 {{template "INSERT" $v}}
-{{else if eq .QueryType "SELECT"}}
-{{template "SELECT" $v}}
+{{else if eq .QueryType "SELECT_STRUCT_SINGLE"}}
+{{template "SELECT_STRUCT_SINGLE" $v}}
+{{else if eq .QueryType "SELECT_STRUCT_LIST"}}
+{{template "SELECT_STRUCT_LIST" $v}}
 {{else if eq .QueryType "UPDATE"}}
 {{template "UPDATE" $v}}
 {{else if eq .QueryType "DELETE"}}
@@ -63,23 +65,22 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}(do *do.{{.TableName}}DO) (id int64, 
 }
 {{end}}
 
-{{define "SELECT"}}
+{{define "SELECT_STRUCT_SINGLE"}}
 func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) (*do.{{.TableName}}DO, error) {
 	// TODO(@benqi): sqlmap
 	var sql = "{{.Sql}}"
 	do := &do.{{.TableName}}DO{ {{ range $i, $v := .Params }} {{.Name}} : {{.FieldName}}, {{end}} }
 	rows, err := dao.db.NamedQuery(sql, do)
 	if err != nil {
-		glog.Error("{{.TableName}}DAO/SelectById error: ", err)
+		glog.Error("{{.TableName}}DAO/{{.FuncName}} error: ", err)
 		return nil, err
 	}
 
 	defer rows.Close()
-
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("{{.TableName}}DAO/SelectById error: ", err)
+			glog.Error("{{.TableName}}DAO/{{.FuncName}} error: ", err)
 			return nil, err
 		}
 	} else {
@@ -89,6 +90,37 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if n
 	return do, nil
 }
 {{end}}
+
+{{define "SELECT_STRUCT_LIST"}}
+func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) ([]do.{{.TableName}}DO, error) {
+	// TODO(@benqi): sqlmap
+	var sql = "{{.Sql}}"
+	do2 := &do.{{.TableName}}DO{ {{ range $i, $v := .Params }} {{.Name}} : {{.FieldName}}, {{end}} }
+	rows, err := dao.db.NamedQuery(sql, do2)
+	if err != nil {
+		glog.Errorf("{{.TableName}}DAO/{{.FuncName}} error: ", err)
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	var values []do.{{.TableName}}DO
+	for rows.Next() {
+        v := do.{{.TableName}}DO{}
+
+        // TODO(@benqi): 不使用反射
+        err := rows.StructScan(&v)
+        if err != nil {
+            glog.Errorf("{{.TableName}}DAO/{{.FuncName}} error: %s", err)
+            return nil, err
+        }
+		values = append(values, v)
+    }
+
+    return values, nil
+}
+{{end}}
+
 
 {{define "UPDATE"}}
 func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) (rows int64, err error) {
