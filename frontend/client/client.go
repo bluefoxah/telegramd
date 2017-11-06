@@ -185,10 +185,11 @@ func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 		 *	Other methods will result in an error: 401 UNAUTHORIZED.
 		 */
 
+		glog.Info("rpc request authId: ", c.Codec.AuthKeyId)
 		// TODO(@benqi): 透传UserID
 		// 初始化metadata
 		rpcMetadata := &RpcMetaData{}
-		rpcMetadata.ServerId = 1
+		rpcMetadata.ServerId = 2
 		rpcMetadata.AuthId = c.Codec.AuthKeyId
 		rpcMetadata.SessionId = c.Codec.SessionId
 		rpcMetadata.ClientAddr = c.Codec.RemoteAddr().String()

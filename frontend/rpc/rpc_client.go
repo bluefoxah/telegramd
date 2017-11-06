@@ -51,7 +51,7 @@ func (c* RPCClient) Invoke(rpcMetaData *mtproto.RpcMetaData, object mtproto.TLOb
 		return nil, err
 	}
 
-	glog.Infof("Invoke - object: {%v}\n", t)
+	glog.Infof("Invoke - method: {%s}, req: {%v}", t.Method, object)
 	r := t.NewReplyFunc()
 	// glog.Infof("Invoke - NewReplyFunc: {%v}\n", r)
 
@@ -59,7 +59,7 @@ func (c* RPCClient) Invoke(rpcMetaData *mtproto.RpcMetaData, object mtproto.TLOb
 	// ctx := context.Background()
 	err := c.conn.Invoke(ctx, t.Method, object, r)
 	if err != nil {
-		glog.Errorf("%v.Invoke(_) = _, %v: \n", c.conn, err)
+		glog.Errorf("RPC method: %s,  >> %v.Invoke(_) = _, %v: \n", t.Method, c.conn, err)
 		return nil, err
 	}
 

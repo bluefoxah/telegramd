@@ -21,10 +21,12 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
-	"errors"
+	"google.golang.org/grpc/metadata"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 )
 
 type UsersServiceImpl struct {
+	UsersDAO *dao.UsersDAO
 }
 
 // func (s *UsersServiceImpl)UsersGetUsers(ctx context.Context,  request *mtproto.TLUsersGetUsers) (*mtproto.Vector<User>, error) {
@@ -32,7 +34,87 @@ type UsersServiceImpl struct {
 //   return nil, errors.New("UsersGetFullUser - Not impl")
 // }
 
+// userFull#f220f3f
+// 	flags:#
+//  	blocked:flags.0?true
+//  	phone_calls_available:flags.4?true
+//  	phone_calls_private:flags.5?true
+//  user:User
+// 		about:flags.1?string
+//  link:contacts.Link
+//  	profile_photo:flags.2?Photo
+//  notify_settings:PeerNotifySettings
+//  	bot_info:flags.3?BotInfo
+//  common_chats_count:int
+// = UserFull;
 func (s *UsersServiceImpl) UsersGetFullUser(ctx context.Context, request *mtproto.TLUsersGetFullUser) (*mtproto.UserFull, error) {
 	glog.Infof("UsersGetFullUser - Process: {%v}", request)
-	return nil, errors.New("UsersGetFullUser - Not impl")
+
+	// 查出来
+	md, _ := metadata.FromIncomingContext(ctx)
+	rpcMetaData := mtproto.RpcMetaData{}
+	rpcMetaData.Decode(md)
+
+	fullUser := &mtproto.TLUserFull{}
+	fullUser.PhoneCallsAvailable = true
+	fullUser.PhoneCallsPrivate = true
+	fullUser.About = "@Benqi"
+	fullUser.CommonChatsCount = 0
+
+	switch request.Id.Payload.(type) {
+	case *mtproto.InputUser_InputUserSelf:
+		// User
+		userDO, _ := s.UsersDAO.SelectById(2)
+		user := &mtproto.TLUser{}
+		user.Self = true
+		user.Contact = false
+		user.Id = userDO.Id
+		user.FirstName = userDO.FirstName
+		user.LastName = userDO.LastName
+		user.Username = userDO.Username
+		user.AccessHash = userDO.AccessHash
+		user.Phone = userDO.Phone
+		fullUser.User = mtproto.MakeUser(user)
+
+		// Link
+		link := &mtproto.TLContactsLink{}
+		link.MyLink = mtproto.MakeContactLink(&mtproto.TLContactLinkContact{})
+		link.ForeignLink = mtproto.MakeContactLink(&mtproto.TLContactLinkContact{})
+		link.User = mtproto.MakeUser(user)
+		fullUser.Link = mtproto.MakeContacts_Link(link)
+	case *mtproto.InputUser_InputUser:
+		inputUser := request.Id.Payload.(*mtproto.InputUser_InputUser).InputUser
+		// User
+		userDO, _ := s.UsersDAO.SelectById(inputUser.UserId)
+		user := &mtproto.TLUser{}
+		user.Self = false
+		user.Contact = true
+		user.Id = userDO.Id
+		user.FirstName = userDO.FirstName
+		user.LastName = userDO.LastName
+		user.Username = userDO.Username
+		user.AccessHash = userDO.AccessHash
+		user.Phone = userDO.Phone
+		fullUser.User = mtproto.MakeUser(user)
+
+		// Link
+		link := &mtproto.TLContactsLink{}
+		link.MyLink = mtproto.MakeContactLink(&mtproto.TLContactLinkContact{})
+		link.ForeignLink = mtproto.MakeContactLink(&mtproto.TLContactLinkContact{})
+		link.User = mtproto.MakeUser(user)
+		fullUser.Link = mtproto.MakeContacts_Link(link)
+	case *mtproto.InputUser_InputUserEmpty:
+		// TODO(@benqi): BAD_REQUEST: 400
+	}
+
+	// NotifySettings
+	peerNotifySettings := &mtproto.TLPeerNotifySettings{}
+	peerNotifySettings.ShowPreviews = true
+	peerNotifySettings.MuteUntil = 0
+	peerNotifySettings.Sound = "default"
+	fullUser.NotifySettings = mtproto.MakePeerNotifySettings(peerNotifySettings)
+
+	reply := mtproto.MakeUserFull(fullUser)
+	glog.Infof("UsersGetFullUser - reply: {%v}\n", reply)
+	return reply, nil
 }

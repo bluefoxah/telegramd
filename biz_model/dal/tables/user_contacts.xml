@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table sqlname="user_contacts">
+    <operation name="Insert">
+        <sql>
+            INSERT INTO user_contacts (owner_user_id, contact_user_id) VALUES (:owner_user_id, :contact_user_id)
+        </sql>
+    </operation>
+    <operation name="SelectUserContacts" result_set="list">
+        <sql>
+            SELECT contact_user_id FROM user_contacts WHERE owner_user_id=:owner_user_id AND is_deleted = 0
+        </sql>
+    </operation>
+</table>

@@ -55,12 +55,35 @@ func (dao *UsersDAO) SelectByPhoneNumber(phone string) (*do.UsersDO, error) {
 	do := &do.UsersDO{Phone: phone}
 	rows, err := dao.db.NamedQuery(sql, do)
 	if err != nil {
+		glog.Error("UsersDAO/SelectByPhoneNumber error: ", err)
+		return nil, err
+	}
+
+	defer rows.Close()
+	if rows.Next() {
+		err = rows.StructScan(do)
+		if err != nil {
+			glog.Error("UsersDAO/SelectByPhoneNumber error: ", err)
+			return nil, err
+		}
+	} else {
+		return nil, nil
+	}
+
+	return do, nil
+}
+
+func (dao *UsersDAO) SelectById(id int32) (*do.UsersDO, error) {
+	// TODO(@benqi): sqlmap
+	var sql = "select id, access_hash, first_name, last_name, username from users where id = :id limit 1"
+	do := &do.UsersDO{Id: id}
+	rows, err := dao.db.NamedQuery(sql, do)
+	if err != nil {
 		glog.Error("UsersDAO/SelectById error: ", err)
 		return nil, err
 	}
 
 	defer rows.Close()
-
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
@@ -72,4 +95,32 @@ func (dao *UsersDAO) SelectByPhoneNumber(phone string) (*do.UsersDO, error) {
 	}
 
 	return do, nil
+}
+
+func (dao *UsersDAO) SelectByQueryString(username string, first_name string, last_name string, phone string) ([]do.UsersDO, error) {
+	// TODO(@benqi): sqlmap
+	var sql = "select id, access_hash, first_name, last_name, username, phone from users where username = :username or first_name = :first_name or last_name = :last_name or phone = :phone limit 20"
+	do2 := &do.UsersDO{Username: username, FirstName: first_name, LastName: last_name, Phone: phone}
+	rows, err := dao.db.NamedQuery(sql, do2)
+	if err != nil {
+		glog.Errorf("UsersDAO/SelectByQueryString error: ", err)
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	var values []do.UsersDO
+	for rows.Next() {
+		v := do.UsersDO{}
+
+		// TODO(@benqi): 不使用反射
+		err := rows.StructScan(&v)
+		if err != nil {
+			glog.Errorf("UsersDAO/SelectByQueryString error: %s", err)
+			return nil, err
+		}
+		values = append(values, v)
+	}
+
+	return values, nil
 }

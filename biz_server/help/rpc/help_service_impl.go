@@ -122,7 +122,7 @@ func (s *HelpServiceImpl) HelpGetConfig(ctx context.Context, request *mtproto.TL
 	}
 
 	reply := mtproto.MakeConfig(helpConfig)
-	glog.Infof("HelpGetConfig - reply: {%v}\n", reply)
+	// glog.Infof("HelpGetConfig - reply: {%v}\n", reply)
 	return reply, nil
 }
 

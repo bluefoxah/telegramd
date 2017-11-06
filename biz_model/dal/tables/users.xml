@@ -10,4 +10,14 @@
             SELECT id, access_hash, first_name, last_name, username FROM users WHERE phone=:phone limit 1
         </sql>
     </operation>
+    <operation name="SelectById">
+        <sql>
+            SELECT id, access_hash, first_name, last_name, username FROM users WHERE id=:id limit 1
+        </sql>
+    </operation>
+    <operation name="SelectByQueryString" result_set="list">
+        <sql>
+            SELECT id, access_hash, first_name, last_name, username, phone FROM users WHERE username = :username OR first_name = :first_name OR last_name = :last_name OR phone = :phone limit 20
+        </sql>
+    </operation>
 </table>

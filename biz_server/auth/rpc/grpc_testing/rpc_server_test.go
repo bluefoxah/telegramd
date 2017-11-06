@@ -40,6 +40,9 @@ func (s *TestRPCServer)AuthSentCode(ctx context.Context,  sendCode *TLAuthSendCo
 		}
 	}()
 
+	// status.Error(1, "")
+	//Errorf();
+
 	return &Auth_SentCode{
 		Payload: &Auth_SentCode_AuthSentCode{
 			AuthSentCode: & TLAuthSentCode{

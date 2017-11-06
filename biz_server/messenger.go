@@ -19,10 +19,10 @@ package main
 
 import (
 	"flag"
+	_ "github.com/go-sql-driver/mysql" // import your used driver
 	"github.com/golang/glog"
-	"github.com/nebulaim/telegramd/mtproto"
-	"net"
-	"google.golang.org/grpc"
+	"github.com/jmoiron/sqlx"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	account "github.com/nebulaim/telegramd/biz_server/account/rpc"
 	auth "github.com/nebulaim/telegramd/biz_server/auth/rpc"
 	bots "github.com/nebulaim/telegramd/biz_server/bots/rpc"
@@ -38,9 +38,9 @@ import (
 	updates "github.com/nebulaim/telegramd/biz_server/updates/rpc"
 	upload "github.com/nebulaim/telegramd/biz_server/upload/rpc"
 	users "github.com/nebulaim/telegramd/biz_server/users/rpc"
-	"github.com/jmoiron/sqlx"
-	"github.com/nebulaim/telegramd/biz_model/dal/dao"
-	_ "github.com/go-sql-driver/mysql" // import your used driver
+	"github.com/nebulaim/telegramd/mtproto"
+	"google.golang.org/grpc"
+	"net"
 )
 
 func init() {
@@ -78,29 +78,36 @@ func main() {
 	// authSaltsDAO := dao.NewAuthSaltsDAO(db)
 	// appsDAO := dao.NewAppsDAO(db)
 	userDialogsDAO := dao.NewUserDialogsDAO(db)
+	userContactsDAO := dao.NewUserContactsDAO(db)
 
 	// AccountServiceImpl
 	mtproto.RegisterRPCAccountServer(grpcServer, &account.AccountServiceImpl{
-		UsersDAO: usersDAO,
+		UsersDAO:  usersDAO,
 		DeviceDAO: devicesDAO,
 	})
 
 	// AuthServiceImpl
 	mtproto.RegisterRPCAuthServer(grpcServer, &auth.AuthServiceImpl{
-		UsersDAO: usersDAO,
-		AuthPhoneTransactionsDAO:	authPhoneTransactionsDAO,
+		UsersDAO:                 usersDAO,
+		AuthPhoneTransactionsDAO: authPhoneTransactionsDAO,
 	})
 
 	mtproto.RegisterRPCBotsServer(grpcServer, &bots.BotsServiceImpl{})
 	mtproto.RegisterRPCChannelsServer(grpcServer, &channels.ChannelsServiceImpl{})
-	mtproto.RegisterRPCContactsServer(grpcServer, &contacts.ContactsServiceImpl{})
+
+	// ContactsServiceImpl
+	mtproto.RegisterRPCContactsServer(grpcServer, &contacts.ContactsServiceImpl{
+		UsersDAO: usersDAO,
+		UserContactsDAO: userContactsDAO,
+	})
+
 	mtproto.RegisterRPCHelpServer(grpcServer, &help.HelpServiceImpl{})
 	mtproto.RegisterRPCLangpackServer(grpcServer, &langpack.LangpackServiceImpl{})
 
 	// MessagesServiceImpl
 	mtproto.RegisterRPCMessagesServer(grpcServer, &messages.MessagesServiceImpl{
-		AuthUsersDAO: authUsersDAO,
-		UserDialogsDAO:	userDialogsDAO,
+		AuthUsersDAO:   authUsersDAO,
+		UserDialogsDAO: userDialogsDAO,
 	})
 
 	mtproto.RegisterRPCPaymentsServer(grpcServer, &payments.PaymentsServiceImpl{})
@@ -109,7 +116,10 @@ func main() {
 	mtproto.RegisterRPCStickersServer(grpcServer, &stickers.StickersServiceImpl{})
 	mtproto.RegisterRPCUpdatesServer(grpcServer, &updates.UpdatesServiceImpl{})
 	mtproto.RegisterRPCUploadServer(grpcServer, &upload.UploadServiceImpl{})
-	mtproto.RegisterRPCUsersServer(grpcServer, &users.UsersServiceImpl{})
+
+	mtproto.RegisterRPCUsersServer(grpcServer, &users.UsersServiceImpl{
+		UsersDAO: usersDAO,
+	})
 
 	glog.Info("NewRPCServer in 0.0.0.0:10001.")
 

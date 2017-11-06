@@ -24,6 +24,7 @@ import (
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"google.golang.org/grpc/metadata"
 	"time"
+	"github.com/cosiner/gohper/errors"
 )
 
 type MessagesServiceImpl struct {
@@ -162,8 +163,8 @@ func (s *MessagesServiceImpl) MessagesGetMessages(ctx context.Context, request *
 }
 
 func (s *MessagesServiceImpl) MessagesGetHistory(ctx context.Context, request *mtproto.TLMessagesGetHistory) (*mtproto.Messages_Messages, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("MessagesGetHistory - Process: {%v}", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *MessagesServiceImpl) MessagesSearch(ctx context.Context, request *mtproto.TLMessagesSearch) (*mtproto.Messages_Messages, error) {
@@ -182,8 +183,8 @@ func (s *MessagesServiceImpl) MessagesGetUnreadMentions(ctx context.Context, req
 }
 
 func (s *MessagesServiceImpl) MessagesGetDialogs(ctx context.Context, request *mtproto.TLMessagesGetDialogs) (*mtproto.Messages_Dialogs, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("MessagesGetDialogs - Process: {%v}", request)
+	return nil, errors.New("Not impl")
 }
 
 func (s *MessagesServiceImpl) MessagesReadHistory(ctx context.Context, request *mtproto.TLMessagesReadHistory) (*mtproto.Messages_AffectedMessages, error) {

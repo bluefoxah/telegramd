@@ -21,9 +21,12 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 )
 
 type ContactsServiceImpl struct {
+	UsersDAO *dao.UsersDAO
+	UserContactsDAO *dao.UserContactsDAO
 }
 
 func (s *ContactsServiceImpl) ContactsDeleteContacts(ctx context.Context, request *mtproto.TLContactsDeleteContacts) (*mtproto.Bool, error) {
@@ -62,8 +65,41 @@ func (s *ContactsServiceImpl) ContactsImportCard(ctx context.Context, request *m
 // }
 
 func (s *ContactsServiceImpl) ContactsGetContacts(ctx context.Context, request *mtproto.TLContactsGetContacts) (*mtproto.Contacts_Contacts, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("ContactsGetContacts: %v", request)
+
+	// TODO(@benqi): Logout逻辑处理，失效AuthKey
+	// reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
+
+	contacts := &mtproto.TLContactsContacts{}
+
+	contactsDOList, _ := s.UserContactsDAO.SelectUserContacts(2)
+	contacts.SavedCount = int32(len(contactsDOList))
+
+	for _, do := range contactsDOList {
+		contact := &mtproto.TLContact{}
+		contact.UserId = do.ContactUserId
+		contact.Mutual = mtproto.MakeBool(&mtproto.TLBoolFalse{})
+
+		contacts.Contacts = append(contacts.Contacts, mtproto.MakeContact(contact))
+
+		userDO, _ := s.UsersDAO.SelectById(do.ContactUserId)
+		user := &mtproto.TLUser{}
+		user.Id = userDO.Id
+		user.Self = false
+		user.Contact = true
+		user.AccessHash = userDO.AccessHash
+		user.FirstName = userDO.FirstName
+		user.LastName = userDO.LastName
+		user.Username = userDO.Username
+		user.Phone = userDO.Phone
+
+		contacts.Users = append(contacts.Users, mtproto.MakeUser(user))
+	}
+
+	reply := mtproto.MakeContacts_Contacts(contacts)
+
+	glog.Infof("ContactsGetContacts - reply: {%v}\n", reply)
+	return reply, nil
 }
 
 func (s *ContactsServiceImpl) ContactsImportContacts(ctx context.Context, request *mtproto.TLContactsImportContacts) (*mtproto.Contacts_ImportedContacts, error) {
@@ -87,8 +123,33 @@ func (s *ContactsServiceImpl) ContactsGetBlocked(ctx context.Context, request *m
 // }
 
 func (s *ContactsServiceImpl) ContactsSearch(ctx context.Context, request *mtproto.TLContactsSearch) (*mtproto.Contacts_Found, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("ContactsSearch - Process: {%v}", request)
+
+	// TODO(@benqi) 使用ES查询
+	usersDOList, _ := s.UsersDAO.SelectByQueryString(request.Q, request.Q, request.Q, request.Q)
+
+	found := &mtproto.TLContactsFound{}
+	// Peer/Chat/User
+	for _, usersDO := range usersDOList {
+		found.Results = append(found.Results, mtproto.MakePeer(&mtproto.TLPeerUser{UserId: usersDO.Id}))
+
+		user := &mtproto.TLUser{}
+		user.Id = usersDO.Id
+		user.Self = false
+		user.Contact = true
+		user.AccessHash = usersDO.AccessHash
+		user.FirstName = usersDO.FirstName
+		user.LastName = usersDO.LastName
+		user.Username = usersDO.Username
+		user.Phone = usersDO.Phone
+
+		found.Users = append(found.Users, mtproto.MakeUser(user))
+	}
+
+	reply := mtproto.MakeContacts_Found(found)
+
+	glog.Infof("ContactsSearch - reply: {%v}\n", reply)
+	return reply, nil
 }
 
 func (s *ContactsServiceImpl) ContactsResolveUsername(ctx context.Context, request *mtproto.TLContactsResolveUsername) (*mtproto.Contacts_ResolvedPeer, error) {
