@@ -21,7 +21,7 @@
 package mtproto
 
 import (
-	"encoding/binary"
+	// "encoding/binary"
 	"fmt"
 	"github.com/golang/protobuf/proto"
 )
@@ -922,6 +922,7 @@ func (m *ResPQ) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_resPQ):
 		m2 := ResPQ_ResPQ{}
+		m2.ResPQ = &TLResPQ{}
 		m2.ResPQ.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -956,6 +957,7 @@ func (m *P_QInnerData) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_p_q_inner_data):
 		m2 := P_QInnerData_PQInnerData{}
+		m2.PQInnerData = &TLPQInnerData{}
 		m2.PQInnerData.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -993,10 +995,12 @@ func (m *Server_DH_Params) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_server_DH_params_fail):
 		m2 := Server_DH_Params_Server_DHParamsFail{}
+		m2.Server_DHParamsFail = &TLServer_DHParamsFail{}
 		m2.Server_DHParamsFail.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_server_DH_params_ok):
 		m2 := Server_DH_Params_Server_DHParamsOk{}
+		m2.Server_DHParamsOk = &TLServer_DHParamsOk{}
 		m2.Server_DHParamsOk.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1038,6 +1042,7 @@ func (m *Server_DHInnerData) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_server_DH_inner_data):
 		m2 := Server_DHInnerData_Server_DHInnerData{}
+		m2.Server_DHInnerData = &TLServer_DHInnerData{}
 		m2.Server_DHInnerData.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1072,6 +1077,7 @@ func (m *Client_DH_Inner_Data) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_client_DH_inner_data):
 		m2 := Client_DH_Inner_Data_Client_DHInnerData{}
+		m2.Client_DHInnerData = &TLClient_DHInnerData{}
 		m2.Client_DHInnerData.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1112,14 +1118,17 @@ func (m *SetClient_DHParamsAnswer) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_dh_gen_ok):
 		m2 := SetClient_DHParamsAnswer_DhGenOk{}
+		m2.DhGenOk = &TLDhGenOk{}
 		m2.DhGenOk.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_dh_gen_retry):
 		m2 := SetClient_DHParamsAnswer_DhGenRetry{}
+		m2.DhGenRetry = &TLDhGenRetry{}
 		m2.DhGenRetry.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_dh_gen_fail):
 		m2 := SetClient_DHParamsAnswer_DhGenFail{}
+		m2.DhGenFail = &TLDhGenFail{}
 		m2.DhGenFail.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1174,14 +1183,17 @@ func (m *DestroyAuthKeyRes) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_destroy_auth_key_ok):
 		m2 := DestroyAuthKeyRes_DestroyAuthKeyOk{}
+		m2.DestroyAuthKeyOk = &TLDestroyAuthKeyOk{}
 		m2.DestroyAuthKeyOk.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_destroy_auth_key_none):
 		m2 := DestroyAuthKeyRes_DestroyAuthKeyNone{}
+		m2.DestroyAuthKeyNone = &TLDestroyAuthKeyNone{}
 		m2.DestroyAuthKeyNone.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_destroy_auth_key_fail):
 		m2 := DestroyAuthKeyRes_DestroyAuthKeyFail{}
+		m2.DestroyAuthKeyFail = &TLDestroyAuthKeyFail{}
 		m2.DestroyAuthKeyFail.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1230,6 +1242,7 @@ func (m *MsgsAck) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_msgs_ack):
 		m2 := MsgsAck_MsgsAck{}
+		m2.MsgsAck = &TLMsgsAck{}
 		m2.MsgsAck.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1267,10 +1280,12 @@ func (m *BadMsgNotification) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_bad_msg_notification):
 		m2 := BadMsgNotification_BadMsgNotification{}
+		m2.BadMsgNotification = &TLBadMsgNotification{}
 		m2.BadMsgNotification.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_bad_server_salt):
 		m2 := BadMsgNotification_BadServerSalt{}
+		m2.BadServerSalt = &TLBadServerSalt{}
 		m2.BadServerSalt.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1312,6 +1327,7 @@ func (m *MsgsStateReq) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_msgs_state_req):
 		m2 := MsgsStateReq_MsgsStateReq{}
+		m2.MsgsStateReq = &TLMsgsStateReq{}
 		m2.MsgsStateReq.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1346,6 +1362,7 @@ func (m *MsgsStateInfo) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_msgs_state_info):
 		m2 := MsgsStateInfo_MsgsStateInfo{}
+		m2.MsgsStateInfo = &TLMsgsStateInfo{}
 		m2.MsgsStateInfo.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1380,6 +1397,7 @@ func (m *MsgsAllInfo) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_msgs_all_info):
 		m2 := MsgsAllInfo_MsgsAllInfo{}
+		m2.MsgsAllInfo = &TLMsgsAllInfo{}
 		m2.MsgsAllInfo.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1417,10 +1435,12 @@ func (m *MsgDetailedInfo) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_msg_detailed_info):
 		m2 := MsgDetailedInfo_MsgDetailedInfo{}
+		m2.MsgDetailedInfo = &TLMsgDetailedInfo{}
 		m2.MsgDetailedInfo.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_msg_new_detailed_info):
 		m2 := MsgDetailedInfo_MsgNewDetailedInfo{}
+		m2.MsgNewDetailedInfo = &TLMsgNewDetailedInfo{}
 		m2.MsgNewDetailedInfo.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1462,6 +1482,7 @@ func (m *MsgResendReq) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_msg_resend_req):
 		m2 := MsgResendReq_MsgResendReq{}
+		m2.MsgResendReq = &TLMsgResendReq{}
 		m2.MsgResendReq.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1496,6 +1517,7 @@ func (m *RpcError) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_rpc_error):
 		m2 := RpcError_RpcError{}
+		m2.RpcError = &TLRpcError{}
 		m2.RpcError.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1536,14 +1558,17 @@ func (m *RpcDropAnswer) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_rpc_answer_unknown):
 		m2 := RpcDropAnswer_RpcAnswerUnknown{}
+		m2.RpcAnswerUnknown = &TLRpcAnswerUnknown{}
 		m2.RpcAnswerUnknown.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_rpc_answer_dropped_running):
 		m2 := RpcDropAnswer_RpcAnswerDroppedRunning{}
+		m2.RpcAnswerDroppedRunning = &TLRpcAnswerDroppedRunning{}
 		m2.RpcAnswerDroppedRunning.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_rpc_answer_dropped):
 		m2 := RpcDropAnswer_RpcAnswerDropped{}
+		m2.RpcAnswerDropped = &TLRpcAnswerDropped{}
 		m2.RpcAnswerDropped.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1592,6 +1617,7 @@ func (m *FutureSalt) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_future_salt):
 		m2 := FutureSalt_FutureSalt{}
+		m2.FutureSalt = &TLFutureSalt{}
 		m2.FutureSalt.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1626,6 +1652,7 @@ func (m *FutureSalts) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_future_salts):
 		m2 := FutureSalts_FutureSalts{}
+		m2.FutureSalts = &TLFutureSalts{}
 		m2.FutureSalts.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1660,6 +1687,7 @@ func (m *Pong) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_pong):
 		m2 := Pong_Pong{}
+		m2.Pong = &TLPong{}
 		m2.Pong.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1697,10 +1725,12 @@ func (m *DestroySessionRes) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_destroy_session_ok):
 		m2 := DestroySessionRes_DestroySessionOk{}
+		m2.DestroySessionOk = &TLDestroySessionOk{}
 		m2.DestroySessionOk.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_destroy_session_none):
 		m2 := DestroySessionRes_DestroySessionNone{}
+		m2.DestroySessionNone = &TLDestroySessionNone{}
 		m2.DestroySessionNone.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1742,6 +1772,7 @@ func (m *NewSession) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_new_session_created):
 		m2 := NewSession_NewSessionCreated{}
+		m2.NewSessionCreated = &TLNewSessionCreated{}
 		m2.NewSessionCreated.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1776,6 +1807,7 @@ func (m *HttpWait) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_http_wait):
 		m2 := HttpWait_HttpWait{}
+		m2.HttpWait = &TLHttpWait{}
 		m2.HttpWait.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1810,6 +1842,7 @@ func (m *IpPort) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_ipPort):
 		m2 := IpPort_IpPort{}
+		m2.IpPort = &TLIpPort{}
 		m2.IpPort.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1844,6 +1877,7 @@ func (m *Help_ConfigSimple) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_help_configSimple):
 		m2 := Help_ConfigSimple_HelpConfigSimple{}
+		m2.HelpConfigSimple = &TLHelpConfigSimple{}
 		m2.HelpConfigSimple.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1881,10 +1915,12 @@ func (m *Bool) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_boolFalse):
 		m2 := Bool_BoolFalse{}
+		m2.BoolFalse = &TLBoolFalse{}
 		m2.BoolFalse.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_boolTrue):
 		m2 := Bool_BoolTrue{}
+		m2.BoolTrue = &TLBoolTrue{}
 		m2.BoolTrue.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1926,6 +1962,7 @@ func (m *True) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_true):
 		m2 := True_True{}
+		m2.True = &TLTrue{}
 		m2.True.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1960,6 +1997,7 @@ func (m *Error) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_error):
 		m2 := Error_Error{}
+		m2.Error = &TLError{}
 		m2.Error.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -1994,6 +2032,7 @@ func (m *Null) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_null):
 		m2 := Null_Null{}
+		m2.Null = &TLNull{}
 		m2.Null.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -2040,22 +2079,27 @@ func (m *InputPeer) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputPeerEmpty):
 		m2 := InputPeer_InputPeerEmpty{}
+		m2.InputPeerEmpty = &TLInputPeerEmpty{}
 		m2.InputPeerEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputPeerSelf):
 		m2 := InputPeer_InputPeerSelf{}
+		m2.InputPeerSelf = &TLInputPeerSelf{}
 		m2.InputPeerSelf.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputPeerChat):
 		m2 := InputPeer_InputPeerChat{}
+		m2.InputPeerChat = &TLInputPeerChat{}
 		m2.InputPeerChat.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputPeerUser):
 		m2 := InputPeer_InputPeerUser{}
+		m2.InputPeerUser = &TLInputPeerUser{}
 		m2.InputPeerUser.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputPeerChannel):
 		m2 := InputPeer_InputPeerChannel{}
+		m2.InputPeerChannel = &TLInputPeerChannel{}
 		m2.InputPeerChannel.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -2124,14 +2168,17 @@ func (m *InputUser) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputUserEmpty):
 		m2 := InputUser_InputUserEmpty{}
+		m2.InputUserEmpty = &TLInputUserEmpty{}
 		m2.InputUserEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputUserSelf):
 		m2 := InputUser_InputUserSelf{}
+		m2.InputUserSelf = &TLInputUserSelf{}
 		m2.InputUserSelf.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputUser):
 		m2 := InputUser_InputUser{}
+		m2.InputUser = &TLInputUser{}
 		m2.InputUser.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -2180,6 +2227,7 @@ func (m *InputContact) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputPhoneContact):
 		m2 := InputContact_InputPhoneContact{}
+		m2.InputPhoneContact = &TLInputPhoneContact{}
 		m2.InputPhoneContact.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -2217,10 +2265,12 @@ func (m *InputFile) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputFile):
 		m2 := InputFile_InputFile{}
+		m2.InputFile = &TLInputFile{}
 		m2.InputFile.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputFileBig):
 		m2 := InputFile_InputFileBig{}
+		m2.InputFileBig = &TLInputFileBig{}
 		m2.InputFileBig.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -2298,54 +2348,67 @@ func (m *InputMedia) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputMediaEmpty):
 		m2 := InputMedia_InputMediaEmpty{}
+		m2.InputMediaEmpty = &TLInputMediaEmpty{}
 		m2.InputMediaEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMediaUploadedPhoto):
 		m2 := InputMedia_InputMediaUploadedPhoto{}
+		m2.InputMediaUploadedPhoto = &TLInputMediaUploadedPhoto{}
 		m2.InputMediaUploadedPhoto.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMediaPhoto):
 		m2 := InputMedia_InputMediaPhoto{}
+		m2.InputMediaPhoto = &TLInputMediaPhoto{}
 		m2.InputMediaPhoto.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMediaGeoPoint):
 		m2 := InputMedia_InputMediaGeoPoint{}
+		m2.InputMediaGeoPoint = &TLInputMediaGeoPoint{}
 		m2.InputMediaGeoPoint.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMediaContact):
 		m2 := InputMedia_InputMediaContact{}
+		m2.InputMediaContact = &TLInputMediaContact{}
 		m2.InputMediaContact.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMediaUploadedDocument):
 		m2 := InputMedia_InputMediaUploadedDocument{}
+		m2.InputMediaUploadedDocument = &TLInputMediaUploadedDocument{}
 		m2.InputMediaUploadedDocument.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMediaDocument):
 		m2 := InputMedia_InputMediaDocument{}
+		m2.InputMediaDocument = &TLInputMediaDocument{}
 		m2.InputMediaDocument.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMediaVenue):
 		m2 := InputMedia_InputMediaVenue{}
+		m2.InputMediaVenue = &TLInputMediaVenue{}
 		m2.InputMediaVenue.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMediaGifExternal):
 		m2 := InputMedia_InputMediaGifExternal{}
+		m2.InputMediaGifExternal = &TLInputMediaGifExternal{}
 		m2.InputMediaGifExternal.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMediaPhotoExternal):
 		m2 := InputMedia_InputMediaPhotoExternal{}
+		m2.InputMediaPhotoExternal = &TLInputMediaPhotoExternal{}
 		m2.InputMediaPhotoExternal.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMediaDocumentExternal):
 		m2 := InputMedia_InputMediaDocumentExternal{}
+		m2.InputMediaDocumentExternal = &TLInputMediaDocumentExternal{}
 		m2.InputMediaDocumentExternal.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMediaGame):
 		m2 := InputMedia_InputMediaGame{}
+		m2.InputMediaGame = &TLInputMediaGame{}
 		m2.InputMediaGame.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMediaInvoice):
 		m2 := InputMedia_InputMediaInvoice{}
+		m2.InputMediaInvoice = &TLInputMediaInvoice{}
 		m2.InputMediaInvoice.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -2470,14 +2533,17 @@ func (m *InputChatPhoto) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputChatPhotoEmpty):
 		m2 := InputChatPhoto_InputChatPhotoEmpty{}
+		m2.InputChatPhotoEmpty = &TLInputChatPhotoEmpty{}
 		m2.InputChatPhotoEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputChatUploadedPhoto):
 		m2 := InputChatPhoto_InputChatUploadedPhoto{}
+		m2.InputChatUploadedPhoto = &TLInputChatUploadedPhoto{}
 		m2.InputChatUploadedPhoto.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputChatPhoto):
 		m2 := InputChatPhoto_InputChatPhoto{}
+		m2.InputChatPhoto = &TLInputChatPhoto{}
 		m2.InputChatPhoto.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -2529,10 +2595,12 @@ func (m *InputGeoPoint) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputGeoPointEmpty):
 		m2 := InputGeoPoint_InputGeoPointEmpty{}
+		m2.InputGeoPointEmpty = &TLInputGeoPointEmpty{}
 		m2.InputGeoPointEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputGeoPoint):
 		m2 := InputGeoPoint_InputGeoPoint{}
+		m2.InputGeoPoint = &TLInputGeoPoint{}
 		m2.InputGeoPoint.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -2577,10 +2645,12 @@ func (m *InputPhoto) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputPhotoEmpty):
 		m2 := InputPhoto_InputPhotoEmpty{}
+		m2.InputPhotoEmpty = &TLInputPhotoEmpty{}
 		m2.InputPhotoEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputPhoto):
 		m2 := InputPhoto_InputPhoto{}
+		m2.InputPhoto = &TLInputPhoto{}
 		m2.InputPhoto.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -2628,14 +2698,17 @@ func (m *InputFileLocation) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputFileLocation):
 		m2 := InputFileLocation_InputFileLocation{}
+		m2.InputFileLocation = &TLInputFileLocation{}
 		m2.InputFileLocation.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputEncryptedFileLocation):
 		m2 := InputFileLocation_InputEncryptedFileLocation{}
+		m2.InputEncryptedFileLocation = &TLInputEncryptedFileLocation{}
 		m2.InputEncryptedFileLocation.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputDocumentFileLocation):
 		m2 := InputFileLocation_InputDocumentFileLocation{}
+		m2.InputDocumentFileLocation = &TLInputDocumentFileLocation{}
 		m2.InputDocumentFileLocation.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -2684,6 +2757,7 @@ func (m *InputAppEvent) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputAppEvent):
 		m2 := InputAppEvent_InputAppEvent{}
+		m2.InputAppEvent = &TLInputAppEvent{}
 		m2.InputAppEvent.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -2724,14 +2798,17 @@ func (m *Peer) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_peerUser):
 		m2 := Peer_PeerUser{}
+		m2.PeerUser = &TLPeerUser{}
 		m2.PeerUser.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_peerChat):
 		m2 := Peer_PeerChat{}
+		m2.PeerChat = &TLPeerChat{}
 		m2.PeerChat.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_peerChannel):
 		m2 := Peer_PeerChannel{}
+		m2.PeerChannel = &TLPeerChannel{}
 		m2.PeerChannel.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -2807,42 +2884,52 @@ func (m *Storage_FileType) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_storage_fileUnknown):
 		m2 := Storage_FileType_StorageFileUnknown{}
+		m2.StorageFileUnknown = &TLStorageFileUnknown{}
 		m2.StorageFileUnknown.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_storage_filePartial):
 		m2 := Storage_FileType_StorageFilePartial{}
+		m2.StorageFilePartial = &TLStorageFilePartial{}
 		m2.StorageFilePartial.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_storage_fileJpeg):
 		m2 := Storage_FileType_StorageFileJpeg{}
+		m2.StorageFileJpeg = &TLStorageFileJpeg{}
 		m2.StorageFileJpeg.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_storage_fileGif):
 		m2 := Storage_FileType_StorageFileGif{}
+		m2.StorageFileGif = &TLStorageFileGif{}
 		m2.StorageFileGif.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_storage_filePng):
 		m2 := Storage_FileType_StorageFilePng{}
+		m2.StorageFilePng = &TLStorageFilePng{}
 		m2.StorageFilePng.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_storage_filePdf):
 		m2 := Storage_FileType_StorageFilePdf{}
+		m2.StorageFilePdf = &TLStorageFilePdf{}
 		m2.StorageFilePdf.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_storage_fileMp3):
 		m2 := Storage_FileType_StorageFileMp3{}
+		m2.StorageFileMp3 = &TLStorageFileMp3{}
 		m2.StorageFileMp3.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_storage_fileMov):
 		m2 := Storage_FileType_StorageFileMov{}
+		m2.StorageFileMov = &TLStorageFileMov{}
 		m2.StorageFileMov.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_storage_fileMp4):
 		m2 := Storage_FileType_StorageFileMp4{}
+		m2.StorageFileMp4 = &TLStorageFileMp4{}
 		m2.StorageFileMp4.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_storage_fileWebp):
 		m2 := Storage_FileType_StorageFileWebp{}
+		m2.StorageFileWebp = &TLStorageFileWebp{}
 		m2.StorageFileWebp.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -2943,10 +3030,12 @@ func (m *FileLocation) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_fileLocationUnavailable):
 		m2 := FileLocation_FileLocationUnavailable{}
+		m2.FileLocationUnavailable = &TLFileLocationUnavailable{}
 		m2.FileLocationUnavailable.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_fileLocation):
 		m2 := FileLocation_FileLocation{}
+		m2.FileLocation = &TLFileLocation{}
 		m2.FileLocation.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -2991,10 +3080,12 @@ func (m *User) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_userEmpty):
 		m2 := User_UserEmpty{}
+		m2.UserEmpty = &TLUserEmpty{}
 		m2.UserEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_user):
 		m2 := User_User{}
+		m2.User = &TLUser{}
 		m2.User.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -3039,10 +3130,12 @@ func (m *UserProfilePhoto) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_userProfilePhotoEmpty):
 		m2 := UserProfilePhoto_UserProfilePhotoEmpty{}
+		m2.UserProfilePhotoEmpty = &TLUserProfilePhotoEmpty{}
 		m2.UserProfilePhotoEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_userProfilePhoto):
 		m2 := UserProfilePhoto_UserProfilePhoto{}
+		m2.UserProfilePhoto = &TLUserProfilePhoto{}
 		m2.UserProfilePhoto.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -3099,26 +3192,32 @@ func (m *UserStatus) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_userStatusEmpty):
 		m2 := UserStatus_UserStatusEmpty{}
+		m2.UserStatusEmpty = &TLUserStatusEmpty{}
 		m2.UserStatusEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_userStatusOnline):
 		m2 := UserStatus_UserStatusOnline{}
+		m2.UserStatusOnline = &TLUserStatusOnline{}
 		m2.UserStatusOnline.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_userStatusOffline):
 		m2 := UserStatus_UserStatusOffline{}
+		m2.UserStatusOffline = &TLUserStatusOffline{}
 		m2.UserStatusOffline.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_userStatusRecently):
 		m2 := UserStatus_UserStatusRecently{}
+		m2.UserStatusRecently = &TLUserStatusRecently{}
 		m2.UserStatusRecently.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_userStatusLastWeek):
 		m2 := UserStatus_UserStatusLastWeek{}
+		m2.UserStatusLastWeek = &TLUserStatusLastWeek{}
 		m2.UserStatusLastWeek.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_userStatusLastMonth):
 		m2 := UserStatus_UserStatusLastMonth{}
+		m2.UserStatusLastMonth = &TLUserStatusLastMonth{}
 		m2.UserStatusLastMonth.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -3200,22 +3299,27 @@ func (m *Chat) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_chatEmpty):
 		m2 := Chat_ChatEmpty{}
+		m2.ChatEmpty = &TLChatEmpty{}
 		m2.ChatEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_chat):
 		m2 := Chat_Chat{}
+		m2.Chat = &TLChat{}
 		m2.Chat.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_chatForbidden):
 		m2 := Chat_ChatForbidden{}
+		m2.ChatForbidden = &TLChatForbidden{}
 		m2.ChatForbidden.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channel):
 		m2 := Chat_Channel{}
+		m2.Channel = &TLChannel{}
 		m2.Channel.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelForbidden):
 		m2 := Chat_ChannelForbidden{}
+		m2.ChannelForbidden = &TLChannelForbidden{}
 		m2.ChannelForbidden.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -3281,10 +3385,12 @@ func (m *ChatFull) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_chatFull):
 		m2 := ChatFull_ChatFull{}
+		m2.ChatFull = &TLChatFull{}
 		m2.ChatFull.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelFull):
 		m2 := ChatFull_ChannelFull{}
+		m2.ChannelFull = &TLChannelFull{}
 		m2.ChannelFull.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -3332,14 +3438,17 @@ func (m *ChatParticipant) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_chatParticipant):
 		m2 := ChatParticipant_ChatParticipant{}
+		m2.ChatParticipant = &TLChatParticipant{}
 		m2.ChatParticipant.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_chatParticipantCreator):
 		m2 := ChatParticipant_ChatParticipantCreator{}
+		m2.ChatParticipantCreator = &TLChatParticipantCreator{}
 		m2.ChatParticipantCreator.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_chatParticipantAdmin):
 		m2 := ChatParticipant_ChatParticipantAdmin{}
+		m2.ChatParticipantAdmin = &TLChatParticipantAdmin{}
 		m2.ChatParticipantAdmin.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -3391,10 +3500,12 @@ func (m *ChatParticipants) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_chatParticipantsForbidden):
 		m2 := ChatParticipants_ChatParticipantsForbidden{}
+		m2.ChatParticipantsForbidden = &TLChatParticipantsForbidden{}
 		m2.ChatParticipantsForbidden.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_chatParticipants):
 		m2 := ChatParticipants_ChatParticipants{}
+		m2.ChatParticipants = &TLChatParticipants{}
 		m2.ChatParticipants.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -3439,10 +3550,12 @@ func (m *ChatPhoto) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_chatPhotoEmpty):
 		m2 := ChatPhoto_ChatPhotoEmpty{}
+		m2.ChatPhotoEmpty = &TLChatPhotoEmpty{}
 		m2.ChatPhotoEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_chatPhoto):
 		m2 := ChatPhoto_ChatPhoto{}
+		m2.ChatPhoto = &TLChatPhoto{}
 		m2.ChatPhoto.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -3490,14 +3603,17 @@ func (m *Message) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messageEmpty):
 		m2 := Message_MessageEmpty{}
+		m2.MessageEmpty = &TLMessageEmpty{}
 		m2.MessageEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_message):
 		m2 := Message_Message{}
+		m2.Message = &TLMessage{}
 		m2.Message.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageService):
 		m2 := Message_MessageService{}
+		m2.MessageService = &TLMessageService{}
 		m2.MessageService.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -3573,42 +3689,52 @@ func (m *MessageMedia) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messageMediaEmpty):
 		m2 := MessageMedia_MessageMediaEmpty{}
+		m2.MessageMediaEmpty = &TLMessageMediaEmpty{}
 		m2.MessageMediaEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageMediaPhoto):
 		m2 := MessageMedia_MessageMediaPhoto{}
+		m2.MessageMediaPhoto = &TLMessageMediaPhoto{}
 		m2.MessageMediaPhoto.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageMediaGeo):
 		m2 := MessageMedia_MessageMediaGeo{}
+		m2.MessageMediaGeo = &TLMessageMediaGeo{}
 		m2.MessageMediaGeo.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageMediaContact):
 		m2 := MessageMedia_MessageMediaContact{}
+		m2.MessageMediaContact = &TLMessageMediaContact{}
 		m2.MessageMediaContact.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageMediaUnsupported):
 		m2 := MessageMedia_MessageMediaUnsupported{}
+		m2.MessageMediaUnsupported = &TLMessageMediaUnsupported{}
 		m2.MessageMediaUnsupported.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageMediaDocument):
 		m2 := MessageMedia_MessageMediaDocument{}
+		m2.MessageMediaDocument = &TLMessageMediaDocument{}
 		m2.MessageMediaDocument.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageMediaWebPage):
 		m2 := MessageMedia_MessageMediaWebPage{}
+		m2.MessageMediaWebPage = &TLMessageMediaWebPage{}
 		m2.MessageMediaWebPage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageMediaVenue):
 		m2 := MessageMedia_MessageMediaVenue{}
+		m2.MessageMediaVenue = &TLMessageMediaVenue{}
 		m2.MessageMediaVenue.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageMediaGame):
 		m2 := MessageMedia_MessageMediaGame{}
+		m2.MessageMediaGame = &TLMessageMediaGame{}
 		m2.MessageMediaGame.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageMediaInvoice):
 		m2 := MessageMedia_MessageMediaInvoice{}
+		m2.MessageMediaInvoice = &TLMessageMediaInvoice{}
 		m2.MessageMediaInvoice.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -3757,74 +3883,92 @@ func (m *MessageAction) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messageActionEmpty):
 		m2 := MessageAction_MessageActionEmpty{}
+		m2.MessageActionEmpty = &TLMessageActionEmpty{}
 		m2.MessageActionEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionChatCreate):
 		m2 := MessageAction_MessageActionChatCreate{}
+		m2.MessageActionChatCreate = &TLMessageActionChatCreate{}
 		m2.MessageActionChatCreate.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionChatEditTitle):
 		m2 := MessageAction_MessageActionChatEditTitle{}
+		m2.MessageActionChatEditTitle = &TLMessageActionChatEditTitle{}
 		m2.MessageActionChatEditTitle.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionChatEditPhoto):
 		m2 := MessageAction_MessageActionChatEditPhoto{}
+		m2.MessageActionChatEditPhoto = &TLMessageActionChatEditPhoto{}
 		m2.MessageActionChatEditPhoto.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionChatDeletePhoto):
 		m2 := MessageAction_MessageActionChatDeletePhoto{}
+		m2.MessageActionChatDeletePhoto = &TLMessageActionChatDeletePhoto{}
 		m2.MessageActionChatDeletePhoto.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionChatAddUser):
 		m2 := MessageAction_MessageActionChatAddUser{}
+		m2.MessageActionChatAddUser = &TLMessageActionChatAddUser{}
 		m2.MessageActionChatAddUser.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionChatDeleteUser):
 		m2 := MessageAction_MessageActionChatDeleteUser{}
+		m2.MessageActionChatDeleteUser = &TLMessageActionChatDeleteUser{}
 		m2.MessageActionChatDeleteUser.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionChatJoinedByLink):
 		m2 := MessageAction_MessageActionChatJoinedByLink{}
+		m2.MessageActionChatJoinedByLink = &TLMessageActionChatJoinedByLink{}
 		m2.MessageActionChatJoinedByLink.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionChannelCreate):
 		m2 := MessageAction_MessageActionChannelCreate{}
+		m2.MessageActionChannelCreate = &TLMessageActionChannelCreate{}
 		m2.MessageActionChannelCreate.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionChatMigrateTo):
 		m2 := MessageAction_MessageActionChatMigrateTo{}
+		m2.MessageActionChatMigrateTo = &TLMessageActionChatMigrateTo{}
 		m2.MessageActionChatMigrateTo.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionChannelMigrateFrom):
 		m2 := MessageAction_MessageActionChannelMigrateFrom{}
+		m2.MessageActionChannelMigrateFrom = &TLMessageActionChannelMigrateFrom{}
 		m2.MessageActionChannelMigrateFrom.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionPinMessage):
 		m2 := MessageAction_MessageActionPinMessage{}
+		m2.MessageActionPinMessage = &TLMessageActionPinMessage{}
 		m2.MessageActionPinMessage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionHistoryClear):
 		m2 := MessageAction_MessageActionHistoryClear{}
+		m2.MessageActionHistoryClear = &TLMessageActionHistoryClear{}
 		m2.MessageActionHistoryClear.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionGameScore):
 		m2 := MessageAction_MessageActionGameScore{}
+		m2.MessageActionGameScore = &TLMessageActionGameScore{}
 		m2.MessageActionGameScore.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionPaymentSentMe):
 		m2 := MessageAction_MessageActionPaymentSentMe{}
+		m2.MessageActionPaymentSentMe = &TLMessageActionPaymentSentMe{}
 		m2.MessageActionPaymentSentMe.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionPaymentSent):
 		m2 := MessageAction_MessageActionPaymentSent{}
+		m2.MessageActionPaymentSent = &TLMessageActionPaymentSent{}
 		m2.MessageActionPaymentSent.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionPhoneCall):
 		m2 := MessageAction_MessageActionPhoneCall{}
+		m2.MessageActionPhoneCall = &TLMessageActionPhoneCall{}
 		m2.MessageActionPhoneCall.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageActionScreenshotTaken):
 		m2 := MessageAction_MessageActionScreenshotTaken{}
+		m2.MessageActionScreenshotTaken = &TLMessageActionScreenshotTaken{}
 		m2.MessageActionScreenshotTaken.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -3978,6 +4122,7 @@ func (m *Dialog) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_dialog):
 		m2 := Dialog_Dialog{}
+		m2.Dialog = &TLDialog{}
 		m2.Dialog.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4015,10 +4160,12 @@ func (m *Photo) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_photoEmpty):
 		m2 := Photo_PhotoEmpty{}
+		m2.PhotoEmpty = &TLPhotoEmpty{}
 		m2.PhotoEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_photo):
 		m2 := Photo_Photo{}
+		m2.Photo = &TLPhoto{}
 		m2.Photo.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4066,14 +4213,17 @@ func (m *PhotoSize) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_photoSizeEmpty):
 		m2 := PhotoSize_PhotoSizeEmpty{}
+		m2.PhotoSizeEmpty = &TLPhotoSizeEmpty{}
 		m2.PhotoSizeEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_photoSize):
 		m2 := PhotoSize_PhotoSize{}
+		m2.PhotoSize = &TLPhotoSize{}
 		m2.PhotoSize.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_photoCachedSize):
 		m2 := PhotoSize_PhotoCachedSize{}
+		m2.PhotoCachedSize = &TLPhotoCachedSize{}
 		m2.PhotoCachedSize.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4125,10 +4275,12 @@ func (m *GeoPoint) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_geoPointEmpty):
 		m2 := GeoPoint_GeoPointEmpty{}
+		m2.GeoPointEmpty = &TLGeoPointEmpty{}
 		m2.GeoPointEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_geoPoint):
 		m2 := GeoPoint_GeoPoint{}
+		m2.GeoPoint = &TLGeoPoint{}
 		m2.GeoPoint.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4170,6 +4322,7 @@ func (m *Auth_CheckedPhone) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_auth_checkedPhone):
 		m2 := Auth_CheckedPhone_AuthCheckedPhone{}
+		m2.AuthCheckedPhone = &TLAuthCheckedPhone{}
 		m2.AuthCheckedPhone.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4204,6 +4357,7 @@ func (m *Auth_SentCode) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_auth_sentCode):
 		m2 := Auth_SentCode_AuthSentCode{}
+		m2.AuthSentCode = &TLAuthSentCode{}
 		m2.AuthSentCode.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4238,6 +4392,7 @@ func (m *Auth_Authorization) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_auth_authorization):
 		m2 := Auth_Authorization_AuthAuthorization{}
+		m2.AuthAuthorization = &TLAuthAuthorization{}
 		m2.AuthAuthorization.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4272,6 +4427,7 @@ func (m *Auth_ExportedAuthorization) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_auth_exportedAuthorization):
 		m2 := Auth_ExportedAuthorization_AuthExportedAuthorization{}
+		m2.AuthExportedAuthorization = &TLAuthExportedAuthorization{}
 		m2.AuthExportedAuthorization.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4315,18 +4471,22 @@ func (m *InputNotifyPeer) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputNotifyPeer):
 		m2 := InputNotifyPeer_InputNotifyPeer{}
+		m2.InputNotifyPeer = &TLInputNotifyPeer{}
 		m2.InputNotifyPeer.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputNotifyUsers):
 		m2 := InputNotifyPeer_InputNotifyUsers{}
+		m2.InputNotifyUsers = &TLInputNotifyUsers{}
 		m2.InputNotifyUsers.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputNotifyChats):
 		m2 := InputNotifyPeer_InputNotifyChats{}
+		m2.InputNotifyChats = &TLInputNotifyChats{}
 		m2.InputNotifyChats.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputNotifyAll):
 		m2 := InputNotifyPeer_InputNotifyAll{}
+		m2.InputNotifyAll = &TLInputNotifyAll{}
 		m2.InputNotifyAll.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4385,10 +4545,12 @@ func (m *InputPeerNotifyEvents) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputPeerNotifyEventsEmpty):
 		m2 := InputPeerNotifyEvents_InputPeerNotifyEventsEmpty{}
+		m2.InputPeerNotifyEventsEmpty = &TLInputPeerNotifyEventsEmpty{}
 		m2.InputPeerNotifyEventsEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputPeerNotifyEventsAll):
 		m2 := InputPeerNotifyEvents_InputPeerNotifyEventsAll{}
+		m2.InputPeerNotifyEventsAll = &TLInputPeerNotifyEventsAll{}
 		m2.InputPeerNotifyEventsAll.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4430,6 +4592,7 @@ func (m *InputPeerNotifySettings) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputPeerNotifySettings):
 		m2 := InputPeerNotifySettings_InputPeerNotifySettings{}
+		m2.InputPeerNotifySettings = &TLInputPeerNotifySettings{}
 		m2.InputPeerNotifySettings.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4467,10 +4630,12 @@ func (m *PeerNotifyEvents) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_peerNotifyEventsEmpty):
 		m2 := PeerNotifyEvents_PeerNotifyEventsEmpty{}
+		m2.PeerNotifyEventsEmpty = &TLPeerNotifyEventsEmpty{}
 		m2.PeerNotifyEventsEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_peerNotifyEventsAll):
 		m2 := PeerNotifyEvents_PeerNotifyEventsAll{}
+		m2.PeerNotifyEventsAll = &TLPeerNotifyEventsAll{}
 		m2.PeerNotifyEventsAll.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4515,10 +4680,12 @@ func (m *PeerNotifySettings) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_peerNotifySettingsEmpty):
 		m2 := PeerNotifySettings_PeerNotifySettingsEmpty{}
+		m2.PeerNotifySettingsEmpty = &TLPeerNotifySettingsEmpty{}
 		m2.PeerNotifySettingsEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_peerNotifySettings):
 		m2 := PeerNotifySettings_PeerNotifySettings{}
+		m2.PeerNotifySettings = &TLPeerNotifySettings{}
 		m2.PeerNotifySettings.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4560,6 +4727,7 @@ func (m *PeerSettings) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_peerSettings):
 		m2 := PeerSettings_PeerSettings{}
+		m2.PeerSettings = &TLPeerSettings{}
 		m2.PeerSettings.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4597,10 +4765,12 @@ func (m *WallPaper) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_wallPaper):
 		m2 := WallPaper_WallPaper{}
+		m2.WallPaper = &TLWallPaper{}
 		m2.WallPaper.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_wallPaperSolid):
 		m2 := WallPaper_WallPaperSolid{}
+		m2.WallPaperSolid = &TLWallPaperSolid{}
 		m2.WallPaperSolid.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4651,18 +4821,22 @@ func (m *ReportReason) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputReportReasonSpam):
 		m2 := ReportReason_InputReportReasonSpam{}
+		m2.InputReportReasonSpam = &TLInputReportReasonSpam{}
 		m2.InputReportReasonSpam.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputReportReasonViolence):
 		m2 := ReportReason_InputReportReasonViolence{}
+		m2.InputReportReasonViolence = &TLInputReportReasonViolence{}
 		m2.InputReportReasonViolence.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputReportReasonPornography):
 		m2 := ReportReason_InputReportReasonPornography{}
+		m2.InputReportReasonPornography = &TLInputReportReasonPornography{}
 		m2.InputReportReasonPornography.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputReportReasonOther):
 		m2 := ReportReason_InputReportReasonOther{}
+		m2.InputReportReasonOther = &TLInputReportReasonOther{}
 		m2.InputReportReasonOther.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4718,6 +4892,7 @@ func (m *UserFull) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_userFull):
 		m2 := UserFull_UserFull{}
+		m2.UserFull = &TLUserFull{}
 		m2.UserFull.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4752,6 +4927,7 @@ func (m *Contact) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_contact):
 		m2 := Contact_Contact{}
+		m2.Contact = &TLContact{}
 		m2.Contact.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4786,6 +4962,7 @@ func (m *ImportedContact) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_importedContact):
 		m2 := ImportedContact_ImportedContact{}
+		m2.ImportedContact = &TLImportedContact{}
 		m2.ImportedContact.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4820,6 +4997,7 @@ func (m *ContactBlocked) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_contactBlocked):
 		m2 := ContactBlocked_ContactBlocked{}
+		m2.ContactBlocked = &TLContactBlocked{}
 		m2.ContactBlocked.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4854,6 +5032,7 @@ func (m *ContactStatus) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_contactStatus):
 		m2 := ContactStatus_ContactStatus{}
+		m2.ContactStatus = &TLContactStatus{}
 		m2.ContactStatus.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4888,6 +5067,7 @@ func (m *Contacts_Link) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_contacts_link):
 		m2 := Contacts_Link_ContactsLink{}
+		m2.ContactsLink = &TLContactsLink{}
 		m2.ContactsLink.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4925,10 +5105,12 @@ func (m *Contacts_Contacts) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_contacts_contactsNotModified):
 		m2 := Contacts_Contacts_ContactsContactsNotModified{}
+		m2.ContactsContactsNotModified = &TLContactsContactsNotModified{}
 		m2.ContactsContactsNotModified.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_contacts_contacts):
 		m2 := Contacts_Contacts_ContactsContacts{}
+		m2.ContactsContacts = &TLContactsContacts{}
 		m2.ContactsContacts.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -4970,6 +5152,7 @@ func (m *Contacts_ImportedContacts) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_contacts_importedContacts):
 		m2 := Contacts_ImportedContacts_ContactsImportedContacts{}
+		m2.ContactsImportedContacts = &TLContactsImportedContacts{}
 		m2.ContactsImportedContacts.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -5007,10 +5190,12 @@ func (m *Contacts_Blocked) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_contacts_blocked):
 		m2 := Contacts_Blocked_ContactsBlocked{}
+		m2.ContactsBlocked = &TLContactsBlocked{}
 		m2.ContactsBlocked.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_contacts_blockedSlice):
 		m2 := Contacts_Blocked_ContactsBlockedSlice{}
+		m2.ContactsBlockedSlice = &TLContactsBlockedSlice{}
 		m2.ContactsBlockedSlice.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -5055,10 +5240,12 @@ func (m *Messages_Dialogs) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_dialogs):
 		m2 := Messages_Dialogs_MessagesDialogs{}
+		m2.MessagesDialogs = &TLMessagesDialogs{}
 		m2.MessagesDialogs.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messages_dialogsSlice):
 		m2 := Messages_Dialogs_MessagesDialogsSlice{}
+		m2.MessagesDialogsSlice = &TLMessagesDialogsSlice{}
 		m2.MessagesDialogsSlice.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -5106,14 +5293,17 @@ func (m *Messages_Messages) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_messages):
 		m2 := Messages_Messages_MessagesMessages{}
+		m2.MessagesMessages = &TLMessagesMessages{}
 		m2.MessagesMessages.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messages_messagesSlice):
 		m2 := Messages_Messages_MessagesMessagesSlice{}
+		m2.MessagesMessagesSlice = &TLMessagesMessagesSlice{}
 		m2.MessagesMessagesSlice.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messages_channelMessages):
 		m2 := Messages_Messages_MessagesChannelMessages{}
+		m2.MessagesChannelMessages = &TLMessagesChannelMessages{}
 		m2.MessagesChannelMessages.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -5165,10 +5355,12 @@ func (m *Messages_Chats) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_chats):
 		m2 := Messages_Chats_MessagesChats{}
+		m2.MessagesChats = &TLMessagesChats{}
 		m2.MessagesChats.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messages_chatsSlice):
 		m2 := Messages_Chats_MessagesChatsSlice{}
+		m2.MessagesChatsSlice = &TLMessagesChatsSlice{}
 		m2.MessagesChatsSlice.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -5210,6 +5402,7 @@ func (m *Messages_ChatFull) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_chatFull):
 		m2 := Messages_ChatFull_MessagesChatFull{}
+		m2.MessagesChatFull = &TLMessagesChatFull{}
 		m2.MessagesChatFull.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -5244,6 +5437,7 @@ func (m *Messages_AffectedHistory) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_affectedHistory):
 		m2 := Messages_AffectedHistory_MessagesAffectedHistory{}
+		m2.MessagesAffectedHistory = &TLMessagesAffectedHistory{}
 		m2.MessagesAffectedHistory.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -5320,62 +5514,77 @@ func (m *MessagesFilter) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputMessagesFilterEmpty):
 		m2 := MessagesFilter_InputMessagesFilterEmpty{}
+		m2.InputMessagesFilterEmpty = &TLInputMessagesFilterEmpty{}
 		m2.InputMessagesFilterEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMessagesFilterPhotos):
 		m2 := MessagesFilter_InputMessagesFilterPhotos{}
+		m2.InputMessagesFilterPhotos = &TLInputMessagesFilterPhotos{}
 		m2.InputMessagesFilterPhotos.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMessagesFilterVideo):
 		m2 := MessagesFilter_InputMessagesFilterVideo{}
+		m2.InputMessagesFilterVideo = &TLInputMessagesFilterVideo{}
 		m2.InputMessagesFilterVideo.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMessagesFilterPhotoVideo):
 		m2 := MessagesFilter_InputMessagesFilterPhotoVideo{}
+		m2.InputMessagesFilterPhotoVideo = &TLInputMessagesFilterPhotoVideo{}
 		m2.InputMessagesFilterPhotoVideo.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMessagesFilterPhotoVideoDocuments):
 		m2 := MessagesFilter_InputMessagesFilterPhotoVideoDocuments{}
+		m2.InputMessagesFilterPhotoVideoDocuments = &TLInputMessagesFilterPhotoVideoDocuments{}
 		m2.InputMessagesFilterPhotoVideoDocuments.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMessagesFilterDocument):
 		m2 := MessagesFilter_InputMessagesFilterDocument{}
+		m2.InputMessagesFilterDocument = &TLInputMessagesFilterDocument{}
 		m2.InputMessagesFilterDocument.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMessagesFilterUrl):
 		m2 := MessagesFilter_InputMessagesFilterUrl{}
+		m2.InputMessagesFilterUrl = &TLInputMessagesFilterUrl{}
 		m2.InputMessagesFilterUrl.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMessagesFilterGif):
 		m2 := MessagesFilter_InputMessagesFilterGif{}
+		m2.InputMessagesFilterGif = &TLInputMessagesFilterGif{}
 		m2.InputMessagesFilterGif.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMessagesFilterVoice):
 		m2 := MessagesFilter_InputMessagesFilterVoice{}
+		m2.InputMessagesFilterVoice = &TLInputMessagesFilterVoice{}
 		m2.InputMessagesFilterVoice.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMessagesFilterMusic):
 		m2 := MessagesFilter_InputMessagesFilterMusic{}
+		m2.InputMessagesFilterMusic = &TLInputMessagesFilterMusic{}
 		m2.InputMessagesFilterMusic.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMessagesFilterChatPhotos):
 		m2 := MessagesFilter_InputMessagesFilterChatPhotos{}
+		m2.InputMessagesFilterChatPhotos = &TLInputMessagesFilterChatPhotos{}
 		m2.InputMessagesFilterChatPhotos.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMessagesFilterPhoneCalls):
 		m2 := MessagesFilter_InputMessagesFilterPhoneCalls{}
+		m2.InputMessagesFilterPhoneCalls = &TLInputMessagesFilterPhoneCalls{}
 		m2.InputMessagesFilterPhoneCalls.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMessagesFilterRoundVoice):
 		m2 := MessagesFilter_InputMessagesFilterRoundVoice{}
+		m2.InputMessagesFilterRoundVoice = &TLInputMessagesFilterRoundVoice{}
 		m2.InputMessagesFilterRoundVoice.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMessagesFilterRoundVideo):
 		m2 := MessagesFilter_InputMessagesFilterRoundVideo{}
+		m2.InputMessagesFilterRoundVideo = &TLInputMessagesFilterRoundVideo{}
 		m2.InputMessagesFilterRoundVideo.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMessagesFilterMyMentions):
 		m2 := MessagesFilter_InputMessagesFilterMyMentions{}
+		m2.InputMessagesFilterMyMentions = &TLInputMessagesFilterMyMentions{}
 		m2.InputMessagesFilterMyMentions.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -5700,262 +5909,327 @@ func (m *Update) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_updateNewMessage):
 		m2 := Update_UpdateNewMessage{}
+		m2.UpdateNewMessage = &TLUpdateNewMessage{}
 		m2.UpdateNewMessage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateMessageID):
 		m2 := Update_UpdateMessageID{}
+		m2.UpdateMessageID = &TLUpdateMessageID{}
 		m2.UpdateMessageID.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateDeleteMessages):
 		m2 := Update_UpdateDeleteMessages{}
+		m2.UpdateDeleteMessages = &TLUpdateDeleteMessages{}
 		m2.UpdateDeleteMessages.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateUserTyping):
 		m2 := Update_UpdateUserTyping{}
+		m2.UpdateUserTyping = &TLUpdateUserTyping{}
 		m2.UpdateUserTyping.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateChatUserTyping):
 		m2 := Update_UpdateChatUserTyping{}
+		m2.UpdateChatUserTyping = &TLUpdateChatUserTyping{}
 		m2.UpdateChatUserTyping.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateChatParticipants):
 		m2 := Update_UpdateChatParticipants{}
+		m2.UpdateChatParticipants = &TLUpdateChatParticipants{}
 		m2.UpdateChatParticipants.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateUserStatus):
 		m2 := Update_UpdateUserStatus{}
+		m2.UpdateUserStatus = &TLUpdateUserStatus{}
 		m2.UpdateUserStatus.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateUserName):
 		m2 := Update_UpdateUserName{}
+		m2.UpdateUserName = &TLUpdateUserName{}
 		m2.UpdateUserName.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateUserPhoto):
 		m2 := Update_UpdateUserPhoto{}
+		m2.UpdateUserPhoto = &TLUpdateUserPhoto{}
 		m2.UpdateUserPhoto.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateContactRegistered):
 		m2 := Update_UpdateContactRegistered{}
+		m2.UpdateContactRegistered = &TLUpdateContactRegistered{}
 		m2.UpdateContactRegistered.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateContactLink):
 		m2 := Update_UpdateContactLink{}
+		m2.UpdateContactLink = &TLUpdateContactLink{}
 		m2.UpdateContactLink.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateNewEncryptedMessage):
 		m2 := Update_UpdateNewEncryptedMessage{}
+		m2.UpdateNewEncryptedMessage = &TLUpdateNewEncryptedMessage{}
 		m2.UpdateNewEncryptedMessage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateEncryptedChatTyping):
 		m2 := Update_UpdateEncryptedChatTyping{}
+		m2.UpdateEncryptedChatTyping = &TLUpdateEncryptedChatTyping{}
 		m2.UpdateEncryptedChatTyping.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateEncryption):
 		m2 := Update_UpdateEncryption{}
+		m2.UpdateEncryption = &TLUpdateEncryption{}
 		m2.UpdateEncryption.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateEncryptedMessagesRead):
 		m2 := Update_UpdateEncryptedMessagesRead{}
+		m2.UpdateEncryptedMessagesRead = &TLUpdateEncryptedMessagesRead{}
 		m2.UpdateEncryptedMessagesRead.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateChatParticipantAdd):
 		m2 := Update_UpdateChatParticipantAdd{}
+		m2.UpdateChatParticipantAdd = &TLUpdateChatParticipantAdd{}
 		m2.UpdateChatParticipantAdd.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateChatParticipantDelete):
 		m2 := Update_UpdateChatParticipantDelete{}
+		m2.UpdateChatParticipantDelete = &TLUpdateChatParticipantDelete{}
 		m2.UpdateChatParticipantDelete.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateDcOptions):
 		m2 := Update_UpdateDcOptions{}
+		m2.UpdateDcOptions = &TLUpdateDcOptions{}
 		m2.UpdateDcOptions.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateUserBlocked):
 		m2 := Update_UpdateUserBlocked{}
+		m2.UpdateUserBlocked = &TLUpdateUserBlocked{}
 		m2.UpdateUserBlocked.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateNotifySettings):
 		m2 := Update_UpdateNotifySettings{}
+		m2.UpdateNotifySettings = &TLUpdateNotifySettings{}
 		m2.UpdateNotifySettings.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateServiceNotification):
 		m2 := Update_UpdateServiceNotification{}
+		m2.UpdateServiceNotification = &TLUpdateServiceNotification{}
 		m2.UpdateServiceNotification.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updatePrivacy):
 		m2 := Update_UpdatePrivacy{}
+		m2.UpdatePrivacy = &TLUpdatePrivacy{}
 		m2.UpdatePrivacy.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateUserPhone):
 		m2 := Update_UpdateUserPhone{}
+		m2.UpdateUserPhone = &TLUpdateUserPhone{}
 		m2.UpdateUserPhone.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateReadHistoryInbox):
 		m2 := Update_UpdateReadHistoryInbox{}
+		m2.UpdateReadHistoryInbox = &TLUpdateReadHistoryInbox{}
 		m2.UpdateReadHistoryInbox.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateReadHistoryOutbox):
 		m2 := Update_UpdateReadHistoryOutbox{}
+		m2.UpdateReadHistoryOutbox = &TLUpdateReadHistoryOutbox{}
 		m2.UpdateReadHistoryOutbox.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateWebPage):
 		m2 := Update_UpdateWebPage{}
+		m2.UpdateWebPage = &TLUpdateWebPage{}
 		m2.UpdateWebPage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateReadMessagesContents):
 		m2 := Update_UpdateReadMessagesContents{}
+		m2.UpdateReadMessagesContents = &TLUpdateReadMessagesContents{}
 		m2.UpdateReadMessagesContents.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateChannelTooLong):
 		m2 := Update_UpdateChannelTooLong{}
+		m2.UpdateChannelTooLong = &TLUpdateChannelTooLong{}
 		m2.UpdateChannelTooLong.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateChannel):
 		m2 := Update_UpdateChannel{}
+		m2.UpdateChannel = &TLUpdateChannel{}
 		m2.UpdateChannel.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateNewChannelMessage):
 		m2 := Update_UpdateNewChannelMessage{}
+		m2.UpdateNewChannelMessage = &TLUpdateNewChannelMessage{}
 		m2.UpdateNewChannelMessage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateReadChannelInbox):
 		m2 := Update_UpdateReadChannelInbox{}
+		m2.UpdateReadChannelInbox = &TLUpdateReadChannelInbox{}
 		m2.UpdateReadChannelInbox.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateDeleteChannelMessages):
 		m2 := Update_UpdateDeleteChannelMessages{}
+		m2.UpdateDeleteChannelMessages = &TLUpdateDeleteChannelMessages{}
 		m2.UpdateDeleteChannelMessages.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateChannelMessageViews):
 		m2 := Update_UpdateChannelMessageViews{}
+		m2.UpdateChannelMessageViews = &TLUpdateChannelMessageViews{}
 		m2.UpdateChannelMessageViews.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateChatAdmins):
 		m2 := Update_UpdateChatAdmins{}
+		m2.UpdateChatAdmins = &TLUpdateChatAdmins{}
 		m2.UpdateChatAdmins.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateChatParticipantAdmin):
 		m2 := Update_UpdateChatParticipantAdmin{}
+		m2.UpdateChatParticipantAdmin = &TLUpdateChatParticipantAdmin{}
 		m2.UpdateChatParticipantAdmin.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateNewStickerSet):
 		m2 := Update_UpdateNewStickerSet{}
+		m2.UpdateNewStickerSet = &TLUpdateNewStickerSet{}
 		m2.UpdateNewStickerSet.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateStickerSetsOrder):
 		m2 := Update_UpdateStickerSetsOrder{}
+		m2.UpdateStickerSetsOrder = &TLUpdateStickerSetsOrder{}
 		m2.UpdateStickerSetsOrder.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateStickerSets):
 		m2 := Update_UpdateStickerSets{}
+		m2.UpdateStickerSets = &TLUpdateStickerSets{}
 		m2.UpdateStickerSets.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateSavedGifs):
 		m2 := Update_UpdateSavedGifs{}
+		m2.UpdateSavedGifs = &TLUpdateSavedGifs{}
 		m2.UpdateSavedGifs.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateBotInlineQuery):
 		m2 := Update_UpdateBotInlineQuery{}
+		m2.UpdateBotInlineQuery = &TLUpdateBotInlineQuery{}
 		m2.UpdateBotInlineQuery.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateBotInlineSend):
 		m2 := Update_UpdateBotInlineSend{}
+		m2.UpdateBotInlineSend = &TLUpdateBotInlineSend{}
 		m2.UpdateBotInlineSend.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateEditChannelMessage):
 		m2 := Update_UpdateEditChannelMessage{}
+		m2.UpdateEditChannelMessage = &TLUpdateEditChannelMessage{}
 		m2.UpdateEditChannelMessage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateChannelPinnedMessage):
 		m2 := Update_UpdateChannelPinnedMessage{}
+		m2.UpdateChannelPinnedMessage = &TLUpdateChannelPinnedMessage{}
 		m2.UpdateChannelPinnedMessage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateBotCallbackQuery):
 		m2 := Update_UpdateBotCallbackQuery{}
+		m2.UpdateBotCallbackQuery = &TLUpdateBotCallbackQuery{}
 		m2.UpdateBotCallbackQuery.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateEditMessage):
 		m2 := Update_UpdateEditMessage{}
+		m2.UpdateEditMessage = &TLUpdateEditMessage{}
 		m2.UpdateEditMessage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateInlineBotCallbackQuery):
 		m2 := Update_UpdateInlineBotCallbackQuery{}
+		m2.UpdateInlineBotCallbackQuery = &TLUpdateInlineBotCallbackQuery{}
 		m2.UpdateInlineBotCallbackQuery.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateReadChannelOutbox):
 		m2 := Update_UpdateReadChannelOutbox{}
+		m2.UpdateReadChannelOutbox = &TLUpdateReadChannelOutbox{}
 		m2.UpdateReadChannelOutbox.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateDraftMessage):
 		m2 := Update_UpdateDraftMessage{}
+		m2.UpdateDraftMessage = &TLUpdateDraftMessage{}
 		m2.UpdateDraftMessage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateReadFeaturedStickers):
 		m2 := Update_UpdateReadFeaturedStickers{}
+		m2.UpdateReadFeaturedStickers = &TLUpdateReadFeaturedStickers{}
 		m2.UpdateReadFeaturedStickers.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateRecentStickers):
 		m2 := Update_UpdateRecentStickers{}
+		m2.UpdateRecentStickers = &TLUpdateRecentStickers{}
 		m2.UpdateRecentStickers.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateConfig):
 		m2 := Update_UpdateConfig{}
+		m2.UpdateConfig = &TLUpdateConfig{}
 		m2.UpdateConfig.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updatePtsChanged):
 		m2 := Update_UpdatePtsChanged{}
+		m2.UpdatePtsChanged = &TLUpdatePtsChanged{}
 		m2.UpdatePtsChanged.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateChannelWebPage):
 		m2 := Update_UpdateChannelWebPage{}
+		m2.UpdateChannelWebPage = &TLUpdateChannelWebPage{}
 		m2.UpdateChannelWebPage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateDialogPinned):
 		m2 := Update_UpdateDialogPinned{}
+		m2.UpdateDialogPinned = &TLUpdateDialogPinned{}
 		m2.UpdateDialogPinned.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updatePinnedDialogs):
 		m2 := Update_UpdatePinnedDialogs{}
+		m2.UpdatePinnedDialogs = &TLUpdatePinnedDialogs{}
 		m2.UpdatePinnedDialogs.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateBotWebhookJSON):
 		m2 := Update_UpdateBotWebhookJSON{}
+		m2.UpdateBotWebhookJSON = &TLUpdateBotWebhookJSON{}
 		m2.UpdateBotWebhookJSON.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateBotWebhookJSONQuery):
 		m2 := Update_UpdateBotWebhookJSONQuery{}
+		m2.UpdateBotWebhookJSONQuery = &TLUpdateBotWebhookJSONQuery{}
 		m2.UpdateBotWebhookJSONQuery.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateBotShippingQuery):
 		m2 := Update_UpdateBotShippingQuery{}
+		m2.UpdateBotShippingQuery = &TLUpdateBotShippingQuery{}
 		m2.UpdateBotShippingQuery.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateBotPrecheckoutQuery):
 		m2 := Update_UpdateBotPrecheckoutQuery{}
+		m2.UpdateBotPrecheckoutQuery = &TLUpdateBotPrecheckoutQuery{}
 		m2.UpdateBotPrecheckoutQuery.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updatePhoneCall):
 		m2 := Update_UpdatePhoneCall{}
+		m2.UpdatePhoneCall = &TLUpdatePhoneCall{}
 		m2.UpdatePhoneCall.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateLangPackTooLong):
 		m2 := Update_UpdateLangPackTooLong{}
+		m2.UpdateLangPackTooLong = &TLUpdateLangPackTooLong{}
 		m2.UpdateLangPackTooLong.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateLangPack):
 		m2 := Update_UpdateLangPack{}
+		m2.UpdateLangPack = &TLUpdateLangPack{}
 		m2.UpdateLangPack.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateFavedStickers):
 		m2 := Update_UpdateFavedStickers{}
+		m2.UpdateFavedStickers = &TLUpdateFavedStickers{}
 		m2.UpdateFavedStickers.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateChannelReadMessagesContents):
 		m2 := Update_UpdateChannelReadMessagesContents{}
+		m2.UpdateChannelReadMessagesContents = &TLUpdateChannelReadMessagesContents{}
 		m2.UpdateChannelReadMessagesContents.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateContactsReset):
 		m2 := Update_UpdateContactsReset{}
+		m2.UpdateContactsReset = &TLUpdateContactsReset{}
 		m2.UpdateContactsReset.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -6438,6 +6712,7 @@ func (m *Updates_State) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_updates_state):
 		m2 := Updates_State_UpdatesState{}
+		m2.UpdatesState = &TLUpdatesState{}
 		m2.UpdatesState.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -6481,18 +6756,22 @@ func (m *Updates_Difference) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_updates_differenceEmpty):
 		m2 := Updates_Difference_UpdatesDifferenceEmpty{}
+		m2.UpdatesDifferenceEmpty = &TLUpdatesDifferenceEmpty{}
 		m2.UpdatesDifferenceEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updates_difference):
 		m2 := Updates_Difference_UpdatesDifference{}
+		m2.UpdatesDifference = &TLUpdatesDifference{}
 		m2.UpdatesDifference.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updates_differenceSlice):
 		m2 := Updates_Difference_UpdatesDifferenceSlice{}
+		m2.UpdatesDifferenceSlice = &TLUpdatesDifferenceSlice{}
 		m2.UpdatesDifferenceSlice.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updates_differenceTooLong):
 		m2 := Updates_Difference_UpdatesDifferenceTooLong{}
+		m2.UpdatesDifferenceTooLong = &TLUpdatesDifferenceTooLong{}
 		m2.UpdatesDifferenceTooLong.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -6566,30 +6845,37 @@ func (m *Updates) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_updatesTooLong):
 		m2 := Updates_UpdatesTooLong{}
+		m2.UpdatesTooLong = &TLUpdatesTooLong{}
 		m2.UpdatesTooLong.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateShortMessage):
 		m2 := Updates_UpdateShortMessage{}
+		m2.UpdateShortMessage = &TLUpdateShortMessage{}
 		m2.UpdateShortMessage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateShortChatMessage):
 		m2 := Updates_UpdateShortChatMessage{}
+		m2.UpdateShortChatMessage = &TLUpdateShortChatMessage{}
 		m2.UpdateShortChatMessage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateShort):
 		m2 := Updates_UpdateShort{}
+		m2.UpdateShort = &TLUpdateShort{}
 		m2.UpdateShort.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updatesCombined):
 		m2 := Updates_UpdatesCombined{}
+		m2.UpdatesCombined = &TLUpdatesCombined{}
 		m2.UpdatesCombined.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updates):
 		m2 := Updates_Updates{}
+		m2.Updates = &TLUpdates{}
 		m2.Updates.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updateShortSentMessage):
 		m2 := Updates_UpdateShortSentMessage{}
+		m2.UpdateShortSentMessage = &TLUpdateShortSentMessage{}
 		m2.UpdateShortSentMessage.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -6669,10 +6955,12 @@ func (m *Photos_Photos) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_photos_photos):
 		m2 := Photos_Photos_PhotosPhotos{}
+		m2.PhotosPhotos = &TLPhotosPhotos{}
 		m2.PhotosPhotos.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_photos_photosSlice):
 		m2 := Photos_Photos_PhotosPhotosSlice{}
+		m2.PhotosPhotosSlice = &TLPhotosPhotosSlice{}
 		m2.PhotosPhotosSlice.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -6714,6 +7002,7 @@ func (m *Photos_Photo) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_photos_photo):
 		m2 := Photos_Photo_PhotosPhoto{}
+		m2.PhotosPhoto = &TLPhotosPhoto{}
 		m2.PhotosPhoto.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -6751,10 +7040,12 @@ func (m *Upload_File) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_upload_file):
 		m2 := Upload_File_UploadFile{}
+		m2.UploadFile = &TLUploadFile{}
 		m2.UploadFile.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_upload_fileCdnRedirect):
 		m2 := Upload_File_UploadFileCdnRedirect{}
+		m2.UploadFileCdnRedirect = &TLUploadFileCdnRedirect{}
 		m2.UploadFileCdnRedirect.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -6796,6 +7087,7 @@ func (m *DcOption) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_dcOption):
 		m2 := DcOption_DcOption{}
+		m2.DcOption = &TLDcOption{}
 		m2.DcOption.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -6830,6 +7122,7 @@ func (m *Config) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_config):
 		m2 := Config_Config{}
+		m2.Config = &TLConfig{}
 		m2.Config.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -6864,6 +7157,7 @@ func (m *NearestDc) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_nearestDc):
 		m2 := NearestDc_NearestDc{}
+		m2.NearestDc = &TLNearestDc{}
 		m2.NearestDc.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -6901,10 +7195,12 @@ func (m *Help_AppUpdate) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_help_appUpdate):
 		m2 := Help_AppUpdate_HelpAppUpdate{}
+		m2.HelpAppUpdate = &TLHelpAppUpdate{}
 		m2.HelpAppUpdate.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_help_noAppUpdate):
 		m2 := Help_AppUpdate_HelpNoAppUpdate{}
+		m2.HelpNoAppUpdate = &TLHelpNoAppUpdate{}
 		m2.HelpNoAppUpdate.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -6946,6 +7242,7 @@ func (m *Help_InviteText) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_help_inviteText):
 		m2 := Help_InviteText_HelpInviteText{}
+		m2.HelpInviteText = &TLHelpInviteText{}
 		m2.HelpInviteText.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -6992,22 +7289,27 @@ func (m *EncryptedChat) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_encryptedChatEmpty):
 		m2 := EncryptedChat_EncryptedChatEmpty{}
+		m2.EncryptedChatEmpty = &TLEncryptedChatEmpty{}
 		m2.EncryptedChatEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_encryptedChatWaiting):
 		m2 := EncryptedChat_EncryptedChatWaiting{}
+		m2.EncryptedChatWaiting = &TLEncryptedChatWaiting{}
 		m2.EncryptedChatWaiting.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_encryptedChatRequested):
 		m2 := EncryptedChat_EncryptedChatRequested{}
+		m2.EncryptedChatRequested = &TLEncryptedChatRequested{}
 		m2.EncryptedChatRequested.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_encryptedChat):
 		m2 := EncryptedChat_EncryptedChat{}
+		m2.EncryptedChat = &TLEncryptedChat{}
 		m2.EncryptedChat.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_encryptedChatDiscarded):
 		m2 := EncryptedChat_EncryptedChatDiscarded{}
+		m2.EncryptedChatDiscarded = &TLEncryptedChatDiscarded{}
 		m2.EncryptedChatDiscarded.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -7070,6 +7372,7 @@ func (m *InputEncryptedChat) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputEncryptedChat):
 		m2 := InputEncryptedChat_InputEncryptedChat{}
+		m2.InputEncryptedChat = &TLInputEncryptedChat{}
 		m2.InputEncryptedChat.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -7107,10 +7410,12 @@ func (m *EncryptedFile) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_encryptedFileEmpty):
 		m2 := EncryptedFile_EncryptedFileEmpty{}
+		m2.EncryptedFileEmpty = &TLEncryptedFileEmpty{}
 		m2.EncryptedFileEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_encryptedFile):
 		m2 := EncryptedFile_EncryptedFile{}
+		m2.EncryptedFile = &TLEncryptedFile{}
 		m2.EncryptedFile.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -7161,18 +7466,22 @@ func (m *InputEncryptedFile) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputEncryptedFileEmpty):
 		m2 := InputEncryptedFile_InputEncryptedFileEmpty{}
+		m2.InputEncryptedFileEmpty = &TLInputEncryptedFileEmpty{}
 		m2.InputEncryptedFileEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputEncryptedFileUploaded):
 		m2 := InputEncryptedFile_InputEncryptedFileUploaded{}
+		m2.InputEncryptedFileUploaded = &TLInputEncryptedFileUploaded{}
 		m2.InputEncryptedFileUploaded.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputEncryptedFile):
 		m2 := InputEncryptedFile_InputEncryptedFile{}
+		m2.InputEncryptedFile = &TLInputEncryptedFile{}
 		m2.InputEncryptedFile.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputEncryptedFileBigUploaded):
 		m2 := InputEncryptedFile_InputEncryptedFileBigUploaded{}
+		m2.InputEncryptedFileBigUploaded = &TLInputEncryptedFileBigUploaded{}
 		m2.InputEncryptedFileBigUploaded.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -7231,10 +7540,12 @@ func (m *EncryptedMessage) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_encryptedMessage):
 		m2 := EncryptedMessage_EncryptedMessage{}
+		m2.EncryptedMessage = &TLEncryptedMessage{}
 		m2.EncryptedMessage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_encryptedMessageService):
 		m2 := EncryptedMessage_EncryptedMessageService{}
+		m2.EncryptedMessageService = &TLEncryptedMessageService{}
 		m2.EncryptedMessageService.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -7279,10 +7590,12 @@ func (m *Messages_DhConfig) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_dhConfigNotModified):
 		m2 := Messages_DhConfig_MessagesDhConfigNotModified{}
+		m2.MessagesDhConfigNotModified = &TLMessagesDhConfigNotModified{}
 		m2.MessagesDhConfigNotModified.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messages_dhConfig):
 		m2 := Messages_DhConfig_MessagesDhConfig{}
+		m2.MessagesDhConfig = &TLMessagesDhConfig{}
 		m2.MessagesDhConfig.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -7327,10 +7640,12 @@ func (m *Messages_SentEncryptedMessage) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_sentEncryptedMessage):
 		m2 := Messages_SentEncryptedMessage_MessagesSentEncryptedMessage{}
+		m2.MessagesSentEncryptedMessage = &TLMessagesSentEncryptedMessage{}
 		m2.MessagesSentEncryptedMessage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messages_sentEncryptedFile):
 		m2 := Messages_SentEncryptedMessage_MessagesSentEncryptedFile{}
+		m2.MessagesSentEncryptedFile = &TLMessagesSentEncryptedFile{}
 		m2.MessagesSentEncryptedFile.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -7375,10 +7690,12 @@ func (m *InputDocument) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputDocumentEmpty):
 		m2 := InputDocument_InputDocumentEmpty{}
+		m2.InputDocumentEmpty = &TLInputDocumentEmpty{}
 		m2.InputDocumentEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputDocument):
 		m2 := InputDocument_InputDocument{}
+		m2.InputDocument = &TLInputDocument{}
 		m2.InputDocument.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -7423,10 +7740,12 @@ func (m *Document) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_documentEmpty):
 		m2 := Document_DocumentEmpty{}
+		m2.DocumentEmpty = &TLDocumentEmpty{}
 		m2.DocumentEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_document):
 		m2 := Document_Document{}
+		m2.Document = &TLDocument{}
 		m2.Document.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -7468,6 +7787,7 @@ func (m *Help_Support) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_help_support):
 		m2 := Help_Support_HelpSupport{}
+		m2.HelpSupport = &TLHelpSupport{}
 		m2.HelpSupport.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -7511,18 +7831,22 @@ func (m *NotifyPeer) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_notifyPeer):
 		m2 := NotifyPeer_NotifyPeer{}
+		m2.NotifyPeer = &TLNotifyPeer{}
 		m2.NotifyPeer.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_notifyUsers):
 		m2 := NotifyPeer_NotifyUsers{}
+		m2.NotifyUsers = &TLNotifyUsers{}
 		m2.NotifyUsers.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_notifyChats):
 		m2 := NotifyPeer_NotifyChats{}
+		m2.NotifyChats = &TLNotifyChats{}
 		m2.NotifyChats.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_notifyAll):
 		m2 := NotifyPeer_NotifyAll{}
+		m2.NotifyAll = &TLNotifyAll{}
 		m2.NotifyAll.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -7614,54 +7938,67 @@ func (m *SendMessageAction) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_sendMessageTypingAction):
 		m2 := SendMessageAction_SendMessageTypingAction{}
+		m2.SendMessageTypingAction = &TLSendMessageTypingAction{}
 		m2.SendMessageTypingAction.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_sendMessageCancelAction):
 		m2 := SendMessageAction_SendMessageCancelAction{}
+		m2.SendMessageCancelAction = &TLSendMessageCancelAction{}
 		m2.SendMessageCancelAction.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_sendMessageRecordVideoAction):
 		m2 := SendMessageAction_SendMessageRecordVideoAction{}
+		m2.SendMessageRecordVideoAction = &TLSendMessageRecordVideoAction{}
 		m2.SendMessageRecordVideoAction.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_sendMessageUploadVideoAction):
 		m2 := SendMessageAction_SendMessageUploadVideoAction{}
+		m2.SendMessageUploadVideoAction = &TLSendMessageUploadVideoAction{}
 		m2.SendMessageUploadVideoAction.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_sendMessageRecordAudioAction):
 		m2 := SendMessageAction_SendMessageRecordAudioAction{}
+		m2.SendMessageRecordAudioAction = &TLSendMessageRecordAudioAction{}
 		m2.SendMessageRecordAudioAction.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_sendMessageUploadAudioAction):
 		m2 := SendMessageAction_SendMessageUploadAudioAction{}
+		m2.SendMessageUploadAudioAction = &TLSendMessageUploadAudioAction{}
 		m2.SendMessageUploadAudioAction.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_sendMessageUploadPhotoAction):
 		m2 := SendMessageAction_SendMessageUploadPhotoAction{}
+		m2.SendMessageUploadPhotoAction = &TLSendMessageUploadPhotoAction{}
 		m2.SendMessageUploadPhotoAction.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_sendMessageUploadDocumentAction):
 		m2 := SendMessageAction_SendMessageUploadDocumentAction{}
+		m2.SendMessageUploadDocumentAction = &TLSendMessageUploadDocumentAction{}
 		m2.SendMessageUploadDocumentAction.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_sendMessageGeoLocationAction):
 		m2 := SendMessageAction_SendMessageGeoLocationAction{}
+		m2.SendMessageGeoLocationAction = &TLSendMessageGeoLocationAction{}
 		m2.SendMessageGeoLocationAction.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_sendMessageChooseContactAction):
 		m2 := SendMessageAction_SendMessageChooseContactAction{}
+		m2.SendMessageChooseContactAction = &TLSendMessageChooseContactAction{}
 		m2.SendMessageChooseContactAction.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_sendMessageGamePlayAction):
 		m2 := SendMessageAction_SendMessageGamePlayAction{}
+		m2.SendMessageGamePlayAction = &TLSendMessageGamePlayAction{}
 		m2.SendMessageGamePlayAction.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_sendMessageRecordRoundAction):
 		m2 := SendMessageAction_SendMessageRecordRoundAction{}
+		m2.SendMessageRecordRoundAction = &TLSendMessageRecordRoundAction{}
 		m2.SendMessageRecordRoundAction.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_sendMessageUploadRoundAction):
 		m2 := SendMessageAction_SendMessageUploadRoundAction{}
+		m2.SendMessageUploadRoundAction = &TLSendMessageUploadRoundAction{}
 		m2.SendMessageUploadRoundAction.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -7780,6 +8117,7 @@ func (m *Contacts_Found) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_contacts_found):
 		m2 := Contacts_Found_ContactsFound{}
+		m2.ContactsFound = &TLContactsFound{}
 		m2.ContactsFound.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -7820,14 +8158,17 @@ func (m *InputPrivacyKey) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputPrivacyKeyStatusTimestamp):
 		m2 := InputPrivacyKey_InputPrivacyKeyStatusTimestamp{}
+		m2.InputPrivacyKeyStatusTimestamp = &TLInputPrivacyKeyStatusTimestamp{}
 		m2.InputPrivacyKeyStatusTimestamp.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputPrivacyKeyChatInvite):
 		m2 := InputPrivacyKey_InputPrivacyKeyChatInvite{}
+		m2.InputPrivacyKeyChatInvite = &TLInputPrivacyKeyChatInvite{}
 		m2.InputPrivacyKeyChatInvite.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputPrivacyKeyPhoneCall):
 		m2 := InputPrivacyKey_InputPrivacyKeyPhoneCall{}
+		m2.InputPrivacyKeyPhoneCall = &TLInputPrivacyKeyPhoneCall{}
 		m2.InputPrivacyKeyPhoneCall.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -7882,14 +8223,17 @@ func (m *PrivacyKey) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_privacyKeyStatusTimestamp):
 		m2 := PrivacyKey_PrivacyKeyStatusTimestamp{}
+		m2.PrivacyKeyStatusTimestamp = &TLPrivacyKeyStatusTimestamp{}
 		m2.PrivacyKeyStatusTimestamp.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_privacyKeyChatInvite):
 		m2 := PrivacyKey_PrivacyKeyChatInvite{}
+		m2.PrivacyKeyChatInvite = &TLPrivacyKeyChatInvite{}
 		m2.PrivacyKeyChatInvite.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_privacyKeyPhoneCall):
 		m2 := PrivacyKey_PrivacyKeyPhoneCall{}
+		m2.PrivacyKeyPhoneCall = &TLPrivacyKeyPhoneCall{}
 		m2.PrivacyKeyPhoneCall.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -7953,26 +8297,32 @@ func (m *InputPrivacyRule) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputPrivacyValueAllowContacts):
 		m2 := InputPrivacyRule_InputPrivacyValueAllowContacts{}
+		m2.InputPrivacyValueAllowContacts = &TLInputPrivacyValueAllowContacts{}
 		m2.InputPrivacyValueAllowContacts.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputPrivacyValueAllowAll):
 		m2 := InputPrivacyRule_InputPrivacyValueAllowAll{}
+		m2.InputPrivacyValueAllowAll = &TLInputPrivacyValueAllowAll{}
 		m2.InputPrivacyValueAllowAll.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputPrivacyValueAllowUsers):
 		m2 := InputPrivacyRule_InputPrivacyValueAllowUsers{}
+		m2.InputPrivacyValueAllowUsers = &TLInputPrivacyValueAllowUsers{}
 		m2.InputPrivacyValueAllowUsers.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputPrivacyValueDisallowContacts):
 		m2 := InputPrivacyRule_InputPrivacyValueDisallowContacts{}
+		m2.InputPrivacyValueDisallowContacts = &TLInputPrivacyValueDisallowContacts{}
 		m2.InputPrivacyValueDisallowContacts.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputPrivacyValueDisallowAll):
 		m2 := InputPrivacyRule_InputPrivacyValueDisallowAll{}
+		m2.InputPrivacyValueDisallowAll = &TLInputPrivacyValueDisallowAll{}
 		m2.InputPrivacyValueDisallowAll.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputPrivacyValueDisallowUsers):
 		m2 := InputPrivacyRule_InputPrivacyValueDisallowUsers{}
+		m2.InputPrivacyValueDisallowUsers = &TLInputPrivacyValueDisallowUsers{}
 		m2.InputPrivacyValueDisallowUsers.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8057,26 +8407,32 @@ func (m *PrivacyRule) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_privacyValueAllowContacts):
 		m2 := PrivacyRule_PrivacyValueAllowContacts{}
+		m2.PrivacyValueAllowContacts = &TLPrivacyValueAllowContacts{}
 		m2.PrivacyValueAllowContacts.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_privacyValueAllowAll):
 		m2 := PrivacyRule_PrivacyValueAllowAll{}
+		m2.PrivacyValueAllowAll = &TLPrivacyValueAllowAll{}
 		m2.PrivacyValueAllowAll.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_privacyValueAllowUsers):
 		m2 := PrivacyRule_PrivacyValueAllowUsers{}
+		m2.PrivacyValueAllowUsers = &TLPrivacyValueAllowUsers{}
 		m2.PrivacyValueAllowUsers.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_privacyValueDisallowContacts):
 		m2 := PrivacyRule_PrivacyValueDisallowContacts{}
+		m2.PrivacyValueDisallowContacts = &TLPrivacyValueDisallowContacts{}
 		m2.PrivacyValueDisallowContacts.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_privacyValueDisallowAll):
 		m2 := PrivacyRule_PrivacyValueDisallowAll{}
+		m2.PrivacyValueDisallowAll = &TLPrivacyValueDisallowAll{}
 		m2.PrivacyValueDisallowAll.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_privacyValueDisallowUsers):
 		m2 := PrivacyRule_PrivacyValueDisallowUsers{}
+		m2.PrivacyValueDisallowUsers = &TLPrivacyValueDisallowUsers{}
 		m2.PrivacyValueDisallowUsers.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8146,6 +8502,7 @@ func (m *Account_PrivacyRules) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_account_privacyRules):
 		m2 := Account_PrivacyRules_AccountPrivacyRules{}
+		m2.AccountPrivacyRules = &TLAccountPrivacyRules{}
 		m2.AccountPrivacyRules.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8180,6 +8537,7 @@ func (m *AccountDaysTTL) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_accountDaysTTL):
 		m2 := AccountDaysTTL_AccountDaysTTL{}
+		m2.AccountDaysTTL = &TLAccountDaysTTL{}
 		m2.AccountDaysTTL.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8232,30 +8590,37 @@ func (m *DocumentAttribute) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_documentAttributeImageSize):
 		m2 := DocumentAttribute_DocumentAttributeImageSize{}
+		m2.DocumentAttributeImageSize = &TLDocumentAttributeImageSize{}
 		m2.DocumentAttributeImageSize.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_documentAttributeAnimated):
 		m2 := DocumentAttribute_DocumentAttributeAnimated{}
+		m2.DocumentAttributeAnimated = &TLDocumentAttributeAnimated{}
 		m2.DocumentAttributeAnimated.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_documentAttributeSticker):
 		m2 := DocumentAttribute_DocumentAttributeSticker{}
+		m2.DocumentAttributeSticker = &TLDocumentAttributeSticker{}
 		m2.DocumentAttributeSticker.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_documentAttributeVideo):
 		m2 := DocumentAttribute_DocumentAttributeVideo{}
+		m2.DocumentAttributeVideo = &TLDocumentAttributeVideo{}
 		m2.DocumentAttributeVideo.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_documentAttributeAudio):
 		m2 := DocumentAttribute_DocumentAttributeAudio{}
+		m2.DocumentAttributeAudio = &TLDocumentAttributeAudio{}
 		m2.DocumentAttributeAudio.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_documentAttributeFilename):
 		m2 := DocumentAttribute_DocumentAttributeFilename{}
+		m2.DocumentAttributeFilename = &TLDocumentAttributeFilename{}
 		m2.DocumentAttributeFilename.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_documentAttributeHasStickers):
 		m2 := DocumentAttribute_DocumentAttributeHasStickers{}
+		m2.DocumentAttributeHasStickers = &TLDocumentAttributeHasStickers{}
 		m2.DocumentAttributeHasStickers.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8335,10 +8700,12 @@ func (m *Messages_Stickers) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_stickersNotModified):
 		m2 := Messages_Stickers_MessagesStickersNotModified{}
+		m2.MessagesStickersNotModified = &TLMessagesStickersNotModified{}
 		m2.MessagesStickersNotModified.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messages_stickers):
 		m2 := Messages_Stickers_MessagesStickers{}
+		m2.MessagesStickers = &TLMessagesStickers{}
 		m2.MessagesStickers.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8380,6 +8747,7 @@ func (m *StickerPack) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_stickerPack):
 		m2 := StickerPack_StickerPack{}
+		m2.StickerPack = &TLStickerPack{}
 		m2.StickerPack.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8417,10 +8785,12 @@ func (m *Messages_AllStickers) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_allStickersNotModified):
 		m2 := Messages_AllStickers_MessagesAllStickersNotModified{}
+		m2.MessagesAllStickersNotModified = &TLMessagesAllStickersNotModified{}
 		m2.MessagesAllStickersNotModified.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messages_allStickers):
 		m2 := Messages_AllStickers_MessagesAllStickers{}
+		m2.MessagesAllStickers = &TLMessagesAllStickers{}
 		m2.MessagesAllStickers.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8462,6 +8832,7 @@ func (m *DisabledFeature) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_disabledFeature):
 		m2 := DisabledFeature_DisabledFeature{}
+		m2.DisabledFeature = &TLDisabledFeature{}
 		m2.DisabledFeature.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8496,6 +8867,7 @@ func (m *Messages_AffectedMessages) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_affectedMessages):
 		m2 := Messages_AffectedMessages_MessagesAffectedMessages{}
+		m2.MessagesAffectedMessages = &TLMessagesAffectedMessages{}
 		m2.MessagesAffectedMessages.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8539,18 +8911,22 @@ func (m *ContactLink) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_contactLinkUnknown):
 		m2 := ContactLink_ContactLinkUnknown{}
+		m2.ContactLinkUnknown = &TLContactLinkUnknown{}
 		m2.ContactLinkUnknown.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_contactLinkNone):
 		m2 := ContactLink_ContactLinkNone{}
+		m2.ContactLinkNone = &TLContactLinkNone{}
 		m2.ContactLinkNone.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_contactLinkHasPhone):
 		m2 := ContactLink_ContactLinkHasPhone{}
+		m2.ContactLinkHasPhone = &TLContactLinkHasPhone{}
 		m2.ContactLinkHasPhone.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_contactLinkContact):
 		m2 := ContactLink_ContactLinkContact{}
+		m2.ContactLinkContact = &TLContactLinkContact{}
 		m2.ContactLinkContact.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8615,18 +8991,22 @@ func (m *WebPage) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_webPageEmpty):
 		m2 := WebPage_WebPageEmpty{}
+		m2.WebPageEmpty = &TLWebPageEmpty{}
 		m2.WebPageEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_webPagePending):
 		m2 := WebPage_WebPagePending{}
+		m2.WebPagePending = &TLWebPagePending{}
 		m2.WebPagePending.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_webPage):
 		m2 := WebPage_WebPage{}
+		m2.WebPage = &TLWebPage{}
 		m2.WebPage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_webPageNotModified):
 		m2 := WebPage_WebPageNotModified{}
+		m2.WebPageNotModified = &TLWebPageNotModified{}
 		m2.WebPageNotModified.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8682,6 +9062,7 @@ func (m *Authorization) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_authorization):
 		m2 := Authorization_Authorization{}
+		m2.Authorization = &TLAuthorization{}
 		m2.Authorization.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8716,6 +9097,7 @@ func (m *Account_Authorizations) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_account_authorizations):
 		m2 := Account_Authorizations_AccountAuthorizations{}
+		m2.AccountAuthorizations = &TLAccountAuthorizations{}
 		m2.AccountAuthorizations.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8753,10 +9135,12 @@ func (m *Account_Password) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_account_noPassword):
 		m2 := Account_Password_AccountNoPassword{}
+		m2.AccountNoPassword = &TLAccountNoPassword{}
 		m2.AccountNoPassword.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_account_password):
 		m2 := Account_Password_AccountPassword{}
+		m2.AccountPassword = &TLAccountPassword{}
 		m2.AccountPassword.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8798,6 +9182,7 @@ func (m *Account_PasswordSettings) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_account_passwordSettings):
 		m2 := Account_PasswordSettings_AccountPasswordSettings{}
+		m2.AccountPasswordSettings = &TLAccountPasswordSettings{}
 		m2.AccountPasswordSettings.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8832,6 +9217,7 @@ func (m *Account_PasswordInputSettings) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_account_passwordInputSettings):
 		m2 := Account_PasswordInputSettings_AccountPasswordInputSettings{}
+		m2.AccountPasswordInputSettings = &TLAccountPasswordInputSettings{}
 		m2.AccountPasswordInputSettings.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8866,6 +9252,7 @@ func (m *Auth_PasswordRecovery) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_auth_passwordRecovery):
 		m2 := Auth_PasswordRecovery_AuthPasswordRecovery{}
+		m2.AuthPasswordRecovery = &TLAuthPasswordRecovery{}
 		m2.AuthPasswordRecovery.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8900,6 +9287,7 @@ func (m *ReceivedNotifyMessage) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_receivedNotifyMessage):
 		m2 := ReceivedNotifyMessage_ReceivedNotifyMessage{}
+		m2.ReceivedNotifyMessage = &TLReceivedNotifyMessage{}
 		m2.ReceivedNotifyMessage.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8937,10 +9325,12 @@ func (m *ExportedChatInvite) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_chatInviteEmpty):
 		m2 := ExportedChatInvite_ChatInviteEmpty{}
+		m2.ChatInviteEmpty = &TLChatInviteEmpty{}
 		m2.ChatInviteEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_chatInviteExported):
 		m2 := ExportedChatInvite_ChatInviteExported{}
+		m2.ChatInviteExported = &TLChatInviteExported{}
 		m2.ChatInviteExported.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -8985,10 +9375,12 @@ func (m *ChatInvite) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_chatInviteAlready):
 		m2 := ChatInvite_ChatInviteAlready{}
+		m2.ChatInviteAlready = &TLChatInviteAlready{}
 		m2.ChatInviteAlready.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_chatInvite):
 		m2 := ChatInvite_ChatInvite{}
+		m2.ChatInvite = &TLChatInvite{}
 		m2.ChatInvite.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -9036,14 +9428,17 @@ func (m *InputStickerSet) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputStickerSetEmpty):
 		m2 := InputStickerSet_InputStickerSetEmpty{}
+		m2.InputStickerSetEmpty = &TLInputStickerSetEmpty{}
 		m2.InputStickerSetEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputStickerSetID):
 		m2 := InputStickerSet_InputStickerSetID{}
+		m2.InputStickerSetID = &TLInputStickerSetID{}
 		m2.InputStickerSetID.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputStickerSetShortName):
 		m2 := InputStickerSet_InputStickerSetShortName{}
+		m2.InputStickerSetShortName = &TLInputStickerSetShortName{}
 		m2.InputStickerSetShortName.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -9092,6 +9487,7 @@ func (m *StickerSet) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_stickerSet):
 		m2 := StickerSet_StickerSet{}
+		m2.StickerSet = &TLStickerSet{}
 		m2.StickerSet.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -9126,6 +9522,7 @@ func (m *Messages_StickerSet) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_stickerSet):
 		m2 := Messages_StickerSet_MessagesStickerSet{}
+		m2.MessagesStickerSet = &TLMessagesStickerSet{}
 		m2.MessagesStickerSet.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -9160,6 +9557,7 @@ func (m *BotCommand) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_botCommand):
 		m2 := BotCommand_BotCommand{}
+		m2.BotCommand = &TLBotCommand{}
 		m2.BotCommand.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -9194,6 +9592,7 @@ func (m *BotInfo) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_botInfo):
 		m2 := BotInfo_BotInfo{}
+		m2.BotInfo = &TLBotInfo{}
 		m2.BotInfo.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -9249,34 +9648,42 @@ func (m *KeyboardButton) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_keyboardButton):
 		m2 := KeyboardButton_KeyboardButton{}
+		m2.KeyboardButton = &TLKeyboardButton{}
 		m2.KeyboardButton.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_keyboardButtonUrl):
 		m2 := KeyboardButton_KeyboardButtonUrl{}
+		m2.KeyboardButtonUrl = &TLKeyboardButtonUrl{}
 		m2.KeyboardButtonUrl.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_keyboardButtonCallback):
 		m2 := KeyboardButton_KeyboardButtonCallback{}
+		m2.KeyboardButtonCallback = &TLKeyboardButtonCallback{}
 		m2.KeyboardButtonCallback.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_keyboardButtonRequestPhone):
 		m2 := KeyboardButton_KeyboardButtonRequestPhone{}
+		m2.KeyboardButtonRequestPhone = &TLKeyboardButtonRequestPhone{}
 		m2.KeyboardButtonRequestPhone.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_keyboardButtonRequestGeoLocation):
 		m2 := KeyboardButton_KeyboardButtonRequestGeoLocation{}
+		m2.KeyboardButtonRequestGeoLocation = &TLKeyboardButtonRequestGeoLocation{}
 		m2.KeyboardButtonRequestGeoLocation.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_keyboardButtonSwitchInline):
 		m2 := KeyboardButton_KeyboardButtonSwitchInline{}
+		m2.KeyboardButtonSwitchInline = &TLKeyboardButtonSwitchInline{}
 		m2.KeyboardButtonSwitchInline.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_keyboardButtonGame):
 		m2 := KeyboardButton_KeyboardButtonGame{}
+		m2.KeyboardButtonGame = &TLKeyboardButtonGame{}
 		m2.KeyboardButtonGame.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_keyboardButtonBuy):
 		m2 := KeyboardButton_KeyboardButtonBuy{}
+		m2.KeyboardButtonBuy = &TLKeyboardButtonBuy{}
 		m2.KeyboardButtonBuy.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -9360,6 +9767,7 @@ func (m *KeyboardButtonRow) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_keyboardButtonRow):
 		m2 := KeyboardButtonRow_KeyboardButtonRow{}
+		m2.KeyboardButtonRow = &TLKeyboardButtonRow{}
 		m2.KeyboardButtonRow.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -9403,18 +9811,22 @@ func (m *ReplyMarkup) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_replyKeyboardHide):
 		m2 := ReplyMarkup_ReplyKeyboardHide{}
+		m2.ReplyKeyboardHide = &TLReplyKeyboardHide{}
 		m2.ReplyKeyboardHide.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_replyKeyboardForceReply):
 		m2 := ReplyMarkup_ReplyKeyboardForceReply{}
+		m2.ReplyKeyboardForceReply = &TLReplyKeyboardForceReply{}
 		m2.ReplyKeyboardForceReply.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_replyKeyboardMarkup):
 		m2 := ReplyMarkup_ReplyKeyboardMarkup{}
+		m2.ReplyKeyboardMarkup = &TLReplyKeyboardMarkup{}
 		m2.ReplyKeyboardMarkup.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_replyInlineMarkup):
 		m2 := ReplyMarkup_ReplyInlineMarkup{}
+		m2.ReplyInlineMarkup = &TLReplyInlineMarkup{}
 		m2.ReplyInlineMarkup.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -9506,54 +9918,67 @@ func (m *MessageEntity) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messageEntityUnknown):
 		m2 := MessageEntity_MessageEntityUnknown{}
+		m2.MessageEntityUnknown = &TLMessageEntityUnknown{}
 		m2.MessageEntityUnknown.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageEntityMention):
 		m2 := MessageEntity_MessageEntityMention{}
+		m2.MessageEntityMention = &TLMessageEntityMention{}
 		m2.MessageEntityMention.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageEntityHashtag):
 		m2 := MessageEntity_MessageEntityHashtag{}
+		m2.MessageEntityHashtag = &TLMessageEntityHashtag{}
 		m2.MessageEntityHashtag.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageEntityBotCommand):
 		m2 := MessageEntity_MessageEntityBotCommand{}
+		m2.MessageEntityBotCommand = &TLMessageEntityBotCommand{}
 		m2.MessageEntityBotCommand.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageEntityUrl):
 		m2 := MessageEntity_MessageEntityUrl{}
+		m2.MessageEntityUrl = &TLMessageEntityUrl{}
 		m2.MessageEntityUrl.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageEntityEmail):
 		m2 := MessageEntity_MessageEntityEmail{}
+		m2.MessageEntityEmail = &TLMessageEntityEmail{}
 		m2.MessageEntityEmail.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageEntityBold):
 		m2 := MessageEntity_MessageEntityBold{}
+		m2.MessageEntityBold = &TLMessageEntityBold{}
 		m2.MessageEntityBold.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageEntityItalic):
 		m2 := MessageEntity_MessageEntityItalic{}
+		m2.MessageEntityItalic = &TLMessageEntityItalic{}
 		m2.MessageEntityItalic.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageEntityCode):
 		m2 := MessageEntity_MessageEntityCode{}
+		m2.MessageEntityCode = &TLMessageEntityCode{}
 		m2.MessageEntityCode.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageEntityPre):
 		m2 := MessageEntity_MessageEntityPre{}
+		m2.MessageEntityPre = &TLMessageEntityPre{}
 		m2.MessageEntityPre.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageEntityTextUrl):
 		m2 := MessageEntity_MessageEntityTextUrl{}
+		m2.MessageEntityTextUrl = &TLMessageEntityTextUrl{}
 		m2.MessageEntityTextUrl.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messageEntityMentionName):
 		m2 := MessageEntity_MessageEntityMentionName{}
+		m2.MessageEntityMentionName = &TLMessageEntityMentionName{}
 		m2.MessageEntityMentionName.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputMessageEntityMentionName):
 		m2 := MessageEntity_InputMessageEntityMentionName{}
+		m2.InputMessageEntityMentionName = &TLInputMessageEntityMentionName{}
 		m2.InputMessageEntityMentionName.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -9675,10 +10100,12 @@ func (m *InputChannel) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputChannelEmpty):
 		m2 := InputChannel_InputChannelEmpty{}
+		m2.InputChannelEmpty = &TLInputChannelEmpty{}
 		m2.InputChannelEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputChannel):
 		m2 := InputChannel_InputChannel{}
+		m2.InputChannel = &TLInputChannel{}
 		m2.InputChannel.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -9720,6 +10147,7 @@ func (m *Contacts_ResolvedPeer) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_contacts_resolvedPeer):
 		m2 := Contacts_ResolvedPeer_ContactsResolvedPeer{}
+		m2.ContactsResolvedPeer = &TLContactsResolvedPeer{}
 		m2.ContactsResolvedPeer.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -9754,6 +10182,7 @@ func (m *MessageRange) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messageRange):
 		m2 := MessageRange_MessageRange{}
+		m2.MessageRange = &TLMessageRange{}
 		m2.MessageRange.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -9794,14 +10223,17 @@ func (m *Updates_ChannelDifference) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_updates_channelDifferenceEmpty):
 		m2 := Updates_ChannelDifference_UpdatesChannelDifferenceEmpty{}
+		m2.UpdatesChannelDifferenceEmpty = &TLUpdatesChannelDifferenceEmpty{}
 		m2.UpdatesChannelDifferenceEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updates_channelDifferenceTooLong):
 		m2 := Updates_ChannelDifference_UpdatesChannelDifferenceTooLong{}
+		m2.UpdatesChannelDifferenceTooLong = &TLUpdatesChannelDifferenceTooLong{}
 		m2.UpdatesChannelDifferenceTooLong.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_updates_channelDifference):
 		m2 := Updates_ChannelDifference_UpdatesChannelDifference{}
+		m2.UpdatesChannelDifference = &TLUpdatesChannelDifference{}
 		m2.UpdatesChannelDifference.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -9853,10 +10285,12 @@ func (m *ChannelMessagesFilter) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_channelMessagesFilterEmpty):
 		m2 := ChannelMessagesFilter_ChannelMessagesFilterEmpty{}
+		m2.ChannelMessagesFilterEmpty = &TLChannelMessagesFilterEmpty{}
 		m2.ChannelMessagesFilterEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelMessagesFilter):
 		m2 := ChannelMessagesFilter_ChannelMessagesFilter{}
+		m2.ChannelMessagesFilter = &TLChannelMessagesFilter{}
 		m2.ChannelMessagesFilter.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -9910,22 +10344,27 @@ func (m *ChannelParticipant) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_channelParticipant):
 		m2 := ChannelParticipant_ChannelParticipant{}
+		m2.ChannelParticipant = &TLChannelParticipant{}
 		m2.ChannelParticipant.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelParticipantSelf):
 		m2 := ChannelParticipant_ChannelParticipantSelf{}
+		m2.ChannelParticipantSelf = &TLChannelParticipantSelf{}
 		m2.ChannelParticipantSelf.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelParticipantCreator):
 		m2 := ChannelParticipant_ChannelParticipantCreator{}
+		m2.ChannelParticipantCreator = &TLChannelParticipantCreator{}
 		m2.ChannelParticipantCreator.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelParticipantAdmin):
 		m2 := ChannelParticipant_ChannelParticipantAdmin{}
+		m2.ChannelParticipantAdmin = &TLChannelParticipantAdmin{}
 		m2.ChannelParticipantAdmin.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelParticipantBanned):
 		m2 := ChannelParticipant_ChannelParticipantBanned{}
+		m2.ChannelParticipantBanned = &TLChannelParticipantBanned{}
 		m2.ChannelParticipantBanned.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10003,26 +10442,32 @@ func (m *ChannelParticipantsFilter) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_channelParticipantsRecent):
 		m2 := ChannelParticipantsFilter_ChannelParticipantsRecent{}
+		m2.ChannelParticipantsRecent = &TLChannelParticipantsRecent{}
 		m2.ChannelParticipantsRecent.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelParticipantsAdmins):
 		m2 := ChannelParticipantsFilter_ChannelParticipantsAdmins{}
+		m2.ChannelParticipantsAdmins = &TLChannelParticipantsAdmins{}
 		m2.ChannelParticipantsAdmins.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelParticipantsKicked):
 		m2 := ChannelParticipantsFilter_ChannelParticipantsKicked{}
+		m2.ChannelParticipantsKicked = &TLChannelParticipantsKicked{}
 		m2.ChannelParticipantsKicked.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelParticipantsBots):
 		m2 := ChannelParticipantsFilter_ChannelParticipantsBots{}
+		m2.ChannelParticipantsBots = &TLChannelParticipantsBots{}
 		m2.ChannelParticipantsBots.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelParticipantsBanned):
 		m2 := ChannelParticipantsFilter_ChannelParticipantsBanned{}
+		m2.ChannelParticipantsBanned = &TLChannelParticipantsBanned{}
 		m2.ChannelParticipantsBanned.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelParticipantsSearch):
 		m2 := ChannelParticipantsFilter_ChannelParticipantsSearch{}
+		m2.ChannelParticipantsSearch = &TLChannelParticipantsSearch{}
 		m2.ChannelParticipantsSearch.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10092,6 +10537,7 @@ func (m *Channels_ChannelParticipants) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_channels_channelParticipants):
 		m2 := Channels_ChannelParticipants_ChannelsChannelParticipants{}
+		m2.ChannelsChannelParticipants = &TLChannelsChannelParticipants{}
 		m2.ChannelsChannelParticipants.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10126,6 +10572,7 @@ func (m *Channels_ChannelParticipant) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_channels_channelParticipant):
 		m2 := Channels_ChannelParticipant_ChannelsChannelParticipant{}
+		m2.ChannelsChannelParticipant = &TLChannelsChannelParticipant{}
 		m2.ChannelsChannelParticipant.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10160,6 +10607,7 @@ func (m *Help_TermsOfService) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_help_termsOfService):
 		m2 := Help_TermsOfService_HelpTermsOfService{}
+		m2.HelpTermsOfService = &TLHelpTermsOfService{}
 		m2.HelpTermsOfService.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10197,10 +10645,12 @@ func (m *FoundGif) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_foundGif):
 		m2 := FoundGif_FoundGif{}
+		m2.FoundGif = &TLFoundGif{}
 		m2.FoundGif.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_foundGifCached):
 		m2 := FoundGif_FoundGifCached{}
+		m2.FoundGifCached = &TLFoundGifCached{}
 		m2.FoundGifCached.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10242,6 +10692,7 @@ func (m *Messages_FoundGifs) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_foundGifs):
 		m2 := Messages_FoundGifs_MessagesFoundGifs{}
+		m2.MessagesFoundGifs = &TLMessagesFoundGifs{}
 		m2.MessagesFoundGifs.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10279,10 +10730,12 @@ func (m *Messages_SavedGifs) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_savedGifsNotModified):
 		m2 := Messages_SavedGifs_MessagesSavedGifsNotModified{}
+		m2.MessagesSavedGifsNotModified = &TLMessagesSavedGifsNotModified{}
 		m2.MessagesSavedGifsNotModified.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messages_savedGifs):
 		m2 := Messages_SavedGifs_MessagesSavedGifs{}
+		m2.MessagesSavedGifs = &TLMessagesSavedGifs{}
 		m2.MessagesSavedGifs.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10339,26 +10792,32 @@ func (m *InputBotInlineMessage) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputBotInlineMessageMediaAuto):
 		m2 := InputBotInlineMessage_InputBotInlineMessageMediaAuto{}
+		m2.InputBotInlineMessageMediaAuto = &TLInputBotInlineMessageMediaAuto{}
 		m2.InputBotInlineMessageMediaAuto.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputBotInlineMessageText):
 		m2 := InputBotInlineMessage_InputBotInlineMessageText{}
+		m2.InputBotInlineMessageText = &TLInputBotInlineMessageText{}
 		m2.InputBotInlineMessageText.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputBotInlineMessageMediaGeo):
 		m2 := InputBotInlineMessage_InputBotInlineMessageMediaGeo{}
+		m2.InputBotInlineMessageMediaGeo = &TLInputBotInlineMessageMediaGeo{}
 		m2.InputBotInlineMessageMediaGeo.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputBotInlineMessageMediaVenue):
 		m2 := InputBotInlineMessage_InputBotInlineMessageMediaVenue{}
+		m2.InputBotInlineMessageMediaVenue = &TLInputBotInlineMessageMediaVenue{}
 		m2.InputBotInlineMessageMediaVenue.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputBotInlineMessageMediaContact):
 		m2 := InputBotInlineMessage_InputBotInlineMessageMediaContact{}
+		m2.InputBotInlineMessageMediaContact = &TLInputBotInlineMessageMediaContact{}
 		m2.InputBotInlineMessageMediaContact.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputBotInlineMessageGame):
 		m2 := InputBotInlineMessage_InputBotInlineMessageGame{}
+		m2.InputBotInlineMessageGame = &TLInputBotInlineMessageGame{}
 		m2.InputBotInlineMessageGame.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10437,18 +10896,22 @@ func (m *InputBotInlineResult) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputBotInlineResult):
 		m2 := InputBotInlineResult_InputBotInlineResult{}
+		m2.InputBotInlineResult = &TLInputBotInlineResult{}
 		m2.InputBotInlineResult.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputBotInlineResultPhoto):
 		m2 := InputBotInlineResult_InputBotInlineResultPhoto{}
+		m2.InputBotInlineResultPhoto = &TLInputBotInlineResultPhoto{}
 		m2.InputBotInlineResultPhoto.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputBotInlineResultDocument):
 		m2 := InputBotInlineResult_InputBotInlineResultDocument{}
+		m2.InputBotInlineResultDocument = &TLInputBotInlineResultDocument{}
 		m2.InputBotInlineResultDocument.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputBotInlineResultGame):
 		m2 := InputBotInlineResult_InputBotInlineResultGame{}
+		m2.InputBotInlineResultGame = &TLInputBotInlineResultGame{}
 		m2.InputBotInlineResultGame.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10516,22 +10979,27 @@ func (m *BotInlineMessage) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_botInlineMessageMediaAuto):
 		m2 := BotInlineMessage_BotInlineMessageMediaAuto{}
+		m2.BotInlineMessageMediaAuto = &TLBotInlineMessageMediaAuto{}
 		m2.BotInlineMessageMediaAuto.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_botInlineMessageText):
 		m2 := BotInlineMessage_BotInlineMessageText{}
+		m2.BotInlineMessageText = &TLBotInlineMessageText{}
 		m2.BotInlineMessageText.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_botInlineMessageMediaGeo):
 		m2 := BotInlineMessage_BotInlineMessageMediaGeo{}
+		m2.BotInlineMessageMediaGeo = &TLBotInlineMessageMediaGeo{}
 		m2.BotInlineMessageMediaGeo.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_botInlineMessageMediaVenue):
 		m2 := BotInlineMessage_BotInlineMessageMediaVenue{}
+		m2.BotInlineMessageMediaVenue = &TLBotInlineMessageMediaVenue{}
 		m2.BotInlineMessageMediaVenue.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_botInlineMessageMediaContact):
 		m2 := BotInlineMessage_BotInlineMessageMediaContact{}
+		m2.BotInlineMessageMediaContact = &TLBotInlineMessageMediaContact{}
 		m2.BotInlineMessageMediaContact.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10597,10 +11065,12 @@ func (m *BotInlineResult) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_botInlineResult):
 		m2 := BotInlineResult_BotInlineResult{}
+		m2.BotInlineResult = &TLBotInlineResult{}
 		m2.BotInlineResult.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_botInlineMediaResult):
 		m2 := BotInlineResult_BotInlineMediaResult{}
+		m2.BotInlineMediaResult = &TLBotInlineMediaResult{}
 		m2.BotInlineMediaResult.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10642,6 +11112,7 @@ func (m *Messages_BotResults) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_botResults):
 		m2 := Messages_BotResults_MessagesBotResults{}
+		m2.MessagesBotResults = &TLMessagesBotResults{}
 		m2.MessagesBotResults.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10676,6 +11147,7 @@ func (m *ExportedMessageLink) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_exportedMessageLink):
 		m2 := ExportedMessageLink_ExportedMessageLink{}
+		m2.ExportedMessageLink = &TLExportedMessageLink{}
 		m2.ExportedMessageLink.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10710,6 +11182,7 @@ func (m *MessageFwdHeader) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messageFwdHeader):
 		m2 := MessageFwdHeader_MessageFwdHeader{}
+		m2.MessageFwdHeader = &TLMessageFwdHeader{}
 		m2.MessageFwdHeader.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10750,14 +11223,17 @@ func (m *Auth_CodeType) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_auth_codeTypeSms):
 		m2 := Auth_CodeType_AuthCodeTypeSms{}
+		m2.AuthCodeTypeSms = &TLAuthCodeTypeSms{}
 		m2.AuthCodeTypeSms.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_auth_codeTypeCall):
 		m2 := Auth_CodeType_AuthCodeTypeCall{}
+		m2.AuthCodeTypeCall = &TLAuthCodeTypeCall{}
 		m2.AuthCodeTypeCall.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_auth_codeTypeFlashCall):
 		m2 := Auth_CodeType_AuthCodeTypeFlashCall{}
+		m2.AuthCodeTypeFlashCall = &TLAuthCodeTypeFlashCall{}
 		m2.AuthCodeTypeFlashCall.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10815,18 +11291,22 @@ func (m *Auth_SentCodeType) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_auth_sentCodeTypeApp):
 		m2 := Auth_SentCodeType_AuthSentCodeTypeApp{}
+		m2.AuthSentCodeTypeApp = &TLAuthSentCodeTypeApp{}
 		m2.AuthSentCodeTypeApp.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_auth_sentCodeTypeSms):
 		m2 := Auth_SentCodeType_AuthSentCodeTypeSms{}
+		m2.AuthSentCodeTypeSms = &TLAuthSentCodeTypeSms{}
 		m2.AuthSentCodeTypeSms.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_auth_sentCodeTypeCall):
 		m2 := Auth_SentCodeType_AuthSentCodeTypeCall{}
+		m2.AuthSentCodeTypeCall = &TLAuthSentCodeTypeCall{}
 		m2.AuthSentCodeTypeCall.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_auth_sentCodeTypeFlashCall):
 		m2 := Auth_SentCodeType_AuthSentCodeTypeFlashCall{}
+		m2.AuthSentCodeTypeFlashCall = &TLAuthSentCodeTypeFlashCall{}
 		m2.AuthSentCodeTypeFlashCall.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10882,6 +11362,7 @@ func (m *Messages_BotCallbackAnswer) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_botCallbackAnswer):
 		m2 := Messages_BotCallbackAnswer_MessagesBotCallbackAnswer{}
+		m2.MessagesBotCallbackAnswer = &TLMessagesBotCallbackAnswer{}
 		m2.MessagesBotCallbackAnswer.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10916,6 +11397,7 @@ func (m *Messages_MessageEditData) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_messageEditData):
 		m2 := Messages_MessageEditData_MessagesMessageEditData{}
+		m2.MessagesMessageEditData = &TLMessagesMessageEditData{}
 		m2.MessagesMessageEditData.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10950,6 +11432,7 @@ func (m *InputBotInlineMessageID) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputBotInlineMessageID):
 		m2 := InputBotInlineMessageID_InputBotInlineMessageID{}
+		m2.InputBotInlineMessageID = &TLInputBotInlineMessageID{}
 		m2.InputBotInlineMessageID.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -10984,6 +11467,7 @@ func (m *InlineBotSwitchPM) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inlineBotSwitchPM):
 		m2 := InlineBotSwitchPM_InlineBotSwitchPM{}
+		m2.InlineBotSwitchPM = &TLInlineBotSwitchPM{}
 		m2.InlineBotSwitchPM.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11018,6 +11502,7 @@ func (m *Messages_PeerDialogs) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_peerDialogs):
 		m2 := Messages_PeerDialogs_MessagesPeerDialogs{}
+		m2.MessagesPeerDialogs = &TLMessagesPeerDialogs{}
 		m2.MessagesPeerDialogs.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11052,6 +11537,7 @@ func (m *TopPeer) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_topPeer):
 		m2 := TopPeer_TopPeer{}
+		m2.TopPeer = &TLTopPeer{}
 		m2.TopPeer.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11101,26 +11587,32 @@ func (m *TopPeerCategory) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_topPeerCategoryBotsPM):
 		m2 := TopPeerCategory_TopPeerCategoryBotsPM{}
+		m2.TopPeerCategoryBotsPM = &TLTopPeerCategoryBotsPM{}
 		m2.TopPeerCategoryBotsPM.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_topPeerCategoryBotsInline):
 		m2 := TopPeerCategory_TopPeerCategoryBotsInline{}
+		m2.TopPeerCategoryBotsInline = &TLTopPeerCategoryBotsInline{}
 		m2.TopPeerCategoryBotsInline.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_topPeerCategoryCorrespondents):
 		m2 := TopPeerCategory_TopPeerCategoryCorrespondents{}
+		m2.TopPeerCategoryCorrespondents = &TLTopPeerCategoryCorrespondents{}
 		m2.TopPeerCategoryCorrespondents.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_topPeerCategoryGroups):
 		m2 := TopPeerCategory_TopPeerCategoryGroups{}
+		m2.TopPeerCategoryGroups = &TLTopPeerCategoryGroups{}
 		m2.TopPeerCategoryGroups.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_topPeerCategoryChannels):
 		m2 := TopPeerCategory_TopPeerCategoryChannels{}
+		m2.TopPeerCategoryChannels = &TLTopPeerCategoryChannels{}
 		m2.TopPeerCategoryChannels.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_topPeerCategoryPhoneCalls):
 		m2 := TopPeerCategory_TopPeerCategoryPhoneCalls{}
+		m2.TopPeerCategoryPhoneCalls = &TLTopPeerCategoryPhoneCalls{}
 		m2.TopPeerCategoryPhoneCalls.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11190,6 +11682,7 @@ func (m *TopPeerCategoryPeers) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_topPeerCategoryPeers):
 		m2 := TopPeerCategoryPeers_TopPeerCategoryPeers{}
+		m2.TopPeerCategoryPeers = &TLTopPeerCategoryPeers{}
 		m2.TopPeerCategoryPeers.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11227,10 +11720,12 @@ func (m *Contacts_TopPeers) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_contacts_topPeersNotModified):
 		m2 := Contacts_TopPeers_ContactsTopPeersNotModified{}
+		m2.ContactsTopPeersNotModified = &TLContactsTopPeersNotModified{}
 		m2.ContactsTopPeersNotModified.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_contacts_topPeers):
 		m2 := Contacts_TopPeers_ContactsTopPeers{}
+		m2.ContactsTopPeers = &TLContactsTopPeers{}
 		m2.ContactsTopPeers.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11275,10 +11770,12 @@ func (m *DraftMessage) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_draftMessageEmpty):
 		m2 := DraftMessage_DraftMessageEmpty{}
+		m2.DraftMessageEmpty = &TLDraftMessageEmpty{}
 		m2.DraftMessageEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_draftMessage):
 		m2 := DraftMessage_DraftMessage{}
+		m2.DraftMessage = &TLDraftMessage{}
 		m2.DraftMessage.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11323,10 +11820,12 @@ func (m *Messages_FeaturedStickers) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_featuredStickersNotModified):
 		m2 := Messages_FeaturedStickers_MessagesFeaturedStickersNotModified{}
+		m2.MessagesFeaturedStickersNotModified = &TLMessagesFeaturedStickersNotModified{}
 		m2.MessagesFeaturedStickersNotModified.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messages_featuredStickers):
 		m2 := Messages_FeaturedStickers_MessagesFeaturedStickers{}
+		m2.MessagesFeaturedStickers = &TLMessagesFeaturedStickers{}
 		m2.MessagesFeaturedStickers.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11371,10 +11870,12 @@ func (m *Messages_RecentStickers) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_recentStickersNotModified):
 		m2 := Messages_RecentStickers_MessagesRecentStickersNotModified{}
+		m2.MessagesRecentStickersNotModified = &TLMessagesRecentStickersNotModified{}
 		m2.MessagesRecentStickersNotModified.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messages_recentStickers):
 		m2 := Messages_RecentStickers_MessagesRecentStickers{}
+		m2.MessagesRecentStickers = &TLMessagesRecentStickers{}
 		m2.MessagesRecentStickers.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11416,6 +11917,7 @@ func (m *Messages_ArchivedStickers) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_archivedStickers):
 		m2 := Messages_ArchivedStickers_MessagesArchivedStickers{}
+		m2.MessagesArchivedStickers = &TLMessagesArchivedStickers{}
 		m2.MessagesArchivedStickers.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11453,10 +11955,12 @@ func (m *Messages_StickerSetInstallResult) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_stickerSetInstallResultSuccess):
 		m2 := Messages_StickerSetInstallResult_MessagesStickerSetInstallResultSuccess{}
+		m2.MessagesStickerSetInstallResultSuccess = &TLMessagesStickerSetInstallResultSuccess{}
 		m2.MessagesStickerSetInstallResultSuccess.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messages_stickerSetInstallResultArchive):
 		m2 := Messages_StickerSetInstallResult_MessagesStickerSetInstallResultArchive{}
+		m2.MessagesStickerSetInstallResultArchive = &TLMessagesStickerSetInstallResultArchive{}
 		m2.MessagesStickerSetInstallResultArchive.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11501,10 +12005,12 @@ func (m *StickerSetCovered) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_stickerSetCovered):
 		m2 := StickerSetCovered_StickerSetCovered{}
+		m2.StickerSetCovered = &TLStickerSetCovered{}
 		m2.StickerSetCovered.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_stickerSetMultiCovered):
 		m2 := StickerSetCovered_StickerSetMultiCovered{}
+		m2.StickerSetMultiCovered = &TLStickerSetMultiCovered{}
 		m2.StickerSetMultiCovered.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11546,6 +12052,7 @@ func (m *MaskCoords) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_maskCoords):
 		m2 := MaskCoords_MaskCoords{}
+		m2.MaskCoords = &TLMaskCoords{}
 		m2.MaskCoords.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11583,10 +12090,12 @@ func (m *InputStickeredMedia) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputStickeredMediaPhoto):
 		m2 := InputStickeredMedia_InputStickeredMediaPhoto{}
+		m2.InputStickeredMediaPhoto = &TLInputStickeredMediaPhoto{}
 		m2.InputStickeredMediaPhoto.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputStickeredMediaDocument):
 		m2 := InputStickeredMedia_InputStickeredMediaDocument{}
+		m2.InputStickeredMediaDocument = &TLInputStickeredMediaDocument{}
 		m2.InputStickeredMediaDocument.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11628,6 +12137,7 @@ func (m *Game) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_game):
 		m2 := Game_Game{}
+		m2.Game = &TLGame{}
 		m2.Game.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11665,10 +12175,12 @@ func (m *InputGame) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputGameID):
 		m2 := InputGame_InputGameID{}
+		m2.InputGameID = &TLInputGameID{}
 		m2.InputGameID.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputGameShortName):
 		m2 := InputGame_InputGameShortName{}
+		m2.InputGameShortName = &TLInputGameShortName{}
 		m2.InputGameShortName.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11710,6 +12222,7 @@ func (m *HighScore) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_highScore):
 		m2 := HighScore_HighScore{}
+		m2.HighScore = &TLHighScore{}
 		m2.HighScore.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11744,6 +12257,7 @@ func (m *Messages_HighScores) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_highScores):
 		m2 := Messages_HighScores_MessagesHighScores{}
+		m2.MessagesHighScores = &TLMessagesHighScores{}
 		m2.MessagesHighScores.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -11805,42 +12319,52 @@ func (m *RichText) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_textEmpty):
 		m2 := RichText_TextEmpty{}
+		m2.TextEmpty = &TLTextEmpty{}
 		m2.TextEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_textPlain):
 		m2 := RichText_TextPlain{}
+		m2.TextPlain = &TLTextPlain{}
 		m2.TextPlain.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_textBold):
 		m2 := RichText_TextBold{}
+		m2.TextBold = &TLTextBold{}
 		m2.TextBold.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_textItalic):
 		m2 := RichText_TextItalic{}
+		m2.TextItalic = &TLTextItalic{}
 		m2.TextItalic.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_textUnderline):
 		m2 := RichText_TextUnderline{}
+		m2.TextUnderline = &TLTextUnderline{}
 		m2.TextUnderline.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_textStrike):
 		m2 := RichText_TextStrike{}
+		m2.TextStrike = &TLTextStrike{}
 		m2.TextStrike.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_textFixed):
 		m2 := RichText_TextFixed{}
+		m2.TextFixed = &TLTextFixed{}
 		m2.TextFixed.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_textUrl):
 		m2 := RichText_TextUrl{}
+		m2.TextUrl = &TLTextUrl{}
 		m2.TextUrl.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_textEmail):
 		m2 := RichText_TextEmail{}
+		m2.TextEmail = &TLTextEmail{}
 		m2.TextEmail.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_textConcat):
 		m2 := RichText_TextConcat{}
+		m2.TextConcat = &TLTextConcat{}
 		m2.TextConcat.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12004,94 +12528,117 @@ func (m *PageBlock) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_pageBlockUnsupported):
 		m2 := PageBlock_PageBlockUnsupported{}
+		m2.PageBlockUnsupported = &TLPageBlockUnsupported{}
 		m2.PageBlockUnsupported.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockTitle):
 		m2 := PageBlock_PageBlockTitle{}
+		m2.PageBlockTitle = &TLPageBlockTitle{}
 		m2.PageBlockTitle.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockSubtitle):
 		m2 := PageBlock_PageBlockSubtitle{}
+		m2.PageBlockSubtitle = &TLPageBlockSubtitle{}
 		m2.PageBlockSubtitle.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockAuthorDate):
 		m2 := PageBlock_PageBlockAuthorDate{}
+		m2.PageBlockAuthorDate = &TLPageBlockAuthorDate{}
 		m2.PageBlockAuthorDate.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockHeader):
 		m2 := PageBlock_PageBlockHeader{}
+		m2.PageBlockHeader = &TLPageBlockHeader{}
 		m2.PageBlockHeader.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockSubheader):
 		m2 := PageBlock_PageBlockSubheader{}
+		m2.PageBlockSubheader = &TLPageBlockSubheader{}
 		m2.PageBlockSubheader.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockParagraph):
 		m2 := PageBlock_PageBlockParagraph{}
+		m2.PageBlockParagraph = &TLPageBlockParagraph{}
 		m2.PageBlockParagraph.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockPreformatted):
 		m2 := PageBlock_PageBlockPreformatted{}
+		m2.PageBlockPreformatted = &TLPageBlockPreformatted{}
 		m2.PageBlockPreformatted.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockFooter):
 		m2 := PageBlock_PageBlockFooter{}
+		m2.PageBlockFooter = &TLPageBlockFooter{}
 		m2.PageBlockFooter.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockDivider):
 		m2 := PageBlock_PageBlockDivider{}
+		m2.PageBlockDivider = &TLPageBlockDivider{}
 		m2.PageBlockDivider.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockAnchor):
 		m2 := PageBlock_PageBlockAnchor{}
+		m2.PageBlockAnchor = &TLPageBlockAnchor{}
 		m2.PageBlockAnchor.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockList):
 		m2 := PageBlock_PageBlockList{}
+		m2.PageBlockList = &TLPageBlockList{}
 		m2.PageBlockList.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockBlockquote):
 		m2 := PageBlock_PageBlockBlockquote{}
+		m2.PageBlockBlockquote = &TLPageBlockBlockquote{}
 		m2.PageBlockBlockquote.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockPullquote):
 		m2 := PageBlock_PageBlockPullquote{}
+		m2.PageBlockPullquote = &TLPageBlockPullquote{}
 		m2.PageBlockPullquote.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockPhoto):
 		m2 := PageBlock_PageBlockPhoto{}
+		m2.PageBlockPhoto = &TLPageBlockPhoto{}
 		m2.PageBlockPhoto.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockVideo):
 		m2 := PageBlock_PageBlockVideo{}
+		m2.PageBlockVideo = &TLPageBlockVideo{}
 		m2.PageBlockVideo.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockCover):
 		m2 := PageBlock_PageBlockCover{}
+		m2.PageBlockCover = &TLPageBlockCover{}
 		m2.PageBlockCover.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockEmbed):
 		m2 := PageBlock_PageBlockEmbed{}
+		m2.PageBlockEmbed = &TLPageBlockEmbed{}
 		m2.PageBlockEmbed.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockEmbedPost):
 		m2 := PageBlock_PageBlockEmbedPost{}
+		m2.PageBlockEmbedPost = &TLPageBlockEmbedPost{}
 		m2.PageBlockEmbedPost.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockCollage):
 		m2 := PageBlock_PageBlockCollage{}
+		m2.PageBlockCollage = &TLPageBlockCollage{}
 		m2.PageBlockCollage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockSlideshow):
 		m2 := PageBlock_PageBlockSlideshow{}
+		m2.PageBlockSlideshow = &TLPageBlockSlideshow{}
 		m2.PageBlockSlideshow.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockChannel):
 		m2 := PageBlock_PageBlockChannel{}
+		m2.PageBlockChannel = &TLPageBlockChannel{}
 		m2.PageBlockChannel.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageBlockAudio):
 		m2 := PageBlock_PageBlockAudio{}
+		m2.PageBlockAudio = &TLPageBlockAudio{}
 		m2.PageBlockAudio.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12283,10 +12830,12 @@ func (m *Page) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_pagePart):
 		m2 := Page_PagePart{}
+		m2.PagePart = &TLPagePart{}
 		m2.PagePart.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_pageFull):
 		m2 := Page_PageFull{}
+		m2.PageFull = &TLPageFull{}
 		m2.PageFull.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12337,18 +12886,22 @@ func (m *PhoneCallDiscardReason) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_phoneCallDiscardReasonMissed):
 		m2 := PhoneCallDiscardReason_PhoneCallDiscardReasonMissed{}
+		m2.PhoneCallDiscardReasonMissed = &TLPhoneCallDiscardReasonMissed{}
 		m2.PhoneCallDiscardReasonMissed.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_phoneCallDiscardReasonDisconnect):
 		m2 := PhoneCallDiscardReason_PhoneCallDiscardReasonDisconnect{}
+		m2.PhoneCallDiscardReasonDisconnect = &TLPhoneCallDiscardReasonDisconnect{}
 		m2.PhoneCallDiscardReasonDisconnect.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_phoneCallDiscardReasonHangup):
 		m2 := PhoneCallDiscardReason_PhoneCallDiscardReasonHangup{}
+		m2.PhoneCallDiscardReasonHangup = &TLPhoneCallDiscardReasonHangup{}
 		m2.PhoneCallDiscardReasonHangup.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_phoneCallDiscardReasonBusy):
 		m2 := PhoneCallDiscardReason_PhoneCallDiscardReasonBusy{}
+		m2.PhoneCallDiscardReasonBusy = &TLPhoneCallDiscardReasonBusy{}
 		m2.PhoneCallDiscardReasonBusy.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12404,6 +12957,7 @@ func (m *DataJSON) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_dataJSON):
 		m2 := DataJSON_DataJSON{}
+		m2.DataJSON = &TLDataJSON{}
 		m2.DataJSON.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12438,6 +12992,7 @@ func (m *LabeledPrice) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_labeledPrice):
 		m2 := LabeledPrice_LabeledPrice{}
+		m2.LabeledPrice = &TLLabeledPrice{}
 		m2.LabeledPrice.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12472,6 +13027,7 @@ func (m *Invoice) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_invoice):
 		m2 := Invoice_Invoice{}
+		m2.Invoice = &TLInvoice{}
 		m2.Invoice.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12506,6 +13062,7 @@ func (m *PaymentCharge) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_paymentCharge):
 		m2 := PaymentCharge_PaymentCharge{}
+		m2.PaymentCharge = &TLPaymentCharge{}
 		m2.PaymentCharge.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12540,6 +13097,7 @@ func (m *PostAddress) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_postAddress):
 		m2 := PostAddress_PostAddress{}
+		m2.PostAddress = &TLPostAddress{}
 		m2.PostAddress.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12574,6 +13132,7 @@ func (m *PaymentRequestedInfo) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_paymentRequestedInfo):
 		m2 := PaymentRequestedInfo_PaymentRequestedInfo{}
+		m2.PaymentRequestedInfo = &TLPaymentRequestedInfo{}
 		m2.PaymentRequestedInfo.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12608,6 +13167,7 @@ func (m *PaymentSavedCredentials) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_paymentSavedCredentialsCard):
 		m2 := PaymentSavedCredentials_PaymentSavedCredentialsCard{}
+		m2.PaymentSavedCredentialsCard = &TLPaymentSavedCredentialsCard{}
 		m2.PaymentSavedCredentialsCard.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12642,6 +13202,7 @@ func (m *WebDocument) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_webDocument):
 		m2 := WebDocument_WebDocument{}
+		m2.WebDocument = &TLWebDocument{}
 		m2.WebDocument.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12676,6 +13237,7 @@ func (m *InputWebDocument) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputWebDocument):
 		m2 := InputWebDocument_InputWebDocument{}
+		m2.InputWebDocument = &TLInputWebDocument{}
 		m2.InputWebDocument.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12710,6 +13272,7 @@ func (m *InputWebFileLocation) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputWebFileLocation):
 		m2 := InputWebFileLocation_InputWebFileLocation{}
+		m2.InputWebFileLocation = &TLInputWebFileLocation{}
 		m2.InputWebFileLocation.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12744,6 +13307,7 @@ func (m *Upload_WebFile) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_upload_webFile):
 		m2 := Upload_WebFile_UploadWebFile{}
+		m2.UploadWebFile = &TLUploadWebFile{}
 		m2.UploadWebFile.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12778,6 +13342,7 @@ func (m *Payments_PaymentForm) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_payments_paymentForm):
 		m2 := Payments_PaymentForm_PaymentsPaymentForm{}
+		m2.PaymentsPaymentForm = &TLPaymentsPaymentForm{}
 		m2.PaymentsPaymentForm.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12812,6 +13377,7 @@ func (m *Payments_ValidatedRequestedInfo) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_payments_validatedRequestedInfo):
 		m2 := Payments_ValidatedRequestedInfo_PaymentsValidatedRequestedInfo{}
+		m2.PaymentsValidatedRequestedInfo = &TLPaymentsValidatedRequestedInfo{}
 		m2.PaymentsValidatedRequestedInfo.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12849,10 +13415,12 @@ func (m *Payments_PaymentResult) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_payments_paymentResult):
 		m2 := Payments_PaymentResult_PaymentsPaymentResult{}
+		m2.PaymentsPaymentResult = &TLPaymentsPaymentResult{}
 		m2.PaymentsPaymentResult.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_payments_paymentVerficationNeeded):
 		m2 := Payments_PaymentResult_PaymentsPaymentVerficationNeeded{}
+		m2.PaymentsPaymentVerficationNeeded = &TLPaymentsPaymentVerficationNeeded{}
 		m2.PaymentsPaymentVerficationNeeded.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12894,6 +13462,7 @@ func (m *Payments_PaymentReceipt) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_payments_paymentReceipt):
 		m2 := Payments_PaymentReceipt_PaymentsPaymentReceipt{}
+		m2.PaymentsPaymentReceipt = &TLPaymentsPaymentReceipt{}
 		m2.PaymentsPaymentReceipt.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12928,6 +13497,7 @@ func (m *Payments_SavedInfo) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_payments_savedInfo):
 		m2 := Payments_SavedInfo_PaymentsSavedInfo{}
+		m2.PaymentsSavedInfo = &TLPaymentsSavedInfo{}
 		m2.PaymentsSavedInfo.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -12965,10 +13535,12 @@ func (m *InputPaymentCredentials) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputPaymentCredentialsSaved):
 		m2 := InputPaymentCredentials_InputPaymentCredentialsSaved{}
+		m2.InputPaymentCredentialsSaved = &TLInputPaymentCredentialsSaved{}
 		m2.InputPaymentCredentialsSaved.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_inputPaymentCredentials):
 		m2 := InputPaymentCredentials_InputPaymentCredentials{}
+		m2.InputPaymentCredentials = &TLInputPaymentCredentials{}
 		m2.InputPaymentCredentials.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13010,6 +13582,7 @@ func (m *Account_TmpPassword) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_account_tmpPassword):
 		m2 := Account_TmpPassword_AccountTmpPassword{}
+		m2.AccountTmpPassword = &TLAccountTmpPassword{}
 		m2.AccountTmpPassword.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13044,6 +13617,7 @@ func (m *ShippingOption) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_shippingOption):
 		m2 := ShippingOption_ShippingOption{}
+		m2.ShippingOption = &TLShippingOption{}
 		m2.ShippingOption.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13078,6 +13652,7 @@ func (m *InputStickerSetItem) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputStickerSetItem):
 		m2 := InputStickerSetItem_InputStickerSetItem{}
+		m2.InputStickerSetItem = &TLInputStickerSetItem{}
 		m2.InputStickerSetItem.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13112,6 +13687,7 @@ func (m *InputPhoneCall) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_inputPhoneCall):
 		m2 := InputPhoneCall_InputPhoneCall{}
+		m2.InputPhoneCall = &TLInputPhoneCall{}
 		m2.InputPhoneCall.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13161,26 +13737,32 @@ func (m *PhoneCall) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_phoneCallEmpty):
 		m2 := PhoneCall_PhoneCallEmpty{}
+		m2.PhoneCallEmpty = &TLPhoneCallEmpty{}
 		m2.PhoneCallEmpty.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_phoneCallWaiting):
 		m2 := PhoneCall_PhoneCallWaiting{}
+		m2.PhoneCallWaiting = &TLPhoneCallWaiting{}
 		m2.PhoneCallWaiting.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_phoneCallRequested):
 		m2 := PhoneCall_PhoneCallRequested{}
+		m2.PhoneCallRequested = &TLPhoneCallRequested{}
 		m2.PhoneCallRequested.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_phoneCallAccepted):
 		m2 := PhoneCall_PhoneCallAccepted{}
+		m2.PhoneCallAccepted = &TLPhoneCallAccepted{}
 		m2.PhoneCallAccepted.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_phoneCall):
 		m2 := PhoneCall_PhoneCall{}
+		m2.PhoneCall = &TLPhoneCall{}
 		m2.PhoneCall.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_phoneCallDiscarded):
 		m2 := PhoneCall_PhoneCallDiscarded{}
+		m2.PhoneCallDiscarded = &TLPhoneCallDiscarded{}
 		m2.PhoneCallDiscarded.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13250,6 +13832,7 @@ func (m *PhoneConnection) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_phoneConnection):
 		m2 := PhoneConnection_PhoneConnection{}
+		m2.PhoneConnection = &TLPhoneConnection{}
 		m2.PhoneConnection.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13284,6 +13867,7 @@ func (m *PhoneCallProtocol) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_phoneCallProtocol):
 		m2 := PhoneCallProtocol_PhoneCallProtocol{}
+		m2.PhoneCallProtocol = &TLPhoneCallProtocol{}
 		m2.PhoneCallProtocol.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13318,6 +13902,7 @@ func (m *Phone_PhoneCall) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_phone_phoneCall):
 		m2 := Phone_PhoneCall_PhonePhoneCall{}
+		m2.PhonePhoneCall = &TLPhonePhoneCall{}
 		m2.PhonePhoneCall.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13355,10 +13940,12 @@ func (m *Upload_CdnFile) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_upload_cdnFileReuploadNeeded):
 		m2 := Upload_CdnFile_UploadCdnFileReuploadNeeded{}
+		m2.UploadCdnFileReuploadNeeded = &TLUploadCdnFileReuploadNeeded{}
 		m2.UploadCdnFileReuploadNeeded.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_upload_cdnFile):
 		m2 := Upload_CdnFile_UploadCdnFile{}
+		m2.UploadCdnFile = &TLUploadCdnFile{}
 		m2.UploadCdnFile.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13400,6 +13987,7 @@ func (m *CdnPublicKey) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_cdnPublicKey):
 		m2 := CdnPublicKey_CdnPublicKey{}
+		m2.CdnPublicKey = &TLCdnPublicKey{}
 		m2.CdnPublicKey.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13434,6 +14022,7 @@ func (m *CdnConfig) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_cdnConfig):
 		m2 := CdnConfig_CdnConfig{}
+		m2.CdnConfig = &TLCdnConfig{}
 		m2.CdnConfig.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13474,14 +14063,17 @@ func (m *LangPackString) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_langPackString):
 		m2 := LangPackString_LangPackString{}
+		m2.LangPackString = &TLLangPackString{}
 		m2.LangPackString.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_langPackStringPluralized):
 		m2 := LangPackString_LangPackStringPluralized{}
+		m2.LangPackStringPluralized = &TLLangPackStringPluralized{}
 		m2.LangPackStringPluralized.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_langPackStringDeleted):
 		m2 := LangPackString_LangPackStringDeleted{}
+		m2.LangPackStringDeleted = &TLLangPackStringDeleted{}
 		m2.LangPackStringDeleted.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13530,6 +14122,7 @@ func (m *LangPackDifference) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_langPackDifference):
 		m2 := LangPackDifference_LangPackDifference{}
+		m2.LangPackDifference = &TLLangPackDifference{}
 		m2.LangPackDifference.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13564,6 +14157,7 @@ func (m *LangPackLanguage) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_langPackLanguage):
 		m2 := LangPackLanguage_LangPackLanguage{}
+		m2.LangPackLanguage = &TLLangPackLanguage{}
 		m2.LangPackLanguage.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13598,6 +14192,7 @@ func (m *ChannelAdminRights) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_channelAdminRights):
 		m2 := ChannelAdminRights_ChannelAdminRights{}
+		m2.ChannelAdminRights = &TLChannelAdminRights{}
 		m2.ChannelAdminRights.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13632,6 +14227,7 @@ func (m *ChannelBannedRights) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_channelBannedRights):
 		m2 := ChannelBannedRights_ChannelBannedRights{}
+		m2.ChannelBannedRights = &TLChannelBannedRights{}
 		m2.ChannelBannedRights.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13708,62 +14304,77 @@ func (m *ChannelAdminLogEventAction) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_channelAdminLogEventActionChangeTitle):
 		m2 := ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeTitle{}
+		m2.ChannelAdminLogEventActionChangeTitle = &TLChannelAdminLogEventActionChangeTitle{}
 		m2.ChannelAdminLogEventActionChangeTitle.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelAdminLogEventActionChangeAbout):
 		m2 := ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeAbout{}
+		m2.ChannelAdminLogEventActionChangeAbout = &TLChannelAdminLogEventActionChangeAbout{}
 		m2.ChannelAdminLogEventActionChangeAbout.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelAdminLogEventActionChangeUsername):
 		m2 := ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeUsername{}
+		m2.ChannelAdminLogEventActionChangeUsername = &TLChannelAdminLogEventActionChangeUsername{}
 		m2.ChannelAdminLogEventActionChangeUsername.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelAdminLogEventActionChangePhoto):
 		m2 := ChannelAdminLogEventAction_ChannelAdminLogEventActionChangePhoto{}
+		m2.ChannelAdminLogEventActionChangePhoto = &TLChannelAdminLogEventActionChangePhoto{}
 		m2.ChannelAdminLogEventActionChangePhoto.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelAdminLogEventActionToggleInvites):
 		m2 := ChannelAdminLogEventAction_ChannelAdminLogEventActionToggleInvites{}
+		m2.ChannelAdminLogEventActionToggleInvites = &TLChannelAdminLogEventActionToggleInvites{}
 		m2.ChannelAdminLogEventActionToggleInvites.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelAdminLogEventActionToggleSignatures):
 		m2 := ChannelAdminLogEventAction_ChannelAdminLogEventActionToggleSignatures{}
+		m2.ChannelAdminLogEventActionToggleSignatures = &TLChannelAdminLogEventActionToggleSignatures{}
 		m2.ChannelAdminLogEventActionToggleSignatures.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelAdminLogEventActionUpdatePinned):
 		m2 := ChannelAdminLogEventAction_ChannelAdminLogEventActionUpdatePinned{}
+		m2.ChannelAdminLogEventActionUpdatePinned = &TLChannelAdminLogEventActionUpdatePinned{}
 		m2.ChannelAdminLogEventActionUpdatePinned.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelAdminLogEventActionEditMessage):
 		m2 := ChannelAdminLogEventAction_ChannelAdminLogEventActionEditMessage{}
+		m2.ChannelAdminLogEventActionEditMessage = &TLChannelAdminLogEventActionEditMessage{}
 		m2.ChannelAdminLogEventActionEditMessage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelAdminLogEventActionDeleteMessage):
 		m2 := ChannelAdminLogEventAction_ChannelAdminLogEventActionDeleteMessage{}
+		m2.ChannelAdminLogEventActionDeleteMessage = &TLChannelAdminLogEventActionDeleteMessage{}
 		m2.ChannelAdminLogEventActionDeleteMessage.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelAdminLogEventActionParticipantJoin):
 		m2 := ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantJoin{}
+		m2.ChannelAdminLogEventActionParticipantJoin = &TLChannelAdminLogEventActionParticipantJoin{}
 		m2.ChannelAdminLogEventActionParticipantJoin.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelAdminLogEventActionParticipantLeave):
 		m2 := ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantLeave{}
+		m2.ChannelAdminLogEventActionParticipantLeave = &TLChannelAdminLogEventActionParticipantLeave{}
 		m2.ChannelAdminLogEventActionParticipantLeave.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelAdminLogEventActionParticipantInvite):
 		m2 := ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantInvite{}
+		m2.ChannelAdminLogEventActionParticipantInvite = &TLChannelAdminLogEventActionParticipantInvite{}
 		m2.ChannelAdminLogEventActionParticipantInvite.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelAdminLogEventActionParticipantToggleBan):
 		m2 := ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantToggleBan{}
+		m2.ChannelAdminLogEventActionParticipantToggleBan = &TLChannelAdminLogEventActionParticipantToggleBan{}
 		m2.ChannelAdminLogEventActionParticipantToggleBan.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelAdminLogEventActionParticipantToggleAdmin):
 		m2 := ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantToggleAdmin{}
+		m2.ChannelAdminLogEventActionParticipantToggleAdmin = &TLChannelAdminLogEventActionParticipantToggleAdmin{}
 		m2.ChannelAdminLogEventActionParticipantToggleAdmin.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_channelAdminLogEventActionChangeStickerSet):
 		m2 := ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeStickerSet{}
+		m2.ChannelAdminLogEventActionChangeStickerSet = &TLChannelAdminLogEventActionChangeStickerSet{}
 		m2.ChannelAdminLogEventActionChangeStickerSet.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13896,6 +14507,7 @@ func (m *ChannelAdminLogEvent) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_channelAdminLogEvent):
 		m2 := ChannelAdminLogEvent_ChannelAdminLogEvent{}
+		m2.ChannelAdminLogEvent = &TLChannelAdminLogEvent{}
 		m2.ChannelAdminLogEvent.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13930,6 +14542,7 @@ func (m *Channels_AdminLogResults) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_channels_adminLogResults):
 		m2 := Channels_AdminLogResults_ChannelsAdminLogResults{}
+		m2.ChannelsAdminLogResults = &TLChannelsAdminLogResults{}
 		m2.ChannelsAdminLogResults.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13964,6 +14577,7 @@ func (m *ChannelAdminLogEventsFilter) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_channelAdminLogEventsFilter):
 		m2 := ChannelAdminLogEventsFilter_ChannelAdminLogEventsFilter{}
+		m2.ChannelAdminLogEventsFilter = &TLChannelAdminLogEventsFilter{}
 		m2.ChannelAdminLogEventsFilter.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -13998,6 +14612,7 @@ func (m *PopularContact) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_popularContact):
 		m2 := PopularContact_PopularContact{}
+		m2.PopularContact = &TLPopularContact{}
 		m2.PopularContact.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -14032,6 +14647,7 @@ func (m *CdnFileHash) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_cdnFileHash):
 		m2 := CdnFileHash_CdnFileHash{}
+		m2.CdnFileHash = &TLCdnFileHash{}
 		m2.CdnFileHash.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -14069,10 +14685,12 @@ func (m *Messages_FavedStickers) Decode(dbuf *DecodeBuf) error {
 	switch classId {
 	case int32(TLConstructor_CRC32_messages_favedStickersNotModified):
 		m2 := Messages_FavedStickers_MessagesFavedStickersNotModified{}
+		m2.MessagesFavedStickersNotModified = &TLMessagesFavedStickersNotModified{}
 		m2.MessagesFavedStickersNotModified.Decode(dbuf)
 		m.Payload = &m2
 	case int32(TLConstructor_CRC32_messages_favedStickers):
 		m2 := Messages_FavedStickers_MessagesFavedStickers{}
+		m2.MessagesFavedStickers = &TLMessagesFavedStickers{}
 		m2.MessagesFavedStickers.Decode(dbuf)
 		m.Payload = &m2
 	}
@@ -14520,9 +15138,10 @@ func (m *TLFutureSalts) Encode() []byte {
 	x.Long(m.ReqMsgId)
 	x.Int(m.Now)
 	// x.VectorMessage(m.Salts);
-	x3 := make([]byte, 8)
+	// x3 := make([]byte, 8)
 	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Salts)))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Salts)))
+	x.Int(int32(len(m.Salts)))
 	for _, v := range m.Salts {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -14647,9 +15266,10 @@ func (m *TLHelpConfigSimple) Encode() []byte {
 	x.Int(m.Expires)
 	x.Int(m.DcId)
 	// x.VectorMessage(m.IpPortList);
-	x4 := make([]byte, 8)
+	// x4 := make([]byte, 8)
 	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.IpPortList)))
+	// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.IpPortList)))
+	x.Int(int32(len(m.IpPortList)))
 	for _, v := range m.IpPortList {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -14922,9 +15542,11 @@ func (m *TLInputMediaUploadedPhoto) Encode() []byte {
 	x.String(m.Caption)
 	if (flags & (1 << 0)) != 0 {
 		// x.VectorMessage(m.Stickers);
-		x3 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Stickers)))
+		// x3 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Stickers)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Stickers)))
 		for _, v := range m.Stickers {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -14943,7 +15565,7 @@ func (m *TLInputMediaUploadedPhoto) Decode(dbuf *DecodeBuf) error {
 	m.Caption = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
 		// x.VectorMessage(m.Stickers);
-		dbuf.Int()
+		//  dbuf.Int()
 		c3 := dbuf.Int()
 		if c3 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c3)
@@ -15047,18 +15669,22 @@ func (m *TLInputMediaUploadedDocument) Encode() []byte {
 	}
 	x.String(m.MimeType)
 	// x.VectorMessage(m.Attributes);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Attributes)))
+	// x4 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Attributes)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Attributes)))
 	for _, v := range m.Attributes {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	x.String(m.Caption)
 	if (flags & (1 << 0)) != 0 {
 		// x.VectorMessage(m.Stickers);
-		x6 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Stickers)))
+		// x6 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Stickers)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Stickers)))
 		for _, v := range m.Stickers {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -15081,7 +15707,7 @@ func (m *TLInputMediaUploadedDocument) Decode(dbuf *DecodeBuf) error {
 	}
 	m.MimeType = dbuf.String()
 	// x.VectorMessage(m.Attributes);
-	dbuf.Int()
+	//  dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -15095,7 +15721,7 @@ func (m *TLInputMediaUploadedDocument) Decode(dbuf *DecodeBuf) error {
 	m.Caption = dbuf.String()
 	if (flags & (1 << 0)) != 0 {
 		// x.VectorMessage(m.Stickers);
-		dbuf.Int()
+		//  dbuf.Int()
 		c6 := dbuf.Int()
 		if c6 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c6)
@@ -16326,9 +16952,11 @@ func (m *TLChatFull) Encode() []byte {
 	x.Bytes(m.NotifySettings.Encode())
 	x.Bytes(m.ExportedInvite.Encode())
 	// x.VectorMessage(m.BotInfo);
-	x6 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.BotInfo)))
+	// x6 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.BotInfo)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.BotInfo)))
 	for _, v := range m.BotInfo {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -16350,7 +16978,7 @@ func (m *TLChatFull) Decode(dbuf *DecodeBuf) error {
 	m.ExportedInvite = &ExportedChatInvite{}
 	(*m.ExportedInvite).Decode(dbuf)
 	// x.VectorMessage(m.BotInfo);
-	dbuf.Int()
+	//  dbuf.Int()
 	c6 := dbuf.Int()
 	if c6 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c6)
@@ -16435,9 +17063,11 @@ func (m *TLChannelFull) Encode() []byte {
 	x.Bytes(m.NotifySettings.Encode())
 	x.Bytes(m.ExportedInvite.Encode())
 	// x.VectorMessage(m.BotInfo);
-	x16 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x16, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x16[4:], uint32(len(m.BotInfo)))
+	// x16 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x16, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x16[4:], uint32(len(m.BotInfo)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.BotInfo)))
 	for _, v := range m.BotInfo {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -16494,7 +17124,7 @@ func (m *TLChannelFull) Decode(dbuf *DecodeBuf) error {
 	m.ExportedInvite = &ExportedChatInvite{}
 	(*m.ExportedInvite).Decode(dbuf)
 	// x.VectorMessage(m.BotInfo);
-	dbuf.Int()
+	//  dbuf.Int()
 	c16 := dbuf.Int()
 	if c16 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c16)
@@ -16604,9 +17234,11 @@ func (m *TLChatParticipants) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_chatParticipants))
 	x.Int(m.ChatId)
 	// x.VectorMessage(m.Participants);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Participants)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Participants)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Participants)))
 	for _, v := range m.Participants {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -16617,7 +17249,7 @@ func (m *TLChatParticipants) Encode() []byte {
 func (m *TLChatParticipants) Decode(dbuf *DecodeBuf) error {
 	m.ChatId = dbuf.Int()
 	// x.VectorMessage(m.Participants);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -16767,9 +17399,11 @@ func (m *TLMessage) Encode() []byte {
 	}
 	if (flags & (1 << 7)) != 0 {
 		// x.VectorMessage(m.Entities);
-		x16 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x16, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x16[4:], uint32(len(m.Entities)))
+		// x16 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x16, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x16[4:], uint32(len(m.Entities)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Entities)))
 		for _, v := range m.Entities {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -16835,7 +17469,7 @@ func (m *TLMessage) Decode(dbuf *DecodeBuf) error {
 	}
 	if (flags & (1 << 7)) != 0 {
 		// x.VectorMessage(m.Entities);
-		dbuf.Int()
+		//  dbuf.Int()
 		c16 := dbuf.Int()
 		if c16 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c16)
@@ -17599,9 +18233,11 @@ func (m *TLPhoto) Encode() []byte {
 	x.Long(m.AccessHash)
 	x.Int(m.Date)
 	// x.VectorMessage(m.Sizes);
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Sizes)))
+	// x5 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Sizes)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Sizes)))
 	for _, v := range m.Sizes {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -17617,7 +18253,7 @@ func (m *TLPhoto) Decode(dbuf *DecodeBuf) error {
 	m.AccessHash = dbuf.Long()
 	m.Date = dbuf.Int()
 	// x.VectorMessage(m.Sizes);
-	dbuf.Int()
+	//  dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -18037,9 +18673,11 @@ func (m *TLWallPaper) Encode() []byte {
 	x.Int(m.Id)
 	x.String(m.Title)
 	// x.VectorMessage(m.Sizes);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Sizes)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Sizes)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Sizes)))
 	for _, v := range m.Sizes {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -18051,7 +18689,7 @@ func (m *TLWallPaper) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.Int()
 	m.Title = dbuf.String()
 	// x.VectorMessage(m.Sizes);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18322,17 +18960,21 @@ func (m *TLContactsContacts) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_contacts))
 	// x.VectorMessage(m.Contacts);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Contacts)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Contacts)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Contacts)))
 	for _, v := range m.Contacts {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	x.Int(m.SavedCount)
 	// x.VectorMessage(m.Users);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -18341,7 +18983,7 @@ func (m *TLContactsContacts) Encode() []byte {
 
 func (m *TLContactsContacts) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Contacts);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -18354,7 +18996,7 @@ func (m *TLContactsContacts) Decode(dbuf *DecodeBuf) error {
 	}
 	m.SavedCount = dbuf.Int()
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18373,24 +19015,30 @@ func (m *TLContactsImportedContacts) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_importedContacts))
 	// x.VectorMessage(m.Imported);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Imported)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Imported)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Imported)))
 	for _, v := range m.Imported {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.PopularInvites);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.PopularInvites)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.PopularInvites)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.PopularInvites)))
 	for _, v := range m.PopularInvites {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	x.VectorLong(m.RetryContacts)
 	// x.VectorMessage(m.Users);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Users)))
+	// x4 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -18399,7 +19047,7 @@ func (m *TLContactsImportedContacts) Encode() []byte {
 
 func (m *TLContactsImportedContacts) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Imported);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -18411,7 +19059,7 @@ func (m *TLContactsImportedContacts) Decode(dbuf *DecodeBuf) error {
 		(*m.Imported[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.PopularInvites);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18424,7 +19072,7 @@ func (m *TLContactsImportedContacts) Decode(dbuf *DecodeBuf) error {
 	}
 	m.RetryContacts = dbuf.VectorLong()
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -18443,16 +19091,20 @@ func (m *TLContactsBlocked) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_blocked))
 	// x.VectorMessage(m.Blocked);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Blocked)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Blocked)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Blocked)))
 	for _, v := range m.Blocked {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -18461,7 +19113,7 @@ func (m *TLContactsBlocked) Encode() []byte {
 
 func (m *TLContactsBlocked) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Blocked);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -18473,7 +19125,7 @@ func (m *TLContactsBlocked) Decode(dbuf *DecodeBuf) error {
 		(*m.Blocked[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18493,16 +19145,20 @@ func (m *TLContactsBlockedSlice) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_contacts_blockedSlice))
 	x.Int(m.Count)
 	// x.VectorMessage(m.Blocked);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Blocked)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Blocked)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Blocked)))
 	for _, v := range m.Blocked {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -18512,7 +19168,7 @@ func (m *TLContactsBlockedSlice) Encode() []byte {
 func (m *TLContactsBlockedSlice) Decode(dbuf *DecodeBuf) error {
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Blocked);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18524,7 +19180,7 @@ func (m *TLContactsBlockedSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Blocked[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18543,30 +19199,38 @@ func (m *TLMessagesDialogs) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_dialogs))
 	// x.VectorMessage(m.Dialogs);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Dialogs)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Dialogs)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Dialogs)))
 	for _, v := range m.Dialogs {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Messages);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Messages)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Messages)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Messages)))
 	for _, v := range m.Messages {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Chats)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Users)))
+	// x4 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -18575,7 +19239,7 @@ func (m *TLMessagesDialogs) Encode() []byte {
 
 func (m *TLMessagesDialogs) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Dialogs);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -18587,7 +19251,7 @@ func (m *TLMessagesDialogs) Decode(dbuf *DecodeBuf) error {
 		(*m.Dialogs[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Messages);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18599,7 +19263,7 @@ func (m *TLMessagesDialogs) Decode(dbuf *DecodeBuf) error {
 		(*m.Messages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18611,7 +19275,7 @@ func (m *TLMessagesDialogs) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -18631,30 +19295,38 @@ func (m *TLMessagesDialogsSlice) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_messages_dialogsSlice))
 	x.Int(m.Count)
 	// x.VectorMessage(m.Dialogs);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Dialogs)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Dialogs)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Dialogs)))
 	for _, v := range m.Dialogs {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Messages);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Messages)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Messages)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Messages)))
 	for _, v := range m.Messages {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Chats)))
+	// x4 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Users)))
+	// x5 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -18664,7 +19336,7 @@ func (m *TLMessagesDialogsSlice) Encode() []byte {
 func (m *TLMessagesDialogsSlice) Decode(dbuf *DecodeBuf) error {
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Dialogs);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18676,7 +19348,7 @@ func (m *TLMessagesDialogsSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Dialogs[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Messages);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18688,7 +19360,7 @@ func (m *TLMessagesDialogsSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Messages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -18700,7 +19372,7 @@ func (m *TLMessagesDialogsSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -18719,23 +19391,29 @@ func (m *TLMessagesMessages) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_messages))
 	// x.VectorMessage(m.Messages);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Messages)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Messages)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Messages)))
 	for _, v := range m.Messages {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Chats)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -18744,7 +19422,7 @@ func (m *TLMessagesMessages) Encode() []byte {
 
 func (m *TLMessagesMessages) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Messages);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -18756,7 +19434,7 @@ func (m *TLMessagesMessages) Decode(dbuf *DecodeBuf) error {
 		(*m.Messages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18768,7 +19446,7 @@ func (m *TLMessagesMessages) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18788,23 +19466,29 @@ func (m *TLMessagesMessagesSlice) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_messages_messagesSlice))
 	x.Int(m.Count)
 	// x.VectorMessage(m.Messages);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Messages)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Messages)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Messages)))
 	for _, v := range m.Messages {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Chats)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Users)))
+	// x4 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -18814,7 +19498,7 @@ func (m *TLMessagesMessagesSlice) Encode() []byte {
 func (m *TLMessagesMessagesSlice) Decode(dbuf *DecodeBuf) error {
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Messages);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18826,7 +19510,7 @@ func (m *TLMessagesMessagesSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Messages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18838,7 +19522,7 @@ func (m *TLMessagesMessagesSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -18863,23 +19547,29 @@ func (m *TLMessagesChannelMessages) Encode() []byte {
 	x.Int(m.Pts)
 	x.Int(m.Count)
 	// x.VectorMessage(m.Messages);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Messages)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Messages)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Messages)))
 	for _, v := range m.Messages {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Chats)))
+	// x4 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Users)))
+	// x5 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -18893,7 +19583,7 @@ func (m *TLMessagesChannelMessages) Decode(dbuf *DecodeBuf) error {
 	m.Pts = dbuf.Int()
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Messages);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -18905,7 +19595,7 @@ func (m *TLMessagesChannelMessages) Decode(dbuf *DecodeBuf) error {
 		(*m.Messages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -18917,7 +19607,7 @@ func (m *TLMessagesChannelMessages) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -18936,9 +19626,11 @@ func (m *TLMessagesChats) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_chats))
 	// x.VectorMessage(m.Chats);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Chats)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -18947,7 +19639,7 @@ func (m *TLMessagesChats) Encode() []byte {
 
 func (m *TLMessagesChats) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -18967,9 +19659,11 @@ func (m *TLMessagesChatsSlice) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_messages_chatsSlice))
 	x.Int(m.Count)
 	// x.VectorMessage(m.Chats);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Chats)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -18979,7 +19673,7 @@ func (m *TLMessagesChatsSlice) Encode() []byte {
 func (m *TLMessagesChatsSlice) Decode(dbuf *DecodeBuf) error {
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -18999,16 +19693,20 @@ func (m *TLMessagesChatFull) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_messages_chatFull))
 	x.Bytes(m.FullChat.Encode())
 	// x.VectorMessage(m.Chats);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Chats)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -19020,7 +19718,7 @@ func (m *TLMessagesChatFull) Decode(dbuf *DecodeBuf) error {
 	m.FullChat = &ChatFull{}
 	(*m.FullChat).Decode(dbuf)
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -19032,7 +19730,7 @@ func (m *TLMessagesChatFull) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -19546,9 +20244,11 @@ func (m *TLUpdateDcOptions) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateDcOptions))
 	// x.VectorMessage(m.DcOptions);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.DcOptions)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.DcOptions)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.DcOptions)))
 	for _, v := range m.DcOptions {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -19557,7 +20257,7 @@ func (m *TLUpdateDcOptions) Encode() []byte {
 
 func (m *TLUpdateDcOptions) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.DcOptions);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -19631,9 +20331,11 @@ func (m *TLUpdateServiceNotification) Encode() []byte {
 	x.String(m.Message)
 	x.Bytes(m.Media.Encode())
 	// x.VectorMessage(m.Entities);
-	x6 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Entities)))
+	// x6 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Entities)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Entities)))
 	for _, v := range m.Entities {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -19654,7 +20356,7 @@ func (m *TLUpdateServiceNotification) Decode(dbuf *DecodeBuf) error {
 	m.Media = &MessageMedia{}
 	(*m.Media).Decode(dbuf)
 	// x.VectorMessage(m.Entities);
-	dbuf.Int()
+	//  dbuf.Int()
 	c6 := dbuf.Int()
 	if c6 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c6)
@@ -19674,9 +20376,11 @@ func (m *TLUpdatePrivacy) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_updatePrivacy))
 	x.Bytes(m.Key.Encode())
 	// x.VectorMessage(m.Rules);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Rules)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Rules)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Rules)))
 	for _, v := range m.Rules {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -19688,7 +20392,7 @@ func (m *TLUpdatePrivacy) Decode(dbuf *DecodeBuf) error {
 	m.Key = &PrivacyKey{}
 	(*m.Key).Decode(dbuf)
 	// x.VectorMessage(m.Rules);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -20372,9 +21076,11 @@ func (m *TLUpdatePinnedDialogs) Encode() []byte {
 
 	if (flags & (1 << 0)) != 0 {
 		// x.VectorMessage(m.Order);
-		x1 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Order)))
+		// x1 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Order)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Order)))
 		for _, v := range m.Order {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -20386,7 +21092,7 @@ func (m *TLUpdatePinnedDialogs) Decode(dbuf *DecodeBuf) error {
 	flags := dbuf.UInt()
 	if (flags & (1 << 0)) != 0 {
 		// x.VectorMessage(m.Order);
-		dbuf.Int()
+		//  dbuf.Int()
 		c1 := dbuf.Int()
 		if c1 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c1)
@@ -20621,37 +21327,47 @@ func (m *TLUpdatesDifference) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates_difference))
 	// x.VectorMessage(m.NewMessages);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.NewMessages)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.NewMessages)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.NewMessages)))
 	for _, v := range m.NewMessages {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.NewEncryptedMessages);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.NewEncryptedMessages)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.NewEncryptedMessages)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.NewEncryptedMessages)))
 	for _, v := range m.NewEncryptedMessages {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.OtherUpdates);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.OtherUpdates)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.OtherUpdates)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.OtherUpdates)))
 	for _, v := range m.OtherUpdates {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Chats)))
+	// x4 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Users)))
+	// x5 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -20661,7 +21377,7 @@ func (m *TLUpdatesDifference) Encode() []byte {
 
 func (m *TLUpdatesDifference) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.NewMessages);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -20673,7 +21389,7 @@ func (m *TLUpdatesDifference) Decode(dbuf *DecodeBuf) error {
 		(*m.NewMessages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.NewEncryptedMessages);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -20685,7 +21401,7 @@ func (m *TLUpdatesDifference) Decode(dbuf *DecodeBuf) error {
 		(*m.NewEncryptedMessages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.OtherUpdates);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -20697,7 +21413,7 @@ func (m *TLUpdatesDifference) Decode(dbuf *DecodeBuf) error {
 		(*m.OtherUpdates[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -20709,7 +21425,7 @@ func (m *TLUpdatesDifference) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -20731,37 +21447,47 @@ func (m *TLUpdatesDifferenceSlice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates_differenceSlice))
 	// x.VectorMessage(m.NewMessages);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.NewMessages)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.NewMessages)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.NewMessages)))
 	for _, v := range m.NewMessages {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.NewEncryptedMessages);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.NewEncryptedMessages)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.NewEncryptedMessages)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.NewEncryptedMessages)))
 	for _, v := range m.NewEncryptedMessages {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.OtherUpdates);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.OtherUpdates)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.OtherUpdates)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.OtherUpdates)))
 	for _, v := range m.OtherUpdates {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Chats)))
+	// x4 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Users)))
+	// x5 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -20771,7 +21497,7 @@ func (m *TLUpdatesDifferenceSlice) Encode() []byte {
 
 func (m *TLUpdatesDifferenceSlice) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.NewMessages);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -20783,7 +21509,7 @@ func (m *TLUpdatesDifferenceSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.NewMessages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.NewEncryptedMessages);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -20795,7 +21521,7 @@ func (m *TLUpdatesDifferenceSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.NewEncryptedMessages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.OtherUpdates);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -20807,7 +21533,7 @@ func (m *TLUpdatesDifferenceSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.OtherUpdates[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -20819,7 +21545,7 @@ func (m *TLUpdatesDifferenceSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -20921,9 +21647,11 @@ func (m *TLUpdateShortMessage) Encode() []byte {
 	}
 	if (flags & (1 << 7)) != 0 {
 		// x.VectorMessage(m.Entities);
-		x14 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x14, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x14[4:], uint32(len(m.Entities)))
+		// x14 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x14, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x14[4:], uint32(len(m.Entities)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Entities)))
 		for _, v := range m.Entities {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -20964,7 +21692,7 @@ func (m *TLUpdateShortMessage) Decode(dbuf *DecodeBuf) error {
 	}
 	if (flags & (1 << 7)) != 0 {
 		// x.VectorMessage(m.Entities);
-		dbuf.Int()
+		//  dbuf.Int()
 		c14 := dbuf.Int()
 		if c14 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c14)
@@ -21041,9 +21769,11 @@ func (m *TLUpdateShortChatMessage) Encode() []byte {
 	}
 	if (flags & (1 << 7)) != 0 {
 		// x.VectorMessage(m.Entities);
-		x15 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x15, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x15[4:], uint32(len(m.Entities)))
+		// x15 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x15, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x15[4:], uint32(len(m.Entities)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Entities)))
 		for _, v := range m.Entities {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -21085,7 +21815,7 @@ func (m *TLUpdateShortChatMessage) Decode(dbuf *DecodeBuf) error {
 	}
 	if (flags & (1 << 7)) != 0 {
 		// x.VectorMessage(m.Entities);
-		dbuf.Int()
+		//  dbuf.Int()
 		c15 := dbuf.Int()
 		if c15 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c15)
@@ -21122,23 +21852,29 @@ func (m *TLUpdatesCombined) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updatesCombined))
 	// x.VectorMessage(m.Updates);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Updates)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Updates)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Updates)))
 	for _, v := range m.Updates {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Chats)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -21150,7 +21886,7 @@ func (m *TLUpdatesCombined) Encode() []byte {
 
 func (m *TLUpdatesCombined) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Updates);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -21162,7 +21898,7 @@ func (m *TLUpdatesCombined) Decode(dbuf *DecodeBuf) error {
 		(*m.Updates[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -21174,7 +21910,7 @@ func (m *TLUpdatesCombined) Decode(dbuf *DecodeBuf) error {
 		(*m.Users[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -21196,23 +21932,29 @@ func (m *TLUpdates) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates))
 	// x.VectorMessage(m.Updates);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Updates)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Updates)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Updates)))
 	for _, v := range m.Updates {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Chats)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -21223,7 +21965,7 @@ func (m *TLUpdates) Encode() []byte {
 
 func (m *TLUpdates) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Updates);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -21235,7 +21977,7 @@ func (m *TLUpdates) Decode(dbuf *DecodeBuf) error {
 		(*m.Updates[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -21247,7 +21989,7 @@ func (m *TLUpdates) Decode(dbuf *DecodeBuf) error {
 		(*m.Users[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -21292,9 +22034,11 @@ func (m *TLUpdateShortSentMessage) Encode() []byte {
 	}
 	if (flags & (1 << 7)) != 0 {
 		// x.VectorMessage(m.Entities);
-		x7 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x7, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x7[4:], uint32(len(m.Entities)))
+		// x7 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x7, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x7[4:], uint32(len(m.Entities)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Entities)))
 		for _, v := range m.Entities {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -21318,7 +22062,7 @@ func (m *TLUpdateShortSentMessage) Decode(dbuf *DecodeBuf) error {
 	}
 	if (flags & (1 << 7)) != 0 {
 		// x.VectorMessage(m.Entities);
-		dbuf.Int()
+		//  dbuf.Int()
 		c7 := dbuf.Int()
 		if c7 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c7)
@@ -21338,16 +22082,20 @@ func (m *TLPhotosPhotos) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_photos_photos))
 	// x.VectorMessage(m.Photos);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Photos)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Photos)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Photos)))
 	for _, v := range m.Photos {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -21356,7 +22104,7 @@ func (m *TLPhotosPhotos) Encode() []byte {
 
 func (m *TLPhotosPhotos) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Photos);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -21368,7 +22116,7 @@ func (m *TLPhotosPhotos) Decode(dbuf *DecodeBuf) error {
 		(*m.Photos[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -21388,16 +22136,20 @@ func (m *TLPhotosPhotosSlice) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_photos_photosSlice))
 	x.Int(m.Count)
 	// x.VectorMessage(m.Photos);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Photos)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Photos)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Photos)))
 	for _, v := range m.Photos {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -21407,7 +22159,7 @@ func (m *TLPhotosPhotosSlice) Encode() []byte {
 func (m *TLPhotosPhotosSlice) Decode(dbuf *DecodeBuf) error {
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Photos);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -21419,7 +22171,7 @@ func (m *TLPhotosPhotosSlice) Decode(dbuf *DecodeBuf) error {
 		(*m.Photos[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -21439,9 +22191,11 @@ func (m *TLPhotosPhoto) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_photos_photo))
 	x.Bytes(m.Photo.Encode())
 	// x.VectorMessage(m.Users);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -21453,7 +22207,7 @@ func (m *TLPhotosPhoto) Decode(dbuf *DecodeBuf) error {
 	m.Photo = &Photo{}
 	(*m.Photo).Decode(dbuf)
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -21495,9 +22249,11 @@ func (m *TLUploadFileCdnRedirect) Encode() []byte {
 	x.StringBytes(m.EncryptionKey)
 	x.StringBytes(m.EncryptionIv)
 	// x.VectorMessage(m.CdnFileHashes);
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.CdnFileHashes)))
+	// x5 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.CdnFileHashes)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.CdnFileHashes)))
 	for _, v := range m.CdnFileHashes {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -21510,7 +22266,7 @@ func (m *TLUploadFileCdnRedirect) Decode(dbuf *DecodeBuf) error {
 	m.EncryptionKey = dbuf.StringBytes()
 	m.EncryptionIv = dbuf.StringBytes()
 	// x.VectorMessage(m.CdnFileHashes);
-	dbuf.Int()
+	//  dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -21619,9 +22375,11 @@ func (m *TLConfig) Encode() []byte {
 	x.Bytes(m.TestMode.Encode())
 	x.Int(m.ThisDc)
 	// x.VectorMessage(m.DcOptions);
-	x6 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.DcOptions)))
+	// x6 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.DcOptions)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.DcOptions)))
 	for _, v := range m.DcOptions {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -21658,9 +22416,11 @@ func (m *TLConfig) Encode() []byte {
 		x.Int(m.LangPackVersion)
 	}
 	// x.VectorMessage(m.DisabledFeatures);
-	x33 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x33, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x33[4:], uint32(len(m.DisabledFeatures)))
+	// x33 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x33, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x33[4:], uint32(len(m.DisabledFeatures)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.DisabledFeatures)))
 	for _, v := range m.DisabledFeatures {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -21679,7 +22439,7 @@ func (m *TLConfig) Decode(dbuf *DecodeBuf) error {
 	(*m.TestMode).Decode(dbuf)
 	m.ThisDc = dbuf.Int()
 	// x.VectorMessage(m.DcOptions);
-	dbuf.Int()
+	//  dbuf.Int()
 	c6 := dbuf.Int()
 	if c6 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c6)
@@ -21723,7 +22483,7 @@ func (m *TLConfig) Decode(dbuf *DecodeBuf) error {
 		m.LangPackVersion = dbuf.Int()
 	}
 	// x.VectorMessage(m.DisabledFeatures);
-	dbuf.Int()
+	//  dbuf.Int()
 	c33 := dbuf.Int()
 	if c33 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c33)
@@ -22159,9 +22919,11 @@ func (m *TLDocument) Encode() []byte {
 	x.Int(m.DcId)
 	x.Int(m.Version)
 	// x.VectorMessage(m.Attributes);
-	x9 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x9, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x9[4:], uint32(len(m.Attributes)))
+	// x9 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x9, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x9[4:], uint32(len(m.Attributes)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Attributes)))
 	for _, v := range m.Attributes {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -22180,7 +22942,7 @@ func (m *TLDocument) Decode(dbuf *DecodeBuf) error {
 	m.DcId = dbuf.Int()
 	m.Version = dbuf.Int()
 	// x.VectorMessage(m.Attributes);
-	dbuf.Int()
+	//  dbuf.Int()
 	c9 := dbuf.Int()
 	if c9 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c9)
@@ -22417,23 +23179,29 @@ func (m *TLContactsFound) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_found))
 	// x.VectorMessage(m.Results);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Results)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Results)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Results)))
 	for _, v := range m.Results {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Chats)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -22442,7 +23210,7 @@ func (m *TLContactsFound) Encode() []byte {
 
 func (m *TLContactsFound) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Results);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -22454,7 +23222,7 @@ func (m *TLContactsFound) Decode(dbuf *DecodeBuf) error {
 		(*m.Results[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -22466,7 +23234,7 @@ func (m *TLContactsFound) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -22573,9 +23341,11 @@ func (m *TLInputPrivacyValueAllowUsers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPrivacyValueAllowUsers))
 	// x.VectorMessage(m.Users);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Users)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -22584,7 +23354,7 @@ func (m *TLInputPrivacyValueAllowUsers) Encode() []byte {
 
 func (m *TLInputPrivacyValueAllowUsers) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -22625,9 +23395,11 @@ func (m *TLInputPrivacyValueDisallowUsers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPrivacyValueDisallowUsers))
 	// x.VectorMessage(m.Users);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Users)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -22636,7 +23408,7 @@ func (m *TLInputPrivacyValueDisallowUsers) Encode() []byte {
 
 func (m *TLInputPrivacyValueDisallowUsers) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -22725,16 +23497,20 @@ func (m *TLAccountPrivacyRules) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_account_privacyRules))
 	// x.VectorMessage(m.Rules);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Rules)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Rules)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Rules)))
 	for _, v := range m.Rules {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -22743,7 +23519,7 @@ func (m *TLAccountPrivacyRules) Encode() []byte {
 
 func (m *TLAccountPrivacyRules) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Rules);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -22755,7 +23531,7 @@ func (m *TLAccountPrivacyRules) Decode(dbuf *DecodeBuf) error {
 		(*m.Rules[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -22976,9 +23752,11 @@ func (m *TLMessagesStickers) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_messages_stickers))
 	x.String(m.Hash)
 	// x.VectorMessage(m.Stickers);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Stickers)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Stickers)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Stickers)))
 	for _, v := range m.Stickers {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -22988,7 +23766,7 @@ func (m *TLMessagesStickers) Encode() []byte {
 func (m *TLMessagesStickers) Decode(dbuf *DecodeBuf) error {
 	m.Hash = dbuf.String()
 	// x.VectorMessage(m.Stickers);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -23034,9 +23812,11 @@ func (m *TLMessagesAllStickers) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_messages_allStickers))
 	x.Int(m.Hash)
 	// x.VectorMessage(m.Sets);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Sets)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Sets)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Sets)))
 	for _, v := range m.Sets {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -23046,7 +23826,7 @@ func (m *TLMessagesAllStickers) Encode() []byte {
 func (m *TLMessagesAllStickers) Decode(dbuf *DecodeBuf) error {
 	m.Hash = dbuf.Int()
 	// x.VectorMessage(m.Sets);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -23360,9 +24140,11 @@ func (m *TLAccountAuthorizations) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_account_authorizations))
 	// x.VectorMessage(m.Authorizations);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Authorizations)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Authorizations)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Authorizations)))
 	for _, v := range m.Authorizations {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -23371,7 +24153,7 @@ func (m *TLAccountAuthorizations) Encode() []byte {
 
 func (m *TLAccountAuthorizations) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Authorizations);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -23593,9 +24375,11 @@ func (m *TLChatInvite) Encode() []byte {
 	x.Int(m.ParticipantsCount)
 	if (flags & (1 << 4)) != 0 {
 		// x.VectorMessage(m.Participants);
-		x8 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x8, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x8[4:], uint32(len(m.Participants)))
+		// x8 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x8, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x8[4:], uint32(len(m.Participants)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Participants)))
 		for _, v := range m.Participants {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -23624,7 +24408,7 @@ func (m *TLChatInvite) Decode(dbuf *DecodeBuf) error {
 	m.ParticipantsCount = dbuf.Int()
 	if (flags & (1 << 4)) != 0 {
 		// x.VectorMessage(m.Participants);
-		dbuf.Int()
+		//  dbuf.Int()
 		c8 := dbuf.Int()
 		if c8 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c8)
@@ -23748,16 +24532,20 @@ func (m *TLMessagesStickerSet) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_messages_stickerSet))
 	x.Bytes(m.Set.Encode())
 	// x.VectorMessage(m.Packs);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Packs)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Packs)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Packs)))
 	for _, v := range m.Packs {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Documents);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Documents)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Documents)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Documents)))
 	for _, v := range m.Documents {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -23769,7 +24557,7 @@ func (m *TLMessagesStickerSet) Decode(dbuf *DecodeBuf) error {
 	m.Set = &StickerSet{}
 	(*m.Set).Decode(dbuf)
 	// x.VectorMessage(m.Packs);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -23781,7 +24569,7 @@ func (m *TLMessagesStickerSet) Decode(dbuf *DecodeBuf) error {
 		(*m.Packs[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Documents);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -23817,9 +24605,11 @@ func (m *TLBotInfo) Encode() []byte {
 	x.Int(m.UserId)
 	x.String(m.Description)
 	// x.VectorMessage(m.Commands);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Commands)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Commands)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Commands)))
 	for _, v := range m.Commands {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -23830,7 +24620,7 @@ func (m *TLBotInfo) Decode(dbuf *DecodeBuf) error {
 	m.UserId = dbuf.Int()
 	m.Description = dbuf.String()
 	// x.VectorMessage(m.Commands);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -23973,9 +24763,11 @@ func (m *TLKeyboardButtonRow) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_keyboardButtonRow))
 	// x.VectorMessage(m.Buttons);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Buttons)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Buttons)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Buttons)))
 	for _, v := range m.Buttons {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -23984,7 +24776,7 @@ func (m *TLKeyboardButtonRow) Encode() []byte {
 
 func (m *TLKeyboardButtonRow) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Buttons);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -24084,9 +24876,11 @@ func (m *TLReplyKeyboardMarkup) Encode() []byte {
 		// ignore
 	}
 	// x.VectorMessage(m.Rows);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Rows)))
+	// x4 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Rows)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Rows)))
 	for _, v := range m.Rows {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -24105,7 +24899,7 @@ func (m *TLReplyKeyboardMarkup) Decode(dbuf *DecodeBuf) error {
 		m.Selective = true
 	}
 	// x.VectorMessage(m.Rows);
-	dbuf.Int()
+	//  dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -24124,9 +24918,11 @@ func (m *TLReplyInlineMarkup) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_replyInlineMarkup))
 	// x.VectorMessage(m.Rows);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Rows)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Rows)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Rows)))
 	for _, v := range m.Rows {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -24135,7 +24931,7 @@ func (m *TLReplyInlineMarkup) Encode() []byte {
 
 func (m *TLReplyInlineMarkup) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Rows);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -24386,16 +25182,20 @@ func (m *TLContactsResolvedPeer) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_contacts_resolvedPeer))
 	x.Bytes(m.Peer.Encode())
 	// x.VectorMessage(m.Chats);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Chats)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -24407,7 +25207,7 @@ func (m *TLContactsResolvedPeer) Decode(dbuf *DecodeBuf) error {
 	m.Peer = &Peer{}
 	(*m.Peer).Decode(dbuf)
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -24419,7 +25219,7 @@ func (m *TLContactsResolvedPeer) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -24511,23 +25311,29 @@ func (m *TLUpdatesChannelDifferenceTooLong) Encode() []byte {
 	x.Int(m.UnreadCount)
 	x.Int(m.UnreadMentionsCount)
 	// x.VectorMessage(m.Messages);
-	x9 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x9, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x9[4:], uint32(len(m.Messages)))
+	// x9 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x9, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x9[4:], uint32(len(m.Messages)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Messages)))
 	for _, v := range m.Messages {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x10 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x10, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x10[4:], uint32(len(m.Chats)))
+	// x10 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x10, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x10[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x11 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x11, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x11[4:], uint32(len(m.Users)))
+	// x11 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x11, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x11[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -24549,7 +25355,7 @@ func (m *TLUpdatesChannelDifferenceTooLong) Decode(dbuf *DecodeBuf) error {
 	m.UnreadCount = dbuf.Int()
 	m.UnreadMentionsCount = dbuf.Int()
 	// x.VectorMessage(m.Messages);
-	dbuf.Int()
+	//  dbuf.Int()
 	c9 := dbuf.Int()
 	if c9 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c9)
@@ -24561,7 +25367,7 @@ func (m *TLUpdatesChannelDifferenceTooLong) Decode(dbuf *DecodeBuf) error {
 		(*m.Messages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c10 := dbuf.Int()
 	if c10 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c10)
@@ -24573,7 +25379,7 @@ func (m *TLUpdatesChannelDifferenceTooLong) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c11 := dbuf.Int()
 	if c11 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c11)
@@ -24609,30 +25415,38 @@ func (m *TLUpdatesChannelDifference) Encode() []byte {
 		x.Int(m.Timeout)
 	}
 	// x.VectorMessage(m.NewMessages);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.NewMessages)))
+	// x4 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.NewMessages)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.NewMessages)))
 	for _, v := range m.NewMessages {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.OtherUpdates);
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.OtherUpdates)))
+	// x5 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.OtherUpdates)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.OtherUpdates)))
 	for _, v := range m.OtherUpdates {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x6 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Chats)))
+	// x6 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x7 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x7, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x7[4:], uint32(len(m.Users)))
+	// x7 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x7, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x7[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -24649,7 +25463,7 @@ func (m *TLUpdatesChannelDifference) Decode(dbuf *DecodeBuf) error {
 		m.Timeout = dbuf.Int()
 	}
 	// x.VectorMessage(m.NewMessages);
-	dbuf.Int()
+	//  dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -24661,7 +25475,7 @@ func (m *TLUpdatesChannelDifference) Decode(dbuf *DecodeBuf) error {
 		(*m.NewMessages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.OtherUpdates);
-	dbuf.Int()
+	//  dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -24673,7 +25487,7 @@ func (m *TLUpdatesChannelDifference) Decode(dbuf *DecodeBuf) error {
 		(*m.OtherUpdates[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c6 := dbuf.Int()
 	if c6 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c6)
@@ -24685,7 +25499,7 @@ func (m *TLUpdatesChannelDifference) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c7 := dbuf.Int()
 	if c7 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c7)
@@ -24725,9 +25539,11 @@ func (m *TLChannelMessagesFilter) Encode() []byte {
 		// ignore
 	}
 	// x.VectorMessage(m.Ranges);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Ranges)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Ranges)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Ranges)))
 	for _, v := range m.Ranges {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -24740,7 +25556,7 @@ func (m *TLChannelMessagesFilter) Decode(dbuf *DecodeBuf) error {
 		m.ExcludeNewMessages = true
 	}
 	// x.VectorMessage(m.Ranges);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -24949,16 +25765,20 @@ func (m *TLChannelsChannelParticipants) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_channels_channelParticipants))
 	x.Int(m.Count)
 	// x.VectorMessage(m.Participants);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Participants)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Participants)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Participants)))
 	for _, v := range m.Participants {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -24968,7 +25788,7 @@ func (m *TLChannelsChannelParticipants) Encode() []byte {
 func (m *TLChannelsChannelParticipants) Decode(dbuf *DecodeBuf) error {
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Participants);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -24980,7 +25800,7 @@ func (m *TLChannelsChannelParticipants) Decode(dbuf *DecodeBuf) error {
 		(*m.Participants[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -25000,9 +25820,11 @@ func (m *TLChannelsChannelParticipant) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_channels_channelParticipant))
 	x.Bytes(m.Participant.Encode())
 	// x.VectorMessage(m.Users);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -25014,7 +25836,7 @@ func (m *TLChannelsChannelParticipant) Decode(dbuf *DecodeBuf) error {
 	m.Participant = &ChannelParticipant{}
 	(*m.Participant).Decode(dbuf)
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -25091,9 +25913,11 @@ func (m *TLMessagesFoundGifs) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_messages_foundGifs))
 	x.Int(m.NextOffset)
 	// x.VectorMessage(m.Results);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Results)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Results)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Results)))
 	for _, v := range m.Results {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -25103,7 +25927,7 @@ func (m *TLMessagesFoundGifs) Encode() []byte {
 func (m *TLMessagesFoundGifs) Decode(dbuf *DecodeBuf) error {
 	m.NextOffset = dbuf.Int()
 	// x.VectorMessage(m.Results);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -25134,9 +25958,11 @@ func (m *TLMessagesSavedGifs) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_messages_savedGifs))
 	x.Int(m.Hash)
 	// x.VectorMessage(m.Gifs);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Gifs)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Gifs)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Gifs)))
 	for _, v := range m.Gifs {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -25146,7 +25972,7 @@ func (m *TLMessagesSavedGifs) Encode() []byte {
 func (m *TLMessagesSavedGifs) Decode(dbuf *DecodeBuf) error {
 	m.Hash = dbuf.Int()
 	// x.VectorMessage(m.Gifs);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -25212,9 +26038,11 @@ func (m *TLInputBotInlineMessageText) Encode() []byte {
 	x.String(m.Message)
 	if (flags & (1 << 1)) != 0 {
 		// x.VectorMessage(m.Entities);
-		x3 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Entities)))
+		// x3 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Entities)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Entities)))
 		for _, v := range m.Entities {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -25233,7 +26061,7 @@ func (m *TLInputBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
 	m.Message = dbuf.String()
 	if (flags & (1 << 1)) != 0 {
 		// x.VectorMessage(m.Entities);
-		dbuf.Int()
+		//  dbuf.Int()
 		c3 := dbuf.Int()
 		if c3 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c3)
@@ -25628,9 +26456,11 @@ func (m *TLBotInlineMessageText) Encode() []byte {
 	x.String(m.Message)
 	if (flags & (1 << 1)) != 0 {
 		// x.VectorMessage(m.Entities);
-		x3 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Entities)))
+		// x3 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Entities)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Entities)))
 		for _, v := range m.Entities {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -25649,7 +26479,7 @@ func (m *TLBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
 	m.Message = dbuf.String()
 	if (flags & (1 << 1)) != 0 {
 		// x.VectorMessage(m.Entities);
-		dbuf.Int()
+		//  dbuf.Int()
 		c3 := dbuf.Int()
 		if c3 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c3)
@@ -25969,9 +26799,11 @@ func (m *TLMessagesBotResults) Encode() []byte {
 		x.Bytes(m.SwitchPm.Encode())
 	}
 	// x.VectorMessage(m.Results);
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Results)))
+	// x5 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Results)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Results)))
 	for _, v := range m.Results {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -25994,7 +26826,7 @@ func (m *TLMessagesBotResults) Decode(dbuf *DecodeBuf) error {
 		(*m.SwitchPm).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Results);
-	dbuf.Int()
+	//  dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -26277,30 +27109,38 @@ func (m *TLMessagesPeerDialogs) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_peerDialogs))
 	// x.VectorMessage(m.Dialogs);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Dialogs)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Dialogs)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Dialogs)))
 	for _, v := range m.Dialogs {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Messages);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Messages)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Messages)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Messages)))
 	for _, v := range m.Messages {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Chats)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Users)))
+	// x4 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -26310,7 +27150,7 @@ func (m *TLMessagesPeerDialogs) Encode() []byte {
 
 func (m *TLMessagesPeerDialogs) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Dialogs);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -26322,7 +27162,7 @@ func (m *TLMessagesPeerDialogs) Decode(dbuf *DecodeBuf) error {
 		(*m.Dialogs[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Messages);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -26334,7 +27174,7 @@ func (m *TLMessagesPeerDialogs) Decode(dbuf *DecodeBuf) error {
 		(*m.Messages[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -26346,7 +27186,7 @@ func (m *TLMessagesPeerDialogs) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -26453,9 +27293,11 @@ func (m *TLTopPeerCategoryPeers) Encode() []byte {
 	x.Bytes(m.Category.Encode())
 	x.Int(m.Count)
 	// x.VectorMessage(m.Peers);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Peers)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Peers)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Peers)))
 	for _, v := range m.Peers {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -26468,7 +27310,7 @@ func (m *TLTopPeerCategoryPeers) Decode(dbuf *DecodeBuf) error {
 	(*m.Category).Decode(dbuf)
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Peers);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -26498,23 +27340,29 @@ func (m *TLContactsTopPeers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_topPeers))
 	// x.VectorMessage(m.Categories);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Categories)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Categories)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Categories)))
 	for _, v := range m.Categories {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Chats)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -26523,7 +27371,7 @@ func (m *TLContactsTopPeers) Encode() []byte {
 
 func (m *TLContactsTopPeers) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Categories);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -26535,7 +27383,7 @@ func (m *TLContactsTopPeers) Decode(dbuf *DecodeBuf) error {
 		(*m.Categories[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -26547,7 +27395,7 @@ func (m *TLContactsTopPeers) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -26598,9 +27446,11 @@ func (m *TLDraftMessage) Encode() []byte {
 	x.String(m.Message)
 	if (flags & (1 << 3)) != 0 {
 		// x.VectorMessage(m.Entities);
-		x4 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Entities)))
+		// x4 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Entities)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Entities)))
 		for _, v := range m.Entities {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -26620,7 +27470,7 @@ func (m *TLDraftMessage) Decode(dbuf *DecodeBuf) error {
 	m.Message = dbuf.String()
 	if (flags & (1 << 3)) != 0 {
 		// x.VectorMessage(m.Entities);
-		dbuf.Int()
+		//  dbuf.Int()
 		c4 := dbuf.Int()
 		if c4 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c4)
@@ -26653,9 +27503,11 @@ func (m *TLMessagesFeaturedStickers) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_messages_featuredStickers))
 	x.Int(m.Hash)
 	// x.VectorMessage(m.Sets);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Sets)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Sets)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Sets)))
 	for _, v := range m.Sets {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -26666,7 +27518,7 @@ func (m *TLMessagesFeaturedStickers) Encode() []byte {
 func (m *TLMessagesFeaturedStickers) Decode(dbuf *DecodeBuf) error {
 	m.Hash = dbuf.Int()
 	// x.VectorMessage(m.Sets);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -26698,9 +27550,11 @@ func (m *TLMessagesRecentStickers) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_messages_recentStickers))
 	x.Int(m.Hash)
 	// x.VectorMessage(m.Stickers);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Stickers)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Stickers)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Stickers)))
 	for _, v := range m.Stickers {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -26710,7 +27564,7 @@ func (m *TLMessagesRecentStickers) Encode() []byte {
 func (m *TLMessagesRecentStickers) Decode(dbuf *DecodeBuf) error {
 	m.Hash = dbuf.Int()
 	// x.VectorMessage(m.Stickers);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -26730,9 +27584,11 @@ func (m *TLMessagesArchivedStickers) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_messages_archivedStickers))
 	x.Int(m.Count)
 	// x.VectorMessage(m.Sets);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Sets)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Sets)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Sets)))
 	for _, v := range m.Sets {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -26742,7 +27598,7 @@ func (m *TLMessagesArchivedStickers) Encode() []byte {
 func (m *TLMessagesArchivedStickers) Decode(dbuf *DecodeBuf) error {
 	m.Count = dbuf.Int()
 	// x.VectorMessage(m.Sets);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -26772,9 +27628,11 @@ func (m *TLMessagesStickerSetInstallResultArchive) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_stickerSetInstallResultArchive))
 	// x.VectorMessage(m.Sets);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Sets)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Sets)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Sets)))
 	for _, v := range m.Sets {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -26783,7 +27641,7 @@ func (m *TLMessagesStickerSetInstallResultArchive) Encode() []byte {
 
 func (m *TLMessagesStickerSetInstallResultArchive) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Sets);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -26822,9 +27680,11 @@ func (m *TLStickerSetMultiCovered) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_stickerSetMultiCovered))
 	x.Bytes(m.Set.Encode())
 	// x.VectorMessage(m.Covers);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Covers)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Covers)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Covers)))
 	for _, v := range m.Covers {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -26836,7 +27696,7 @@ func (m *TLStickerSetMultiCovered) Decode(dbuf *DecodeBuf) error {
 	m.Set = &StickerSet{}
 	(*m.Set).Decode(dbuf)
 	// x.VectorMessage(m.Covers);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -26994,16 +27854,20 @@ func (m *TLMessagesHighScores) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_highScores))
 	// x.VectorMessage(m.Scores);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Scores)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Scores)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Scores)))
 	for _, v := range m.Scores {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -27012,7 +27876,7 @@ func (m *TLMessagesHighScores) Encode() []byte {
 
 func (m *TLMessagesHighScores) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Scores);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -27024,7 +27888,7 @@ func (m *TLMessagesHighScores) Decode(dbuf *DecodeBuf) error {
 		(*m.Scores[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -27178,9 +28042,11 @@ func (m *TLTextConcat) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_textConcat))
 	// x.VectorMessage(m.Texts);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Texts)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Texts)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Texts)))
 	for _, v := range m.Texts {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -27189,7 +28055,7 @@ func (m *TLTextConcat) Encode() []byte {
 
 func (m *TLTextConcat) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Texts);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -27368,9 +28234,11 @@ func (m *TLPageBlockList) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_pageBlockList))
 	x.Bytes(m.Ordered.Encode())
 	// x.VectorMessage(m.Items);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Items)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Items)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Items)))
 	for _, v := range m.Items {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -27382,7 +28250,7 @@ func (m *TLPageBlockList) Decode(dbuf *DecodeBuf) error {
 	m.Ordered = &Bool{}
 	(*m.Ordered).Decode(dbuf)
 	// x.VectorMessage(m.Items);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -27585,9 +28453,11 @@ func (m *TLPageBlockEmbedPost) Encode() []byte {
 	x.String(m.Author)
 	x.Int(m.Date)
 	// x.VectorMessage(m.Blocks);
-	x6 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Blocks)))
+	// x6 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Blocks)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Blocks)))
 	for _, v := range m.Blocks {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -27602,7 +28472,7 @@ func (m *TLPageBlockEmbedPost) Decode(dbuf *DecodeBuf) error {
 	m.Author = dbuf.String()
 	m.Date = dbuf.Int()
 	// x.VectorMessage(m.Blocks);
-	dbuf.Int()
+	//  dbuf.Int()
 	c6 := dbuf.Int()
 	if c6 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c6)
@@ -27624,9 +28494,11 @@ func (m *TLPageBlockCollage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockCollage))
 	// x.VectorMessage(m.Items);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Items)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Items)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Items)))
 	for _, v := range m.Items {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -27636,7 +28508,7 @@ func (m *TLPageBlockCollage) Encode() []byte {
 
 func (m *TLPageBlockCollage) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Items);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -27658,9 +28530,11 @@ func (m *TLPageBlockSlideshow) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockSlideshow))
 	// x.VectorMessage(m.Items);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Items)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Items)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Items)))
 	for _, v := range m.Items {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -27670,7 +28544,7 @@ func (m *TLPageBlockSlideshow) Encode() []byte {
 
 func (m *TLPageBlockSlideshow) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Items);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -27724,23 +28598,29 @@ func (m *TLPagePart) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pagePart))
 	// x.VectorMessage(m.Blocks);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Blocks)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Blocks)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Blocks)))
 	for _, v := range m.Blocks {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Photos);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Photos)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Photos)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Photos)))
 	for _, v := range m.Photos {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Documents);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Documents)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Documents)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Documents)))
 	for _, v := range m.Documents {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -27749,7 +28629,7 @@ func (m *TLPagePart) Encode() []byte {
 
 func (m *TLPagePart) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Blocks);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -27761,7 +28641,7 @@ func (m *TLPagePart) Decode(dbuf *DecodeBuf) error {
 		(*m.Blocks[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Photos);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -27773,7 +28653,7 @@ func (m *TLPagePart) Decode(dbuf *DecodeBuf) error {
 		(*m.Photos[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Documents);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -27792,23 +28672,29 @@ func (m *TLPageFull) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageFull))
 	// x.VectorMessage(m.Blocks);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Blocks)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Blocks)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Blocks)))
 	for _, v := range m.Blocks {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Photos);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Photos)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Photos)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Photos)))
 	for _, v := range m.Photos {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Documents);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Documents)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Documents)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Documents)))
 	for _, v := range m.Documents {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -27817,7 +28703,7 @@ func (m *TLPageFull) Encode() []byte {
 
 func (m *TLPageFull) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Blocks);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -27829,7 +28715,7 @@ func (m *TLPageFull) Decode(dbuf *DecodeBuf) error {
 		(*m.Blocks[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Photos);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -27841,7 +28727,7 @@ func (m *TLPageFull) Decode(dbuf *DecodeBuf) error {
 		(*m.Photos[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Documents);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -27973,9 +28859,11 @@ func (m *TLInvoice) Encode() []byte {
 	}
 	x.String(m.Currency)
 	// x.VectorMessage(m.Prices);
-	x8 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x8, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x8[4:], uint32(len(m.Prices)))
+	// x8 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x8, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x8[4:], uint32(len(m.Prices)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Prices)))
 	for _, v := range m.Prices {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -28004,7 +28892,7 @@ func (m *TLInvoice) Decode(dbuf *DecodeBuf) error {
 	}
 	m.Currency = dbuf.String()
 	// x.VectorMessage(m.Prices);
-	dbuf.Int()
+	//  dbuf.Int()
 	c8 := dbuf.Int()
 	if c8 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c8)
@@ -28134,9 +29022,11 @@ func (m *TLWebDocument) Encode() []byte {
 	x.Int(m.Size)
 	x.String(m.MimeType)
 	// x.VectorMessage(m.Attributes);
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Attributes)))
+	// x5 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Attributes)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Attributes)))
 	for _, v := range m.Attributes {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -28150,7 +29040,7 @@ func (m *TLWebDocument) Decode(dbuf *DecodeBuf) error {
 	m.Size = dbuf.Int()
 	m.MimeType = dbuf.String()
 	// x.VectorMessage(m.Attributes);
-	dbuf.Int()
+	//  dbuf.Int()
 	c5 := dbuf.Int()
 	if c5 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c5)
@@ -28173,9 +29063,11 @@ func (m *TLInputWebDocument) Encode() []byte {
 	x.Int(m.Size)
 	x.String(m.MimeType)
 	// x.VectorMessage(m.Attributes);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Attributes)))
+	// x4 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Attributes)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Attributes)))
 	for _, v := range m.Attributes {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -28187,7 +29079,7 @@ func (m *TLInputWebDocument) Decode(dbuf *DecodeBuf) error {
 	m.Size = dbuf.Int()
 	m.MimeType = dbuf.String()
 	// x.VectorMessage(m.Attributes);
-	dbuf.Int()
+	//  dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -28288,9 +29180,11 @@ func (m *TLPaymentsPaymentForm) Encode() []byte {
 		x.Bytes(m.SavedCredentials.Encode())
 	}
 	// x.VectorMessage(m.Users);
-	x11 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x11, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x11[4:], uint32(len(m.Users)))
+	// x11 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x11, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x11[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -28330,7 +29224,7 @@ func (m *TLPaymentsPaymentForm) Decode(dbuf *DecodeBuf) error {
 		(*m.SavedCredentials).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c11 := dbuf.Int()
 	if c11 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c11)
@@ -28363,9 +29257,11 @@ func (m *TLPaymentsValidatedRequestedInfo) Encode() []byte {
 	}
 	if (flags & (1 << 1)) != 0 {
 		// x.VectorMessage(m.ShippingOptions);
-		x2 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.ShippingOptions)))
+		// x2 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.ShippingOptions)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.ShippingOptions)))
 		for _, v := range m.ShippingOptions {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -28380,7 +29276,7 @@ func (m *TLPaymentsValidatedRequestedInfo) Decode(dbuf *DecodeBuf) error {
 	}
 	if (flags & (1 << 1)) != 0 {
 		// x.VectorMessage(m.ShippingOptions);
-		dbuf.Int()
+		//  dbuf.Int()
 		c2 := dbuf.Int()
 		if c2 != int32(TLConstructor_CRC32_vector) {
 			return fmt.Errorf("Not vector, classID: ", c2)
@@ -28451,9 +29347,11 @@ func (m *TLPaymentsPaymentReceipt) Encode() []byte {
 	x.Long(m.TotalAmount)
 	x.String(m.CredentialsTitle)
 	// x.VectorMessage(m.Users);
-	x10 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x10, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x10[4:], uint32(len(m.Users)))
+	// x10 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x10, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x10[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -28482,7 +29380,7 @@ func (m *TLPaymentsPaymentReceipt) Decode(dbuf *DecodeBuf) error {
 	m.TotalAmount = dbuf.Long()
 	m.CredentialsTitle = dbuf.String()
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c10 := dbuf.Int()
 	if c10 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c10)
@@ -28598,9 +29496,11 @@ func (m *TLShippingOption) Encode() []byte {
 	x.String(m.Id)
 	x.String(m.Title)
 	// x.VectorMessage(m.Prices);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Prices)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Prices)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Prices)))
 	for _, v := range m.Prices {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -28611,7 +29511,7 @@ func (m *TLShippingOption) Decode(dbuf *DecodeBuf) error {
 	m.Id = dbuf.String()
 	m.Title = dbuf.String()
 	// x.VectorMessage(m.Prices);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -28793,9 +29693,11 @@ func (m *TLPhoneCall) Encode() []byte {
 	x.Bytes(m.Protocol.Encode())
 	x.Bytes(m.Connection.Encode())
 	// x.VectorMessage(m.AlternativeConnections);
-	x10 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x10, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x10[4:], uint32(len(m.AlternativeConnections)))
+	// x10 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x10, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x10[4:], uint32(len(m.AlternativeConnections)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.AlternativeConnections)))
 	for _, v := range m.AlternativeConnections {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -28818,7 +29720,7 @@ func (m *TLPhoneCall) Decode(dbuf *DecodeBuf) error {
 	m.Connection = &PhoneConnection{}
 	(*m.Connection).Decode(dbuf)
 	// x.VectorMessage(m.AlternativeConnections);
-	dbuf.Int()
+	//  dbuf.Int()
 	c10 := dbuf.Int()
 	if c10 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c10)
@@ -28954,9 +29856,11 @@ func (m *TLPhonePhoneCall) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_phone_phoneCall))
 	x.Bytes(m.PhoneCall.Encode())
 	// x.VectorMessage(m.Users);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -28968,7 +29872,7 @@ func (m *TLPhonePhoneCall) Decode(dbuf *DecodeBuf) error {
 	m.PhoneCall = &PhoneCall{}
 	(*m.PhoneCall).Decode(dbuf)
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -29028,9 +29932,11 @@ func (m *TLCdnConfig) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_cdnConfig))
 	// x.VectorMessage(m.PublicKeys);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.PublicKeys)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.PublicKeys)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.PublicKeys)))
 	for _, v := range m.PublicKeys {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -29039,7 +29945,7 @@ func (m *TLCdnConfig) Encode() []byte {
 
 func (m *TLCdnConfig) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.PublicKeys);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -29154,9 +30060,11 @@ func (m *TLLangPackDifference) Encode() []byte {
 	x.Int(m.FromVersion)
 	x.Int(m.Version)
 	// x.VectorMessage(m.Strings);
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Strings)))
+	// x4 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Strings)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Strings)))
 	for _, v := range m.Strings {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -29168,7 +30076,7 @@ func (m *TLLangPackDifference) Decode(dbuf *DecodeBuf) error {
 	m.FromVersion = dbuf.Int()
 	m.Version = dbuf.Int()
 	// x.VectorMessage(m.Strings);
-	dbuf.Int()
+	//  dbuf.Int()
 	c4 := dbuf.Int()
 	if c4 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c4)
@@ -29649,23 +30557,29 @@ func (m *TLChannelsAdminLogResults) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channels_adminLogResults))
 	// x.VectorMessage(m.Events);
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Events)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Events)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Events)))
 	for _, v := range m.Events {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Chats);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Chats)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Chats)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Chats)))
 	for _, v := range m.Chats {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Users);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -29674,7 +30588,7 @@ func (m *TLChannelsAdminLogResults) Encode() []byte {
 
 func (m *TLChannelsAdminLogResults) Decode(dbuf *DecodeBuf) error {
 	// x.VectorMessage(m.Events);
-	dbuf.Int()
+	//  dbuf.Int()
 	c1 := dbuf.Int()
 	if c1 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c1)
@@ -29686,7 +30600,7 @@ func (m *TLChannelsAdminLogResults) Decode(dbuf *DecodeBuf) error {
 		(*m.Events[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Chats);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -29698,7 +30612,7 @@ func (m *TLChannelsAdminLogResults) Decode(dbuf *DecodeBuf) error {
 		(*m.Chats[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Users);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -29903,16 +30817,20 @@ func (m *TLMessagesFavedStickers) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_messages_favedStickers))
 	x.Int(m.Hash)
 	// x.VectorMessage(m.Packs);
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Packs)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Packs)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Packs)))
 	for _, v := range m.Packs {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
 	// x.VectorMessage(m.Stickers);
-	x3 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Stickers)))
+	// x3 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.Stickers)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Stickers)))
 	for _, v := range m.Stickers {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -29922,7 +30840,7 @@ func (m *TLMessagesFavedStickers) Encode() []byte {
 func (m *TLMessagesFavedStickers) Decode(dbuf *DecodeBuf) error {
 	m.Hash = dbuf.Int()
 	// x.VectorMessage(m.Packs);
-	dbuf.Int()
+	//  dbuf.Int()
 	c2 := dbuf.Int()
 	if c2 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c2)
@@ -29934,7 +30852,7 @@ func (m *TLMessagesFavedStickers) Decode(dbuf *DecodeBuf) error {
 		(*m.Packs[i]).Decode(dbuf)
 	}
 	// x.VectorMessage(m.Stickers);
-	dbuf.Int()
+	//  dbuf.Int()
 	c3 := dbuf.Int()
 	if c3 != int32(TLConstructor_CRC32_vector) {
 		return fmt.Errorf("Not vector, classID: ", c3)
@@ -30383,9 +31301,11 @@ func (m *TLContactsDeleteContacts) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_deleteContacts))
 	// x.VectorMessage(m.Id)
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Id)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Id)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Id)))
 	for _, v := range m.Id {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -30690,9 +31610,11 @@ func (m *TLMessagesSetInlineBotResults) Encode() []byte {
 	}
 	x.Long(m.QueryId)
 	// x.VectorMessage(m.Results)
-	x4 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Results)))
+	// x4 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Results)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Results)))
 	for _, v := range m.Results {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -30770,9 +31692,11 @@ func (m *TLMessagesEditInlineBotMessage) Encode() []byte {
 	}
 	if (flags & (1 << 3)) != 0 {
 		// x.VectorMessage(m.Entities)
-		x5 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Entities)))
+		// x5 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Entities)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Entities)))
 		for _, v := range m.Entities {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -30886,9 +31810,11 @@ func (m *TLMessagesSaveDraft) Encode() []byte {
 	x.String(m.Message)
 	if (flags & (1 << 3)) != 0 {
 		// x.VectorMessage(m.Entities)
-		x5 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Entities)))
+		// x5 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Entities)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Entities)))
 		for _, v := range m.Entities {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -31083,9 +32009,11 @@ func (m *TLMessagesReorderPinnedDialogs) Encode() []byte {
 		//  m.Force = true
 	}
 	// x.VectorMessage(m.Order)
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Order)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Order)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Order)))
 	for _, v := range m.Order {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -31131,9 +32059,11 @@ func (m *TLMessagesSetBotShippingResults) Encode() []byte {
 	}
 	if (flags & (1 << 1)) != 0 {
 		// x.VectorMessage(m.ShippingOptions)
-		x3 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.ShippingOptions)))
+		// x3 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x3, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x3[4:], uint32(len(m.ShippingOptions)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.ShippingOptions)))
 		for _, v := range m.ShippingOptions {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -31259,9 +32189,11 @@ func (m *TLHelpSaveAppLog) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_help_saveAppLog))
 	// x.VectorMessage(m.Events)
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Events)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Events)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Events)))
 	for _, v := range m.Events {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -32002,9 +32934,11 @@ func (m *TLAccountSetPrivacy) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_account_setPrivacy))
 	x.Bytes(m.Key.Encode())
 	// x.VectorMessage(m.Rules)
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Rules)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Rules)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Rules)))
 	for _, v := range m.Rules {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -32095,9 +33029,11 @@ func (m *TLUsersGetUsers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_users_getUsers))
 	// x.VectorMessage(m.Id)
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Id)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Id)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Id)))
 	for _, v := range m.Id {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -32163,9 +33099,11 @@ func (m *TLContactsImportContacts) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_importContacts))
 	// x.VectorMessage(m.Contacts)
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Contacts)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Contacts)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Contacts)))
 	for _, v := range m.Contacts {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -32733,9 +33671,11 @@ func (m *TLMessagesSendMessage) Encode() []byte {
 	}
 	if (flags & (1 << 3)) != 0 {
 		// x.VectorMessage(m.Entities)
-		x10 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x10, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x10[4:], uint32(len(m.Entities)))
+		// x10 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x10, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x10[4:], uint32(len(m.Entities)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Entities)))
 		for _, v := range m.Entities {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -32987,9 +33927,11 @@ func (m *TLMessagesCreateChat) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_createChat))
 	// x.VectorMessage(m.Users)
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Users)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -33193,9 +34135,11 @@ func (m *TLMessagesEditMessage) Encode() []byte {
 	}
 	if (flags & (1 << 3)) != 0 {
 		// x.VectorMessage(m.Entities)
-		x6 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Entities)))
+		// x6 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x6, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x6[4:], uint32(len(m.Entities)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Entities)))
 		for _, v := range m.Entities {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}
@@ -33458,9 +34402,11 @@ func (m *TLChannelsInviteToChannel) Encode() []byte {
 	x.Int(int32(TLConstructor_CRC32_channels_inviteToChannel))
 	x.Bytes(m.Channel.Encode())
 	// x.VectorMessage(m.Users)
-	x2 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	// x2 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x2, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x2[4:], uint32(len(m.Users)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Users)))
 	for _, v := range m.Users {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -33699,9 +34645,11 @@ func (m *TLChannelsGetChannels) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channels_getChannels))
 	// x.VectorMessage(m.Id)
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Id)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Id)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Id)))
 	for _, v := range m.Id {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -33894,9 +34842,11 @@ func (m *TLPhotosDeletePhotos) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_photos_deletePhotos))
 	// x.VectorMessage(m.Id)
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Id)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Id)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Id)))
 	for _, v := range m.Id {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -34050,9 +35000,11 @@ func (m *TLStickersCreateStickerSet) Encode() []byte {
 	x.String(m.Title)
 	x.String(m.ShortName)
 	// x.VectorMessage(m.Stickers)
-	x5 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Stickers)))
+	// x5 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x5, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x5[4:], uint32(len(m.Stickers)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Stickers)))
 	for _, v := range m.Stickers {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -34299,9 +35251,11 @@ func (m *TLMessagesGetPeerDialogs) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_getPeerDialogs))
 	// x.VectorMessage(m.Peers)
-	x1 := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
-	binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Peers)))
+	// x1 := make([]byte, 8)
+	// binary.LittleEndian.PutUint32(x1, uint32(TLConstructor_CRC32_vector))
+	// binary.LittleEndian.PutUint32(x1[4:], uint32(len(m.Peers)))
+	x.Int(int32(TLConstructor_CRC32_vector))
+	x.Int(int32(len(m.Peers)))
 	for _, v := range m.Peers {
 		x.buf = append(x.buf, (*v).Encode()...)
 	}
@@ -34858,9 +35812,11 @@ func (m *TLChannelsGetAdminLog) Encode() []byte {
 	}
 	if (flags & (1 << 1)) != 0 {
 		// x.VectorMessage(m.Admins)
-		x4 := make([]byte, 8)
-		binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
-		binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Admins)))
+		// x4 := make([]byte, 8)
+		// binary.LittleEndian.PutUint32(x4, uint32(TLConstructor_CRC32_vector))
+		// binary.LittleEndian.PutUint32(x4[4:], uint32(len(m.Admins)))
+		x.Int(int32(TLConstructor_CRC32_vector))
+		x.Int(int32(len(m.Admins)))
 		for _, v := range m.Admins {
 			x.buf = append(x.buf, (*v).Encode()...)
 		}

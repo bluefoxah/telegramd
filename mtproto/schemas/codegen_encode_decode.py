@@ -506,6 +506,7 @@ for restype in typesList:
 
     resClassTypesTexts2 += '    case int32(TLConstructor_CRC32_' + name + '):\n'
     resClassTypesTexts2 += '      m2 := ' + to_proto_go_name(resType) + '_' + to_proto_go_name(name) + '{}\n'
+    resClassTypesTexts2 += '      m2.' + to_proto_go_name(name) + ' = &TL' + to_proto_go_name(name) + '{}\n'
     resClassTypesTexts2 += '      m2.' + to_proto_go_name(name) + '.Decode(dbuf)\n'
     resClassTypesTexts2 += '      m.Payload = &m2\n'
 
@@ -588,9 +589,10 @@ for restype in typesList:
         eptype = txt_wrap_by('<', '*', paramType);
         classTypesTexts += '  // x.VectorMessage(m.' + to_proto_go_name(paramName) + ');\n';
 
-        classTypesTexts += '  x%d := make([]byte, 8)\n' % (ii)
+        classTypesTexts += '  // x%d := make([]byte, 8)\n' % (ii)
         classTypesTexts += '  // binary.LittleEndian.PutUint32(x%d, uint32(TLConstructor_CRC32_vector))\n' % (ii)
-        classTypesTexts += '  binary.LittleEndian.PutUint32(x%d[4:], uint32(len(m.%s)))\n' % (ii, to_proto_go_name(paramName))
+        classTypesTexts += '  // binary.LittleEndian.PutUint32(x%d[4:], uint32(len(m.%s)))\n' % (ii, to_proto_go_name(paramName))
+        classTypesTexts += '  x.Int(int32(len(m.%s)))\n' % (to_proto_go_name(paramName))
         classTypesTexts += '  for _, v := range m.' + to_proto_go_name(paramName) + ' {\n'
         classTypesTexts += '     x.buf = append(x.buf, (*v).Encode()...)\n'
         classTypesTexts += '  }\n'
@@ -599,9 +601,11 @@ for restype in typesList:
         eptype = txt_wrap_by('<', '>', paramType);
         classTypesTexts += '  // x.VectorMessage(m.' + to_proto_go_name(paramName) + ');\n';
 
-        classTypesTexts += '  x%d := make([]byte, 8)\n' % (ii)
-        classTypesTexts += '  binary.LittleEndian.PutUint32(x%d, uint32(TLConstructor_CRC32_vector))\n' % (ii)
-        classTypesTexts += '  binary.LittleEndian.PutUint32(x%d[4:], uint32(len(m.%s)))\n' % (ii, to_proto_go_name(paramName))
+        classTypesTexts += '  // x%d := make([]byte, 8)\n' % (ii)
+        classTypesTexts += '  // binary.LittleEndian.PutUint32(x%d, uint32(TLConstructor_CRC32_vector))\n' % (ii)
+        classTypesTexts += '  // binary.LittleEndian.PutUint32(x%d[4:], uint32(len(m.%s)))\n' % (ii, to_proto_go_name(paramName))
+        classTypesTexts += '  x.Int(int32(TLConstructor_CRC32_vector))\n'
+        classTypesTexts += '  x.Int(int32(len(m.%s)))\n' % (to_proto_go_name(paramName))
         classTypesTexts += '  for _, v := range m.' + to_proto_go_name(paramName) + ' {\n'
         classTypesTexts += '     x.buf = append(x.buf, (*v).Encode()...)\n'
         classTypesTexts += '  }\n'
@@ -696,7 +700,7 @@ for restype in typesList:
       elif (paramType.find('TLObjectVector') >= 0):
         eptype = txt_wrap_by('<', '>', paramType);
         classTypesTexts += '  // x.VectorMessage(m.' + to_proto_go_name(paramName) + ');\n';
-        classTypesTexts += '    dbuf.Int()\n'
+        classTypesTexts += '  //  dbuf.Int()\n'
         classTypesTexts += '  c%d := dbuf.Int()\n' % (ii)
         classTypesTexts += '  if c%d != int32(TLConstructor_CRC32_vector) {\n' % (ii)
         classTypesTexts += '    return fmt.Errorf("Not vector, classID: ", c%d)\n' % (ii)
@@ -707,7 +711,7 @@ for restype in typesList:
         classTypesTexts += '  for i := 0; i < int(l%d); i++ {\n' % (ii)
         classTypesTexts += '    m.%s[i] = &%s{}\n' % (to_proto_go_name(paramName), to_proto_go_name(eptype))
         if (eptype in TypesList):
-          classTypesTexts += '   (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
+          classTypesTexts += '    (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
         else:
           classTypesTexts += '    dbuf.Int()\n'
           classTypesTexts += '    (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
@@ -831,9 +835,10 @@ for restype in funcsList:
           eptype = txt_wrap_by('<', '*', paramType);
           classTypesTexts += '  // x.VectorMessage(m.' + to_proto_go_name(paramName) + ')\n';
 
-          classTypesTexts += '  x%d := make([]byte, 8)\n' % (ii)
+          classTypesTexts += '  // x%d := make([]byte, 8)\n' % (ii)
           classTypesTexts += '  // binary.LittleEndian.PutUint32(x%d, uint32(TLConstructor_CRC32_vector))\n' % (ii)
-          classTypesTexts += '  binary.LittleEndian.PutUint32(x%d[4:], uint32(len(m.%s)))\n' % (ii, to_proto_go_name(paramName))
+          classTypesTexts += '  // binary.LittleEndian.PutUint32(x%d[4:], uint32(len(m.%s)))\n' % (ii, to_proto_go_name(paramName))
+          classTypesTexts += '  x.Int(int32(len(m.%s)))\n' % (to_proto_go_name(paramName))
           classTypesTexts += '  for _, v := range m.' + to_proto_go_name(paramName) + ' {\n'
           classTypesTexts += '     x.buf = append(x.buf, (*v).Encode()...)\n'
           classTypesTexts += '  }\n'
@@ -843,9 +848,11 @@ for restype in funcsList:
 
           classTypesTexts += '  // x.VectorMessage(m.' + to_proto_go_name(paramName) + ')\n';
 
-          classTypesTexts += '  x%d := make([]byte, 8)\n' % (ii)
-          classTypesTexts += '  binary.LittleEndian.PutUint32(x%d, uint32(TLConstructor_CRC32_vector))\n' % (ii)
-          classTypesTexts += '  binary.LittleEndian.PutUint32(x%d[4:], uint32(len(m.%s)))\n' % (ii, to_proto_go_name(paramName))
+          classTypesTexts += '  // x%d := make([]byte, 8)\n' % (ii)
+          classTypesTexts += '  // binary.LittleEndian.PutUint32(x%d, uint32(TLConstructor_CRC32_vector))\n' % (ii)
+          classTypesTexts += '  // binary.LittleEndian.PutUint32(x%d[4:], uint32(len(m.%s)))\n' % (ii, to_proto_go_name(paramName))
+          classTypesTexts += '  x.Int(int32(TLConstructor_CRC32_vector))\n'
+          classTypesTexts += '  x.Int(int32(len(m.%s)))\n' % (to_proto_go_name(paramName))
           classTypesTexts += '  for _, v := range m.' + to_proto_go_name(paramName) + ' {\n'
           classTypesTexts += '     x.buf = append(x.buf, (*v).Encode()...)\n'
           classTypesTexts += '  }\n'
@@ -950,7 +957,7 @@ for restype in funcsList:
           classTypesTexts += '  for i := 0; i < int(l%d); i++ {\n' % (ii)
           classTypesTexts += '    m.%s[i] = &%s{}\n' % (to_proto_go_name(paramName), to_proto_go_name(eptype))
           if (eptype in TypesList):
-            classTypesTexts += '   (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
+            classTypesTexts += '    (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
           else:
             classTypesTexts += '    dbuf.Int()\n'
             classTypesTexts += '    (*m.%s[i]).Decode(dbuf)\n' % (to_proto_go_name(paramName))
@@ -992,7 +999,7 @@ proto_file = '\
  */\n\n\
 package mtproto\n\n\
 import ( \n\
-  "encoding/binary" \n\
+  // "encoding/binary" \n\
   "fmt" \n\
   "github.com/golang/protobuf/proto"\n\
 )\n\n\
