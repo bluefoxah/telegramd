@@ -494,6 +494,14 @@ for restype in typesList:
 
     classTypesTexts += '// ' + line + '\n';
 
+    classTypesTexts += 'func (m* TL' + to_proto_go_name(name) + ') To' + to_proto_go_name(resType) + '() (*' + to_proto_go_name(resType) + ') {\n'
+    classTypesTexts += '  return &' + to_proto_go_name(resType) + '{\n';
+    classTypesTexts += '    Payload: &' + to_proto_go_name(resType) + '_' + to_proto_go_name(name) + '{\n'
+    classTypesTexts += '      ' + to_proto_go_name(name) + ': &TL' + to_proto_go_name(name) + '{}, \n'
+    classTypesTexts += '    },\n'
+    classTypesTexts += '  }\n'
+    classTypesTexts += '}\n\n'
+
     # classTypesTexts += 'message Z' + name + ' : public ' + resType + ' {\n'; # type class declaration
     classTypesTexts += 'func (m* TL' + to_proto_go_name(name) + ') Encode() []byte {\n'; # type class declaration
     classTypesTexts += '  x := NewEncodeBuf(512)\n'; # type class declaration
@@ -517,6 +525,7 @@ for restype in typesList:
     resClassTypesTexts3 += '           ' + to_proto_go_name(name) + ': m2,\n'
     resClassTypesTexts3 += '         },\n'
     resClassTypesTexts3 += '      }\n'
+
 
     ij += 1;
 

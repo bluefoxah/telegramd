@@ -14718,6 +14718,14 @@ func MakeMessages_FavedStickers(message proto.Message) (m *Messages_FavedSticker
 }
 
 // resPQ#05162463 nonce:int128 server_nonce:int128 pq:string server_public_key_fingerprints:Vector<long> = ResPQ;
+func (m *TLResPQ) ToResPQ() *ResPQ {
+	return &ResPQ{
+		Payload: &ResPQ_ResPQ{
+			ResPQ: &TLResPQ{},
+		},
+	}
+}
+
 func (m *TLResPQ) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_resPQ))
@@ -14737,6 +14745,14 @@ func (m *TLResPQ) Decode(dbuf *DecodeBuf) error {
 }
 
 // p_q_inner_data#83c95aec pq:string p:string q:string nonce:int128 server_nonce:int128 new_nonce:int256 = P_Q_inner_data;
+func (m *TLPQInnerData) ToP_QInnerData() *P_QInnerData {
+	return &P_QInnerData{
+		Payload: &P_QInnerData_PQInnerData{
+			PQInnerData: &TLPQInnerData{},
+		},
+	}
+}
+
 func (m *TLPQInnerData) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_p_q_inner_data))
@@ -14760,6 +14776,14 @@ func (m *TLPQInnerData) Decode(dbuf *DecodeBuf) error {
 }
 
 // server_DH_params_fail#79cb045d nonce:int128 server_nonce:int128 new_nonce_hash:int128 = Server_DH_Params;
+func (m *TLServer_DHParamsFail) ToServer_DH_Params() *Server_DH_Params {
+	return &Server_DH_Params{
+		Payload: &Server_DH_Params_Server_DHParamsFail{
+			Server_DHParamsFail: &TLServer_DHParamsFail{},
+		},
+	}
+}
+
 func (m *TLServer_DHParamsFail) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_server_DH_params_fail))
@@ -14777,6 +14801,14 @@ func (m *TLServer_DHParamsFail) Decode(dbuf *DecodeBuf) error {
 }
 
 // server_DH_params_ok#d0e8075c nonce:int128 server_nonce:int128 encrypted_answer:string = Server_DH_Params;
+func (m *TLServer_DHParamsOk) ToServer_DH_Params() *Server_DH_Params {
+	return &Server_DH_Params{
+		Payload: &Server_DH_Params_Server_DHParamsOk{
+			Server_DHParamsOk: &TLServer_DHParamsOk{},
+		},
+	}
+}
+
 func (m *TLServer_DHParamsOk) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_server_DH_params_ok))
@@ -14794,6 +14826,14 @@ func (m *TLServer_DHParamsOk) Decode(dbuf *DecodeBuf) error {
 }
 
 // server_DH_inner_data#b5890dba nonce:int128 server_nonce:int128 g:int dh_prime:string g_a:string server_time:int = Server_DH_inner_data;
+func (m *TLServer_DHInnerData) ToServer_DHInnerData() *Server_DHInnerData {
+	return &Server_DHInnerData{
+		Payload: &Server_DHInnerData_Server_DHInnerData{
+			Server_DHInnerData: &TLServer_DHInnerData{},
+		},
+	}
+}
+
 func (m *TLServer_DHInnerData) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_server_DH_inner_data))
@@ -14817,6 +14857,14 @@ func (m *TLServer_DHInnerData) Decode(dbuf *DecodeBuf) error {
 }
 
 // client_DH_inner_data#6643b654 nonce:int128 server_nonce:int128 retry_id:long g_b:string = Client_DH_Inner_Data;
+func (m *TLClient_DHInnerData) ToClient_DH_Inner_Data() *Client_DH_Inner_Data {
+	return &Client_DH_Inner_Data{
+		Payload: &Client_DH_Inner_Data_Client_DHInnerData{
+			Client_DHInnerData: &TLClient_DHInnerData{},
+		},
+	}
+}
+
 func (m *TLClient_DHInnerData) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_client_DH_inner_data))
@@ -14836,6 +14884,14 @@ func (m *TLClient_DHInnerData) Decode(dbuf *DecodeBuf) error {
 }
 
 // dh_gen_ok#3bcbf734 nonce:int128 server_nonce:int128 new_nonce_hash1:int128 = Set_client_DH_params_answer;
+func (m *TLDhGenOk) ToSetClient_DHParamsAnswer() *SetClient_DHParamsAnswer {
+	return &SetClient_DHParamsAnswer{
+		Payload: &SetClient_DHParamsAnswer_DhGenOk{
+			DhGenOk: &TLDhGenOk{},
+		},
+	}
+}
+
 func (m *TLDhGenOk) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_dh_gen_ok))
@@ -14853,6 +14909,14 @@ func (m *TLDhGenOk) Decode(dbuf *DecodeBuf) error {
 }
 
 // dh_gen_retry#46dc1fb9 nonce:int128 server_nonce:int128 new_nonce_hash2:int128 = Set_client_DH_params_answer;
+func (m *TLDhGenRetry) ToSetClient_DHParamsAnswer() *SetClient_DHParamsAnswer {
+	return &SetClient_DHParamsAnswer{
+		Payload: &SetClient_DHParamsAnswer_DhGenRetry{
+			DhGenRetry: &TLDhGenRetry{},
+		},
+	}
+}
+
 func (m *TLDhGenRetry) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_dh_gen_retry))
@@ -14870,6 +14934,14 @@ func (m *TLDhGenRetry) Decode(dbuf *DecodeBuf) error {
 }
 
 // dh_gen_fail#a69dae02 nonce:int128 server_nonce:int128 new_nonce_hash3:int128 = Set_client_DH_params_answer;
+func (m *TLDhGenFail) ToSetClient_DHParamsAnswer() *SetClient_DHParamsAnswer {
+	return &SetClient_DHParamsAnswer{
+		Payload: &SetClient_DHParamsAnswer_DhGenFail{
+			DhGenFail: &TLDhGenFail{},
+		},
+	}
+}
+
 func (m *TLDhGenFail) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_dh_gen_fail))
@@ -14887,6 +14959,14 @@ func (m *TLDhGenFail) Decode(dbuf *DecodeBuf) error {
 }
 
 // destroy_auth_key_ok#f660e1d4 = DestroyAuthKeyRes;
+func (m *TLDestroyAuthKeyOk) ToDestroyAuthKeyRes() *DestroyAuthKeyRes {
+	return &DestroyAuthKeyRes{
+		Payload: &DestroyAuthKeyRes_DestroyAuthKeyOk{
+			DestroyAuthKeyOk: &TLDestroyAuthKeyOk{},
+		},
+	}
+}
+
 func (m *TLDestroyAuthKeyOk) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_destroy_auth_key_ok))
@@ -14898,6 +14978,14 @@ func (m *TLDestroyAuthKeyOk) Decode(dbuf *DecodeBuf) error {
 }
 
 // destroy_auth_key_none#0a9f2259 = DestroyAuthKeyRes;
+func (m *TLDestroyAuthKeyNone) ToDestroyAuthKeyRes() *DestroyAuthKeyRes {
+	return &DestroyAuthKeyRes{
+		Payload: &DestroyAuthKeyRes_DestroyAuthKeyNone{
+			DestroyAuthKeyNone: &TLDestroyAuthKeyNone{},
+		},
+	}
+}
+
 func (m *TLDestroyAuthKeyNone) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_destroy_auth_key_none))
@@ -14909,6 +14997,14 @@ func (m *TLDestroyAuthKeyNone) Decode(dbuf *DecodeBuf) error {
 }
 
 // destroy_auth_key_fail#ea109b13 = DestroyAuthKeyRes;
+func (m *TLDestroyAuthKeyFail) ToDestroyAuthKeyRes() *DestroyAuthKeyRes {
+	return &DestroyAuthKeyRes{
+		Payload: &DestroyAuthKeyRes_DestroyAuthKeyFail{
+			DestroyAuthKeyFail: &TLDestroyAuthKeyFail{},
+		},
+	}
+}
+
 func (m *TLDestroyAuthKeyFail) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_destroy_auth_key_fail))
@@ -14920,6 +15016,14 @@ func (m *TLDestroyAuthKeyFail) Decode(dbuf *DecodeBuf) error {
 }
 
 // msgs_ack#62d6b459 msg_ids:Vector<long> = MsgsAck;
+func (m *TLMsgsAck) ToMsgsAck() *MsgsAck {
+	return &MsgsAck{
+		Payload: &MsgsAck_MsgsAck{
+			MsgsAck: &TLMsgsAck{},
+		},
+	}
+}
+
 func (m *TLMsgsAck) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_msgs_ack))
@@ -14933,6 +15037,14 @@ func (m *TLMsgsAck) Decode(dbuf *DecodeBuf) error {
 }
 
 // bad_msg_notification#a7eff811 bad_msg_id:long bad_msg_seqno:int error_code:int = BadMsgNotification;
+func (m *TLBadMsgNotification) ToBadMsgNotification() *BadMsgNotification {
+	return &BadMsgNotification{
+		Payload: &BadMsgNotification_BadMsgNotification{
+			BadMsgNotification: &TLBadMsgNotification{},
+		},
+	}
+}
+
 func (m *TLBadMsgNotification) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_bad_msg_notification))
@@ -14950,6 +15062,14 @@ func (m *TLBadMsgNotification) Decode(dbuf *DecodeBuf) error {
 }
 
 // bad_server_salt#edab447b bad_msg_id:long bad_msg_seqno:int error_code:int new_server_salt:long = BadMsgNotification;
+func (m *TLBadServerSalt) ToBadMsgNotification() *BadMsgNotification {
+	return &BadMsgNotification{
+		Payload: &BadMsgNotification_BadServerSalt{
+			BadServerSalt: &TLBadServerSalt{},
+		},
+	}
+}
+
 func (m *TLBadServerSalt) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_bad_server_salt))
@@ -14969,6 +15089,14 @@ func (m *TLBadServerSalt) Decode(dbuf *DecodeBuf) error {
 }
 
 // msgs_state_req#da69fb52 msg_ids:Vector<long> = MsgsStateReq;
+func (m *TLMsgsStateReq) ToMsgsStateReq() *MsgsStateReq {
+	return &MsgsStateReq{
+		Payload: &MsgsStateReq_MsgsStateReq{
+			MsgsStateReq: &TLMsgsStateReq{},
+		},
+	}
+}
+
 func (m *TLMsgsStateReq) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_msgs_state_req))
@@ -14982,6 +15110,14 @@ func (m *TLMsgsStateReq) Decode(dbuf *DecodeBuf) error {
 }
 
 // msgs_state_info#04deb57d req_msg_id:long info:string = MsgsStateInfo;
+func (m *TLMsgsStateInfo) ToMsgsStateInfo() *MsgsStateInfo {
+	return &MsgsStateInfo{
+		Payload: &MsgsStateInfo_MsgsStateInfo{
+			MsgsStateInfo: &TLMsgsStateInfo{},
+		},
+	}
+}
+
 func (m *TLMsgsStateInfo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_msgs_state_info))
@@ -14997,6 +15133,14 @@ func (m *TLMsgsStateInfo) Decode(dbuf *DecodeBuf) error {
 }
 
 // msgs_all_info#8cc0d131 msg_ids:Vector<long> info:string = MsgsAllInfo;
+func (m *TLMsgsAllInfo) ToMsgsAllInfo() *MsgsAllInfo {
+	return &MsgsAllInfo{
+		Payload: &MsgsAllInfo_MsgsAllInfo{
+			MsgsAllInfo: &TLMsgsAllInfo{},
+		},
+	}
+}
+
 func (m *TLMsgsAllInfo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_msgs_all_info))
@@ -15012,6 +15156,14 @@ func (m *TLMsgsAllInfo) Decode(dbuf *DecodeBuf) error {
 }
 
 // msg_detailed_info#276d3ec6 msg_id:long answer_msg_id:long bytes:int status:int = MsgDetailedInfo;
+func (m *TLMsgDetailedInfo) ToMsgDetailedInfo() *MsgDetailedInfo {
+	return &MsgDetailedInfo{
+		Payload: &MsgDetailedInfo_MsgDetailedInfo{
+			MsgDetailedInfo: &TLMsgDetailedInfo{},
+		},
+	}
+}
+
 func (m *TLMsgDetailedInfo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_msg_detailed_info))
@@ -15031,6 +15183,14 @@ func (m *TLMsgDetailedInfo) Decode(dbuf *DecodeBuf) error {
 }
 
 // msg_new_detailed_info#809db6df answer_msg_id:long bytes:int status:int = MsgDetailedInfo;
+func (m *TLMsgNewDetailedInfo) ToMsgDetailedInfo() *MsgDetailedInfo {
+	return &MsgDetailedInfo{
+		Payload: &MsgDetailedInfo_MsgNewDetailedInfo{
+			MsgNewDetailedInfo: &TLMsgNewDetailedInfo{},
+		},
+	}
+}
+
 func (m *TLMsgNewDetailedInfo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_msg_new_detailed_info))
@@ -15048,6 +15208,14 @@ func (m *TLMsgNewDetailedInfo) Decode(dbuf *DecodeBuf) error {
 }
 
 // msg_resend_req#7d861a08 msg_ids:Vector<long> = MsgResendReq;
+func (m *TLMsgResendReq) ToMsgResendReq() *MsgResendReq {
+	return &MsgResendReq{
+		Payload: &MsgResendReq_MsgResendReq{
+			MsgResendReq: &TLMsgResendReq{},
+		},
+	}
+}
+
 func (m *TLMsgResendReq) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_msg_resend_req))
@@ -15061,6 +15229,14 @@ func (m *TLMsgResendReq) Decode(dbuf *DecodeBuf) error {
 }
 
 // rpc_error#2144ca19 error_code:int error_message:string = RpcError;
+func (m *TLRpcError) ToRpcError() *RpcError {
+	return &RpcError{
+		Payload: &RpcError_RpcError{
+			RpcError: &TLRpcError{},
+		},
+	}
+}
+
 func (m *TLRpcError) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_rpc_error))
@@ -15076,6 +15252,14 @@ func (m *TLRpcError) Decode(dbuf *DecodeBuf) error {
 }
 
 // rpc_answer_unknown#5e2ad36e = RpcDropAnswer;
+func (m *TLRpcAnswerUnknown) ToRpcDropAnswer() *RpcDropAnswer {
+	return &RpcDropAnswer{
+		Payload: &RpcDropAnswer_RpcAnswerUnknown{
+			RpcAnswerUnknown: &TLRpcAnswerUnknown{},
+		},
+	}
+}
+
 func (m *TLRpcAnswerUnknown) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_rpc_answer_unknown))
@@ -15087,6 +15271,14 @@ func (m *TLRpcAnswerUnknown) Decode(dbuf *DecodeBuf) error {
 }
 
 // rpc_answer_dropped_running#cd78e586 = RpcDropAnswer;
+func (m *TLRpcAnswerDroppedRunning) ToRpcDropAnswer() *RpcDropAnswer {
+	return &RpcDropAnswer{
+		Payload: &RpcDropAnswer_RpcAnswerDroppedRunning{
+			RpcAnswerDroppedRunning: &TLRpcAnswerDroppedRunning{},
+		},
+	}
+}
+
 func (m *TLRpcAnswerDroppedRunning) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_rpc_answer_dropped_running))
@@ -15098,6 +15290,14 @@ func (m *TLRpcAnswerDroppedRunning) Decode(dbuf *DecodeBuf) error {
 }
 
 // rpc_answer_dropped#a43ad8b7 msg_id:long seq_no:int bytes:int = RpcDropAnswer;
+func (m *TLRpcAnswerDropped) ToRpcDropAnswer() *RpcDropAnswer {
+	return &RpcDropAnswer{
+		Payload: &RpcDropAnswer_RpcAnswerDropped{
+			RpcAnswerDropped: &TLRpcAnswerDropped{},
+		},
+	}
+}
+
 func (m *TLRpcAnswerDropped) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_rpc_answer_dropped))
@@ -15115,6 +15315,14 @@ func (m *TLRpcAnswerDropped) Decode(dbuf *DecodeBuf) error {
 }
 
 // future_salt#0949d9dc valid_since:int valid_until:int salt:long = FutureSalt;
+func (m *TLFutureSalt) ToFutureSalt() *FutureSalt {
+	return &FutureSalt{
+		Payload: &FutureSalt_FutureSalt{
+			FutureSalt: &TLFutureSalt{},
+		},
+	}
+}
+
 func (m *TLFutureSalt) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_future_salt))
@@ -15132,6 +15340,14 @@ func (m *TLFutureSalt) Decode(dbuf *DecodeBuf) error {
 }
 
 // future_salts#ae500895 req_msg_id:long now:int salts:vector<future_salt> = FutureSalts;
+func (m *TLFutureSalts) ToFutureSalts() *FutureSalts {
+	return &FutureSalts{
+		Payload: &FutureSalts_FutureSalts{
+			FutureSalts: &TLFutureSalts{},
+		},
+	}
+}
+
 func (m *TLFutureSalts) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_future_salts))
@@ -15169,6 +15385,14 @@ func (m *TLFutureSalts) Decode(dbuf *DecodeBuf) error {
 }
 
 // pong#347773c5 msg_id:long ping_id:long = Pong;
+func (m *TLPong) ToPong() *Pong {
+	return &Pong{
+		Payload: &Pong_Pong{
+			Pong: &TLPong{},
+		},
+	}
+}
+
 func (m *TLPong) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pong))
@@ -15184,6 +15408,14 @@ func (m *TLPong) Decode(dbuf *DecodeBuf) error {
 }
 
 // destroy_session_ok#e22045fc session_id:long = DestroySessionRes;
+func (m *TLDestroySessionOk) ToDestroySessionRes() *DestroySessionRes {
+	return &DestroySessionRes{
+		Payload: &DestroySessionRes_DestroySessionOk{
+			DestroySessionOk: &TLDestroySessionOk{},
+		},
+	}
+}
+
 func (m *TLDestroySessionOk) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_destroy_session_ok))
@@ -15197,6 +15429,14 @@ func (m *TLDestroySessionOk) Decode(dbuf *DecodeBuf) error {
 }
 
 // destroy_session_none#62d350c9 session_id:long = DestroySessionRes;
+func (m *TLDestroySessionNone) ToDestroySessionRes() *DestroySessionRes {
+	return &DestroySessionRes{
+		Payload: &DestroySessionRes_DestroySessionNone{
+			DestroySessionNone: &TLDestroySessionNone{},
+		},
+	}
+}
+
 func (m *TLDestroySessionNone) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_destroy_session_none))
@@ -15210,6 +15450,14 @@ func (m *TLDestroySessionNone) Decode(dbuf *DecodeBuf) error {
 }
 
 // new_session_created#9ec20908 first_msg_id:long unique_id:long server_salt:long = NewSession;
+func (m *TLNewSessionCreated) ToNewSession() *NewSession {
+	return &NewSession{
+		Payload: &NewSession_NewSessionCreated{
+			NewSessionCreated: &TLNewSessionCreated{},
+		},
+	}
+}
+
 func (m *TLNewSessionCreated) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_new_session_created))
@@ -15227,6 +15475,14 @@ func (m *TLNewSessionCreated) Decode(dbuf *DecodeBuf) error {
 }
 
 // http_wait#9299359f max_delay:int wait_after:int max_wait:int = HttpWait;
+func (m *TLHttpWait) ToHttpWait() *HttpWait {
+	return &HttpWait{
+		Payload: &HttpWait_HttpWait{
+			HttpWait: &TLHttpWait{},
+		},
+	}
+}
+
 func (m *TLHttpWait) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_http_wait))
@@ -15244,6 +15500,14 @@ func (m *TLHttpWait) Decode(dbuf *DecodeBuf) error {
 }
 
 // ipPort#d433ad73 ipv4:int port:int = IpPort;
+func (m *TLIpPort) ToIpPort() *IpPort {
+	return &IpPort{
+		Payload: &IpPort_IpPort{
+			IpPort: &TLIpPort{},
+		},
+	}
+}
+
 func (m *TLIpPort) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_ipPort))
@@ -15259,6 +15523,14 @@ func (m *TLIpPort) Decode(dbuf *DecodeBuf) error {
 }
 
 // help.configSimple#d997c3c5 date:int expires:int dc_id:int ip_port_list:Vector<ipPort> = help.ConfigSimple;
+func (m *TLHelpConfigSimple) ToHelp_ConfigSimple() *Help_ConfigSimple {
+	return &Help_ConfigSimple{
+		Payload: &Help_ConfigSimple_HelpConfigSimple{
+			HelpConfigSimple: &TLHelpConfigSimple{},
+		},
+	}
+}
+
 func (m *TLHelpConfigSimple) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_help_configSimple))
@@ -15298,6 +15570,14 @@ func (m *TLHelpConfigSimple) Decode(dbuf *DecodeBuf) error {
 }
 
 // boolFalse#bc799737 = Bool;
+func (m *TLBoolFalse) ToBool() *Bool {
+	return &Bool{
+		Payload: &Bool_BoolFalse{
+			BoolFalse: &TLBoolFalse{},
+		},
+	}
+}
+
 func (m *TLBoolFalse) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_boolFalse))
@@ -15309,6 +15589,14 @@ func (m *TLBoolFalse) Decode(dbuf *DecodeBuf) error {
 }
 
 // boolTrue#997275b5 = Bool;
+func (m *TLBoolTrue) ToBool() *Bool {
+	return &Bool{
+		Payload: &Bool_BoolTrue{
+			BoolTrue: &TLBoolTrue{},
+		},
+	}
+}
+
 func (m *TLBoolTrue) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_boolTrue))
@@ -15320,6 +15608,14 @@ func (m *TLBoolTrue) Decode(dbuf *DecodeBuf) error {
 }
 
 // true#3fedd339 = True;
+func (m *TLTrue) ToTrue() *True {
+	return &True{
+		Payload: &True_True{
+			True: &TLTrue{},
+		},
+	}
+}
+
 func (m *TLTrue) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_true))
@@ -15331,6 +15627,14 @@ func (m *TLTrue) Decode(dbuf *DecodeBuf) error {
 }
 
 // error#c4b9f9bb code:int text:string = Error;
+func (m *TLError) ToError() *Error {
+	return &Error{
+		Payload: &Error_Error{
+			Error: &TLError{},
+		},
+	}
+}
+
 func (m *TLError) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_error))
@@ -15346,6 +15650,14 @@ func (m *TLError) Decode(dbuf *DecodeBuf) error {
 }
 
 // null#56730bcc = Null;
+func (m *TLNull) ToNull() *Null {
+	return &Null{
+		Payload: &Null_Null{
+			Null: &TLNull{},
+		},
+	}
+}
+
 func (m *TLNull) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_null))
@@ -15357,6 +15669,14 @@ func (m *TLNull) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPeerEmpty#7f3b18ea = InputPeer;
+func (m *TLInputPeerEmpty) ToInputPeer() *InputPeer {
+	return &InputPeer{
+		Payload: &InputPeer_InputPeerEmpty{
+			InputPeerEmpty: &TLInputPeerEmpty{},
+		},
+	}
+}
+
 func (m *TLInputPeerEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPeerEmpty))
@@ -15368,6 +15688,14 @@ func (m *TLInputPeerEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPeerSelf#7da07ec9 = InputPeer;
+func (m *TLInputPeerSelf) ToInputPeer() *InputPeer {
+	return &InputPeer{
+		Payload: &InputPeer_InputPeerSelf{
+			InputPeerSelf: &TLInputPeerSelf{},
+		},
+	}
+}
+
 func (m *TLInputPeerSelf) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPeerSelf))
@@ -15379,6 +15707,14 @@ func (m *TLInputPeerSelf) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPeerChat#179be863 chat_id:int = InputPeer;
+func (m *TLInputPeerChat) ToInputPeer() *InputPeer {
+	return &InputPeer{
+		Payload: &InputPeer_InputPeerChat{
+			InputPeerChat: &TLInputPeerChat{},
+		},
+	}
+}
+
 func (m *TLInputPeerChat) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPeerChat))
@@ -15392,6 +15728,14 @@ func (m *TLInputPeerChat) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPeerUser#7b8e7de6 user_id:int access_hash:long = InputPeer;
+func (m *TLInputPeerUser) ToInputPeer() *InputPeer {
+	return &InputPeer{
+		Payload: &InputPeer_InputPeerUser{
+			InputPeerUser: &TLInputPeerUser{},
+		},
+	}
+}
+
 func (m *TLInputPeerUser) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPeerUser))
@@ -15407,6 +15751,14 @@ func (m *TLInputPeerUser) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPeerChannel#20adaef8 channel_id:int access_hash:long = InputPeer;
+func (m *TLInputPeerChannel) ToInputPeer() *InputPeer {
+	return &InputPeer{
+		Payload: &InputPeer_InputPeerChannel{
+			InputPeerChannel: &TLInputPeerChannel{},
+		},
+	}
+}
+
 func (m *TLInputPeerChannel) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPeerChannel))
@@ -15422,6 +15774,14 @@ func (m *TLInputPeerChannel) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputUserEmpty#b98886cf = InputUser;
+func (m *TLInputUserEmpty) ToInputUser() *InputUser {
+	return &InputUser{
+		Payload: &InputUser_InputUserEmpty{
+			InputUserEmpty: &TLInputUserEmpty{},
+		},
+	}
+}
+
 func (m *TLInputUserEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputUserEmpty))
@@ -15433,6 +15793,14 @@ func (m *TLInputUserEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputUserSelf#f7c1b13f = InputUser;
+func (m *TLInputUserSelf) ToInputUser() *InputUser {
+	return &InputUser{
+		Payload: &InputUser_InputUserSelf{
+			InputUserSelf: &TLInputUserSelf{},
+		},
+	}
+}
+
 func (m *TLInputUserSelf) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputUserSelf))
@@ -15444,6 +15812,14 @@ func (m *TLInputUserSelf) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputUser#d8292816 user_id:int access_hash:long = InputUser;
+func (m *TLInputUser) ToInputUser() *InputUser {
+	return &InputUser{
+		Payload: &InputUser_InputUser{
+			InputUser: &TLInputUser{},
+		},
+	}
+}
+
 func (m *TLInputUser) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputUser))
@@ -15459,6 +15835,14 @@ func (m *TLInputUser) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPhoneContact#f392b7f4 client_id:long phone:string first_name:string last_name:string = InputContact;
+func (m *TLInputPhoneContact) ToInputContact() *InputContact {
+	return &InputContact{
+		Payload: &InputContact_InputPhoneContact{
+			InputPhoneContact: &TLInputPhoneContact{},
+		},
+	}
+}
+
 func (m *TLInputPhoneContact) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPhoneContact))
@@ -15478,6 +15862,14 @@ func (m *TLInputPhoneContact) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputFile#f52ff27f id:long parts:int name:string md5_checksum:string = InputFile;
+func (m *TLInputFile) ToInputFile() *InputFile {
+	return &InputFile{
+		Payload: &InputFile_InputFile{
+			InputFile: &TLInputFile{},
+		},
+	}
+}
+
 func (m *TLInputFile) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputFile))
@@ -15497,6 +15889,14 @@ func (m *TLInputFile) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputFileBig#fa4f0bb5 id:long parts:int name:string = InputFile;
+func (m *TLInputFileBig) ToInputFile() *InputFile {
+	return &InputFile{
+		Payload: &InputFile_InputFileBig{
+			InputFileBig: &TLInputFileBig{},
+		},
+	}
+}
+
 func (m *TLInputFileBig) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputFileBig))
@@ -15514,6 +15914,14 @@ func (m *TLInputFileBig) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMediaEmpty#9664f57f = InputMedia;
+func (m *TLInputMediaEmpty) ToInputMedia() *InputMedia {
+	return &InputMedia{
+		Payload: &InputMedia_InputMediaEmpty{
+			InputMediaEmpty: &TLInputMediaEmpty{},
+		},
+	}
+}
+
 func (m *TLInputMediaEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaEmpty))
@@ -15525,6 +15933,14 @@ func (m *TLInputMediaEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMediaUploadedPhoto#2f37e231 flags:# file:InputFile caption:string stickers:flags.0?Vector<InputDocument> ttl_seconds:flags.1?int = InputMedia;
+func (m *TLInputMediaUploadedPhoto) ToInputMedia() *InputMedia {
+	return &InputMedia{
+		Payload: &InputMedia_InputMediaUploadedPhoto{
+			InputMediaUploadedPhoto: &TLInputMediaUploadedPhoto{},
+		},
+	}
+}
+
 func (m *TLInputMediaUploadedPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaUploadedPhoto))
@@ -15584,6 +16000,14 @@ func (m *TLInputMediaUploadedPhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMediaPhoto#81fa373a flags:# id:InputPhoto caption:string ttl_seconds:flags.0?int = InputMedia;
+func (m *TLInputMediaPhoto) ToInputMedia() *InputMedia {
+	return &InputMedia{
+		Payload: &InputMedia_InputMediaPhoto{
+			InputMediaPhoto: &TLInputMediaPhoto{},
+		},
+	}
+}
+
 func (m *TLInputMediaPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaPhoto))
@@ -15615,6 +16039,14 @@ func (m *TLInputMediaPhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMediaGeoPoint#f9c44144 geo_point:InputGeoPoint = InputMedia;
+func (m *TLInputMediaGeoPoint) ToInputMedia() *InputMedia {
+	return &InputMedia{
+		Payload: &InputMedia_InputMediaGeoPoint{
+			InputMediaGeoPoint: &TLInputMediaGeoPoint{},
+		},
+	}
+}
+
 func (m *TLInputMediaGeoPoint) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaGeoPoint))
@@ -15630,6 +16062,14 @@ func (m *TLInputMediaGeoPoint) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMediaContact#a6e45987 phone_number:string first_name:string last_name:string = InputMedia;
+func (m *TLInputMediaContact) ToInputMedia() *InputMedia {
+	return &InputMedia{
+		Payload: &InputMedia_InputMediaContact{
+			InputMediaContact: &TLInputMediaContact{},
+		},
+	}
+}
+
 func (m *TLInputMediaContact) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaContact))
@@ -15647,6 +16087,14 @@ func (m *TLInputMediaContact) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMediaUploadedDocument#e39621fd flags:# file:InputFile thumb:flags.2?InputFile mime_type:string attributes:Vector<DocumentAttribute> caption:string stickers:flags.0?Vector<InputDocument> ttl_seconds:flags.1?int = InputMedia;
+func (m *TLInputMediaUploadedDocument) ToInputMedia() *InputMedia {
+	return &InputMedia{
+		Payload: &InputMedia_InputMediaUploadedDocument{
+			InputMediaUploadedDocument: &TLInputMediaUploadedDocument{},
+		},
+	}
+}
+
 func (m *TLInputMediaUploadedDocument) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaUploadedDocument))
@@ -15740,6 +16188,14 @@ func (m *TLInputMediaUploadedDocument) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMediaDocument#5acb668e flags:# id:InputDocument caption:string ttl_seconds:flags.0?int = InputMedia;
+func (m *TLInputMediaDocument) ToInputMedia() *InputMedia {
+	return &InputMedia{
+		Payload: &InputMedia_InputMediaDocument{
+			InputMediaDocument: &TLInputMediaDocument{},
+		},
+	}
+}
+
 func (m *TLInputMediaDocument) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaDocument))
@@ -15771,6 +16227,14 @@ func (m *TLInputMediaDocument) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMediaVenue#2827a81a geo_point:InputGeoPoint title:string address:string provider:string venue_id:string = InputMedia;
+func (m *TLInputMediaVenue) ToInputMedia() *InputMedia {
+	return &InputMedia{
+		Payload: &InputMedia_InputMediaVenue{
+			InputMediaVenue: &TLInputMediaVenue{},
+		},
+	}
+}
+
 func (m *TLInputMediaVenue) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaVenue))
@@ -15794,6 +16258,14 @@ func (m *TLInputMediaVenue) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMediaGifExternal#4843b0fd url:string q:string = InputMedia;
+func (m *TLInputMediaGifExternal) ToInputMedia() *InputMedia {
+	return &InputMedia{
+		Payload: &InputMedia_InputMediaGifExternal{
+			InputMediaGifExternal: &TLInputMediaGifExternal{},
+		},
+	}
+}
+
 func (m *TLInputMediaGifExternal) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaGifExternal))
@@ -15809,6 +16281,14 @@ func (m *TLInputMediaGifExternal) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMediaPhotoExternal#922aec1 flags:# url:string caption:string ttl_seconds:flags.0?int = InputMedia;
+func (m *TLInputMediaPhotoExternal) ToInputMedia() *InputMedia {
+	return &InputMedia{
+		Payload: &InputMedia_InputMediaPhotoExternal{
+			InputMediaPhotoExternal: &TLInputMediaPhotoExternal{},
+		},
+	}
+}
+
 func (m *TLInputMediaPhotoExternal) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaPhotoExternal))
@@ -15838,6 +16318,14 @@ func (m *TLInputMediaPhotoExternal) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMediaDocumentExternal#b6f74335 flags:# url:string caption:string ttl_seconds:flags.0?int = InputMedia;
+func (m *TLInputMediaDocumentExternal) ToInputMedia() *InputMedia {
+	return &InputMedia{
+		Payload: &InputMedia_InputMediaDocumentExternal{
+			InputMediaDocumentExternal: &TLInputMediaDocumentExternal{},
+		},
+	}
+}
+
 func (m *TLInputMediaDocumentExternal) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaDocumentExternal))
@@ -15867,6 +16355,14 @@ func (m *TLInputMediaDocumentExternal) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMediaGame#d33f43f3 id:InputGame = InputMedia;
+func (m *TLInputMediaGame) ToInputMedia() *InputMedia {
+	return &InputMedia{
+		Payload: &InputMedia_InputMediaGame{
+			InputMediaGame: &TLInputMediaGame{},
+		},
+	}
+}
+
 func (m *TLInputMediaGame) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaGame))
@@ -15882,6 +16378,14 @@ func (m *TLInputMediaGame) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMediaInvoice#92153685 flags:# title:string description:string photo:flags.0?InputWebDocument invoice:Invoice payload:bytes provider:string start_param:string = InputMedia;
+func (m *TLInputMediaInvoice) ToInputMedia() *InputMedia {
+	return &InputMedia{
+		Payload: &InputMedia_InputMediaInvoice{
+			InputMediaInvoice: &TLInputMediaInvoice{},
+		},
+	}
+}
+
 func (m *TLInputMediaInvoice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMediaInvoice))
@@ -15923,6 +16427,14 @@ func (m *TLInputMediaInvoice) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputChatPhotoEmpty#1ca48f57 = InputChatPhoto;
+func (m *TLInputChatPhotoEmpty) ToInputChatPhoto() *InputChatPhoto {
+	return &InputChatPhoto{
+		Payload: &InputChatPhoto_InputChatPhotoEmpty{
+			InputChatPhotoEmpty: &TLInputChatPhotoEmpty{},
+		},
+	}
+}
+
 func (m *TLInputChatPhotoEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputChatPhotoEmpty))
@@ -15934,6 +16446,14 @@ func (m *TLInputChatPhotoEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputChatUploadedPhoto#927c55b4 file:InputFile = InputChatPhoto;
+func (m *TLInputChatUploadedPhoto) ToInputChatPhoto() *InputChatPhoto {
+	return &InputChatPhoto{
+		Payload: &InputChatPhoto_InputChatUploadedPhoto{
+			InputChatUploadedPhoto: &TLInputChatUploadedPhoto{},
+		},
+	}
+}
+
 func (m *TLInputChatUploadedPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputChatUploadedPhoto))
@@ -15949,6 +16469,14 @@ func (m *TLInputChatUploadedPhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputChatPhoto#8953ad37 id:InputPhoto = InputChatPhoto;
+func (m *TLInputChatPhoto) ToInputChatPhoto() *InputChatPhoto {
+	return &InputChatPhoto{
+		Payload: &InputChatPhoto_InputChatPhoto{
+			InputChatPhoto: &TLInputChatPhoto{},
+		},
+	}
+}
+
 func (m *TLInputChatPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputChatPhoto))
@@ -15964,6 +16492,14 @@ func (m *TLInputChatPhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputGeoPointEmpty#e4c123d6 = InputGeoPoint;
+func (m *TLInputGeoPointEmpty) ToInputGeoPoint() *InputGeoPoint {
+	return &InputGeoPoint{
+		Payload: &InputGeoPoint_InputGeoPointEmpty{
+			InputGeoPointEmpty: &TLInputGeoPointEmpty{},
+		},
+	}
+}
+
 func (m *TLInputGeoPointEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputGeoPointEmpty))
@@ -15975,6 +16511,14 @@ func (m *TLInputGeoPointEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputGeoPoint#f3b7acc9 lat:double long:double = InputGeoPoint;
+func (m *TLInputGeoPoint) ToInputGeoPoint() *InputGeoPoint {
+	return &InputGeoPoint{
+		Payload: &InputGeoPoint_InputGeoPoint{
+			InputGeoPoint: &TLInputGeoPoint{},
+		},
+	}
+}
+
 func (m *TLInputGeoPoint) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputGeoPoint))
@@ -15990,6 +16534,14 @@ func (m *TLInputGeoPoint) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPhotoEmpty#1cd7bf0d = InputPhoto;
+func (m *TLInputPhotoEmpty) ToInputPhoto() *InputPhoto {
+	return &InputPhoto{
+		Payload: &InputPhoto_InputPhotoEmpty{
+			InputPhotoEmpty: &TLInputPhotoEmpty{},
+		},
+	}
+}
+
 func (m *TLInputPhotoEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPhotoEmpty))
@@ -16001,6 +16553,14 @@ func (m *TLInputPhotoEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPhoto#fb95c6c4 id:long access_hash:long = InputPhoto;
+func (m *TLInputPhoto) ToInputPhoto() *InputPhoto {
+	return &InputPhoto{
+		Payload: &InputPhoto_InputPhoto{
+			InputPhoto: &TLInputPhoto{},
+		},
+	}
+}
+
 func (m *TLInputPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPhoto))
@@ -16016,6 +16576,14 @@ func (m *TLInputPhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputFileLocation#14637196 volume_id:long local_id:int secret:long = InputFileLocation;
+func (m *TLInputFileLocation) ToInputFileLocation() *InputFileLocation {
+	return &InputFileLocation{
+		Payload: &InputFileLocation_InputFileLocation{
+			InputFileLocation: &TLInputFileLocation{},
+		},
+	}
+}
+
 func (m *TLInputFileLocation) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputFileLocation))
@@ -16033,6 +16601,14 @@ func (m *TLInputFileLocation) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputEncryptedFileLocation#f5235d55 id:long access_hash:long = InputFileLocation;
+func (m *TLInputEncryptedFileLocation) ToInputFileLocation() *InputFileLocation {
+	return &InputFileLocation{
+		Payload: &InputFileLocation_InputEncryptedFileLocation{
+			InputEncryptedFileLocation: &TLInputEncryptedFileLocation{},
+		},
+	}
+}
+
 func (m *TLInputEncryptedFileLocation) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputEncryptedFileLocation))
@@ -16048,6 +16624,14 @@ func (m *TLInputEncryptedFileLocation) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputDocumentFileLocation#430f0724 id:long access_hash:long version:int = InputFileLocation;
+func (m *TLInputDocumentFileLocation) ToInputFileLocation() *InputFileLocation {
+	return &InputFileLocation{
+		Payload: &InputFileLocation_InputDocumentFileLocation{
+			InputDocumentFileLocation: &TLInputDocumentFileLocation{},
+		},
+	}
+}
+
 func (m *TLInputDocumentFileLocation) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputDocumentFileLocation))
@@ -16065,6 +16649,14 @@ func (m *TLInputDocumentFileLocation) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputAppEvent#770656a8 time:double type:string peer:long data:string = InputAppEvent;
+func (m *TLInputAppEvent) ToInputAppEvent() *InputAppEvent {
+	return &InputAppEvent{
+		Payload: &InputAppEvent_InputAppEvent{
+			InputAppEvent: &TLInputAppEvent{},
+		},
+	}
+}
+
 func (m *TLInputAppEvent) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputAppEvent))
@@ -16084,6 +16676,14 @@ func (m *TLInputAppEvent) Decode(dbuf *DecodeBuf) error {
 }
 
 // peerUser#9db1bc6d user_id:int = Peer;
+func (m *TLPeerUser) ToPeer() *Peer {
+	return &Peer{
+		Payload: &Peer_PeerUser{
+			PeerUser: &TLPeerUser{},
+		},
+	}
+}
+
 func (m *TLPeerUser) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_peerUser))
@@ -16097,6 +16697,14 @@ func (m *TLPeerUser) Decode(dbuf *DecodeBuf) error {
 }
 
 // peerChat#bad0e5bb chat_id:int = Peer;
+func (m *TLPeerChat) ToPeer() *Peer {
+	return &Peer{
+		Payload: &Peer_PeerChat{
+			PeerChat: &TLPeerChat{},
+		},
+	}
+}
+
 func (m *TLPeerChat) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_peerChat))
@@ -16110,6 +16718,14 @@ func (m *TLPeerChat) Decode(dbuf *DecodeBuf) error {
 }
 
 // peerChannel#bddde532 channel_id:int = Peer;
+func (m *TLPeerChannel) ToPeer() *Peer {
+	return &Peer{
+		Payload: &Peer_PeerChannel{
+			PeerChannel: &TLPeerChannel{},
+		},
+	}
+}
+
 func (m *TLPeerChannel) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_peerChannel))
@@ -16123,6 +16739,14 @@ func (m *TLPeerChannel) Decode(dbuf *DecodeBuf) error {
 }
 
 // storage.fileUnknown#aa963b05 = storage.FileType;
+func (m *TLStorageFileUnknown) ToStorage_FileType() *Storage_FileType {
+	return &Storage_FileType{
+		Payload: &Storage_FileType_StorageFileUnknown{
+			StorageFileUnknown: &TLStorageFileUnknown{},
+		},
+	}
+}
+
 func (m *TLStorageFileUnknown) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_storage_fileUnknown))
@@ -16134,6 +16758,14 @@ func (m *TLStorageFileUnknown) Decode(dbuf *DecodeBuf) error {
 }
 
 // storage.filePartial#40bc6f52 = storage.FileType;
+func (m *TLStorageFilePartial) ToStorage_FileType() *Storage_FileType {
+	return &Storage_FileType{
+		Payload: &Storage_FileType_StorageFilePartial{
+			StorageFilePartial: &TLStorageFilePartial{},
+		},
+	}
+}
+
 func (m *TLStorageFilePartial) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_storage_filePartial))
@@ -16145,6 +16777,14 @@ func (m *TLStorageFilePartial) Decode(dbuf *DecodeBuf) error {
 }
 
 // storage.fileJpeg#7efe0e = storage.FileType;
+func (m *TLStorageFileJpeg) ToStorage_FileType() *Storage_FileType {
+	return &Storage_FileType{
+		Payload: &Storage_FileType_StorageFileJpeg{
+			StorageFileJpeg: &TLStorageFileJpeg{},
+		},
+	}
+}
+
 func (m *TLStorageFileJpeg) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_storage_fileJpeg))
@@ -16156,6 +16796,14 @@ func (m *TLStorageFileJpeg) Decode(dbuf *DecodeBuf) error {
 }
 
 // storage.fileGif#cae1aadf = storage.FileType;
+func (m *TLStorageFileGif) ToStorage_FileType() *Storage_FileType {
+	return &Storage_FileType{
+		Payload: &Storage_FileType_StorageFileGif{
+			StorageFileGif: &TLStorageFileGif{},
+		},
+	}
+}
+
 func (m *TLStorageFileGif) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_storage_fileGif))
@@ -16167,6 +16815,14 @@ func (m *TLStorageFileGif) Decode(dbuf *DecodeBuf) error {
 }
 
 // storage.filePng#a4f63c0 = storage.FileType;
+func (m *TLStorageFilePng) ToStorage_FileType() *Storage_FileType {
+	return &Storage_FileType{
+		Payload: &Storage_FileType_StorageFilePng{
+			StorageFilePng: &TLStorageFilePng{},
+		},
+	}
+}
+
 func (m *TLStorageFilePng) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_storage_filePng))
@@ -16178,6 +16834,14 @@ func (m *TLStorageFilePng) Decode(dbuf *DecodeBuf) error {
 }
 
 // storage.filePdf#ae1e508d = storage.FileType;
+func (m *TLStorageFilePdf) ToStorage_FileType() *Storage_FileType {
+	return &Storage_FileType{
+		Payload: &Storage_FileType_StorageFilePdf{
+			StorageFilePdf: &TLStorageFilePdf{},
+		},
+	}
+}
+
 func (m *TLStorageFilePdf) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_storage_filePdf))
@@ -16189,6 +16853,14 @@ func (m *TLStorageFilePdf) Decode(dbuf *DecodeBuf) error {
 }
 
 // storage.fileMp3#528a0677 = storage.FileType;
+func (m *TLStorageFileMp3) ToStorage_FileType() *Storage_FileType {
+	return &Storage_FileType{
+		Payload: &Storage_FileType_StorageFileMp3{
+			StorageFileMp3: &TLStorageFileMp3{},
+		},
+	}
+}
+
 func (m *TLStorageFileMp3) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_storage_fileMp3))
@@ -16200,6 +16872,14 @@ func (m *TLStorageFileMp3) Decode(dbuf *DecodeBuf) error {
 }
 
 // storage.fileMov#4b09ebbc = storage.FileType;
+func (m *TLStorageFileMov) ToStorage_FileType() *Storage_FileType {
+	return &Storage_FileType{
+		Payload: &Storage_FileType_StorageFileMov{
+			StorageFileMov: &TLStorageFileMov{},
+		},
+	}
+}
+
 func (m *TLStorageFileMov) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_storage_fileMov))
@@ -16211,6 +16891,14 @@ func (m *TLStorageFileMov) Decode(dbuf *DecodeBuf) error {
 }
 
 // storage.fileMp4#b3cea0e4 = storage.FileType;
+func (m *TLStorageFileMp4) ToStorage_FileType() *Storage_FileType {
+	return &Storage_FileType{
+		Payload: &Storage_FileType_StorageFileMp4{
+			StorageFileMp4: &TLStorageFileMp4{},
+		},
+	}
+}
+
 func (m *TLStorageFileMp4) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_storage_fileMp4))
@@ -16222,6 +16910,14 @@ func (m *TLStorageFileMp4) Decode(dbuf *DecodeBuf) error {
 }
 
 // storage.fileWebp#1081464c = storage.FileType;
+func (m *TLStorageFileWebp) ToStorage_FileType() *Storage_FileType {
+	return &Storage_FileType{
+		Payload: &Storage_FileType_StorageFileWebp{
+			StorageFileWebp: &TLStorageFileWebp{},
+		},
+	}
+}
+
 func (m *TLStorageFileWebp) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_storage_fileWebp))
@@ -16233,6 +16929,14 @@ func (m *TLStorageFileWebp) Decode(dbuf *DecodeBuf) error {
 }
 
 // fileLocationUnavailable#7c596b46 volume_id:long local_id:int secret:long = FileLocation;
+func (m *TLFileLocationUnavailable) ToFileLocation() *FileLocation {
+	return &FileLocation{
+		Payload: &FileLocation_FileLocationUnavailable{
+			FileLocationUnavailable: &TLFileLocationUnavailable{},
+		},
+	}
+}
+
 func (m *TLFileLocationUnavailable) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_fileLocationUnavailable))
@@ -16250,6 +16954,14 @@ func (m *TLFileLocationUnavailable) Decode(dbuf *DecodeBuf) error {
 }
 
 // fileLocation#53d69076 dc_id:int volume_id:long local_id:int secret:long = FileLocation;
+func (m *TLFileLocation) ToFileLocation() *FileLocation {
+	return &FileLocation{
+		Payload: &FileLocation_FileLocation{
+			FileLocation: &TLFileLocation{},
+		},
+	}
+}
+
 func (m *TLFileLocation) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_fileLocation))
@@ -16269,6 +16981,14 @@ func (m *TLFileLocation) Decode(dbuf *DecodeBuf) error {
 }
 
 // userEmpty#200250ba id:int = User;
+func (m *TLUserEmpty) ToUser() *User {
+	return &User{
+		Payload: &User_UserEmpty{
+			UserEmpty: &TLUserEmpty{},
+		},
+	}
+}
+
 func (m *TLUserEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_userEmpty))
@@ -16282,6 +17002,14 @@ func (m *TLUserEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // user#2e13f4c3 flags:# self:flags.10?true contact:flags.11?true mutual_contact:flags.12?true deleted:flags.13?true bot:flags.14?true bot_chat_history:flags.15?true bot_nochats:flags.16?true verified:flags.17?true restricted:flags.18?true min:flags.20?true bot_inline_geo:flags.21?true id:int access_hash:flags.0?long first_name:flags.1?string last_name:flags.2?string username:flags.3?string phone:flags.4?string photo:flags.5?UserProfilePhoto status:flags.6?UserStatus bot_info_version:flags.14?int restriction_reason:flags.18?string bot_inline_placeholder:flags.19?string lang_code:flags.22?string = User;
+func (m *TLUser) ToUser() *User {
+	return &User{
+		Payload: &User_User{
+			User: &TLUser{},
+		},
+	}
+}
+
 func (m *TLUser) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_user))
@@ -16502,6 +17230,14 @@ func (m *TLUser) Decode(dbuf *DecodeBuf) error {
 }
 
 // userProfilePhotoEmpty#4f11bae1 = UserProfilePhoto;
+func (m *TLUserProfilePhotoEmpty) ToUserProfilePhoto() *UserProfilePhoto {
+	return &UserProfilePhoto{
+		Payload: &UserProfilePhoto_UserProfilePhotoEmpty{
+			UserProfilePhotoEmpty: &TLUserProfilePhotoEmpty{},
+		},
+	}
+}
+
 func (m *TLUserProfilePhotoEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_userProfilePhotoEmpty))
@@ -16513,6 +17249,14 @@ func (m *TLUserProfilePhotoEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // userProfilePhoto#d559d8c8 photo_id:long photo_small:FileLocation photo_big:FileLocation = UserProfilePhoto;
+func (m *TLUserProfilePhoto) ToUserProfilePhoto() *UserProfilePhoto {
+	return &UserProfilePhoto{
+		Payload: &UserProfilePhoto_UserProfilePhoto{
+			UserProfilePhoto: &TLUserProfilePhoto{},
+		},
+	}
+}
+
 func (m *TLUserProfilePhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_userProfilePhoto))
@@ -16534,6 +17278,14 @@ func (m *TLUserProfilePhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // userStatusEmpty#9d05049 = UserStatus;
+func (m *TLUserStatusEmpty) ToUserStatus() *UserStatus {
+	return &UserStatus{
+		Payload: &UserStatus_UserStatusEmpty{
+			UserStatusEmpty: &TLUserStatusEmpty{},
+		},
+	}
+}
+
 func (m *TLUserStatusEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_userStatusEmpty))
@@ -16545,6 +17297,14 @@ func (m *TLUserStatusEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // userStatusOnline#edb93949 expires:int = UserStatus;
+func (m *TLUserStatusOnline) ToUserStatus() *UserStatus {
+	return &UserStatus{
+		Payload: &UserStatus_UserStatusOnline{
+			UserStatusOnline: &TLUserStatusOnline{},
+		},
+	}
+}
+
 func (m *TLUserStatusOnline) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_userStatusOnline))
@@ -16558,6 +17318,14 @@ func (m *TLUserStatusOnline) Decode(dbuf *DecodeBuf) error {
 }
 
 // userStatusOffline#8c703f was_online:int = UserStatus;
+func (m *TLUserStatusOffline) ToUserStatus() *UserStatus {
+	return &UserStatus{
+		Payload: &UserStatus_UserStatusOffline{
+			UserStatusOffline: &TLUserStatusOffline{},
+		},
+	}
+}
+
 func (m *TLUserStatusOffline) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_userStatusOffline))
@@ -16571,6 +17339,14 @@ func (m *TLUserStatusOffline) Decode(dbuf *DecodeBuf) error {
 }
 
 // userStatusRecently#e26f42f1 = UserStatus;
+func (m *TLUserStatusRecently) ToUserStatus() *UserStatus {
+	return &UserStatus{
+		Payload: &UserStatus_UserStatusRecently{
+			UserStatusRecently: &TLUserStatusRecently{},
+		},
+	}
+}
+
 func (m *TLUserStatusRecently) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_userStatusRecently))
@@ -16582,6 +17358,14 @@ func (m *TLUserStatusRecently) Decode(dbuf *DecodeBuf) error {
 }
 
 // userStatusLastWeek#7bf09fc = UserStatus;
+func (m *TLUserStatusLastWeek) ToUserStatus() *UserStatus {
+	return &UserStatus{
+		Payload: &UserStatus_UserStatusLastWeek{
+			UserStatusLastWeek: &TLUserStatusLastWeek{},
+		},
+	}
+}
+
 func (m *TLUserStatusLastWeek) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_userStatusLastWeek))
@@ -16593,6 +17377,14 @@ func (m *TLUserStatusLastWeek) Decode(dbuf *DecodeBuf) error {
 }
 
 // userStatusLastMonth#77ebc742 = UserStatus;
+func (m *TLUserStatusLastMonth) ToUserStatus() *UserStatus {
+	return &UserStatus{
+		Payload: &UserStatus_UserStatusLastMonth{
+			UserStatusLastMonth: &TLUserStatusLastMonth{},
+		},
+	}
+}
+
 func (m *TLUserStatusLastMonth) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_userStatusLastMonth))
@@ -16604,6 +17396,14 @@ func (m *TLUserStatusLastMonth) Decode(dbuf *DecodeBuf) error {
 }
 
 // chatEmpty#9ba2d800 id:int = Chat;
+func (m *TLChatEmpty) ToChat() *Chat {
+	return &Chat{
+		Payload: &Chat_ChatEmpty{
+			ChatEmpty: &TLChatEmpty{},
+		},
+	}
+}
+
 func (m *TLChatEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatEmpty))
@@ -16617,6 +17417,14 @@ func (m *TLChatEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // chat#d91cdd54 flags:# creator:flags.0?true kicked:flags.1?true left:flags.2?true admins_enabled:flags.3?true admin:flags.4?true deactivated:flags.5?true id:int title:string photo:ChatPhoto participants_count:int date:int version:int migrated_to:flags.6?InputChannel = Chat;
+func (m *TLChat) ToChat() *Chat {
+	return &Chat{
+		Payload: &Chat_Chat{
+			Chat: &TLChat{},
+		},
+	}
+}
+
 func (m *TLChat) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chat))
@@ -16712,6 +17520,14 @@ func (m *TLChat) Decode(dbuf *DecodeBuf) error {
 }
 
 // chatForbidden#7328bdb id:int title:string = Chat;
+func (m *TLChatForbidden) ToChat() *Chat {
+	return &Chat{
+		Payload: &Chat_ChatForbidden{
+			ChatForbidden: &TLChatForbidden{},
+		},
+	}
+}
+
 func (m *TLChatForbidden) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatForbidden))
@@ -16727,6 +17543,14 @@ func (m *TLChatForbidden) Decode(dbuf *DecodeBuf) error {
 }
 
 // channel#cb44b1c flags:# creator:flags.0?true left:flags.2?true editor:flags.3?true broadcast:flags.5?true verified:flags.7?true megagroup:flags.8?true restricted:flags.9?true democracy:flags.10?true signatures:flags.11?true min:flags.12?true id:int access_hash:flags.13?long title:string username:flags.6?string photo:ChatPhoto date:int version:int restriction_reason:flags.9?string admin_rights:flags.14?ChannelAdminRights banned_rights:flags.15?ChannelBannedRights = Chat;
+func (m *TLChannel) ToChat() *Chat {
+	return &Chat{
+		Payload: &Chat_Channel{
+			Channel: &TLChannel{},
+		},
+	}
+}
+
 func (m *TLChannel) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channel))
@@ -16894,6 +17718,14 @@ func (m *TLChannel) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelForbidden#289da732 flags:# broadcast:flags.5?true megagroup:flags.8?true id:int access_hash:long title:string until_date:flags.16?int = Chat;
+func (m *TLChannelForbidden) ToChat() *Chat {
+	return &Chat{
+		Payload: &Chat_ChannelForbidden{
+			ChannelForbidden: &TLChannelForbidden{},
+		},
+	}
+}
+
 func (m *TLChannelForbidden) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelForbidden))
@@ -16943,6 +17775,14 @@ func (m *TLChannelForbidden) Decode(dbuf *DecodeBuf) error {
 }
 
 // chatFull#2e02a614 id:int participants:ChatParticipants chat_photo:Photo notify_settings:PeerNotifySettings exported_invite:ExportedChatInvite bot_info:Vector<BotInfo> = ChatFull;
+func (m *TLChatFull) ToChatFull() *ChatFull {
+	return &ChatFull{
+		Payload: &ChatFull_ChatFull{
+			ChatFull: &TLChatFull{},
+		},
+	}
+}
+
 func (m *TLChatFull) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatFull))
@@ -16993,6 +17833,14 @@ func (m *TLChatFull) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelFull#17f45fcf flags:# can_view_participants:flags.3?true can_set_username:flags.6?true can_set_stickers:flags.7?true id:int about:string participants_count:flags.0?int admins_count:flags.1?int kicked_count:flags.2?int banned_count:flags.2?int read_inbox_max_id:int read_outbox_max_id:int unread_count:int chat_photo:Photo notify_settings:PeerNotifySettings exported_invite:ExportedChatInvite bot_info:Vector<BotInfo> migrated_from_chat_id:flags.4?int migrated_from_max_id:flags.4?int pinned_msg_id:flags.5?int stickerset:flags.8?StickerSet = ChatFull;
+func (m *TLChannelFull) ToChatFull() *ChatFull {
+	return &ChatFull{
+		Payload: &ChatFull_ChannelFull{
+			ChannelFull: &TLChannelFull{},
+		},
+	}
+}
+
 func (m *TLChannelFull) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelFull))
@@ -17153,6 +18001,14 @@ func (m *TLChannelFull) Decode(dbuf *DecodeBuf) error {
 }
 
 // chatParticipant#c8d7493e user_id:int inviter_id:int date:int = ChatParticipant;
+func (m *TLChatParticipant) ToChatParticipant() *ChatParticipant {
+	return &ChatParticipant{
+		Payload: &ChatParticipant_ChatParticipant{
+			ChatParticipant: &TLChatParticipant{},
+		},
+	}
+}
+
 func (m *TLChatParticipant) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatParticipant))
@@ -17170,6 +18026,14 @@ func (m *TLChatParticipant) Decode(dbuf *DecodeBuf) error {
 }
 
 // chatParticipantCreator#da13538a user_id:int = ChatParticipant;
+func (m *TLChatParticipantCreator) ToChatParticipant() *ChatParticipant {
+	return &ChatParticipant{
+		Payload: &ChatParticipant_ChatParticipantCreator{
+			ChatParticipantCreator: &TLChatParticipantCreator{},
+		},
+	}
+}
+
 func (m *TLChatParticipantCreator) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatParticipantCreator))
@@ -17183,6 +18047,14 @@ func (m *TLChatParticipantCreator) Decode(dbuf *DecodeBuf) error {
 }
 
 // chatParticipantAdmin#e2d6e436 user_id:int inviter_id:int date:int = ChatParticipant;
+func (m *TLChatParticipantAdmin) ToChatParticipant() *ChatParticipant {
+	return &ChatParticipant{
+		Payload: &ChatParticipant_ChatParticipantAdmin{
+			ChatParticipantAdmin: &TLChatParticipantAdmin{},
+		},
+	}
+}
+
 func (m *TLChatParticipantAdmin) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatParticipantAdmin))
@@ -17200,6 +18072,14 @@ func (m *TLChatParticipantAdmin) Decode(dbuf *DecodeBuf) error {
 }
 
 // chatParticipantsForbidden#fc900c2b flags:# chat_id:int self_participant:flags.0?ChatParticipant = ChatParticipants;
+func (m *TLChatParticipantsForbidden) ToChatParticipants() *ChatParticipants {
+	return &ChatParticipants{
+		Payload: &ChatParticipants_ChatParticipantsForbidden{
+			ChatParticipantsForbidden: &TLChatParticipantsForbidden{},
+		},
+	}
+}
+
 func (m *TLChatParticipantsForbidden) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatParticipantsForbidden))
@@ -17229,6 +18109,14 @@ func (m *TLChatParticipantsForbidden) Decode(dbuf *DecodeBuf) error {
 }
 
 // chatParticipants#3f460fed chat_id:int participants:Vector<ChatParticipant> version:int = ChatParticipants;
+func (m *TLChatParticipants) ToChatParticipants() *ChatParticipants {
+	return &ChatParticipants{
+		Payload: &ChatParticipants_ChatParticipants{
+			ChatParticipants: &TLChatParticipants{},
+		},
+	}
+}
+
 func (m *TLChatParticipants) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatParticipants))
@@ -17265,6 +18153,14 @@ func (m *TLChatParticipants) Decode(dbuf *DecodeBuf) error {
 }
 
 // chatPhotoEmpty#37c1011c = ChatPhoto;
+func (m *TLChatPhotoEmpty) ToChatPhoto() *ChatPhoto {
+	return &ChatPhoto{
+		Payload: &ChatPhoto_ChatPhotoEmpty{
+			ChatPhotoEmpty: &TLChatPhotoEmpty{},
+		},
+	}
+}
+
 func (m *TLChatPhotoEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatPhotoEmpty))
@@ -17276,6 +18172,14 @@ func (m *TLChatPhotoEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // chatPhoto#6153276a photo_small:FileLocation photo_big:FileLocation = ChatPhoto;
+func (m *TLChatPhoto) ToChatPhoto() *ChatPhoto {
+	return &ChatPhoto{
+		Payload: &ChatPhoto_ChatPhoto{
+			ChatPhoto: &TLChatPhoto{},
+		},
+	}
+}
+
 func (m *TLChatPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatPhoto))
@@ -17295,6 +18199,14 @@ func (m *TLChatPhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageEmpty#83e5de54 id:int = Message;
+func (m *TLMessageEmpty) ToMessage() *Message {
+	return &Message{
+		Payload: &Message_MessageEmpty{
+			MessageEmpty: &TLMessageEmpty{},
+		},
+	}
+}
+
 func (m *TLMessageEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageEmpty))
@@ -17308,6 +18220,14 @@ func (m *TLMessageEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // message#90dddc11 flags:# out:flags.1?true mentioned:flags.4?true media_unread:flags.5?true silent:flags.13?true post:flags.14?true id:int from_id:flags.8?int to_id:Peer fwd_from:flags.2?MessageFwdHeader via_bot_id:flags.11?int reply_to_msg_id:flags.3?int date:int message:string media:flags.9?MessageMedia reply_markup:flags.6?ReplyMarkup entities:flags.7?Vector<MessageEntity> views:flags.10?int edit_date:flags.15?int post_author:flags.16?string = Message;
+func (m *TLMessage) ToMessage() *Message {
+	return &Message{
+		Payload: &Message_Message{
+			Message: &TLMessage{},
+		},
+	}
+}
+
 func (m *TLMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_message))
@@ -17494,6 +18414,14 @@ func (m *TLMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageService#9e19a1f6 flags:# out:flags.1?true mentioned:flags.4?true media_unread:flags.5?true silent:flags.13?true post:flags.14?true id:int from_id:flags.8?int to_id:Peer reply_to_msg_id:flags.3?int date:int action:MessageAction = Message;
+func (m *TLMessageService) ToMessage() *Message {
+	return &Message{
+		Payload: &Message_MessageService{
+			MessageService: &TLMessageService{},
+		},
+	}
+}
+
 func (m *TLMessageService) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageService))
@@ -17585,6 +18513,14 @@ func (m *TLMessageService) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageMediaEmpty#3ded6320 = MessageMedia;
+func (m *TLMessageMediaEmpty) ToMessageMedia() *MessageMedia {
+	return &MessageMedia{
+		Payload: &MessageMedia_MessageMediaEmpty{
+			MessageMediaEmpty: &TLMessageMediaEmpty{},
+		},
+	}
+}
+
 func (m *TLMessageMediaEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageMediaEmpty))
@@ -17596,6 +18532,14 @@ func (m *TLMessageMediaEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageMediaPhoto#b5223b0f flags:# photo:flags.0?Photo caption:flags.1?string ttl_seconds:flags.2?int = MessageMedia;
+func (m *TLMessageMediaPhoto) ToMessageMedia() *MessageMedia {
+	return &MessageMedia{
+		Payload: &MessageMedia_MessageMediaPhoto{
+			MessageMediaPhoto: &TLMessageMediaPhoto{},
+		},
+	}
+}
+
 func (m *TLMessageMediaPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageMediaPhoto))
@@ -17641,6 +18585,14 @@ func (m *TLMessageMediaPhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageMediaGeo#56e0d474 geo:GeoPoint = MessageMedia;
+func (m *TLMessageMediaGeo) ToMessageMedia() *MessageMedia {
+	return &MessageMedia{
+		Payload: &MessageMedia_MessageMediaGeo{
+			MessageMediaGeo: &TLMessageMediaGeo{},
+		},
+	}
+}
+
 func (m *TLMessageMediaGeo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageMediaGeo))
@@ -17656,6 +18608,14 @@ func (m *TLMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageMediaContact#5e7d2f39 phone_number:string first_name:string last_name:string user_id:int = MessageMedia;
+func (m *TLMessageMediaContact) ToMessageMedia() *MessageMedia {
+	return &MessageMedia{
+		Payload: &MessageMedia_MessageMediaContact{
+			MessageMediaContact: &TLMessageMediaContact{},
+		},
+	}
+}
+
 func (m *TLMessageMediaContact) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageMediaContact))
@@ -17675,6 +18635,14 @@ func (m *TLMessageMediaContact) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageMediaUnsupported#9f84f49e = MessageMedia;
+func (m *TLMessageMediaUnsupported) ToMessageMedia() *MessageMedia {
+	return &MessageMedia{
+		Payload: &MessageMedia_MessageMediaUnsupported{
+			MessageMediaUnsupported: &TLMessageMediaUnsupported{},
+		},
+	}
+}
+
 func (m *TLMessageMediaUnsupported) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageMediaUnsupported))
@@ -17686,6 +18654,14 @@ func (m *TLMessageMediaUnsupported) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageMediaDocument#7c4414d3 flags:# document:flags.0?Document caption:flags.1?string ttl_seconds:flags.2?int = MessageMedia;
+func (m *TLMessageMediaDocument) ToMessageMedia() *MessageMedia {
+	return &MessageMedia{
+		Payload: &MessageMedia_MessageMediaDocument{
+			MessageMediaDocument: &TLMessageMediaDocument{},
+		},
+	}
+}
+
 func (m *TLMessageMediaDocument) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageMediaDocument))
@@ -17731,6 +18707,14 @@ func (m *TLMessageMediaDocument) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageMediaWebPage#a32dd600 webpage:WebPage = MessageMedia;
+func (m *TLMessageMediaWebPage) ToMessageMedia() *MessageMedia {
+	return &MessageMedia{
+		Payload: &MessageMedia_MessageMediaWebPage{
+			MessageMediaWebPage: &TLMessageMediaWebPage{},
+		},
+	}
+}
+
 func (m *TLMessageMediaWebPage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageMediaWebPage))
@@ -17746,6 +18730,14 @@ func (m *TLMessageMediaWebPage) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageMediaVenue#7912b71f geo:GeoPoint title:string address:string provider:string venue_id:string = MessageMedia;
+func (m *TLMessageMediaVenue) ToMessageMedia() *MessageMedia {
+	return &MessageMedia{
+		Payload: &MessageMedia_MessageMediaVenue{
+			MessageMediaVenue: &TLMessageMediaVenue{},
+		},
+	}
+}
+
 func (m *TLMessageMediaVenue) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageMediaVenue))
@@ -17769,6 +18761,14 @@ func (m *TLMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageMediaGame#fdb19008 game:Game = MessageMedia;
+func (m *TLMessageMediaGame) ToMessageMedia() *MessageMedia {
+	return &MessageMedia{
+		Payload: &MessageMedia_MessageMediaGame{
+			MessageMediaGame: &TLMessageMediaGame{},
+		},
+	}
+}
+
 func (m *TLMessageMediaGame) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageMediaGame))
@@ -17784,6 +18784,14 @@ func (m *TLMessageMediaGame) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageMediaInvoice#84551347 flags:# shipping_address_requested:flags.1?true test:flags.3?true title:string description:string photo:flags.0?WebDocument receipt_msg_id:flags.2?int currency:string total_amount:long start_param:string = MessageMedia;
+func (m *TLMessageMediaInvoice) ToMessageMedia() *MessageMedia {
+	return &MessageMedia{
+		Payload: &MessageMedia_MessageMediaInvoice{
+			MessageMediaInvoice: &TLMessageMediaInvoice{},
+		},
+	}
+}
+
 func (m *TLMessageMediaInvoice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageMediaInvoice))
@@ -17848,6 +18856,14 @@ func (m *TLMessageMediaInvoice) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionEmpty#b6aef7b0 = MessageAction;
+func (m *TLMessageActionEmpty) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionEmpty{
+			MessageActionEmpty: &TLMessageActionEmpty{},
+		},
+	}
+}
+
 func (m *TLMessageActionEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionEmpty))
@@ -17859,6 +18875,14 @@ func (m *TLMessageActionEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionChatCreate#a6638b9a title:string users:Vector<int> = MessageAction;
+func (m *TLMessageActionChatCreate) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionChatCreate{
+			MessageActionChatCreate: &TLMessageActionChatCreate{},
+		},
+	}
+}
+
 func (m *TLMessageActionChatCreate) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionChatCreate))
@@ -17874,6 +18898,14 @@ func (m *TLMessageActionChatCreate) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionChatEditTitle#b5a1ce5a title:string = MessageAction;
+func (m *TLMessageActionChatEditTitle) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionChatEditTitle{
+			MessageActionChatEditTitle: &TLMessageActionChatEditTitle{},
+		},
+	}
+}
+
 func (m *TLMessageActionChatEditTitle) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionChatEditTitle))
@@ -17887,6 +18919,14 @@ func (m *TLMessageActionChatEditTitle) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionChatEditPhoto#7fcb13a8 photo:Photo = MessageAction;
+func (m *TLMessageActionChatEditPhoto) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionChatEditPhoto{
+			MessageActionChatEditPhoto: &TLMessageActionChatEditPhoto{},
+		},
+	}
+}
+
 func (m *TLMessageActionChatEditPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionChatEditPhoto))
@@ -17902,6 +18942,14 @@ func (m *TLMessageActionChatEditPhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionChatDeletePhoto#95e3fbef = MessageAction;
+func (m *TLMessageActionChatDeletePhoto) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionChatDeletePhoto{
+			MessageActionChatDeletePhoto: &TLMessageActionChatDeletePhoto{},
+		},
+	}
+}
+
 func (m *TLMessageActionChatDeletePhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionChatDeletePhoto))
@@ -17913,6 +18961,14 @@ func (m *TLMessageActionChatDeletePhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionChatAddUser#488a7337 users:Vector<int> = MessageAction;
+func (m *TLMessageActionChatAddUser) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionChatAddUser{
+			MessageActionChatAddUser: &TLMessageActionChatAddUser{},
+		},
+	}
+}
+
 func (m *TLMessageActionChatAddUser) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionChatAddUser))
@@ -17926,6 +18982,14 @@ func (m *TLMessageActionChatAddUser) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionChatDeleteUser#b2ae9b0c user_id:int = MessageAction;
+func (m *TLMessageActionChatDeleteUser) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionChatDeleteUser{
+			MessageActionChatDeleteUser: &TLMessageActionChatDeleteUser{},
+		},
+	}
+}
+
 func (m *TLMessageActionChatDeleteUser) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionChatDeleteUser))
@@ -17939,6 +19003,14 @@ func (m *TLMessageActionChatDeleteUser) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionChatJoinedByLink#f89cf5e8 inviter_id:int = MessageAction;
+func (m *TLMessageActionChatJoinedByLink) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionChatJoinedByLink{
+			MessageActionChatJoinedByLink: &TLMessageActionChatJoinedByLink{},
+		},
+	}
+}
+
 func (m *TLMessageActionChatJoinedByLink) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionChatJoinedByLink))
@@ -17952,6 +19024,14 @@ func (m *TLMessageActionChatJoinedByLink) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionChannelCreate#95d2ac92 title:string = MessageAction;
+func (m *TLMessageActionChannelCreate) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionChannelCreate{
+			MessageActionChannelCreate: &TLMessageActionChannelCreate{},
+		},
+	}
+}
+
 func (m *TLMessageActionChannelCreate) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionChannelCreate))
@@ -17965,6 +19045,14 @@ func (m *TLMessageActionChannelCreate) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionChatMigrateTo#51bdb021 channel_id:int = MessageAction;
+func (m *TLMessageActionChatMigrateTo) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionChatMigrateTo{
+			MessageActionChatMigrateTo: &TLMessageActionChatMigrateTo{},
+		},
+	}
+}
+
 func (m *TLMessageActionChatMigrateTo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionChatMigrateTo))
@@ -17978,6 +19066,14 @@ func (m *TLMessageActionChatMigrateTo) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionChannelMigrateFrom#b055eaee title:string chat_id:int = MessageAction;
+func (m *TLMessageActionChannelMigrateFrom) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionChannelMigrateFrom{
+			MessageActionChannelMigrateFrom: &TLMessageActionChannelMigrateFrom{},
+		},
+	}
+}
+
 func (m *TLMessageActionChannelMigrateFrom) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionChannelMigrateFrom))
@@ -17993,6 +19089,14 @@ func (m *TLMessageActionChannelMigrateFrom) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionPinMessage#94bd38ed = MessageAction;
+func (m *TLMessageActionPinMessage) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionPinMessage{
+			MessageActionPinMessage: &TLMessageActionPinMessage{},
+		},
+	}
+}
+
 func (m *TLMessageActionPinMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionPinMessage))
@@ -18004,6 +19108,14 @@ func (m *TLMessageActionPinMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionHistoryClear#9fbab604 = MessageAction;
+func (m *TLMessageActionHistoryClear) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionHistoryClear{
+			MessageActionHistoryClear: &TLMessageActionHistoryClear{},
+		},
+	}
+}
+
 func (m *TLMessageActionHistoryClear) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionHistoryClear))
@@ -18015,6 +19127,14 @@ func (m *TLMessageActionHistoryClear) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionGameScore#92a72876 game_id:long score:int = MessageAction;
+func (m *TLMessageActionGameScore) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionGameScore{
+			MessageActionGameScore: &TLMessageActionGameScore{},
+		},
+	}
+}
+
 func (m *TLMessageActionGameScore) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionGameScore))
@@ -18030,6 +19150,14 @@ func (m *TLMessageActionGameScore) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionPaymentSentMe#8f31b327 flags:# currency:string total_amount:long payload:bytes info:flags.0?PaymentRequestedInfo shipping_option_id:flags.1?string charge:PaymentCharge = MessageAction;
+func (m *TLMessageActionPaymentSentMe) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionPaymentSentMe{
+			MessageActionPaymentSentMe: &TLMessageActionPaymentSentMe{},
+		},
+	}
+}
+
 func (m *TLMessageActionPaymentSentMe) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionPaymentSentMe))
@@ -18076,6 +19204,14 @@ func (m *TLMessageActionPaymentSentMe) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionPaymentSent#40699cd0 currency:string total_amount:long = MessageAction;
+func (m *TLMessageActionPaymentSent) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionPaymentSent{
+			MessageActionPaymentSent: &TLMessageActionPaymentSent{},
+		},
+	}
+}
+
 func (m *TLMessageActionPaymentSent) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionPaymentSent))
@@ -18091,6 +19227,14 @@ func (m *TLMessageActionPaymentSent) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionPhoneCall#80e11a7f flags:# call_id:long reason:flags.0?PhoneCallDiscardReason duration:flags.1?int = MessageAction;
+func (m *TLMessageActionPhoneCall) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionPhoneCall{
+			MessageActionPhoneCall: &TLMessageActionPhoneCall{},
+		},
+	}
+}
+
 func (m *TLMessageActionPhoneCall) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionPhoneCall))
@@ -18129,6 +19273,14 @@ func (m *TLMessageActionPhoneCall) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageActionScreenshotTaken#4792929b = MessageAction;
+func (m *TLMessageActionScreenshotTaken) ToMessageAction() *MessageAction {
+	return &MessageAction{
+		Payload: &MessageAction_MessageActionScreenshotTaken{
+			MessageActionScreenshotTaken: &TLMessageActionScreenshotTaken{},
+		},
+	}
+}
+
 func (m *TLMessageActionScreenshotTaken) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageActionScreenshotTaken))
@@ -18140,6 +19292,14 @@ func (m *TLMessageActionScreenshotTaken) Decode(dbuf *DecodeBuf) error {
 }
 
 // dialog#e4def5db flags:# pinned:flags.2?true peer:Peer top_message:int read_inbox_max_id:int read_outbox_max_id:int unread_count:int unread_mentions_count:int notify_settings:PeerNotifySettings pts:flags.0?int draft:flags.1?DraftMessage = Dialog;
+func (m *TLDialog) ToDialog() *Dialog {
+	return &Dialog{
+		Payload: &Dialog_Dialog{
+			Dialog: &TLDialog{},
+		},
+	}
+}
+
 func (m *TLDialog) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_dialog))
@@ -18203,6 +19363,14 @@ func (m *TLDialog) Decode(dbuf *DecodeBuf) error {
 }
 
 // photoEmpty#2331b22d id:long = Photo;
+func (m *TLPhotoEmpty) ToPhoto() *Photo {
+	return &Photo{
+		Payload: &Photo_PhotoEmpty{
+			PhotoEmpty: &TLPhotoEmpty{},
+		},
+	}
+}
+
 func (m *TLPhotoEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_photoEmpty))
@@ -18216,6 +19384,14 @@ func (m *TLPhotoEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // photo#9288dd29 flags:# has_stickers:flags.0?true id:long access_hash:long date:int sizes:Vector<PhotoSize> = Photo;
+func (m *TLPhoto) ToPhoto() *Photo {
+	return &Photo{
+		Payload: &Photo_Photo{
+			Photo: &TLPhoto{},
+		},
+	}
+}
+
 func (m *TLPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_photo))
@@ -18268,6 +19444,14 @@ func (m *TLPhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // photoSizeEmpty#e17e23c type:string = PhotoSize;
+func (m *TLPhotoSizeEmpty) ToPhotoSize() *PhotoSize {
+	return &PhotoSize{
+		Payload: &PhotoSize_PhotoSizeEmpty{
+			PhotoSizeEmpty: &TLPhotoSizeEmpty{},
+		},
+	}
+}
+
 func (m *TLPhotoSizeEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_photoSizeEmpty))
@@ -18281,6 +19465,14 @@ func (m *TLPhotoSizeEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // photoSize#77bfb61b type:string location:FileLocation w:int h:int size:int = PhotoSize;
+func (m *TLPhotoSize) ToPhotoSize() *PhotoSize {
+	return &PhotoSize{
+		Payload: &PhotoSize_PhotoSize{
+			PhotoSize: &TLPhotoSize{},
+		},
+	}
+}
+
 func (m *TLPhotoSize) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_photoSize))
@@ -18304,6 +19496,14 @@ func (m *TLPhotoSize) Decode(dbuf *DecodeBuf) error {
 }
 
 // photoCachedSize#e9a734fa type:string location:FileLocation w:int h:int bytes:bytes = PhotoSize;
+func (m *TLPhotoCachedSize) ToPhotoSize() *PhotoSize {
+	return &PhotoSize{
+		Payload: &PhotoSize_PhotoCachedSize{
+			PhotoCachedSize: &TLPhotoCachedSize{},
+		},
+	}
+}
+
 func (m *TLPhotoCachedSize) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_photoCachedSize))
@@ -18327,6 +19527,14 @@ func (m *TLPhotoCachedSize) Decode(dbuf *DecodeBuf) error {
 }
 
 // geoPointEmpty#1117dd5f = GeoPoint;
+func (m *TLGeoPointEmpty) ToGeoPoint() *GeoPoint {
+	return &GeoPoint{
+		Payload: &GeoPoint_GeoPointEmpty{
+			GeoPointEmpty: &TLGeoPointEmpty{},
+		},
+	}
+}
+
 func (m *TLGeoPointEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_geoPointEmpty))
@@ -18338,6 +19546,14 @@ func (m *TLGeoPointEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // geoPoint#2049d70c long:double lat:double = GeoPoint;
+func (m *TLGeoPoint) ToGeoPoint() *GeoPoint {
+	return &GeoPoint{
+		Payload: &GeoPoint_GeoPoint{
+			GeoPoint: &TLGeoPoint{},
+		},
+	}
+}
+
 func (m *TLGeoPoint) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_geoPoint))
@@ -18353,6 +19569,14 @@ func (m *TLGeoPoint) Decode(dbuf *DecodeBuf) error {
 }
 
 // auth.checkedPhone#811ea28e phone_registered:Bool = auth.CheckedPhone;
+func (m *TLAuthCheckedPhone) ToAuth_CheckedPhone() *Auth_CheckedPhone {
+	return &Auth_CheckedPhone{
+		Payload: &Auth_CheckedPhone_AuthCheckedPhone{
+			AuthCheckedPhone: &TLAuthCheckedPhone{},
+		},
+	}
+}
+
 func (m *TLAuthCheckedPhone) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_checkedPhone))
@@ -18368,6 +19592,14 @@ func (m *TLAuthCheckedPhone) Decode(dbuf *DecodeBuf) error {
 }
 
 // auth.sentCode#5e002502 flags:# phone_registered:flags.0?true type:auth.SentCodeType phone_code_hash:string next_type:flags.1?auth.CodeType timeout:flags.2?int = auth.SentCode;
+func (m *TLAuthSentCode) ToAuth_SentCode() *Auth_SentCode {
+	return &Auth_SentCode{
+		Payload: &Auth_SentCode_AuthSentCode{
+			AuthSentCode: &TLAuthSentCode{},
+		},
+	}
+}
+
 func (m *TLAuthSentCode) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_sentCode))
@@ -18419,6 +19651,14 @@ func (m *TLAuthSentCode) Decode(dbuf *DecodeBuf) error {
 }
 
 // auth.authorization#cd050916 flags:# tmp_sessions:flags.0?int user:User = auth.Authorization;
+func (m *TLAuthAuthorization) ToAuth_Authorization() *Auth_Authorization {
+	return &Auth_Authorization{
+		Payload: &Auth_Authorization_AuthAuthorization{
+			AuthAuthorization: &TLAuthAuthorization{},
+		},
+	}
+}
+
 func (m *TLAuthAuthorization) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_authorization))
@@ -18448,6 +19688,14 @@ func (m *TLAuthAuthorization) Decode(dbuf *DecodeBuf) error {
 }
 
 // auth.exportedAuthorization#df969c2d id:int bytes:bytes = auth.ExportedAuthorization;
+func (m *TLAuthExportedAuthorization) ToAuth_ExportedAuthorization() *Auth_ExportedAuthorization {
+	return &Auth_ExportedAuthorization{
+		Payload: &Auth_ExportedAuthorization_AuthExportedAuthorization{
+			AuthExportedAuthorization: &TLAuthExportedAuthorization{},
+		},
+	}
+}
+
 func (m *TLAuthExportedAuthorization) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_exportedAuthorization))
@@ -18463,6 +19711,14 @@ func (m *TLAuthExportedAuthorization) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputNotifyPeer#b8bc5b0c peer:InputPeer = InputNotifyPeer;
+func (m *TLInputNotifyPeer) ToInputNotifyPeer() *InputNotifyPeer {
+	return &InputNotifyPeer{
+		Payload: &InputNotifyPeer_InputNotifyPeer{
+			InputNotifyPeer: &TLInputNotifyPeer{},
+		},
+	}
+}
+
 func (m *TLInputNotifyPeer) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputNotifyPeer))
@@ -18478,6 +19734,14 @@ func (m *TLInputNotifyPeer) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputNotifyUsers#193b4417 = InputNotifyPeer;
+func (m *TLInputNotifyUsers) ToInputNotifyPeer() *InputNotifyPeer {
+	return &InputNotifyPeer{
+		Payload: &InputNotifyPeer_InputNotifyUsers{
+			InputNotifyUsers: &TLInputNotifyUsers{},
+		},
+	}
+}
+
 func (m *TLInputNotifyUsers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputNotifyUsers))
@@ -18489,6 +19753,14 @@ func (m *TLInputNotifyUsers) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputNotifyChats#4a95e84e = InputNotifyPeer;
+func (m *TLInputNotifyChats) ToInputNotifyPeer() *InputNotifyPeer {
+	return &InputNotifyPeer{
+		Payload: &InputNotifyPeer_InputNotifyChats{
+			InputNotifyChats: &TLInputNotifyChats{},
+		},
+	}
+}
+
 func (m *TLInputNotifyChats) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputNotifyChats))
@@ -18500,6 +19772,14 @@ func (m *TLInputNotifyChats) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputNotifyAll#a429b886 = InputNotifyPeer;
+func (m *TLInputNotifyAll) ToInputNotifyPeer() *InputNotifyPeer {
+	return &InputNotifyPeer{
+		Payload: &InputNotifyPeer_InputNotifyAll{
+			InputNotifyAll: &TLInputNotifyAll{},
+		},
+	}
+}
+
 func (m *TLInputNotifyAll) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputNotifyAll))
@@ -18511,6 +19791,14 @@ func (m *TLInputNotifyAll) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPeerNotifyEventsEmpty#f03064d8 = InputPeerNotifyEvents;
+func (m *TLInputPeerNotifyEventsEmpty) ToInputPeerNotifyEvents() *InputPeerNotifyEvents {
+	return &InputPeerNotifyEvents{
+		Payload: &InputPeerNotifyEvents_InputPeerNotifyEventsEmpty{
+			InputPeerNotifyEventsEmpty: &TLInputPeerNotifyEventsEmpty{},
+		},
+	}
+}
+
 func (m *TLInputPeerNotifyEventsEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPeerNotifyEventsEmpty))
@@ -18522,6 +19810,14 @@ func (m *TLInputPeerNotifyEventsEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPeerNotifyEventsAll#e86a2c74 = InputPeerNotifyEvents;
+func (m *TLInputPeerNotifyEventsAll) ToInputPeerNotifyEvents() *InputPeerNotifyEvents {
+	return &InputPeerNotifyEvents{
+		Payload: &InputPeerNotifyEvents_InputPeerNotifyEventsAll{
+			InputPeerNotifyEventsAll: &TLInputPeerNotifyEventsAll{},
+		},
+	}
+}
+
 func (m *TLInputPeerNotifyEventsAll) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPeerNotifyEventsAll))
@@ -18533,6 +19829,14 @@ func (m *TLInputPeerNotifyEventsAll) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPeerNotifySettings#38935eb2 flags:# show_previews:flags.0?true silent:flags.1?true mute_until:int sound:string = InputPeerNotifySettings;
+func (m *TLInputPeerNotifySettings) ToInputPeerNotifySettings() *InputPeerNotifySettings {
+	return &InputPeerNotifySettings{
+		Payload: &InputPeerNotifySettings_InputPeerNotifySettings{
+			InputPeerNotifySettings: &TLInputPeerNotifySettings{},
+		},
+	}
+}
+
 func (m *TLInputPeerNotifySettings) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPeerNotifySettings))
@@ -18571,6 +19875,14 @@ func (m *TLInputPeerNotifySettings) Decode(dbuf *DecodeBuf) error {
 }
 
 // peerNotifyEventsEmpty#add53cb3 = PeerNotifyEvents;
+func (m *TLPeerNotifyEventsEmpty) ToPeerNotifyEvents() *PeerNotifyEvents {
+	return &PeerNotifyEvents{
+		Payload: &PeerNotifyEvents_PeerNotifyEventsEmpty{
+			PeerNotifyEventsEmpty: &TLPeerNotifyEventsEmpty{},
+		},
+	}
+}
+
 func (m *TLPeerNotifyEventsEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_peerNotifyEventsEmpty))
@@ -18582,6 +19894,14 @@ func (m *TLPeerNotifyEventsEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // peerNotifyEventsAll#6d1ded88 = PeerNotifyEvents;
+func (m *TLPeerNotifyEventsAll) ToPeerNotifyEvents() *PeerNotifyEvents {
+	return &PeerNotifyEvents{
+		Payload: &PeerNotifyEvents_PeerNotifyEventsAll{
+			PeerNotifyEventsAll: &TLPeerNotifyEventsAll{},
+		},
+	}
+}
+
 func (m *TLPeerNotifyEventsAll) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_peerNotifyEventsAll))
@@ -18593,6 +19913,14 @@ func (m *TLPeerNotifyEventsAll) Decode(dbuf *DecodeBuf) error {
 }
 
 // peerNotifySettingsEmpty#70a68512 = PeerNotifySettings;
+func (m *TLPeerNotifySettingsEmpty) ToPeerNotifySettings() *PeerNotifySettings {
+	return &PeerNotifySettings{
+		Payload: &PeerNotifySettings_PeerNotifySettingsEmpty{
+			PeerNotifySettingsEmpty: &TLPeerNotifySettingsEmpty{},
+		},
+	}
+}
+
 func (m *TLPeerNotifySettingsEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_peerNotifySettingsEmpty))
@@ -18604,6 +19932,14 @@ func (m *TLPeerNotifySettingsEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // peerNotifySettings#9acda4c0 flags:# show_previews:flags.0?true silent:flags.1?true mute_until:int sound:string = PeerNotifySettings;
+func (m *TLPeerNotifySettings) ToPeerNotifySettings() *PeerNotifySettings {
+	return &PeerNotifySettings{
+		Payload: &PeerNotifySettings_PeerNotifySettings{
+			PeerNotifySettings: &TLPeerNotifySettings{},
+		},
+	}
+}
+
 func (m *TLPeerNotifySettings) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_peerNotifySettings))
@@ -18642,6 +19978,14 @@ func (m *TLPeerNotifySettings) Decode(dbuf *DecodeBuf) error {
 }
 
 // peerSettings#818426cd flags:# report_spam:flags.0?true = PeerSettings;
+func (m *TLPeerSettings) ToPeerSettings() *PeerSettings {
+	return &PeerSettings{
+		Payload: &PeerSettings_PeerSettings{
+			PeerSettings: &TLPeerSettings{},
+		},
+	}
+}
+
 func (m *TLPeerSettings) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_peerSettings))
@@ -18667,6 +20011,14 @@ func (m *TLPeerSettings) Decode(dbuf *DecodeBuf) error {
 }
 
 // wallPaper#ccb03657 id:int title:string sizes:Vector<PhotoSize> color:int = WallPaper;
+func (m *TLWallPaper) ToWallPaper() *WallPaper {
+	return &WallPaper{
+		Payload: &WallPaper_WallPaper{
+			WallPaper: &TLWallPaper{},
+		},
+	}
+}
+
 func (m *TLWallPaper) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_wallPaper))
@@ -18705,6 +20057,14 @@ func (m *TLWallPaper) Decode(dbuf *DecodeBuf) error {
 }
 
 // wallPaperSolid#63117f24 id:int title:string bg_color:int color:int = WallPaper;
+func (m *TLWallPaperSolid) ToWallPaper() *WallPaper {
+	return &WallPaper{
+		Payload: &WallPaper_WallPaperSolid{
+			WallPaperSolid: &TLWallPaperSolid{},
+		},
+	}
+}
+
 func (m *TLWallPaperSolid) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_wallPaperSolid))
@@ -18724,6 +20084,14 @@ func (m *TLWallPaperSolid) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputReportReasonSpam#58dbcab8 = ReportReason;
+func (m *TLInputReportReasonSpam) ToReportReason() *ReportReason {
+	return &ReportReason{
+		Payload: &ReportReason_InputReportReasonSpam{
+			InputReportReasonSpam: &TLInputReportReasonSpam{},
+		},
+	}
+}
+
 func (m *TLInputReportReasonSpam) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputReportReasonSpam))
@@ -18735,6 +20103,14 @@ func (m *TLInputReportReasonSpam) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputReportReasonViolence#1e22c78d = ReportReason;
+func (m *TLInputReportReasonViolence) ToReportReason() *ReportReason {
+	return &ReportReason{
+		Payload: &ReportReason_InputReportReasonViolence{
+			InputReportReasonViolence: &TLInputReportReasonViolence{},
+		},
+	}
+}
+
 func (m *TLInputReportReasonViolence) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputReportReasonViolence))
@@ -18746,6 +20122,14 @@ func (m *TLInputReportReasonViolence) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputReportReasonPornography#2e59d922 = ReportReason;
+func (m *TLInputReportReasonPornography) ToReportReason() *ReportReason {
+	return &ReportReason{
+		Payload: &ReportReason_InputReportReasonPornography{
+			InputReportReasonPornography: &TLInputReportReasonPornography{},
+		},
+	}
+}
+
 func (m *TLInputReportReasonPornography) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputReportReasonPornography))
@@ -18757,6 +20141,14 @@ func (m *TLInputReportReasonPornography) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputReportReasonOther#e1746d0a text:string = ReportReason;
+func (m *TLInputReportReasonOther) ToReportReason() *ReportReason {
+	return &ReportReason{
+		Payload: &ReportReason_InputReportReasonOther{
+			InputReportReasonOther: &TLInputReportReasonOther{},
+		},
+	}
+}
+
 func (m *TLInputReportReasonOther) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputReportReasonOther))
@@ -18770,6 +20162,14 @@ func (m *TLInputReportReasonOther) Decode(dbuf *DecodeBuf) error {
 }
 
 // userFull#f220f3f flags:# blocked:flags.0?true phone_calls_available:flags.4?true phone_calls_private:flags.5?true user:User about:flags.1?string link:contacts.Link profile_photo:flags.2?Photo notify_settings:PeerNotifySettings bot_info:flags.3?BotInfo common_chats_count:int = UserFull;
+func (m *TLUserFull) ToUserFull() *UserFull {
+	return &UserFull{
+		Payload: &UserFull_UserFull{
+			UserFull: &TLUserFull{},
+		},
+	}
+}
+
 func (m *TLUserFull) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_userFull))
@@ -18858,6 +20258,14 @@ func (m *TLUserFull) Decode(dbuf *DecodeBuf) error {
 }
 
 // contact#f911c994 user_id:int mutual:Bool = Contact;
+func (m *TLContact) ToContact() *Contact {
+	return &Contact{
+		Payload: &Contact_Contact{
+			Contact: &TLContact{},
+		},
+	}
+}
+
 func (m *TLContact) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contact))
@@ -18875,6 +20283,14 @@ func (m *TLContact) Decode(dbuf *DecodeBuf) error {
 }
 
 // importedContact#d0028438 user_id:int client_id:long = ImportedContact;
+func (m *TLImportedContact) ToImportedContact() *ImportedContact {
+	return &ImportedContact{
+		Payload: &ImportedContact_ImportedContact{
+			ImportedContact: &TLImportedContact{},
+		},
+	}
+}
+
 func (m *TLImportedContact) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_importedContact))
@@ -18890,6 +20306,14 @@ func (m *TLImportedContact) Decode(dbuf *DecodeBuf) error {
 }
 
 // contactBlocked#561bc879 user_id:int date:int = ContactBlocked;
+func (m *TLContactBlocked) ToContactBlocked() *ContactBlocked {
+	return &ContactBlocked{
+		Payload: &ContactBlocked_ContactBlocked{
+			ContactBlocked: &TLContactBlocked{},
+		},
+	}
+}
+
 func (m *TLContactBlocked) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contactBlocked))
@@ -18905,6 +20329,14 @@ func (m *TLContactBlocked) Decode(dbuf *DecodeBuf) error {
 }
 
 // contactStatus#d3680c61 user_id:int status:UserStatus = ContactStatus;
+func (m *TLContactStatus) ToContactStatus() *ContactStatus {
+	return &ContactStatus{
+		Payload: &ContactStatus_ContactStatus{
+			ContactStatus: &TLContactStatus{},
+		},
+	}
+}
+
 func (m *TLContactStatus) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contactStatus))
@@ -18922,6 +20354,14 @@ func (m *TLContactStatus) Decode(dbuf *DecodeBuf) error {
 }
 
 // contacts.link#3ace484c my_link:ContactLink foreign_link:ContactLink user:User = contacts.Link;
+func (m *TLContactsLink) ToContacts_Link() *Contacts_Link {
+	return &Contacts_Link{
+		Payload: &Contacts_Link_ContactsLink{
+			ContactsLink: &TLContactsLink{},
+		},
+	}
+}
+
 func (m *TLContactsLink) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_link))
@@ -18945,6 +20385,14 @@ func (m *TLContactsLink) Decode(dbuf *DecodeBuf) error {
 }
 
 // contacts.contactsNotModified#b74ba9d2 = contacts.Contacts;
+func (m *TLContactsContactsNotModified) ToContacts_Contacts() *Contacts_Contacts {
+	return &Contacts_Contacts{
+		Payload: &Contacts_Contacts_ContactsContactsNotModified{
+			ContactsContactsNotModified: &TLContactsContactsNotModified{},
+		},
+	}
+}
+
 func (m *TLContactsContactsNotModified) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_contactsNotModified))
@@ -18956,6 +20404,14 @@ func (m *TLContactsContactsNotModified) Decode(dbuf *DecodeBuf) error {
 }
 
 // contacts.contacts#eae87e42 contacts:Vector<Contact> saved_count:int users:Vector<User> = contacts.Contacts;
+func (m *TLContactsContacts) ToContacts_Contacts() *Contacts_Contacts {
+	return &Contacts_Contacts{
+		Payload: &Contacts_Contacts_ContactsContacts{
+			ContactsContacts: &TLContactsContacts{},
+		},
+	}
+}
+
 func (m *TLContactsContacts) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_contacts))
@@ -19011,6 +20467,14 @@ func (m *TLContactsContacts) Decode(dbuf *DecodeBuf) error {
 }
 
 // contacts.importedContacts#77d01c3b imported:Vector<ImportedContact> popular_invites:Vector<PopularContact> retry_contacts:Vector<long> users:Vector<User> = contacts.ImportedContacts;
+func (m *TLContactsImportedContacts) ToContacts_ImportedContacts() *Contacts_ImportedContacts {
+	return &Contacts_ImportedContacts{
+		Payload: &Contacts_ImportedContacts_ContactsImportedContacts{
+			ContactsImportedContacts: &TLContactsImportedContacts{},
+		},
+	}
+}
+
 func (m *TLContactsImportedContacts) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_importedContacts))
@@ -19087,6 +20551,14 @@ func (m *TLContactsImportedContacts) Decode(dbuf *DecodeBuf) error {
 }
 
 // contacts.blocked#1c138d15 blocked:Vector<ContactBlocked> users:Vector<User> = contacts.Blocked;
+func (m *TLContactsBlocked) ToContacts_Blocked() *Contacts_Blocked {
+	return &Contacts_Blocked{
+		Payload: &Contacts_Blocked_ContactsBlocked{
+			ContactsBlocked: &TLContactsBlocked{},
+		},
+	}
+}
+
 func (m *TLContactsBlocked) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_blocked))
@@ -19140,6 +20612,14 @@ func (m *TLContactsBlocked) Decode(dbuf *DecodeBuf) error {
 }
 
 // contacts.blockedSlice#900802a1 count:int blocked:Vector<ContactBlocked> users:Vector<User> = contacts.Blocked;
+func (m *TLContactsBlockedSlice) ToContacts_Blocked() *Contacts_Blocked {
+	return &Contacts_Blocked{
+		Payload: &Contacts_Blocked_ContactsBlockedSlice{
+			ContactsBlockedSlice: &TLContactsBlockedSlice{},
+		},
+	}
+}
+
 func (m *TLContactsBlockedSlice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_blockedSlice))
@@ -19195,6 +20675,14 @@ func (m *TLContactsBlockedSlice) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.dialogs#15ba6c40 dialogs:Vector<Dialog> messages:Vector<Message> chats:Vector<Chat> users:Vector<User> = messages.Dialogs;
+func (m *TLMessagesDialogs) ToMessages_Dialogs() *Messages_Dialogs {
+	return &Messages_Dialogs{
+		Payload: &Messages_Dialogs_MessagesDialogs{
+			MessagesDialogs: &TLMessagesDialogs{},
+		},
+	}
+}
+
 func (m *TLMessagesDialogs) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_dialogs))
@@ -19290,6 +20778,14 @@ func (m *TLMessagesDialogs) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.dialogsSlice#71e094f3 count:int dialogs:Vector<Dialog> messages:Vector<Message> chats:Vector<Chat> users:Vector<User> = messages.Dialogs;
+func (m *TLMessagesDialogsSlice) ToMessages_Dialogs() *Messages_Dialogs {
+	return &Messages_Dialogs{
+		Payload: &Messages_Dialogs_MessagesDialogsSlice{
+			MessagesDialogsSlice: &TLMessagesDialogsSlice{},
+		},
+	}
+}
+
 func (m *TLMessagesDialogsSlice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_dialogsSlice))
@@ -19387,6 +20883,14 @@ func (m *TLMessagesDialogsSlice) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.messages#8c718e87 messages:Vector<Message> chats:Vector<Chat> users:Vector<User> = messages.Messages;
+func (m *TLMessagesMessages) ToMessages_Messages() *Messages_Messages {
+	return &Messages_Messages{
+		Payload: &Messages_Messages_MessagesMessages{
+			MessagesMessages: &TLMessagesMessages{},
+		},
+	}
+}
+
 func (m *TLMessagesMessages) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_messages))
@@ -19461,6 +20965,14 @@ func (m *TLMessagesMessages) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.messagesSlice#b446ae3 count:int messages:Vector<Message> chats:Vector<Chat> users:Vector<User> = messages.Messages;
+func (m *TLMessagesMessagesSlice) ToMessages_Messages() *Messages_Messages {
+	return &Messages_Messages{
+		Payload: &Messages_Messages_MessagesMessagesSlice{
+			MessagesMessagesSlice: &TLMessagesMessagesSlice{},
+		},
+	}
+}
+
 func (m *TLMessagesMessagesSlice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_messagesSlice))
@@ -19537,6 +21049,14 @@ func (m *TLMessagesMessagesSlice) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.channelMessages#99262e37 flags:# pts:int count:int messages:Vector<Message> chats:Vector<Chat> users:Vector<User> = messages.Messages;
+func (m *TLMessagesChannelMessages) ToMessages_Messages() *Messages_Messages {
+	return &Messages_Messages{
+		Payload: &Messages_Messages_MessagesChannelMessages{
+			MessagesChannelMessages: &TLMessagesChannelMessages{},
+		},
+	}
+}
+
 func (m *TLMessagesChannelMessages) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_channelMessages))
@@ -19622,6 +21142,14 @@ func (m *TLMessagesChannelMessages) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.chats#64ff9fd5 chats:Vector<Chat> = messages.Chats;
+func (m *TLMessagesChats) ToMessages_Chats() *Messages_Chats {
+	return &Messages_Chats{
+		Payload: &Messages_Chats_MessagesChats{
+			MessagesChats: &TLMessagesChats{},
+		},
+	}
+}
+
 func (m *TLMessagesChats) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_chats))
@@ -19654,6 +21182,14 @@ func (m *TLMessagesChats) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.chatsSlice#9cd81144 count:int chats:Vector<Chat> = messages.Chats;
+func (m *TLMessagesChatsSlice) ToMessages_Chats() *Messages_Chats {
+	return &Messages_Chats{
+		Payload: &Messages_Chats_MessagesChatsSlice{
+			MessagesChatsSlice: &TLMessagesChatsSlice{},
+		},
+	}
+}
+
 func (m *TLMessagesChatsSlice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_chatsSlice))
@@ -19688,6 +21224,14 @@ func (m *TLMessagesChatsSlice) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.chatFull#e5d7d19c full_chat:ChatFull chats:Vector<Chat> users:Vector<User> = messages.ChatFull;
+func (m *TLMessagesChatFull) ToMessages_ChatFull() *Messages_ChatFull {
+	return &Messages_ChatFull{
+		Payload: &Messages_ChatFull_MessagesChatFull{
+			MessagesChatFull: &TLMessagesChatFull{},
+		},
+	}
+}
+
 func (m *TLMessagesChatFull) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_chatFull))
@@ -19745,6 +21289,14 @@ func (m *TLMessagesChatFull) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.affectedHistory#b45c69d1 pts:int pts_count:int offset:int = messages.AffectedHistory;
+func (m *TLMessagesAffectedHistory) ToMessages_AffectedHistory() *Messages_AffectedHistory {
+	return &Messages_AffectedHistory{
+		Payload: &Messages_AffectedHistory_MessagesAffectedHistory{
+			MessagesAffectedHistory: &TLMessagesAffectedHistory{},
+		},
+	}
+}
+
 func (m *TLMessagesAffectedHistory) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_affectedHistory))
@@ -19762,6 +21314,14 @@ func (m *TLMessagesAffectedHistory) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMessagesFilterEmpty#57e2f66c = MessagesFilter;
+func (m *TLInputMessagesFilterEmpty) ToMessagesFilter() *MessagesFilter {
+	return &MessagesFilter{
+		Payload: &MessagesFilter_InputMessagesFilterEmpty{
+			InputMessagesFilterEmpty: &TLInputMessagesFilterEmpty{},
+		},
+	}
+}
+
 func (m *TLInputMessagesFilterEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterEmpty))
@@ -19773,6 +21333,14 @@ func (m *TLInputMessagesFilterEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMessagesFilterPhotos#9609a51c = MessagesFilter;
+func (m *TLInputMessagesFilterPhotos) ToMessagesFilter() *MessagesFilter {
+	return &MessagesFilter{
+		Payload: &MessagesFilter_InputMessagesFilterPhotos{
+			InputMessagesFilterPhotos: &TLInputMessagesFilterPhotos{},
+		},
+	}
+}
+
 func (m *TLInputMessagesFilterPhotos) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterPhotos))
@@ -19784,6 +21352,14 @@ func (m *TLInputMessagesFilterPhotos) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMessagesFilterVideo#9fc00e65 = MessagesFilter;
+func (m *TLInputMessagesFilterVideo) ToMessagesFilter() *MessagesFilter {
+	return &MessagesFilter{
+		Payload: &MessagesFilter_InputMessagesFilterVideo{
+			InputMessagesFilterVideo: &TLInputMessagesFilterVideo{},
+		},
+	}
+}
+
 func (m *TLInputMessagesFilterVideo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterVideo))
@@ -19795,6 +21371,14 @@ func (m *TLInputMessagesFilterVideo) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMessagesFilterPhotoVideo#56e9f0e4 = MessagesFilter;
+func (m *TLInputMessagesFilterPhotoVideo) ToMessagesFilter() *MessagesFilter {
+	return &MessagesFilter{
+		Payload: &MessagesFilter_InputMessagesFilterPhotoVideo{
+			InputMessagesFilterPhotoVideo: &TLInputMessagesFilterPhotoVideo{},
+		},
+	}
+}
+
 func (m *TLInputMessagesFilterPhotoVideo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterPhotoVideo))
@@ -19806,6 +21390,14 @@ func (m *TLInputMessagesFilterPhotoVideo) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMessagesFilterPhotoVideoDocuments#d95e73bb = MessagesFilter;
+func (m *TLInputMessagesFilterPhotoVideoDocuments) ToMessagesFilter() *MessagesFilter {
+	return &MessagesFilter{
+		Payload: &MessagesFilter_InputMessagesFilterPhotoVideoDocuments{
+			InputMessagesFilterPhotoVideoDocuments: &TLInputMessagesFilterPhotoVideoDocuments{},
+		},
+	}
+}
+
 func (m *TLInputMessagesFilterPhotoVideoDocuments) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterPhotoVideoDocuments))
@@ -19817,6 +21409,14 @@ func (m *TLInputMessagesFilterPhotoVideoDocuments) Decode(dbuf *DecodeBuf) error
 }
 
 // inputMessagesFilterDocument#9eddf188 = MessagesFilter;
+func (m *TLInputMessagesFilterDocument) ToMessagesFilter() *MessagesFilter {
+	return &MessagesFilter{
+		Payload: &MessagesFilter_InputMessagesFilterDocument{
+			InputMessagesFilterDocument: &TLInputMessagesFilterDocument{},
+		},
+	}
+}
+
 func (m *TLInputMessagesFilterDocument) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterDocument))
@@ -19828,6 +21428,14 @@ func (m *TLInputMessagesFilterDocument) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMessagesFilterUrl#7ef0dd87 = MessagesFilter;
+func (m *TLInputMessagesFilterUrl) ToMessagesFilter() *MessagesFilter {
+	return &MessagesFilter{
+		Payload: &MessagesFilter_InputMessagesFilterUrl{
+			InputMessagesFilterUrl: &TLInputMessagesFilterUrl{},
+		},
+	}
+}
+
 func (m *TLInputMessagesFilterUrl) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterUrl))
@@ -19839,6 +21447,14 @@ func (m *TLInputMessagesFilterUrl) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMessagesFilterGif#ffc86587 = MessagesFilter;
+func (m *TLInputMessagesFilterGif) ToMessagesFilter() *MessagesFilter {
+	return &MessagesFilter{
+		Payload: &MessagesFilter_InputMessagesFilterGif{
+			InputMessagesFilterGif: &TLInputMessagesFilterGif{},
+		},
+	}
+}
+
 func (m *TLInputMessagesFilterGif) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterGif))
@@ -19850,6 +21466,14 @@ func (m *TLInputMessagesFilterGif) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMessagesFilterVoice#50f5c392 = MessagesFilter;
+func (m *TLInputMessagesFilterVoice) ToMessagesFilter() *MessagesFilter {
+	return &MessagesFilter{
+		Payload: &MessagesFilter_InputMessagesFilterVoice{
+			InputMessagesFilterVoice: &TLInputMessagesFilterVoice{},
+		},
+	}
+}
+
 func (m *TLInputMessagesFilterVoice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterVoice))
@@ -19861,6 +21485,14 @@ func (m *TLInputMessagesFilterVoice) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMessagesFilterMusic#3751b49e = MessagesFilter;
+func (m *TLInputMessagesFilterMusic) ToMessagesFilter() *MessagesFilter {
+	return &MessagesFilter{
+		Payload: &MessagesFilter_InputMessagesFilterMusic{
+			InputMessagesFilterMusic: &TLInputMessagesFilterMusic{},
+		},
+	}
+}
+
 func (m *TLInputMessagesFilterMusic) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterMusic))
@@ -19872,6 +21504,14 @@ func (m *TLInputMessagesFilterMusic) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMessagesFilterChatPhotos#3a20ecb8 = MessagesFilter;
+func (m *TLInputMessagesFilterChatPhotos) ToMessagesFilter() *MessagesFilter {
+	return &MessagesFilter{
+		Payload: &MessagesFilter_InputMessagesFilterChatPhotos{
+			InputMessagesFilterChatPhotos: &TLInputMessagesFilterChatPhotos{},
+		},
+	}
+}
+
 func (m *TLInputMessagesFilterChatPhotos) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterChatPhotos))
@@ -19883,6 +21523,14 @@ func (m *TLInputMessagesFilterChatPhotos) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMessagesFilterPhoneCalls#80c99768 flags:# missed:flags.0?true = MessagesFilter;
+func (m *TLInputMessagesFilterPhoneCalls) ToMessagesFilter() *MessagesFilter {
+	return &MessagesFilter{
+		Payload: &MessagesFilter_InputMessagesFilterPhoneCalls{
+			InputMessagesFilterPhoneCalls: &TLInputMessagesFilterPhoneCalls{},
+		},
+	}
+}
+
 func (m *TLInputMessagesFilterPhoneCalls) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterPhoneCalls))
@@ -19908,6 +21556,14 @@ func (m *TLInputMessagesFilterPhoneCalls) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMessagesFilterRoundVoice#7a7c17a4 = MessagesFilter;
+func (m *TLInputMessagesFilterRoundVoice) ToMessagesFilter() *MessagesFilter {
+	return &MessagesFilter{
+		Payload: &MessagesFilter_InputMessagesFilterRoundVoice{
+			InputMessagesFilterRoundVoice: &TLInputMessagesFilterRoundVoice{},
+		},
+	}
+}
+
 func (m *TLInputMessagesFilterRoundVoice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterRoundVoice))
@@ -19919,6 +21575,14 @@ func (m *TLInputMessagesFilterRoundVoice) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMessagesFilterRoundVideo#b549da53 = MessagesFilter;
+func (m *TLInputMessagesFilterRoundVideo) ToMessagesFilter() *MessagesFilter {
+	return &MessagesFilter{
+		Payload: &MessagesFilter_InputMessagesFilterRoundVideo{
+			InputMessagesFilterRoundVideo: &TLInputMessagesFilterRoundVideo{},
+		},
+	}
+}
+
 func (m *TLInputMessagesFilterRoundVideo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterRoundVideo))
@@ -19930,6 +21594,14 @@ func (m *TLInputMessagesFilterRoundVideo) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMessagesFilterMyMentions#c1f8e69a = MessagesFilter;
+func (m *TLInputMessagesFilterMyMentions) ToMessagesFilter() *MessagesFilter {
+	return &MessagesFilter{
+		Payload: &MessagesFilter_InputMessagesFilterMyMentions{
+			InputMessagesFilterMyMentions: &TLInputMessagesFilterMyMentions{},
+		},
+	}
+}
+
 func (m *TLInputMessagesFilterMyMentions) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessagesFilterMyMentions))
@@ -19941,6 +21613,14 @@ func (m *TLInputMessagesFilterMyMentions) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateNewMessage#1f2b0afd message:Message pts:int pts_count:int = Update;
+func (m *TLUpdateNewMessage) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateNewMessage{
+			UpdateNewMessage: &TLUpdateNewMessage{},
+		},
+	}
+}
+
 func (m *TLUpdateNewMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateNewMessage))
@@ -19960,6 +21640,14 @@ func (m *TLUpdateNewMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateMessageID#4e90bfd6 id:int random_id:long = Update;
+func (m *TLUpdateMessageID) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateMessageID{
+			UpdateMessageID: &TLUpdateMessageID{},
+		},
+	}
+}
+
 func (m *TLUpdateMessageID) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateMessageID))
@@ -19975,6 +21663,14 @@ func (m *TLUpdateMessageID) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateDeleteMessages#a20db0e5 messages:Vector<int> pts:int pts_count:int = Update;
+func (m *TLUpdateDeleteMessages) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateDeleteMessages{
+			UpdateDeleteMessages: &TLUpdateDeleteMessages{},
+		},
+	}
+}
+
 func (m *TLUpdateDeleteMessages) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateDeleteMessages))
@@ -19992,6 +21688,14 @@ func (m *TLUpdateDeleteMessages) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateUserTyping#5c486927 user_id:int action:SendMessageAction = Update;
+func (m *TLUpdateUserTyping) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateUserTyping{
+			UpdateUserTyping: &TLUpdateUserTyping{},
+		},
+	}
+}
+
 func (m *TLUpdateUserTyping) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateUserTyping))
@@ -20009,6 +21713,14 @@ func (m *TLUpdateUserTyping) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateChatUserTyping#9a65ea1f chat_id:int user_id:int action:SendMessageAction = Update;
+func (m *TLUpdateChatUserTyping) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateChatUserTyping{
+			UpdateChatUserTyping: &TLUpdateChatUserTyping{},
+		},
+	}
+}
+
 func (m *TLUpdateChatUserTyping) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateChatUserTyping))
@@ -20028,6 +21740,14 @@ func (m *TLUpdateChatUserTyping) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateChatParticipants#7761198 participants:ChatParticipants = Update;
+func (m *TLUpdateChatParticipants) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateChatParticipants{
+			UpdateChatParticipants: &TLUpdateChatParticipants{},
+		},
+	}
+}
+
 func (m *TLUpdateChatParticipants) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateChatParticipants))
@@ -20043,6 +21763,14 @@ func (m *TLUpdateChatParticipants) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateUserStatus#1bfbd823 user_id:int status:UserStatus = Update;
+func (m *TLUpdateUserStatus) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateUserStatus{
+			UpdateUserStatus: &TLUpdateUserStatus{},
+		},
+	}
+}
+
 func (m *TLUpdateUserStatus) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateUserStatus))
@@ -20060,6 +21788,14 @@ func (m *TLUpdateUserStatus) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateUserName#a7332b73 user_id:int first_name:string last_name:string username:string = Update;
+func (m *TLUpdateUserName) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateUserName{
+			UpdateUserName: &TLUpdateUserName{},
+		},
+	}
+}
+
 func (m *TLUpdateUserName) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateUserName))
@@ -20079,6 +21815,14 @@ func (m *TLUpdateUserName) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateUserPhoto#95313b0c user_id:int date:int photo:UserProfilePhoto previous:Bool = Update;
+func (m *TLUpdateUserPhoto) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateUserPhoto{
+			UpdateUserPhoto: &TLUpdateUserPhoto{},
+		},
+	}
+}
+
 func (m *TLUpdateUserPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateUserPhoto))
@@ -20102,6 +21846,14 @@ func (m *TLUpdateUserPhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateContactRegistered#2575bbb9 user_id:int date:int = Update;
+func (m *TLUpdateContactRegistered) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateContactRegistered{
+			UpdateContactRegistered: &TLUpdateContactRegistered{},
+		},
+	}
+}
+
 func (m *TLUpdateContactRegistered) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateContactRegistered))
@@ -20117,6 +21869,14 @@ func (m *TLUpdateContactRegistered) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateContactLink#9d2e67c5 user_id:int my_link:ContactLink foreign_link:ContactLink = Update;
+func (m *TLUpdateContactLink) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateContactLink{
+			UpdateContactLink: &TLUpdateContactLink{},
+		},
+	}
+}
+
 func (m *TLUpdateContactLink) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateContactLink))
@@ -20138,6 +21898,14 @@ func (m *TLUpdateContactLink) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateNewEncryptedMessage#12bcbd9a message:EncryptedMessage qts:int = Update;
+func (m *TLUpdateNewEncryptedMessage) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateNewEncryptedMessage{
+			UpdateNewEncryptedMessage: &TLUpdateNewEncryptedMessage{},
+		},
+	}
+}
+
 func (m *TLUpdateNewEncryptedMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateNewEncryptedMessage))
@@ -20155,6 +21923,14 @@ func (m *TLUpdateNewEncryptedMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateEncryptedChatTyping#1710f156 chat_id:int = Update;
+func (m *TLUpdateEncryptedChatTyping) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateEncryptedChatTyping{
+			UpdateEncryptedChatTyping: &TLUpdateEncryptedChatTyping{},
+		},
+	}
+}
+
 func (m *TLUpdateEncryptedChatTyping) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateEncryptedChatTyping))
@@ -20168,6 +21944,14 @@ func (m *TLUpdateEncryptedChatTyping) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateEncryption#b4a2e88d chat:EncryptedChat date:int = Update;
+func (m *TLUpdateEncryption) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateEncryption{
+			UpdateEncryption: &TLUpdateEncryption{},
+		},
+	}
+}
+
 func (m *TLUpdateEncryption) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateEncryption))
@@ -20185,6 +21969,14 @@ func (m *TLUpdateEncryption) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateEncryptedMessagesRead#38fe25b7 chat_id:int max_date:int date:int = Update;
+func (m *TLUpdateEncryptedMessagesRead) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateEncryptedMessagesRead{
+			UpdateEncryptedMessagesRead: &TLUpdateEncryptedMessagesRead{},
+		},
+	}
+}
+
 func (m *TLUpdateEncryptedMessagesRead) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateEncryptedMessagesRead))
@@ -20202,6 +21994,14 @@ func (m *TLUpdateEncryptedMessagesRead) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateChatParticipantAdd#ea4b0e5c chat_id:int user_id:int inviter_id:int date:int version:int = Update;
+func (m *TLUpdateChatParticipantAdd) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateChatParticipantAdd{
+			UpdateChatParticipantAdd: &TLUpdateChatParticipantAdd{},
+		},
+	}
+}
+
 func (m *TLUpdateChatParticipantAdd) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateChatParticipantAdd))
@@ -20223,6 +22023,14 @@ func (m *TLUpdateChatParticipantAdd) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateChatParticipantDelete#6e5f8c22 chat_id:int user_id:int version:int = Update;
+func (m *TLUpdateChatParticipantDelete) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateChatParticipantDelete{
+			UpdateChatParticipantDelete: &TLUpdateChatParticipantDelete{},
+		},
+	}
+}
+
 func (m *TLUpdateChatParticipantDelete) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateChatParticipantDelete))
@@ -20240,6 +22048,14 @@ func (m *TLUpdateChatParticipantDelete) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateDcOptions#8e5e9873 dc_options:Vector<DcOption> = Update;
+func (m *TLUpdateDcOptions) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateDcOptions{
+			UpdateDcOptions: &TLUpdateDcOptions{},
+		},
+	}
+}
+
 func (m *TLUpdateDcOptions) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateDcOptions))
@@ -20272,6 +22088,14 @@ func (m *TLUpdateDcOptions) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateUserBlocked#80ece81a user_id:int blocked:Bool = Update;
+func (m *TLUpdateUserBlocked) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateUserBlocked{
+			UpdateUserBlocked: &TLUpdateUserBlocked{},
+		},
+	}
+}
+
 func (m *TLUpdateUserBlocked) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateUserBlocked))
@@ -20289,6 +22113,14 @@ func (m *TLUpdateUserBlocked) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateNotifySettings#bec268ef peer:NotifyPeer notify_settings:PeerNotifySettings = Update;
+func (m *TLUpdateNotifySettings) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateNotifySettings{
+			UpdateNotifySettings: &TLUpdateNotifySettings{},
+		},
+	}
+}
+
 func (m *TLUpdateNotifySettings) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateNotifySettings))
@@ -20308,6 +22140,14 @@ func (m *TLUpdateNotifySettings) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateServiceNotification#ebe46819 flags:# popup:flags.0?true inbox_date:flags.1?int type:string message:string media:MessageMedia entities:Vector<MessageEntity> = Update;
+func (m *TLUpdateServiceNotification) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateServiceNotification{
+			UpdateServiceNotification: &TLUpdateServiceNotification{},
+		},
+	}
+}
+
 func (m *TLUpdateServiceNotification) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateServiceNotification))
@@ -20371,6 +22211,14 @@ func (m *TLUpdateServiceNotification) Decode(dbuf *DecodeBuf) error {
 }
 
 // updatePrivacy#ee3b272a key:PrivacyKey rules:Vector<PrivacyRule> = Update;
+func (m *TLUpdatePrivacy) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdatePrivacy{
+			UpdatePrivacy: &TLUpdatePrivacy{},
+		},
+	}
+}
+
 func (m *TLUpdatePrivacy) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updatePrivacy))
@@ -20407,6 +22255,14 @@ func (m *TLUpdatePrivacy) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateUserPhone#12b9417b user_id:int phone:string = Update;
+func (m *TLUpdateUserPhone) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateUserPhone{
+			UpdateUserPhone: &TLUpdateUserPhone{},
+		},
+	}
+}
+
 func (m *TLUpdateUserPhone) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateUserPhone))
@@ -20422,6 +22278,14 @@ func (m *TLUpdateUserPhone) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateReadHistoryInbox#9961fd5c peer:Peer max_id:int pts:int pts_count:int = Update;
+func (m *TLUpdateReadHistoryInbox) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateReadHistoryInbox{
+			UpdateReadHistoryInbox: &TLUpdateReadHistoryInbox{},
+		},
+	}
+}
+
 func (m *TLUpdateReadHistoryInbox) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateReadHistoryInbox))
@@ -20443,6 +22307,14 @@ func (m *TLUpdateReadHistoryInbox) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateReadHistoryOutbox#2f2f21bf peer:Peer max_id:int pts:int pts_count:int = Update;
+func (m *TLUpdateReadHistoryOutbox) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateReadHistoryOutbox{
+			UpdateReadHistoryOutbox: &TLUpdateReadHistoryOutbox{},
+		},
+	}
+}
+
 func (m *TLUpdateReadHistoryOutbox) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateReadHistoryOutbox))
@@ -20464,6 +22336,14 @@ func (m *TLUpdateReadHistoryOutbox) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateWebPage#7f891213 webpage:WebPage pts:int pts_count:int = Update;
+func (m *TLUpdateWebPage) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateWebPage{
+			UpdateWebPage: &TLUpdateWebPage{},
+		},
+	}
+}
+
 func (m *TLUpdateWebPage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateWebPage))
@@ -20483,6 +22363,14 @@ func (m *TLUpdateWebPage) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateReadMessagesContents#68c13933 messages:Vector<int> pts:int pts_count:int = Update;
+func (m *TLUpdateReadMessagesContents) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateReadMessagesContents{
+			UpdateReadMessagesContents: &TLUpdateReadMessagesContents{},
+		},
+	}
+}
+
 func (m *TLUpdateReadMessagesContents) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateReadMessagesContents))
@@ -20500,6 +22388,14 @@ func (m *TLUpdateReadMessagesContents) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateChannelTooLong#eb0467fb flags:# channel_id:int pts:flags.0?int = Update;
+func (m *TLUpdateChannelTooLong) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateChannelTooLong{
+			UpdateChannelTooLong: &TLUpdateChannelTooLong{},
+		},
+	}
+}
+
 func (m *TLUpdateChannelTooLong) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateChannelTooLong))
@@ -20527,6 +22423,14 @@ func (m *TLUpdateChannelTooLong) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateChannel#b6d45656 channel_id:int = Update;
+func (m *TLUpdateChannel) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateChannel{
+			UpdateChannel: &TLUpdateChannel{},
+		},
+	}
+}
+
 func (m *TLUpdateChannel) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateChannel))
@@ -20540,6 +22444,14 @@ func (m *TLUpdateChannel) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateNewChannelMessage#62ba04d9 message:Message pts:int pts_count:int = Update;
+func (m *TLUpdateNewChannelMessage) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateNewChannelMessage{
+			UpdateNewChannelMessage: &TLUpdateNewChannelMessage{},
+		},
+	}
+}
+
 func (m *TLUpdateNewChannelMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateNewChannelMessage))
@@ -20559,6 +22471,14 @@ func (m *TLUpdateNewChannelMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateReadChannelInbox#4214f37f channel_id:int max_id:int = Update;
+func (m *TLUpdateReadChannelInbox) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateReadChannelInbox{
+			UpdateReadChannelInbox: &TLUpdateReadChannelInbox{},
+		},
+	}
+}
+
 func (m *TLUpdateReadChannelInbox) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateReadChannelInbox))
@@ -20574,6 +22494,14 @@ func (m *TLUpdateReadChannelInbox) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateDeleteChannelMessages#c37521c9 channel_id:int messages:Vector<int> pts:int pts_count:int = Update;
+func (m *TLUpdateDeleteChannelMessages) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateDeleteChannelMessages{
+			UpdateDeleteChannelMessages: &TLUpdateDeleteChannelMessages{},
+		},
+	}
+}
+
 func (m *TLUpdateDeleteChannelMessages) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateDeleteChannelMessages))
@@ -20593,6 +22521,14 @@ func (m *TLUpdateDeleteChannelMessages) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateChannelMessageViews#98a12b4b channel_id:int id:int views:int = Update;
+func (m *TLUpdateChannelMessageViews) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateChannelMessageViews{
+			UpdateChannelMessageViews: &TLUpdateChannelMessageViews{},
+		},
+	}
+}
+
 func (m *TLUpdateChannelMessageViews) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateChannelMessageViews))
@@ -20610,6 +22546,14 @@ func (m *TLUpdateChannelMessageViews) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateChatAdmins#6e947941 chat_id:int enabled:Bool version:int = Update;
+func (m *TLUpdateChatAdmins) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateChatAdmins{
+			UpdateChatAdmins: &TLUpdateChatAdmins{},
+		},
+	}
+}
+
 func (m *TLUpdateChatAdmins) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateChatAdmins))
@@ -20629,6 +22573,14 @@ func (m *TLUpdateChatAdmins) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateChatParticipantAdmin#b6901959 chat_id:int user_id:int is_admin:Bool version:int = Update;
+func (m *TLUpdateChatParticipantAdmin) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateChatParticipantAdmin{
+			UpdateChatParticipantAdmin: &TLUpdateChatParticipantAdmin{},
+		},
+	}
+}
+
 func (m *TLUpdateChatParticipantAdmin) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateChatParticipantAdmin))
@@ -20650,6 +22602,14 @@ func (m *TLUpdateChatParticipantAdmin) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateNewStickerSet#688a30aa stickerset:messages.StickerSet = Update;
+func (m *TLUpdateNewStickerSet) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateNewStickerSet{
+			UpdateNewStickerSet: &TLUpdateNewStickerSet{},
+		},
+	}
+}
+
 func (m *TLUpdateNewStickerSet) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateNewStickerSet))
@@ -20665,6 +22625,14 @@ func (m *TLUpdateNewStickerSet) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateStickerSetsOrder#bb2d201 flags:# masks:flags.0?true order:Vector<long> = Update;
+func (m *TLUpdateStickerSetsOrder) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateStickerSetsOrder{
+			UpdateStickerSetsOrder: &TLUpdateStickerSetsOrder{},
+		},
+	}
+}
+
 func (m *TLUpdateStickerSetsOrder) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateStickerSetsOrder))
@@ -20692,6 +22660,14 @@ func (m *TLUpdateStickerSetsOrder) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateStickerSets#43ae3dec = Update;
+func (m *TLUpdateStickerSets) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateStickerSets{
+			UpdateStickerSets: &TLUpdateStickerSets{},
+		},
+	}
+}
+
 func (m *TLUpdateStickerSets) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateStickerSets))
@@ -20703,6 +22679,14 @@ func (m *TLUpdateStickerSets) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateSavedGifs#9375341e = Update;
+func (m *TLUpdateSavedGifs) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateSavedGifs{
+			UpdateSavedGifs: &TLUpdateSavedGifs{},
+		},
+	}
+}
+
 func (m *TLUpdateSavedGifs) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateSavedGifs))
@@ -20714,6 +22698,14 @@ func (m *TLUpdateSavedGifs) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateBotInlineQuery#54826690 flags:# query_id:long user_id:int query:string geo:flags.0?GeoPoint offset:string = Update;
+func (m *TLUpdateBotInlineQuery) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateBotInlineQuery{
+			UpdateBotInlineQuery: &TLUpdateBotInlineQuery{},
+		},
+	}
+}
+
 func (m *TLUpdateBotInlineQuery) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateBotInlineQuery))
@@ -20749,6 +22741,14 @@ func (m *TLUpdateBotInlineQuery) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateBotInlineSend#e48f964 flags:# user_id:int query:string geo:flags.0?GeoPoint id:string msg_id:flags.1?InputBotInlineMessageID = Update;
+func (m *TLUpdateBotInlineSend) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateBotInlineSend{
+			UpdateBotInlineSend: &TLUpdateBotInlineSend{},
+		},
+	}
+}
+
 func (m *TLUpdateBotInlineSend) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateBotInlineSend))
@@ -20793,6 +22793,14 @@ func (m *TLUpdateBotInlineSend) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateEditChannelMessage#1b3f4df7 message:Message pts:int pts_count:int = Update;
+func (m *TLUpdateEditChannelMessage) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateEditChannelMessage{
+			UpdateEditChannelMessage: &TLUpdateEditChannelMessage{},
+		},
+	}
+}
+
 func (m *TLUpdateEditChannelMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateEditChannelMessage))
@@ -20812,6 +22820,14 @@ func (m *TLUpdateEditChannelMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateChannelPinnedMessage#98592475 channel_id:int id:int = Update;
+func (m *TLUpdateChannelPinnedMessage) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateChannelPinnedMessage{
+			UpdateChannelPinnedMessage: &TLUpdateChannelPinnedMessage{},
+		},
+	}
+}
+
 func (m *TLUpdateChannelPinnedMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateChannelPinnedMessage))
@@ -20827,6 +22843,14 @@ func (m *TLUpdateChannelPinnedMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateBotCallbackQuery#e73547e1 flags:# query_id:long user_id:int peer:Peer msg_id:int chat_instance:long data:flags.0?bytes game_short_name:flags.1?string = Update;
+func (m *TLUpdateBotCallbackQuery) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateBotCallbackQuery{
+			UpdateBotCallbackQuery: &TLUpdateBotCallbackQuery{},
+		},
+	}
+}
+
 func (m *TLUpdateBotCallbackQuery) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateBotCallbackQuery))
@@ -20873,6 +22897,14 @@ func (m *TLUpdateBotCallbackQuery) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateEditMessage#e40370a3 message:Message pts:int pts_count:int = Update;
+func (m *TLUpdateEditMessage) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateEditMessage{
+			UpdateEditMessage: &TLUpdateEditMessage{},
+		},
+	}
+}
+
 func (m *TLUpdateEditMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateEditMessage))
@@ -20892,6 +22924,14 @@ func (m *TLUpdateEditMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateInlineBotCallbackQuery#f9d27a5a flags:# query_id:long user_id:int msg_id:InputBotInlineMessageID chat_instance:long data:flags.0?bytes game_short_name:flags.1?string = Update;
+func (m *TLUpdateInlineBotCallbackQuery) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateInlineBotCallbackQuery{
+			UpdateInlineBotCallbackQuery: &TLUpdateInlineBotCallbackQuery{},
+		},
+	}
+}
+
 func (m *TLUpdateInlineBotCallbackQuery) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateInlineBotCallbackQuery))
@@ -20936,6 +22976,14 @@ func (m *TLUpdateInlineBotCallbackQuery) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateReadChannelOutbox#25d6c9c7 channel_id:int max_id:int = Update;
+func (m *TLUpdateReadChannelOutbox) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateReadChannelOutbox{
+			UpdateReadChannelOutbox: &TLUpdateReadChannelOutbox{},
+		},
+	}
+}
+
 func (m *TLUpdateReadChannelOutbox) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateReadChannelOutbox))
@@ -20951,6 +22999,14 @@ func (m *TLUpdateReadChannelOutbox) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateDraftMessage#ee2bb969 peer:Peer draft:DraftMessage = Update;
+func (m *TLUpdateDraftMessage) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateDraftMessage{
+			UpdateDraftMessage: &TLUpdateDraftMessage{},
+		},
+	}
+}
+
 func (m *TLUpdateDraftMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateDraftMessage))
@@ -20970,6 +23026,14 @@ func (m *TLUpdateDraftMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateReadFeaturedStickers#571d2742 = Update;
+func (m *TLUpdateReadFeaturedStickers) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateReadFeaturedStickers{
+			UpdateReadFeaturedStickers: &TLUpdateReadFeaturedStickers{},
+		},
+	}
+}
+
 func (m *TLUpdateReadFeaturedStickers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateReadFeaturedStickers))
@@ -20981,6 +23045,14 @@ func (m *TLUpdateReadFeaturedStickers) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateRecentStickers#9a422c20 = Update;
+func (m *TLUpdateRecentStickers) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateRecentStickers{
+			UpdateRecentStickers: &TLUpdateRecentStickers{},
+		},
+	}
+}
+
 func (m *TLUpdateRecentStickers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateRecentStickers))
@@ -20992,6 +23064,14 @@ func (m *TLUpdateRecentStickers) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateConfig#a229dd06 = Update;
+func (m *TLUpdateConfig) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateConfig{
+			UpdateConfig: &TLUpdateConfig{},
+		},
+	}
+}
+
 func (m *TLUpdateConfig) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateConfig))
@@ -21003,6 +23083,14 @@ func (m *TLUpdateConfig) Decode(dbuf *DecodeBuf) error {
 }
 
 // updatePtsChanged#3354678f = Update;
+func (m *TLUpdatePtsChanged) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdatePtsChanged{
+			UpdatePtsChanged: &TLUpdatePtsChanged{},
+		},
+	}
+}
+
 func (m *TLUpdatePtsChanged) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updatePtsChanged))
@@ -21014,6 +23102,14 @@ func (m *TLUpdatePtsChanged) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateChannelWebPage#40771900 channel_id:int webpage:WebPage pts:int pts_count:int = Update;
+func (m *TLUpdateChannelWebPage) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateChannelWebPage{
+			UpdateChannelWebPage: &TLUpdateChannelWebPage{},
+		},
+	}
+}
+
 func (m *TLUpdateChannelWebPage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateChannelWebPage))
@@ -21035,6 +23131,14 @@ func (m *TLUpdateChannelWebPage) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateDialogPinned#d711a2cc flags:# pinned:flags.0?true peer:Peer = Update;
+func (m *TLUpdateDialogPinned) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateDialogPinned{
+			UpdateDialogPinned: &TLUpdateDialogPinned{},
+		},
+	}
+}
+
 func (m *TLUpdateDialogPinned) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateDialogPinned))
@@ -21064,6 +23168,14 @@ func (m *TLUpdateDialogPinned) Decode(dbuf *DecodeBuf) error {
 }
 
 // updatePinnedDialogs#d8caf68d flags:# order:flags.0?Vector<Peer> = Update;
+func (m *TLUpdatePinnedDialogs) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdatePinnedDialogs{
+			UpdatePinnedDialogs: &TLUpdatePinnedDialogs{},
+		},
+	}
+}
+
 func (m *TLUpdatePinnedDialogs) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updatePinnedDialogs))
@@ -21108,6 +23220,14 @@ func (m *TLUpdatePinnedDialogs) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateBotWebhookJSON#8317c0c3 data:DataJSON = Update;
+func (m *TLUpdateBotWebhookJSON) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateBotWebhookJSON{
+			UpdateBotWebhookJSON: &TLUpdateBotWebhookJSON{},
+		},
+	}
+}
+
 func (m *TLUpdateBotWebhookJSON) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateBotWebhookJSON))
@@ -21123,6 +23243,14 @@ func (m *TLUpdateBotWebhookJSON) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateBotWebhookJSONQuery#9b9240a6 query_id:long data:DataJSON timeout:int = Update;
+func (m *TLUpdateBotWebhookJSONQuery) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateBotWebhookJSONQuery{
+			UpdateBotWebhookJSONQuery: &TLUpdateBotWebhookJSONQuery{},
+		},
+	}
+}
+
 func (m *TLUpdateBotWebhookJSONQuery) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateBotWebhookJSONQuery))
@@ -21142,6 +23270,14 @@ func (m *TLUpdateBotWebhookJSONQuery) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateBotShippingQuery#e0cdc940 query_id:long user_id:int payload:bytes shipping_address:PostAddress = Update;
+func (m *TLUpdateBotShippingQuery) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateBotShippingQuery{
+			UpdateBotShippingQuery: &TLUpdateBotShippingQuery{},
+		},
+	}
+}
+
 func (m *TLUpdateBotShippingQuery) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateBotShippingQuery))
@@ -21163,6 +23299,14 @@ func (m *TLUpdateBotShippingQuery) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateBotPrecheckoutQuery#5d2f3aa9 flags:# query_id:long user_id:int payload:bytes info:flags.0?PaymentRequestedInfo shipping_option_id:flags.1?string currency:string total_amount:long = Update;
+func (m *TLUpdateBotPrecheckoutQuery) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateBotPrecheckoutQuery{
+			UpdateBotPrecheckoutQuery: &TLUpdateBotPrecheckoutQuery{},
+		},
+	}
+}
+
 func (m *TLUpdateBotPrecheckoutQuery) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateBotPrecheckoutQuery))
@@ -21209,6 +23353,14 @@ func (m *TLUpdateBotPrecheckoutQuery) Decode(dbuf *DecodeBuf) error {
 }
 
 // updatePhoneCall#ab0f6b1e phone_call:PhoneCall = Update;
+func (m *TLUpdatePhoneCall) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdatePhoneCall{
+			UpdatePhoneCall: &TLUpdatePhoneCall{},
+		},
+	}
+}
+
 func (m *TLUpdatePhoneCall) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updatePhoneCall))
@@ -21224,6 +23376,14 @@ func (m *TLUpdatePhoneCall) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateLangPackTooLong#10c2404b = Update;
+func (m *TLUpdateLangPackTooLong) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateLangPackTooLong{
+			UpdateLangPackTooLong: &TLUpdateLangPackTooLong{},
+		},
+	}
+}
+
 func (m *TLUpdateLangPackTooLong) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateLangPackTooLong))
@@ -21235,6 +23395,14 @@ func (m *TLUpdateLangPackTooLong) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateLangPack#56022f4d difference:LangPackDifference = Update;
+func (m *TLUpdateLangPack) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateLangPack{
+			UpdateLangPack: &TLUpdateLangPack{},
+		},
+	}
+}
+
 func (m *TLUpdateLangPack) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateLangPack))
@@ -21250,6 +23418,14 @@ func (m *TLUpdateLangPack) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateFavedStickers#e511996d = Update;
+func (m *TLUpdateFavedStickers) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateFavedStickers{
+			UpdateFavedStickers: &TLUpdateFavedStickers{},
+		},
+	}
+}
+
 func (m *TLUpdateFavedStickers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateFavedStickers))
@@ -21261,6 +23437,14 @@ func (m *TLUpdateFavedStickers) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateChannelReadMessagesContents#89893b45 channel_id:int messages:Vector<int> = Update;
+func (m *TLUpdateChannelReadMessagesContents) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateChannelReadMessagesContents{
+			UpdateChannelReadMessagesContents: &TLUpdateChannelReadMessagesContents{},
+		},
+	}
+}
+
 func (m *TLUpdateChannelReadMessagesContents) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateChannelReadMessagesContents))
@@ -21276,6 +23460,14 @@ func (m *TLUpdateChannelReadMessagesContents) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateContactsReset#7084a7be = Update;
+func (m *TLUpdateContactsReset) ToUpdate() *Update {
+	return &Update{
+		Payload: &Update_UpdateContactsReset{
+			UpdateContactsReset: &TLUpdateContactsReset{},
+		},
+	}
+}
+
 func (m *TLUpdateContactsReset) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateContactsReset))
@@ -21287,6 +23479,14 @@ func (m *TLUpdateContactsReset) Decode(dbuf *DecodeBuf) error {
 }
 
 // updates.state#a56c2a3e pts:int qts:int date:int seq:int unread_count:int = updates.State;
+func (m *TLUpdatesState) ToUpdates_State() *Updates_State {
+	return &Updates_State{
+		Payload: &Updates_State_UpdatesState{
+			UpdatesState: &TLUpdatesState{},
+		},
+	}
+}
+
 func (m *TLUpdatesState) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates_state))
@@ -21308,6 +23508,14 @@ func (m *TLUpdatesState) Decode(dbuf *DecodeBuf) error {
 }
 
 // updates.differenceEmpty#5d75a138 date:int seq:int = updates.Difference;
+func (m *TLUpdatesDifferenceEmpty) ToUpdates_Difference() *Updates_Difference {
+	return &Updates_Difference{
+		Payload: &Updates_Difference_UpdatesDifferenceEmpty{
+			UpdatesDifferenceEmpty: &TLUpdatesDifferenceEmpty{},
+		},
+	}
+}
+
 func (m *TLUpdatesDifferenceEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates_differenceEmpty))
@@ -21323,6 +23531,14 @@ func (m *TLUpdatesDifferenceEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // updates.difference#f49ca0 new_messages:Vector<Message> new_encrypted_messages:Vector<EncryptedMessage> other_updates:Vector<Update> chats:Vector<Chat> users:Vector<User> state:updates.State = updates.Difference;
+func (m *TLUpdatesDifference) ToUpdates_Difference() *Updates_Difference {
+	return &Updates_Difference{
+		Payload: &Updates_Difference_UpdatesDifference{
+			UpdatesDifference: &TLUpdatesDifference{},
+		},
+	}
+}
+
 func (m *TLUpdatesDifference) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates_difference))
@@ -21443,6 +23659,14 @@ func (m *TLUpdatesDifference) Decode(dbuf *DecodeBuf) error {
 }
 
 // updates.differenceSlice#a8fb1981 new_messages:Vector<Message> new_encrypted_messages:Vector<EncryptedMessage> other_updates:Vector<Update> chats:Vector<Chat> users:Vector<User> intermediate_state:updates.State = updates.Difference;
+func (m *TLUpdatesDifferenceSlice) ToUpdates_Difference() *Updates_Difference {
+	return &Updates_Difference{
+		Payload: &Updates_Difference_UpdatesDifferenceSlice{
+			UpdatesDifferenceSlice: &TLUpdatesDifferenceSlice{},
+		},
+	}
+}
+
 func (m *TLUpdatesDifferenceSlice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates_differenceSlice))
@@ -21563,6 +23787,14 @@ func (m *TLUpdatesDifferenceSlice) Decode(dbuf *DecodeBuf) error {
 }
 
 // updates.differenceTooLong#4afe8f6d pts:int = updates.Difference;
+func (m *TLUpdatesDifferenceTooLong) ToUpdates_Difference() *Updates_Difference {
+	return &Updates_Difference{
+		Payload: &Updates_Difference_UpdatesDifferenceTooLong{
+			UpdatesDifferenceTooLong: &TLUpdatesDifferenceTooLong{},
+		},
+	}
+}
+
 func (m *TLUpdatesDifferenceTooLong) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates_differenceTooLong))
@@ -21576,6 +23808,14 @@ func (m *TLUpdatesDifferenceTooLong) Decode(dbuf *DecodeBuf) error {
 }
 
 // updatesTooLong#e317af7e = Updates;
+func (m *TLUpdatesTooLong) ToUpdates() *Updates {
+	return &Updates{
+		Payload: &Updates_UpdatesTooLong{
+			UpdatesTooLong: &TLUpdatesTooLong{},
+		},
+	}
+}
+
 func (m *TLUpdatesTooLong) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updatesTooLong))
@@ -21587,6 +23827,14 @@ func (m *TLUpdatesTooLong) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateShortMessage#914fbf11 flags:# out:flags.1?true mentioned:flags.4?true media_unread:flags.5?true silent:flags.13?true id:int user_id:int message:string pts:int pts_count:int date:int fwd_from:flags.2?MessageFwdHeader via_bot_id:flags.11?int reply_to_msg_id:flags.3?int entities:flags.7?Vector<MessageEntity> = Updates;
+func (m *TLUpdateShortMessage) ToUpdates() *Updates {
+	return &Updates{
+		Payload: &Updates_UpdateShortMessage{
+			UpdateShortMessage: &TLUpdateShortMessage{},
+		},
+	}
+}
+
 func (m *TLUpdateShortMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateShortMessage))
@@ -21708,6 +23956,14 @@ func (m *TLUpdateShortMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateShortChatMessage#16812688 flags:# out:flags.1?true mentioned:flags.4?true media_unread:flags.5?true silent:flags.13?true id:int from_id:int chat_id:int message:string pts:int pts_count:int date:int fwd_from:flags.2?MessageFwdHeader via_bot_id:flags.11?int reply_to_msg_id:flags.3?int entities:flags.7?Vector<MessageEntity> = Updates;
+func (m *TLUpdateShortChatMessage) ToUpdates() *Updates {
+	return &Updates{
+		Payload: &Updates_UpdateShortChatMessage{
+			UpdateShortChatMessage: &TLUpdateShortChatMessage{},
+		},
+	}
+}
+
 func (m *TLUpdateShortChatMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateShortChatMessage))
@@ -21831,6 +24087,14 @@ func (m *TLUpdateShortChatMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateShort#78d4dec1 update:Update date:int = Updates;
+func (m *TLUpdateShort) ToUpdates() *Updates {
+	return &Updates{
+		Payload: &Updates_UpdateShort{
+			UpdateShort: &TLUpdateShort{},
+		},
+	}
+}
+
 func (m *TLUpdateShort) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateShort))
@@ -21848,6 +24112,14 @@ func (m *TLUpdateShort) Decode(dbuf *DecodeBuf) error {
 }
 
 // updatesCombined#725b04c3 updates:Vector<Update> users:Vector<User> chats:Vector<Chat> date:int seq_start:int seq:int = Updates;
+func (m *TLUpdatesCombined) ToUpdates() *Updates {
+	return &Updates{
+		Payload: &Updates_UpdatesCombined{
+			UpdatesCombined: &TLUpdatesCombined{},
+		},
+	}
+}
+
 func (m *TLUpdatesCombined) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updatesCombined))
@@ -21928,6 +24200,14 @@ func (m *TLUpdatesCombined) Decode(dbuf *DecodeBuf) error {
 }
 
 // updates#74ae4240 updates:Vector<Update> users:Vector<User> chats:Vector<Chat> date:int seq:int = Updates;
+func (m *TLUpdates) ToUpdates() *Updates {
+	return &Updates{
+		Payload: &Updates_Updates{
+			Updates: &TLUpdates{},
+		},
+	}
+}
+
 func (m *TLUpdates) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates))
@@ -22006,6 +24286,14 @@ func (m *TLUpdates) Decode(dbuf *DecodeBuf) error {
 }
 
 // updateShortSentMessage#11f1331c flags:# out:flags.1?true id:int pts:int pts_count:int date:int media:flags.9?MessageMedia entities:flags.7?Vector<MessageEntity> = Updates;
+func (m *TLUpdateShortSentMessage) ToUpdates() *Updates {
+	return &Updates{
+		Payload: &Updates_UpdateShortSentMessage{
+			UpdateShortSentMessage: &TLUpdateShortSentMessage{},
+		},
+	}
+}
+
 func (m *TLUpdateShortSentMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updateShortSentMessage))
@@ -22078,6 +24366,14 @@ func (m *TLUpdateShortSentMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // photos.photos#8dca6aa5 photos:Vector<Photo> users:Vector<User> = photos.Photos;
+func (m *TLPhotosPhotos) ToPhotos_Photos() *Photos_Photos {
+	return &Photos_Photos{
+		Payload: &Photos_Photos_PhotosPhotos{
+			PhotosPhotos: &TLPhotosPhotos{},
+		},
+	}
+}
+
 func (m *TLPhotosPhotos) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_photos_photos))
@@ -22131,6 +24427,14 @@ func (m *TLPhotosPhotos) Decode(dbuf *DecodeBuf) error {
 }
 
 // photos.photosSlice#15051f54 count:int photos:Vector<Photo> users:Vector<User> = photos.Photos;
+func (m *TLPhotosPhotosSlice) ToPhotos_Photos() *Photos_Photos {
+	return &Photos_Photos{
+		Payload: &Photos_Photos_PhotosPhotosSlice{
+			PhotosPhotosSlice: &TLPhotosPhotosSlice{},
+		},
+	}
+}
+
 func (m *TLPhotosPhotosSlice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_photos_photosSlice))
@@ -22186,6 +24490,14 @@ func (m *TLPhotosPhotosSlice) Decode(dbuf *DecodeBuf) error {
 }
 
 // photos.photo#20212ca8 photo:Photo users:Vector<User> = photos.Photo;
+func (m *TLPhotosPhoto) ToPhotos_Photo() *Photos_Photo {
+	return &Photos_Photo{
+		Payload: &Photos_Photo_PhotosPhoto{
+			PhotosPhoto: &TLPhotosPhoto{},
+		},
+	}
+}
+
 func (m *TLPhotosPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_photos_photo))
@@ -22222,6 +24534,14 @@ func (m *TLPhotosPhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // upload.file#96a18d5 type:storage.FileType mtime:int bytes:bytes = upload.File;
+func (m *TLUploadFile) ToUpload_File() *Upload_File {
+	return &Upload_File{
+		Payload: &Upload_File_UploadFile{
+			UploadFile: &TLUploadFile{},
+		},
+	}
+}
+
 func (m *TLUploadFile) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_upload_file))
@@ -22241,6 +24561,14 @@ func (m *TLUploadFile) Decode(dbuf *DecodeBuf) error {
 }
 
 // upload.fileCdnRedirect#ea52fe5a dc_id:int file_token:bytes encryption_key:bytes encryption_iv:bytes cdn_file_hashes:Vector<CdnFileHash> = upload.File;
+func (m *TLUploadFileCdnRedirect) ToUpload_File() *Upload_File {
+	return &Upload_File{
+		Payload: &Upload_File_UploadFileCdnRedirect{
+			UploadFileCdnRedirect: &TLUploadFileCdnRedirect{},
+		},
+	}
+}
+
 func (m *TLUploadFileCdnRedirect) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_upload_fileCdnRedirect))
@@ -22281,6 +24609,14 @@ func (m *TLUploadFileCdnRedirect) Decode(dbuf *DecodeBuf) error {
 }
 
 // dcOption#5d8c6cc flags:# ipv6:flags.0?true media_only:flags.1?true tcpo_only:flags.2?true cdn:flags.3?true static:flags.4?true id:int ip_address:string port:int = DcOption;
+func (m *TLDcOption) ToDcOption() *DcOption {
+	return &DcOption{
+		Payload: &DcOption_DcOption{
+			DcOption: &TLDcOption{},
+		},
+	}
+}
+
 func (m *TLDcOption) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_dcOption))
@@ -22348,6 +24684,14 @@ func (m *TLDcOption) Decode(dbuf *DecodeBuf) error {
 }
 
 // config#8df376a4 flags:# phonecalls_enabled:flags.1?true date:int expires:int test_mode:Bool this_dc:int dc_options:Vector<DcOption> chat_size_max:int megagroup_size_max:int forwarded_count_max:int online_update_period_ms:int offline_blur_timeout_ms:int offline_idle_timeout_ms:int online_cloud_timeout_ms:int notify_cloud_delay_ms:int notify_default_delay_ms:int chat_big_size:int push_chat_period_ms:int push_chat_limit:int saved_gifs_limit:int edit_time_limit:int rating_e_decay:int stickers_recent_limit:int stickers_faved_limit:int tmp_sessions:flags.0?int pinned_dialogs_count_max:int call_receive_timeout_ms:int call_ring_timeout_ms:int call_connect_timeout_ms:int call_packet_timeout_ms:int me_url_prefix:string suggested_lang_code:flags.2?string lang_pack_version:flags.2?int disabled_features:Vector<DisabledFeature> = Config;
+func (m *TLConfig) ToConfig() *Config {
+	return &Config{
+		Payload: &Config_Config{
+			Config: &TLConfig{},
+		},
+	}
+}
+
 func (m *TLConfig) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_config))
@@ -22498,6 +24842,14 @@ func (m *TLConfig) Decode(dbuf *DecodeBuf) error {
 }
 
 // nearestDc#8e1a1775 country:string this_dc:int nearest_dc:int = NearestDc;
+func (m *TLNearestDc) ToNearestDc() *NearestDc {
+	return &NearestDc{
+		Payload: &NearestDc_NearestDc{
+			NearestDc: &TLNearestDc{},
+		},
+	}
+}
+
 func (m *TLNearestDc) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_nearestDc))
@@ -22515,6 +24867,14 @@ func (m *TLNearestDc) Decode(dbuf *DecodeBuf) error {
 }
 
 // help.appUpdate#8987f311 id:int critical:Bool url:string text:string = help.AppUpdate;
+func (m *TLHelpAppUpdate) ToHelp_AppUpdate() *Help_AppUpdate {
+	return &Help_AppUpdate{
+		Payload: &Help_AppUpdate_HelpAppUpdate{
+			HelpAppUpdate: &TLHelpAppUpdate{},
+		},
+	}
+}
+
 func (m *TLHelpAppUpdate) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_help_appUpdate))
@@ -22536,6 +24896,14 @@ func (m *TLHelpAppUpdate) Decode(dbuf *DecodeBuf) error {
 }
 
 // help.noAppUpdate#c45a6536 = help.AppUpdate;
+func (m *TLHelpNoAppUpdate) ToHelp_AppUpdate() *Help_AppUpdate {
+	return &Help_AppUpdate{
+		Payload: &Help_AppUpdate_HelpNoAppUpdate{
+			HelpNoAppUpdate: &TLHelpNoAppUpdate{},
+		},
+	}
+}
+
 func (m *TLHelpNoAppUpdate) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_help_noAppUpdate))
@@ -22547,6 +24915,14 @@ func (m *TLHelpNoAppUpdate) Decode(dbuf *DecodeBuf) error {
 }
 
 // help.inviteText#18cb9f78 message:string = help.InviteText;
+func (m *TLHelpInviteText) ToHelp_InviteText() *Help_InviteText {
+	return &Help_InviteText{
+		Payload: &Help_InviteText_HelpInviteText{
+			HelpInviteText: &TLHelpInviteText{},
+		},
+	}
+}
+
 func (m *TLHelpInviteText) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_help_inviteText))
@@ -22560,6 +24936,14 @@ func (m *TLHelpInviteText) Decode(dbuf *DecodeBuf) error {
 }
 
 // encryptedChatEmpty#ab7ec0a0 id:int = EncryptedChat;
+func (m *TLEncryptedChatEmpty) ToEncryptedChat() *EncryptedChat {
+	return &EncryptedChat{
+		Payload: &EncryptedChat_EncryptedChatEmpty{
+			EncryptedChatEmpty: &TLEncryptedChatEmpty{},
+		},
+	}
+}
+
 func (m *TLEncryptedChatEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_encryptedChatEmpty))
@@ -22573,6 +24957,14 @@ func (m *TLEncryptedChatEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // encryptedChatWaiting#3bf703dc id:int access_hash:long date:int admin_id:int participant_id:int = EncryptedChat;
+func (m *TLEncryptedChatWaiting) ToEncryptedChat() *EncryptedChat {
+	return &EncryptedChat{
+		Payload: &EncryptedChat_EncryptedChatWaiting{
+			EncryptedChatWaiting: &TLEncryptedChatWaiting{},
+		},
+	}
+}
+
 func (m *TLEncryptedChatWaiting) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_encryptedChatWaiting))
@@ -22594,6 +24986,14 @@ func (m *TLEncryptedChatWaiting) Decode(dbuf *DecodeBuf) error {
 }
 
 // encryptedChatRequested#c878527e id:int access_hash:long date:int admin_id:int participant_id:int g_a:bytes = EncryptedChat;
+func (m *TLEncryptedChatRequested) ToEncryptedChat() *EncryptedChat {
+	return &EncryptedChat{
+		Payload: &EncryptedChat_EncryptedChatRequested{
+			EncryptedChatRequested: &TLEncryptedChatRequested{},
+		},
+	}
+}
+
 func (m *TLEncryptedChatRequested) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_encryptedChatRequested))
@@ -22617,6 +25017,14 @@ func (m *TLEncryptedChatRequested) Decode(dbuf *DecodeBuf) error {
 }
 
 // encryptedChat#fa56ce36 id:int access_hash:long date:int admin_id:int participant_id:int g_a_or_b:bytes key_fingerprint:long = EncryptedChat;
+func (m *TLEncryptedChat) ToEncryptedChat() *EncryptedChat {
+	return &EncryptedChat{
+		Payload: &EncryptedChat_EncryptedChat{
+			EncryptedChat: &TLEncryptedChat{},
+		},
+	}
+}
+
 func (m *TLEncryptedChat) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_encryptedChat))
@@ -22642,6 +25050,14 @@ func (m *TLEncryptedChat) Decode(dbuf *DecodeBuf) error {
 }
 
 // encryptedChatDiscarded#13d6dd27 id:int = EncryptedChat;
+func (m *TLEncryptedChatDiscarded) ToEncryptedChat() *EncryptedChat {
+	return &EncryptedChat{
+		Payload: &EncryptedChat_EncryptedChatDiscarded{
+			EncryptedChatDiscarded: &TLEncryptedChatDiscarded{},
+		},
+	}
+}
+
 func (m *TLEncryptedChatDiscarded) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_encryptedChatDiscarded))
@@ -22655,6 +25071,14 @@ func (m *TLEncryptedChatDiscarded) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputEncryptedChat#f141b5e1 chat_id:int access_hash:long = InputEncryptedChat;
+func (m *TLInputEncryptedChat) ToInputEncryptedChat() *InputEncryptedChat {
+	return &InputEncryptedChat{
+		Payload: &InputEncryptedChat_InputEncryptedChat{
+			InputEncryptedChat: &TLInputEncryptedChat{},
+		},
+	}
+}
+
 func (m *TLInputEncryptedChat) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputEncryptedChat))
@@ -22670,6 +25094,14 @@ func (m *TLInputEncryptedChat) Decode(dbuf *DecodeBuf) error {
 }
 
 // encryptedFileEmpty#c21f497e = EncryptedFile;
+func (m *TLEncryptedFileEmpty) ToEncryptedFile() *EncryptedFile {
+	return &EncryptedFile{
+		Payload: &EncryptedFile_EncryptedFileEmpty{
+			EncryptedFileEmpty: &TLEncryptedFileEmpty{},
+		},
+	}
+}
+
 func (m *TLEncryptedFileEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_encryptedFileEmpty))
@@ -22681,6 +25113,14 @@ func (m *TLEncryptedFileEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // encryptedFile#4a70994c id:long access_hash:long size:int dc_id:int key_fingerprint:int = EncryptedFile;
+func (m *TLEncryptedFile) ToEncryptedFile() *EncryptedFile {
+	return &EncryptedFile{
+		Payload: &EncryptedFile_EncryptedFile{
+			EncryptedFile: &TLEncryptedFile{},
+		},
+	}
+}
+
 func (m *TLEncryptedFile) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_encryptedFile))
@@ -22702,6 +25142,14 @@ func (m *TLEncryptedFile) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputEncryptedFileEmpty#1837c364 = InputEncryptedFile;
+func (m *TLInputEncryptedFileEmpty) ToInputEncryptedFile() *InputEncryptedFile {
+	return &InputEncryptedFile{
+		Payload: &InputEncryptedFile_InputEncryptedFileEmpty{
+			InputEncryptedFileEmpty: &TLInputEncryptedFileEmpty{},
+		},
+	}
+}
+
 func (m *TLInputEncryptedFileEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputEncryptedFileEmpty))
@@ -22713,6 +25161,14 @@ func (m *TLInputEncryptedFileEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputEncryptedFileUploaded#64bd0306 id:long parts:int md5_checksum:string key_fingerprint:int = InputEncryptedFile;
+func (m *TLInputEncryptedFileUploaded) ToInputEncryptedFile() *InputEncryptedFile {
+	return &InputEncryptedFile{
+		Payload: &InputEncryptedFile_InputEncryptedFileUploaded{
+			InputEncryptedFileUploaded: &TLInputEncryptedFileUploaded{},
+		},
+	}
+}
+
 func (m *TLInputEncryptedFileUploaded) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputEncryptedFileUploaded))
@@ -22732,6 +25188,14 @@ func (m *TLInputEncryptedFileUploaded) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputEncryptedFile#5a17b5e5 id:long access_hash:long = InputEncryptedFile;
+func (m *TLInputEncryptedFile) ToInputEncryptedFile() *InputEncryptedFile {
+	return &InputEncryptedFile{
+		Payload: &InputEncryptedFile_InputEncryptedFile{
+			InputEncryptedFile: &TLInputEncryptedFile{},
+		},
+	}
+}
+
 func (m *TLInputEncryptedFile) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputEncryptedFile))
@@ -22747,6 +25211,14 @@ func (m *TLInputEncryptedFile) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputEncryptedFileBigUploaded#2dc173c8 id:long parts:int key_fingerprint:int = InputEncryptedFile;
+func (m *TLInputEncryptedFileBigUploaded) ToInputEncryptedFile() *InputEncryptedFile {
+	return &InputEncryptedFile{
+		Payload: &InputEncryptedFile_InputEncryptedFileBigUploaded{
+			InputEncryptedFileBigUploaded: &TLInputEncryptedFileBigUploaded{},
+		},
+	}
+}
+
 func (m *TLInputEncryptedFileBigUploaded) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputEncryptedFileBigUploaded))
@@ -22764,6 +25236,14 @@ func (m *TLInputEncryptedFileBigUploaded) Decode(dbuf *DecodeBuf) error {
 }
 
 // encryptedMessage#ed18c118 random_id:long chat_id:int date:int bytes:bytes file:EncryptedFile = EncryptedMessage;
+func (m *TLEncryptedMessage) ToEncryptedMessage() *EncryptedMessage {
+	return &EncryptedMessage{
+		Payload: &EncryptedMessage_EncryptedMessage{
+			EncryptedMessage: &TLEncryptedMessage{},
+		},
+	}
+}
+
 func (m *TLEncryptedMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_encryptedMessage))
@@ -22787,6 +25267,14 @@ func (m *TLEncryptedMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // encryptedMessageService#23734b06 random_id:long chat_id:int date:int bytes:bytes = EncryptedMessage;
+func (m *TLEncryptedMessageService) ToEncryptedMessage() *EncryptedMessage {
+	return &EncryptedMessage{
+		Payload: &EncryptedMessage_EncryptedMessageService{
+			EncryptedMessageService: &TLEncryptedMessageService{},
+		},
+	}
+}
+
 func (m *TLEncryptedMessageService) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_encryptedMessageService))
@@ -22806,6 +25294,14 @@ func (m *TLEncryptedMessageService) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.dhConfigNotModified#c0e24635 random:bytes = messages.DhConfig;
+func (m *TLMessagesDhConfigNotModified) ToMessages_DhConfig() *Messages_DhConfig {
+	return &Messages_DhConfig{
+		Payload: &Messages_DhConfig_MessagesDhConfigNotModified{
+			MessagesDhConfigNotModified: &TLMessagesDhConfigNotModified{},
+		},
+	}
+}
+
 func (m *TLMessagesDhConfigNotModified) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_dhConfigNotModified))
@@ -22819,6 +25315,14 @@ func (m *TLMessagesDhConfigNotModified) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.dhConfig#2c221edd g:int p:bytes version:int random:bytes = messages.DhConfig;
+func (m *TLMessagesDhConfig) ToMessages_DhConfig() *Messages_DhConfig {
+	return &Messages_DhConfig{
+		Payload: &Messages_DhConfig_MessagesDhConfig{
+			MessagesDhConfig: &TLMessagesDhConfig{},
+		},
+	}
+}
+
 func (m *TLMessagesDhConfig) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_dhConfig))
@@ -22838,6 +25342,14 @@ func (m *TLMessagesDhConfig) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.sentEncryptedMessage#560f8935 date:int = messages.SentEncryptedMessage;
+func (m *TLMessagesSentEncryptedMessage) ToMessages_SentEncryptedMessage() *Messages_SentEncryptedMessage {
+	return &Messages_SentEncryptedMessage{
+		Payload: &Messages_SentEncryptedMessage_MessagesSentEncryptedMessage{
+			MessagesSentEncryptedMessage: &TLMessagesSentEncryptedMessage{},
+		},
+	}
+}
+
 func (m *TLMessagesSentEncryptedMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_sentEncryptedMessage))
@@ -22851,6 +25363,14 @@ func (m *TLMessagesSentEncryptedMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.sentEncryptedFile#9493ff32 date:int file:EncryptedFile = messages.SentEncryptedMessage;
+func (m *TLMessagesSentEncryptedFile) ToMessages_SentEncryptedMessage() *Messages_SentEncryptedMessage {
+	return &Messages_SentEncryptedMessage{
+		Payload: &Messages_SentEncryptedMessage_MessagesSentEncryptedFile{
+			MessagesSentEncryptedFile: &TLMessagesSentEncryptedFile{},
+		},
+	}
+}
+
 func (m *TLMessagesSentEncryptedFile) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_sentEncryptedFile))
@@ -22868,6 +25388,14 @@ func (m *TLMessagesSentEncryptedFile) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputDocumentEmpty#72f0eaae = InputDocument;
+func (m *TLInputDocumentEmpty) ToInputDocument() *InputDocument {
+	return &InputDocument{
+		Payload: &InputDocument_InputDocumentEmpty{
+			InputDocumentEmpty: &TLInputDocumentEmpty{},
+		},
+	}
+}
+
 func (m *TLInputDocumentEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputDocumentEmpty))
@@ -22879,6 +25407,14 @@ func (m *TLInputDocumentEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputDocument#18798952 id:long access_hash:long = InputDocument;
+func (m *TLInputDocument) ToInputDocument() *InputDocument {
+	return &InputDocument{
+		Payload: &InputDocument_InputDocument{
+			InputDocument: &TLInputDocument{},
+		},
+	}
+}
+
 func (m *TLInputDocument) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputDocument))
@@ -22894,6 +25430,14 @@ func (m *TLInputDocument) Decode(dbuf *DecodeBuf) error {
 }
 
 // documentEmpty#36f8c871 id:long = Document;
+func (m *TLDocumentEmpty) ToDocument() *Document {
+	return &Document{
+		Payload: &Document_DocumentEmpty{
+			DocumentEmpty: &TLDocumentEmpty{},
+		},
+	}
+}
+
 func (m *TLDocumentEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_documentEmpty))
@@ -22907,6 +25451,14 @@ func (m *TLDocumentEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // document#87232bc7 id:long access_hash:long date:int mime_type:string size:int thumb:PhotoSize dc_id:int version:int attributes:Vector<DocumentAttribute> = Document;
+func (m *TLDocument) ToDocument() *Document {
+	return &Document{
+		Payload: &Document_Document{
+			Document: &TLDocument{},
+		},
+	}
+}
+
 func (m *TLDocument) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_document))
@@ -22957,6 +25509,14 @@ func (m *TLDocument) Decode(dbuf *DecodeBuf) error {
 }
 
 // help.support#17c6b5f6 phone_number:string user:User = help.Support;
+func (m *TLHelpSupport) ToHelp_Support() *Help_Support {
+	return &Help_Support{
+		Payload: &Help_Support_HelpSupport{
+			HelpSupport: &TLHelpSupport{},
+		},
+	}
+}
+
 func (m *TLHelpSupport) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_help_support))
@@ -22974,6 +25534,14 @@ func (m *TLHelpSupport) Decode(dbuf *DecodeBuf) error {
 }
 
 // notifyPeer#9fd40bd8 peer:Peer = NotifyPeer;
+func (m *TLNotifyPeer) ToNotifyPeer() *NotifyPeer {
+	return &NotifyPeer{
+		Payload: &NotifyPeer_NotifyPeer{
+			NotifyPeer: &TLNotifyPeer{},
+		},
+	}
+}
+
 func (m *TLNotifyPeer) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_notifyPeer))
@@ -22989,6 +25557,14 @@ func (m *TLNotifyPeer) Decode(dbuf *DecodeBuf) error {
 }
 
 // notifyUsers#b4c83b4c = NotifyPeer;
+func (m *TLNotifyUsers) ToNotifyPeer() *NotifyPeer {
+	return &NotifyPeer{
+		Payload: &NotifyPeer_NotifyUsers{
+			NotifyUsers: &TLNotifyUsers{},
+		},
+	}
+}
+
 func (m *TLNotifyUsers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_notifyUsers))
@@ -23000,6 +25576,14 @@ func (m *TLNotifyUsers) Decode(dbuf *DecodeBuf) error {
 }
 
 // notifyChats#c007cec3 = NotifyPeer;
+func (m *TLNotifyChats) ToNotifyPeer() *NotifyPeer {
+	return &NotifyPeer{
+		Payload: &NotifyPeer_NotifyChats{
+			NotifyChats: &TLNotifyChats{},
+		},
+	}
+}
+
 func (m *TLNotifyChats) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_notifyChats))
@@ -23011,6 +25595,14 @@ func (m *TLNotifyChats) Decode(dbuf *DecodeBuf) error {
 }
 
 // notifyAll#74d07c60 = NotifyPeer;
+func (m *TLNotifyAll) ToNotifyPeer() *NotifyPeer {
+	return &NotifyPeer{
+		Payload: &NotifyPeer_NotifyAll{
+			NotifyAll: &TLNotifyAll{},
+		},
+	}
+}
+
 func (m *TLNotifyAll) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_notifyAll))
@@ -23022,6 +25614,14 @@ func (m *TLNotifyAll) Decode(dbuf *DecodeBuf) error {
 }
 
 // sendMessageTypingAction#16bf744e = SendMessageAction;
+func (m *TLSendMessageTypingAction) ToSendMessageAction() *SendMessageAction {
+	return &SendMessageAction{
+		Payload: &SendMessageAction_SendMessageTypingAction{
+			SendMessageTypingAction: &TLSendMessageTypingAction{},
+		},
+	}
+}
+
 func (m *TLSendMessageTypingAction) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_sendMessageTypingAction))
@@ -23033,6 +25633,14 @@ func (m *TLSendMessageTypingAction) Decode(dbuf *DecodeBuf) error {
 }
 
 // sendMessageCancelAction#fd5ec8f5 = SendMessageAction;
+func (m *TLSendMessageCancelAction) ToSendMessageAction() *SendMessageAction {
+	return &SendMessageAction{
+		Payload: &SendMessageAction_SendMessageCancelAction{
+			SendMessageCancelAction: &TLSendMessageCancelAction{},
+		},
+	}
+}
+
 func (m *TLSendMessageCancelAction) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_sendMessageCancelAction))
@@ -23044,6 +25652,14 @@ func (m *TLSendMessageCancelAction) Decode(dbuf *DecodeBuf) error {
 }
 
 // sendMessageRecordVideoAction#a187d66f = SendMessageAction;
+func (m *TLSendMessageRecordVideoAction) ToSendMessageAction() *SendMessageAction {
+	return &SendMessageAction{
+		Payload: &SendMessageAction_SendMessageRecordVideoAction{
+			SendMessageRecordVideoAction: &TLSendMessageRecordVideoAction{},
+		},
+	}
+}
+
 func (m *TLSendMessageRecordVideoAction) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_sendMessageRecordVideoAction))
@@ -23055,6 +25671,14 @@ func (m *TLSendMessageRecordVideoAction) Decode(dbuf *DecodeBuf) error {
 }
 
 // sendMessageUploadVideoAction#e9763aec progress:int = SendMessageAction;
+func (m *TLSendMessageUploadVideoAction) ToSendMessageAction() *SendMessageAction {
+	return &SendMessageAction{
+		Payload: &SendMessageAction_SendMessageUploadVideoAction{
+			SendMessageUploadVideoAction: &TLSendMessageUploadVideoAction{},
+		},
+	}
+}
+
 func (m *TLSendMessageUploadVideoAction) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_sendMessageUploadVideoAction))
@@ -23068,6 +25692,14 @@ func (m *TLSendMessageUploadVideoAction) Decode(dbuf *DecodeBuf) error {
 }
 
 // sendMessageRecordAudioAction#d52f73f7 = SendMessageAction;
+func (m *TLSendMessageRecordAudioAction) ToSendMessageAction() *SendMessageAction {
+	return &SendMessageAction{
+		Payload: &SendMessageAction_SendMessageRecordAudioAction{
+			SendMessageRecordAudioAction: &TLSendMessageRecordAudioAction{},
+		},
+	}
+}
+
 func (m *TLSendMessageRecordAudioAction) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_sendMessageRecordAudioAction))
@@ -23079,6 +25711,14 @@ func (m *TLSendMessageRecordAudioAction) Decode(dbuf *DecodeBuf) error {
 }
 
 // sendMessageUploadAudioAction#f351d7ab progress:int = SendMessageAction;
+func (m *TLSendMessageUploadAudioAction) ToSendMessageAction() *SendMessageAction {
+	return &SendMessageAction{
+		Payload: &SendMessageAction_SendMessageUploadAudioAction{
+			SendMessageUploadAudioAction: &TLSendMessageUploadAudioAction{},
+		},
+	}
+}
+
 func (m *TLSendMessageUploadAudioAction) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_sendMessageUploadAudioAction))
@@ -23092,6 +25732,14 @@ func (m *TLSendMessageUploadAudioAction) Decode(dbuf *DecodeBuf) error {
 }
 
 // sendMessageUploadPhotoAction#d1d34a26 progress:int = SendMessageAction;
+func (m *TLSendMessageUploadPhotoAction) ToSendMessageAction() *SendMessageAction {
+	return &SendMessageAction{
+		Payload: &SendMessageAction_SendMessageUploadPhotoAction{
+			SendMessageUploadPhotoAction: &TLSendMessageUploadPhotoAction{},
+		},
+	}
+}
+
 func (m *TLSendMessageUploadPhotoAction) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_sendMessageUploadPhotoAction))
@@ -23105,6 +25753,14 @@ func (m *TLSendMessageUploadPhotoAction) Decode(dbuf *DecodeBuf) error {
 }
 
 // sendMessageUploadDocumentAction#aa0cd9e4 progress:int = SendMessageAction;
+func (m *TLSendMessageUploadDocumentAction) ToSendMessageAction() *SendMessageAction {
+	return &SendMessageAction{
+		Payload: &SendMessageAction_SendMessageUploadDocumentAction{
+			SendMessageUploadDocumentAction: &TLSendMessageUploadDocumentAction{},
+		},
+	}
+}
+
 func (m *TLSendMessageUploadDocumentAction) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_sendMessageUploadDocumentAction))
@@ -23118,6 +25774,14 @@ func (m *TLSendMessageUploadDocumentAction) Decode(dbuf *DecodeBuf) error {
 }
 
 // sendMessageGeoLocationAction#176f8ba1 = SendMessageAction;
+func (m *TLSendMessageGeoLocationAction) ToSendMessageAction() *SendMessageAction {
+	return &SendMessageAction{
+		Payload: &SendMessageAction_SendMessageGeoLocationAction{
+			SendMessageGeoLocationAction: &TLSendMessageGeoLocationAction{},
+		},
+	}
+}
+
 func (m *TLSendMessageGeoLocationAction) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_sendMessageGeoLocationAction))
@@ -23129,6 +25793,14 @@ func (m *TLSendMessageGeoLocationAction) Decode(dbuf *DecodeBuf) error {
 }
 
 // sendMessageChooseContactAction#628cbc6f = SendMessageAction;
+func (m *TLSendMessageChooseContactAction) ToSendMessageAction() *SendMessageAction {
+	return &SendMessageAction{
+		Payload: &SendMessageAction_SendMessageChooseContactAction{
+			SendMessageChooseContactAction: &TLSendMessageChooseContactAction{},
+		},
+	}
+}
+
 func (m *TLSendMessageChooseContactAction) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_sendMessageChooseContactAction))
@@ -23140,6 +25812,14 @@ func (m *TLSendMessageChooseContactAction) Decode(dbuf *DecodeBuf) error {
 }
 
 // sendMessageGamePlayAction#dd6a8f48 = SendMessageAction;
+func (m *TLSendMessageGamePlayAction) ToSendMessageAction() *SendMessageAction {
+	return &SendMessageAction{
+		Payload: &SendMessageAction_SendMessageGamePlayAction{
+			SendMessageGamePlayAction: &TLSendMessageGamePlayAction{},
+		},
+	}
+}
+
 func (m *TLSendMessageGamePlayAction) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_sendMessageGamePlayAction))
@@ -23151,6 +25831,14 @@ func (m *TLSendMessageGamePlayAction) Decode(dbuf *DecodeBuf) error {
 }
 
 // sendMessageRecordRoundAction#88f27fbc = SendMessageAction;
+func (m *TLSendMessageRecordRoundAction) ToSendMessageAction() *SendMessageAction {
+	return &SendMessageAction{
+		Payload: &SendMessageAction_SendMessageRecordRoundAction{
+			SendMessageRecordRoundAction: &TLSendMessageRecordRoundAction{},
+		},
+	}
+}
+
 func (m *TLSendMessageRecordRoundAction) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_sendMessageRecordRoundAction))
@@ -23162,6 +25850,14 @@ func (m *TLSendMessageRecordRoundAction) Decode(dbuf *DecodeBuf) error {
 }
 
 // sendMessageUploadRoundAction#243e1c66 progress:int = SendMessageAction;
+func (m *TLSendMessageUploadRoundAction) ToSendMessageAction() *SendMessageAction {
+	return &SendMessageAction{
+		Payload: &SendMessageAction_SendMessageUploadRoundAction{
+			SendMessageUploadRoundAction: &TLSendMessageUploadRoundAction{},
+		},
+	}
+}
+
 func (m *TLSendMessageUploadRoundAction) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_sendMessageUploadRoundAction))
@@ -23175,6 +25871,14 @@ func (m *TLSendMessageUploadRoundAction) Decode(dbuf *DecodeBuf) error {
 }
 
 // contacts.found#1aa1f784 results:Vector<Peer> chats:Vector<Chat> users:Vector<User> = contacts.Found;
+func (m *TLContactsFound) ToContacts_Found() *Contacts_Found {
+	return &Contacts_Found{
+		Payload: &Contacts_Found_ContactsFound{
+			ContactsFound: &TLContactsFound{},
+		},
+	}
+}
+
 func (m *TLContactsFound) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_found))
@@ -23249,6 +25953,14 @@ func (m *TLContactsFound) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPrivacyKeyStatusTimestamp#4f96cb18 = InputPrivacyKey;
+func (m *TLInputPrivacyKeyStatusTimestamp) ToInputPrivacyKey() *InputPrivacyKey {
+	return &InputPrivacyKey{
+		Payload: &InputPrivacyKey_InputPrivacyKeyStatusTimestamp{
+			InputPrivacyKeyStatusTimestamp: &TLInputPrivacyKeyStatusTimestamp{},
+		},
+	}
+}
+
 func (m *TLInputPrivacyKeyStatusTimestamp) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPrivacyKeyStatusTimestamp))
@@ -23260,6 +25972,14 @@ func (m *TLInputPrivacyKeyStatusTimestamp) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPrivacyKeyChatInvite#bdfb0426 = InputPrivacyKey;
+func (m *TLInputPrivacyKeyChatInvite) ToInputPrivacyKey() *InputPrivacyKey {
+	return &InputPrivacyKey{
+		Payload: &InputPrivacyKey_InputPrivacyKeyChatInvite{
+			InputPrivacyKeyChatInvite: &TLInputPrivacyKeyChatInvite{},
+		},
+	}
+}
+
 func (m *TLInputPrivacyKeyChatInvite) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPrivacyKeyChatInvite))
@@ -23271,6 +25991,14 @@ func (m *TLInputPrivacyKeyChatInvite) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPrivacyKeyPhoneCall#fabadc5f = InputPrivacyKey;
+func (m *TLInputPrivacyKeyPhoneCall) ToInputPrivacyKey() *InputPrivacyKey {
+	return &InputPrivacyKey{
+		Payload: &InputPrivacyKey_InputPrivacyKeyPhoneCall{
+			InputPrivacyKeyPhoneCall: &TLInputPrivacyKeyPhoneCall{},
+		},
+	}
+}
+
 func (m *TLInputPrivacyKeyPhoneCall) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPrivacyKeyPhoneCall))
@@ -23282,6 +26010,14 @@ func (m *TLInputPrivacyKeyPhoneCall) Decode(dbuf *DecodeBuf) error {
 }
 
 // privacyKeyStatusTimestamp#bc2eab30 = PrivacyKey;
+func (m *TLPrivacyKeyStatusTimestamp) ToPrivacyKey() *PrivacyKey {
+	return &PrivacyKey{
+		Payload: &PrivacyKey_PrivacyKeyStatusTimestamp{
+			PrivacyKeyStatusTimestamp: &TLPrivacyKeyStatusTimestamp{},
+		},
+	}
+}
+
 func (m *TLPrivacyKeyStatusTimestamp) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_privacyKeyStatusTimestamp))
@@ -23293,6 +26029,14 @@ func (m *TLPrivacyKeyStatusTimestamp) Decode(dbuf *DecodeBuf) error {
 }
 
 // privacyKeyChatInvite#500e6dfa = PrivacyKey;
+func (m *TLPrivacyKeyChatInvite) ToPrivacyKey() *PrivacyKey {
+	return &PrivacyKey{
+		Payload: &PrivacyKey_PrivacyKeyChatInvite{
+			PrivacyKeyChatInvite: &TLPrivacyKeyChatInvite{},
+		},
+	}
+}
+
 func (m *TLPrivacyKeyChatInvite) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_privacyKeyChatInvite))
@@ -23304,6 +26048,14 @@ func (m *TLPrivacyKeyChatInvite) Decode(dbuf *DecodeBuf) error {
 }
 
 // privacyKeyPhoneCall#3d662b7b = PrivacyKey;
+func (m *TLPrivacyKeyPhoneCall) ToPrivacyKey() *PrivacyKey {
+	return &PrivacyKey{
+		Payload: &PrivacyKey_PrivacyKeyPhoneCall{
+			PrivacyKeyPhoneCall: &TLPrivacyKeyPhoneCall{},
+		},
+	}
+}
+
 func (m *TLPrivacyKeyPhoneCall) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_privacyKeyPhoneCall))
@@ -23315,6 +26067,14 @@ func (m *TLPrivacyKeyPhoneCall) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPrivacyValueAllowContacts#d09e07b = InputPrivacyRule;
+func (m *TLInputPrivacyValueAllowContacts) ToInputPrivacyRule() *InputPrivacyRule {
+	return &InputPrivacyRule{
+		Payload: &InputPrivacyRule_InputPrivacyValueAllowContacts{
+			InputPrivacyValueAllowContacts: &TLInputPrivacyValueAllowContacts{},
+		},
+	}
+}
+
 func (m *TLInputPrivacyValueAllowContacts) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPrivacyValueAllowContacts))
@@ -23326,6 +26086,14 @@ func (m *TLInputPrivacyValueAllowContacts) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPrivacyValueAllowAll#184b35ce = InputPrivacyRule;
+func (m *TLInputPrivacyValueAllowAll) ToInputPrivacyRule() *InputPrivacyRule {
+	return &InputPrivacyRule{
+		Payload: &InputPrivacyRule_InputPrivacyValueAllowAll{
+			InputPrivacyValueAllowAll: &TLInputPrivacyValueAllowAll{},
+		},
+	}
+}
+
 func (m *TLInputPrivacyValueAllowAll) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPrivacyValueAllowAll))
@@ -23337,6 +26105,14 @@ func (m *TLInputPrivacyValueAllowAll) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPrivacyValueAllowUsers#131cc67f users:Vector<InputUser> = InputPrivacyRule;
+func (m *TLInputPrivacyValueAllowUsers) ToInputPrivacyRule() *InputPrivacyRule {
+	return &InputPrivacyRule{
+		Payload: &InputPrivacyRule_InputPrivacyValueAllowUsers{
+			InputPrivacyValueAllowUsers: &TLInputPrivacyValueAllowUsers{},
+		},
+	}
+}
+
 func (m *TLInputPrivacyValueAllowUsers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPrivacyValueAllowUsers))
@@ -23369,6 +26145,14 @@ func (m *TLInputPrivacyValueAllowUsers) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPrivacyValueDisallowContacts#ba52007 = InputPrivacyRule;
+func (m *TLInputPrivacyValueDisallowContacts) ToInputPrivacyRule() *InputPrivacyRule {
+	return &InputPrivacyRule{
+		Payload: &InputPrivacyRule_InputPrivacyValueDisallowContacts{
+			InputPrivacyValueDisallowContacts: &TLInputPrivacyValueDisallowContacts{},
+		},
+	}
+}
+
 func (m *TLInputPrivacyValueDisallowContacts) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPrivacyValueDisallowContacts))
@@ -23380,6 +26164,14 @@ func (m *TLInputPrivacyValueDisallowContacts) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPrivacyValueDisallowAll#d66b66c9 = InputPrivacyRule;
+func (m *TLInputPrivacyValueDisallowAll) ToInputPrivacyRule() *InputPrivacyRule {
+	return &InputPrivacyRule{
+		Payload: &InputPrivacyRule_InputPrivacyValueDisallowAll{
+			InputPrivacyValueDisallowAll: &TLInputPrivacyValueDisallowAll{},
+		},
+	}
+}
+
 func (m *TLInputPrivacyValueDisallowAll) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPrivacyValueDisallowAll))
@@ -23391,6 +26183,14 @@ func (m *TLInputPrivacyValueDisallowAll) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPrivacyValueDisallowUsers#90110467 users:Vector<InputUser> = InputPrivacyRule;
+func (m *TLInputPrivacyValueDisallowUsers) ToInputPrivacyRule() *InputPrivacyRule {
+	return &InputPrivacyRule{
+		Payload: &InputPrivacyRule_InputPrivacyValueDisallowUsers{
+			InputPrivacyValueDisallowUsers: &TLInputPrivacyValueDisallowUsers{},
+		},
+	}
+}
+
 func (m *TLInputPrivacyValueDisallowUsers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPrivacyValueDisallowUsers))
@@ -23423,6 +26223,14 @@ func (m *TLInputPrivacyValueDisallowUsers) Decode(dbuf *DecodeBuf) error {
 }
 
 // privacyValueAllowContacts#fffe1bac = PrivacyRule;
+func (m *TLPrivacyValueAllowContacts) ToPrivacyRule() *PrivacyRule {
+	return &PrivacyRule{
+		Payload: &PrivacyRule_PrivacyValueAllowContacts{
+			PrivacyValueAllowContacts: &TLPrivacyValueAllowContacts{},
+		},
+	}
+}
+
 func (m *TLPrivacyValueAllowContacts) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_privacyValueAllowContacts))
@@ -23434,6 +26242,14 @@ func (m *TLPrivacyValueAllowContacts) Decode(dbuf *DecodeBuf) error {
 }
 
 // privacyValueAllowAll#65427b82 = PrivacyRule;
+func (m *TLPrivacyValueAllowAll) ToPrivacyRule() *PrivacyRule {
+	return &PrivacyRule{
+		Payload: &PrivacyRule_PrivacyValueAllowAll{
+			PrivacyValueAllowAll: &TLPrivacyValueAllowAll{},
+		},
+	}
+}
+
 func (m *TLPrivacyValueAllowAll) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_privacyValueAllowAll))
@@ -23445,6 +26261,14 @@ func (m *TLPrivacyValueAllowAll) Decode(dbuf *DecodeBuf) error {
 }
 
 // privacyValueAllowUsers#4d5bbe0c users:Vector<int> = PrivacyRule;
+func (m *TLPrivacyValueAllowUsers) ToPrivacyRule() *PrivacyRule {
+	return &PrivacyRule{
+		Payload: &PrivacyRule_PrivacyValueAllowUsers{
+			PrivacyValueAllowUsers: &TLPrivacyValueAllowUsers{},
+		},
+	}
+}
+
 func (m *TLPrivacyValueAllowUsers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_privacyValueAllowUsers))
@@ -23458,6 +26282,14 @@ func (m *TLPrivacyValueAllowUsers) Decode(dbuf *DecodeBuf) error {
 }
 
 // privacyValueDisallowContacts#f888fa1a = PrivacyRule;
+func (m *TLPrivacyValueDisallowContacts) ToPrivacyRule() *PrivacyRule {
+	return &PrivacyRule{
+		Payload: &PrivacyRule_PrivacyValueDisallowContacts{
+			PrivacyValueDisallowContacts: &TLPrivacyValueDisallowContacts{},
+		},
+	}
+}
+
 func (m *TLPrivacyValueDisallowContacts) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_privacyValueDisallowContacts))
@@ -23469,6 +26301,14 @@ func (m *TLPrivacyValueDisallowContacts) Decode(dbuf *DecodeBuf) error {
 }
 
 // privacyValueDisallowAll#8b73e763 = PrivacyRule;
+func (m *TLPrivacyValueDisallowAll) ToPrivacyRule() *PrivacyRule {
+	return &PrivacyRule{
+		Payload: &PrivacyRule_PrivacyValueDisallowAll{
+			PrivacyValueDisallowAll: &TLPrivacyValueDisallowAll{},
+		},
+	}
+}
+
 func (m *TLPrivacyValueDisallowAll) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_privacyValueDisallowAll))
@@ -23480,6 +26320,14 @@ func (m *TLPrivacyValueDisallowAll) Decode(dbuf *DecodeBuf) error {
 }
 
 // privacyValueDisallowUsers#c7f49b7 users:Vector<int> = PrivacyRule;
+func (m *TLPrivacyValueDisallowUsers) ToPrivacyRule() *PrivacyRule {
+	return &PrivacyRule{
+		Payload: &PrivacyRule_PrivacyValueDisallowUsers{
+			PrivacyValueDisallowUsers: &TLPrivacyValueDisallowUsers{},
+		},
+	}
+}
+
 func (m *TLPrivacyValueDisallowUsers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_privacyValueDisallowUsers))
@@ -23493,6 +26341,14 @@ func (m *TLPrivacyValueDisallowUsers) Decode(dbuf *DecodeBuf) error {
 }
 
 // account.privacyRules#554abb6f rules:Vector<PrivacyRule> users:Vector<User> = account.PrivacyRules;
+func (m *TLAccountPrivacyRules) ToAccount_PrivacyRules() *Account_PrivacyRules {
+	return &Account_PrivacyRules{
+		Payload: &Account_PrivacyRules_AccountPrivacyRules{
+			AccountPrivacyRules: &TLAccountPrivacyRules{},
+		},
+	}
+}
+
 func (m *TLAccountPrivacyRules) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_account_privacyRules))
@@ -23546,6 +26402,14 @@ func (m *TLAccountPrivacyRules) Decode(dbuf *DecodeBuf) error {
 }
 
 // accountDaysTTL#b8d0afdf days:int = AccountDaysTTL;
+func (m *TLAccountDaysTTL) ToAccountDaysTTL() *AccountDaysTTL {
+	return &AccountDaysTTL{
+		Payload: &AccountDaysTTL_AccountDaysTTL{
+			AccountDaysTTL: &TLAccountDaysTTL{},
+		},
+	}
+}
+
 func (m *TLAccountDaysTTL) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_accountDaysTTL))
@@ -23559,6 +26423,14 @@ func (m *TLAccountDaysTTL) Decode(dbuf *DecodeBuf) error {
 }
 
 // documentAttributeImageSize#6c37c15c w:int h:int = DocumentAttribute;
+func (m *TLDocumentAttributeImageSize) ToDocumentAttribute() *DocumentAttribute {
+	return &DocumentAttribute{
+		Payload: &DocumentAttribute_DocumentAttributeImageSize{
+			DocumentAttributeImageSize: &TLDocumentAttributeImageSize{},
+		},
+	}
+}
+
 func (m *TLDocumentAttributeImageSize) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_documentAttributeImageSize))
@@ -23574,6 +26446,14 @@ func (m *TLDocumentAttributeImageSize) Decode(dbuf *DecodeBuf) error {
 }
 
 // documentAttributeAnimated#11b58939 = DocumentAttribute;
+func (m *TLDocumentAttributeAnimated) ToDocumentAttribute() *DocumentAttribute {
+	return &DocumentAttribute{
+		Payload: &DocumentAttribute_DocumentAttributeAnimated{
+			DocumentAttributeAnimated: &TLDocumentAttributeAnimated{},
+		},
+	}
+}
+
 func (m *TLDocumentAttributeAnimated) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_documentAttributeAnimated))
@@ -23585,6 +26465,14 @@ func (m *TLDocumentAttributeAnimated) Decode(dbuf *DecodeBuf) error {
 }
 
 // documentAttributeSticker#6319d612 flags:# mask:flags.1?true alt:string stickerset:InputStickerSet mask_coords:flags.0?MaskCoords = DocumentAttribute;
+func (m *TLDocumentAttributeSticker) ToDocumentAttribute() *DocumentAttribute {
+	return &DocumentAttribute{
+		Payload: &DocumentAttribute_DocumentAttributeSticker{
+			DocumentAttributeSticker: &TLDocumentAttributeSticker{},
+		},
+	}
+}
+
 func (m *TLDocumentAttributeSticker) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_documentAttributeSticker))
@@ -23627,6 +26515,14 @@ func (m *TLDocumentAttributeSticker) Decode(dbuf *DecodeBuf) error {
 }
 
 // documentAttributeVideo#ef02ce6 flags:# round_message:flags.0?true duration:int w:int h:int = DocumentAttribute;
+func (m *TLDocumentAttributeVideo) ToDocumentAttribute() *DocumentAttribute {
+	return &DocumentAttribute{
+		Payload: &DocumentAttribute_DocumentAttributeVideo{
+			DocumentAttributeVideo: &TLDocumentAttributeVideo{},
+		},
+	}
+}
+
 func (m *TLDocumentAttributeVideo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_documentAttributeVideo))
@@ -23658,6 +26554,14 @@ func (m *TLDocumentAttributeVideo) Decode(dbuf *DecodeBuf) error {
 }
 
 // documentAttributeAudio#9852f9c6 flags:# voice:flags.10?true duration:int title:flags.0?string performer:flags.1?string waveform:flags.2?bytes = DocumentAttribute;
+func (m *TLDocumentAttributeAudio) ToDocumentAttribute() *DocumentAttribute {
+	return &DocumentAttribute{
+		Payload: &DocumentAttribute_DocumentAttributeAudio{
+			DocumentAttributeAudio: &TLDocumentAttributeAudio{},
+		},
+	}
+}
+
 func (m *TLDocumentAttributeAudio) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_documentAttributeAudio))
@@ -23712,6 +26616,14 @@ func (m *TLDocumentAttributeAudio) Decode(dbuf *DecodeBuf) error {
 }
 
 // documentAttributeFilename#15590068 file_name:string = DocumentAttribute;
+func (m *TLDocumentAttributeFilename) ToDocumentAttribute() *DocumentAttribute {
+	return &DocumentAttribute{
+		Payload: &DocumentAttribute_DocumentAttributeFilename{
+			DocumentAttributeFilename: &TLDocumentAttributeFilename{},
+		},
+	}
+}
+
 func (m *TLDocumentAttributeFilename) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_documentAttributeFilename))
@@ -23725,6 +26637,14 @@ func (m *TLDocumentAttributeFilename) Decode(dbuf *DecodeBuf) error {
 }
 
 // documentAttributeHasStickers#9801d2f7 = DocumentAttribute;
+func (m *TLDocumentAttributeHasStickers) ToDocumentAttribute() *DocumentAttribute {
+	return &DocumentAttribute{
+		Payload: &DocumentAttribute_DocumentAttributeHasStickers{
+			DocumentAttributeHasStickers: &TLDocumentAttributeHasStickers{},
+		},
+	}
+}
+
 func (m *TLDocumentAttributeHasStickers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_documentAttributeHasStickers))
@@ -23736,6 +26656,14 @@ func (m *TLDocumentAttributeHasStickers) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.stickersNotModified#f1749a22 = messages.Stickers;
+func (m *TLMessagesStickersNotModified) ToMessages_Stickers() *Messages_Stickers {
+	return &Messages_Stickers{
+		Payload: &Messages_Stickers_MessagesStickersNotModified{
+			MessagesStickersNotModified: &TLMessagesStickersNotModified{},
+		},
+	}
+}
+
 func (m *TLMessagesStickersNotModified) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_stickersNotModified))
@@ -23747,6 +26675,14 @@ func (m *TLMessagesStickersNotModified) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.stickers#8a8ecd32 hash:string stickers:Vector<Document> = messages.Stickers;
+func (m *TLMessagesStickers) ToMessages_Stickers() *Messages_Stickers {
+	return &Messages_Stickers{
+		Payload: &Messages_Stickers_MessagesStickers{
+			MessagesStickers: &TLMessagesStickers{},
+		},
+	}
+}
+
 func (m *TLMessagesStickers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_stickers))
@@ -23781,6 +26717,14 @@ func (m *TLMessagesStickers) Decode(dbuf *DecodeBuf) error {
 }
 
 // stickerPack#12b299d4 emoticon:string documents:Vector<long> = StickerPack;
+func (m *TLStickerPack) ToStickerPack() *StickerPack {
+	return &StickerPack{
+		Payload: &StickerPack_StickerPack{
+			StickerPack: &TLStickerPack{},
+		},
+	}
+}
+
 func (m *TLStickerPack) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_stickerPack))
@@ -23796,6 +26740,14 @@ func (m *TLStickerPack) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.allStickersNotModified#e86602c3 = messages.AllStickers;
+func (m *TLMessagesAllStickersNotModified) ToMessages_AllStickers() *Messages_AllStickers {
+	return &Messages_AllStickers{
+		Payload: &Messages_AllStickers_MessagesAllStickersNotModified{
+			MessagesAllStickersNotModified: &TLMessagesAllStickersNotModified{},
+		},
+	}
+}
+
 func (m *TLMessagesAllStickersNotModified) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_allStickersNotModified))
@@ -23807,6 +26759,14 @@ func (m *TLMessagesAllStickersNotModified) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.allStickers#edfd405f hash:int sets:Vector<StickerSet> = messages.AllStickers;
+func (m *TLMessagesAllStickers) ToMessages_AllStickers() *Messages_AllStickers {
+	return &Messages_AllStickers{
+		Payload: &Messages_AllStickers_MessagesAllStickers{
+			MessagesAllStickers: &TLMessagesAllStickers{},
+		},
+	}
+}
+
 func (m *TLMessagesAllStickers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_allStickers))
@@ -23841,6 +26801,14 @@ func (m *TLMessagesAllStickers) Decode(dbuf *DecodeBuf) error {
 }
 
 // disabledFeature#ae636f24 feature:string description:string = DisabledFeature;
+func (m *TLDisabledFeature) ToDisabledFeature() *DisabledFeature {
+	return &DisabledFeature{
+		Payload: &DisabledFeature_DisabledFeature{
+			DisabledFeature: &TLDisabledFeature{},
+		},
+	}
+}
+
 func (m *TLDisabledFeature) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_disabledFeature))
@@ -23856,6 +26824,14 @@ func (m *TLDisabledFeature) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.affectedMessages#84d19185 pts:int pts_count:int = messages.AffectedMessages;
+func (m *TLMessagesAffectedMessages) ToMessages_AffectedMessages() *Messages_AffectedMessages {
+	return &Messages_AffectedMessages{
+		Payload: &Messages_AffectedMessages_MessagesAffectedMessages{
+			MessagesAffectedMessages: &TLMessagesAffectedMessages{},
+		},
+	}
+}
+
 func (m *TLMessagesAffectedMessages) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_affectedMessages))
@@ -23871,6 +26847,14 @@ func (m *TLMessagesAffectedMessages) Decode(dbuf *DecodeBuf) error {
 }
 
 // contactLinkUnknown#5f4f9247 = ContactLink;
+func (m *TLContactLinkUnknown) ToContactLink() *ContactLink {
+	return &ContactLink{
+		Payload: &ContactLink_ContactLinkUnknown{
+			ContactLinkUnknown: &TLContactLinkUnknown{},
+		},
+	}
+}
+
 func (m *TLContactLinkUnknown) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contactLinkUnknown))
@@ -23882,6 +26866,14 @@ func (m *TLContactLinkUnknown) Decode(dbuf *DecodeBuf) error {
 }
 
 // contactLinkNone#feedd3ad = ContactLink;
+func (m *TLContactLinkNone) ToContactLink() *ContactLink {
+	return &ContactLink{
+		Payload: &ContactLink_ContactLinkNone{
+			ContactLinkNone: &TLContactLinkNone{},
+		},
+	}
+}
+
 func (m *TLContactLinkNone) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contactLinkNone))
@@ -23893,6 +26885,14 @@ func (m *TLContactLinkNone) Decode(dbuf *DecodeBuf) error {
 }
 
 // contactLinkHasPhone#268f3f59 = ContactLink;
+func (m *TLContactLinkHasPhone) ToContactLink() *ContactLink {
+	return &ContactLink{
+		Payload: &ContactLink_ContactLinkHasPhone{
+			ContactLinkHasPhone: &TLContactLinkHasPhone{},
+		},
+	}
+}
+
 func (m *TLContactLinkHasPhone) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contactLinkHasPhone))
@@ -23904,6 +26904,14 @@ func (m *TLContactLinkHasPhone) Decode(dbuf *DecodeBuf) error {
 }
 
 // contactLinkContact#d502c2d0 = ContactLink;
+func (m *TLContactLinkContact) ToContactLink() *ContactLink {
+	return &ContactLink{
+		Payload: &ContactLink_ContactLinkContact{
+			ContactLinkContact: &TLContactLinkContact{},
+		},
+	}
+}
+
 func (m *TLContactLinkContact) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contactLinkContact))
@@ -23915,6 +26923,14 @@ func (m *TLContactLinkContact) Decode(dbuf *DecodeBuf) error {
 }
 
 // webPageEmpty#eb1477e8 id:long = WebPage;
+func (m *TLWebPageEmpty) ToWebPage() *WebPage {
+	return &WebPage{
+		Payload: &WebPage_WebPageEmpty{
+			WebPageEmpty: &TLWebPageEmpty{},
+		},
+	}
+}
+
 func (m *TLWebPageEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_webPageEmpty))
@@ -23928,6 +26944,14 @@ func (m *TLWebPageEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // webPagePending#c586da1c id:long date:int = WebPage;
+func (m *TLWebPagePending) ToWebPage() *WebPage {
+	return &WebPage{
+		Payload: &WebPage_WebPagePending{
+			WebPagePending: &TLWebPagePending{},
+		},
+	}
+}
+
 func (m *TLWebPagePending) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_webPagePending))
@@ -23943,6 +26967,14 @@ func (m *TLWebPagePending) Decode(dbuf *DecodeBuf) error {
 }
 
 // webPage#5f07b4bc flags:# id:long url:string display_url:string hash:int type:flags.0?string site_name:flags.1?string title:flags.2?string description:flags.3?string photo:flags.4?Photo embed_url:flags.5?string embed_type:flags.5?string embed_width:flags.6?int embed_height:flags.6?int duration:flags.7?int author:flags.8?string document:flags.9?Document cached_page:flags.10?Page = WebPage;
+func (m *TLWebPage) ToWebPage() *WebPage {
+	return &WebPage{
+		Payload: &WebPage_WebPage{
+			WebPage: &TLWebPage{},
+		},
+	}
+}
+
 func (m *TLWebPage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_webPage))
@@ -24090,6 +27122,14 @@ func (m *TLWebPage) Decode(dbuf *DecodeBuf) error {
 }
 
 // webPageNotModified#85849473 = WebPage;
+func (m *TLWebPageNotModified) ToWebPage() *WebPage {
+	return &WebPage{
+		Payload: &WebPage_WebPageNotModified{
+			WebPageNotModified: &TLWebPageNotModified{},
+		},
+	}
+}
+
 func (m *TLWebPageNotModified) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_webPageNotModified))
@@ -24101,6 +27141,14 @@ func (m *TLWebPageNotModified) Decode(dbuf *DecodeBuf) error {
 }
 
 // authorization#7bf2e6f6 hash:long flags:int device_model:string platform:string system_version:string api_id:int app_name:string app_version:string date_created:int date_active:int ip:string country:string region:string = Authorization;
+func (m *TLAuthorization) ToAuthorization() *Authorization {
+	return &Authorization{
+		Payload: &Authorization_Authorization{
+			Authorization: &TLAuthorization{},
+		},
+	}
+}
+
 func (m *TLAuthorization) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_authorization))
@@ -24136,6 +27184,14 @@ func (m *TLAuthorization) Decode(dbuf *DecodeBuf) error {
 }
 
 // account.authorizations#1250abde authorizations:Vector<Authorization> = account.Authorizations;
+func (m *TLAccountAuthorizations) ToAccount_Authorizations() *Account_Authorizations {
+	return &Account_Authorizations{
+		Payload: &Account_Authorizations_AccountAuthorizations{
+			AccountAuthorizations: &TLAccountAuthorizations{},
+		},
+	}
+}
+
 func (m *TLAccountAuthorizations) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_account_authorizations))
@@ -24168,6 +27224,14 @@ func (m *TLAccountAuthorizations) Decode(dbuf *DecodeBuf) error {
 }
 
 // account.noPassword#96dabc18 new_salt:bytes email_unconfirmed_pattern:string = account.Password;
+func (m *TLAccountNoPassword) ToAccount_Password() *Account_Password {
+	return &Account_Password{
+		Payload: &Account_Password_AccountNoPassword{
+			AccountNoPassword: &TLAccountNoPassword{},
+		},
+	}
+}
+
 func (m *TLAccountNoPassword) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_account_noPassword))
@@ -24183,6 +27247,14 @@ func (m *TLAccountNoPassword) Decode(dbuf *DecodeBuf) error {
 }
 
 // account.password#7c18141c current_salt:bytes new_salt:bytes hint:string has_recovery:Bool email_unconfirmed_pattern:string = account.Password;
+func (m *TLAccountPassword) ToAccount_Password() *Account_Password {
+	return &Account_Password{
+		Payload: &Account_Password_AccountPassword{
+			AccountPassword: &TLAccountPassword{},
+		},
+	}
+}
+
 func (m *TLAccountPassword) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_account_password))
@@ -24206,6 +27278,14 @@ func (m *TLAccountPassword) Decode(dbuf *DecodeBuf) error {
 }
 
 // account.passwordSettings#b7b72ab3 email:string = account.PasswordSettings;
+func (m *TLAccountPasswordSettings) ToAccount_PasswordSettings() *Account_PasswordSettings {
+	return &Account_PasswordSettings{
+		Payload: &Account_PasswordSettings_AccountPasswordSettings{
+			AccountPasswordSettings: &TLAccountPasswordSettings{},
+		},
+	}
+}
+
 func (m *TLAccountPasswordSettings) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_account_passwordSettings))
@@ -24219,6 +27299,14 @@ func (m *TLAccountPasswordSettings) Decode(dbuf *DecodeBuf) error {
 }
 
 // account.passwordInputSettings#86916deb flags:# new_salt:flags.0?bytes new_password_hash:flags.0?bytes hint:flags.0?string email:flags.1?string = account.PasswordInputSettings;
+func (m *TLAccountPasswordInputSettings) ToAccount_PasswordInputSettings() *Account_PasswordInputSettings {
+	return &Account_PasswordInputSettings{
+		Payload: &Account_PasswordInputSettings_AccountPasswordInputSettings{
+			AccountPasswordInputSettings: &TLAccountPasswordInputSettings{},
+		},
+	}
+}
+
 func (m *TLAccountPasswordInputSettings) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_account_passwordInputSettings))
@@ -24271,6 +27359,14 @@ func (m *TLAccountPasswordInputSettings) Decode(dbuf *DecodeBuf) error {
 }
 
 // auth.passwordRecovery#137948a5 email_pattern:string = auth.PasswordRecovery;
+func (m *TLAuthPasswordRecovery) ToAuth_PasswordRecovery() *Auth_PasswordRecovery {
+	return &Auth_PasswordRecovery{
+		Payload: &Auth_PasswordRecovery_AuthPasswordRecovery{
+			AuthPasswordRecovery: &TLAuthPasswordRecovery{},
+		},
+	}
+}
+
 func (m *TLAuthPasswordRecovery) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_passwordRecovery))
@@ -24284,6 +27380,14 @@ func (m *TLAuthPasswordRecovery) Decode(dbuf *DecodeBuf) error {
 }
 
 // receivedNotifyMessage#a384b779 id:int flags:int = ReceivedNotifyMessage;
+func (m *TLReceivedNotifyMessage) ToReceivedNotifyMessage() *ReceivedNotifyMessage {
+	return &ReceivedNotifyMessage{
+		Payload: &ReceivedNotifyMessage_ReceivedNotifyMessage{
+			ReceivedNotifyMessage: &TLReceivedNotifyMessage{},
+		},
+	}
+}
+
 func (m *TLReceivedNotifyMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_receivedNotifyMessage))
@@ -24297,6 +27401,14 @@ func (m *TLReceivedNotifyMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // chatInviteEmpty#69df3769 = ExportedChatInvite;
+func (m *TLChatInviteEmpty) ToExportedChatInvite() *ExportedChatInvite {
+	return &ExportedChatInvite{
+		Payload: &ExportedChatInvite_ChatInviteEmpty{
+			ChatInviteEmpty: &TLChatInviteEmpty{},
+		},
+	}
+}
+
 func (m *TLChatInviteEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatInviteEmpty))
@@ -24308,6 +27420,14 @@ func (m *TLChatInviteEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // chatInviteExported#fc2e05bc link:string = ExportedChatInvite;
+func (m *TLChatInviteExported) ToExportedChatInvite() *ExportedChatInvite {
+	return &ExportedChatInvite{
+		Payload: &ExportedChatInvite_ChatInviteExported{
+			ChatInviteExported: &TLChatInviteExported{},
+		},
+	}
+}
+
 func (m *TLChatInviteExported) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatInviteExported))
@@ -24321,6 +27441,14 @@ func (m *TLChatInviteExported) Decode(dbuf *DecodeBuf) error {
 }
 
 // chatInviteAlready#5a686d7c chat:Chat = ChatInvite;
+func (m *TLChatInviteAlready) ToChatInvite() *ChatInvite {
+	return &ChatInvite{
+		Payload: &ChatInvite_ChatInviteAlready{
+			ChatInviteAlready: &TLChatInviteAlready{},
+		},
+	}
+}
+
 func (m *TLChatInviteAlready) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatInviteAlready))
@@ -24336,6 +27464,14 @@ func (m *TLChatInviteAlready) Decode(dbuf *DecodeBuf) error {
 }
 
 // chatInvite#db74f558 flags:# channel:flags.0?true broadcast:flags.1?true public:flags.2?true megagroup:flags.3?true title:string photo:ChatPhoto participants_count:int participants:flags.4?Vector<User> = ChatInvite;
+func (m *TLChatInvite) ToChatInvite() *ChatInvite {
+	return &ChatInvite{
+		Payload: &ChatInvite_ChatInvite{
+			ChatInvite: &TLChatInvite{},
+		},
+	}
+}
+
 func (m *TLChatInvite) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_chatInvite))
@@ -24424,6 +27560,14 @@ func (m *TLChatInvite) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputStickerSetEmpty#ffb62b95 = InputStickerSet;
+func (m *TLInputStickerSetEmpty) ToInputStickerSet() *InputStickerSet {
+	return &InputStickerSet{
+		Payload: &InputStickerSet_InputStickerSetEmpty{
+			InputStickerSetEmpty: &TLInputStickerSetEmpty{},
+		},
+	}
+}
+
 func (m *TLInputStickerSetEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputStickerSetEmpty))
@@ -24435,6 +27579,14 @@ func (m *TLInputStickerSetEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputStickerSetID#9de7a269 id:long access_hash:long = InputStickerSet;
+func (m *TLInputStickerSetID) ToInputStickerSet() *InputStickerSet {
+	return &InputStickerSet{
+		Payload: &InputStickerSet_InputStickerSetID{
+			InputStickerSetID: &TLInputStickerSetID{},
+		},
+	}
+}
+
 func (m *TLInputStickerSetID) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputStickerSetID))
@@ -24450,6 +27602,14 @@ func (m *TLInputStickerSetID) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputStickerSetShortName#861cc8a0 short_name:string = InputStickerSet;
+func (m *TLInputStickerSetShortName) ToInputStickerSet() *InputStickerSet {
+	return &InputStickerSet{
+		Payload: &InputStickerSet_InputStickerSetShortName{
+			InputStickerSetShortName: &TLInputStickerSetShortName{},
+		},
+	}
+}
+
 func (m *TLInputStickerSetShortName) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputStickerSetShortName))
@@ -24463,6 +27623,14 @@ func (m *TLInputStickerSetShortName) Decode(dbuf *DecodeBuf) error {
 }
 
 // stickerSet#cd303b41 flags:# installed:flags.0?true archived:flags.1?true official:flags.2?true masks:flags.3?true id:long access_hash:long title:string short_name:string count:int hash:int = StickerSet;
+func (m *TLStickerSet) ToStickerSet() *StickerSet {
+	return &StickerSet{
+		Payload: &StickerSet_StickerSet{
+			StickerSet: &TLStickerSet{},
+		},
+	}
+}
+
 func (m *TLStickerSet) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_stickerSet))
@@ -24527,6 +27695,14 @@ func (m *TLStickerSet) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.stickerSet#b60a24a6 set:StickerSet packs:Vector<StickerPack> documents:Vector<Document> = messages.StickerSet;
+func (m *TLMessagesStickerSet) ToMessages_StickerSet() *Messages_StickerSet {
+	return &Messages_StickerSet{
+		Payload: &Messages_StickerSet_MessagesStickerSet{
+			MessagesStickerSet: &TLMessagesStickerSet{},
+		},
+	}
+}
+
 func (m *TLMessagesStickerSet) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_stickerSet))
@@ -24584,6 +27760,14 @@ func (m *TLMessagesStickerSet) Decode(dbuf *DecodeBuf) error {
 }
 
 // botCommand#c27ac8c7 command:string description:string = BotCommand;
+func (m *TLBotCommand) ToBotCommand() *BotCommand {
+	return &BotCommand{
+		Payload: &BotCommand_BotCommand{
+			BotCommand: &TLBotCommand{},
+		},
+	}
+}
+
 func (m *TLBotCommand) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botCommand))
@@ -24599,6 +27783,14 @@ func (m *TLBotCommand) Decode(dbuf *DecodeBuf) error {
 }
 
 // botInfo#98e81d3a user_id:int description:string commands:Vector<BotCommand> = BotInfo;
+func (m *TLBotInfo) ToBotInfo() *BotInfo {
+	return &BotInfo{
+		Payload: &BotInfo_BotInfo{
+			BotInfo: &TLBotInfo{},
+		},
+	}
+}
+
 func (m *TLBotInfo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botInfo))
@@ -24635,6 +27827,14 @@ func (m *TLBotInfo) Decode(dbuf *DecodeBuf) error {
 }
 
 // keyboardButton#a2fa4880 text:string = KeyboardButton;
+func (m *TLKeyboardButton) ToKeyboardButton() *KeyboardButton {
+	return &KeyboardButton{
+		Payload: &KeyboardButton_KeyboardButton{
+			KeyboardButton: &TLKeyboardButton{},
+		},
+	}
+}
+
 func (m *TLKeyboardButton) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_keyboardButton))
@@ -24648,6 +27848,14 @@ func (m *TLKeyboardButton) Decode(dbuf *DecodeBuf) error {
 }
 
 // keyboardButtonUrl#258aff05 text:string url:string = KeyboardButton;
+func (m *TLKeyboardButtonUrl) ToKeyboardButton() *KeyboardButton {
+	return &KeyboardButton{
+		Payload: &KeyboardButton_KeyboardButtonUrl{
+			KeyboardButtonUrl: &TLKeyboardButtonUrl{},
+		},
+	}
+}
+
 func (m *TLKeyboardButtonUrl) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_keyboardButtonUrl))
@@ -24663,6 +27871,14 @@ func (m *TLKeyboardButtonUrl) Decode(dbuf *DecodeBuf) error {
 }
 
 // keyboardButtonCallback#683a5e46 text:string data:bytes = KeyboardButton;
+func (m *TLKeyboardButtonCallback) ToKeyboardButton() *KeyboardButton {
+	return &KeyboardButton{
+		Payload: &KeyboardButton_KeyboardButtonCallback{
+			KeyboardButtonCallback: &TLKeyboardButtonCallback{},
+		},
+	}
+}
+
 func (m *TLKeyboardButtonCallback) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_keyboardButtonCallback))
@@ -24678,6 +27894,14 @@ func (m *TLKeyboardButtonCallback) Decode(dbuf *DecodeBuf) error {
 }
 
 // keyboardButtonRequestPhone#b16a6c29 text:string = KeyboardButton;
+func (m *TLKeyboardButtonRequestPhone) ToKeyboardButton() *KeyboardButton {
+	return &KeyboardButton{
+		Payload: &KeyboardButton_KeyboardButtonRequestPhone{
+			KeyboardButtonRequestPhone: &TLKeyboardButtonRequestPhone{},
+		},
+	}
+}
+
 func (m *TLKeyboardButtonRequestPhone) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_keyboardButtonRequestPhone))
@@ -24691,6 +27915,14 @@ func (m *TLKeyboardButtonRequestPhone) Decode(dbuf *DecodeBuf) error {
 }
 
 // keyboardButtonRequestGeoLocation#fc796b3f text:string = KeyboardButton;
+func (m *TLKeyboardButtonRequestGeoLocation) ToKeyboardButton() *KeyboardButton {
+	return &KeyboardButton{
+		Payload: &KeyboardButton_KeyboardButtonRequestGeoLocation{
+			KeyboardButtonRequestGeoLocation: &TLKeyboardButtonRequestGeoLocation{},
+		},
+	}
+}
+
 func (m *TLKeyboardButtonRequestGeoLocation) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_keyboardButtonRequestGeoLocation))
@@ -24704,6 +27936,14 @@ func (m *TLKeyboardButtonRequestGeoLocation) Decode(dbuf *DecodeBuf) error {
 }
 
 // keyboardButtonSwitchInline#568a748 flags:# same_peer:flags.0?true text:string query:string = KeyboardButton;
+func (m *TLKeyboardButtonSwitchInline) ToKeyboardButton() *KeyboardButton {
+	return &KeyboardButton{
+		Payload: &KeyboardButton_KeyboardButtonSwitchInline{
+			KeyboardButtonSwitchInline: &TLKeyboardButtonSwitchInline{},
+		},
+	}
+}
+
 func (m *TLKeyboardButtonSwitchInline) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_keyboardButtonSwitchInline))
@@ -24733,6 +27973,14 @@ func (m *TLKeyboardButtonSwitchInline) Decode(dbuf *DecodeBuf) error {
 }
 
 // keyboardButtonGame#50f41ccf text:string = KeyboardButton;
+func (m *TLKeyboardButtonGame) ToKeyboardButton() *KeyboardButton {
+	return &KeyboardButton{
+		Payload: &KeyboardButton_KeyboardButtonGame{
+			KeyboardButtonGame: &TLKeyboardButtonGame{},
+		},
+	}
+}
+
 func (m *TLKeyboardButtonGame) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_keyboardButtonGame))
@@ -24746,6 +27994,14 @@ func (m *TLKeyboardButtonGame) Decode(dbuf *DecodeBuf) error {
 }
 
 // keyboardButtonBuy#afd93fbb text:string = KeyboardButton;
+func (m *TLKeyboardButtonBuy) ToKeyboardButton() *KeyboardButton {
+	return &KeyboardButton{
+		Payload: &KeyboardButton_KeyboardButtonBuy{
+			KeyboardButtonBuy: &TLKeyboardButtonBuy{},
+		},
+	}
+}
+
 func (m *TLKeyboardButtonBuy) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_keyboardButtonBuy))
@@ -24759,6 +28015,14 @@ func (m *TLKeyboardButtonBuy) Decode(dbuf *DecodeBuf) error {
 }
 
 // keyboardButtonRow#77608b83 buttons:Vector<KeyboardButton> = KeyboardButtonRow;
+func (m *TLKeyboardButtonRow) ToKeyboardButtonRow() *KeyboardButtonRow {
+	return &KeyboardButtonRow{
+		Payload: &KeyboardButtonRow_KeyboardButtonRow{
+			KeyboardButtonRow: &TLKeyboardButtonRow{},
+		},
+	}
+}
+
 func (m *TLKeyboardButtonRow) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_keyboardButtonRow))
@@ -24791,6 +28055,14 @@ func (m *TLKeyboardButtonRow) Decode(dbuf *DecodeBuf) error {
 }
 
 // replyKeyboardHide#a03e5b85 flags:# selective:flags.2?true = ReplyMarkup;
+func (m *TLReplyKeyboardHide) ToReplyMarkup() *ReplyMarkup {
+	return &ReplyMarkup{
+		Payload: &ReplyMarkup_ReplyKeyboardHide{
+			ReplyKeyboardHide: &TLReplyKeyboardHide{},
+		},
+	}
+}
+
 func (m *TLReplyKeyboardHide) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_replyKeyboardHide))
@@ -24816,6 +28088,14 @@ func (m *TLReplyKeyboardHide) Decode(dbuf *DecodeBuf) error {
 }
 
 // replyKeyboardForceReply#f4108aa0 flags:# single_use:flags.1?true selective:flags.2?true = ReplyMarkup;
+func (m *TLReplyKeyboardForceReply) ToReplyMarkup() *ReplyMarkup {
+	return &ReplyMarkup{
+		Payload: &ReplyMarkup_ReplyKeyboardForceReply{
+			ReplyKeyboardForceReply: &TLReplyKeyboardForceReply{},
+		},
+	}
+}
+
 func (m *TLReplyKeyboardForceReply) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_replyKeyboardForceReply))
@@ -24850,6 +28130,14 @@ func (m *TLReplyKeyboardForceReply) Decode(dbuf *DecodeBuf) error {
 }
 
 // replyKeyboardMarkup#3502758c flags:# resize:flags.0?true single_use:flags.1?true selective:flags.2?true rows:Vector<KeyboardButtonRow> = ReplyMarkup;
+func (m *TLReplyKeyboardMarkup) ToReplyMarkup() *ReplyMarkup {
+	return &ReplyMarkup{
+		Payload: &ReplyMarkup_ReplyKeyboardMarkup{
+			ReplyKeyboardMarkup: &TLReplyKeyboardMarkup{},
+		},
+	}
+}
+
 func (m *TLReplyKeyboardMarkup) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_replyKeyboardMarkup))
@@ -24914,6 +28202,14 @@ func (m *TLReplyKeyboardMarkup) Decode(dbuf *DecodeBuf) error {
 }
 
 // replyInlineMarkup#48a30254 rows:Vector<KeyboardButtonRow> = ReplyMarkup;
+func (m *TLReplyInlineMarkup) ToReplyMarkup() *ReplyMarkup {
+	return &ReplyMarkup{
+		Payload: &ReplyMarkup_ReplyInlineMarkup{
+			ReplyInlineMarkup: &TLReplyInlineMarkup{},
+		},
+	}
+}
+
 func (m *TLReplyInlineMarkup) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_replyInlineMarkup))
@@ -24946,6 +28242,14 @@ func (m *TLReplyInlineMarkup) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageEntityUnknown#bb92ba95 offset:int length:int = MessageEntity;
+func (m *TLMessageEntityUnknown) ToMessageEntity() *MessageEntity {
+	return &MessageEntity{
+		Payload: &MessageEntity_MessageEntityUnknown{
+			MessageEntityUnknown: &TLMessageEntityUnknown{},
+		},
+	}
+}
+
 func (m *TLMessageEntityUnknown) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageEntityUnknown))
@@ -24961,6 +28265,14 @@ func (m *TLMessageEntityUnknown) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageEntityMention#fa04579d offset:int length:int = MessageEntity;
+func (m *TLMessageEntityMention) ToMessageEntity() *MessageEntity {
+	return &MessageEntity{
+		Payload: &MessageEntity_MessageEntityMention{
+			MessageEntityMention: &TLMessageEntityMention{},
+		},
+	}
+}
+
 func (m *TLMessageEntityMention) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageEntityMention))
@@ -24976,6 +28288,14 @@ func (m *TLMessageEntityMention) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageEntityHashtag#6f635b0d offset:int length:int = MessageEntity;
+func (m *TLMessageEntityHashtag) ToMessageEntity() *MessageEntity {
+	return &MessageEntity{
+		Payload: &MessageEntity_MessageEntityHashtag{
+			MessageEntityHashtag: &TLMessageEntityHashtag{},
+		},
+	}
+}
+
 func (m *TLMessageEntityHashtag) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageEntityHashtag))
@@ -24991,6 +28311,14 @@ func (m *TLMessageEntityHashtag) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageEntityBotCommand#6cef8ac7 offset:int length:int = MessageEntity;
+func (m *TLMessageEntityBotCommand) ToMessageEntity() *MessageEntity {
+	return &MessageEntity{
+		Payload: &MessageEntity_MessageEntityBotCommand{
+			MessageEntityBotCommand: &TLMessageEntityBotCommand{},
+		},
+	}
+}
+
 func (m *TLMessageEntityBotCommand) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageEntityBotCommand))
@@ -25006,6 +28334,14 @@ func (m *TLMessageEntityBotCommand) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageEntityUrl#6ed02538 offset:int length:int = MessageEntity;
+func (m *TLMessageEntityUrl) ToMessageEntity() *MessageEntity {
+	return &MessageEntity{
+		Payload: &MessageEntity_MessageEntityUrl{
+			MessageEntityUrl: &TLMessageEntityUrl{},
+		},
+	}
+}
+
 func (m *TLMessageEntityUrl) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageEntityUrl))
@@ -25021,6 +28357,14 @@ func (m *TLMessageEntityUrl) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageEntityEmail#64e475c2 offset:int length:int = MessageEntity;
+func (m *TLMessageEntityEmail) ToMessageEntity() *MessageEntity {
+	return &MessageEntity{
+		Payload: &MessageEntity_MessageEntityEmail{
+			MessageEntityEmail: &TLMessageEntityEmail{},
+		},
+	}
+}
+
 func (m *TLMessageEntityEmail) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageEntityEmail))
@@ -25036,6 +28380,14 @@ func (m *TLMessageEntityEmail) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageEntityBold#bd610bc9 offset:int length:int = MessageEntity;
+func (m *TLMessageEntityBold) ToMessageEntity() *MessageEntity {
+	return &MessageEntity{
+		Payload: &MessageEntity_MessageEntityBold{
+			MessageEntityBold: &TLMessageEntityBold{},
+		},
+	}
+}
+
 func (m *TLMessageEntityBold) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageEntityBold))
@@ -25051,6 +28403,14 @@ func (m *TLMessageEntityBold) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageEntityItalic#826f8b60 offset:int length:int = MessageEntity;
+func (m *TLMessageEntityItalic) ToMessageEntity() *MessageEntity {
+	return &MessageEntity{
+		Payload: &MessageEntity_MessageEntityItalic{
+			MessageEntityItalic: &TLMessageEntityItalic{},
+		},
+	}
+}
+
 func (m *TLMessageEntityItalic) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageEntityItalic))
@@ -25066,6 +28426,14 @@ func (m *TLMessageEntityItalic) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageEntityCode#28a20571 offset:int length:int = MessageEntity;
+func (m *TLMessageEntityCode) ToMessageEntity() *MessageEntity {
+	return &MessageEntity{
+		Payload: &MessageEntity_MessageEntityCode{
+			MessageEntityCode: &TLMessageEntityCode{},
+		},
+	}
+}
+
 func (m *TLMessageEntityCode) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageEntityCode))
@@ -25081,6 +28449,14 @@ func (m *TLMessageEntityCode) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageEntityPre#73924be0 offset:int length:int language:string = MessageEntity;
+func (m *TLMessageEntityPre) ToMessageEntity() *MessageEntity {
+	return &MessageEntity{
+		Payload: &MessageEntity_MessageEntityPre{
+			MessageEntityPre: &TLMessageEntityPre{},
+		},
+	}
+}
+
 func (m *TLMessageEntityPre) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageEntityPre))
@@ -25098,6 +28474,14 @@ func (m *TLMessageEntityPre) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageEntityTextUrl#76a6d327 offset:int length:int url:string = MessageEntity;
+func (m *TLMessageEntityTextUrl) ToMessageEntity() *MessageEntity {
+	return &MessageEntity{
+		Payload: &MessageEntity_MessageEntityTextUrl{
+			MessageEntityTextUrl: &TLMessageEntityTextUrl{},
+		},
+	}
+}
+
 func (m *TLMessageEntityTextUrl) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageEntityTextUrl))
@@ -25115,6 +28499,14 @@ func (m *TLMessageEntityTextUrl) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageEntityMentionName#352dca58 offset:int length:int user_id:int = MessageEntity;
+func (m *TLMessageEntityMentionName) ToMessageEntity() *MessageEntity {
+	return &MessageEntity{
+		Payload: &MessageEntity_MessageEntityMentionName{
+			MessageEntityMentionName: &TLMessageEntityMentionName{},
+		},
+	}
+}
+
 func (m *TLMessageEntityMentionName) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageEntityMentionName))
@@ -25132,6 +28524,14 @@ func (m *TLMessageEntityMentionName) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputMessageEntityMentionName#208e68c9 offset:int length:int user_id:InputUser = MessageEntity;
+func (m *TLInputMessageEntityMentionName) ToMessageEntity() *MessageEntity {
+	return &MessageEntity{
+		Payload: &MessageEntity_InputMessageEntityMentionName{
+			InputMessageEntityMentionName: &TLInputMessageEntityMentionName{},
+		},
+	}
+}
+
 func (m *TLInputMessageEntityMentionName) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputMessageEntityMentionName))
@@ -25151,6 +28551,14 @@ func (m *TLInputMessageEntityMentionName) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputChannelEmpty#ee8c1e86 = InputChannel;
+func (m *TLInputChannelEmpty) ToInputChannel() *InputChannel {
+	return &InputChannel{
+		Payload: &InputChannel_InputChannelEmpty{
+			InputChannelEmpty: &TLInputChannelEmpty{},
+		},
+	}
+}
+
 func (m *TLInputChannelEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputChannelEmpty))
@@ -25162,6 +28570,14 @@ func (m *TLInputChannelEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputChannel#afeb712e channel_id:int access_hash:long = InputChannel;
+func (m *TLInputChannel) ToInputChannel() *InputChannel {
+	return &InputChannel{
+		Payload: &InputChannel_InputChannel{
+			InputChannel: &TLInputChannel{},
+		},
+	}
+}
+
 func (m *TLInputChannel) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputChannel))
@@ -25177,6 +28593,14 @@ func (m *TLInputChannel) Decode(dbuf *DecodeBuf) error {
 }
 
 // contacts.resolvedPeer#7f077ad9 peer:Peer chats:Vector<Chat> users:Vector<User> = contacts.ResolvedPeer;
+func (m *TLContactsResolvedPeer) ToContacts_ResolvedPeer() *Contacts_ResolvedPeer {
+	return &Contacts_ResolvedPeer{
+		Payload: &Contacts_ResolvedPeer_ContactsResolvedPeer{
+			ContactsResolvedPeer: &TLContactsResolvedPeer{},
+		},
+	}
+}
+
 func (m *TLContactsResolvedPeer) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_resolvedPeer))
@@ -25234,6 +28658,14 @@ func (m *TLContactsResolvedPeer) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageRange#ae30253 min_id:int max_id:int = MessageRange;
+func (m *TLMessageRange) ToMessageRange() *MessageRange {
+	return &MessageRange{
+		Payload: &MessageRange_MessageRange{
+			MessageRange: &TLMessageRange{},
+		},
+	}
+}
+
 func (m *TLMessageRange) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageRange))
@@ -25249,6 +28681,14 @@ func (m *TLMessageRange) Decode(dbuf *DecodeBuf) error {
 }
 
 // updates.channelDifferenceEmpty#3e11affb flags:# final:flags.0?true pts:int timeout:flags.1?int = updates.ChannelDifference;
+func (m *TLUpdatesChannelDifferenceEmpty) ToUpdates_ChannelDifference() *Updates_ChannelDifference {
+	return &Updates_ChannelDifference{
+		Payload: &Updates_ChannelDifference_UpdatesChannelDifferenceEmpty{
+			UpdatesChannelDifferenceEmpty: &TLUpdatesChannelDifferenceEmpty{},
+		},
+	}
+}
+
 func (m *TLUpdatesChannelDifferenceEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates_channelDifferenceEmpty))
@@ -25285,6 +28725,14 @@ func (m *TLUpdatesChannelDifferenceEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // updates.channelDifferenceTooLong#6a9d7b35 flags:# final:flags.0?true pts:int timeout:flags.1?int top_message:int read_inbox_max_id:int read_outbox_max_id:int unread_count:int unread_mentions_count:int messages:Vector<Message> chats:Vector<Chat> users:Vector<User> = updates.ChannelDifference;
+func (m *TLUpdatesChannelDifferenceTooLong) ToUpdates_ChannelDifference() *Updates_ChannelDifference {
+	return &Updates_ChannelDifference{
+		Payload: &Updates_ChannelDifference_UpdatesChannelDifferenceTooLong{
+			UpdatesChannelDifferenceTooLong: &TLUpdatesChannelDifferenceTooLong{},
+		},
+	}
+}
+
 func (m *TLUpdatesChannelDifferenceTooLong) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates_channelDifferenceTooLong))
@@ -25394,6 +28842,14 @@ func (m *TLUpdatesChannelDifferenceTooLong) Decode(dbuf *DecodeBuf) error {
 }
 
 // updates.channelDifference#2064674e flags:# final:flags.0?true pts:int timeout:flags.1?int new_messages:Vector<Message> other_updates:Vector<Update> chats:Vector<Chat> users:Vector<User> = updates.ChannelDifference;
+func (m *TLUpdatesChannelDifference) ToUpdates_ChannelDifference() *Updates_ChannelDifference {
+	return &Updates_ChannelDifference{
+		Payload: &Updates_ChannelDifference_UpdatesChannelDifference{
+			UpdatesChannelDifference: &TLUpdatesChannelDifference{},
+		},
+	}
+}
+
 func (m *TLUpdatesChannelDifference) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_updates_channelDifference))
@@ -25514,6 +28970,14 @@ func (m *TLUpdatesChannelDifference) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelMessagesFilterEmpty#94d42ee7 = ChannelMessagesFilter;
+func (m *TLChannelMessagesFilterEmpty) ToChannelMessagesFilter() *ChannelMessagesFilter {
+	return &ChannelMessagesFilter{
+		Payload: &ChannelMessagesFilter_ChannelMessagesFilterEmpty{
+			ChannelMessagesFilterEmpty: &TLChannelMessagesFilterEmpty{},
+		},
+	}
+}
+
 func (m *TLChannelMessagesFilterEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelMessagesFilterEmpty))
@@ -25525,6 +28989,14 @@ func (m *TLChannelMessagesFilterEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelMessagesFilter#cd77d957 flags:# exclude_new_messages:flags.1?true ranges:Vector<MessageRange> = ChannelMessagesFilter;
+func (m *TLChannelMessagesFilter) ToChannelMessagesFilter() *ChannelMessagesFilter {
+	return &ChannelMessagesFilter{
+		Payload: &ChannelMessagesFilter_ChannelMessagesFilter{
+			ChannelMessagesFilter: &TLChannelMessagesFilter{},
+		},
+	}
+}
+
 func (m *TLChannelMessagesFilter) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelMessagesFilter))
@@ -25571,6 +29043,14 @@ func (m *TLChannelMessagesFilter) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelParticipant#15ebac1d user_id:int date:int = ChannelParticipant;
+func (m *TLChannelParticipant) ToChannelParticipant() *ChannelParticipant {
+	return &ChannelParticipant{
+		Payload: &ChannelParticipant_ChannelParticipant{
+			ChannelParticipant: &TLChannelParticipant{},
+		},
+	}
+}
+
 func (m *TLChannelParticipant) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelParticipant))
@@ -25586,6 +29066,14 @@ func (m *TLChannelParticipant) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelParticipantSelf#a3289a6d user_id:int inviter_id:int date:int = ChannelParticipant;
+func (m *TLChannelParticipantSelf) ToChannelParticipant() *ChannelParticipant {
+	return &ChannelParticipant{
+		Payload: &ChannelParticipant_ChannelParticipantSelf{
+			ChannelParticipantSelf: &TLChannelParticipantSelf{},
+		},
+	}
+}
+
 func (m *TLChannelParticipantSelf) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelParticipantSelf))
@@ -25603,6 +29091,14 @@ func (m *TLChannelParticipantSelf) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelParticipantCreator#e3e2e1f9 user_id:int = ChannelParticipant;
+func (m *TLChannelParticipantCreator) ToChannelParticipant() *ChannelParticipant {
+	return &ChannelParticipant{
+		Payload: &ChannelParticipant_ChannelParticipantCreator{
+			ChannelParticipantCreator: &TLChannelParticipantCreator{},
+		},
+	}
+}
+
 func (m *TLChannelParticipantCreator) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelParticipantCreator))
@@ -25616,6 +29112,14 @@ func (m *TLChannelParticipantCreator) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelParticipantAdmin#a82fa898 flags:# can_edit:flags.0?true user_id:int inviter_id:int promoted_by:int date:int admin_rights:ChannelAdminRights = ChannelParticipant;
+func (m *TLChannelParticipantAdmin) ToChannelParticipant() *ChannelParticipant {
+	return &ChannelParticipant{
+		Payload: &ChannelParticipant_ChannelParticipantAdmin{
+			ChannelParticipantAdmin: &TLChannelParticipantAdmin{},
+		},
+	}
+}
+
 func (m *TLChannelParticipantAdmin) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelParticipantAdmin))
@@ -25653,6 +29157,14 @@ func (m *TLChannelParticipantAdmin) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelParticipantBanned#222c1886 flags:# left:flags.0?true user_id:int kicked_by:int date:int banned_rights:ChannelBannedRights = ChannelParticipant;
+func (m *TLChannelParticipantBanned) ToChannelParticipant() *ChannelParticipant {
+	return &ChannelParticipant{
+		Payload: &ChannelParticipant_ChannelParticipantBanned{
+			ChannelParticipantBanned: &TLChannelParticipantBanned{},
+		},
+	}
+}
+
 func (m *TLChannelParticipantBanned) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelParticipantBanned))
@@ -25688,6 +29200,14 @@ func (m *TLChannelParticipantBanned) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelParticipantsRecent#de3f3c79 = ChannelParticipantsFilter;
+func (m *TLChannelParticipantsRecent) ToChannelParticipantsFilter() *ChannelParticipantsFilter {
+	return &ChannelParticipantsFilter{
+		Payload: &ChannelParticipantsFilter_ChannelParticipantsRecent{
+			ChannelParticipantsRecent: &TLChannelParticipantsRecent{},
+		},
+	}
+}
+
 func (m *TLChannelParticipantsRecent) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelParticipantsRecent))
@@ -25699,6 +29219,14 @@ func (m *TLChannelParticipantsRecent) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelParticipantsAdmins#b4608969 = ChannelParticipantsFilter;
+func (m *TLChannelParticipantsAdmins) ToChannelParticipantsFilter() *ChannelParticipantsFilter {
+	return &ChannelParticipantsFilter{
+		Payload: &ChannelParticipantsFilter_ChannelParticipantsAdmins{
+			ChannelParticipantsAdmins: &TLChannelParticipantsAdmins{},
+		},
+	}
+}
+
 func (m *TLChannelParticipantsAdmins) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelParticipantsAdmins))
@@ -25710,6 +29238,14 @@ func (m *TLChannelParticipantsAdmins) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelParticipantsKicked#a3b54985 q:string = ChannelParticipantsFilter;
+func (m *TLChannelParticipantsKicked) ToChannelParticipantsFilter() *ChannelParticipantsFilter {
+	return &ChannelParticipantsFilter{
+		Payload: &ChannelParticipantsFilter_ChannelParticipantsKicked{
+			ChannelParticipantsKicked: &TLChannelParticipantsKicked{},
+		},
+	}
+}
+
 func (m *TLChannelParticipantsKicked) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelParticipantsKicked))
@@ -25723,6 +29259,14 @@ func (m *TLChannelParticipantsKicked) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelParticipantsBots#b0d1865b = ChannelParticipantsFilter;
+func (m *TLChannelParticipantsBots) ToChannelParticipantsFilter() *ChannelParticipantsFilter {
+	return &ChannelParticipantsFilter{
+		Payload: &ChannelParticipantsFilter_ChannelParticipantsBots{
+			ChannelParticipantsBots: &TLChannelParticipantsBots{},
+		},
+	}
+}
+
 func (m *TLChannelParticipantsBots) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelParticipantsBots))
@@ -25734,6 +29278,14 @@ func (m *TLChannelParticipantsBots) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelParticipantsBanned#1427a5e1 q:string = ChannelParticipantsFilter;
+func (m *TLChannelParticipantsBanned) ToChannelParticipantsFilter() *ChannelParticipantsFilter {
+	return &ChannelParticipantsFilter{
+		Payload: &ChannelParticipantsFilter_ChannelParticipantsBanned{
+			ChannelParticipantsBanned: &TLChannelParticipantsBanned{},
+		},
+	}
+}
+
 func (m *TLChannelParticipantsBanned) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelParticipantsBanned))
@@ -25747,6 +29299,14 @@ func (m *TLChannelParticipantsBanned) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelParticipantsSearch#656ac4b q:string = ChannelParticipantsFilter;
+func (m *TLChannelParticipantsSearch) ToChannelParticipantsFilter() *ChannelParticipantsFilter {
+	return &ChannelParticipantsFilter{
+		Payload: &ChannelParticipantsFilter_ChannelParticipantsSearch{
+			ChannelParticipantsSearch: &TLChannelParticipantsSearch{},
+		},
+	}
+}
+
 func (m *TLChannelParticipantsSearch) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelParticipantsSearch))
@@ -25760,6 +29320,14 @@ func (m *TLChannelParticipantsSearch) Decode(dbuf *DecodeBuf) error {
 }
 
 // channels.channelParticipants#f56ee2a8 count:int participants:Vector<ChannelParticipant> users:Vector<User> = channels.ChannelParticipants;
+func (m *TLChannelsChannelParticipants) ToChannels_ChannelParticipants() *Channels_ChannelParticipants {
+	return &Channels_ChannelParticipants{
+		Payload: &Channels_ChannelParticipants_ChannelsChannelParticipants{
+			ChannelsChannelParticipants: &TLChannelsChannelParticipants{},
+		},
+	}
+}
+
 func (m *TLChannelsChannelParticipants) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channels_channelParticipants))
@@ -25815,6 +29383,14 @@ func (m *TLChannelsChannelParticipants) Decode(dbuf *DecodeBuf) error {
 }
 
 // channels.channelParticipant#d0d9b163 participant:ChannelParticipant users:Vector<User> = channels.ChannelParticipant;
+func (m *TLChannelsChannelParticipant) ToChannels_ChannelParticipant() *Channels_ChannelParticipant {
+	return &Channels_ChannelParticipant{
+		Payload: &Channels_ChannelParticipant_ChannelsChannelParticipant{
+			ChannelsChannelParticipant: &TLChannelsChannelParticipant{},
+		},
+	}
+}
+
 func (m *TLChannelsChannelParticipant) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channels_channelParticipant))
@@ -25851,6 +29427,14 @@ func (m *TLChannelsChannelParticipant) Decode(dbuf *DecodeBuf) error {
 }
 
 // help.termsOfService#f1ee3e90 text:string = help.TermsOfService;
+func (m *TLHelpTermsOfService) ToHelp_TermsOfService() *Help_TermsOfService {
+	return &Help_TermsOfService{
+		Payload: &Help_TermsOfService_HelpTermsOfService{
+			HelpTermsOfService: &TLHelpTermsOfService{},
+		},
+	}
+}
+
 func (m *TLHelpTermsOfService) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_help_termsOfService))
@@ -25864,6 +29448,14 @@ func (m *TLHelpTermsOfService) Decode(dbuf *DecodeBuf) error {
 }
 
 // foundGif#162ecc1f url:string thumb_url:string content_url:string content_type:string w:int h:int = FoundGif;
+func (m *TLFoundGif) ToFoundGif() *FoundGif {
+	return &FoundGif{
+		Payload: &FoundGif_FoundGif{
+			FoundGif: &TLFoundGif{},
+		},
+	}
+}
+
 func (m *TLFoundGif) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_foundGif))
@@ -25887,6 +29479,14 @@ func (m *TLFoundGif) Decode(dbuf *DecodeBuf) error {
 }
 
 // foundGifCached#9c750409 url:string photo:Photo document:Document = FoundGif;
+func (m *TLFoundGifCached) ToFoundGif() *FoundGif {
+	return &FoundGif{
+		Payload: &FoundGif_FoundGifCached{
+			FoundGifCached: &TLFoundGifCached{},
+		},
+	}
+}
+
 func (m *TLFoundGifCached) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_foundGifCached))
@@ -25908,6 +29508,14 @@ func (m *TLFoundGifCached) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.foundGifs#450a1c0a next_offset:int results:Vector<FoundGif> = messages.FoundGifs;
+func (m *TLMessagesFoundGifs) ToMessages_FoundGifs() *Messages_FoundGifs {
+	return &Messages_FoundGifs{
+		Payload: &Messages_FoundGifs_MessagesFoundGifs{
+			MessagesFoundGifs: &TLMessagesFoundGifs{},
+		},
+	}
+}
+
 func (m *TLMessagesFoundGifs) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_foundGifs))
@@ -25942,6 +29550,14 @@ func (m *TLMessagesFoundGifs) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.savedGifsNotModified#e8025ca2 = messages.SavedGifs;
+func (m *TLMessagesSavedGifsNotModified) ToMessages_SavedGifs() *Messages_SavedGifs {
+	return &Messages_SavedGifs{
+		Payload: &Messages_SavedGifs_MessagesSavedGifsNotModified{
+			MessagesSavedGifsNotModified: &TLMessagesSavedGifsNotModified{},
+		},
+	}
+}
+
 func (m *TLMessagesSavedGifsNotModified) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_savedGifsNotModified))
@@ -25953,6 +29569,14 @@ func (m *TLMessagesSavedGifsNotModified) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.savedGifs#2e0709a5 hash:int gifs:Vector<Document> = messages.SavedGifs;
+func (m *TLMessagesSavedGifs) ToMessages_SavedGifs() *Messages_SavedGifs {
+	return &Messages_SavedGifs{
+		Payload: &Messages_SavedGifs_MessagesSavedGifs{
+			MessagesSavedGifs: &TLMessagesSavedGifs{},
+		},
+	}
+}
+
 func (m *TLMessagesSavedGifs) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_savedGifs))
@@ -25987,6 +29611,14 @@ func (m *TLMessagesSavedGifs) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputBotInlineMessageMediaAuto#292fed13 flags:# caption:string reply_markup:flags.2?ReplyMarkup = InputBotInlineMessage;
+func (m *TLInputBotInlineMessageMediaAuto) ToInputBotInlineMessage() *InputBotInlineMessage {
+	return &InputBotInlineMessage{
+		Payload: &InputBotInlineMessage_InputBotInlineMessageMediaAuto{
+			InputBotInlineMessageMediaAuto: &TLInputBotInlineMessageMediaAuto{},
+		},
+	}
+}
+
 func (m *TLInputBotInlineMessageMediaAuto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineMessageMediaAuto))
@@ -26016,6 +29648,14 @@ func (m *TLInputBotInlineMessageMediaAuto) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputBotInlineMessageText#3dcd7a87 flags:# no_webpage:flags.0?true message:string entities:flags.1?Vector<MessageEntity> reply_markup:flags.2?ReplyMarkup = InputBotInlineMessage;
+func (m *TLInputBotInlineMessageText) ToInputBotInlineMessage() *InputBotInlineMessage {
+	return &InputBotInlineMessage{
+		Payload: &InputBotInlineMessage_InputBotInlineMessageText{
+			InputBotInlineMessageText: &TLInputBotInlineMessageText{},
+		},
+	}
+}
+
 func (m *TLInputBotInlineMessageText) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineMessageText))
@@ -26082,6 +29722,14 @@ func (m *TLInputBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputBotInlineMessageMediaGeo#f4a59de1 flags:# geo_point:InputGeoPoint reply_markup:flags.2?ReplyMarkup = InputBotInlineMessage;
+func (m *TLInputBotInlineMessageMediaGeo) ToInputBotInlineMessage() *InputBotInlineMessage {
+	return &InputBotInlineMessage{
+		Payload: &InputBotInlineMessage_InputBotInlineMessageMediaGeo{
+			InputBotInlineMessageMediaGeo: &TLInputBotInlineMessageMediaGeo{},
+		},
+	}
+}
+
 func (m *TLInputBotInlineMessageMediaGeo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineMessageMediaGeo))
@@ -26113,6 +29761,14 @@ func (m *TLInputBotInlineMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputBotInlineMessageMediaVenue#aaafadc8 flags:# geo_point:InputGeoPoint title:string address:string provider:string venue_id:string reply_markup:flags.2?ReplyMarkup = InputBotInlineMessage;
+func (m *TLInputBotInlineMessageMediaVenue) ToInputBotInlineMessage() *InputBotInlineMessage {
+	return &InputBotInlineMessage{
+		Payload: &InputBotInlineMessage_InputBotInlineMessageMediaVenue{
+			InputBotInlineMessageMediaVenue: &TLInputBotInlineMessageMediaVenue{},
+		},
+	}
+}
+
 func (m *TLInputBotInlineMessageMediaVenue) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineMessageMediaVenue))
@@ -26152,6 +29808,14 @@ func (m *TLInputBotInlineMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputBotInlineMessageMediaContact#2daf01a7 flags:# phone_number:string first_name:string last_name:string reply_markup:flags.2?ReplyMarkup = InputBotInlineMessage;
+func (m *TLInputBotInlineMessageMediaContact) ToInputBotInlineMessage() *InputBotInlineMessage {
+	return &InputBotInlineMessage{
+		Payload: &InputBotInlineMessage_InputBotInlineMessageMediaContact{
+			InputBotInlineMessageMediaContact: &TLInputBotInlineMessageMediaContact{},
+		},
+	}
+}
+
 func (m *TLInputBotInlineMessageMediaContact) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineMessageMediaContact))
@@ -26185,6 +29849,14 @@ func (m *TLInputBotInlineMessageMediaContact) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputBotInlineMessageGame#4b425864 flags:# reply_markup:flags.2?ReplyMarkup = InputBotInlineMessage;
+func (m *TLInputBotInlineMessageGame) ToInputBotInlineMessage() *InputBotInlineMessage {
+	return &InputBotInlineMessage{
+		Payload: &InputBotInlineMessage_InputBotInlineMessageGame{
+			InputBotInlineMessageGame: &TLInputBotInlineMessageGame{},
+		},
+	}
+}
+
 func (m *TLInputBotInlineMessageGame) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineMessageGame))
@@ -26212,6 +29884,14 @@ func (m *TLInputBotInlineMessageGame) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputBotInlineResult#2cbbe15a flags:# id:string type:string title:flags.1?string description:flags.2?string url:flags.3?string thumb_url:flags.4?string content_url:flags.5?string content_type:flags.5?string w:flags.6?int h:flags.6?int duration:flags.7?int send_message:InputBotInlineMessage = InputBotInlineResult;
+func (m *TLInputBotInlineResult) ToInputBotInlineResult() *InputBotInlineResult {
+	return &InputBotInlineResult{
+		Payload: &InputBotInlineResult_InputBotInlineResult{
+			InputBotInlineResult: &TLInputBotInlineResult{},
+		},
+	}
+}
+
 func (m *TLInputBotInlineResult) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineResult))
@@ -26317,6 +29997,14 @@ func (m *TLInputBotInlineResult) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputBotInlineResultPhoto#a8d864a7 id:string type:string photo:InputPhoto send_message:InputBotInlineMessage = InputBotInlineResult;
+func (m *TLInputBotInlineResultPhoto) ToInputBotInlineResult() *InputBotInlineResult {
+	return &InputBotInlineResult{
+		Payload: &InputBotInlineResult_InputBotInlineResultPhoto{
+			InputBotInlineResultPhoto: &TLInputBotInlineResultPhoto{},
+		},
+	}
+}
+
 func (m *TLInputBotInlineResultPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineResultPhoto))
@@ -26340,6 +30028,14 @@ func (m *TLInputBotInlineResultPhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputBotInlineResultDocument#fff8fdc4 flags:# id:string type:string title:flags.1?string description:flags.2?string document:InputDocument send_message:InputBotInlineMessage = InputBotInlineResult;
+func (m *TLInputBotInlineResultDocument) ToInputBotInlineResult() *InputBotInlineResult {
+	return &InputBotInlineResult{
+		Payload: &InputBotInlineResult_InputBotInlineResultDocument{
+			InputBotInlineResultDocument: &TLInputBotInlineResultDocument{},
+		},
+	}
+}
+
 func (m *TLInputBotInlineResultDocument) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineResultDocument))
@@ -26386,6 +30082,14 @@ func (m *TLInputBotInlineResultDocument) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputBotInlineResultGame#4fa417f2 id:string short_name:string send_message:InputBotInlineMessage = InputBotInlineResult;
+func (m *TLInputBotInlineResultGame) ToInputBotInlineResult() *InputBotInlineResult {
+	return &InputBotInlineResult{
+		Payload: &InputBotInlineResult_InputBotInlineResultGame{
+			InputBotInlineResultGame: &TLInputBotInlineResultGame{},
+		},
+	}
+}
+
 func (m *TLInputBotInlineResultGame) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineResultGame))
@@ -26405,6 +30109,14 @@ func (m *TLInputBotInlineResultGame) Decode(dbuf *DecodeBuf) error {
 }
 
 // botInlineMessageMediaAuto#a74b15b flags:# caption:string reply_markup:flags.2?ReplyMarkup = BotInlineMessage;
+func (m *TLBotInlineMessageMediaAuto) ToBotInlineMessage() *BotInlineMessage {
+	return &BotInlineMessage{
+		Payload: &BotInlineMessage_BotInlineMessageMediaAuto{
+			BotInlineMessageMediaAuto: &TLBotInlineMessageMediaAuto{},
+		},
+	}
+}
+
 func (m *TLBotInlineMessageMediaAuto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botInlineMessageMediaAuto))
@@ -26434,6 +30146,14 @@ func (m *TLBotInlineMessageMediaAuto) Decode(dbuf *DecodeBuf) error {
 }
 
 // botInlineMessageText#8c7f65e2 flags:# no_webpage:flags.0?true message:string entities:flags.1?Vector<MessageEntity> reply_markup:flags.2?ReplyMarkup = BotInlineMessage;
+func (m *TLBotInlineMessageText) ToBotInlineMessage() *BotInlineMessage {
+	return &BotInlineMessage{
+		Payload: &BotInlineMessage_BotInlineMessageText{
+			BotInlineMessageText: &TLBotInlineMessageText{},
+		},
+	}
+}
+
 func (m *TLBotInlineMessageText) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botInlineMessageText))
@@ -26500,6 +30220,14 @@ func (m *TLBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
 }
 
 // botInlineMessageMediaGeo#3a8fd8b8 flags:# geo:GeoPoint reply_markup:flags.2?ReplyMarkup = BotInlineMessage;
+func (m *TLBotInlineMessageMediaGeo) ToBotInlineMessage() *BotInlineMessage {
+	return &BotInlineMessage{
+		Payload: &BotInlineMessage_BotInlineMessageMediaGeo{
+			BotInlineMessageMediaGeo: &TLBotInlineMessageMediaGeo{},
+		},
+	}
+}
+
 func (m *TLBotInlineMessageMediaGeo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botInlineMessageMediaGeo))
@@ -26531,6 +30259,14 @@ func (m *TLBotInlineMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
 }
 
 // botInlineMessageMediaVenue#4366232e flags:# geo:GeoPoint title:string address:string provider:string venue_id:string reply_markup:flags.2?ReplyMarkup = BotInlineMessage;
+func (m *TLBotInlineMessageMediaVenue) ToBotInlineMessage() *BotInlineMessage {
+	return &BotInlineMessage{
+		Payload: &BotInlineMessage_BotInlineMessageMediaVenue{
+			BotInlineMessageMediaVenue: &TLBotInlineMessageMediaVenue{},
+		},
+	}
+}
+
 func (m *TLBotInlineMessageMediaVenue) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botInlineMessageMediaVenue))
@@ -26570,6 +30306,14 @@ func (m *TLBotInlineMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
 }
 
 // botInlineMessageMediaContact#35edb4d4 flags:# phone_number:string first_name:string last_name:string reply_markup:flags.2?ReplyMarkup = BotInlineMessage;
+func (m *TLBotInlineMessageMediaContact) ToBotInlineMessage() *BotInlineMessage {
+	return &BotInlineMessage{
+		Payload: &BotInlineMessage_BotInlineMessageMediaContact{
+			BotInlineMessageMediaContact: &TLBotInlineMessageMediaContact{},
+		},
+	}
+}
+
 func (m *TLBotInlineMessageMediaContact) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botInlineMessageMediaContact))
@@ -26603,6 +30347,14 @@ func (m *TLBotInlineMessageMediaContact) Decode(dbuf *DecodeBuf) error {
 }
 
 // botInlineResult#9bebaeb9 flags:# id:string type:string title:flags.1?string description:flags.2?string url:flags.3?string thumb_url:flags.4?string content_url:flags.5?string content_type:flags.5?string w:flags.6?int h:flags.6?int duration:flags.7?int send_message:BotInlineMessage = BotInlineResult;
+func (m *TLBotInlineResult) ToBotInlineResult() *BotInlineResult {
+	return &BotInlineResult{
+		Payload: &BotInlineResult_BotInlineResult{
+			BotInlineResult: &TLBotInlineResult{},
+		},
+	}
+}
+
 func (m *TLBotInlineResult) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botInlineResult))
@@ -26708,6 +30460,14 @@ func (m *TLBotInlineResult) Decode(dbuf *DecodeBuf) error {
 }
 
 // botInlineMediaResult#17db940b flags:# id:string type:string photo:flags.0?Photo document:flags.1?Document title:flags.2?string description:flags.3?string send_message:BotInlineMessage = BotInlineResult;
+func (m *TLBotInlineMediaResult) ToBotInlineResult() *BotInlineResult {
+	return &BotInlineResult{
+		Payload: &BotInlineResult_BotInlineMediaResult{
+			BotInlineMediaResult: &TLBotInlineMediaResult{},
+		},
+	}
+}
+
 func (m *TLBotInlineMediaResult) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_botInlineMediaResult))
@@ -26772,6 +30532,14 @@ func (m *TLBotInlineMediaResult) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.botResults#ccd3563d flags:# gallery:flags.0?true query_id:long next_offset:flags.1?string switch_pm:flags.2?InlineBotSwitchPM results:Vector<BotInlineResult> cache_time:int = messages.BotResults;
+func (m *TLMessagesBotResults) ToMessages_BotResults() *Messages_BotResults {
+	return &Messages_BotResults{
+		Payload: &Messages_BotResults_MessagesBotResults{
+			MessagesBotResults: &TLMessagesBotResults{},
+		},
+	}
+}
+
 func (m *TLMessagesBotResults) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_botResults))
@@ -26842,6 +30610,14 @@ func (m *TLMessagesBotResults) Decode(dbuf *DecodeBuf) error {
 }
 
 // exportedMessageLink#1f486803 link:string = ExportedMessageLink;
+func (m *TLExportedMessageLink) ToExportedMessageLink() *ExportedMessageLink {
+	return &ExportedMessageLink{
+		Payload: &ExportedMessageLink_ExportedMessageLink{
+			ExportedMessageLink: &TLExportedMessageLink{},
+		},
+	}
+}
+
 func (m *TLExportedMessageLink) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_exportedMessageLink))
@@ -26855,6 +30631,14 @@ func (m *TLExportedMessageLink) Decode(dbuf *DecodeBuf) error {
 }
 
 // messageFwdHeader#fadff4ac flags:# from_id:flags.0?int date:int channel_id:flags.1?int channel_post:flags.2?int post_author:flags.3?string = MessageFwdHeader;
+func (m *TLMessageFwdHeader) ToMessageFwdHeader() *MessageFwdHeader {
+	return &MessageFwdHeader{
+		Payload: &MessageFwdHeader_MessageFwdHeader{
+			MessageFwdHeader: &TLMessageFwdHeader{},
+		},
+	}
+}
+
 func (m *TLMessageFwdHeader) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messageFwdHeader))
@@ -26909,6 +30693,14 @@ func (m *TLMessageFwdHeader) Decode(dbuf *DecodeBuf) error {
 }
 
 // auth.codeTypeSms#72a3158c = auth.CodeType;
+func (m *TLAuthCodeTypeSms) ToAuth_CodeType() *Auth_CodeType {
+	return &Auth_CodeType{
+		Payload: &Auth_CodeType_AuthCodeTypeSms{
+			AuthCodeTypeSms: &TLAuthCodeTypeSms{},
+		},
+	}
+}
+
 func (m *TLAuthCodeTypeSms) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_codeTypeSms))
@@ -26920,6 +30712,14 @@ func (m *TLAuthCodeTypeSms) Decode(dbuf *DecodeBuf) error {
 }
 
 // auth.codeTypeCall#741cd3e3 = auth.CodeType;
+func (m *TLAuthCodeTypeCall) ToAuth_CodeType() *Auth_CodeType {
+	return &Auth_CodeType{
+		Payload: &Auth_CodeType_AuthCodeTypeCall{
+			AuthCodeTypeCall: &TLAuthCodeTypeCall{},
+		},
+	}
+}
+
 func (m *TLAuthCodeTypeCall) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_codeTypeCall))
@@ -26931,6 +30731,14 @@ func (m *TLAuthCodeTypeCall) Decode(dbuf *DecodeBuf) error {
 }
 
 // auth.codeTypeFlashCall#226ccefb = auth.CodeType;
+func (m *TLAuthCodeTypeFlashCall) ToAuth_CodeType() *Auth_CodeType {
+	return &Auth_CodeType{
+		Payload: &Auth_CodeType_AuthCodeTypeFlashCall{
+			AuthCodeTypeFlashCall: &TLAuthCodeTypeFlashCall{},
+		},
+	}
+}
+
 func (m *TLAuthCodeTypeFlashCall) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_codeTypeFlashCall))
@@ -26942,6 +30750,14 @@ func (m *TLAuthCodeTypeFlashCall) Decode(dbuf *DecodeBuf) error {
 }
 
 // auth.sentCodeTypeApp#3dbb5986 length:int = auth.SentCodeType;
+func (m *TLAuthSentCodeTypeApp) ToAuth_SentCodeType() *Auth_SentCodeType {
+	return &Auth_SentCodeType{
+		Payload: &Auth_SentCodeType_AuthSentCodeTypeApp{
+			AuthSentCodeTypeApp: &TLAuthSentCodeTypeApp{},
+		},
+	}
+}
+
 func (m *TLAuthSentCodeTypeApp) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_sentCodeTypeApp))
@@ -26955,6 +30771,14 @@ func (m *TLAuthSentCodeTypeApp) Decode(dbuf *DecodeBuf) error {
 }
 
 // auth.sentCodeTypeSms#c000bba2 length:int = auth.SentCodeType;
+func (m *TLAuthSentCodeTypeSms) ToAuth_SentCodeType() *Auth_SentCodeType {
+	return &Auth_SentCodeType{
+		Payload: &Auth_SentCodeType_AuthSentCodeTypeSms{
+			AuthSentCodeTypeSms: &TLAuthSentCodeTypeSms{},
+		},
+	}
+}
+
 func (m *TLAuthSentCodeTypeSms) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_sentCodeTypeSms))
@@ -26968,6 +30792,14 @@ func (m *TLAuthSentCodeTypeSms) Decode(dbuf *DecodeBuf) error {
 }
 
 // auth.sentCodeTypeCall#5353e5a7 length:int = auth.SentCodeType;
+func (m *TLAuthSentCodeTypeCall) ToAuth_SentCodeType() *Auth_SentCodeType {
+	return &Auth_SentCodeType{
+		Payload: &Auth_SentCodeType_AuthSentCodeTypeCall{
+			AuthSentCodeTypeCall: &TLAuthSentCodeTypeCall{},
+		},
+	}
+}
+
 func (m *TLAuthSentCodeTypeCall) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_sentCodeTypeCall))
@@ -26981,6 +30813,14 @@ func (m *TLAuthSentCodeTypeCall) Decode(dbuf *DecodeBuf) error {
 }
 
 // auth.sentCodeTypeFlashCall#ab03c6d9 pattern:string = auth.SentCodeType;
+func (m *TLAuthSentCodeTypeFlashCall) ToAuth_SentCodeType() *Auth_SentCodeType {
+	return &Auth_SentCodeType{
+		Payload: &Auth_SentCodeType_AuthSentCodeTypeFlashCall{
+			AuthSentCodeTypeFlashCall: &TLAuthSentCodeTypeFlashCall{},
+		},
+	}
+}
+
 func (m *TLAuthSentCodeTypeFlashCall) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_auth_sentCodeTypeFlashCall))
@@ -26994,6 +30834,14 @@ func (m *TLAuthSentCodeTypeFlashCall) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.botCallbackAnswer#36585ea4 flags:# alert:flags.1?true has_url:flags.3?true message:flags.0?string url:flags.2?string cache_time:int = messages.BotCallbackAnswer;
+func (m *TLMessagesBotCallbackAnswer) ToMessages_BotCallbackAnswer() *Messages_BotCallbackAnswer {
+	return &Messages_BotCallbackAnswer{
+		Payload: &Messages_BotCallbackAnswer_MessagesBotCallbackAnswer{
+			MessagesBotCallbackAnswer: &TLMessagesBotCallbackAnswer{},
+		},
+	}
+}
+
 func (m *TLMessagesBotCallbackAnswer) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_botCallbackAnswer))
@@ -27048,6 +30896,14 @@ func (m *TLMessagesBotCallbackAnswer) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.messageEditData#26b5dde6 flags:# caption:flags.0?true = messages.MessageEditData;
+func (m *TLMessagesMessageEditData) ToMessages_MessageEditData() *Messages_MessageEditData {
+	return &Messages_MessageEditData{
+		Payload: &Messages_MessageEditData_MessagesMessageEditData{
+			MessagesMessageEditData: &TLMessagesMessageEditData{},
+		},
+	}
+}
+
 func (m *TLMessagesMessageEditData) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_messageEditData))
@@ -27073,6 +30929,14 @@ func (m *TLMessagesMessageEditData) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputBotInlineMessageID#890c3d89 dc_id:int id:long access_hash:long = InputBotInlineMessageID;
+func (m *TLInputBotInlineMessageID) ToInputBotInlineMessageID() *InputBotInlineMessageID {
+	return &InputBotInlineMessageID{
+		Payload: &InputBotInlineMessageID_InputBotInlineMessageID{
+			InputBotInlineMessageID: &TLInputBotInlineMessageID{},
+		},
+	}
+}
+
 func (m *TLInputBotInlineMessageID) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputBotInlineMessageID))
@@ -27090,6 +30954,14 @@ func (m *TLInputBotInlineMessageID) Decode(dbuf *DecodeBuf) error {
 }
 
 // inlineBotSwitchPM#3c20629f text:string start_param:string = InlineBotSwitchPM;
+func (m *TLInlineBotSwitchPM) ToInlineBotSwitchPM() *InlineBotSwitchPM {
+	return &InlineBotSwitchPM{
+		Payload: &InlineBotSwitchPM_InlineBotSwitchPM{
+			InlineBotSwitchPM: &TLInlineBotSwitchPM{},
+		},
+	}
+}
+
 func (m *TLInlineBotSwitchPM) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inlineBotSwitchPM))
@@ -27105,6 +30977,14 @@ func (m *TLInlineBotSwitchPM) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.peerDialogs#3371c354 dialogs:Vector<Dialog> messages:Vector<Message> chats:Vector<Chat> users:Vector<User> state:updates.State = messages.PeerDialogs;
+func (m *TLMessagesPeerDialogs) ToMessages_PeerDialogs() *Messages_PeerDialogs {
+	return &Messages_PeerDialogs{
+		Payload: &Messages_PeerDialogs_MessagesPeerDialogs{
+			MessagesPeerDialogs: &TLMessagesPeerDialogs{},
+		},
+	}
+}
+
 func (m *TLMessagesPeerDialogs) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_peerDialogs))
@@ -27204,6 +31084,14 @@ func (m *TLMessagesPeerDialogs) Decode(dbuf *DecodeBuf) error {
 }
 
 // topPeer#edcdc05b peer:Peer rating:double = TopPeer;
+func (m *TLTopPeer) ToTopPeer() *TopPeer {
+	return &TopPeer{
+		Payload: &TopPeer_TopPeer{
+			TopPeer: &TLTopPeer{},
+		},
+	}
+}
+
 func (m *TLTopPeer) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_topPeer))
@@ -27221,6 +31109,14 @@ func (m *TLTopPeer) Decode(dbuf *DecodeBuf) error {
 }
 
 // topPeerCategoryBotsPM#ab661b5b = TopPeerCategory;
+func (m *TLTopPeerCategoryBotsPM) ToTopPeerCategory() *TopPeerCategory {
+	return &TopPeerCategory{
+		Payload: &TopPeerCategory_TopPeerCategoryBotsPM{
+			TopPeerCategoryBotsPM: &TLTopPeerCategoryBotsPM{},
+		},
+	}
+}
+
 func (m *TLTopPeerCategoryBotsPM) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_topPeerCategoryBotsPM))
@@ -27232,6 +31128,14 @@ func (m *TLTopPeerCategoryBotsPM) Decode(dbuf *DecodeBuf) error {
 }
 
 // topPeerCategoryBotsInline#148677e2 = TopPeerCategory;
+func (m *TLTopPeerCategoryBotsInline) ToTopPeerCategory() *TopPeerCategory {
+	return &TopPeerCategory{
+		Payload: &TopPeerCategory_TopPeerCategoryBotsInline{
+			TopPeerCategoryBotsInline: &TLTopPeerCategoryBotsInline{},
+		},
+	}
+}
+
 func (m *TLTopPeerCategoryBotsInline) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_topPeerCategoryBotsInline))
@@ -27243,6 +31147,14 @@ func (m *TLTopPeerCategoryBotsInline) Decode(dbuf *DecodeBuf) error {
 }
 
 // topPeerCategoryCorrespondents#637b7ed = TopPeerCategory;
+func (m *TLTopPeerCategoryCorrespondents) ToTopPeerCategory() *TopPeerCategory {
+	return &TopPeerCategory{
+		Payload: &TopPeerCategory_TopPeerCategoryCorrespondents{
+			TopPeerCategoryCorrespondents: &TLTopPeerCategoryCorrespondents{},
+		},
+	}
+}
+
 func (m *TLTopPeerCategoryCorrespondents) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_topPeerCategoryCorrespondents))
@@ -27254,6 +31166,14 @@ func (m *TLTopPeerCategoryCorrespondents) Decode(dbuf *DecodeBuf) error {
 }
 
 // topPeerCategoryGroups#bd17a14a = TopPeerCategory;
+func (m *TLTopPeerCategoryGroups) ToTopPeerCategory() *TopPeerCategory {
+	return &TopPeerCategory{
+		Payload: &TopPeerCategory_TopPeerCategoryGroups{
+			TopPeerCategoryGroups: &TLTopPeerCategoryGroups{},
+		},
+	}
+}
+
 func (m *TLTopPeerCategoryGroups) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_topPeerCategoryGroups))
@@ -27265,6 +31185,14 @@ func (m *TLTopPeerCategoryGroups) Decode(dbuf *DecodeBuf) error {
 }
 
 // topPeerCategoryChannels#161d9628 = TopPeerCategory;
+func (m *TLTopPeerCategoryChannels) ToTopPeerCategory() *TopPeerCategory {
+	return &TopPeerCategory{
+		Payload: &TopPeerCategory_TopPeerCategoryChannels{
+			TopPeerCategoryChannels: &TLTopPeerCategoryChannels{},
+		},
+	}
+}
+
 func (m *TLTopPeerCategoryChannels) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_topPeerCategoryChannels))
@@ -27276,6 +31204,14 @@ func (m *TLTopPeerCategoryChannels) Decode(dbuf *DecodeBuf) error {
 }
 
 // topPeerCategoryPhoneCalls#1e76a78c = TopPeerCategory;
+func (m *TLTopPeerCategoryPhoneCalls) ToTopPeerCategory() *TopPeerCategory {
+	return &TopPeerCategory{
+		Payload: &TopPeerCategory_TopPeerCategoryPhoneCalls{
+			TopPeerCategoryPhoneCalls: &TLTopPeerCategoryPhoneCalls{},
+		},
+	}
+}
+
 func (m *TLTopPeerCategoryPhoneCalls) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_topPeerCategoryPhoneCalls))
@@ -27287,6 +31223,14 @@ func (m *TLTopPeerCategoryPhoneCalls) Decode(dbuf *DecodeBuf) error {
 }
 
 // topPeerCategoryPeers#fb834291 category:TopPeerCategory count:int peers:Vector<TopPeer> = TopPeerCategoryPeers;
+func (m *TLTopPeerCategoryPeers) ToTopPeerCategoryPeers() *TopPeerCategoryPeers {
+	return &TopPeerCategoryPeers{
+		Payload: &TopPeerCategoryPeers_TopPeerCategoryPeers{
+			TopPeerCategoryPeers: &TLTopPeerCategoryPeers{},
+		},
+	}
+}
+
 func (m *TLTopPeerCategoryPeers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_topPeerCategoryPeers))
@@ -27325,6 +31269,14 @@ func (m *TLTopPeerCategoryPeers) Decode(dbuf *DecodeBuf) error {
 }
 
 // contacts.topPeersNotModified#de266ef5 = contacts.TopPeers;
+func (m *TLContactsTopPeersNotModified) ToContacts_TopPeers() *Contacts_TopPeers {
+	return &Contacts_TopPeers{
+		Payload: &Contacts_TopPeers_ContactsTopPeersNotModified{
+			ContactsTopPeersNotModified: &TLContactsTopPeersNotModified{},
+		},
+	}
+}
+
 func (m *TLContactsTopPeersNotModified) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_topPeersNotModified))
@@ -27336,6 +31288,14 @@ func (m *TLContactsTopPeersNotModified) Decode(dbuf *DecodeBuf) error {
 }
 
 // contacts.topPeers#70b772a8 categories:Vector<TopPeerCategoryPeers> chats:Vector<Chat> users:Vector<User> = contacts.TopPeers;
+func (m *TLContactsTopPeers) ToContacts_TopPeers() *Contacts_TopPeers {
+	return &Contacts_TopPeers{
+		Payload: &Contacts_TopPeers_ContactsTopPeers{
+			ContactsTopPeers: &TLContactsTopPeers{},
+		},
+	}
+}
+
 func (m *TLContactsTopPeers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_contacts_topPeers))
@@ -27410,6 +31370,14 @@ func (m *TLContactsTopPeers) Decode(dbuf *DecodeBuf) error {
 }
 
 // draftMessageEmpty#ba4baec5 = DraftMessage;
+func (m *TLDraftMessageEmpty) ToDraftMessage() *DraftMessage {
+	return &DraftMessage{
+		Payload: &DraftMessage_DraftMessageEmpty{
+			DraftMessageEmpty: &TLDraftMessageEmpty{},
+		},
+	}
+}
+
 func (m *TLDraftMessageEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_draftMessageEmpty))
@@ -27421,6 +31389,14 @@ func (m *TLDraftMessageEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // draftMessage#fd8e711f flags:# no_webpage:flags.1?true reply_to_msg_id:flags.0?int message:string entities:flags.3?Vector<MessageEntity> date:int = DraftMessage;
+func (m *TLDraftMessage) ToDraftMessage() *DraftMessage {
+	return &DraftMessage{
+		Payload: &DraftMessage_DraftMessage{
+			DraftMessage: &TLDraftMessage{},
+		},
+	}
+}
+
 func (m *TLDraftMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_draftMessage))
@@ -27487,6 +31463,14 @@ func (m *TLDraftMessage) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.featuredStickersNotModified#4ede3cf = messages.FeaturedStickers;
+func (m *TLMessagesFeaturedStickersNotModified) ToMessages_FeaturedStickers() *Messages_FeaturedStickers {
+	return &Messages_FeaturedStickers{
+		Payload: &Messages_FeaturedStickers_MessagesFeaturedStickersNotModified{
+			MessagesFeaturedStickersNotModified: &TLMessagesFeaturedStickersNotModified{},
+		},
+	}
+}
+
 func (m *TLMessagesFeaturedStickersNotModified) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_featuredStickersNotModified))
@@ -27498,6 +31482,14 @@ func (m *TLMessagesFeaturedStickersNotModified) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.featuredStickers#f89d88e5 hash:int sets:Vector<StickerSetCovered> unread:Vector<long> = messages.FeaturedStickers;
+func (m *TLMessagesFeaturedStickers) ToMessages_FeaturedStickers() *Messages_FeaturedStickers {
+	return &Messages_FeaturedStickers{
+		Payload: &Messages_FeaturedStickers_MessagesFeaturedStickers{
+			MessagesFeaturedStickers: &TLMessagesFeaturedStickers{},
+		},
+	}
+}
+
 func (m *TLMessagesFeaturedStickers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_featuredStickers))
@@ -27534,6 +31526,14 @@ func (m *TLMessagesFeaturedStickers) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.recentStickersNotModified#b17f890 = messages.RecentStickers;
+func (m *TLMessagesRecentStickersNotModified) ToMessages_RecentStickers() *Messages_RecentStickers {
+	return &Messages_RecentStickers{
+		Payload: &Messages_RecentStickers_MessagesRecentStickersNotModified{
+			MessagesRecentStickersNotModified: &TLMessagesRecentStickersNotModified{},
+		},
+	}
+}
+
 func (m *TLMessagesRecentStickersNotModified) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_recentStickersNotModified))
@@ -27545,6 +31545,14 @@ func (m *TLMessagesRecentStickersNotModified) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.recentStickers#5ce20970 hash:int stickers:Vector<Document> = messages.RecentStickers;
+func (m *TLMessagesRecentStickers) ToMessages_RecentStickers() *Messages_RecentStickers {
+	return &Messages_RecentStickers{
+		Payload: &Messages_RecentStickers_MessagesRecentStickers{
+			MessagesRecentStickers: &TLMessagesRecentStickers{},
+		},
+	}
+}
+
 func (m *TLMessagesRecentStickers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_recentStickers))
@@ -27579,6 +31587,14 @@ func (m *TLMessagesRecentStickers) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.archivedStickers#4fcba9c8 count:int sets:Vector<StickerSetCovered> = messages.ArchivedStickers;
+func (m *TLMessagesArchivedStickers) ToMessages_ArchivedStickers() *Messages_ArchivedStickers {
+	return &Messages_ArchivedStickers{
+		Payload: &Messages_ArchivedStickers_MessagesArchivedStickers{
+			MessagesArchivedStickers: &TLMessagesArchivedStickers{},
+		},
+	}
+}
+
 func (m *TLMessagesArchivedStickers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_archivedStickers))
@@ -27613,6 +31629,14 @@ func (m *TLMessagesArchivedStickers) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.stickerSetInstallResultSuccess#38641628 = messages.StickerSetInstallResult;
+func (m *TLMessagesStickerSetInstallResultSuccess) ToMessages_StickerSetInstallResult() *Messages_StickerSetInstallResult {
+	return &Messages_StickerSetInstallResult{
+		Payload: &Messages_StickerSetInstallResult_MessagesStickerSetInstallResultSuccess{
+			MessagesStickerSetInstallResultSuccess: &TLMessagesStickerSetInstallResultSuccess{},
+		},
+	}
+}
+
 func (m *TLMessagesStickerSetInstallResultSuccess) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_stickerSetInstallResultSuccess))
@@ -27624,6 +31648,14 @@ func (m *TLMessagesStickerSetInstallResultSuccess) Decode(dbuf *DecodeBuf) error
 }
 
 // messages.stickerSetInstallResultArchive#35e410a8 sets:Vector<StickerSetCovered> = messages.StickerSetInstallResult;
+func (m *TLMessagesStickerSetInstallResultArchive) ToMessages_StickerSetInstallResult() *Messages_StickerSetInstallResult {
+	return &Messages_StickerSetInstallResult{
+		Payload: &Messages_StickerSetInstallResult_MessagesStickerSetInstallResultArchive{
+			MessagesStickerSetInstallResultArchive: &TLMessagesStickerSetInstallResultArchive{},
+		},
+	}
+}
+
 func (m *TLMessagesStickerSetInstallResultArchive) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_stickerSetInstallResultArchive))
@@ -27656,6 +31688,14 @@ func (m *TLMessagesStickerSetInstallResultArchive) Decode(dbuf *DecodeBuf) error
 }
 
 // stickerSetCovered#6410a5d2 set:StickerSet cover:Document = StickerSetCovered;
+func (m *TLStickerSetCovered) ToStickerSetCovered() *StickerSetCovered {
+	return &StickerSetCovered{
+		Payload: &StickerSetCovered_StickerSetCovered{
+			StickerSetCovered: &TLStickerSetCovered{},
+		},
+	}
+}
+
 func (m *TLStickerSetCovered) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_stickerSetCovered))
@@ -27675,6 +31715,14 @@ func (m *TLStickerSetCovered) Decode(dbuf *DecodeBuf) error {
 }
 
 // stickerSetMultiCovered#3407e51b set:StickerSet covers:Vector<Document> = StickerSetCovered;
+func (m *TLStickerSetMultiCovered) ToStickerSetCovered() *StickerSetCovered {
+	return &StickerSetCovered{
+		Payload: &StickerSetCovered_StickerSetMultiCovered{
+			StickerSetMultiCovered: &TLStickerSetMultiCovered{},
+		},
+	}
+}
+
 func (m *TLStickerSetMultiCovered) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_stickerSetMultiCovered))
@@ -27711,6 +31759,14 @@ func (m *TLStickerSetMultiCovered) Decode(dbuf *DecodeBuf) error {
 }
 
 // maskCoords#aed6dbb2 n:int x:double y:double zoom:double = MaskCoords;
+func (m *TLMaskCoords) ToMaskCoords() *MaskCoords {
+	return &MaskCoords{
+		Payload: &MaskCoords_MaskCoords{
+			MaskCoords: &TLMaskCoords{},
+		},
+	}
+}
+
 func (m *TLMaskCoords) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_maskCoords))
@@ -27730,6 +31786,14 @@ func (m *TLMaskCoords) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputStickeredMediaPhoto#4a992157 id:InputPhoto = InputStickeredMedia;
+func (m *TLInputStickeredMediaPhoto) ToInputStickeredMedia() *InputStickeredMedia {
+	return &InputStickeredMedia{
+		Payload: &InputStickeredMedia_InputStickeredMediaPhoto{
+			InputStickeredMediaPhoto: &TLInputStickeredMediaPhoto{},
+		},
+	}
+}
+
 func (m *TLInputStickeredMediaPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputStickeredMediaPhoto))
@@ -27745,6 +31809,14 @@ func (m *TLInputStickeredMediaPhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputStickeredMediaDocument#438865b id:InputDocument = InputStickeredMedia;
+func (m *TLInputStickeredMediaDocument) ToInputStickeredMedia() *InputStickeredMedia {
+	return &InputStickeredMedia{
+		Payload: &InputStickeredMedia_InputStickeredMediaDocument{
+			InputStickeredMediaDocument: &TLInputStickeredMediaDocument{},
+		},
+	}
+}
+
 func (m *TLInputStickeredMediaDocument) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputStickeredMediaDocument))
@@ -27760,6 +31832,14 @@ func (m *TLInputStickeredMediaDocument) Decode(dbuf *DecodeBuf) error {
 }
 
 // game#bdf9653b flags:# id:long access_hash:long short_name:string title:string description:string photo:Photo document:flags.0?Document = Game;
+func (m *TLGame) ToGame() *Game {
+	return &Game{
+		Payload: &Game_Game{
+			Game: &TLGame{},
+		},
+	}
+}
+
 func (m *TLGame) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_game))
@@ -27801,6 +31881,14 @@ func (m *TLGame) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputGameID#32c3e77 id:long access_hash:long = InputGame;
+func (m *TLInputGameID) ToInputGame() *InputGame {
+	return &InputGame{
+		Payload: &InputGame_InputGameID{
+			InputGameID: &TLInputGameID{},
+		},
+	}
+}
+
 func (m *TLInputGameID) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputGameID))
@@ -27816,6 +31904,14 @@ func (m *TLInputGameID) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputGameShortName#c331e80a bot_id:InputUser short_name:string = InputGame;
+func (m *TLInputGameShortName) ToInputGame() *InputGame {
+	return &InputGame{
+		Payload: &InputGame_InputGameShortName{
+			InputGameShortName: &TLInputGameShortName{},
+		},
+	}
+}
+
 func (m *TLInputGameShortName) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputGameShortName))
@@ -27833,6 +31929,14 @@ func (m *TLInputGameShortName) Decode(dbuf *DecodeBuf) error {
 }
 
 // highScore#58fffcd0 pos:int user_id:int score:int = HighScore;
+func (m *TLHighScore) ToHighScore() *HighScore {
+	return &HighScore{
+		Payload: &HighScore_HighScore{
+			HighScore: &TLHighScore{},
+		},
+	}
+}
+
 func (m *TLHighScore) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_highScore))
@@ -27850,6 +31954,14 @@ func (m *TLHighScore) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.highScores#9a3bfd99 scores:Vector<HighScore> users:Vector<User> = messages.HighScores;
+func (m *TLMessagesHighScores) ToMessages_HighScores() *Messages_HighScores {
+	return &Messages_HighScores{
+		Payload: &Messages_HighScores_MessagesHighScores{
+			MessagesHighScores: &TLMessagesHighScores{},
+		},
+	}
+}
+
 func (m *TLMessagesHighScores) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_highScores))
@@ -27903,6 +32015,14 @@ func (m *TLMessagesHighScores) Decode(dbuf *DecodeBuf) error {
 }
 
 // textEmpty#dc3d824f = RichText;
+func (m *TLTextEmpty) ToRichText() *RichText {
+	return &RichText{
+		Payload: &RichText_TextEmpty{
+			TextEmpty: &TLTextEmpty{},
+		},
+	}
+}
+
 func (m *TLTextEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_textEmpty))
@@ -27914,6 +32034,14 @@ func (m *TLTextEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // textPlain#744694e0 text:string = RichText;
+func (m *TLTextPlain) ToRichText() *RichText {
+	return &RichText{
+		Payload: &RichText_TextPlain{
+			TextPlain: &TLTextPlain{},
+		},
+	}
+}
+
 func (m *TLTextPlain) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_textPlain))
@@ -27927,6 +32055,14 @@ func (m *TLTextPlain) Decode(dbuf *DecodeBuf) error {
 }
 
 // textBold#6724abc4 text:RichText = RichText;
+func (m *TLTextBold) ToRichText() *RichText {
+	return &RichText{
+		Payload: &RichText_TextBold{
+			TextBold: &TLTextBold{},
+		},
+	}
+}
+
 func (m *TLTextBold) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_textBold))
@@ -27942,6 +32078,14 @@ func (m *TLTextBold) Decode(dbuf *DecodeBuf) error {
 }
 
 // textItalic#d912a59c text:RichText = RichText;
+func (m *TLTextItalic) ToRichText() *RichText {
+	return &RichText{
+		Payload: &RichText_TextItalic{
+			TextItalic: &TLTextItalic{},
+		},
+	}
+}
+
 func (m *TLTextItalic) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_textItalic))
@@ -27957,6 +32101,14 @@ func (m *TLTextItalic) Decode(dbuf *DecodeBuf) error {
 }
 
 // textUnderline#c12622c4 text:RichText = RichText;
+func (m *TLTextUnderline) ToRichText() *RichText {
+	return &RichText{
+		Payload: &RichText_TextUnderline{
+			TextUnderline: &TLTextUnderline{},
+		},
+	}
+}
+
 func (m *TLTextUnderline) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_textUnderline))
@@ -27972,6 +32124,14 @@ func (m *TLTextUnderline) Decode(dbuf *DecodeBuf) error {
 }
 
 // textStrike#9bf8bb95 text:RichText = RichText;
+func (m *TLTextStrike) ToRichText() *RichText {
+	return &RichText{
+		Payload: &RichText_TextStrike{
+			TextStrike: &TLTextStrike{},
+		},
+	}
+}
+
 func (m *TLTextStrike) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_textStrike))
@@ -27987,6 +32147,14 @@ func (m *TLTextStrike) Decode(dbuf *DecodeBuf) error {
 }
 
 // textFixed#6c3f19b9 text:RichText = RichText;
+func (m *TLTextFixed) ToRichText() *RichText {
+	return &RichText{
+		Payload: &RichText_TextFixed{
+			TextFixed: &TLTextFixed{},
+		},
+	}
+}
+
 func (m *TLTextFixed) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_textFixed))
@@ -28002,6 +32170,14 @@ func (m *TLTextFixed) Decode(dbuf *DecodeBuf) error {
 }
 
 // textUrl#3c2884c1 text:RichText url:string webpage_id:long = RichText;
+func (m *TLTextUrl) ToRichText() *RichText {
+	return &RichText{
+		Payload: &RichText_TextUrl{
+			TextUrl: &TLTextUrl{},
+		},
+	}
+}
+
 func (m *TLTextUrl) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_textUrl))
@@ -28021,6 +32197,14 @@ func (m *TLTextUrl) Decode(dbuf *DecodeBuf) error {
 }
 
 // textEmail#de5a0dd6 text:RichText email:string = RichText;
+func (m *TLTextEmail) ToRichText() *RichText {
+	return &RichText{
+		Payload: &RichText_TextEmail{
+			TextEmail: &TLTextEmail{},
+		},
+	}
+}
+
 func (m *TLTextEmail) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_textEmail))
@@ -28038,6 +32222,14 @@ func (m *TLTextEmail) Decode(dbuf *DecodeBuf) error {
 }
 
 // textConcat#7e6260d7 texts:Vector<RichText> = RichText;
+func (m *TLTextConcat) ToRichText() *RichText {
+	return &RichText{
+		Payload: &RichText_TextConcat{
+			TextConcat: &TLTextConcat{},
+		},
+	}
+}
+
 func (m *TLTextConcat) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_textConcat))
@@ -28070,6 +32262,14 @@ func (m *TLTextConcat) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockUnsupported#13567e8a = PageBlock;
+func (m *TLPageBlockUnsupported) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockUnsupported{
+			PageBlockUnsupported: &TLPageBlockUnsupported{},
+		},
+	}
+}
+
 func (m *TLPageBlockUnsupported) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockUnsupported))
@@ -28081,6 +32281,14 @@ func (m *TLPageBlockUnsupported) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockTitle#70abc3fd text:RichText = PageBlock;
+func (m *TLPageBlockTitle) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockTitle{
+			PageBlockTitle: &TLPageBlockTitle{},
+		},
+	}
+}
+
 func (m *TLPageBlockTitle) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockTitle))
@@ -28096,6 +32304,14 @@ func (m *TLPageBlockTitle) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockSubtitle#8ffa9a1f text:RichText = PageBlock;
+func (m *TLPageBlockSubtitle) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockSubtitle{
+			PageBlockSubtitle: &TLPageBlockSubtitle{},
+		},
+	}
+}
+
 func (m *TLPageBlockSubtitle) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockSubtitle))
@@ -28111,6 +32327,14 @@ func (m *TLPageBlockSubtitle) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockAuthorDate#baafe5e0 author:RichText published_date:int = PageBlock;
+func (m *TLPageBlockAuthorDate) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockAuthorDate{
+			PageBlockAuthorDate: &TLPageBlockAuthorDate{},
+		},
+	}
+}
+
 func (m *TLPageBlockAuthorDate) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockAuthorDate))
@@ -28128,6 +32352,14 @@ func (m *TLPageBlockAuthorDate) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockHeader#bfd064ec text:RichText = PageBlock;
+func (m *TLPageBlockHeader) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockHeader{
+			PageBlockHeader: &TLPageBlockHeader{},
+		},
+	}
+}
+
 func (m *TLPageBlockHeader) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockHeader))
@@ -28143,6 +32375,14 @@ func (m *TLPageBlockHeader) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockSubheader#f12bb6e1 text:RichText = PageBlock;
+func (m *TLPageBlockSubheader) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockSubheader{
+			PageBlockSubheader: &TLPageBlockSubheader{},
+		},
+	}
+}
+
 func (m *TLPageBlockSubheader) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockSubheader))
@@ -28158,6 +32398,14 @@ func (m *TLPageBlockSubheader) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockParagraph#467a0766 text:RichText = PageBlock;
+func (m *TLPageBlockParagraph) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockParagraph{
+			PageBlockParagraph: &TLPageBlockParagraph{},
+		},
+	}
+}
+
 func (m *TLPageBlockParagraph) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockParagraph))
@@ -28173,6 +32421,14 @@ func (m *TLPageBlockParagraph) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockPreformatted#c070d93e text:RichText language:string = PageBlock;
+func (m *TLPageBlockPreformatted) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockPreformatted{
+			PageBlockPreformatted: &TLPageBlockPreformatted{},
+		},
+	}
+}
+
 func (m *TLPageBlockPreformatted) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockPreformatted))
@@ -28190,6 +32446,14 @@ func (m *TLPageBlockPreformatted) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockFooter#48870999 text:RichText = PageBlock;
+func (m *TLPageBlockFooter) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockFooter{
+			PageBlockFooter: &TLPageBlockFooter{},
+		},
+	}
+}
+
 func (m *TLPageBlockFooter) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockFooter))
@@ -28205,6 +32469,14 @@ func (m *TLPageBlockFooter) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockDivider#db20b188 = PageBlock;
+func (m *TLPageBlockDivider) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockDivider{
+			PageBlockDivider: &TLPageBlockDivider{},
+		},
+	}
+}
+
 func (m *TLPageBlockDivider) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockDivider))
@@ -28216,6 +32488,14 @@ func (m *TLPageBlockDivider) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockAnchor#ce0d37b0 name:string = PageBlock;
+func (m *TLPageBlockAnchor) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockAnchor{
+			PageBlockAnchor: &TLPageBlockAnchor{},
+		},
+	}
+}
+
 func (m *TLPageBlockAnchor) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockAnchor))
@@ -28229,6 +32509,14 @@ func (m *TLPageBlockAnchor) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockList#3a58c7f4 ordered:Bool items:Vector<RichText> = PageBlock;
+func (m *TLPageBlockList) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockList{
+			PageBlockList: &TLPageBlockList{},
+		},
+	}
+}
+
 func (m *TLPageBlockList) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockList))
@@ -28265,6 +32553,14 @@ func (m *TLPageBlockList) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockBlockquote#263d7c26 text:RichText caption:RichText = PageBlock;
+func (m *TLPageBlockBlockquote) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockBlockquote{
+			PageBlockBlockquote: &TLPageBlockBlockquote{},
+		},
+	}
+}
+
 func (m *TLPageBlockBlockquote) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockBlockquote))
@@ -28284,6 +32580,14 @@ func (m *TLPageBlockBlockquote) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockPullquote#4f4456d3 text:RichText caption:RichText = PageBlock;
+func (m *TLPageBlockPullquote) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockPullquote{
+			PageBlockPullquote: &TLPageBlockPullquote{},
+		},
+	}
+}
+
 func (m *TLPageBlockPullquote) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockPullquote))
@@ -28303,6 +32607,14 @@ func (m *TLPageBlockPullquote) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockPhoto#e9c69982 photo_id:long caption:RichText = PageBlock;
+func (m *TLPageBlockPhoto) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockPhoto{
+			PageBlockPhoto: &TLPageBlockPhoto{},
+		},
+	}
+}
+
 func (m *TLPageBlockPhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockPhoto))
@@ -28320,6 +32632,14 @@ func (m *TLPageBlockPhoto) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockVideo#d9d71866 flags:# autoplay:flags.0?true loop:flags.1?true video_id:long caption:RichText = PageBlock;
+func (m *TLPageBlockVideo) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockVideo{
+			PageBlockVideo: &TLPageBlockVideo{},
+		},
+	}
+}
+
 func (m *TLPageBlockVideo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockVideo))
@@ -28360,6 +32680,14 @@ func (m *TLPageBlockVideo) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockCover#39f23300 cover:PageBlock = PageBlock;
+func (m *TLPageBlockCover) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockCover{
+			PageBlockCover: &TLPageBlockCover{},
+		},
+	}
+}
+
 func (m *TLPageBlockCover) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockCover))
@@ -28375,6 +32703,14 @@ func (m *TLPageBlockCover) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockEmbed#cde200d1 flags:# full_width:flags.0?true allow_scrolling:flags.3?true url:flags.1?string html:flags.2?string poster_photo_id:flags.4?long w:int h:int caption:RichText = PageBlock;
+func (m *TLPageBlockEmbed) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockEmbed{
+			PageBlockEmbed: &TLPageBlockEmbed{},
+		},
+	}
+}
+
 func (m *TLPageBlockEmbed) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockEmbed))
@@ -28444,6 +32780,14 @@ func (m *TLPageBlockEmbed) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockEmbedPost#292c7be9 url:string webpage_id:long author_photo_id:long author:string date:int blocks:Vector<PageBlock> caption:RichText = PageBlock;
+func (m *TLPageBlockEmbedPost) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockEmbedPost{
+			PageBlockEmbedPost: &TLPageBlockEmbedPost{},
+		},
+	}
+}
+
 func (m *TLPageBlockEmbedPost) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockEmbedPost))
@@ -28490,6 +32834,14 @@ func (m *TLPageBlockEmbedPost) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockCollage#8b31c4f items:Vector<PageBlock> caption:RichText = PageBlock;
+func (m *TLPageBlockCollage) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockCollage{
+			PageBlockCollage: &TLPageBlockCollage{},
+		},
+	}
+}
+
 func (m *TLPageBlockCollage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockCollage))
@@ -28526,6 +32878,14 @@ func (m *TLPageBlockCollage) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockSlideshow#130c8963 items:Vector<PageBlock> caption:RichText = PageBlock;
+func (m *TLPageBlockSlideshow) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockSlideshow{
+			PageBlockSlideshow: &TLPageBlockSlideshow{},
+		},
+	}
+}
+
 func (m *TLPageBlockSlideshow) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockSlideshow))
@@ -28562,6 +32922,14 @@ func (m *TLPageBlockSlideshow) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockChannel#ef1751b5 channel:Chat = PageBlock;
+func (m *TLPageBlockChannel) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockChannel{
+			PageBlockChannel: &TLPageBlockChannel{},
+		},
+	}
+}
+
 func (m *TLPageBlockChannel) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockChannel))
@@ -28577,6 +32945,14 @@ func (m *TLPageBlockChannel) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageBlockAudio#31b81a7f audio_id:long caption:RichText = PageBlock;
+func (m *TLPageBlockAudio) ToPageBlock() *PageBlock {
+	return &PageBlock{
+		Payload: &PageBlock_PageBlockAudio{
+			PageBlockAudio: &TLPageBlockAudio{},
+		},
+	}
+}
+
 func (m *TLPageBlockAudio) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageBlockAudio))
@@ -28594,6 +32970,14 @@ func (m *TLPageBlockAudio) Decode(dbuf *DecodeBuf) error {
 }
 
 // pagePart#8e3f9ebe blocks:Vector<PageBlock> photos:Vector<Photo> documents:Vector<Document> = Page;
+func (m *TLPagePart) ToPage() *Page {
+	return &Page{
+		Payload: &Page_PagePart{
+			PagePart: &TLPagePart{},
+		},
+	}
+}
+
 func (m *TLPagePart) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pagePart))
@@ -28668,6 +33052,14 @@ func (m *TLPagePart) Decode(dbuf *DecodeBuf) error {
 }
 
 // pageFull#556ec7aa blocks:Vector<PageBlock> photos:Vector<Photo> documents:Vector<Document> = Page;
+func (m *TLPageFull) ToPage() *Page {
+	return &Page{
+		Payload: &Page_PageFull{
+			PageFull: &TLPageFull{},
+		},
+	}
+}
+
 func (m *TLPageFull) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_pageFull))
@@ -28742,6 +33134,14 @@ func (m *TLPageFull) Decode(dbuf *DecodeBuf) error {
 }
 
 // phoneCallDiscardReasonMissed#85e42301 = PhoneCallDiscardReason;
+func (m *TLPhoneCallDiscardReasonMissed) ToPhoneCallDiscardReason() *PhoneCallDiscardReason {
+	return &PhoneCallDiscardReason{
+		Payload: &PhoneCallDiscardReason_PhoneCallDiscardReasonMissed{
+			PhoneCallDiscardReasonMissed: &TLPhoneCallDiscardReasonMissed{},
+		},
+	}
+}
+
 func (m *TLPhoneCallDiscardReasonMissed) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phoneCallDiscardReasonMissed))
@@ -28753,6 +33153,14 @@ func (m *TLPhoneCallDiscardReasonMissed) Decode(dbuf *DecodeBuf) error {
 }
 
 // phoneCallDiscardReasonDisconnect#e095c1a0 = PhoneCallDiscardReason;
+func (m *TLPhoneCallDiscardReasonDisconnect) ToPhoneCallDiscardReason() *PhoneCallDiscardReason {
+	return &PhoneCallDiscardReason{
+		Payload: &PhoneCallDiscardReason_PhoneCallDiscardReasonDisconnect{
+			PhoneCallDiscardReasonDisconnect: &TLPhoneCallDiscardReasonDisconnect{},
+		},
+	}
+}
+
 func (m *TLPhoneCallDiscardReasonDisconnect) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phoneCallDiscardReasonDisconnect))
@@ -28764,6 +33172,14 @@ func (m *TLPhoneCallDiscardReasonDisconnect) Decode(dbuf *DecodeBuf) error {
 }
 
 // phoneCallDiscardReasonHangup#57adc690 = PhoneCallDiscardReason;
+func (m *TLPhoneCallDiscardReasonHangup) ToPhoneCallDiscardReason() *PhoneCallDiscardReason {
+	return &PhoneCallDiscardReason{
+		Payload: &PhoneCallDiscardReason_PhoneCallDiscardReasonHangup{
+			PhoneCallDiscardReasonHangup: &TLPhoneCallDiscardReasonHangup{},
+		},
+	}
+}
+
 func (m *TLPhoneCallDiscardReasonHangup) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phoneCallDiscardReasonHangup))
@@ -28775,6 +33191,14 @@ func (m *TLPhoneCallDiscardReasonHangup) Decode(dbuf *DecodeBuf) error {
 }
 
 // phoneCallDiscardReasonBusy#faf7e8c9 = PhoneCallDiscardReason;
+func (m *TLPhoneCallDiscardReasonBusy) ToPhoneCallDiscardReason() *PhoneCallDiscardReason {
+	return &PhoneCallDiscardReason{
+		Payload: &PhoneCallDiscardReason_PhoneCallDiscardReasonBusy{
+			PhoneCallDiscardReasonBusy: &TLPhoneCallDiscardReasonBusy{},
+		},
+	}
+}
+
 func (m *TLPhoneCallDiscardReasonBusy) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phoneCallDiscardReasonBusy))
@@ -28786,6 +33210,14 @@ func (m *TLPhoneCallDiscardReasonBusy) Decode(dbuf *DecodeBuf) error {
 }
 
 // dataJSON#7d748d04 data:string = DataJSON;
+func (m *TLDataJSON) ToDataJSON() *DataJSON {
+	return &DataJSON{
+		Payload: &DataJSON_DataJSON{
+			DataJSON: &TLDataJSON{},
+		},
+	}
+}
+
 func (m *TLDataJSON) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_dataJSON))
@@ -28799,6 +33231,14 @@ func (m *TLDataJSON) Decode(dbuf *DecodeBuf) error {
 }
 
 // labeledPrice#cb296bf8 label:string amount:long = LabeledPrice;
+func (m *TLLabeledPrice) ToLabeledPrice() *LabeledPrice {
+	return &LabeledPrice{
+		Payload: &LabeledPrice_LabeledPrice{
+			LabeledPrice: &TLLabeledPrice{},
+		},
+	}
+}
+
 func (m *TLLabeledPrice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_labeledPrice))
@@ -28814,6 +33254,14 @@ func (m *TLLabeledPrice) Decode(dbuf *DecodeBuf) error {
 }
 
 // invoice#c30aa358 flags:# test:flags.0?true name_requested:flags.1?true phone_requested:flags.2?true email_requested:flags.3?true shipping_address_requested:flags.4?true flexible:flags.5?true currency:string prices:Vector<LabeledPrice> = Invoice;
+func (m *TLInvoice) ToInvoice() *Invoice {
+	return &Invoice{
+		Payload: &Invoice_Invoice{
+			Invoice: &TLInvoice{},
+		},
+	}
+}
+
 func (m *TLInvoice) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_invoice))
@@ -28907,6 +33355,14 @@ func (m *TLInvoice) Decode(dbuf *DecodeBuf) error {
 }
 
 // paymentCharge#ea02c27e id:string provider_charge_id:string = PaymentCharge;
+func (m *TLPaymentCharge) ToPaymentCharge() *PaymentCharge {
+	return &PaymentCharge{
+		Payload: &PaymentCharge_PaymentCharge{
+			PaymentCharge: &TLPaymentCharge{},
+		},
+	}
+}
+
 func (m *TLPaymentCharge) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_paymentCharge))
@@ -28922,6 +33378,14 @@ func (m *TLPaymentCharge) Decode(dbuf *DecodeBuf) error {
 }
 
 // postAddress#1e8caaeb street_line1:string street_line2:string city:string state:string country_iso2:string post_code:string = PostAddress;
+func (m *TLPostAddress) ToPostAddress() *PostAddress {
+	return &PostAddress{
+		Payload: &PostAddress_PostAddress{
+			PostAddress: &TLPostAddress{},
+		},
+	}
+}
+
 func (m *TLPostAddress) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_postAddress))
@@ -28945,6 +33409,14 @@ func (m *TLPostAddress) Decode(dbuf *DecodeBuf) error {
 }
 
 // paymentRequestedInfo#909c3f94 flags:# name:flags.0?string phone:flags.1?string email:flags.2?string shipping_address:flags.3?PostAddress = PaymentRequestedInfo;
+func (m *TLPaymentRequestedInfo) ToPaymentRequestedInfo() *PaymentRequestedInfo {
+	return &PaymentRequestedInfo{
+		Payload: &PaymentRequestedInfo_PaymentRequestedInfo{
+			PaymentRequestedInfo: &TLPaymentRequestedInfo{},
+		},
+	}
+}
+
 func (m *TLPaymentRequestedInfo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_paymentRequestedInfo))
@@ -28999,6 +33471,14 @@ func (m *TLPaymentRequestedInfo) Decode(dbuf *DecodeBuf) error {
 }
 
 // paymentSavedCredentialsCard#cdc27a1f id:string title:string = PaymentSavedCredentials;
+func (m *TLPaymentSavedCredentialsCard) ToPaymentSavedCredentials() *PaymentSavedCredentials {
+	return &PaymentSavedCredentials{
+		Payload: &PaymentSavedCredentials_PaymentSavedCredentialsCard{
+			PaymentSavedCredentialsCard: &TLPaymentSavedCredentialsCard{},
+		},
+	}
+}
+
 func (m *TLPaymentSavedCredentialsCard) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_paymentSavedCredentialsCard))
@@ -29014,6 +33494,14 @@ func (m *TLPaymentSavedCredentialsCard) Decode(dbuf *DecodeBuf) error {
 }
 
 // webDocument#c61acbd8 url:string access_hash:long size:int mime_type:string attributes:Vector<DocumentAttribute> dc_id:int = WebDocument;
+func (m *TLWebDocument) ToWebDocument() *WebDocument {
+	return &WebDocument{
+		Payload: &WebDocument_WebDocument{
+			WebDocument: &TLWebDocument{},
+		},
+	}
+}
+
 func (m *TLWebDocument) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_webDocument))
@@ -29056,6 +33544,14 @@ func (m *TLWebDocument) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputWebDocument#9bed434d url:string size:int mime_type:string attributes:Vector<DocumentAttribute> = InputWebDocument;
+func (m *TLInputWebDocument) ToInputWebDocument() *InputWebDocument {
+	return &InputWebDocument{
+		Payload: &InputWebDocument_InputWebDocument{
+			InputWebDocument: &TLInputWebDocument{},
+		},
+	}
+}
+
 func (m *TLInputWebDocument) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputWebDocument))
@@ -29094,6 +33590,14 @@ func (m *TLInputWebDocument) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputWebFileLocation#c239d686 url:string access_hash:long = InputWebFileLocation;
+func (m *TLInputWebFileLocation) ToInputWebFileLocation() *InputWebFileLocation {
+	return &InputWebFileLocation{
+		Payload: &InputWebFileLocation_InputWebFileLocation{
+			InputWebFileLocation: &TLInputWebFileLocation{},
+		},
+	}
+}
+
 func (m *TLInputWebFileLocation) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputWebFileLocation))
@@ -29109,6 +33613,14 @@ func (m *TLInputWebFileLocation) Decode(dbuf *DecodeBuf) error {
 }
 
 // upload.webFile#21e753bc size:int mime_type:string file_type:storage.FileType mtime:int bytes:bytes = upload.WebFile;
+func (m *TLUploadWebFile) ToUpload_WebFile() *Upload_WebFile {
+	return &Upload_WebFile{
+		Payload: &Upload_WebFile_UploadWebFile{
+			UploadWebFile: &TLUploadWebFile{},
+		},
+	}
+}
+
 func (m *TLUploadWebFile) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_upload_webFile))
@@ -29132,6 +33644,14 @@ func (m *TLUploadWebFile) Decode(dbuf *DecodeBuf) error {
 }
 
 // payments.paymentForm#3f56aea3 flags:# can_save_credentials:flags.2?true password_missing:flags.3?true bot_id:int invoice:Invoice provider_id:int url:string native_provider:flags.4?string native_params:flags.4?DataJSON saved_info:flags.0?PaymentRequestedInfo saved_credentials:flags.1?PaymentSavedCredentials users:Vector<User> = payments.PaymentForm;
+func (m *TLPaymentsPaymentForm) ToPayments_PaymentForm() *Payments_PaymentForm {
+	return &Payments_PaymentForm{
+		Payload: &Payments_PaymentForm_PaymentsPaymentForm{
+			PaymentsPaymentForm: &TLPaymentsPaymentForm{},
+		},
+	}
+}
+
 func (m *TLPaymentsPaymentForm) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_payments_paymentForm))
@@ -29239,6 +33759,14 @@ func (m *TLPaymentsPaymentForm) Decode(dbuf *DecodeBuf) error {
 }
 
 // payments.validatedRequestedInfo#d1451883 flags:# id:flags.0?string shipping_options:flags.1?Vector<ShippingOption> = payments.ValidatedRequestedInfo;
+func (m *TLPaymentsValidatedRequestedInfo) ToPayments_ValidatedRequestedInfo() *Payments_ValidatedRequestedInfo {
+	return &Payments_ValidatedRequestedInfo{
+		Payload: &Payments_ValidatedRequestedInfo_PaymentsValidatedRequestedInfo{
+			PaymentsValidatedRequestedInfo: &TLPaymentsValidatedRequestedInfo{},
+		},
+	}
+}
+
 func (m *TLPaymentsValidatedRequestedInfo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_payments_validatedRequestedInfo))
@@ -29292,6 +33820,14 @@ func (m *TLPaymentsValidatedRequestedInfo) Decode(dbuf *DecodeBuf) error {
 }
 
 // payments.paymentResult#4e5f810d updates:Updates = payments.PaymentResult;
+func (m *TLPaymentsPaymentResult) ToPayments_PaymentResult() *Payments_PaymentResult {
+	return &Payments_PaymentResult{
+		Payload: &Payments_PaymentResult_PaymentsPaymentResult{
+			PaymentsPaymentResult: &TLPaymentsPaymentResult{},
+		},
+	}
+}
+
 func (m *TLPaymentsPaymentResult) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_payments_paymentResult))
@@ -29307,6 +33843,14 @@ func (m *TLPaymentsPaymentResult) Decode(dbuf *DecodeBuf) error {
 }
 
 // payments.paymentVerficationNeeded#6b56b921 url:string = payments.PaymentResult;
+func (m *TLPaymentsPaymentVerficationNeeded) ToPayments_PaymentResult() *Payments_PaymentResult {
+	return &Payments_PaymentResult{
+		Payload: &Payments_PaymentResult_PaymentsPaymentVerficationNeeded{
+			PaymentsPaymentVerficationNeeded: &TLPaymentsPaymentVerficationNeeded{},
+		},
+	}
+}
+
 func (m *TLPaymentsPaymentVerficationNeeded) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_payments_paymentVerficationNeeded))
@@ -29320,6 +33864,14 @@ func (m *TLPaymentsPaymentVerficationNeeded) Decode(dbuf *DecodeBuf) error {
 }
 
 // payments.paymentReceipt#500911e1 flags:# date:int bot_id:int invoice:Invoice provider_id:int info:flags.0?PaymentRequestedInfo shipping:flags.1?ShippingOption currency:string total_amount:long credentials_title:string users:Vector<User> = payments.PaymentReceipt;
+func (m *TLPaymentsPaymentReceipt) ToPayments_PaymentReceipt() *Payments_PaymentReceipt {
+	return &Payments_PaymentReceipt{
+		Payload: &Payments_PaymentReceipt_PaymentsPaymentReceipt{
+			PaymentsPaymentReceipt: &TLPaymentsPaymentReceipt{},
+		},
+	}
+}
+
 func (m *TLPaymentsPaymentReceipt) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_payments_paymentReceipt))
@@ -29395,6 +33947,14 @@ func (m *TLPaymentsPaymentReceipt) Decode(dbuf *DecodeBuf) error {
 }
 
 // payments.savedInfo#fb8fe43c flags:# has_saved_credentials:flags.1?true saved_info:flags.0?PaymentRequestedInfo = payments.SavedInfo;
+func (m *TLPaymentsSavedInfo) ToPayments_SavedInfo() *Payments_SavedInfo {
+	return &Payments_SavedInfo{
+		Payload: &Payments_SavedInfo_PaymentsSavedInfo{
+			PaymentsSavedInfo: &TLPaymentsSavedInfo{},
+		},
+	}
+}
+
 func (m *TLPaymentsSavedInfo) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_payments_savedInfo))
@@ -29431,6 +33991,14 @@ func (m *TLPaymentsSavedInfo) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPaymentCredentialsSaved#c10eb2cf id:string tmp_password:bytes = InputPaymentCredentials;
+func (m *TLInputPaymentCredentialsSaved) ToInputPaymentCredentials() *InputPaymentCredentials {
+	return &InputPaymentCredentials{
+		Payload: &InputPaymentCredentials_InputPaymentCredentialsSaved{
+			InputPaymentCredentialsSaved: &TLInputPaymentCredentialsSaved{},
+		},
+	}
+}
+
 func (m *TLInputPaymentCredentialsSaved) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPaymentCredentialsSaved))
@@ -29446,6 +34014,14 @@ func (m *TLInputPaymentCredentialsSaved) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPaymentCredentials#3417d728 flags:# save:flags.0?true data:DataJSON = InputPaymentCredentials;
+func (m *TLInputPaymentCredentials) ToInputPaymentCredentials() *InputPaymentCredentials {
+	return &InputPaymentCredentials{
+		Payload: &InputPaymentCredentials_InputPaymentCredentials{
+			InputPaymentCredentials: &TLInputPaymentCredentials{},
+		},
+	}
+}
+
 func (m *TLInputPaymentCredentials) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPaymentCredentials))
@@ -29475,6 +34051,14 @@ func (m *TLInputPaymentCredentials) Decode(dbuf *DecodeBuf) error {
 }
 
 // account.tmpPassword#db64fd34 tmp_password:bytes valid_until:int = account.TmpPassword;
+func (m *TLAccountTmpPassword) ToAccount_TmpPassword() *Account_TmpPassword {
+	return &Account_TmpPassword{
+		Payload: &Account_TmpPassword_AccountTmpPassword{
+			AccountTmpPassword: &TLAccountTmpPassword{},
+		},
+	}
+}
+
 func (m *TLAccountTmpPassword) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_account_tmpPassword))
@@ -29490,6 +34074,14 @@ func (m *TLAccountTmpPassword) Decode(dbuf *DecodeBuf) error {
 }
 
 // shippingOption#b6213cdf id:string title:string prices:Vector<LabeledPrice> = ShippingOption;
+func (m *TLShippingOption) ToShippingOption() *ShippingOption {
+	return &ShippingOption{
+		Payload: &ShippingOption_ShippingOption{
+			ShippingOption: &TLShippingOption{},
+		},
+	}
+}
+
 func (m *TLShippingOption) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_shippingOption))
@@ -29526,6 +34118,14 @@ func (m *TLShippingOption) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputStickerSetItem#ffa0a496 flags:# document:InputDocument emoji:string mask_coords:flags.0?MaskCoords = InputStickerSetItem;
+func (m *TLInputStickerSetItem) ToInputStickerSetItem() *InputStickerSetItem {
+	return &InputStickerSetItem{
+		Payload: &InputStickerSetItem_InputStickerSetItem{
+			InputStickerSetItem: &TLInputStickerSetItem{},
+		},
+	}
+}
+
 func (m *TLInputStickerSetItem) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputStickerSetItem))
@@ -29559,6 +34159,14 @@ func (m *TLInputStickerSetItem) Decode(dbuf *DecodeBuf) error {
 }
 
 // inputPhoneCall#1e36fded id:long access_hash:long = InputPhoneCall;
+func (m *TLInputPhoneCall) ToInputPhoneCall() *InputPhoneCall {
+	return &InputPhoneCall{
+		Payload: &InputPhoneCall_InputPhoneCall{
+			InputPhoneCall: &TLInputPhoneCall{},
+		},
+	}
+}
+
 func (m *TLInputPhoneCall) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_inputPhoneCall))
@@ -29574,6 +34182,14 @@ func (m *TLInputPhoneCall) Decode(dbuf *DecodeBuf) error {
 }
 
 // phoneCallEmpty#5366c915 id:long = PhoneCall;
+func (m *TLPhoneCallEmpty) ToPhoneCall() *PhoneCall {
+	return &PhoneCall{
+		Payload: &PhoneCall_PhoneCallEmpty{
+			PhoneCallEmpty: &TLPhoneCallEmpty{},
+		},
+	}
+}
+
 func (m *TLPhoneCallEmpty) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phoneCallEmpty))
@@ -29587,6 +34203,14 @@ func (m *TLPhoneCallEmpty) Decode(dbuf *DecodeBuf) error {
 }
 
 // phoneCallWaiting#1b8f4ad1 flags:# id:long access_hash:long date:int admin_id:int participant_id:int protocol:PhoneCallProtocol receive_date:flags.0?int = PhoneCall;
+func (m *TLPhoneCallWaiting) ToPhoneCall() *PhoneCall {
+	return &PhoneCall{
+		Payload: &PhoneCall_PhoneCallWaiting{
+			PhoneCallWaiting: &TLPhoneCallWaiting{},
+		},
+	}
+}
+
 func (m *TLPhoneCallWaiting) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phoneCallWaiting))
@@ -29626,6 +34250,14 @@ func (m *TLPhoneCallWaiting) Decode(dbuf *DecodeBuf) error {
 }
 
 // phoneCallRequested#83761ce4 id:long access_hash:long date:int admin_id:int participant_id:int g_a_hash:bytes protocol:PhoneCallProtocol = PhoneCall;
+func (m *TLPhoneCallRequested) ToPhoneCall() *PhoneCall {
+	return &PhoneCall{
+		Payload: &PhoneCall_PhoneCallRequested{
+			PhoneCallRequested: &TLPhoneCallRequested{},
+		},
+	}
+}
+
 func (m *TLPhoneCallRequested) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phoneCallRequested))
@@ -29653,6 +34285,14 @@ func (m *TLPhoneCallRequested) Decode(dbuf *DecodeBuf) error {
 }
 
 // phoneCallAccepted#6d003d3f id:long access_hash:long date:int admin_id:int participant_id:int g_b:bytes protocol:PhoneCallProtocol = PhoneCall;
+func (m *TLPhoneCallAccepted) ToPhoneCall() *PhoneCall {
+	return &PhoneCall{
+		Payload: &PhoneCall_PhoneCallAccepted{
+			PhoneCallAccepted: &TLPhoneCallAccepted{},
+		},
+	}
+}
+
 func (m *TLPhoneCallAccepted) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phoneCallAccepted))
@@ -29680,6 +34320,14 @@ func (m *TLPhoneCallAccepted) Decode(dbuf *DecodeBuf) error {
 }
 
 // phoneCall#ffe6ab67 id:long access_hash:long date:int admin_id:int participant_id:int g_a_or_b:bytes key_fingerprint:long protocol:PhoneCallProtocol connection:PhoneConnection alternative_connections:Vector<PhoneConnection> start_date:int = PhoneCall;
+func (m *TLPhoneCall) ToPhoneCall() *PhoneCall {
+	return &PhoneCall{
+		Payload: &PhoneCall_PhoneCall{
+			PhoneCall: &TLPhoneCall{},
+		},
+	}
+}
+
 func (m *TLPhoneCall) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phoneCall))
@@ -29736,6 +34384,14 @@ func (m *TLPhoneCall) Decode(dbuf *DecodeBuf) error {
 }
 
 // phoneCallDiscarded#50ca4de1 flags:# need_rating:flags.2?true need_debug:flags.3?true id:long reason:flags.0?PhoneCallDiscardReason duration:flags.1?int = PhoneCall;
+func (m *TLPhoneCallDiscarded) ToPhoneCall() *PhoneCall {
+	return &PhoneCall{
+		Payload: &PhoneCall_PhoneCallDiscarded{
+			PhoneCallDiscarded: &TLPhoneCallDiscarded{},
+		},
+	}
+}
+
 func (m *TLPhoneCallDiscarded) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phoneCallDiscarded))
@@ -29792,6 +34448,14 @@ func (m *TLPhoneCallDiscarded) Decode(dbuf *DecodeBuf) error {
 }
 
 // phoneConnection#9d4c17c0 id:long ip:string ipv6:string port:int peer_tag:bytes = PhoneConnection;
+func (m *TLPhoneConnection) ToPhoneConnection() *PhoneConnection {
+	return &PhoneConnection{
+		Payload: &PhoneConnection_PhoneConnection{
+			PhoneConnection: &TLPhoneConnection{},
+		},
+	}
+}
+
 func (m *TLPhoneConnection) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phoneConnection))
@@ -29813,6 +34477,14 @@ func (m *TLPhoneConnection) Decode(dbuf *DecodeBuf) error {
 }
 
 // phoneCallProtocol#a2bb35cb flags:# udp_p2p:flags.0?true udp_reflector:flags.1?true min_layer:int max_layer:int = PhoneCallProtocol;
+func (m *TLPhoneCallProtocol) ToPhoneCallProtocol() *PhoneCallProtocol {
+	return &PhoneCallProtocol{
+		Payload: &PhoneCallProtocol_PhoneCallProtocol{
+			PhoneCallProtocol: &TLPhoneCallProtocol{},
+		},
+	}
+}
+
 func (m *TLPhoneCallProtocol) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phoneCallProtocol))
@@ -29851,6 +34523,14 @@ func (m *TLPhoneCallProtocol) Decode(dbuf *DecodeBuf) error {
 }
 
 // phone.phoneCall#ec82e140 phone_call:PhoneCall users:Vector<User> = phone.PhoneCall;
+func (m *TLPhonePhoneCall) ToPhone_PhoneCall() *Phone_PhoneCall {
+	return &Phone_PhoneCall{
+		Payload: &Phone_PhoneCall_PhonePhoneCall{
+			PhonePhoneCall: &TLPhonePhoneCall{},
+		},
+	}
+}
+
 func (m *TLPhonePhoneCall) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_phone_phoneCall))
@@ -29887,6 +34567,14 @@ func (m *TLPhonePhoneCall) Decode(dbuf *DecodeBuf) error {
 }
 
 // upload.cdnFileReuploadNeeded#eea8e46e request_token:bytes = upload.CdnFile;
+func (m *TLUploadCdnFileReuploadNeeded) ToUpload_CdnFile() *Upload_CdnFile {
+	return &Upload_CdnFile{
+		Payload: &Upload_CdnFile_UploadCdnFileReuploadNeeded{
+			UploadCdnFileReuploadNeeded: &TLUploadCdnFileReuploadNeeded{},
+		},
+	}
+}
+
 func (m *TLUploadCdnFileReuploadNeeded) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_upload_cdnFileReuploadNeeded))
@@ -29900,6 +34588,14 @@ func (m *TLUploadCdnFileReuploadNeeded) Decode(dbuf *DecodeBuf) error {
 }
 
 // upload.cdnFile#a99fca4f bytes:bytes = upload.CdnFile;
+func (m *TLUploadCdnFile) ToUpload_CdnFile() *Upload_CdnFile {
+	return &Upload_CdnFile{
+		Payload: &Upload_CdnFile_UploadCdnFile{
+			UploadCdnFile: &TLUploadCdnFile{},
+		},
+	}
+}
+
 func (m *TLUploadCdnFile) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_upload_cdnFile))
@@ -29913,6 +34609,14 @@ func (m *TLUploadCdnFile) Decode(dbuf *DecodeBuf) error {
 }
 
 // cdnPublicKey#c982eaba dc_id:int public_key:string = CdnPublicKey;
+func (m *TLCdnPublicKey) ToCdnPublicKey() *CdnPublicKey {
+	return &CdnPublicKey{
+		Payload: &CdnPublicKey_CdnPublicKey{
+			CdnPublicKey: &TLCdnPublicKey{},
+		},
+	}
+}
+
 func (m *TLCdnPublicKey) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_cdnPublicKey))
@@ -29928,6 +34632,14 @@ func (m *TLCdnPublicKey) Decode(dbuf *DecodeBuf) error {
 }
 
 // cdnConfig#5725e40a public_keys:Vector<CdnPublicKey> = CdnConfig;
+func (m *TLCdnConfig) ToCdnConfig() *CdnConfig {
+	return &CdnConfig{
+		Payload: &CdnConfig_CdnConfig{
+			CdnConfig: &TLCdnConfig{},
+		},
+	}
+}
+
 func (m *TLCdnConfig) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_cdnConfig))
@@ -29960,6 +34672,14 @@ func (m *TLCdnConfig) Decode(dbuf *DecodeBuf) error {
 }
 
 // langPackString#cad181f6 key:string value:string = LangPackString;
+func (m *TLLangPackString) ToLangPackString() *LangPackString {
+	return &LangPackString{
+		Payload: &LangPackString_LangPackString{
+			LangPackString: &TLLangPackString{},
+		},
+	}
+}
+
 func (m *TLLangPackString) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_langPackString))
@@ -29975,6 +34695,14 @@ func (m *TLLangPackString) Decode(dbuf *DecodeBuf) error {
 }
 
 // langPackStringPluralized#6c47ac9f flags:# key:string zero_value:flags.0?string one_value:flags.1?string two_value:flags.2?string few_value:flags.3?string many_value:flags.4?string other_value:string = LangPackString;
+func (m *TLLangPackStringPluralized) ToLangPackString() *LangPackString {
+	return &LangPackString{
+		Payload: &LangPackString_LangPackStringPluralized{
+			LangPackStringPluralized: &TLLangPackStringPluralized{},
+		},
+	}
+}
+
 func (m *TLLangPackStringPluralized) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_langPackStringPluralized))
@@ -30040,6 +34768,14 @@ func (m *TLLangPackStringPluralized) Decode(dbuf *DecodeBuf) error {
 }
 
 // langPackStringDeleted#2979eeb2 key:string = LangPackString;
+func (m *TLLangPackStringDeleted) ToLangPackString() *LangPackString {
+	return &LangPackString{
+		Payload: &LangPackString_LangPackStringDeleted{
+			LangPackStringDeleted: &TLLangPackStringDeleted{},
+		},
+	}
+}
+
 func (m *TLLangPackStringDeleted) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_langPackStringDeleted))
@@ -30053,6 +34789,14 @@ func (m *TLLangPackStringDeleted) Decode(dbuf *DecodeBuf) error {
 }
 
 // langPackDifference#f385c1f6 lang_code:string from_version:int version:int strings:Vector<LangPackString> = LangPackDifference;
+func (m *TLLangPackDifference) ToLangPackDifference() *LangPackDifference {
+	return &LangPackDifference{
+		Payload: &LangPackDifference_LangPackDifference{
+			LangPackDifference: &TLLangPackDifference{},
+		},
+	}
+}
+
 func (m *TLLangPackDifference) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_langPackDifference))
@@ -30091,6 +34835,14 @@ func (m *TLLangPackDifference) Decode(dbuf *DecodeBuf) error {
 }
 
 // langPackLanguage#117698f1 name:string native_name:string lang_code:string = LangPackLanguage;
+func (m *TLLangPackLanguage) ToLangPackLanguage() *LangPackLanguage {
+	return &LangPackLanguage{
+		Payload: &LangPackLanguage_LangPackLanguage{
+			LangPackLanguage: &TLLangPackLanguage{},
+		},
+	}
+}
+
 func (m *TLLangPackLanguage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_langPackLanguage))
@@ -30108,6 +34860,14 @@ func (m *TLLangPackLanguage) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelAdminRights#5d7ceba5 flags:# change_info:flags.0?true post_messages:flags.1?true edit_messages:flags.2?true delete_messages:flags.3?true ban_users:flags.4?true invite_users:flags.5?true invite_link:flags.6?true pin_messages:flags.7?true add_admins:flags.9?true = ChannelAdminRights;
+func (m *TLChannelAdminRights) ToChannelAdminRights() *ChannelAdminRights {
+	return &ChannelAdminRights{
+		Payload: &ChannelAdminRights_ChannelAdminRights{
+			ChannelAdminRights: &TLChannelAdminRights{},
+		},
+	}
+}
+
 func (m *TLChannelAdminRights) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminRights))
@@ -30205,6 +34965,14 @@ func (m *TLChannelAdminRights) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelBannedRights#58cf4249 flags:# view_messages:flags.0?true send_messages:flags.1?true send_media:flags.2?true send_stickers:flags.3?true send_gifs:flags.4?true send_games:flags.5?true send_inline:flags.6?true embed_links:flags.7?true until_date:int = ChannelBannedRights;
+func (m *TLChannelBannedRights) ToChannelBannedRights() *ChannelBannedRights {
+	return &ChannelBannedRights{
+		Payload: &ChannelBannedRights_ChannelBannedRights{
+			ChannelBannedRights: &TLChannelBannedRights{},
+		},
+	}
+}
+
 func (m *TLChannelBannedRights) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelBannedRights))
@@ -30295,6 +35063,14 @@ func (m *TLChannelBannedRights) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelAdminLogEventActionChangeTitle#e6dfb825 prev_value:string new_value:string = ChannelAdminLogEventAction;
+func (m *TLChannelAdminLogEventActionChangeTitle) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
+	return &ChannelAdminLogEventAction{
+		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeTitle{
+			ChannelAdminLogEventActionChangeTitle: &TLChannelAdminLogEventActionChangeTitle{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventActionChangeTitle) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventActionChangeTitle))
@@ -30310,6 +35086,14 @@ func (m *TLChannelAdminLogEventActionChangeTitle) Decode(dbuf *DecodeBuf) error 
 }
 
 // channelAdminLogEventActionChangeAbout#55188a2e prev_value:string new_value:string = ChannelAdminLogEventAction;
+func (m *TLChannelAdminLogEventActionChangeAbout) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
+	return &ChannelAdminLogEventAction{
+		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeAbout{
+			ChannelAdminLogEventActionChangeAbout: &TLChannelAdminLogEventActionChangeAbout{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventActionChangeAbout) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventActionChangeAbout))
@@ -30325,6 +35109,14 @@ func (m *TLChannelAdminLogEventActionChangeAbout) Decode(dbuf *DecodeBuf) error 
 }
 
 // channelAdminLogEventActionChangeUsername#6a4afc38 prev_value:string new_value:string = ChannelAdminLogEventAction;
+func (m *TLChannelAdminLogEventActionChangeUsername) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
+	return &ChannelAdminLogEventAction{
+		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeUsername{
+			ChannelAdminLogEventActionChangeUsername: &TLChannelAdminLogEventActionChangeUsername{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventActionChangeUsername) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventActionChangeUsername))
@@ -30340,6 +35132,14 @@ func (m *TLChannelAdminLogEventActionChangeUsername) Decode(dbuf *DecodeBuf) err
 }
 
 // channelAdminLogEventActionChangePhoto#b82f55c3 prev_photo:ChatPhoto new_photo:ChatPhoto = ChannelAdminLogEventAction;
+func (m *TLChannelAdminLogEventActionChangePhoto) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
+	return &ChannelAdminLogEventAction{
+		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionChangePhoto{
+			ChannelAdminLogEventActionChangePhoto: &TLChannelAdminLogEventActionChangePhoto{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventActionChangePhoto) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventActionChangePhoto))
@@ -30359,6 +35159,14 @@ func (m *TLChannelAdminLogEventActionChangePhoto) Decode(dbuf *DecodeBuf) error 
 }
 
 // channelAdminLogEventActionToggleInvites#1b7907ae new_value:Bool = ChannelAdminLogEventAction;
+func (m *TLChannelAdminLogEventActionToggleInvites) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
+	return &ChannelAdminLogEventAction{
+		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionToggleInvites{
+			ChannelAdminLogEventActionToggleInvites: &TLChannelAdminLogEventActionToggleInvites{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventActionToggleInvites) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventActionToggleInvites))
@@ -30374,6 +35182,14 @@ func (m *TLChannelAdminLogEventActionToggleInvites) Decode(dbuf *DecodeBuf) erro
 }
 
 // channelAdminLogEventActionToggleSignatures#26ae0971 new_value:Bool = ChannelAdminLogEventAction;
+func (m *TLChannelAdminLogEventActionToggleSignatures) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
+	return &ChannelAdminLogEventAction{
+		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionToggleSignatures{
+			ChannelAdminLogEventActionToggleSignatures: &TLChannelAdminLogEventActionToggleSignatures{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventActionToggleSignatures) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventActionToggleSignatures))
@@ -30389,6 +35205,14 @@ func (m *TLChannelAdminLogEventActionToggleSignatures) Decode(dbuf *DecodeBuf) e
 }
 
 // channelAdminLogEventActionUpdatePinned#e9e82c18 message:Message = ChannelAdminLogEventAction;
+func (m *TLChannelAdminLogEventActionUpdatePinned) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
+	return &ChannelAdminLogEventAction{
+		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionUpdatePinned{
+			ChannelAdminLogEventActionUpdatePinned: &TLChannelAdminLogEventActionUpdatePinned{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventActionUpdatePinned) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventActionUpdatePinned))
@@ -30404,6 +35228,14 @@ func (m *TLChannelAdminLogEventActionUpdatePinned) Decode(dbuf *DecodeBuf) error
 }
 
 // channelAdminLogEventActionEditMessage#709b2405 prev_message:Message new_message:Message = ChannelAdminLogEventAction;
+func (m *TLChannelAdminLogEventActionEditMessage) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
+	return &ChannelAdminLogEventAction{
+		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionEditMessage{
+			ChannelAdminLogEventActionEditMessage: &TLChannelAdminLogEventActionEditMessage{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventActionEditMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventActionEditMessage))
@@ -30423,6 +35255,14 @@ func (m *TLChannelAdminLogEventActionEditMessage) Decode(dbuf *DecodeBuf) error 
 }
 
 // channelAdminLogEventActionDeleteMessage#42e047bb message:Message = ChannelAdminLogEventAction;
+func (m *TLChannelAdminLogEventActionDeleteMessage) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
+	return &ChannelAdminLogEventAction{
+		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionDeleteMessage{
+			ChannelAdminLogEventActionDeleteMessage: &TLChannelAdminLogEventActionDeleteMessage{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventActionDeleteMessage) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventActionDeleteMessage))
@@ -30438,6 +35278,14 @@ func (m *TLChannelAdminLogEventActionDeleteMessage) Decode(dbuf *DecodeBuf) erro
 }
 
 // channelAdminLogEventActionParticipantJoin#183040d3 = ChannelAdminLogEventAction;
+func (m *TLChannelAdminLogEventActionParticipantJoin) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
+	return &ChannelAdminLogEventAction{
+		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantJoin{
+			ChannelAdminLogEventActionParticipantJoin: &TLChannelAdminLogEventActionParticipantJoin{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventActionParticipantJoin) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventActionParticipantJoin))
@@ -30449,6 +35297,14 @@ func (m *TLChannelAdminLogEventActionParticipantJoin) Decode(dbuf *DecodeBuf) er
 }
 
 // channelAdminLogEventActionParticipantLeave#f89777f2 = ChannelAdminLogEventAction;
+func (m *TLChannelAdminLogEventActionParticipantLeave) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
+	return &ChannelAdminLogEventAction{
+		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantLeave{
+			ChannelAdminLogEventActionParticipantLeave: &TLChannelAdminLogEventActionParticipantLeave{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventActionParticipantLeave) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventActionParticipantLeave))
@@ -30460,6 +35316,14 @@ func (m *TLChannelAdminLogEventActionParticipantLeave) Decode(dbuf *DecodeBuf) e
 }
 
 // channelAdminLogEventActionParticipantInvite#e31c34d8 participant:ChannelParticipant = ChannelAdminLogEventAction;
+func (m *TLChannelAdminLogEventActionParticipantInvite) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
+	return &ChannelAdminLogEventAction{
+		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantInvite{
+			ChannelAdminLogEventActionParticipantInvite: &TLChannelAdminLogEventActionParticipantInvite{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventActionParticipantInvite) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventActionParticipantInvite))
@@ -30475,6 +35339,14 @@ func (m *TLChannelAdminLogEventActionParticipantInvite) Decode(dbuf *DecodeBuf) 
 }
 
 // channelAdminLogEventActionParticipantToggleBan#e6d83d7e prev_participant:ChannelParticipant new_participant:ChannelParticipant = ChannelAdminLogEventAction;
+func (m *TLChannelAdminLogEventActionParticipantToggleBan) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
+	return &ChannelAdminLogEventAction{
+		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantToggleBan{
+			ChannelAdminLogEventActionParticipantToggleBan: &TLChannelAdminLogEventActionParticipantToggleBan{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventActionParticipantToggleBan) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventActionParticipantToggleBan))
@@ -30494,6 +35366,14 @@ func (m *TLChannelAdminLogEventActionParticipantToggleBan) Decode(dbuf *DecodeBu
 }
 
 // channelAdminLogEventActionParticipantToggleAdmin#d5676710 prev_participant:ChannelParticipant new_participant:ChannelParticipant = ChannelAdminLogEventAction;
+func (m *TLChannelAdminLogEventActionParticipantToggleAdmin) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
+	return &ChannelAdminLogEventAction{
+		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantToggleAdmin{
+			ChannelAdminLogEventActionParticipantToggleAdmin: &TLChannelAdminLogEventActionParticipantToggleAdmin{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventActionParticipantToggleAdmin) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventActionParticipantToggleAdmin))
@@ -30513,6 +35393,14 @@ func (m *TLChannelAdminLogEventActionParticipantToggleAdmin) Decode(dbuf *Decode
 }
 
 // channelAdminLogEventActionChangeStickerSet#b1c3caa7 prev_stickerset:InputStickerSet new_stickerset:InputStickerSet = ChannelAdminLogEventAction;
+func (m *TLChannelAdminLogEventActionChangeStickerSet) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
+	return &ChannelAdminLogEventAction{
+		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeStickerSet{
+			ChannelAdminLogEventActionChangeStickerSet: &TLChannelAdminLogEventActionChangeStickerSet{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventActionChangeStickerSet) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventActionChangeStickerSet))
@@ -30532,6 +35420,14 @@ func (m *TLChannelAdminLogEventActionChangeStickerSet) Decode(dbuf *DecodeBuf) e
 }
 
 // channelAdminLogEvent#3b5a3e40 id:long date:int user_id:int action:ChannelAdminLogEventAction = ChannelAdminLogEvent;
+func (m *TLChannelAdminLogEvent) ToChannelAdminLogEvent() *ChannelAdminLogEvent {
+	return &ChannelAdminLogEvent{
+		Payload: &ChannelAdminLogEvent_ChannelAdminLogEvent{
+			ChannelAdminLogEvent: &TLChannelAdminLogEvent{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEvent) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEvent))
@@ -30553,6 +35449,14 @@ func (m *TLChannelAdminLogEvent) Decode(dbuf *DecodeBuf) error {
 }
 
 // channels.adminLogResults#ed8af74d events:Vector<ChannelAdminLogEvent> chats:Vector<Chat> users:Vector<User> = channels.AdminLogResults;
+func (m *TLChannelsAdminLogResults) ToChannels_AdminLogResults() *Channels_AdminLogResults {
+	return &Channels_AdminLogResults{
+		Payload: &Channels_AdminLogResults_ChannelsAdminLogResults{
+			ChannelsAdminLogResults: &TLChannelsAdminLogResults{},
+		},
+	}
+}
+
 func (m *TLChannelsAdminLogResults) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channels_adminLogResults))
@@ -30627,6 +35531,14 @@ func (m *TLChannelsAdminLogResults) Decode(dbuf *DecodeBuf) error {
 }
 
 // channelAdminLogEventsFilter#ea107ae4 flags:# join:flags.0?true leave:flags.1?true invite:flags.2?true ban:flags.3?true unban:flags.4?true kick:flags.5?true unkick:flags.6?true promote:flags.7?true demote:flags.8?true info:flags.9?true settings:flags.10?true pinned:flags.11?true edit:flags.12?true delete:flags.13?true = ChannelAdminLogEventsFilter;
+func (m *TLChannelAdminLogEventsFilter) ToChannelAdminLogEventsFilter() *ChannelAdminLogEventsFilter {
+	return &ChannelAdminLogEventsFilter{
+		Payload: &ChannelAdminLogEventsFilter_ChannelAdminLogEventsFilter{
+			ChannelAdminLogEventsFilter: &TLChannelAdminLogEventsFilter{},
+		},
+	}
+}
+
 func (m *TLChannelAdminLogEventsFilter) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_channelAdminLogEventsFilter))
@@ -30769,6 +35681,14 @@ func (m *TLChannelAdminLogEventsFilter) Decode(dbuf *DecodeBuf) error {
 }
 
 // popularContact#5ce14175 client_id:long importers:int = PopularContact;
+func (m *TLPopularContact) ToPopularContact() *PopularContact {
+	return &PopularContact{
+		Payload: &PopularContact_PopularContact{
+			PopularContact: &TLPopularContact{},
+		},
+	}
+}
+
 func (m *TLPopularContact) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_popularContact))
@@ -30784,6 +35704,14 @@ func (m *TLPopularContact) Decode(dbuf *DecodeBuf) error {
 }
 
 // cdnFileHash#77eec38f offset:int limit:int hash:bytes = CdnFileHash;
+func (m *TLCdnFileHash) ToCdnFileHash() *CdnFileHash {
+	return &CdnFileHash{
+		Payload: &CdnFileHash_CdnFileHash{
+			CdnFileHash: &TLCdnFileHash{},
+		},
+	}
+}
+
 func (m *TLCdnFileHash) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_cdnFileHash))
@@ -30801,6 +35729,14 @@ func (m *TLCdnFileHash) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.favedStickersNotModified#9e8fa6d3 = messages.FavedStickers;
+func (m *TLMessagesFavedStickersNotModified) ToMessages_FavedStickers() *Messages_FavedStickers {
+	return &Messages_FavedStickers{
+		Payload: &Messages_FavedStickers_MessagesFavedStickersNotModified{
+			MessagesFavedStickersNotModified: &TLMessagesFavedStickersNotModified{},
+		},
+	}
+}
+
 func (m *TLMessagesFavedStickersNotModified) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_favedStickersNotModified))
@@ -30812,6 +35748,14 @@ func (m *TLMessagesFavedStickersNotModified) Decode(dbuf *DecodeBuf) error {
 }
 
 // messages.favedStickers#f37f2f16 hash:int packs:Vector<StickerPack> stickers:Vector<Document> = messages.FavedStickers;
+func (m *TLMessagesFavedStickers) ToMessages_FavedStickers() *Messages_FavedStickers {
+	return &Messages_FavedStickers{
+		Payload: &Messages_FavedStickers_MessagesFavedStickers{
+			MessagesFavedStickers: &TLMessagesFavedStickers{},
+		},
+	}
+}
+
 func (m *TLMessagesFavedStickers) Encode() []byte {
 	x := NewEncodeBuf(512)
 	x.Int(int32(TLConstructor_CRC32_messages_favedStickers))
