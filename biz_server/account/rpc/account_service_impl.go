@@ -60,6 +60,7 @@ func (s *AccountServiceImpl) AccountRegisterDevice(ctx context.Context, request 
 	if do == nil {
 		//
 		do = &dataobject.DevicesDO{
+			AuthId: rpcMetaData.AuthId,
 			UserId: rpcMetaData.UserId,
 			TokenType: int8(request.TokenType),
 			Token: request.Token,
@@ -85,7 +86,7 @@ func (s *AccountServiceImpl) AccountRegisterDevice(ctx context.Context, request 
 }
 
 func (s *AccountServiceImpl) AccountUnregisterDevice(ctx context.Context, request *mtproto.TLAccountUnregisterDevice) (*mtproto.Bool, error) {
-	glog.Info("AccountRegisterDevice - Process: %v", request)
+	glog.Info("AccountUnregisterDevice - Process: %v", request)
 
 	// 查出来
 	md, _ := metadata.FromIncomingContext(ctx)
@@ -96,7 +97,7 @@ func (s *AccountServiceImpl) AccountUnregisterDevice(ctx context.Context, reques
 
 	do, err := s.DeviceDAO.SelectIdByAuthId(rpcMetaData.AuthId, int8(request.TokenType), request.Token)
 	if err != nil {
-		glog.Errorf("AccountRegisterDevice - s.DeviceDAO.SelectIdByAuthId error: %s", err)
+		glog.Errorf("AccountUnregisterDevice - s.DeviceDAO.SelectIdByAuthId error: %s", err)
 		return nil, err
 	}
 
@@ -105,19 +106,19 @@ func (s *AccountServiceImpl) AccountUnregisterDevice(ctx context.Context, reques
 	} else {
 		_, err := s.DeviceDAO.UpdateStateById(1, do.Id)
 		if err != nil {
-			glog.Errorf("AccountRegisterDevice - s.DeviceDAO.UpdateStateById error: %s", err)
+			glog.Errorf("AccountUnregisterDevice - s.DeviceDAO.UpdateStateById error: %s", err)
 			return nil, err
 		}
 	}
 
 	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
-	glog.Infof("AccountRegisterDevice - reply: {%v}\n", reply)
+	glog.Infof("AccountUnregisterDevice - reply: {%v}\n", reply)
 
 	return reply, nil
 }
 
 func (s *AccountServiceImpl) AccountUpdateNotifySettings(ctx context.Context, request *mtproto.TLAccountUpdateNotifySettings) (*mtproto.Bool, error) {
-	glog.Info("AccountRegisterDevice - Process: %v", request)
+	glog.Info("AccountUpdateNotifySettings - Process: %v", request)
 
 	// TODO(@benqi): 实现逻辑
 	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
@@ -127,7 +128,7 @@ func (s *AccountServiceImpl) AccountUpdateNotifySettings(ctx context.Context, re
 }
 
 func (s *AccountServiceImpl) AccountResetNotifySettings(ctx context.Context, request *mtproto.TLAccountResetNotifySettings) (*mtproto.Bool, error) {
-	glog.Info("AccountRegisterDevice - Process: %v", request)
+	glog.Info("AccountResetNotifySettings - Process: %v", request)
 
 	// TODO(@benqi): 实现逻辑
 	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
@@ -147,7 +148,7 @@ func (s *AccountServiceImpl) AccountUpdateStatus(ctx context.Context, request *m
 }
 
 func (s *AccountServiceImpl) AccountReportPeer(ctx context.Context, request *mtproto.TLAccountReportPeer) (*mtproto.Bool, error) {
-	glog.Info("AccountRegisterDevice - Process: %v", request)
+	glog.Info("AccountReportPeer - Process: %v", request)
 
 	// TODO(@benqi): 实现逻辑
 	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
@@ -157,67 +158,67 @@ func (s *AccountServiceImpl) AccountReportPeer(ctx context.Context, request *mtp
 }
 
 func (s *AccountServiceImpl) AccountCheckUsername(ctx context.Context, request *mtproto.TLAccountCheckUsername) (*mtproto.Bool, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountCheckUsername - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountDeleteAccount(ctx context.Context, request *mtproto.TLAccountDeleteAccount) (*mtproto.Bool, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountDeleteAccount - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountSetAccountTTL(ctx context.Context, request *mtproto.TLAccountSetAccountTTL) (*mtproto.Bool, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountSetAccountTTL - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountUpdateDeviceLocked(ctx context.Context, request *mtproto.TLAccountUpdateDeviceLocked) (*mtproto.Bool, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountUpdateDeviceLocked - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountResetAuthorization(ctx context.Context, request *mtproto.TLAccountResetAuthorization) (*mtproto.Bool, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountResetAuthorization - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountUpdatePasswordSettings(ctx context.Context, request *mtproto.TLAccountUpdatePasswordSettings) (*mtproto.Bool, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountUpdatePasswordSettings - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountConfirmPhone(ctx context.Context, request *mtproto.TLAccountConfirmPhone) (*mtproto.Bool, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountConfirmPhone - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountSendChangePhoneCode(ctx context.Context, request *mtproto.TLAccountSendChangePhoneCode) (*mtproto.Auth_SentCode, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountSendChangePhoneCode - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountSendConfirmPhoneCode(ctx context.Context, request *mtproto.TLAccountSendConfirmPhoneCode) (*mtproto.Auth_SentCode, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountSendConfirmPhoneCode - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountGetNotifySettings(ctx context.Context, request *mtproto.TLAccountGetNotifySettings) (*mtproto.PeerNotifySettings, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountGetNotifySettings - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountUpdateProfile(ctx context.Context, request *mtproto.TLAccountUpdateProfile) (*mtproto.User, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountUpdateProfile - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountUpdateUsername(ctx context.Context, request *mtproto.TLAccountUpdateUsername) (*mtproto.User, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountUpdateUsername - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountChangePhone(ctx context.Context, request *mtproto.TLAccountChangePhone) (*mtproto.User, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountChangePhone - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
@@ -227,38 +228,38 @@ func (s *AccountServiceImpl) AccountChangePhone(ctx context.Context, request *mt
 // }
 
 func (s *AccountServiceImpl) AccountGetPrivacy(ctx context.Context, request *mtproto.TLAccountGetPrivacy) (*mtproto.Account_PrivacyRules, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountGetPrivacy - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountSetPrivacy(ctx context.Context, request *mtproto.TLAccountSetPrivacy) (*mtproto.Account_PrivacyRules, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountSetPrivacy - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountGetAccountTTL(ctx context.Context, request *mtproto.TLAccountGetAccountTTL) (*mtproto.AccountDaysTTL, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountGetAccountTTL - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountGetAuthorizations(ctx context.Context, request *mtproto.TLAccountGetAuthorizations) (*mtproto.Account_Authorizations, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountGetAuthorizations - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 // account.noPassword#96dabc18 new_salt:bytes email_unconfirmed_pattern:string = account.Password;
 // account.password#7c18141c current_salt:bytes new_salt:bytes hint:string has_recovery:Bool email_unconfirmed_pattern:string = account.Password;
 func (s *AccountServiceImpl) AccountGetPassword(ctx context.Context, request *mtproto.TLAccountGetPassword) (*mtproto.Account_Password, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountGetPassword - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountGetPasswordSettings(ctx context.Context, request *mtproto.TLAccountGetPasswordSettings) (*mtproto.Account_PasswordSettings, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountGetPasswordSettings - Process: %v", request)
 	return nil, errors.New("Not impl")
 }
 
 func (s *AccountServiceImpl) AccountGetTmpPassword(ctx context.Context, request *mtproto.TLAccountGetTmpPassword) (*mtproto.Account_TmpPassword, error) {
-	glog.Infof("AccountRegisterDevice - Process: %v", request)
+	glog.Infof("AccountGetTmpPassword - Process: %v", request)
 	return nil, errors.New("Not impl")
 }

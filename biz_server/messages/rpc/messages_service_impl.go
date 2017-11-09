@@ -33,8 +33,43 @@ type MessagesServiceImpl struct {
 }
 
 func (s *MessagesServiceImpl) MessagesSetTyping(ctx context.Context, request *mtproto.TLMessagesSetTyping) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("MessagesSetTyping - Process: {%v}", request)
+
+	md, _ := metadata.FromIncomingContext(ctx)
+	rpcMetaData := mtproto.RpcMetaData{}
+	rpcMetaData.Decode(md)
+
+	var reply *mtproto.Bool = nil
+	switch request.Peer.Payload.(type) {
+	case *mtproto.InputPeer_InputPeerUser:
+		reply = mtproto.MakeBool(&mtproto.TLBoolTrue{})
+		// typing.UserId = request.Peer.Payload.(*mtproto.InputPeer_InputPeerUser).InputPeerUser.UserId
+	case *mtproto.InputPeer_InputPeerChat:
+		reply = mtproto.MakeBool(&mtproto.TLBoolTrue{})
+		// typing.UserId = request.Peer.Payload.(*mtproto.InputPeer_InputPeerChat).InputPeerChat.ChatId
+	default:
+		glog.Errorf("MessagesSetTyping - BadRequest!")
+		reply = mtproto.MakeBool(&mtproto.TLBoolFalse{})
+		return reply, nil
+	}
+
+	reply = mtproto.MakeBool(&mtproto.TLBoolTrue{})
+	glog.Infof("MessagesSetTyping - reply: {%v}\n", reply)
+
+	// TODO(@benqi): Dispatch to updates
+	// var update *mtproto.Update
+	// updateUserTyping#5c486927 user_id:int action:SendMessageAction = Update;
+	// updateChatUserTyping#9a65ea1f chat_id:int user_id:int action:SendMessageAction = Update;
+	// 转发
+	typing := &mtproto.TLUpdateUserTyping{}
+	typing.UserId = rpcMetaData.UserId
+	typing.Action = request.Action
+	tl_updates := &mtproto.TLUpdates{}
+	tl_updates.Updates = append(tl_updates.Updates, mtproto.MakeUpdate(typing))
+	updates := mtproto.MakeUpdates(tl_updates)
+	_ = updates
+
+	return reply, nil
 }
 
 func (s *MessagesServiceImpl) MessagesReportSpam(ctx context.Context, request *mtproto.TLMessagesReportSpam) (*mtproto.Bool, error) {
@@ -212,9 +247,57 @@ func (s *MessagesServiceImpl) MessagesDeleteHistory(ctx context.Context, request
 //   return nil, nil
 // }
 
-func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *mtproto.TLMessagesSendMessage) (*mtproto.Updates, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+
+/*
+	// messages.sendMessage#fa88427a flags:# no_webpage:flags.1?true silent:flags.5?true background:flags.6?true clear_draft:flags.7?true peer:InputPeer reply_to_msg_id:flags.0?int message:string random_id:long reply_markup:flags.2?ReplyMarkup entities:flags.3?Vector<MessageEntity> = Updates;
+	message TL_messages_sendMessage {
+	  bool no_webpage = 1;
+	  bool silent = 2;
+	  bool background = 3;
+	  bool clear_draft = 4;
+	  InputPeer peer = 5;
+	  int32 reply_to_msg_id = 6;
+	  string message = 7;
+	  int64 random_id = 8;
+	  ReplyMarkup reply_markup = 9;
+	  repeated MessageEntity entities = 10;
+	};
+
+	// updateShortSentMessage#11f1331c flags:# out:flags.1?true id:int pts:int pts_count:int date:int media:flags.9?MessageMedia entities:flags.7?Vector<MessageEntity> = Updates;
+	message TL_updateShortSentMessage {
+	  bool out = 1;
+	  int32 id = 2;
+	  int32 pts = 3;
+	  int32 pts_count = 4;
+	  int32 date = 5;
+	  MessageMedia media = 6;
+	  repeated MessageEntity entities = 7;
+	}
+
+ */
+func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *mtproto.TLMessagesSendMessage) (reply *mtproto.Updates, err error) {
+	glog.Infof("MessagesSendMessage - Process: {%v}", request)
+
+	md, _ := metadata.FromIncomingContext(ctx)
+	rpcMetaData := mtproto.RpcMetaData{}
+	rpcMetaData.Decode(md)
+
+	sentMessage := &mtproto.TLUpdateShortSentMessage{}
+	_ = sentMessage
+	switch request.Peer.Payload.(type) {
+	case *mtproto.InputPeer_InputPeerEmpty:
+	case *mtproto.InputPeer_InputPeerSelf:
+	case *mtproto.InputPeer_InputPeerChat:
+	case *mtproto.InputPeer_InputPeerUser:
+		inputPeerUser := request.Peer.GetInputPeerUser()
+		// sentMessage.Id =
+		_ = inputPeerUser
+	case *mtproto.InputPeer_InputPeerChannel:
+	}
+
+	// updateShortSentMessage#11f1331c flags:# out:flags.1?true id:int pts:int pts_count:int date:int media:flags.9?MessageMedia entities:flags.7?Vector<MessageEntity> = Updates;
+
+	return
 }
 
 func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mtproto.TLMessagesSendMedia) (*mtproto.Updates, error) {

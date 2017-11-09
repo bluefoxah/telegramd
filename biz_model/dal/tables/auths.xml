@@ -2,8 +2,8 @@
 <table sqlname="auths">
     <operation name="Insert">
         <sql>
-            INSERT INTO auths (auth_id, api_id, device_model, system_version, system_lang_code, lang_pack, lang_code, connection_hash)
-            VALUES (:auth_id, :api_id, :device_model, :system_version, :system_lang_code, :lang_pack, :lang_code, :connection_hash)
+            INSERT INTO auths (auth_id, api_id, device_model, system_version, app_version, system_lang_code, lang_pack, lang_code, connection_hash)
+            VALUES (:auth_id, :api_id, :device_model, :system_version, :app_version, :system_lang_code, :lang_pack, :lang_code, :connection_hash)
         </sql>
     </operation>
     <operation name="SelectConnectionHashByAuthId">

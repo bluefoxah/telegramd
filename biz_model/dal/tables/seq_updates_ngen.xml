@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table sqlname="seq_updates_ngen">
+    <operation name="Insert">
+        <sql>
+            INSERT INTO seq_updates_ngen (seq_name, seq, created_at) VALUES (:seq_name, :seq, :created_at)
+        </sql>
+    </operation>
+    <operation name="UpdateSeqBySeqName">
+        <sql>
+            UPDATE seq_updates_ngen SET seq = :seq WHERE seq_name = :seq_name
+        </sql>
+    </operation>
+    <operation name="SelectBySeqName">
+        <sql>
+            SELECT seq_name, seq FROM seq_updates_ngen WHERE seq_name = :seq_name
+        </sql>
+    </operation>
+</table>

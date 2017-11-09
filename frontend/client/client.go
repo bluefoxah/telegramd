@@ -129,6 +129,8 @@ func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
 		c.Session.Send(m)
 	}
 
+	glog.Info("OnEncryptedMessage - sessionId: ", request.SessionId, ", seqNo: ", request.SeqNo, ", messageId: ", request.MessageId)
+
 	// TODO(@benqi): 检查sessionId
 	return c.OnMessage(request.MessageId, request.SeqNo, request.Object)
 }
