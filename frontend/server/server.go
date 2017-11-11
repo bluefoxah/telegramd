@@ -58,8 +58,10 @@ func NewServer(addr, dsn string) (s *Server) {
 	return
 }
 
-func (s* Server) Serve(rpcClient *rpc.RPCClient) {
+func (s* Server) Serve(rpcClient *rpc.RPCClient, syncRpcClient *rpc.SyncRPCClient) {
 	glog.Info("Serve...")
+
+	go syncRpcClient.RunUpdatesStreamLoop(s.Server)
 
 	for {
 		session, err := s.Server.Accept2()

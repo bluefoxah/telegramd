@@ -61,10 +61,11 @@ func (s *SyncServiceImpl) unsafeExpire(sid int32) {
 	delete(s.updates, sid)
 }
 
-func (s *SyncServiceImpl) PushUpdatesStream(auth *zproto.ServerAuthReq, stream zproto.RPCSync_PushUpdatesStreamServer) (err error) {
+func (s *SyncServiceImpl) PushUpdatesStream(auth *zproto.ServerAuthReq, stream zproto.RPCSync_PushUpdatesStreamServer) error {
 	// TODO(@benqi): chan数量
 	var update  chan *zproto.PushUpdatesData = make(chan *zproto.PushUpdatesData, 1000)
 
+	var err error
 	s.withWriteLock(func() {
 		if _, ok := s.updates[auth.ServerId]; ok {
 			err = errors.New("already connected")
@@ -87,7 +88,7 @@ func (s *SyncServiceImpl) PushUpdatesStream(auth *zproto.ServerAuthReq, stream z
 			glog.Errorf("PushUpdatesStream - %s\n", err)
 			return stream.Context().Err()
 		case data := <-update:
-			if err := stream.Send(data); err != nil {
+			if err = stream.Send(data); err != nil {
 				return err
 			}
 		}
@@ -114,8 +115,9 @@ func (s *SyncServiceImpl) DeliveryUpdates(ctx context.Context, deliver *zproto.D
 				update := &zproto.PushUpdatesData{}
 				update.AuthKeyId = ss4.AuthKeyId
 				update.SessionId = ss4.SessionId
-				update.NetlibSessionId = update.NetlibSessionId
-				// update.RawData = proto.Marshal()
+				update.NetlibSessionId = ss4.NetlibSessionId
+				update.RawDataHeader = deliver.RawDataHeader
+				update.RawData = deliver.RawData
 				s.updates[k] <- update
 			}
 		})

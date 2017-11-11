@@ -41,12 +41,12 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 	"google.golang.org/grpc"
 	"net"
+	"github.com/nebulaim/telegramd/biz_server/sync_client"
 )
 
 func init() {
 	flag.Set("alsologtostderr", "true")
 	flag.Set("log_dir", "false")
-
 }
 
 // 整合各服务，方便开发调试
@@ -66,6 +66,12 @@ func main() {
 	if err != nil {
 		glog.Fatalf("failed to listen: %v", err)
 	}
+
+	c, err := sync_client.NewSyncRPCClient("127.0.0.1:10002")
+	if err != nil {
+		glog.Fatalf("failed to listen: %v", err)
+	}
+
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
 
@@ -79,6 +85,10 @@ func main() {
 	// appsDAO := dao.NewAppsDAO(db)
 	userDialogsDAO := dao.NewUserDialogsDAO(db)
 	userContactsDAO := dao.NewUserContactsDAO(db)
+	messageBoxsDAO := dao.NewMessageBoxsDAO(db)
+	messagesDAO := dao.NewMessagesDAO(db)
+
+	// SequenceDAO *dao.SequenceDAO
 
 	// AccountServiceImpl
 	mtproto.RegisterRPCAccountServer(grpcServer, &account.AccountServiceImpl{
@@ -108,6 +118,9 @@ func main() {
 	mtproto.RegisterRPCMessagesServer(grpcServer, &messages.MessagesServiceImpl{
 		AuthUsersDAO:   authUsersDAO,
 		UserDialogsDAO: userDialogsDAO,
+		MessagesDAO: messagesDAO,
+		MessageBoxsDAO: messageBoxsDAO,
+		SyncRPCClient: c,
 	})
 
 	mtproto.RegisterRPCPaymentsServer(grpcServer, &payments.PaymentsServiceImpl{})

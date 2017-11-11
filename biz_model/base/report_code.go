@@ -19,7 +19,6 @@ package base
 
 import (
 	"github.com/nebulaim/telegramd/mtproto"
-	"reflect"
 )
 
 type ReportReasonType int8

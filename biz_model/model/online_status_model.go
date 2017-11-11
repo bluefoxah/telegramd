@@ -68,7 +68,7 @@ type SessionStatus struct {
 	SessionId		int64		//
 
 	ServerId		int32		// ServerId
-	NetLibSessionId	int64		// 网络库SessionID，不是
+	NetlibSessionId	int64		// 网络库SessionID，不是
 	Now				int64		// 上报时间
 }
 
@@ -81,7 +81,7 @@ func (status *SessionStatus) ToField() string {
 }
 
 func (status *SessionStatus) ToValue() string {
-	return fmt.Sprintf("%d@%d@%d", status.ServerId, status.NetLibSessionId, status.Now)
+	return fmt.Sprintf("%d@%d@%d", status.ServerId, status.NetlibSessionId, status.Now)
 }
 
 func (status *SessionStatus) FromKeyValue(k, v string) (err error) {
@@ -108,7 +108,7 @@ func (status *SessionStatus) FromKeyValue(k, v string) (err error) {
 	if status.ServerId, err = base.StringToInt32(vs[0]); err != nil {
 		return
 	}
-	if status.NetLibSessionId, err = base.StringToInt64(vs[1]); err != nil {
+	if status.NetlibSessionId, err = base.StringToInt64(vs[1]); err != nil {
 		return
 	}
 	if status.Now, err = base.StringToInt64(vs[2]); err != nil {

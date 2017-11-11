@@ -15,24 +15,33 @@
  * limitations under the License.
  */
 
-package main
+package sync_client
 
 import (
-	server2 "github.com/nebulaim/telegramd/frontend/server"
-	"github.com/nebulaim/telegramd/frontend/rpc"
-	"flag"
+	//"github.com/golang/glog"
+	//"google.golang.org/grpc"
+	//"github.com/nebulaim/telegramd/mtproto"
+	//"fmt"
+	//"context"
+	//"google.golang.org/grpc/metadata"
+	//"time"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/zproto"
+	"google.golang.org/grpc"
 )
 
-func init() {
-	flag.Set("alsologtostderr", "true")
-	flag.Set("log_dir", "false")
+type SyncRPCClient struct {
+	Client zproto.RPCSyncClient
 }
 
-func main() {
-	flag.Parse()
-	// flag.Parse()
-	server := server2.NewServer("0.0.0.0:12345", "root:@/nebulaim?charset=utf8")
-	rpc_client, _ := rpc.NewRPCClient("127.0.0.1:10001")
-	sync_rpc_client, _ := rpc.NewSyncRPCClient("127.0.0.1:10002")
-	server.Serve(rpc_client, sync_rpc_client)
+func NewSyncRPCClient(target string) (c *SyncRPCClient, err error) {
+	conn, err := grpc.Dial(target, grpc.WithInsecure())
+	if err != nil {
+		glog.Error(err)
+		panic(err)
+	}
+	c = &SyncRPCClient {
+		Client: zproto.NewRPCSyncClient(conn),
+	}
+	return
 }

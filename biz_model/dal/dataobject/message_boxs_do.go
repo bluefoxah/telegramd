@@ -15,24 +15,14 @@
  * limitations under the License.
  */
 
-package main
+package dataobject
 
-import (
-	server2 "github.com/nebulaim/telegramd/frontend/server"
-	"github.com/nebulaim/telegramd/frontend/rpc"
-	"flag"
-)
-
-func init() {
-	flag.Set("alsologtostderr", "true")
-	flag.Set("log_dir", "false")
-}
-
-func main() {
-	flag.Parse()
-	// flag.Parse()
-	server := server2.NewServer("0.0.0.0:12345", "root:@/nebulaim?charset=utf8")
-	rpc_client, _ := rpc.NewRPCClient("127.0.0.1:10001")
-	sync_rpc_client, _ := rpc.NewSyncRPCClient("127.0.0.1:10002")
-	server.Serve(rpc_client, sync_rpc_client)
+type MessageBoxsDO struct {
+	Id             int32  `db:"id"`
+	UserId         int32  `db:"user_id"`
+	MessageBoxType int8   `db:"message_box_type"`
+	MessageId      int32  `db:"message_id"`
+	Pts            int32  `db:"pts"`
+	CreatedAt      string `db:"created_at"`
+	UpdatedAt      string `db:"updated_at"`
 }

@@ -21,8 +21,8 @@ import (
 	_ "github.com/go-sql-driver/mysql" // import your used driver
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
-	"testing"
 	"github.com/nebulaim/telegramd/base/redis_client"
+	"testing"
 )
 
 func TestNextID(t *testing.T) {
@@ -37,16 +37,16 @@ func TestNextID(t *testing.T) {
 	seqUpdatesNgen := NewSeqUpdatesNgenDAO(db)
 
 	redisConfig := &redis_client.RedisConfig{
-		Name: "test",
-		Addr: "127.0.0.1:6379",
-		Idle: 100,
-		Active: 100,
-		DialTimeout: 1000000,
-		ReadTimeout: 1000000,
+		Name:         "test",
+		Addr:         "127.0.0.1:6379",
+		Idle:         100,
+		Active:       100,
+		DialTimeout:  1000000,
+		ReadTimeout:  1000000,
 		WriteTimeout: 1000000,
-		IdleTimeout: 15000000,
-		DBNum: "0",
-		Password: "",
+		IdleTimeout:  15000000,
+		DBNum:        "0",
+		Password:     "",
 	}
 
 	redisPool := redis_client.NewRedisPool(redisConfig)

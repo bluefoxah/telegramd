@@ -23,13 +23,13 @@
 package dao
 
 import (
-	"github.com/nebulaim/telegramd/base/redis_client"
 	"fmt"
-	"github.com/golang/glog"
 	"github.com/garyburd/redigo/redis"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/base"
+	"github.com/nebulaim/telegramd/base/redis_client"
 	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 	"time"
-	"github.com/nebulaim/telegramd/base/base"
 )
 
 const (
@@ -41,7 +41,7 @@ type SequenceDAO struct {
 	ngen  *SeqUpdatesNgenDAO
 }
 
-func NewSequenceDAO(redis *redis_client.RedisPool, ngen  *SeqUpdatesNgenDAO) *SequenceDAO {
+func NewSequenceDAO(redis *redis_client.RedisPool, ngen *SeqUpdatesNgenDAO) *SequenceDAO {
 	return &SequenceDAO{
 		redis: redis,
 		ngen:  ngen,
@@ -99,7 +99,7 @@ func (dao *SequenceDAO) NextID(key string) (seq int64, err error) {
 		// 2. redis重新启动，DB里可能已经有值
 
 		do, err = dao.ngen.SelectBySeqName(key)
-		if err !=nil {
+		if err != nil {
 			glog.Errorf("NextID - dao.ngen.SelectBySeqName{%s}, error: %s", key, err)
 			return
 		}
@@ -107,8 +107,8 @@ func (dao *SequenceDAO) NextID(key string) (seq int64, err error) {
 		if do == nil {
 			// DB无值，插入数据
 			do = &dataobject.SeqUpdatesNgenDO{
-				SeqName: key,
-				Seq: seq,
+				SeqName:   key,
+				Seq:       seq,
 				CreatedAt: time.Now().Format("2006-01-02 15:04:05"),
 			}
 		} else {
@@ -123,20 +123,20 @@ func (dao *SequenceDAO) NextID(key string) (seq int64, err error) {
 	} else {
 		do = &dataobject.SeqUpdatesNgenDO{
 			SeqName: key,
-			Seq: seq,
+			Seq:     seq,
 		}
 	}
 
 	// TODO(@benqi): 使用一些策略减少存盘次数
 	if do.Seq == 1 {
 		_, err = dao.ngen.Insert(do)
-		if err !=nil {
+		if err != nil {
 			glog.Errorf("NextID - dao.ngen.Insert{%v}, error: %s", do, err)
 			return
 		}
 	} else {
 		_, err = dao.ngen.UpdateSeqBySeqName(do.Seq, key)
-		if err !=nil {
+		if err != nil {
 			glog.Errorf("NextID - dao.ngen.UpdateSeqBySeqName{%v}, error: %s", do, err)
 			return
 		}

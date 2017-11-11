@@ -53,9 +53,7 @@ func (dao *UserDialogsDAO) SelectPinnedDialogs(user_id int32) ([]do.UserDialogsD
 	// TODO(@benqi): sqlmap
 	var sql = "select peer_type, peer_id from user_dialogs where user_id = :user_id and is_pinned = 1"
 	do2 := &do.UserDialogsDO{UserId: user_id}
-	glog.Info("do2: ", do2)
 	rows, err := dao.db.NamedQuery(sql, do2)
-
 	if err != nil {
 		glog.Errorf("UserDialogsDAO/SelectPinnedDialogs error: ", err)
 		return nil, err
@@ -77,4 +75,28 @@ func (dao *UserDialogsDAO) SelectPinnedDialogs(user_id int32) ([]do.UserDialogsD
 	}
 
 	return values, nil
+}
+
+func (dao *UserDialogsDAO) CheckExists(user_id int32, peer_type int32, peer_id int32) (*do.UserDialogsDO, error) {
+	// TODO(@benqi): sqlmap
+	var sql = "select id from user_dialogs where user_id = :user_id and peer_type = :peer_type and peer_id = :peer_id"
+	do := &do.UserDialogsDO{UserId: user_id, PeerType: peer_type, PeerId: peer_id}
+	rows, err := dao.db.NamedQuery(sql, do)
+	if err != nil {
+		glog.Error("UserDialogsDAO/CheckExists error: ", err)
+		return nil, err
+	}
+
+	defer rows.Close()
+	if rows.Next() {
+		err = rows.StructScan(do)
+		if err != nil {
+			glog.Error("UserDialogsDAO/CheckExists error: ", err)
+			return nil, err
+		}
+	} else {
+		return nil, nil
+	}
+
+	return do, nil
 }

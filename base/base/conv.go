@@ -42,3 +42,7 @@ func StringToUint64(s string) (uint64, error) {
 func Int64ToString(i int64) string {
 	return strconv.FormatInt(i, 10)
 }
+
+func Int32ToString(i int32) string {
+	return strconv.FormatInt(int64(i), 10)
+}

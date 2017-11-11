@@ -10,4 +10,9 @@
             SELECT peer_type, peer_id FROM user_dialogs WHERE user_id=:user_id AND is_pinned = 1
         </sql>
     </operation>
+    <operation name="CheckExists">
+        <sql>
+            SELECT id FROM user_dialogs WHERE user_id=:user_id AND peer_type = :peer_type AND peer_id = :peer_id
+        </sql>
+    </operation>
 </table>

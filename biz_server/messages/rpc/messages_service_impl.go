@@ -25,11 +25,20 @@ import (
 	"google.golang.org/grpc/metadata"
 	"time"
 	"github.com/cosiner/gohper/errors"
+	"github.com/nebulaim/telegramd/biz_server/sync_client"
+	"github.com/nebulaim/telegramd/biz_model/base"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	base2 "github.com/nebulaim/telegramd/base/base"
+	"github.com/nebulaim/telegramd/zproto"
 )
 
 type MessagesServiceImpl struct {
 	AuthUsersDAO *dao.AuthUsersDAO
 	UserDialogsDAO *dao.UserDialogsDAO
+	MessageBoxsDAO *dao.MessageBoxsDAO
+	MessagesDAO *dao.MessagesDAO
+	SequenceDAO *dao.SequenceDAO
+	SyncRPCClient *sync_client.SyncRPCClient
 }
 
 func (s *MessagesServiceImpl) MessagesSetTyping(ctx context.Context, request *mtproto.TLMessagesSetTyping) (*mtproto.Bool, error) {
@@ -274,6 +283,23 @@ func (s *MessagesServiceImpl) MessagesDeleteHistory(ctx context.Context, request
 	  repeated MessageEntity entities = 7;
 	}
 
+	// updateShortMessage#914fbf11 flags:# out:flags.1?true mentioned:flags.4?true media_unread:flags.5?true silent:flags.13?true id:int user_id:int message:string pts:int pts_count:int date:int fwd_from:flags.2?MessageFwdHeader via_bot_id:flags.11?int reply_to_msg_id:flags.3?int entities:flags.7?Vector<MessageEntity> = Updates;
+	message TL_updateShortMessage {
+	  bool out = 1;
+	  bool mentioned = 2;
+	  bool media_unread = 3;
+	  bool silent = 4;
+	  int32 id = 5;
+	  int32 user_id = 6;
+	  string message = 7;
+	  int32 pts = 8;
+	  int32 pts_count = 9;
+	  int32 date = 10;
+	  MessageFwdHeader fwd_from = 11;
+	  int32 via_bot_id = 12;
+	  int32 reply_to_msg_id = 13;
+	  repeated MessageEntity entities = 14;
+	}
  */
 func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *mtproto.TLMessagesSendMessage) (reply *mtproto.Updates, err error) {
 	glog.Infof("MessagesSendMessage - Process: {%v}", request)
@@ -282,6 +308,7 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 	rpcMetaData := mtproto.RpcMetaData{}
 	rpcMetaData.Decode(md)
 
+	// TODO(@benqi): 仅仅验证逻辑，未考虑出错处理等，
 	sentMessage := &mtproto.TLUpdateShortSentMessage{}
 	_ = sentMessage
 	switch request.Peer.Payload.(type) {
@@ -290,12 +317,82 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 	case *mtproto.InputPeer_InputPeerChat:
 	case *mtproto.InputPeer_InputPeerUser:
 		inputPeerUser := request.Peer.GetInputPeerUser()
-		// sentMessage.Id =
-		_ = inputPeerUser
+
+		// TODO(@benqi): 事务
+		// 创建会话
+		dialog1, _ := s.UserDialogsDAO.CheckExists(rpcMetaData.UserId, base.PEER_USER, inputPeerUser.UserId)
+		if dialog1 == nil {
+			dialog1.UserId = rpcMetaData.UserId
+			dialog1.PeerType = base.PEER_USER
+			dialog1.PeerId = inputPeerUser.UserId
+			s.UserDialogsDAO.Insert(dialog1)
+		}
+		dialog2, _ := s.UserDialogsDAO.CheckExists(inputPeerUser.UserId, base.PEER_USER, rpcMetaData.UserId)
+		if dialog2 == nil {
+			dialog1.UserId = inputPeerUser.UserId
+			dialog1.PeerType = base.PEER_USER
+			dialog1.PeerId = rpcMetaData.UserId
+			s.UserDialogsDAO.Insert(dialog1)
+		}
+
+		// 插入消息
+		message := &dataobject.MessagesDO{}
+		message.UserId = rpcMetaData.UserId
+		message.PeerType = base.PEER_USER
+		message.PeerId = inputPeerUser.UserId
+		message.RandomId = request.RandomId
+		message.Message = request.Message
+		messageId, _ := s.MessagesDAO.Insert(message)
+
+		// inbox和outbox
+		// 发件箱
+		messageBox := &dataobject.MessageBoxsDO{}
+		messageBox.UserId = rpcMetaData.UserId
+		messageBox.MessageBoxType = 0
+		messageBox.MessageId = int32(messageId)
+		outPts, _ := s.SequenceDAO.NextID(base2.Int32ToString(messageBox.UserId))
+		messageBox.Pts = int32(outPts)
+		s.MessageBoxsDAO.Insert(messageBox)
+
+		// 收件箱
+		messageBox.UserId = inputPeerUser.UserId
+		messageBox.MessageBoxType = 1
+		inPts, _ := s.SequenceDAO.NextID(base2.Int32ToString(messageBox.UserId))
+		messageBox.Pts = int32(inPts)
+		s.MessageBoxsDAO.Insert(messageBox)
+
+		// 推送给sync
+		// 推给客户端的updates
+		update := mtproto.TLUpdateShortMessage{}
+		update.Id = int32(messageId)
+		update.UserId = rpcMetaData.UserId
+		update.Pts = int32(inPts)
+		update.PtsCount = 1
+		update.Message = request.Message
+		update.Date = int32(time.Now().Unix())
+		updateRawData := update.ToUpdates().Encode()
+
+		delivery := &zproto.DeliveryUpdatesToUsers{}
+		delivery.MyAuthKeyId = rpcMetaData.AuthId
+		delivery.MySessionId = rpcMetaData.SessionId
+		delivery.SendtoUserIdList = append(delivery.SendtoUserIdList, inputPeerUser.UserId)
+		delivery.RawData = updateRawData
+
+		glog.Infof("MessagesSendMessage - delivery: %v", delivery)
+		_, _ = s.SyncRPCClient.Client.DeliveryUpdates(context.Background(), delivery)
+		// update.Encode()
+
+		// 返回给客户端
+		sentMessage := &mtproto.TLUpdateShortSentMessage{}
+		sentMessage.Id = int32(messageId)
+		sentMessage.Pts = int32(outPts)
+		sentMessage.PtsCount = 1
+		sentMessage.Date = int32(time.Now().Unix())
+
+		glog.Infof("MessagesSendMessage - reply: %v", sentMessage)
+		reply = sentMessage.ToUpdates()
 	case *mtproto.InputPeer_InputPeerChannel:
 	}
-
-	// updateShortSentMessage#11f1331c flags:# out:flags.1?true id:int pts:int pts_count:int date:int media:flags.9?MessageMedia entities:flags.7?Vector<MessageEntity> = Updates;
 
 	return
 }
