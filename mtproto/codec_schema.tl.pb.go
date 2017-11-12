@@ -14721,7 +14721,7 @@ func MakeMessages_FavedStickers(message proto.Message) (m *Messages_FavedSticker
 func (m *TLResPQ) ToResPQ() *ResPQ {
 	return &ResPQ{
 		Payload: &ResPQ_ResPQ{
-			ResPQ: &TLResPQ{},
+			ResPQ: m,
 		},
 	}
 }
@@ -14748,7 +14748,7 @@ func (m *TLResPQ) Decode(dbuf *DecodeBuf) error {
 func (m *TLPQInnerData) ToP_QInnerData() *P_QInnerData {
 	return &P_QInnerData{
 		Payload: &P_QInnerData_PQInnerData{
-			PQInnerData: &TLPQInnerData{},
+			PQInnerData: m,
 		},
 	}
 }
@@ -14779,7 +14779,7 @@ func (m *TLPQInnerData) Decode(dbuf *DecodeBuf) error {
 func (m *TLServer_DHParamsFail) ToServer_DH_Params() *Server_DH_Params {
 	return &Server_DH_Params{
 		Payload: &Server_DH_Params_Server_DHParamsFail{
-			Server_DHParamsFail: &TLServer_DHParamsFail{},
+			Server_DHParamsFail: m,
 		},
 	}
 }
@@ -14804,7 +14804,7 @@ func (m *TLServer_DHParamsFail) Decode(dbuf *DecodeBuf) error {
 func (m *TLServer_DHParamsOk) ToServer_DH_Params() *Server_DH_Params {
 	return &Server_DH_Params{
 		Payload: &Server_DH_Params_Server_DHParamsOk{
-			Server_DHParamsOk: &TLServer_DHParamsOk{},
+			Server_DHParamsOk: m,
 		},
 	}
 }
@@ -14829,7 +14829,7 @@ func (m *TLServer_DHParamsOk) Decode(dbuf *DecodeBuf) error {
 func (m *TLServer_DHInnerData) ToServer_DHInnerData() *Server_DHInnerData {
 	return &Server_DHInnerData{
 		Payload: &Server_DHInnerData_Server_DHInnerData{
-			Server_DHInnerData: &TLServer_DHInnerData{},
+			Server_DHInnerData: m,
 		},
 	}
 }
@@ -14860,7 +14860,7 @@ func (m *TLServer_DHInnerData) Decode(dbuf *DecodeBuf) error {
 func (m *TLClient_DHInnerData) ToClient_DH_Inner_Data() *Client_DH_Inner_Data {
 	return &Client_DH_Inner_Data{
 		Payload: &Client_DH_Inner_Data_Client_DHInnerData{
-			Client_DHInnerData: &TLClient_DHInnerData{},
+			Client_DHInnerData: m,
 		},
 	}
 }
@@ -14887,7 +14887,7 @@ func (m *TLClient_DHInnerData) Decode(dbuf *DecodeBuf) error {
 func (m *TLDhGenOk) ToSetClient_DHParamsAnswer() *SetClient_DHParamsAnswer {
 	return &SetClient_DHParamsAnswer{
 		Payload: &SetClient_DHParamsAnswer_DhGenOk{
-			DhGenOk: &TLDhGenOk{},
+			DhGenOk: m,
 		},
 	}
 }
@@ -14912,7 +14912,7 @@ func (m *TLDhGenOk) Decode(dbuf *DecodeBuf) error {
 func (m *TLDhGenRetry) ToSetClient_DHParamsAnswer() *SetClient_DHParamsAnswer {
 	return &SetClient_DHParamsAnswer{
 		Payload: &SetClient_DHParamsAnswer_DhGenRetry{
-			DhGenRetry: &TLDhGenRetry{},
+			DhGenRetry: m,
 		},
 	}
 }
@@ -14937,7 +14937,7 @@ func (m *TLDhGenRetry) Decode(dbuf *DecodeBuf) error {
 func (m *TLDhGenFail) ToSetClient_DHParamsAnswer() *SetClient_DHParamsAnswer {
 	return &SetClient_DHParamsAnswer{
 		Payload: &SetClient_DHParamsAnswer_DhGenFail{
-			DhGenFail: &TLDhGenFail{},
+			DhGenFail: m,
 		},
 	}
 }
@@ -14962,7 +14962,7 @@ func (m *TLDhGenFail) Decode(dbuf *DecodeBuf) error {
 func (m *TLDestroyAuthKeyOk) ToDestroyAuthKeyRes() *DestroyAuthKeyRes {
 	return &DestroyAuthKeyRes{
 		Payload: &DestroyAuthKeyRes_DestroyAuthKeyOk{
-			DestroyAuthKeyOk: &TLDestroyAuthKeyOk{},
+			DestroyAuthKeyOk: m,
 		},
 	}
 }
@@ -14981,7 +14981,7 @@ func (m *TLDestroyAuthKeyOk) Decode(dbuf *DecodeBuf) error {
 func (m *TLDestroyAuthKeyNone) ToDestroyAuthKeyRes() *DestroyAuthKeyRes {
 	return &DestroyAuthKeyRes{
 		Payload: &DestroyAuthKeyRes_DestroyAuthKeyNone{
-			DestroyAuthKeyNone: &TLDestroyAuthKeyNone{},
+			DestroyAuthKeyNone: m,
 		},
 	}
 }
@@ -15000,7 +15000,7 @@ func (m *TLDestroyAuthKeyNone) Decode(dbuf *DecodeBuf) error {
 func (m *TLDestroyAuthKeyFail) ToDestroyAuthKeyRes() *DestroyAuthKeyRes {
 	return &DestroyAuthKeyRes{
 		Payload: &DestroyAuthKeyRes_DestroyAuthKeyFail{
-			DestroyAuthKeyFail: &TLDestroyAuthKeyFail{},
+			DestroyAuthKeyFail: m,
 		},
 	}
 }
@@ -15019,7 +15019,7 @@ func (m *TLDestroyAuthKeyFail) Decode(dbuf *DecodeBuf) error {
 func (m *TLMsgsAck) ToMsgsAck() *MsgsAck {
 	return &MsgsAck{
 		Payload: &MsgsAck_MsgsAck{
-			MsgsAck: &TLMsgsAck{},
+			MsgsAck: m,
 		},
 	}
 }
@@ -15040,7 +15040,7 @@ func (m *TLMsgsAck) Decode(dbuf *DecodeBuf) error {
 func (m *TLBadMsgNotification) ToBadMsgNotification() *BadMsgNotification {
 	return &BadMsgNotification{
 		Payload: &BadMsgNotification_BadMsgNotification{
-			BadMsgNotification: &TLBadMsgNotification{},
+			BadMsgNotification: m,
 		},
 	}
 }
@@ -15065,7 +15065,7 @@ func (m *TLBadMsgNotification) Decode(dbuf *DecodeBuf) error {
 func (m *TLBadServerSalt) ToBadMsgNotification() *BadMsgNotification {
 	return &BadMsgNotification{
 		Payload: &BadMsgNotification_BadServerSalt{
-			BadServerSalt: &TLBadServerSalt{},
+			BadServerSalt: m,
 		},
 	}
 }
@@ -15092,7 +15092,7 @@ func (m *TLBadServerSalt) Decode(dbuf *DecodeBuf) error {
 func (m *TLMsgsStateReq) ToMsgsStateReq() *MsgsStateReq {
 	return &MsgsStateReq{
 		Payload: &MsgsStateReq_MsgsStateReq{
-			MsgsStateReq: &TLMsgsStateReq{},
+			MsgsStateReq: m,
 		},
 	}
 }
@@ -15113,7 +15113,7 @@ func (m *TLMsgsStateReq) Decode(dbuf *DecodeBuf) error {
 func (m *TLMsgsStateInfo) ToMsgsStateInfo() *MsgsStateInfo {
 	return &MsgsStateInfo{
 		Payload: &MsgsStateInfo_MsgsStateInfo{
-			MsgsStateInfo: &TLMsgsStateInfo{},
+			MsgsStateInfo: m,
 		},
 	}
 }
@@ -15136,7 +15136,7 @@ func (m *TLMsgsStateInfo) Decode(dbuf *DecodeBuf) error {
 func (m *TLMsgsAllInfo) ToMsgsAllInfo() *MsgsAllInfo {
 	return &MsgsAllInfo{
 		Payload: &MsgsAllInfo_MsgsAllInfo{
-			MsgsAllInfo: &TLMsgsAllInfo{},
+			MsgsAllInfo: m,
 		},
 	}
 }
@@ -15159,7 +15159,7 @@ func (m *TLMsgsAllInfo) Decode(dbuf *DecodeBuf) error {
 func (m *TLMsgDetailedInfo) ToMsgDetailedInfo() *MsgDetailedInfo {
 	return &MsgDetailedInfo{
 		Payload: &MsgDetailedInfo_MsgDetailedInfo{
-			MsgDetailedInfo: &TLMsgDetailedInfo{},
+			MsgDetailedInfo: m,
 		},
 	}
 }
@@ -15186,7 +15186,7 @@ func (m *TLMsgDetailedInfo) Decode(dbuf *DecodeBuf) error {
 func (m *TLMsgNewDetailedInfo) ToMsgDetailedInfo() *MsgDetailedInfo {
 	return &MsgDetailedInfo{
 		Payload: &MsgDetailedInfo_MsgNewDetailedInfo{
-			MsgNewDetailedInfo: &TLMsgNewDetailedInfo{},
+			MsgNewDetailedInfo: m,
 		},
 	}
 }
@@ -15211,7 +15211,7 @@ func (m *TLMsgNewDetailedInfo) Decode(dbuf *DecodeBuf) error {
 func (m *TLMsgResendReq) ToMsgResendReq() *MsgResendReq {
 	return &MsgResendReq{
 		Payload: &MsgResendReq_MsgResendReq{
-			MsgResendReq: &TLMsgResendReq{},
+			MsgResendReq: m,
 		},
 	}
 }
@@ -15232,7 +15232,7 @@ func (m *TLMsgResendReq) Decode(dbuf *DecodeBuf) error {
 func (m *TLRpcError) ToRpcError() *RpcError {
 	return &RpcError{
 		Payload: &RpcError_RpcError{
-			RpcError: &TLRpcError{},
+			RpcError: m,
 		},
 	}
 }
@@ -15255,7 +15255,7 @@ func (m *TLRpcError) Decode(dbuf *DecodeBuf) error {
 func (m *TLRpcAnswerUnknown) ToRpcDropAnswer() *RpcDropAnswer {
 	return &RpcDropAnswer{
 		Payload: &RpcDropAnswer_RpcAnswerUnknown{
-			RpcAnswerUnknown: &TLRpcAnswerUnknown{},
+			RpcAnswerUnknown: m,
 		},
 	}
 }
@@ -15274,7 +15274,7 @@ func (m *TLRpcAnswerUnknown) Decode(dbuf *DecodeBuf) error {
 func (m *TLRpcAnswerDroppedRunning) ToRpcDropAnswer() *RpcDropAnswer {
 	return &RpcDropAnswer{
 		Payload: &RpcDropAnswer_RpcAnswerDroppedRunning{
-			RpcAnswerDroppedRunning: &TLRpcAnswerDroppedRunning{},
+			RpcAnswerDroppedRunning: m,
 		},
 	}
 }
@@ -15293,7 +15293,7 @@ func (m *TLRpcAnswerDroppedRunning) Decode(dbuf *DecodeBuf) error {
 func (m *TLRpcAnswerDropped) ToRpcDropAnswer() *RpcDropAnswer {
 	return &RpcDropAnswer{
 		Payload: &RpcDropAnswer_RpcAnswerDropped{
-			RpcAnswerDropped: &TLRpcAnswerDropped{},
+			RpcAnswerDropped: m,
 		},
 	}
 }
@@ -15318,7 +15318,7 @@ func (m *TLRpcAnswerDropped) Decode(dbuf *DecodeBuf) error {
 func (m *TLFutureSalt) ToFutureSalt() *FutureSalt {
 	return &FutureSalt{
 		Payload: &FutureSalt_FutureSalt{
-			FutureSalt: &TLFutureSalt{},
+			FutureSalt: m,
 		},
 	}
 }
@@ -15343,7 +15343,7 @@ func (m *TLFutureSalt) Decode(dbuf *DecodeBuf) error {
 func (m *TLFutureSalts) ToFutureSalts() *FutureSalts {
 	return &FutureSalts{
 		Payload: &FutureSalts_FutureSalts{
-			FutureSalts: &TLFutureSalts{},
+			FutureSalts: m,
 		},
 	}
 }
@@ -15388,7 +15388,7 @@ func (m *TLFutureSalts) Decode(dbuf *DecodeBuf) error {
 func (m *TLPong) ToPong() *Pong {
 	return &Pong{
 		Payload: &Pong_Pong{
-			Pong: &TLPong{},
+			Pong: m,
 		},
 	}
 }
@@ -15411,7 +15411,7 @@ func (m *TLPong) Decode(dbuf *DecodeBuf) error {
 func (m *TLDestroySessionOk) ToDestroySessionRes() *DestroySessionRes {
 	return &DestroySessionRes{
 		Payload: &DestroySessionRes_DestroySessionOk{
-			DestroySessionOk: &TLDestroySessionOk{},
+			DestroySessionOk: m,
 		},
 	}
 }
@@ -15432,7 +15432,7 @@ func (m *TLDestroySessionOk) Decode(dbuf *DecodeBuf) error {
 func (m *TLDestroySessionNone) ToDestroySessionRes() *DestroySessionRes {
 	return &DestroySessionRes{
 		Payload: &DestroySessionRes_DestroySessionNone{
-			DestroySessionNone: &TLDestroySessionNone{},
+			DestroySessionNone: m,
 		},
 	}
 }
@@ -15453,7 +15453,7 @@ func (m *TLDestroySessionNone) Decode(dbuf *DecodeBuf) error {
 func (m *TLNewSessionCreated) ToNewSession() *NewSession {
 	return &NewSession{
 		Payload: &NewSession_NewSessionCreated{
-			NewSessionCreated: &TLNewSessionCreated{},
+			NewSessionCreated: m,
 		},
 	}
 }
@@ -15478,7 +15478,7 @@ func (m *TLNewSessionCreated) Decode(dbuf *DecodeBuf) error {
 func (m *TLHttpWait) ToHttpWait() *HttpWait {
 	return &HttpWait{
 		Payload: &HttpWait_HttpWait{
-			HttpWait: &TLHttpWait{},
+			HttpWait: m,
 		},
 	}
 }
@@ -15503,7 +15503,7 @@ func (m *TLHttpWait) Decode(dbuf *DecodeBuf) error {
 func (m *TLIpPort) ToIpPort() *IpPort {
 	return &IpPort{
 		Payload: &IpPort_IpPort{
-			IpPort: &TLIpPort{},
+			IpPort: m,
 		},
 	}
 }
@@ -15526,7 +15526,7 @@ func (m *TLIpPort) Decode(dbuf *DecodeBuf) error {
 func (m *TLHelpConfigSimple) ToHelp_ConfigSimple() *Help_ConfigSimple {
 	return &Help_ConfigSimple{
 		Payload: &Help_ConfigSimple_HelpConfigSimple{
-			HelpConfigSimple: &TLHelpConfigSimple{},
+			HelpConfigSimple: m,
 		},
 	}
 }
@@ -15573,7 +15573,7 @@ func (m *TLHelpConfigSimple) Decode(dbuf *DecodeBuf) error {
 func (m *TLBoolFalse) ToBool() *Bool {
 	return &Bool{
 		Payload: &Bool_BoolFalse{
-			BoolFalse: &TLBoolFalse{},
+			BoolFalse: m,
 		},
 	}
 }
@@ -15592,7 +15592,7 @@ func (m *TLBoolFalse) Decode(dbuf *DecodeBuf) error {
 func (m *TLBoolTrue) ToBool() *Bool {
 	return &Bool{
 		Payload: &Bool_BoolTrue{
-			BoolTrue: &TLBoolTrue{},
+			BoolTrue: m,
 		},
 	}
 }
@@ -15611,7 +15611,7 @@ func (m *TLBoolTrue) Decode(dbuf *DecodeBuf) error {
 func (m *TLTrue) ToTrue() *True {
 	return &True{
 		Payload: &True_True{
-			True: &TLTrue{},
+			True: m,
 		},
 	}
 }
@@ -15630,7 +15630,7 @@ func (m *TLTrue) Decode(dbuf *DecodeBuf) error {
 func (m *TLError) ToError() *Error {
 	return &Error{
 		Payload: &Error_Error{
-			Error: &TLError{},
+			Error: m,
 		},
 	}
 }
@@ -15653,7 +15653,7 @@ func (m *TLError) Decode(dbuf *DecodeBuf) error {
 func (m *TLNull) ToNull() *Null {
 	return &Null{
 		Payload: &Null_Null{
-			Null: &TLNull{},
+			Null: m,
 		},
 	}
 }
@@ -15672,7 +15672,7 @@ func (m *TLNull) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPeerEmpty) ToInputPeer() *InputPeer {
 	return &InputPeer{
 		Payload: &InputPeer_InputPeerEmpty{
-			InputPeerEmpty: &TLInputPeerEmpty{},
+			InputPeerEmpty: m,
 		},
 	}
 }
@@ -15691,7 +15691,7 @@ func (m *TLInputPeerEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPeerSelf) ToInputPeer() *InputPeer {
 	return &InputPeer{
 		Payload: &InputPeer_InputPeerSelf{
-			InputPeerSelf: &TLInputPeerSelf{},
+			InputPeerSelf: m,
 		},
 	}
 }
@@ -15710,7 +15710,7 @@ func (m *TLInputPeerSelf) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPeerChat) ToInputPeer() *InputPeer {
 	return &InputPeer{
 		Payload: &InputPeer_InputPeerChat{
-			InputPeerChat: &TLInputPeerChat{},
+			InputPeerChat: m,
 		},
 	}
 }
@@ -15731,7 +15731,7 @@ func (m *TLInputPeerChat) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPeerUser) ToInputPeer() *InputPeer {
 	return &InputPeer{
 		Payload: &InputPeer_InputPeerUser{
-			InputPeerUser: &TLInputPeerUser{},
+			InputPeerUser: m,
 		},
 	}
 }
@@ -15754,7 +15754,7 @@ func (m *TLInputPeerUser) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPeerChannel) ToInputPeer() *InputPeer {
 	return &InputPeer{
 		Payload: &InputPeer_InputPeerChannel{
-			InputPeerChannel: &TLInputPeerChannel{},
+			InputPeerChannel: m,
 		},
 	}
 }
@@ -15777,7 +15777,7 @@ func (m *TLInputPeerChannel) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputUserEmpty) ToInputUser() *InputUser {
 	return &InputUser{
 		Payload: &InputUser_InputUserEmpty{
-			InputUserEmpty: &TLInputUserEmpty{},
+			InputUserEmpty: m,
 		},
 	}
 }
@@ -15796,7 +15796,7 @@ func (m *TLInputUserEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputUserSelf) ToInputUser() *InputUser {
 	return &InputUser{
 		Payload: &InputUser_InputUserSelf{
-			InputUserSelf: &TLInputUserSelf{},
+			InputUserSelf: m,
 		},
 	}
 }
@@ -15815,7 +15815,7 @@ func (m *TLInputUserSelf) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputUser) ToInputUser() *InputUser {
 	return &InputUser{
 		Payload: &InputUser_InputUser{
-			InputUser: &TLInputUser{},
+			InputUser: m,
 		},
 	}
 }
@@ -15838,7 +15838,7 @@ func (m *TLInputUser) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPhoneContact) ToInputContact() *InputContact {
 	return &InputContact{
 		Payload: &InputContact_InputPhoneContact{
-			InputPhoneContact: &TLInputPhoneContact{},
+			InputPhoneContact: m,
 		},
 	}
 }
@@ -15865,7 +15865,7 @@ func (m *TLInputPhoneContact) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputFile) ToInputFile() *InputFile {
 	return &InputFile{
 		Payload: &InputFile_InputFile{
-			InputFile: &TLInputFile{},
+			InputFile: m,
 		},
 	}
 }
@@ -15892,7 +15892,7 @@ func (m *TLInputFile) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputFileBig) ToInputFile() *InputFile {
 	return &InputFile{
 		Payload: &InputFile_InputFileBig{
-			InputFileBig: &TLInputFileBig{},
+			InputFileBig: m,
 		},
 	}
 }
@@ -15917,7 +15917,7 @@ func (m *TLInputFileBig) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaEmpty) ToInputMedia() *InputMedia {
 	return &InputMedia{
 		Payload: &InputMedia_InputMediaEmpty{
-			InputMediaEmpty: &TLInputMediaEmpty{},
+			InputMediaEmpty: m,
 		},
 	}
 }
@@ -15936,7 +15936,7 @@ func (m *TLInputMediaEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaUploadedPhoto) ToInputMedia() *InputMedia {
 	return &InputMedia{
 		Payload: &InputMedia_InputMediaUploadedPhoto{
-			InputMediaUploadedPhoto: &TLInputMediaUploadedPhoto{},
+			InputMediaUploadedPhoto: m,
 		},
 	}
 }
@@ -16003,7 +16003,7 @@ func (m *TLInputMediaUploadedPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaPhoto) ToInputMedia() *InputMedia {
 	return &InputMedia{
 		Payload: &InputMedia_InputMediaPhoto{
-			InputMediaPhoto: &TLInputMediaPhoto{},
+			InputMediaPhoto: m,
 		},
 	}
 }
@@ -16042,7 +16042,7 @@ func (m *TLInputMediaPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaGeoPoint) ToInputMedia() *InputMedia {
 	return &InputMedia{
 		Payload: &InputMedia_InputMediaGeoPoint{
-			InputMediaGeoPoint: &TLInputMediaGeoPoint{},
+			InputMediaGeoPoint: m,
 		},
 	}
 }
@@ -16065,7 +16065,7 @@ func (m *TLInputMediaGeoPoint) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaContact) ToInputMedia() *InputMedia {
 	return &InputMedia{
 		Payload: &InputMedia_InputMediaContact{
-			InputMediaContact: &TLInputMediaContact{},
+			InputMediaContact: m,
 		},
 	}
 }
@@ -16090,7 +16090,7 @@ func (m *TLInputMediaContact) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaUploadedDocument) ToInputMedia() *InputMedia {
 	return &InputMedia{
 		Payload: &InputMedia_InputMediaUploadedDocument{
-			InputMediaUploadedDocument: &TLInputMediaUploadedDocument{},
+			InputMediaUploadedDocument: m,
 		},
 	}
 }
@@ -16191,7 +16191,7 @@ func (m *TLInputMediaUploadedDocument) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaDocument) ToInputMedia() *InputMedia {
 	return &InputMedia{
 		Payload: &InputMedia_InputMediaDocument{
-			InputMediaDocument: &TLInputMediaDocument{},
+			InputMediaDocument: m,
 		},
 	}
 }
@@ -16230,7 +16230,7 @@ func (m *TLInputMediaDocument) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaVenue) ToInputMedia() *InputMedia {
 	return &InputMedia{
 		Payload: &InputMedia_InputMediaVenue{
-			InputMediaVenue: &TLInputMediaVenue{},
+			InputMediaVenue: m,
 		},
 	}
 }
@@ -16261,7 +16261,7 @@ func (m *TLInputMediaVenue) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaGifExternal) ToInputMedia() *InputMedia {
 	return &InputMedia{
 		Payload: &InputMedia_InputMediaGifExternal{
-			InputMediaGifExternal: &TLInputMediaGifExternal{},
+			InputMediaGifExternal: m,
 		},
 	}
 }
@@ -16284,7 +16284,7 @@ func (m *TLInputMediaGifExternal) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaPhotoExternal) ToInputMedia() *InputMedia {
 	return &InputMedia{
 		Payload: &InputMedia_InputMediaPhotoExternal{
-			InputMediaPhotoExternal: &TLInputMediaPhotoExternal{},
+			InputMediaPhotoExternal: m,
 		},
 	}
 }
@@ -16321,7 +16321,7 @@ func (m *TLInputMediaPhotoExternal) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaDocumentExternal) ToInputMedia() *InputMedia {
 	return &InputMedia{
 		Payload: &InputMedia_InputMediaDocumentExternal{
-			InputMediaDocumentExternal: &TLInputMediaDocumentExternal{},
+			InputMediaDocumentExternal: m,
 		},
 	}
 }
@@ -16358,7 +16358,7 @@ func (m *TLInputMediaDocumentExternal) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaGame) ToInputMedia() *InputMedia {
 	return &InputMedia{
 		Payload: &InputMedia_InputMediaGame{
-			InputMediaGame: &TLInputMediaGame{},
+			InputMediaGame: m,
 		},
 	}
 }
@@ -16381,7 +16381,7 @@ func (m *TLInputMediaGame) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMediaInvoice) ToInputMedia() *InputMedia {
 	return &InputMedia{
 		Payload: &InputMedia_InputMediaInvoice{
-			InputMediaInvoice: &TLInputMediaInvoice{},
+			InputMediaInvoice: m,
 		},
 	}
 }
@@ -16430,7 +16430,7 @@ func (m *TLInputMediaInvoice) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputChatPhotoEmpty) ToInputChatPhoto() *InputChatPhoto {
 	return &InputChatPhoto{
 		Payload: &InputChatPhoto_InputChatPhotoEmpty{
-			InputChatPhotoEmpty: &TLInputChatPhotoEmpty{},
+			InputChatPhotoEmpty: m,
 		},
 	}
 }
@@ -16449,7 +16449,7 @@ func (m *TLInputChatPhotoEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputChatUploadedPhoto) ToInputChatPhoto() *InputChatPhoto {
 	return &InputChatPhoto{
 		Payload: &InputChatPhoto_InputChatUploadedPhoto{
-			InputChatUploadedPhoto: &TLInputChatUploadedPhoto{},
+			InputChatUploadedPhoto: m,
 		},
 	}
 }
@@ -16472,7 +16472,7 @@ func (m *TLInputChatUploadedPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputChatPhoto) ToInputChatPhoto() *InputChatPhoto {
 	return &InputChatPhoto{
 		Payload: &InputChatPhoto_InputChatPhoto{
-			InputChatPhoto: &TLInputChatPhoto{},
+			InputChatPhoto: m,
 		},
 	}
 }
@@ -16495,7 +16495,7 @@ func (m *TLInputChatPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputGeoPointEmpty) ToInputGeoPoint() *InputGeoPoint {
 	return &InputGeoPoint{
 		Payload: &InputGeoPoint_InputGeoPointEmpty{
-			InputGeoPointEmpty: &TLInputGeoPointEmpty{},
+			InputGeoPointEmpty: m,
 		},
 	}
 }
@@ -16514,7 +16514,7 @@ func (m *TLInputGeoPointEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputGeoPoint) ToInputGeoPoint() *InputGeoPoint {
 	return &InputGeoPoint{
 		Payload: &InputGeoPoint_InputGeoPoint{
-			InputGeoPoint: &TLInputGeoPoint{},
+			InputGeoPoint: m,
 		},
 	}
 }
@@ -16537,7 +16537,7 @@ func (m *TLInputGeoPoint) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPhotoEmpty) ToInputPhoto() *InputPhoto {
 	return &InputPhoto{
 		Payload: &InputPhoto_InputPhotoEmpty{
-			InputPhotoEmpty: &TLInputPhotoEmpty{},
+			InputPhotoEmpty: m,
 		},
 	}
 }
@@ -16556,7 +16556,7 @@ func (m *TLInputPhotoEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPhoto) ToInputPhoto() *InputPhoto {
 	return &InputPhoto{
 		Payload: &InputPhoto_InputPhoto{
-			InputPhoto: &TLInputPhoto{},
+			InputPhoto: m,
 		},
 	}
 }
@@ -16579,7 +16579,7 @@ func (m *TLInputPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputFileLocation) ToInputFileLocation() *InputFileLocation {
 	return &InputFileLocation{
 		Payload: &InputFileLocation_InputFileLocation{
-			InputFileLocation: &TLInputFileLocation{},
+			InputFileLocation: m,
 		},
 	}
 }
@@ -16604,7 +16604,7 @@ func (m *TLInputFileLocation) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputEncryptedFileLocation) ToInputFileLocation() *InputFileLocation {
 	return &InputFileLocation{
 		Payload: &InputFileLocation_InputEncryptedFileLocation{
-			InputEncryptedFileLocation: &TLInputEncryptedFileLocation{},
+			InputEncryptedFileLocation: m,
 		},
 	}
 }
@@ -16627,7 +16627,7 @@ func (m *TLInputEncryptedFileLocation) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputDocumentFileLocation) ToInputFileLocation() *InputFileLocation {
 	return &InputFileLocation{
 		Payload: &InputFileLocation_InputDocumentFileLocation{
-			InputDocumentFileLocation: &TLInputDocumentFileLocation{},
+			InputDocumentFileLocation: m,
 		},
 	}
 }
@@ -16652,7 +16652,7 @@ func (m *TLInputDocumentFileLocation) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputAppEvent) ToInputAppEvent() *InputAppEvent {
 	return &InputAppEvent{
 		Payload: &InputAppEvent_InputAppEvent{
-			InputAppEvent: &TLInputAppEvent{},
+			InputAppEvent: m,
 		},
 	}
 }
@@ -16679,7 +16679,7 @@ func (m *TLInputAppEvent) Decode(dbuf *DecodeBuf) error {
 func (m *TLPeerUser) ToPeer() *Peer {
 	return &Peer{
 		Payload: &Peer_PeerUser{
-			PeerUser: &TLPeerUser{},
+			PeerUser: m,
 		},
 	}
 }
@@ -16700,7 +16700,7 @@ func (m *TLPeerUser) Decode(dbuf *DecodeBuf) error {
 func (m *TLPeerChat) ToPeer() *Peer {
 	return &Peer{
 		Payload: &Peer_PeerChat{
-			PeerChat: &TLPeerChat{},
+			PeerChat: m,
 		},
 	}
 }
@@ -16721,7 +16721,7 @@ func (m *TLPeerChat) Decode(dbuf *DecodeBuf) error {
 func (m *TLPeerChannel) ToPeer() *Peer {
 	return &Peer{
 		Payload: &Peer_PeerChannel{
-			PeerChannel: &TLPeerChannel{},
+			PeerChannel: m,
 		},
 	}
 }
@@ -16742,7 +16742,7 @@ func (m *TLPeerChannel) Decode(dbuf *DecodeBuf) error {
 func (m *TLStorageFileUnknown) ToStorage_FileType() *Storage_FileType {
 	return &Storage_FileType{
 		Payload: &Storage_FileType_StorageFileUnknown{
-			StorageFileUnknown: &TLStorageFileUnknown{},
+			StorageFileUnknown: m,
 		},
 	}
 }
@@ -16761,7 +16761,7 @@ func (m *TLStorageFileUnknown) Decode(dbuf *DecodeBuf) error {
 func (m *TLStorageFilePartial) ToStorage_FileType() *Storage_FileType {
 	return &Storage_FileType{
 		Payload: &Storage_FileType_StorageFilePartial{
-			StorageFilePartial: &TLStorageFilePartial{},
+			StorageFilePartial: m,
 		},
 	}
 }
@@ -16780,7 +16780,7 @@ func (m *TLStorageFilePartial) Decode(dbuf *DecodeBuf) error {
 func (m *TLStorageFileJpeg) ToStorage_FileType() *Storage_FileType {
 	return &Storage_FileType{
 		Payload: &Storage_FileType_StorageFileJpeg{
-			StorageFileJpeg: &TLStorageFileJpeg{},
+			StorageFileJpeg: m,
 		},
 	}
 }
@@ -16799,7 +16799,7 @@ func (m *TLStorageFileJpeg) Decode(dbuf *DecodeBuf) error {
 func (m *TLStorageFileGif) ToStorage_FileType() *Storage_FileType {
 	return &Storage_FileType{
 		Payload: &Storage_FileType_StorageFileGif{
-			StorageFileGif: &TLStorageFileGif{},
+			StorageFileGif: m,
 		},
 	}
 }
@@ -16818,7 +16818,7 @@ func (m *TLStorageFileGif) Decode(dbuf *DecodeBuf) error {
 func (m *TLStorageFilePng) ToStorage_FileType() *Storage_FileType {
 	return &Storage_FileType{
 		Payload: &Storage_FileType_StorageFilePng{
-			StorageFilePng: &TLStorageFilePng{},
+			StorageFilePng: m,
 		},
 	}
 }
@@ -16837,7 +16837,7 @@ func (m *TLStorageFilePng) Decode(dbuf *DecodeBuf) error {
 func (m *TLStorageFilePdf) ToStorage_FileType() *Storage_FileType {
 	return &Storage_FileType{
 		Payload: &Storage_FileType_StorageFilePdf{
-			StorageFilePdf: &TLStorageFilePdf{},
+			StorageFilePdf: m,
 		},
 	}
 }
@@ -16856,7 +16856,7 @@ func (m *TLStorageFilePdf) Decode(dbuf *DecodeBuf) error {
 func (m *TLStorageFileMp3) ToStorage_FileType() *Storage_FileType {
 	return &Storage_FileType{
 		Payload: &Storage_FileType_StorageFileMp3{
-			StorageFileMp3: &TLStorageFileMp3{},
+			StorageFileMp3: m,
 		},
 	}
 }
@@ -16875,7 +16875,7 @@ func (m *TLStorageFileMp3) Decode(dbuf *DecodeBuf) error {
 func (m *TLStorageFileMov) ToStorage_FileType() *Storage_FileType {
 	return &Storage_FileType{
 		Payload: &Storage_FileType_StorageFileMov{
-			StorageFileMov: &TLStorageFileMov{},
+			StorageFileMov: m,
 		},
 	}
 }
@@ -16894,7 +16894,7 @@ func (m *TLStorageFileMov) Decode(dbuf *DecodeBuf) error {
 func (m *TLStorageFileMp4) ToStorage_FileType() *Storage_FileType {
 	return &Storage_FileType{
 		Payload: &Storage_FileType_StorageFileMp4{
-			StorageFileMp4: &TLStorageFileMp4{},
+			StorageFileMp4: m,
 		},
 	}
 }
@@ -16913,7 +16913,7 @@ func (m *TLStorageFileMp4) Decode(dbuf *DecodeBuf) error {
 func (m *TLStorageFileWebp) ToStorage_FileType() *Storage_FileType {
 	return &Storage_FileType{
 		Payload: &Storage_FileType_StorageFileWebp{
-			StorageFileWebp: &TLStorageFileWebp{},
+			StorageFileWebp: m,
 		},
 	}
 }
@@ -16932,7 +16932,7 @@ func (m *TLStorageFileWebp) Decode(dbuf *DecodeBuf) error {
 func (m *TLFileLocationUnavailable) ToFileLocation() *FileLocation {
 	return &FileLocation{
 		Payload: &FileLocation_FileLocationUnavailable{
-			FileLocationUnavailable: &TLFileLocationUnavailable{},
+			FileLocationUnavailable: m,
 		},
 	}
 }
@@ -16957,7 +16957,7 @@ func (m *TLFileLocationUnavailable) Decode(dbuf *DecodeBuf) error {
 func (m *TLFileLocation) ToFileLocation() *FileLocation {
 	return &FileLocation{
 		Payload: &FileLocation_FileLocation{
-			FileLocation: &TLFileLocation{},
+			FileLocation: m,
 		},
 	}
 }
@@ -16984,7 +16984,7 @@ func (m *TLFileLocation) Decode(dbuf *DecodeBuf) error {
 func (m *TLUserEmpty) ToUser() *User {
 	return &User{
 		Payload: &User_UserEmpty{
-			UserEmpty: &TLUserEmpty{},
+			UserEmpty: m,
 		},
 	}
 }
@@ -17005,7 +17005,7 @@ func (m *TLUserEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLUser) ToUser() *User {
 	return &User{
 		Payload: &User_User{
-			User: &TLUser{},
+			User: m,
 		},
 	}
 }
@@ -17233,7 +17233,7 @@ func (m *TLUser) Decode(dbuf *DecodeBuf) error {
 func (m *TLUserProfilePhotoEmpty) ToUserProfilePhoto() *UserProfilePhoto {
 	return &UserProfilePhoto{
 		Payload: &UserProfilePhoto_UserProfilePhotoEmpty{
-			UserProfilePhotoEmpty: &TLUserProfilePhotoEmpty{},
+			UserProfilePhotoEmpty: m,
 		},
 	}
 }
@@ -17252,7 +17252,7 @@ func (m *TLUserProfilePhotoEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLUserProfilePhoto) ToUserProfilePhoto() *UserProfilePhoto {
 	return &UserProfilePhoto{
 		Payload: &UserProfilePhoto_UserProfilePhoto{
-			UserProfilePhoto: &TLUserProfilePhoto{},
+			UserProfilePhoto: m,
 		},
 	}
 }
@@ -17281,7 +17281,7 @@ func (m *TLUserProfilePhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLUserStatusEmpty) ToUserStatus() *UserStatus {
 	return &UserStatus{
 		Payload: &UserStatus_UserStatusEmpty{
-			UserStatusEmpty: &TLUserStatusEmpty{},
+			UserStatusEmpty: m,
 		},
 	}
 }
@@ -17300,7 +17300,7 @@ func (m *TLUserStatusEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLUserStatusOnline) ToUserStatus() *UserStatus {
 	return &UserStatus{
 		Payload: &UserStatus_UserStatusOnline{
-			UserStatusOnline: &TLUserStatusOnline{},
+			UserStatusOnline: m,
 		},
 	}
 }
@@ -17321,7 +17321,7 @@ func (m *TLUserStatusOnline) Decode(dbuf *DecodeBuf) error {
 func (m *TLUserStatusOffline) ToUserStatus() *UserStatus {
 	return &UserStatus{
 		Payload: &UserStatus_UserStatusOffline{
-			UserStatusOffline: &TLUserStatusOffline{},
+			UserStatusOffline: m,
 		},
 	}
 }
@@ -17342,7 +17342,7 @@ func (m *TLUserStatusOffline) Decode(dbuf *DecodeBuf) error {
 func (m *TLUserStatusRecently) ToUserStatus() *UserStatus {
 	return &UserStatus{
 		Payload: &UserStatus_UserStatusRecently{
-			UserStatusRecently: &TLUserStatusRecently{},
+			UserStatusRecently: m,
 		},
 	}
 }
@@ -17361,7 +17361,7 @@ func (m *TLUserStatusRecently) Decode(dbuf *DecodeBuf) error {
 func (m *TLUserStatusLastWeek) ToUserStatus() *UserStatus {
 	return &UserStatus{
 		Payload: &UserStatus_UserStatusLastWeek{
-			UserStatusLastWeek: &TLUserStatusLastWeek{},
+			UserStatusLastWeek: m,
 		},
 	}
 }
@@ -17380,7 +17380,7 @@ func (m *TLUserStatusLastWeek) Decode(dbuf *DecodeBuf) error {
 func (m *TLUserStatusLastMonth) ToUserStatus() *UserStatus {
 	return &UserStatus{
 		Payload: &UserStatus_UserStatusLastMonth{
-			UserStatusLastMonth: &TLUserStatusLastMonth{},
+			UserStatusLastMonth: m,
 		},
 	}
 }
@@ -17399,7 +17399,7 @@ func (m *TLUserStatusLastMonth) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatEmpty) ToChat() *Chat {
 	return &Chat{
 		Payload: &Chat_ChatEmpty{
-			ChatEmpty: &TLChatEmpty{},
+			ChatEmpty: m,
 		},
 	}
 }
@@ -17420,7 +17420,7 @@ func (m *TLChatEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLChat) ToChat() *Chat {
 	return &Chat{
 		Payload: &Chat_Chat{
-			Chat: &TLChat{},
+			Chat: m,
 		},
 	}
 }
@@ -17523,7 +17523,7 @@ func (m *TLChat) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatForbidden) ToChat() *Chat {
 	return &Chat{
 		Payload: &Chat_ChatForbidden{
-			ChatForbidden: &TLChatForbidden{},
+			ChatForbidden: m,
 		},
 	}
 }
@@ -17546,7 +17546,7 @@ func (m *TLChatForbidden) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannel) ToChat() *Chat {
 	return &Chat{
 		Payload: &Chat_Channel{
-			Channel: &TLChannel{},
+			Channel: m,
 		},
 	}
 }
@@ -17721,7 +17721,7 @@ func (m *TLChannel) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelForbidden) ToChat() *Chat {
 	return &Chat{
 		Payload: &Chat_ChannelForbidden{
-			ChannelForbidden: &TLChannelForbidden{},
+			ChannelForbidden: m,
 		},
 	}
 }
@@ -17778,7 +17778,7 @@ func (m *TLChannelForbidden) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatFull) ToChatFull() *ChatFull {
 	return &ChatFull{
 		Payload: &ChatFull_ChatFull{
-			ChatFull: &TLChatFull{},
+			ChatFull: m,
 		},
 	}
 }
@@ -17836,7 +17836,7 @@ func (m *TLChatFull) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelFull) ToChatFull() *ChatFull {
 	return &ChatFull{
 		Payload: &ChatFull_ChannelFull{
-			ChannelFull: &TLChannelFull{},
+			ChannelFull: m,
 		},
 	}
 }
@@ -18004,7 +18004,7 @@ func (m *TLChannelFull) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatParticipant) ToChatParticipant() *ChatParticipant {
 	return &ChatParticipant{
 		Payload: &ChatParticipant_ChatParticipant{
-			ChatParticipant: &TLChatParticipant{},
+			ChatParticipant: m,
 		},
 	}
 }
@@ -18029,7 +18029,7 @@ func (m *TLChatParticipant) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatParticipantCreator) ToChatParticipant() *ChatParticipant {
 	return &ChatParticipant{
 		Payload: &ChatParticipant_ChatParticipantCreator{
-			ChatParticipantCreator: &TLChatParticipantCreator{},
+			ChatParticipantCreator: m,
 		},
 	}
 }
@@ -18050,7 +18050,7 @@ func (m *TLChatParticipantCreator) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatParticipantAdmin) ToChatParticipant() *ChatParticipant {
 	return &ChatParticipant{
 		Payload: &ChatParticipant_ChatParticipantAdmin{
-			ChatParticipantAdmin: &TLChatParticipantAdmin{},
+			ChatParticipantAdmin: m,
 		},
 	}
 }
@@ -18075,7 +18075,7 @@ func (m *TLChatParticipantAdmin) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatParticipantsForbidden) ToChatParticipants() *ChatParticipants {
 	return &ChatParticipants{
 		Payload: &ChatParticipants_ChatParticipantsForbidden{
-			ChatParticipantsForbidden: &TLChatParticipantsForbidden{},
+			ChatParticipantsForbidden: m,
 		},
 	}
 }
@@ -18112,7 +18112,7 @@ func (m *TLChatParticipantsForbidden) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatParticipants) ToChatParticipants() *ChatParticipants {
 	return &ChatParticipants{
 		Payload: &ChatParticipants_ChatParticipants{
-			ChatParticipants: &TLChatParticipants{},
+			ChatParticipants: m,
 		},
 	}
 }
@@ -18156,7 +18156,7 @@ func (m *TLChatParticipants) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatPhotoEmpty) ToChatPhoto() *ChatPhoto {
 	return &ChatPhoto{
 		Payload: &ChatPhoto_ChatPhotoEmpty{
-			ChatPhotoEmpty: &TLChatPhotoEmpty{},
+			ChatPhotoEmpty: m,
 		},
 	}
 }
@@ -18175,7 +18175,7 @@ func (m *TLChatPhotoEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatPhoto) ToChatPhoto() *ChatPhoto {
 	return &ChatPhoto{
 		Payload: &ChatPhoto_ChatPhoto{
-			ChatPhoto: &TLChatPhoto{},
+			ChatPhoto: m,
 		},
 	}
 }
@@ -18202,7 +18202,7 @@ func (m *TLChatPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageEmpty) ToMessage() *Message {
 	return &Message{
 		Payload: &Message_MessageEmpty{
-			MessageEmpty: &TLMessageEmpty{},
+			MessageEmpty: m,
 		},
 	}
 }
@@ -18223,7 +18223,7 @@ func (m *TLMessageEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessage) ToMessage() *Message {
 	return &Message{
 		Payload: &Message_Message{
-			Message: &TLMessage{},
+			Message: m,
 		},
 	}
 }
@@ -18417,7 +18417,7 @@ func (m *TLMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageService) ToMessage() *Message {
 	return &Message{
 		Payload: &Message_MessageService{
-			MessageService: &TLMessageService{},
+			MessageService: m,
 		},
 	}
 }
@@ -18516,7 +18516,7 @@ func (m *TLMessageService) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageMediaEmpty) ToMessageMedia() *MessageMedia {
 	return &MessageMedia{
 		Payload: &MessageMedia_MessageMediaEmpty{
-			MessageMediaEmpty: &TLMessageMediaEmpty{},
+			MessageMediaEmpty: m,
 		},
 	}
 }
@@ -18535,7 +18535,7 @@ func (m *TLMessageMediaEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageMediaPhoto) ToMessageMedia() *MessageMedia {
 	return &MessageMedia{
 		Payload: &MessageMedia_MessageMediaPhoto{
-			MessageMediaPhoto: &TLMessageMediaPhoto{},
+			MessageMediaPhoto: m,
 		},
 	}
 }
@@ -18588,7 +18588,7 @@ func (m *TLMessageMediaPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageMediaGeo) ToMessageMedia() *MessageMedia {
 	return &MessageMedia{
 		Payload: &MessageMedia_MessageMediaGeo{
-			MessageMediaGeo: &TLMessageMediaGeo{},
+			MessageMediaGeo: m,
 		},
 	}
 }
@@ -18611,7 +18611,7 @@ func (m *TLMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageMediaContact) ToMessageMedia() *MessageMedia {
 	return &MessageMedia{
 		Payload: &MessageMedia_MessageMediaContact{
-			MessageMediaContact: &TLMessageMediaContact{},
+			MessageMediaContact: m,
 		},
 	}
 }
@@ -18638,7 +18638,7 @@ func (m *TLMessageMediaContact) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageMediaUnsupported) ToMessageMedia() *MessageMedia {
 	return &MessageMedia{
 		Payload: &MessageMedia_MessageMediaUnsupported{
-			MessageMediaUnsupported: &TLMessageMediaUnsupported{},
+			MessageMediaUnsupported: m,
 		},
 	}
 }
@@ -18657,7 +18657,7 @@ func (m *TLMessageMediaUnsupported) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageMediaDocument) ToMessageMedia() *MessageMedia {
 	return &MessageMedia{
 		Payload: &MessageMedia_MessageMediaDocument{
-			MessageMediaDocument: &TLMessageMediaDocument{},
+			MessageMediaDocument: m,
 		},
 	}
 }
@@ -18710,7 +18710,7 @@ func (m *TLMessageMediaDocument) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageMediaWebPage) ToMessageMedia() *MessageMedia {
 	return &MessageMedia{
 		Payload: &MessageMedia_MessageMediaWebPage{
-			MessageMediaWebPage: &TLMessageMediaWebPage{},
+			MessageMediaWebPage: m,
 		},
 	}
 }
@@ -18733,7 +18733,7 @@ func (m *TLMessageMediaWebPage) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageMediaVenue) ToMessageMedia() *MessageMedia {
 	return &MessageMedia{
 		Payload: &MessageMedia_MessageMediaVenue{
-			MessageMediaVenue: &TLMessageMediaVenue{},
+			MessageMediaVenue: m,
 		},
 	}
 }
@@ -18764,7 +18764,7 @@ func (m *TLMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageMediaGame) ToMessageMedia() *MessageMedia {
 	return &MessageMedia{
 		Payload: &MessageMedia_MessageMediaGame{
-			MessageMediaGame: &TLMessageMediaGame{},
+			MessageMediaGame: m,
 		},
 	}
 }
@@ -18787,7 +18787,7 @@ func (m *TLMessageMediaGame) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageMediaInvoice) ToMessageMedia() *MessageMedia {
 	return &MessageMedia{
 		Payload: &MessageMedia_MessageMediaInvoice{
-			MessageMediaInvoice: &TLMessageMediaInvoice{},
+			MessageMediaInvoice: m,
 		},
 	}
 }
@@ -18859,7 +18859,7 @@ func (m *TLMessageMediaInvoice) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionEmpty) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionEmpty{
-			MessageActionEmpty: &TLMessageActionEmpty{},
+			MessageActionEmpty: m,
 		},
 	}
 }
@@ -18878,7 +18878,7 @@ func (m *TLMessageActionEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionChatCreate) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionChatCreate{
-			MessageActionChatCreate: &TLMessageActionChatCreate{},
+			MessageActionChatCreate: m,
 		},
 	}
 }
@@ -18901,7 +18901,7 @@ func (m *TLMessageActionChatCreate) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionChatEditTitle) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionChatEditTitle{
-			MessageActionChatEditTitle: &TLMessageActionChatEditTitle{},
+			MessageActionChatEditTitle: m,
 		},
 	}
 }
@@ -18922,7 +18922,7 @@ func (m *TLMessageActionChatEditTitle) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionChatEditPhoto) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionChatEditPhoto{
-			MessageActionChatEditPhoto: &TLMessageActionChatEditPhoto{},
+			MessageActionChatEditPhoto: m,
 		},
 	}
 }
@@ -18945,7 +18945,7 @@ func (m *TLMessageActionChatEditPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionChatDeletePhoto) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionChatDeletePhoto{
-			MessageActionChatDeletePhoto: &TLMessageActionChatDeletePhoto{},
+			MessageActionChatDeletePhoto: m,
 		},
 	}
 }
@@ -18964,7 +18964,7 @@ func (m *TLMessageActionChatDeletePhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionChatAddUser) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionChatAddUser{
-			MessageActionChatAddUser: &TLMessageActionChatAddUser{},
+			MessageActionChatAddUser: m,
 		},
 	}
 }
@@ -18985,7 +18985,7 @@ func (m *TLMessageActionChatAddUser) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionChatDeleteUser) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionChatDeleteUser{
-			MessageActionChatDeleteUser: &TLMessageActionChatDeleteUser{},
+			MessageActionChatDeleteUser: m,
 		},
 	}
 }
@@ -19006,7 +19006,7 @@ func (m *TLMessageActionChatDeleteUser) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionChatJoinedByLink) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionChatJoinedByLink{
-			MessageActionChatJoinedByLink: &TLMessageActionChatJoinedByLink{},
+			MessageActionChatJoinedByLink: m,
 		},
 	}
 }
@@ -19027,7 +19027,7 @@ func (m *TLMessageActionChatJoinedByLink) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionChannelCreate) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionChannelCreate{
-			MessageActionChannelCreate: &TLMessageActionChannelCreate{},
+			MessageActionChannelCreate: m,
 		},
 	}
 }
@@ -19048,7 +19048,7 @@ func (m *TLMessageActionChannelCreate) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionChatMigrateTo) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionChatMigrateTo{
-			MessageActionChatMigrateTo: &TLMessageActionChatMigrateTo{},
+			MessageActionChatMigrateTo: m,
 		},
 	}
 }
@@ -19069,7 +19069,7 @@ func (m *TLMessageActionChatMigrateTo) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionChannelMigrateFrom) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionChannelMigrateFrom{
-			MessageActionChannelMigrateFrom: &TLMessageActionChannelMigrateFrom{},
+			MessageActionChannelMigrateFrom: m,
 		},
 	}
 }
@@ -19092,7 +19092,7 @@ func (m *TLMessageActionChannelMigrateFrom) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionPinMessage) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionPinMessage{
-			MessageActionPinMessage: &TLMessageActionPinMessage{},
+			MessageActionPinMessage: m,
 		},
 	}
 }
@@ -19111,7 +19111,7 @@ func (m *TLMessageActionPinMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionHistoryClear) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionHistoryClear{
-			MessageActionHistoryClear: &TLMessageActionHistoryClear{},
+			MessageActionHistoryClear: m,
 		},
 	}
 }
@@ -19130,7 +19130,7 @@ func (m *TLMessageActionHistoryClear) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionGameScore) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionGameScore{
-			MessageActionGameScore: &TLMessageActionGameScore{},
+			MessageActionGameScore: m,
 		},
 	}
 }
@@ -19153,7 +19153,7 @@ func (m *TLMessageActionGameScore) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionPaymentSentMe) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionPaymentSentMe{
-			MessageActionPaymentSentMe: &TLMessageActionPaymentSentMe{},
+			MessageActionPaymentSentMe: m,
 		},
 	}
 }
@@ -19207,7 +19207,7 @@ func (m *TLMessageActionPaymentSentMe) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionPaymentSent) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionPaymentSent{
-			MessageActionPaymentSent: &TLMessageActionPaymentSent{},
+			MessageActionPaymentSent: m,
 		},
 	}
 }
@@ -19230,7 +19230,7 @@ func (m *TLMessageActionPaymentSent) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionPhoneCall) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionPhoneCall{
-			MessageActionPhoneCall: &TLMessageActionPhoneCall{},
+			MessageActionPhoneCall: m,
 		},
 	}
 }
@@ -19276,7 +19276,7 @@ func (m *TLMessageActionPhoneCall) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageActionScreenshotTaken) ToMessageAction() *MessageAction {
 	return &MessageAction{
 		Payload: &MessageAction_MessageActionScreenshotTaken{
-			MessageActionScreenshotTaken: &TLMessageActionScreenshotTaken{},
+			MessageActionScreenshotTaken: m,
 		},
 	}
 }
@@ -19295,7 +19295,7 @@ func (m *TLMessageActionScreenshotTaken) Decode(dbuf *DecodeBuf) error {
 func (m *TLDialog) ToDialog() *Dialog {
 	return &Dialog{
 		Payload: &Dialog_Dialog{
-			Dialog: &TLDialog{},
+			Dialog: m,
 		},
 	}
 }
@@ -19366,7 +19366,7 @@ func (m *TLDialog) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhotoEmpty) ToPhoto() *Photo {
 	return &Photo{
 		Payload: &Photo_PhotoEmpty{
-			PhotoEmpty: &TLPhotoEmpty{},
+			PhotoEmpty: m,
 		},
 	}
 }
@@ -19387,7 +19387,7 @@ func (m *TLPhotoEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoto) ToPhoto() *Photo {
 	return &Photo{
 		Payload: &Photo_Photo{
-			Photo: &TLPhoto{},
+			Photo: m,
 		},
 	}
 }
@@ -19447,7 +19447,7 @@ func (m *TLPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhotoSizeEmpty) ToPhotoSize() *PhotoSize {
 	return &PhotoSize{
 		Payload: &PhotoSize_PhotoSizeEmpty{
-			PhotoSizeEmpty: &TLPhotoSizeEmpty{},
+			PhotoSizeEmpty: m,
 		},
 	}
 }
@@ -19468,7 +19468,7 @@ func (m *TLPhotoSizeEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhotoSize) ToPhotoSize() *PhotoSize {
 	return &PhotoSize{
 		Payload: &PhotoSize_PhotoSize{
-			PhotoSize: &TLPhotoSize{},
+			PhotoSize: m,
 		},
 	}
 }
@@ -19499,7 +19499,7 @@ func (m *TLPhotoSize) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhotoCachedSize) ToPhotoSize() *PhotoSize {
 	return &PhotoSize{
 		Payload: &PhotoSize_PhotoCachedSize{
-			PhotoCachedSize: &TLPhotoCachedSize{},
+			PhotoCachedSize: m,
 		},
 	}
 }
@@ -19530,7 +19530,7 @@ func (m *TLPhotoCachedSize) Decode(dbuf *DecodeBuf) error {
 func (m *TLGeoPointEmpty) ToGeoPoint() *GeoPoint {
 	return &GeoPoint{
 		Payload: &GeoPoint_GeoPointEmpty{
-			GeoPointEmpty: &TLGeoPointEmpty{},
+			GeoPointEmpty: m,
 		},
 	}
 }
@@ -19549,7 +19549,7 @@ func (m *TLGeoPointEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLGeoPoint) ToGeoPoint() *GeoPoint {
 	return &GeoPoint{
 		Payload: &GeoPoint_GeoPoint{
-			GeoPoint: &TLGeoPoint{},
+			GeoPoint: m,
 		},
 	}
 }
@@ -19572,7 +19572,7 @@ func (m *TLGeoPoint) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthCheckedPhone) ToAuth_CheckedPhone() *Auth_CheckedPhone {
 	return &Auth_CheckedPhone{
 		Payload: &Auth_CheckedPhone_AuthCheckedPhone{
-			AuthCheckedPhone: &TLAuthCheckedPhone{},
+			AuthCheckedPhone: m,
 		},
 	}
 }
@@ -19595,7 +19595,7 @@ func (m *TLAuthCheckedPhone) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthSentCode) ToAuth_SentCode() *Auth_SentCode {
 	return &Auth_SentCode{
 		Payload: &Auth_SentCode_AuthSentCode{
-			AuthSentCode: &TLAuthSentCode{},
+			AuthSentCode: m,
 		},
 	}
 }
@@ -19654,7 +19654,7 @@ func (m *TLAuthSentCode) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthAuthorization) ToAuth_Authorization() *Auth_Authorization {
 	return &Auth_Authorization{
 		Payload: &Auth_Authorization_AuthAuthorization{
-			AuthAuthorization: &TLAuthAuthorization{},
+			AuthAuthorization: m,
 		},
 	}
 }
@@ -19691,7 +19691,7 @@ func (m *TLAuthAuthorization) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthExportedAuthorization) ToAuth_ExportedAuthorization() *Auth_ExportedAuthorization {
 	return &Auth_ExportedAuthorization{
 		Payload: &Auth_ExportedAuthorization_AuthExportedAuthorization{
-			AuthExportedAuthorization: &TLAuthExportedAuthorization{},
+			AuthExportedAuthorization: m,
 		},
 	}
 }
@@ -19714,7 +19714,7 @@ func (m *TLAuthExportedAuthorization) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputNotifyPeer) ToInputNotifyPeer() *InputNotifyPeer {
 	return &InputNotifyPeer{
 		Payload: &InputNotifyPeer_InputNotifyPeer{
-			InputNotifyPeer: &TLInputNotifyPeer{},
+			InputNotifyPeer: m,
 		},
 	}
 }
@@ -19737,7 +19737,7 @@ func (m *TLInputNotifyPeer) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputNotifyUsers) ToInputNotifyPeer() *InputNotifyPeer {
 	return &InputNotifyPeer{
 		Payload: &InputNotifyPeer_InputNotifyUsers{
-			InputNotifyUsers: &TLInputNotifyUsers{},
+			InputNotifyUsers: m,
 		},
 	}
 }
@@ -19756,7 +19756,7 @@ func (m *TLInputNotifyUsers) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputNotifyChats) ToInputNotifyPeer() *InputNotifyPeer {
 	return &InputNotifyPeer{
 		Payload: &InputNotifyPeer_InputNotifyChats{
-			InputNotifyChats: &TLInputNotifyChats{},
+			InputNotifyChats: m,
 		},
 	}
 }
@@ -19775,7 +19775,7 @@ func (m *TLInputNotifyChats) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputNotifyAll) ToInputNotifyPeer() *InputNotifyPeer {
 	return &InputNotifyPeer{
 		Payload: &InputNotifyPeer_InputNotifyAll{
-			InputNotifyAll: &TLInputNotifyAll{},
+			InputNotifyAll: m,
 		},
 	}
 }
@@ -19794,7 +19794,7 @@ func (m *TLInputNotifyAll) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPeerNotifyEventsEmpty) ToInputPeerNotifyEvents() *InputPeerNotifyEvents {
 	return &InputPeerNotifyEvents{
 		Payload: &InputPeerNotifyEvents_InputPeerNotifyEventsEmpty{
-			InputPeerNotifyEventsEmpty: &TLInputPeerNotifyEventsEmpty{},
+			InputPeerNotifyEventsEmpty: m,
 		},
 	}
 }
@@ -19813,7 +19813,7 @@ func (m *TLInputPeerNotifyEventsEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPeerNotifyEventsAll) ToInputPeerNotifyEvents() *InputPeerNotifyEvents {
 	return &InputPeerNotifyEvents{
 		Payload: &InputPeerNotifyEvents_InputPeerNotifyEventsAll{
-			InputPeerNotifyEventsAll: &TLInputPeerNotifyEventsAll{},
+			InputPeerNotifyEventsAll: m,
 		},
 	}
 }
@@ -19832,7 +19832,7 @@ func (m *TLInputPeerNotifyEventsAll) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPeerNotifySettings) ToInputPeerNotifySettings() *InputPeerNotifySettings {
 	return &InputPeerNotifySettings{
 		Payload: &InputPeerNotifySettings_InputPeerNotifySettings{
-			InputPeerNotifySettings: &TLInputPeerNotifySettings{},
+			InputPeerNotifySettings: m,
 		},
 	}
 }
@@ -19878,7 +19878,7 @@ func (m *TLInputPeerNotifySettings) Decode(dbuf *DecodeBuf) error {
 func (m *TLPeerNotifyEventsEmpty) ToPeerNotifyEvents() *PeerNotifyEvents {
 	return &PeerNotifyEvents{
 		Payload: &PeerNotifyEvents_PeerNotifyEventsEmpty{
-			PeerNotifyEventsEmpty: &TLPeerNotifyEventsEmpty{},
+			PeerNotifyEventsEmpty: m,
 		},
 	}
 }
@@ -19897,7 +19897,7 @@ func (m *TLPeerNotifyEventsEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLPeerNotifyEventsAll) ToPeerNotifyEvents() *PeerNotifyEvents {
 	return &PeerNotifyEvents{
 		Payload: &PeerNotifyEvents_PeerNotifyEventsAll{
-			PeerNotifyEventsAll: &TLPeerNotifyEventsAll{},
+			PeerNotifyEventsAll: m,
 		},
 	}
 }
@@ -19916,7 +19916,7 @@ func (m *TLPeerNotifyEventsAll) Decode(dbuf *DecodeBuf) error {
 func (m *TLPeerNotifySettingsEmpty) ToPeerNotifySettings() *PeerNotifySettings {
 	return &PeerNotifySettings{
 		Payload: &PeerNotifySettings_PeerNotifySettingsEmpty{
-			PeerNotifySettingsEmpty: &TLPeerNotifySettingsEmpty{},
+			PeerNotifySettingsEmpty: m,
 		},
 	}
 }
@@ -19935,7 +19935,7 @@ func (m *TLPeerNotifySettingsEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLPeerNotifySettings) ToPeerNotifySettings() *PeerNotifySettings {
 	return &PeerNotifySettings{
 		Payload: &PeerNotifySettings_PeerNotifySettings{
-			PeerNotifySettings: &TLPeerNotifySettings{},
+			PeerNotifySettings: m,
 		},
 	}
 }
@@ -19981,7 +19981,7 @@ func (m *TLPeerNotifySettings) Decode(dbuf *DecodeBuf) error {
 func (m *TLPeerSettings) ToPeerSettings() *PeerSettings {
 	return &PeerSettings{
 		Payload: &PeerSettings_PeerSettings{
-			PeerSettings: &TLPeerSettings{},
+			PeerSettings: m,
 		},
 	}
 }
@@ -20014,7 +20014,7 @@ func (m *TLPeerSettings) Decode(dbuf *DecodeBuf) error {
 func (m *TLWallPaper) ToWallPaper() *WallPaper {
 	return &WallPaper{
 		Payload: &WallPaper_WallPaper{
-			WallPaper: &TLWallPaper{},
+			WallPaper: m,
 		},
 	}
 }
@@ -20060,7 +20060,7 @@ func (m *TLWallPaper) Decode(dbuf *DecodeBuf) error {
 func (m *TLWallPaperSolid) ToWallPaper() *WallPaper {
 	return &WallPaper{
 		Payload: &WallPaper_WallPaperSolid{
-			WallPaperSolid: &TLWallPaperSolid{},
+			WallPaperSolid: m,
 		},
 	}
 }
@@ -20087,7 +20087,7 @@ func (m *TLWallPaperSolid) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputReportReasonSpam) ToReportReason() *ReportReason {
 	return &ReportReason{
 		Payload: &ReportReason_InputReportReasonSpam{
-			InputReportReasonSpam: &TLInputReportReasonSpam{},
+			InputReportReasonSpam: m,
 		},
 	}
 }
@@ -20106,7 +20106,7 @@ func (m *TLInputReportReasonSpam) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputReportReasonViolence) ToReportReason() *ReportReason {
 	return &ReportReason{
 		Payload: &ReportReason_InputReportReasonViolence{
-			InputReportReasonViolence: &TLInputReportReasonViolence{},
+			InputReportReasonViolence: m,
 		},
 	}
 }
@@ -20125,7 +20125,7 @@ func (m *TLInputReportReasonViolence) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputReportReasonPornography) ToReportReason() *ReportReason {
 	return &ReportReason{
 		Payload: &ReportReason_InputReportReasonPornography{
-			InputReportReasonPornography: &TLInputReportReasonPornography{},
+			InputReportReasonPornography: m,
 		},
 	}
 }
@@ -20144,7 +20144,7 @@ func (m *TLInputReportReasonPornography) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputReportReasonOther) ToReportReason() *ReportReason {
 	return &ReportReason{
 		Payload: &ReportReason_InputReportReasonOther{
-			InputReportReasonOther: &TLInputReportReasonOther{},
+			InputReportReasonOther: m,
 		},
 	}
 }
@@ -20165,7 +20165,7 @@ func (m *TLInputReportReasonOther) Decode(dbuf *DecodeBuf) error {
 func (m *TLUserFull) ToUserFull() *UserFull {
 	return &UserFull{
 		Payload: &UserFull_UserFull{
-			UserFull: &TLUserFull{},
+			UserFull: m,
 		},
 	}
 }
@@ -20261,7 +20261,7 @@ func (m *TLUserFull) Decode(dbuf *DecodeBuf) error {
 func (m *TLContact) ToContact() *Contact {
 	return &Contact{
 		Payload: &Contact_Contact{
-			Contact: &TLContact{},
+			Contact: m,
 		},
 	}
 }
@@ -20286,7 +20286,7 @@ func (m *TLContact) Decode(dbuf *DecodeBuf) error {
 func (m *TLImportedContact) ToImportedContact() *ImportedContact {
 	return &ImportedContact{
 		Payload: &ImportedContact_ImportedContact{
-			ImportedContact: &TLImportedContact{},
+			ImportedContact: m,
 		},
 	}
 }
@@ -20309,7 +20309,7 @@ func (m *TLImportedContact) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactBlocked) ToContactBlocked() *ContactBlocked {
 	return &ContactBlocked{
 		Payload: &ContactBlocked_ContactBlocked{
-			ContactBlocked: &TLContactBlocked{},
+			ContactBlocked: m,
 		},
 	}
 }
@@ -20332,7 +20332,7 @@ func (m *TLContactBlocked) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactStatus) ToContactStatus() *ContactStatus {
 	return &ContactStatus{
 		Payload: &ContactStatus_ContactStatus{
-			ContactStatus: &TLContactStatus{},
+			ContactStatus: m,
 		},
 	}
 }
@@ -20357,7 +20357,7 @@ func (m *TLContactStatus) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactsLink) ToContacts_Link() *Contacts_Link {
 	return &Contacts_Link{
 		Payload: &Contacts_Link_ContactsLink{
-			ContactsLink: &TLContactsLink{},
+			ContactsLink: m,
 		},
 	}
 }
@@ -20388,7 +20388,7 @@ func (m *TLContactsLink) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactsContactsNotModified) ToContacts_Contacts() *Contacts_Contacts {
 	return &Contacts_Contacts{
 		Payload: &Contacts_Contacts_ContactsContactsNotModified{
-			ContactsContactsNotModified: &TLContactsContactsNotModified{},
+			ContactsContactsNotModified: m,
 		},
 	}
 }
@@ -20407,7 +20407,7 @@ func (m *TLContactsContactsNotModified) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactsContacts) ToContacts_Contacts() *Contacts_Contacts {
 	return &Contacts_Contacts{
 		Payload: &Contacts_Contacts_ContactsContacts{
-			ContactsContacts: &TLContactsContacts{},
+			ContactsContacts: m,
 		},
 	}
 }
@@ -20470,7 +20470,7 @@ func (m *TLContactsContacts) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactsImportedContacts) ToContacts_ImportedContacts() *Contacts_ImportedContacts {
 	return &Contacts_ImportedContacts{
 		Payload: &Contacts_ImportedContacts_ContactsImportedContacts{
-			ContactsImportedContacts: &TLContactsImportedContacts{},
+			ContactsImportedContacts: m,
 		},
 	}
 }
@@ -20554,7 +20554,7 @@ func (m *TLContactsImportedContacts) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactsBlocked) ToContacts_Blocked() *Contacts_Blocked {
 	return &Contacts_Blocked{
 		Payload: &Contacts_Blocked_ContactsBlocked{
-			ContactsBlocked: &TLContactsBlocked{},
+			ContactsBlocked: m,
 		},
 	}
 }
@@ -20615,7 +20615,7 @@ func (m *TLContactsBlocked) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactsBlockedSlice) ToContacts_Blocked() *Contacts_Blocked {
 	return &Contacts_Blocked{
 		Payload: &Contacts_Blocked_ContactsBlockedSlice{
-			ContactsBlockedSlice: &TLContactsBlockedSlice{},
+			ContactsBlockedSlice: m,
 		},
 	}
 }
@@ -20678,7 +20678,7 @@ func (m *TLContactsBlockedSlice) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesDialogs) ToMessages_Dialogs() *Messages_Dialogs {
 	return &Messages_Dialogs{
 		Payload: &Messages_Dialogs_MessagesDialogs{
-			MessagesDialogs: &TLMessagesDialogs{},
+			MessagesDialogs: m,
 		},
 	}
 }
@@ -20781,7 +20781,7 @@ func (m *TLMessagesDialogs) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesDialogsSlice) ToMessages_Dialogs() *Messages_Dialogs {
 	return &Messages_Dialogs{
 		Payload: &Messages_Dialogs_MessagesDialogsSlice{
-			MessagesDialogsSlice: &TLMessagesDialogsSlice{},
+			MessagesDialogsSlice: m,
 		},
 	}
 }
@@ -20886,7 +20886,7 @@ func (m *TLMessagesDialogsSlice) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesMessages) ToMessages_Messages() *Messages_Messages {
 	return &Messages_Messages{
 		Payload: &Messages_Messages_MessagesMessages{
-			MessagesMessages: &TLMessagesMessages{},
+			MessagesMessages: m,
 		},
 	}
 }
@@ -20968,7 +20968,7 @@ func (m *TLMessagesMessages) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesMessagesSlice) ToMessages_Messages() *Messages_Messages {
 	return &Messages_Messages{
 		Payload: &Messages_Messages_MessagesMessagesSlice{
-			MessagesMessagesSlice: &TLMessagesMessagesSlice{},
+			MessagesMessagesSlice: m,
 		},
 	}
 }
@@ -21052,7 +21052,7 @@ func (m *TLMessagesMessagesSlice) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesChannelMessages) ToMessages_Messages() *Messages_Messages {
 	return &Messages_Messages{
 		Payload: &Messages_Messages_MessagesChannelMessages{
-			MessagesChannelMessages: &TLMessagesChannelMessages{},
+			MessagesChannelMessages: m,
 		},
 	}
 }
@@ -21145,7 +21145,7 @@ func (m *TLMessagesChannelMessages) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesChats) ToMessages_Chats() *Messages_Chats {
 	return &Messages_Chats{
 		Payload: &Messages_Chats_MessagesChats{
-			MessagesChats: &TLMessagesChats{},
+			MessagesChats: m,
 		},
 	}
 }
@@ -21185,7 +21185,7 @@ func (m *TLMessagesChats) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesChatsSlice) ToMessages_Chats() *Messages_Chats {
 	return &Messages_Chats{
 		Payload: &Messages_Chats_MessagesChatsSlice{
-			MessagesChatsSlice: &TLMessagesChatsSlice{},
+			MessagesChatsSlice: m,
 		},
 	}
 }
@@ -21227,7 +21227,7 @@ func (m *TLMessagesChatsSlice) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesChatFull) ToMessages_ChatFull() *Messages_ChatFull {
 	return &Messages_ChatFull{
 		Payload: &Messages_ChatFull_MessagesChatFull{
-			MessagesChatFull: &TLMessagesChatFull{},
+			MessagesChatFull: m,
 		},
 	}
 }
@@ -21292,7 +21292,7 @@ func (m *TLMessagesChatFull) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesAffectedHistory) ToMessages_AffectedHistory() *Messages_AffectedHistory {
 	return &Messages_AffectedHistory{
 		Payload: &Messages_AffectedHistory_MessagesAffectedHistory{
-			MessagesAffectedHistory: &TLMessagesAffectedHistory{},
+			MessagesAffectedHistory: m,
 		},
 	}
 }
@@ -21317,7 +21317,7 @@ func (m *TLMessagesAffectedHistory) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessagesFilterEmpty) ToMessagesFilter() *MessagesFilter {
 	return &MessagesFilter{
 		Payload: &MessagesFilter_InputMessagesFilterEmpty{
-			InputMessagesFilterEmpty: &TLInputMessagesFilterEmpty{},
+			InputMessagesFilterEmpty: m,
 		},
 	}
 }
@@ -21336,7 +21336,7 @@ func (m *TLInputMessagesFilterEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessagesFilterPhotos) ToMessagesFilter() *MessagesFilter {
 	return &MessagesFilter{
 		Payload: &MessagesFilter_InputMessagesFilterPhotos{
-			InputMessagesFilterPhotos: &TLInputMessagesFilterPhotos{},
+			InputMessagesFilterPhotos: m,
 		},
 	}
 }
@@ -21355,7 +21355,7 @@ func (m *TLInputMessagesFilterPhotos) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessagesFilterVideo) ToMessagesFilter() *MessagesFilter {
 	return &MessagesFilter{
 		Payload: &MessagesFilter_InputMessagesFilterVideo{
-			InputMessagesFilterVideo: &TLInputMessagesFilterVideo{},
+			InputMessagesFilterVideo: m,
 		},
 	}
 }
@@ -21374,7 +21374,7 @@ func (m *TLInputMessagesFilterVideo) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessagesFilterPhotoVideo) ToMessagesFilter() *MessagesFilter {
 	return &MessagesFilter{
 		Payload: &MessagesFilter_InputMessagesFilterPhotoVideo{
-			InputMessagesFilterPhotoVideo: &TLInputMessagesFilterPhotoVideo{},
+			InputMessagesFilterPhotoVideo: m,
 		},
 	}
 }
@@ -21393,7 +21393,7 @@ func (m *TLInputMessagesFilterPhotoVideo) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessagesFilterPhotoVideoDocuments) ToMessagesFilter() *MessagesFilter {
 	return &MessagesFilter{
 		Payload: &MessagesFilter_InputMessagesFilterPhotoVideoDocuments{
-			InputMessagesFilterPhotoVideoDocuments: &TLInputMessagesFilterPhotoVideoDocuments{},
+			InputMessagesFilterPhotoVideoDocuments: m,
 		},
 	}
 }
@@ -21412,7 +21412,7 @@ func (m *TLInputMessagesFilterPhotoVideoDocuments) Decode(dbuf *DecodeBuf) error
 func (m *TLInputMessagesFilterDocument) ToMessagesFilter() *MessagesFilter {
 	return &MessagesFilter{
 		Payload: &MessagesFilter_InputMessagesFilterDocument{
-			InputMessagesFilterDocument: &TLInputMessagesFilterDocument{},
+			InputMessagesFilterDocument: m,
 		},
 	}
 }
@@ -21431,7 +21431,7 @@ func (m *TLInputMessagesFilterDocument) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessagesFilterUrl) ToMessagesFilter() *MessagesFilter {
 	return &MessagesFilter{
 		Payload: &MessagesFilter_InputMessagesFilterUrl{
-			InputMessagesFilterUrl: &TLInputMessagesFilterUrl{},
+			InputMessagesFilterUrl: m,
 		},
 	}
 }
@@ -21450,7 +21450,7 @@ func (m *TLInputMessagesFilterUrl) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessagesFilterGif) ToMessagesFilter() *MessagesFilter {
 	return &MessagesFilter{
 		Payload: &MessagesFilter_InputMessagesFilterGif{
-			InputMessagesFilterGif: &TLInputMessagesFilterGif{},
+			InputMessagesFilterGif: m,
 		},
 	}
 }
@@ -21469,7 +21469,7 @@ func (m *TLInputMessagesFilterGif) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessagesFilterVoice) ToMessagesFilter() *MessagesFilter {
 	return &MessagesFilter{
 		Payload: &MessagesFilter_InputMessagesFilterVoice{
-			InputMessagesFilterVoice: &TLInputMessagesFilterVoice{},
+			InputMessagesFilterVoice: m,
 		},
 	}
 }
@@ -21488,7 +21488,7 @@ func (m *TLInputMessagesFilterVoice) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessagesFilterMusic) ToMessagesFilter() *MessagesFilter {
 	return &MessagesFilter{
 		Payload: &MessagesFilter_InputMessagesFilterMusic{
-			InputMessagesFilterMusic: &TLInputMessagesFilterMusic{},
+			InputMessagesFilterMusic: m,
 		},
 	}
 }
@@ -21507,7 +21507,7 @@ func (m *TLInputMessagesFilterMusic) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessagesFilterChatPhotos) ToMessagesFilter() *MessagesFilter {
 	return &MessagesFilter{
 		Payload: &MessagesFilter_InputMessagesFilterChatPhotos{
-			InputMessagesFilterChatPhotos: &TLInputMessagesFilterChatPhotos{},
+			InputMessagesFilterChatPhotos: m,
 		},
 	}
 }
@@ -21526,7 +21526,7 @@ func (m *TLInputMessagesFilterChatPhotos) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessagesFilterPhoneCalls) ToMessagesFilter() *MessagesFilter {
 	return &MessagesFilter{
 		Payload: &MessagesFilter_InputMessagesFilterPhoneCalls{
-			InputMessagesFilterPhoneCalls: &TLInputMessagesFilterPhoneCalls{},
+			InputMessagesFilterPhoneCalls: m,
 		},
 	}
 }
@@ -21559,7 +21559,7 @@ func (m *TLInputMessagesFilterPhoneCalls) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessagesFilterRoundVoice) ToMessagesFilter() *MessagesFilter {
 	return &MessagesFilter{
 		Payload: &MessagesFilter_InputMessagesFilterRoundVoice{
-			InputMessagesFilterRoundVoice: &TLInputMessagesFilterRoundVoice{},
+			InputMessagesFilterRoundVoice: m,
 		},
 	}
 }
@@ -21578,7 +21578,7 @@ func (m *TLInputMessagesFilterRoundVoice) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessagesFilterRoundVideo) ToMessagesFilter() *MessagesFilter {
 	return &MessagesFilter{
 		Payload: &MessagesFilter_InputMessagesFilterRoundVideo{
-			InputMessagesFilterRoundVideo: &TLInputMessagesFilterRoundVideo{},
+			InputMessagesFilterRoundVideo: m,
 		},
 	}
 }
@@ -21597,7 +21597,7 @@ func (m *TLInputMessagesFilterRoundVideo) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessagesFilterMyMentions) ToMessagesFilter() *MessagesFilter {
 	return &MessagesFilter{
 		Payload: &MessagesFilter_InputMessagesFilterMyMentions{
-			InputMessagesFilterMyMentions: &TLInputMessagesFilterMyMentions{},
+			InputMessagesFilterMyMentions: m,
 		},
 	}
 }
@@ -21616,7 +21616,7 @@ func (m *TLInputMessagesFilterMyMentions) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateNewMessage) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateNewMessage{
-			UpdateNewMessage: &TLUpdateNewMessage{},
+			UpdateNewMessage: m,
 		},
 	}
 }
@@ -21643,7 +21643,7 @@ func (m *TLUpdateNewMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateMessageID) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateMessageID{
-			UpdateMessageID: &TLUpdateMessageID{},
+			UpdateMessageID: m,
 		},
 	}
 }
@@ -21666,7 +21666,7 @@ func (m *TLUpdateMessageID) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateDeleteMessages) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateDeleteMessages{
-			UpdateDeleteMessages: &TLUpdateDeleteMessages{},
+			UpdateDeleteMessages: m,
 		},
 	}
 }
@@ -21691,7 +21691,7 @@ func (m *TLUpdateDeleteMessages) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateUserTyping) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateUserTyping{
-			UpdateUserTyping: &TLUpdateUserTyping{},
+			UpdateUserTyping: m,
 		},
 	}
 }
@@ -21716,7 +21716,7 @@ func (m *TLUpdateUserTyping) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateChatUserTyping) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateChatUserTyping{
-			UpdateChatUserTyping: &TLUpdateChatUserTyping{},
+			UpdateChatUserTyping: m,
 		},
 	}
 }
@@ -21743,7 +21743,7 @@ func (m *TLUpdateChatUserTyping) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateChatParticipants) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateChatParticipants{
-			UpdateChatParticipants: &TLUpdateChatParticipants{},
+			UpdateChatParticipants: m,
 		},
 	}
 }
@@ -21766,7 +21766,7 @@ func (m *TLUpdateChatParticipants) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateUserStatus) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateUserStatus{
-			UpdateUserStatus: &TLUpdateUserStatus{},
+			UpdateUserStatus: m,
 		},
 	}
 }
@@ -21791,7 +21791,7 @@ func (m *TLUpdateUserStatus) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateUserName) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateUserName{
-			UpdateUserName: &TLUpdateUserName{},
+			UpdateUserName: m,
 		},
 	}
 }
@@ -21818,7 +21818,7 @@ func (m *TLUpdateUserName) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateUserPhoto) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateUserPhoto{
-			UpdateUserPhoto: &TLUpdateUserPhoto{},
+			UpdateUserPhoto: m,
 		},
 	}
 }
@@ -21849,7 +21849,7 @@ func (m *TLUpdateUserPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateContactRegistered) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateContactRegistered{
-			UpdateContactRegistered: &TLUpdateContactRegistered{},
+			UpdateContactRegistered: m,
 		},
 	}
 }
@@ -21872,7 +21872,7 @@ func (m *TLUpdateContactRegistered) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateContactLink) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateContactLink{
-			UpdateContactLink: &TLUpdateContactLink{},
+			UpdateContactLink: m,
 		},
 	}
 }
@@ -21901,7 +21901,7 @@ func (m *TLUpdateContactLink) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateNewEncryptedMessage) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateNewEncryptedMessage{
-			UpdateNewEncryptedMessage: &TLUpdateNewEncryptedMessage{},
+			UpdateNewEncryptedMessage: m,
 		},
 	}
 }
@@ -21926,7 +21926,7 @@ func (m *TLUpdateNewEncryptedMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateEncryptedChatTyping) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateEncryptedChatTyping{
-			UpdateEncryptedChatTyping: &TLUpdateEncryptedChatTyping{},
+			UpdateEncryptedChatTyping: m,
 		},
 	}
 }
@@ -21947,7 +21947,7 @@ func (m *TLUpdateEncryptedChatTyping) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateEncryption) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateEncryption{
-			UpdateEncryption: &TLUpdateEncryption{},
+			UpdateEncryption: m,
 		},
 	}
 }
@@ -21972,7 +21972,7 @@ func (m *TLUpdateEncryption) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateEncryptedMessagesRead) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateEncryptedMessagesRead{
-			UpdateEncryptedMessagesRead: &TLUpdateEncryptedMessagesRead{},
+			UpdateEncryptedMessagesRead: m,
 		},
 	}
 }
@@ -21997,7 +21997,7 @@ func (m *TLUpdateEncryptedMessagesRead) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateChatParticipantAdd) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateChatParticipantAdd{
-			UpdateChatParticipantAdd: &TLUpdateChatParticipantAdd{},
+			UpdateChatParticipantAdd: m,
 		},
 	}
 }
@@ -22026,7 +22026,7 @@ func (m *TLUpdateChatParticipantAdd) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateChatParticipantDelete) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateChatParticipantDelete{
-			UpdateChatParticipantDelete: &TLUpdateChatParticipantDelete{},
+			UpdateChatParticipantDelete: m,
 		},
 	}
 }
@@ -22051,7 +22051,7 @@ func (m *TLUpdateChatParticipantDelete) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateDcOptions) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateDcOptions{
-			UpdateDcOptions: &TLUpdateDcOptions{},
+			UpdateDcOptions: m,
 		},
 	}
 }
@@ -22091,7 +22091,7 @@ func (m *TLUpdateDcOptions) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateUserBlocked) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateUserBlocked{
-			UpdateUserBlocked: &TLUpdateUserBlocked{},
+			UpdateUserBlocked: m,
 		},
 	}
 }
@@ -22116,7 +22116,7 @@ func (m *TLUpdateUserBlocked) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateNotifySettings) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateNotifySettings{
-			UpdateNotifySettings: &TLUpdateNotifySettings{},
+			UpdateNotifySettings: m,
 		},
 	}
 }
@@ -22143,7 +22143,7 @@ func (m *TLUpdateNotifySettings) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateServiceNotification) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateServiceNotification{
-			UpdateServiceNotification: &TLUpdateServiceNotification{},
+			UpdateServiceNotification: m,
 		},
 	}
 }
@@ -22214,7 +22214,7 @@ func (m *TLUpdateServiceNotification) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatePrivacy) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdatePrivacy{
-			UpdatePrivacy: &TLUpdatePrivacy{},
+			UpdatePrivacy: m,
 		},
 	}
 }
@@ -22258,7 +22258,7 @@ func (m *TLUpdatePrivacy) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateUserPhone) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateUserPhone{
-			UpdateUserPhone: &TLUpdateUserPhone{},
+			UpdateUserPhone: m,
 		},
 	}
 }
@@ -22281,7 +22281,7 @@ func (m *TLUpdateUserPhone) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateReadHistoryInbox) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateReadHistoryInbox{
-			UpdateReadHistoryInbox: &TLUpdateReadHistoryInbox{},
+			UpdateReadHistoryInbox: m,
 		},
 	}
 }
@@ -22310,7 +22310,7 @@ func (m *TLUpdateReadHistoryInbox) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateReadHistoryOutbox) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateReadHistoryOutbox{
-			UpdateReadHistoryOutbox: &TLUpdateReadHistoryOutbox{},
+			UpdateReadHistoryOutbox: m,
 		},
 	}
 }
@@ -22339,7 +22339,7 @@ func (m *TLUpdateReadHistoryOutbox) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateWebPage) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateWebPage{
-			UpdateWebPage: &TLUpdateWebPage{},
+			UpdateWebPage: m,
 		},
 	}
 }
@@ -22366,7 +22366,7 @@ func (m *TLUpdateWebPage) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateReadMessagesContents) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateReadMessagesContents{
-			UpdateReadMessagesContents: &TLUpdateReadMessagesContents{},
+			UpdateReadMessagesContents: m,
 		},
 	}
 }
@@ -22391,7 +22391,7 @@ func (m *TLUpdateReadMessagesContents) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateChannelTooLong) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateChannelTooLong{
-			UpdateChannelTooLong: &TLUpdateChannelTooLong{},
+			UpdateChannelTooLong: m,
 		},
 	}
 }
@@ -22426,7 +22426,7 @@ func (m *TLUpdateChannelTooLong) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateChannel) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateChannel{
-			UpdateChannel: &TLUpdateChannel{},
+			UpdateChannel: m,
 		},
 	}
 }
@@ -22447,7 +22447,7 @@ func (m *TLUpdateChannel) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateNewChannelMessage) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateNewChannelMessage{
-			UpdateNewChannelMessage: &TLUpdateNewChannelMessage{},
+			UpdateNewChannelMessage: m,
 		},
 	}
 }
@@ -22474,7 +22474,7 @@ func (m *TLUpdateNewChannelMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateReadChannelInbox) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateReadChannelInbox{
-			UpdateReadChannelInbox: &TLUpdateReadChannelInbox{},
+			UpdateReadChannelInbox: m,
 		},
 	}
 }
@@ -22497,7 +22497,7 @@ func (m *TLUpdateReadChannelInbox) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateDeleteChannelMessages) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateDeleteChannelMessages{
-			UpdateDeleteChannelMessages: &TLUpdateDeleteChannelMessages{},
+			UpdateDeleteChannelMessages: m,
 		},
 	}
 }
@@ -22524,7 +22524,7 @@ func (m *TLUpdateDeleteChannelMessages) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateChannelMessageViews) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateChannelMessageViews{
-			UpdateChannelMessageViews: &TLUpdateChannelMessageViews{},
+			UpdateChannelMessageViews: m,
 		},
 	}
 }
@@ -22549,7 +22549,7 @@ func (m *TLUpdateChannelMessageViews) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateChatAdmins) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateChatAdmins{
-			UpdateChatAdmins: &TLUpdateChatAdmins{},
+			UpdateChatAdmins: m,
 		},
 	}
 }
@@ -22576,7 +22576,7 @@ func (m *TLUpdateChatAdmins) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateChatParticipantAdmin) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateChatParticipantAdmin{
-			UpdateChatParticipantAdmin: &TLUpdateChatParticipantAdmin{},
+			UpdateChatParticipantAdmin: m,
 		},
 	}
 }
@@ -22605,7 +22605,7 @@ func (m *TLUpdateChatParticipantAdmin) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateNewStickerSet) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateNewStickerSet{
-			UpdateNewStickerSet: &TLUpdateNewStickerSet{},
+			UpdateNewStickerSet: m,
 		},
 	}
 }
@@ -22628,7 +22628,7 @@ func (m *TLUpdateNewStickerSet) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateStickerSetsOrder) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateStickerSetsOrder{
-			UpdateStickerSetsOrder: &TLUpdateStickerSetsOrder{},
+			UpdateStickerSetsOrder: m,
 		},
 	}
 }
@@ -22663,7 +22663,7 @@ func (m *TLUpdateStickerSetsOrder) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateStickerSets) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateStickerSets{
-			UpdateStickerSets: &TLUpdateStickerSets{},
+			UpdateStickerSets: m,
 		},
 	}
 }
@@ -22682,7 +22682,7 @@ func (m *TLUpdateStickerSets) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateSavedGifs) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateSavedGifs{
-			UpdateSavedGifs: &TLUpdateSavedGifs{},
+			UpdateSavedGifs: m,
 		},
 	}
 }
@@ -22701,7 +22701,7 @@ func (m *TLUpdateSavedGifs) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateBotInlineQuery) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateBotInlineQuery{
-			UpdateBotInlineQuery: &TLUpdateBotInlineQuery{},
+			UpdateBotInlineQuery: m,
 		},
 	}
 }
@@ -22744,7 +22744,7 @@ func (m *TLUpdateBotInlineQuery) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateBotInlineSend) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateBotInlineSend{
-			UpdateBotInlineSend: &TLUpdateBotInlineSend{},
+			UpdateBotInlineSend: m,
 		},
 	}
 }
@@ -22796,7 +22796,7 @@ func (m *TLUpdateBotInlineSend) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateEditChannelMessage) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateEditChannelMessage{
-			UpdateEditChannelMessage: &TLUpdateEditChannelMessage{},
+			UpdateEditChannelMessage: m,
 		},
 	}
 }
@@ -22823,7 +22823,7 @@ func (m *TLUpdateEditChannelMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateChannelPinnedMessage) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateChannelPinnedMessage{
-			UpdateChannelPinnedMessage: &TLUpdateChannelPinnedMessage{},
+			UpdateChannelPinnedMessage: m,
 		},
 	}
 }
@@ -22846,7 +22846,7 @@ func (m *TLUpdateChannelPinnedMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateBotCallbackQuery) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateBotCallbackQuery{
-			UpdateBotCallbackQuery: &TLUpdateBotCallbackQuery{},
+			UpdateBotCallbackQuery: m,
 		},
 	}
 }
@@ -22900,7 +22900,7 @@ func (m *TLUpdateBotCallbackQuery) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateEditMessage) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateEditMessage{
-			UpdateEditMessage: &TLUpdateEditMessage{},
+			UpdateEditMessage: m,
 		},
 	}
 }
@@ -22927,7 +22927,7 @@ func (m *TLUpdateEditMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateInlineBotCallbackQuery) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateInlineBotCallbackQuery{
-			UpdateInlineBotCallbackQuery: &TLUpdateInlineBotCallbackQuery{},
+			UpdateInlineBotCallbackQuery: m,
 		},
 	}
 }
@@ -22979,7 +22979,7 @@ func (m *TLUpdateInlineBotCallbackQuery) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateReadChannelOutbox) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateReadChannelOutbox{
-			UpdateReadChannelOutbox: &TLUpdateReadChannelOutbox{},
+			UpdateReadChannelOutbox: m,
 		},
 	}
 }
@@ -23002,7 +23002,7 @@ func (m *TLUpdateReadChannelOutbox) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateDraftMessage) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateDraftMessage{
-			UpdateDraftMessage: &TLUpdateDraftMessage{},
+			UpdateDraftMessage: m,
 		},
 	}
 }
@@ -23029,7 +23029,7 @@ func (m *TLUpdateDraftMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateReadFeaturedStickers) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateReadFeaturedStickers{
-			UpdateReadFeaturedStickers: &TLUpdateReadFeaturedStickers{},
+			UpdateReadFeaturedStickers: m,
 		},
 	}
 }
@@ -23048,7 +23048,7 @@ func (m *TLUpdateReadFeaturedStickers) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateRecentStickers) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateRecentStickers{
-			UpdateRecentStickers: &TLUpdateRecentStickers{},
+			UpdateRecentStickers: m,
 		},
 	}
 }
@@ -23067,7 +23067,7 @@ func (m *TLUpdateRecentStickers) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateConfig) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateConfig{
-			UpdateConfig: &TLUpdateConfig{},
+			UpdateConfig: m,
 		},
 	}
 }
@@ -23086,7 +23086,7 @@ func (m *TLUpdateConfig) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatePtsChanged) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdatePtsChanged{
-			UpdatePtsChanged: &TLUpdatePtsChanged{},
+			UpdatePtsChanged: m,
 		},
 	}
 }
@@ -23105,7 +23105,7 @@ func (m *TLUpdatePtsChanged) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateChannelWebPage) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateChannelWebPage{
-			UpdateChannelWebPage: &TLUpdateChannelWebPage{},
+			UpdateChannelWebPage: m,
 		},
 	}
 }
@@ -23134,7 +23134,7 @@ func (m *TLUpdateChannelWebPage) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateDialogPinned) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateDialogPinned{
-			UpdateDialogPinned: &TLUpdateDialogPinned{},
+			UpdateDialogPinned: m,
 		},
 	}
 }
@@ -23171,7 +23171,7 @@ func (m *TLUpdateDialogPinned) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatePinnedDialogs) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdatePinnedDialogs{
-			UpdatePinnedDialogs: &TLUpdatePinnedDialogs{},
+			UpdatePinnedDialogs: m,
 		},
 	}
 }
@@ -23223,7 +23223,7 @@ func (m *TLUpdatePinnedDialogs) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateBotWebhookJSON) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateBotWebhookJSON{
-			UpdateBotWebhookJSON: &TLUpdateBotWebhookJSON{},
+			UpdateBotWebhookJSON: m,
 		},
 	}
 }
@@ -23246,7 +23246,7 @@ func (m *TLUpdateBotWebhookJSON) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateBotWebhookJSONQuery) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateBotWebhookJSONQuery{
-			UpdateBotWebhookJSONQuery: &TLUpdateBotWebhookJSONQuery{},
+			UpdateBotWebhookJSONQuery: m,
 		},
 	}
 }
@@ -23273,7 +23273,7 @@ func (m *TLUpdateBotWebhookJSONQuery) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateBotShippingQuery) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateBotShippingQuery{
-			UpdateBotShippingQuery: &TLUpdateBotShippingQuery{},
+			UpdateBotShippingQuery: m,
 		},
 	}
 }
@@ -23302,7 +23302,7 @@ func (m *TLUpdateBotShippingQuery) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateBotPrecheckoutQuery) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateBotPrecheckoutQuery{
-			UpdateBotPrecheckoutQuery: &TLUpdateBotPrecheckoutQuery{},
+			UpdateBotPrecheckoutQuery: m,
 		},
 	}
 }
@@ -23356,7 +23356,7 @@ func (m *TLUpdateBotPrecheckoutQuery) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatePhoneCall) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdatePhoneCall{
-			UpdatePhoneCall: &TLUpdatePhoneCall{},
+			UpdatePhoneCall: m,
 		},
 	}
 }
@@ -23379,7 +23379,7 @@ func (m *TLUpdatePhoneCall) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateLangPackTooLong) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateLangPackTooLong{
-			UpdateLangPackTooLong: &TLUpdateLangPackTooLong{},
+			UpdateLangPackTooLong: m,
 		},
 	}
 }
@@ -23398,7 +23398,7 @@ func (m *TLUpdateLangPackTooLong) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateLangPack) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateLangPack{
-			UpdateLangPack: &TLUpdateLangPack{},
+			UpdateLangPack: m,
 		},
 	}
 }
@@ -23421,7 +23421,7 @@ func (m *TLUpdateLangPack) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateFavedStickers) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateFavedStickers{
-			UpdateFavedStickers: &TLUpdateFavedStickers{},
+			UpdateFavedStickers: m,
 		},
 	}
 }
@@ -23440,7 +23440,7 @@ func (m *TLUpdateFavedStickers) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateChannelReadMessagesContents) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateChannelReadMessagesContents{
-			UpdateChannelReadMessagesContents: &TLUpdateChannelReadMessagesContents{},
+			UpdateChannelReadMessagesContents: m,
 		},
 	}
 }
@@ -23463,7 +23463,7 @@ func (m *TLUpdateChannelReadMessagesContents) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateContactsReset) ToUpdate() *Update {
 	return &Update{
 		Payload: &Update_UpdateContactsReset{
-			UpdateContactsReset: &TLUpdateContactsReset{},
+			UpdateContactsReset: m,
 		},
 	}
 }
@@ -23482,7 +23482,7 @@ func (m *TLUpdateContactsReset) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatesState) ToUpdates_State() *Updates_State {
 	return &Updates_State{
 		Payload: &Updates_State_UpdatesState{
-			UpdatesState: &TLUpdatesState{},
+			UpdatesState: m,
 		},
 	}
 }
@@ -23511,7 +23511,7 @@ func (m *TLUpdatesState) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatesDifferenceEmpty) ToUpdates_Difference() *Updates_Difference {
 	return &Updates_Difference{
 		Payload: &Updates_Difference_UpdatesDifferenceEmpty{
-			UpdatesDifferenceEmpty: &TLUpdatesDifferenceEmpty{},
+			UpdatesDifferenceEmpty: m,
 		},
 	}
 }
@@ -23534,7 +23534,7 @@ func (m *TLUpdatesDifferenceEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatesDifference) ToUpdates_Difference() *Updates_Difference {
 	return &Updates_Difference{
 		Payload: &Updates_Difference_UpdatesDifference{
-			UpdatesDifference: &TLUpdatesDifference{},
+			UpdatesDifference: m,
 		},
 	}
 }
@@ -23662,7 +23662,7 @@ func (m *TLUpdatesDifference) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatesDifferenceSlice) ToUpdates_Difference() *Updates_Difference {
 	return &Updates_Difference{
 		Payload: &Updates_Difference_UpdatesDifferenceSlice{
-			UpdatesDifferenceSlice: &TLUpdatesDifferenceSlice{},
+			UpdatesDifferenceSlice: m,
 		},
 	}
 }
@@ -23790,7 +23790,7 @@ func (m *TLUpdatesDifferenceSlice) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatesDifferenceTooLong) ToUpdates_Difference() *Updates_Difference {
 	return &Updates_Difference{
 		Payload: &Updates_Difference_UpdatesDifferenceTooLong{
-			UpdatesDifferenceTooLong: &TLUpdatesDifferenceTooLong{},
+			UpdatesDifferenceTooLong: m,
 		},
 	}
 }
@@ -23811,7 +23811,7 @@ func (m *TLUpdatesDifferenceTooLong) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatesTooLong) ToUpdates() *Updates {
 	return &Updates{
 		Payload: &Updates_UpdatesTooLong{
-			UpdatesTooLong: &TLUpdatesTooLong{},
+			UpdatesTooLong: m,
 		},
 	}
 }
@@ -23830,7 +23830,7 @@ func (m *TLUpdatesTooLong) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateShortMessage) ToUpdates() *Updates {
 	return &Updates{
 		Payload: &Updates_UpdateShortMessage{
-			UpdateShortMessage: &TLUpdateShortMessage{},
+			UpdateShortMessage: m,
 		},
 	}
 }
@@ -23959,7 +23959,7 @@ func (m *TLUpdateShortMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateShortChatMessage) ToUpdates() *Updates {
 	return &Updates{
 		Payload: &Updates_UpdateShortChatMessage{
-			UpdateShortChatMessage: &TLUpdateShortChatMessage{},
+			UpdateShortChatMessage: m,
 		},
 	}
 }
@@ -24090,7 +24090,7 @@ func (m *TLUpdateShortChatMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateShort) ToUpdates() *Updates {
 	return &Updates{
 		Payload: &Updates_UpdateShort{
-			UpdateShort: &TLUpdateShort{},
+			UpdateShort: m,
 		},
 	}
 }
@@ -24115,7 +24115,7 @@ func (m *TLUpdateShort) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatesCombined) ToUpdates() *Updates {
 	return &Updates{
 		Payload: &Updates_UpdatesCombined{
-			UpdatesCombined: &TLUpdatesCombined{},
+			UpdatesCombined: m,
 		},
 	}
 }
@@ -24203,7 +24203,7 @@ func (m *TLUpdatesCombined) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdates) ToUpdates() *Updates {
 	return &Updates{
 		Payload: &Updates_Updates{
-			Updates: &TLUpdates{},
+			Updates: m,
 		},
 	}
 }
@@ -24289,7 +24289,7 @@ func (m *TLUpdates) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdateShortSentMessage) ToUpdates() *Updates {
 	return &Updates{
 		Payload: &Updates_UpdateShortSentMessage{
-			UpdateShortSentMessage: &TLUpdateShortSentMessage{},
+			UpdateShortSentMessage: m,
 		},
 	}
 }
@@ -24369,7 +24369,7 @@ func (m *TLUpdateShortSentMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhotosPhotos) ToPhotos_Photos() *Photos_Photos {
 	return &Photos_Photos{
 		Payload: &Photos_Photos_PhotosPhotos{
-			PhotosPhotos: &TLPhotosPhotos{},
+			PhotosPhotos: m,
 		},
 	}
 }
@@ -24430,7 +24430,7 @@ func (m *TLPhotosPhotos) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhotosPhotosSlice) ToPhotos_Photos() *Photos_Photos {
 	return &Photos_Photos{
 		Payload: &Photos_Photos_PhotosPhotosSlice{
-			PhotosPhotosSlice: &TLPhotosPhotosSlice{},
+			PhotosPhotosSlice: m,
 		},
 	}
 }
@@ -24493,7 +24493,7 @@ func (m *TLPhotosPhotosSlice) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhotosPhoto) ToPhotos_Photo() *Photos_Photo {
 	return &Photos_Photo{
 		Payload: &Photos_Photo_PhotosPhoto{
-			PhotosPhoto: &TLPhotosPhoto{},
+			PhotosPhoto: m,
 		},
 	}
 }
@@ -24537,7 +24537,7 @@ func (m *TLPhotosPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLUploadFile) ToUpload_File() *Upload_File {
 	return &Upload_File{
 		Payload: &Upload_File_UploadFile{
-			UploadFile: &TLUploadFile{},
+			UploadFile: m,
 		},
 	}
 }
@@ -24564,7 +24564,7 @@ func (m *TLUploadFile) Decode(dbuf *DecodeBuf) error {
 func (m *TLUploadFileCdnRedirect) ToUpload_File() *Upload_File {
 	return &Upload_File{
 		Payload: &Upload_File_UploadFileCdnRedirect{
-			UploadFileCdnRedirect: &TLUploadFileCdnRedirect{},
+			UploadFileCdnRedirect: m,
 		},
 	}
 }
@@ -24612,7 +24612,7 @@ func (m *TLUploadFileCdnRedirect) Decode(dbuf *DecodeBuf) error {
 func (m *TLDcOption) ToDcOption() *DcOption {
 	return &DcOption{
 		Payload: &DcOption_DcOption{
-			DcOption: &TLDcOption{},
+			DcOption: m,
 		},
 	}
 }
@@ -24687,7 +24687,7 @@ func (m *TLDcOption) Decode(dbuf *DecodeBuf) error {
 func (m *TLConfig) ToConfig() *Config {
 	return &Config{
 		Payload: &Config_Config{
-			Config: &TLConfig{},
+			Config: m,
 		},
 	}
 }
@@ -24845,7 +24845,7 @@ func (m *TLConfig) Decode(dbuf *DecodeBuf) error {
 func (m *TLNearestDc) ToNearestDc() *NearestDc {
 	return &NearestDc{
 		Payload: &NearestDc_NearestDc{
-			NearestDc: &TLNearestDc{},
+			NearestDc: m,
 		},
 	}
 }
@@ -24870,7 +24870,7 @@ func (m *TLNearestDc) Decode(dbuf *DecodeBuf) error {
 func (m *TLHelpAppUpdate) ToHelp_AppUpdate() *Help_AppUpdate {
 	return &Help_AppUpdate{
 		Payload: &Help_AppUpdate_HelpAppUpdate{
-			HelpAppUpdate: &TLHelpAppUpdate{},
+			HelpAppUpdate: m,
 		},
 	}
 }
@@ -24899,7 +24899,7 @@ func (m *TLHelpAppUpdate) Decode(dbuf *DecodeBuf) error {
 func (m *TLHelpNoAppUpdate) ToHelp_AppUpdate() *Help_AppUpdate {
 	return &Help_AppUpdate{
 		Payload: &Help_AppUpdate_HelpNoAppUpdate{
-			HelpNoAppUpdate: &TLHelpNoAppUpdate{},
+			HelpNoAppUpdate: m,
 		},
 	}
 }
@@ -24918,7 +24918,7 @@ func (m *TLHelpNoAppUpdate) Decode(dbuf *DecodeBuf) error {
 func (m *TLHelpInviteText) ToHelp_InviteText() *Help_InviteText {
 	return &Help_InviteText{
 		Payload: &Help_InviteText_HelpInviteText{
-			HelpInviteText: &TLHelpInviteText{},
+			HelpInviteText: m,
 		},
 	}
 }
@@ -24939,7 +24939,7 @@ func (m *TLHelpInviteText) Decode(dbuf *DecodeBuf) error {
 func (m *TLEncryptedChatEmpty) ToEncryptedChat() *EncryptedChat {
 	return &EncryptedChat{
 		Payload: &EncryptedChat_EncryptedChatEmpty{
-			EncryptedChatEmpty: &TLEncryptedChatEmpty{},
+			EncryptedChatEmpty: m,
 		},
 	}
 }
@@ -24960,7 +24960,7 @@ func (m *TLEncryptedChatEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLEncryptedChatWaiting) ToEncryptedChat() *EncryptedChat {
 	return &EncryptedChat{
 		Payload: &EncryptedChat_EncryptedChatWaiting{
-			EncryptedChatWaiting: &TLEncryptedChatWaiting{},
+			EncryptedChatWaiting: m,
 		},
 	}
 }
@@ -24989,7 +24989,7 @@ func (m *TLEncryptedChatWaiting) Decode(dbuf *DecodeBuf) error {
 func (m *TLEncryptedChatRequested) ToEncryptedChat() *EncryptedChat {
 	return &EncryptedChat{
 		Payload: &EncryptedChat_EncryptedChatRequested{
-			EncryptedChatRequested: &TLEncryptedChatRequested{},
+			EncryptedChatRequested: m,
 		},
 	}
 }
@@ -25020,7 +25020,7 @@ func (m *TLEncryptedChatRequested) Decode(dbuf *DecodeBuf) error {
 func (m *TLEncryptedChat) ToEncryptedChat() *EncryptedChat {
 	return &EncryptedChat{
 		Payload: &EncryptedChat_EncryptedChat{
-			EncryptedChat: &TLEncryptedChat{},
+			EncryptedChat: m,
 		},
 	}
 }
@@ -25053,7 +25053,7 @@ func (m *TLEncryptedChat) Decode(dbuf *DecodeBuf) error {
 func (m *TLEncryptedChatDiscarded) ToEncryptedChat() *EncryptedChat {
 	return &EncryptedChat{
 		Payload: &EncryptedChat_EncryptedChatDiscarded{
-			EncryptedChatDiscarded: &TLEncryptedChatDiscarded{},
+			EncryptedChatDiscarded: m,
 		},
 	}
 }
@@ -25074,7 +25074,7 @@ func (m *TLEncryptedChatDiscarded) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputEncryptedChat) ToInputEncryptedChat() *InputEncryptedChat {
 	return &InputEncryptedChat{
 		Payload: &InputEncryptedChat_InputEncryptedChat{
-			InputEncryptedChat: &TLInputEncryptedChat{},
+			InputEncryptedChat: m,
 		},
 	}
 }
@@ -25097,7 +25097,7 @@ func (m *TLInputEncryptedChat) Decode(dbuf *DecodeBuf) error {
 func (m *TLEncryptedFileEmpty) ToEncryptedFile() *EncryptedFile {
 	return &EncryptedFile{
 		Payload: &EncryptedFile_EncryptedFileEmpty{
-			EncryptedFileEmpty: &TLEncryptedFileEmpty{},
+			EncryptedFileEmpty: m,
 		},
 	}
 }
@@ -25116,7 +25116,7 @@ func (m *TLEncryptedFileEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLEncryptedFile) ToEncryptedFile() *EncryptedFile {
 	return &EncryptedFile{
 		Payload: &EncryptedFile_EncryptedFile{
-			EncryptedFile: &TLEncryptedFile{},
+			EncryptedFile: m,
 		},
 	}
 }
@@ -25145,7 +25145,7 @@ func (m *TLEncryptedFile) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputEncryptedFileEmpty) ToInputEncryptedFile() *InputEncryptedFile {
 	return &InputEncryptedFile{
 		Payload: &InputEncryptedFile_InputEncryptedFileEmpty{
-			InputEncryptedFileEmpty: &TLInputEncryptedFileEmpty{},
+			InputEncryptedFileEmpty: m,
 		},
 	}
 }
@@ -25164,7 +25164,7 @@ func (m *TLInputEncryptedFileEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputEncryptedFileUploaded) ToInputEncryptedFile() *InputEncryptedFile {
 	return &InputEncryptedFile{
 		Payload: &InputEncryptedFile_InputEncryptedFileUploaded{
-			InputEncryptedFileUploaded: &TLInputEncryptedFileUploaded{},
+			InputEncryptedFileUploaded: m,
 		},
 	}
 }
@@ -25191,7 +25191,7 @@ func (m *TLInputEncryptedFileUploaded) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputEncryptedFile) ToInputEncryptedFile() *InputEncryptedFile {
 	return &InputEncryptedFile{
 		Payload: &InputEncryptedFile_InputEncryptedFile{
-			InputEncryptedFile: &TLInputEncryptedFile{},
+			InputEncryptedFile: m,
 		},
 	}
 }
@@ -25214,7 +25214,7 @@ func (m *TLInputEncryptedFile) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputEncryptedFileBigUploaded) ToInputEncryptedFile() *InputEncryptedFile {
 	return &InputEncryptedFile{
 		Payload: &InputEncryptedFile_InputEncryptedFileBigUploaded{
-			InputEncryptedFileBigUploaded: &TLInputEncryptedFileBigUploaded{},
+			InputEncryptedFileBigUploaded: m,
 		},
 	}
 }
@@ -25239,7 +25239,7 @@ func (m *TLInputEncryptedFileBigUploaded) Decode(dbuf *DecodeBuf) error {
 func (m *TLEncryptedMessage) ToEncryptedMessage() *EncryptedMessage {
 	return &EncryptedMessage{
 		Payload: &EncryptedMessage_EncryptedMessage{
-			EncryptedMessage: &TLEncryptedMessage{},
+			EncryptedMessage: m,
 		},
 	}
 }
@@ -25270,7 +25270,7 @@ func (m *TLEncryptedMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLEncryptedMessageService) ToEncryptedMessage() *EncryptedMessage {
 	return &EncryptedMessage{
 		Payload: &EncryptedMessage_EncryptedMessageService{
-			EncryptedMessageService: &TLEncryptedMessageService{},
+			EncryptedMessageService: m,
 		},
 	}
 }
@@ -25297,7 +25297,7 @@ func (m *TLEncryptedMessageService) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesDhConfigNotModified) ToMessages_DhConfig() *Messages_DhConfig {
 	return &Messages_DhConfig{
 		Payload: &Messages_DhConfig_MessagesDhConfigNotModified{
-			MessagesDhConfigNotModified: &TLMessagesDhConfigNotModified{},
+			MessagesDhConfigNotModified: m,
 		},
 	}
 }
@@ -25318,7 +25318,7 @@ func (m *TLMessagesDhConfigNotModified) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesDhConfig) ToMessages_DhConfig() *Messages_DhConfig {
 	return &Messages_DhConfig{
 		Payload: &Messages_DhConfig_MessagesDhConfig{
-			MessagesDhConfig: &TLMessagesDhConfig{},
+			MessagesDhConfig: m,
 		},
 	}
 }
@@ -25345,7 +25345,7 @@ func (m *TLMessagesDhConfig) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSentEncryptedMessage) ToMessages_SentEncryptedMessage() *Messages_SentEncryptedMessage {
 	return &Messages_SentEncryptedMessage{
 		Payload: &Messages_SentEncryptedMessage_MessagesSentEncryptedMessage{
-			MessagesSentEncryptedMessage: &TLMessagesSentEncryptedMessage{},
+			MessagesSentEncryptedMessage: m,
 		},
 	}
 }
@@ -25366,7 +25366,7 @@ func (m *TLMessagesSentEncryptedMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSentEncryptedFile) ToMessages_SentEncryptedMessage() *Messages_SentEncryptedMessage {
 	return &Messages_SentEncryptedMessage{
 		Payload: &Messages_SentEncryptedMessage_MessagesSentEncryptedFile{
-			MessagesSentEncryptedFile: &TLMessagesSentEncryptedFile{},
+			MessagesSentEncryptedFile: m,
 		},
 	}
 }
@@ -25391,7 +25391,7 @@ func (m *TLMessagesSentEncryptedFile) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputDocumentEmpty) ToInputDocument() *InputDocument {
 	return &InputDocument{
 		Payload: &InputDocument_InputDocumentEmpty{
-			InputDocumentEmpty: &TLInputDocumentEmpty{},
+			InputDocumentEmpty: m,
 		},
 	}
 }
@@ -25410,7 +25410,7 @@ func (m *TLInputDocumentEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputDocument) ToInputDocument() *InputDocument {
 	return &InputDocument{
 		Payload: &InputDocument_InputDocument{
-			InputDocument: &TLInputDocument{},
+			InputDocument: m,
 		},
 	}
 }
@@ -25433,7 +25433,7 @@ func (m *TLInputDocument) Decode(dbuf *DecodeBuf) error {
 func (m *TLDocumentEmpty) ToDocument() *Document {
 	return &Document{
 		Payload: &Document_DocumentEmpty{
-			DocumentEmpty: &TLDocumentEmpty{},
+			DocumentEmpty: m,
 		},
 	}
 }
@@ -25454,7 +25454,7 @@ func (m *TLDocumentEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLDocument) ToDocument() *Document {
 	return &Document{
 		Payload: &Document_Document{
-			Document: &TLDocument{},
+			Document: m,
 		},
 	}
 }
@@ -25512,7 +25512,7 @@ func (m *TLDocument) Decode(dbuf *DecodeBuf) error {
 func (m *TLHelpSupport) ToHelp_Support() *Help_Support {
 	return &Help_Support{
 		Payload: &Help_Support_HelpSupport{
-			HelpSupport: &TLHelpSupport{},
+			HelpSupport: m,
 		},
 	}
 }
@@ -25537,7 +25537,7 @@ func (m *TLHelpSupport) Decode(dbuf *DecodeBuf) error {
 func (m *TLNotifyPeer) ToNotifyPeer() *NotifyPeer {
 	return &NotifyPeer{
 		Payload: &NotifyPeer_NotifyPeer{
-			NotifyPeer: &TLNotifyPeer{},
+			NotifyPeer: m,
 		},
 	}
 }
@@ -25560,7 +25560,7 @@ func (m *TLNotifyPeer) Decode(dbuf *DecodeBuf) error {
 func (m *TLNotifyUsers) ToNotifyPeer() *NotifyPeer {
 	return &NotifyPeer{
 		Payload: &NotifyPeer_NotifyUsers{
-			NotifyUsers: &TLNotifyUsers{},
+			NotifyUsers: m,
 		},
 	}
 }
@@ -25579,7 +25579,7 @@ func (m *TLNotifyUsers) Decode(dbuf *DecodeBuf) error {
 func (m *TLNotifyChats) ToNotifyPeer() *NotifyPeer {
 	return &NotifyPeer{
 		Payload: &NotifyPeer_NotifyChats{
-			NotifyChats: &TLNotifyChats{},
+			NotifyChats: m,
 		},
 	}
 }
@@ -25598,7 +25598,7 @@ func (m *TLNotifyChats) Decode(dbuf *DecodeBuf) error {
 func (m *TLNotifyAll) ToNotifyPeer() *NotifyPeer {
 	return &NotifyPeer{
 		Payload: &NotifyPeer_NotifyAll{
-			NotifyAll: &TLNotifyAll{},
+			NotifyAll: m,
 		},
 	}
 }
@@ -25617,7 +25617,7 @@ func (m *TLNotifyAll) Decode(dbuf *DecodeBuf) error {
 func (m *TLSendMessageTypingAction) ToSendMessageAction() *SendMessageAction {
 	return &SendMessageAction{
 		Payload: &SendMessageAction_SendMessageTypingAction{
-			SendMessageTypingAction: &TLSendMessageTypingAction{},
+			SendMessageTypingAction: m,
 		},
 	}
 }
@@ -25636,7 +25636,7 @@ func (m *TLSendMessageTypingAction) Decode(dbuf *DecodeBuf) error {
 func (m *TLSendMessageCancelAction) ToSendMessageAction() *SendMessageAction {
 	return &SendMessageAction{
 		Payload: &SendMessageAction_SendMessageCancelAction{
-			SendMessageCancelAction: &TLSendMessageCancelAction{},
+			SendMessageCancelAction: m,
 		},
 	}
 }
@@ -25655,7 +25655,7 @@ func (m *TLSendMessageCancelAction) Decode(dbuf *DecodeBuf) error {
 func (m *TLSendMessageRecordVideoAction) ToSendMessageAction() *SendMessageAction {
 	return &SendMessageAction{
 		Payload: &SendMessageAction_SendMessageRecordVideoAction{
-			SendMessageRecordVideoAction: &TLSendMessageRecordVideoAction{},
+			SendMessageRecordVideoAction: m,
 		},
 	}
 }
@@ -25674,7 +25674,7 @@ func (m *TLSendMessageRecordVideoAction) Decode(dbuf *DecodeBuf) error {
 func (m *TLSendMessageUploadVideoAction) ToSendMessageAction() *SendMessageAction {
 	return &SendMessageAction{
 		Payload: &SendMessageAction_SendMessageUploadVideoAction{
-			SendMessageUploadVideoAction: &TLSendMessageUploadVideoAction{},
+			SendMessageUploadVideoAction: m,
 		},
 	}
 }
@@ -25695,7 +25695,7 @@ func (m *TLSendMessageUploadVideoAction) Decode(dbuf *DecodeBuf) error {
 func (m *TLSendMessageRecordAudioAction) ToSendMessageAction() *SendMessageAction {
 	return &SendMessageAction{
 		Payload: &SendMessageAction_SendMessageRecordAudioAction{
-			SendMessageRecordAudioAction: &TLSendMessageRecordAudioAction{},
+			SendMessageRecordAudioAction: m,
 		},
 	}
 }
@@ -25714,7 +25714,7 @@ func (m *TLSendMessageRecordAudioAction) Decode(dbuf *DecodeBuf) error {
 func (m *TLSendMessageUploadAudioAction) ToSendMessageAction() *SendMessageAction {
 	return &SendMessageAction{
 		Payload: &SendMessageAction_SendMessageUploadAudioAction{
-			SendMessageUploadAudioAction: &TLSendMessageUploadAudioAction{},
+			SendMessageUploadAudioAction: m,
 		},
 	}
 }
@@ -25735,7 +25735,7 @@ func (m *TLSendMessageUploadAudioAction) Decode(dbuf *DecodeBuf) error {
 func (m *TLSendMessageUploadPhotoAction) ToSendMessageAction() *SendMessageAction {
 	return &SendMessageAction{
 		Payload: &SendMessageAction_SendMessageUploadPhotoAction{
-			SendMessageUploadPhotoAction: &TLSendMessageUploadPhotoAction{},
+			SendMessageUploadPhotoAction: m,
 		},
 	}
 }
@@ -25756,7 +25756,7 @@ func (m *TLSendMessageUploadPhotoAction) Decode(dbuf *DecodeBuf) error {
 func (m *TLSendMessageUploadDocumentAction) ToSendMessageAction() *SendMessageAction {
 	return &SendMessageAction{
 		Payload: &SendMessageAction_SendMessageUploadDocumentAction{
-			SendMessageUploadDocumentAction: &TLSendMessageUploadDocumentAction{},
+			SendMessageUploadDocumentAction: m,
 		},
 	}
 }
@@ -25777,7 +25777,7 @@ func (m *TLSendMessageUploadDocumentAction) Decode(dbuf *DecodeBuf) error {
 func (m *TLSendMessageGeoLocationAction) ToSendMessageAction() *SendMessageAction {
 	return &SendMessageAction{
 		Payload: &SendMessageAction_SendMessageGeoLocationAction{
-			SendMessageGeoLocationAction: &TLSendMessageGeoLocationAction{},
+			SendMessageGeoLocationAction: m,
 		},
 	}
 }
@@ -25796,7 +25796,7 @@ func (m *TLSendMessageGeoLocationAction) Decode(dbuf *DecodeBuf) error {
 func (m *TLSendMessageChooseContactAction) ToSendMessageAction() *SendMessageAction {
 	return &SendMessageAction{
 		Payload: &SendMessageAction_SendMessageChooseContactAction{
-			SendMessageChooseContactAction: &TLSendMessageChooseContactAction{},
+			SendMessageChooseContactAction: m,
 		},
 	}
 }
@@ -25815,7 +25815,7 @@ func (m *TLSendMessageChooseContactAction) Decode(dbuf *DecodeBuf) error {
 func (m *TLSendMessageGamePlayAction) ToSendMessageAction() *SendMessageAction {
 	return &SendMessageAction{
 		Payload: &SendMessageAction_SendMessageGamePlayAction{
-			SendMessageGamePlayAction: &TLSendMessageGamePlayAction{},
+			SendMessageGamePlayAction: m,
 		},
 	}
 }
@@ -25834,7 +25834,7 @@ func (m *TLSendMessageGamePlayAction) Decode(dbuf *DecodeBuf) error {
 func (m *TLSendMessageRecordRoundAction) ToSendMessageAction() *SendMessageAction {
 	return &SendMessageAction{
 		Payload: &SendMessageAction_SendMessageRecordRoundAction{
-			SendMessageRecordRoundAction: &TLSendMessageRecordRoundAction{},
+			SendMessageRecordRoundAction: m,
 		},
 	}
 }
@@ -25853,7 +25853,7 @@ func (m *TLSendMessageRecordRoundAction) Decode(dbuf *DecodeBuf) error {
 func (m *TLSendMessageUploadRoundAction) ToSendMessageAction() *SendMessageAction {
 	return &SendMessageAction{
 		Payload: &SendMessageAction_SendMessageUploadRoundAction{
-			SendMessageUploadRoundAction: &TLSendMessageUploadRoundAction{},
+			SendMessageUploadRoundAction: m,
 		},
 	}
 }
@@ -25874,7 +25874,7 @@ func (m *TLSendMessageUploadRoundAction) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactsFound) ToContacts_Found() *Contacts_Found {
 	return &Contacts_Found{
 		Payload: &Contacts_Found_ContactsFound{
-			ContactsFound: &TLContactsFound{},
+			ContactsFound: m,
 		},
 	}
 }
@@ -25956,7 +25956,7 @@ func (m *TLContactsFound) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPrivacyKeyStatusTimestamp) ToInputPrivacyKey() *InputPrivacyKey {
 	return &InputPrivacyKey{
 		Payload: &InputPrivacyKey_InputPrivacyKeyStatusTimestamp{
-			InputPrivacyKeyStatusTimestamp: &TLInputPrivacyKeyStatusTimestamp{},
+			InputPrivacyKeyStatusTimestamp: m,
 		},
 	}
 }
@@ -25975,7 +25975,7 @@ func (m *TLInputPrivacyKeyStatusTimestamp) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPrivacyKeyChatInvite) ToInputPrivacyKey() *InputPrivacyKey {
 	return &InputPrivacyKey{
 		Payload: &InputPrivacyKey_InputPrivacyKeyChatInvite{
-			InputPrivacyKeyChatInvite: &TLInputPrivacyKeyChatInvite{},
+			InputPrivacyKeyChatInvite: m,
 		},
 	}
 }
@@ -25994,7 +25994,7 @@ func (m *TLInputPrivacyKeyChatInvite) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPrivacyKeyPhoneCall) ToInputPrivacyKey() *InputPrivacyKey {
 	return &InputPrivacyKey{
 		Payload: &InputPrivacyKey_InputPrivacyKeyPhoneCall{
-			InputPrivacyKeyPhoneCall: &TLInputPrivacyKeyPhoneCall{},
+			InputPrivacyKeyPhoneCall: m,
 		},
 	}
 }
@@ -26013,7 +26013,7 @@ func (m *TLInputPrivacyKeyPhoneCall) Decode(dbuf *DecodeBuf) error {
 func (m *TLPrivacyKeyStatusTimestamp) ToPrivacyKey() *PrivacyKey {
 	return &PrivacyKey{
 		Payload: &PrivacyKey_PrivacyKeyStatusTimestamp{
-			PrivacyKeyStatusTimestamp: &TLPrivacyKeyStatusTimestamp{},
+			PrivacyKeyStatusTimestamp: m,
 		},
 	}
 }
@@ -26032,7 +26032,7 @@ func (m *TLPrivacyKeyStatusTimestamp) Decode(dbuf *DecodeBuf) error {
 func (m *TLPrivacyKeyChatInvite) ToPrivacyKey() *PrivacyKey {
 	return &PrivacyKey{
 		Payload: &PrivacyKey_PrivacyKeyChatInvite{
-			PrivacyKeyChatInvite: &TLPrivacyKeyChatInvite{},
+			PrivacyKeyChatInvite: m,
 		},
 	}
 }
@@ -26051,7 +26051,7 @@ func (m *TLPrivacyKeyChatInvite) Decode(dbuf *DecodeBuf) error {
 func (m *TLPrivacyKeyPhoneCall) ToPrivacyKey() *PrivacyKey {
 	return &PrivacyKey{
 		Payload: &PrivacyKey_PrivacyKeyPhoneCall{
-			PrivacyKeyPhoneCall: &TLPrivacyKeyPhoneCall{},
+			PrivacyKeyPhoneCall: m,
 		},
 	}
 }
@@ -26070,7 +26070,7 @@ func (m *TLPrivacyKeyPhoneCall) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPrivacyValueAllowContacts) ToInputPrivacyRule() *InputPrivacyRule {
 	return &InputPrivacyRule{
 		Payload: &InputPrivacyRule_InputPrivacyValueAllowContacts{
-			InputPrivacyValueAllowContacts: &TLInputPrivacyValueAllowContacts{},
+			InputPrivacyValueAllowContacts: m,
 		},
 	}
 }
@@ -26089,7 +26089,7 @@ func (m *TLInputPrivacyValueAllowContacts) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPrivacyValueAllowAll) ToInputPrivacyRule() *InputPrivacyRule {
 	return &InputPrivacyRule{
 		Payload: &InputPrivacyRule_InputPrivacyValueAllowAll{
-			InputPrivacyValueAllowAll: &TLInputPrivacyValueAllowAll{},
+			InputPrivacyValueAllowAll: m,
 		},
 	}
 }
@@ -26108,7 +26108,7 @@ func (m *TLInputPrivacyValueAllowAll) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPrivacyValueAllowUsers) ToInputPrivacyRule() *InputPrivacyRule {
 	return &InputPrivacyRule{
 		Payload: &InputPrivacyRule_InputPrivacyValueAllowUsers{
-			InputPrivacyValueAllowUsers: &TLInputPrivacyValueAllowUsers{},
+			InputPrivacyValueAllowUsers: m,
 		},
 	}
 }
@@ -26148,7 +26148,7 @@ func (m *TLInputPrivacyValueAllowUsers) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPrivacyValueDisallowContacts) ToInputPrivacyRule() *InputPrivacyRule {
 	return &InputPrivacyRule{
 		Payload: &InputPrivacyRule_InputPrivacyValueDisallowContacts{
-			InputPrivacyValueDisallowContacts: &TLInputPrivacyValueDisallowContacts{},
+			InputPrivacyValueDisallowContacts: m,
 		},
 	}
 }
@@ -26167,7 +26167,7 @@ func (m *TLInputPrivacyValueDisallowContacts) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPrivacyValueDisallowAll) ToInputPrivacyRule() *InputPrivacyRule {
 	return &InputPrivacyRule{
 		Payload: &InputPrivacyRule_InputPrivacyValueDisallowAll{
-			InputPrivacyValueDisallowAll: &TLInputPrivacyValueDisallowAll{},
+			InputPrivacyValueDisallowAll: m,
 		},
 	}
 }
@@ -26186,7 +26186,7 @@ func (m *TLInputPrivacyValueDisallowAll) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPrivacyValueDisallowUsers) ToInputPrivacyRule() *InputPrivacyRule {
 	return &InputPrivacyRule{
 		Payload: &InputPrivacyRule_InputPrivacyValueDisallowUsers{
-			InputPrivacyValueDisallowUsers: &TLInputPrivacyValueDisallowUsers{},
+			InputPrivacyValueDisallowUsers: m,
 		},
 	}
 }
@@ -26226,7 +26226,7 @@ func (m *TLInputPrivacyValueDisallowUsers) Decode(dbuf *DecodeBuf) error {
 func (m *TLPrivacyValueAllowContacts) ToPrivacyRule() *PrivacyRule {
 	return &PrivacyRule{
 		Payload: &PrivacyRule_PrivacyValueAllowContacts{
-			PrivacyValueAllowContacts: &TLPrivacyValueAllowContacts{},
+			PrivacyValueAllowContacts: m,
 		},
 	}
 }
@@ -26245,7 +26245,7 @@ func (m *TLPrivacyValueAllowContacts) Decode(dbuf *DecodeBuf) error {
 func (m *TLPrivacyValueAllowAll) ToPrivacyRule() *PrivacyRule {
 	return &PrivacyRule{
 		Payload: &PrivacyRule_PrivacyValueAllowAll{
-			PrivacyValueAllowAll: &TLPrivacyValueAllowAll{},
+			PrivacyValueAllowAll: m,
 		},
 	}
 }
@@ -26264,7 +26264,7 @@ func (m *TLPrivacyValueAllowAll) Decode(dbuf *DecodeBuf) error {
 func (m *TLPrivacyValueAllowUsers) ToPrivacyRule() *PrivacyRule {
 	return &PrivacyRule{
 		Payload: &PrivacyRule_PrivacyValueAllowUsers{
-			PrivacyValueAllowUsers: &TLPrivacyValueAllowUsers{},
+			PrivacyValueAllowUsers: m,
 		},
 	}
 }
@@ -26285,7 +26285,7 @@ func (m *TLPrivacyValueAllowUsers) Decode(dbuf *DecodeBuf) error {
 func (m *TLPrivacyValueDisallowContacts) ToPrivacyRule() *PrivacyRule {
 	return &PrivacyRule{
 		Payload: &PrivacyRule_PrivacyValueDisallowContacts{
-			PrivacyValueDisallowContacts: &TLPrivacyValueDisallowContacts{},
+			PrivacyValueDisallowContacts: m,
 		},
 	}
 }
@@ -26304,7 +26304,7 @@ func (m *TLPrivacyValueDisallowContacts) Decode(dbuf *DecodeBuf) error {
 func (m *TLPrivacyValueDisallowAll) ToPrivacyRule() *PrivacyRule {
 	return &PrivacyRule{
 		Payload: &PrivacyRule_PrivacyValueDisallowAll{
-			PrivacyValueDisallowAll: &TLPrivacyValueDisallowAll{},
+			PrivacyValueDisallowAll: m,
 		},
 	}
 }
@@ -26323,7 +26323,7 @@ func (m *TLPrivacyValueDisallowAll) Decode(dbuf *DecodeBuf) error {
 func (m *TLPrivacyValueDisallowUsers) ToPrivacyRule() *PrivacyRule {
 	return &PrivacyRule{
 		Payload: &PrivacyRule_PrivacyValueDisallowUsers{
-			PrivacyValueDisallowUsers: &TLPrivacyValueDisallowUsers{},
+			PrivacyValueDisallowUsers: m,
 		},
 	}
 }
@@ -26344,7 +26344,7 @@ func (m *TLPrivacyValueDisallowUsers) Decode(dbuf *DecodeBuf) error {
 func (m *TLAccountPrivacyRules) ToAccount_PrivacyRules() *Account_PrivacyRules {
 	return &Account_PrivacyRules{
 		Payload: &Account_PrivacyRules_AccountPrivacyRules{
-			AccountPrivacyRules: &TLAccountPrivacyRules{},
+			AccountPrivacyRules: m,
 		},
 	}
 }
@@ -26405,7 +26405,7 @@ func (m *TLAccountPrivacyRules) Decode(dbuf *DecodeBuf) error {
 func (m *TLAccountDaysTTL) ToAccountDaysTTL() *AccountDaysTTL {
 	return &AccountDaysTTL{
 		Payload: &AccountDaysTTL_AccountDaysTTL{
-			AccountDaysTTL: &TLAccountDaysTTL{},
+			AccountDaysTTL: m,
 		},
 	}
 }
@@ -26426,7 +26426,7 @@ func (m *TLAccountDaysTTL) Decode(dbuf *DecodeBuf) error {
 func (m *TLDocumentAttributeImageSize) ToDocumentAttribute() *DocumentAttribute {
 	return &DocumentAttribute{
 		Payload: &DocumentAttribute_DocumentAttributeImageSize{
-			DocumentAttributeImageSize: &TLDocumentAttributeImageSize{},
+			DocumentAttributeImageSize: m,
 		},
 	}
 }
@@ -26449,7 +26449,7 @@ func (m *TLDocumentAttributeImageSize) Decode(dbuf *DecodeBuf) error {
 func (m *TLDocumentAttributeAnimated) ToDocumentAttribute() *DocumentAttribute {
 	return &DocumentAttribute{
 		Payload: &DocumentAttribute_DocumentAttributeAnimated{
-			DocumentAttributeAnimated: &TLDocumentAttributeAnimated{},
+			DocumentAttributeAnimated: m,
 		},
 	}
 }
@@ -26468,7 +26468,7 @@ func (m *TLDocumentAttributeAnimated) Decode(dbuf *DecodeBuf) error {
 func (m *TLDocumentAttributeSticker) ToDocumentAttribute() *DocumentAttribute {
 	return &DocumentAttribute{
 		Payload: &DocumentAttribute_DocumentAttributeSticker{
-			DocumentAttributeSticker: &TLDocumentAttributeSticker{},
+			DocumentAttributeSticker: m,
 		},
 	}
 }
@@ -26518,7 +26518,7 @@ func (m *TLDocumentAttributeSticker) Decode(dbuf *DecodeBuf) error {
 func (m *TLDocumentAttributeVideo) ToDocumentAttribute() *DocumentAttribute {
 	return &DocumentAttribute{
 		Payload: &DocumentAttribute_DocumentAttributeVideo{
-			DocumentAttributeVideo: &TLDocumentAttributeVideo{},
+			DocumentAttributeVideo: m,
 		},
 	}
 }
@@ -26557,7 +26557,7 @@ func (m *TLDocumentAttributeVideo) Decode(dbuf *DecodeBuf) error {
 func (m *TLDocumentAttributeAudio) ToDocumentAttribute() *DocumentAttribute {
 	return &DocumentAttribute{
 		Payload: &DocumentAttribute_DocumentAttributeAudio{
-			DocumentAttributeAudio: &TLDocumentAttributeAudio{},
+			DocumentAttributeAudio: m,
 		},
 	}
 }
@@ -26619,7 +26619,7 @@ func (m *TLDocumentAttributeAudio) Decode(dbuf *DecodeBuf) error {
 func (m *TLDocumentAttributeFilename) ToDocumentAttribute() *DocumentAttribute {
 	return &DocumentAttribute{
 		Payload: &DocumentAttribute_DocumentAttributeFilename{
-			DocumentAttributeFilename: &TLDocumentAttributeFilename{},
+			DocumentAttributeFilename: m,
 		},
 	}
 }
@@ -26640,7 +26640,7 @@ func (m *TLDocumentAttributeFilename) Decode(dbuf *DecodeBuf) error {
 func (m *TLDocumentAttributeHasStickers) ToDocumentAttribute() *DocumentAttribute {
 	return &DocumentAttribute{
 		Payload: &DocumentAttribute_DocumentAttributeHasStickers{
-			DocumentAttributeHasStickers: &TLDocumentAttributeHasStickers{},
+			DocumentAttributeHasStickers: m,
 		},
 	}
 }
@@ -26659,7 +26659,7 @@ func (m *TLDocumentAttributeHasStickers) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesStickersNotModified) ToMessages_Stickers() *Messages_Stickers {
 	return &Messages_Stickers{
 		Payload: &Messages_Stickers_MessagesStickersNotModified{
-			MessagesStickersNotModified: &TLMessagesStickersNotModified{},
+			MessagesStickersNotModified: m,
 		},
 	}
 }
@@ -26678,7 +26678,7 @@ func (m *TLMessagesStickersNotModified) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesStickers) ToMessages_Stickers() *Messages_Stickers {
 	return &Messages_Stickers{
 		Payload: &Messages_Stickers_MessagesStickers{
-			MessagesStickers: &TLMessagesStickers{},
+			MessagesStickers: m,
 		},
 	}
 }
@@ -26720,7 +26720,7 @@ func (m *TLMessagesStickers) Decode(dbuf *DecodeBuf) error {
 func (m *TLStickerPack) ToStickerPack() *StickerPack {
 	return &StickerPack{
 		Payload: &StickerPack_StickerPack{
-			StickerPack: &TLStickerPack{},
+			StickerPack: m,
 		},
 	}
 }
@@ -26743,7 +26743,7 @@ func (m *TLStickerPack) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesAllStickersNotModified) ToMessages_AllStickers() *Messages_AllStickers {
 	return &Messages_AllStickers{
 		Payload: &Messages_AllStickers_MessagesAllStickersNotModified{
-			MessagesAllStickersNotModified: &TLMessagesAllStickersNotModified{},
+			MessagesAllStickersNotModified: m,
 		},
 	}
 }
@@ -26762,7 +26762,7 @@ func (m *TLMessagesAllStickersNotModified) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesAllStickers) ToMessages_AllStickers() *Messages_AllStickers {
 	return &Messages_AllStickers{
 		Payload: &Messages_AllStickers_MessagesAllStickers{
-			MessagesAllStickers: &TLMessagesAllStickers{},
+			MessagesAllStickers: m,
 		},
 	}
 }
@@ -26804,7 +26804,7 @@ func (m *TLMessagesAllStickers) Decode(dbuf *DecodeBuf) error {
 func (m *TLDisabledFeature) ToDisabledFeature() *DisabledFeature {
 	return &DisabledFeature{
 		Payload: &DisabledFeature_DisabledFeature{
-			DisabledFeature: &TLDisabledFeature{},
+			DisabledFeature: m,
 		},
 	}
 }
@@ -26827,7 +26827,7 @@ func (m *TLDisabledFeature) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesAffectedMessages) ToMessages_AffectedMessages() *Messages_AffectedMessages {
 	return &Messages_AffectedMessages{
 		Payload: &Messages_AffectedMessages_MessagesAffectedMessages{
-			MessagesAffectedMessages: &TLMessagesAffectedMessages{},
+			MessagesAffectedMessages: m,
 		},
 	}
 }
@@ -26850,7 +26850,7 @@ func (m *TLMessagesAffectedMessages) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactLinkUnknown) ToContactLink() *ContactLink {
 	return &ContactLink{
 		Payload: &ContactLink_ContactLinkUnknown{
-			ContactLinkUnknown: &TLContactLinkUnknown{},
+			ContactLinkUnknown: m,
 		},
 	}
 }
@@ -26869,7 +26869,7 @@ func (m *TLContactLinkUnknown) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactLinkNone) ToContactLink() *ContactLink {
 	return &ContactLink{
 		Payload: &ContactLink_ContactLinkNone{
-			ContactLinkNone: &TLContactLinkNone{},
+			ContactLinkNone: m,
 		},
 	}
 }
@@ -26888,7 +26888,7 @@ func (m *TLContactLinkNone) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactLinkHasPhone) ToContactLink() *ContactLink {
 	return &ContactLink{
 		Payload: &ContactLink_ContactLinkHasPhone{
-			ContactLinkHasPhone: &TLContactLinkHasPhone{},
+			ContactLinkHasPhone: m,
 		},
 	}
 }
@@ -26907,7 +26907,7 @@ func (m *TLContactLinkHasPhone) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactLinkContact) ToContactLink() *ContactLink {
 	return &ContactLink{
 		Payload: &ContactLink_ContactLinkContact{
-			ContactLinkContact: &TLContactLinkContact{},
+			ContactLinkContact: m,
 		},
 	}
 }
@@ -26926,7 +26926,7 @@ func (m *TLContactLinkContact) Decode(dbuf *DecodeBuf) error {
 func (m *TLWebPageEmpty) ToWebPage() *WebPage {
 	return &WebPage{
 		Payload: &WebPage_WebPageEmpty{
-			WebPageEmpty: &TLWebPageEmpty{},
+			WebPageEmpty: m,
 		},
 	}
 }
@@ -26947,7 +26947,7 @@ func (m *TLWebPageEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLWebPagePending) ToWebPage() *WebPage {
 	return &WebPage{
 		Payload: &WebPage_WebPagePending{
-			WebPagePending: &TLWebPagePending{},
+			WebPagePending: m,
 		},
 	}
 }
@@ -26970,7 +26970,7 @@ func (m *TLWebPagePending) Decode(dbuf *DecodeBuf) error {
 func (m *TLWebPage) ToWebPage() *WebPage {
 	return &WebPage{
 		Payload: &WebPage_WebPage{
-			WebPage: &TLWebPage{},
+			WebPage: m,
 		},
 	}
 }
@@ -27125,7 +27125,7 @@ func (m *TLWebPage) Decode(dbuf *DecodeBuf) error {
 func (m *TLWebPageNotModified) ToWebPage() *WebPage {
 	return &WebPage{
 		Payload: &WebPage_WebPageNotModified{
-			WebPageNotModified: &TLWebPageNotModified{},
+			WebPageNotModified: m,
 		},
 	}
 }
@@ -27144,7 +27144,7 @@ func (m *TLWebPageNotModified) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthorization) ToAuthorization() *Authorization {
 	return &Authorization{
 		Payload: &Authorization_Authorization{
-			Authorization: &TLAuthorization{},
+			Authorization: m,
 		},
 	}
 }
@@ -27187,7 +27187,7 @@ func (m *TLAuthorization) Decode(dbuf *DecodeBuf) error {
 func (m *TLAccountAuthorizations) ToAccount_Authorizations() *Account_Authorizations {
 	return &Account_Authorizations{
 		Payload: &Account_Authorizations_AccountAuthorizations{
-			AccountAuthorizations: &TLAccountAuthorizations{},
+			AccountAuthorizations: m,
 		},
 	}
 }
@@ -27227,7 +27227,7 @@ func (m *TLAccountAuthorizations) Decode(dbuf *DecodeBuf) error {
 func (m *TLAccountNoPassword) ToAccount_Password() *Account_Password {
 	return &Account_Password{
 		Payload: &Account_Password_AccountNoPassword{
-			AccountNoPassword: &TLAccountNoPassword{},
+			AccountNoPassword: m,
 		},
 	}
 }
@@ -27250,7 +27250,7 @@ func (m *TLAccountNoPassword) Decode(dbuf *DecodeBuf) error {
 func (m *TLAccountPassword) ToAccount_Password() *Account_Password {
 	return &Account_Password{
 		Payload: &Account_Password_AccountPassword{
-			AccountPassword: &TLAccountPassword{},
+			AccountPassword: m,
 		},
 	}
 }
@@ -27281,7 +27281,7 @@ func (m *TLAccountPassword) Decode(dbuf *DecodeBuf) error {
 func (m *TLAccountPasswordSettings) ToAccount_PasswordSettings() *Account_PasswordSettings {
 	return &Account_PasswordSettings{
 		Payload: &Account_PasswordSettings_AccountPasswordSettings{
-			AccountPasswordSettings: &TLAccountPasswordSettings{},
+			AccountPasswordSettings: m,
 		},
 	}
 }
@@ -27302,7 +27302,7 @@ func (m *TLAccountPasswordSettings) Decode(dbuf *DecodeBuf) error {
 func (m *TLAccountPasswordInputSettings) ToAccount_PasswordInputSettings() *Account_PasswordInputSettings {
 	return &Account_PasswordInputSettings{
 		Payload: &Account_PasswordInputSettings_AccountPasswordInputSettings{
-			AccountPasswordInputSettings: &TLAccountPasswordInputSettings{},
+			AccountPasswordInputSettings: m,
 		},
 	}
 }
@@ -27362,7 +27362,7 @@ func (m *TLAccountPasswordInputSettings) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthPasswordRecovery) ToAuth_PasswordRecovery() *Auth_PasswordRecovery {
 	return &Auth_PasswordRecovery{
 		Payload: &Auth_PasswordRecovery_AuthPasswordRecovery{
-			AuthPasswordRecovery: &TLAuthPasswordRecovery{},
+			AuthPasswordRecovery: m,
 		},
 	}
 }
@@ -27383,7 +27383,7 @@ func (m *TLAuthPasswordRecovery) Decode(dbuf *DecodeBuf) error {
 func (m *TLReceivedNotifyMessage) ToReceivedNotifyMessage() *ReceivedNotifyMessage {
 	return &ReceivedNotifyMessage{
 		Payload: &ReceivedNotifyMessage_ReceivedNotifyMessage{
-			ReceivedNotifyMessage: &TLReceivedNotifyMessage{},
+			ReceivedNotifyMessage: m,
 		},
 	}
 }
@@ -27404,7 +27404,7 @@ func (m *TLReceivedNotifyMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatInviteEmpty) ToExportedChatInvite() *ExportedChatInvite {
 	return &ExportedChatInvite{
 		Payload: &ExportedChatInvite_ChatInviteEmpty{
-			ChatInviteEmpty: &TLChatInviteEmpty{},
+			ChatInviteEmpty: m,
 		},
 	}
 }
@@ -27423,7 +27423,7 @@ func (m *TLChatInviteEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatInviteExported) ToExportedChatInvite() *ExportedChatInvite {
 	return &ExportedChatInvite{
 		Payload: &ExportedChatInvite_ChatInviteExported{
-			ChatInviteExported: &TLChatInviteExported{},
+			ChatInviteExported: m,
 		},
 	}
 }
@@ -27444,7 +27444,7 @@ func (m *TLChatInviteExported) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatInviteAlready) ToChatInvite() *ChatInvite {
 	return &ChatInvite{
 		Payload: &ChatInvite_ChatInviteAlready{
-			ChatInviteAlready: &TLChatInviteAlready{},
+			ChatInviteAlready: m,
 		},
 	}
 }
@@ -27467,7 +27467,7 @@ func (m *TLChatInviteAlready) Decode(dbuf *DecodeBuf) error {
 func (m *TLChatInvite) ToChatInvite() *ChatInvite {
 	return &ChatInvite{
 		Payload: &ChatInvite_ChatInvite{
-			ChatInvite: &TLChatInvite{},
+			ChatInvite: m,
 		},
 	}
 }
@@ -27563,7 +27563,7 @@ func (m *TLChatInvite) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputStickerSetEmpty) ToInputStickerSet() *InputStickerSet {
 	return &InputStickerSet{
 		Payload: &InputStickerSet_InputStickerSetEmpty{
-			InputStickerSetEmpty: &TLInputStickerSetEmpty{},
+			InputStickerSetEmpty: m,
 		},
 	}
 }
@@ -27582,7 +27582,7 @@ func (m *TLInputStickerSetEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputStickerSetID) ToInputStickerSet() *InputStickerSet {
 	return &InputStickerSet{
 		Payload: &InputStickerSet_InputStickerSetID{
-			InputStickerSetID: &TLInputStickerSetID{},
+			InputStickerSetID: m,
 		},
 	}
 }
@@ -27605,7 +27605,7 @@ func (m *TLInputStickerSetID) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputStickerSetShortName) ToInputStickerSet() *InputStickerSet {
 	return &InputStickerSet{
 		Payload: &InputStickerSet_InputStickerSetShortName{
-			InputStickerSetShortName: &TLInputStickerSetShortName{},
+			InputStickerSetShortName: m,
 		},
 	}
 }
@@ -27626,7 +27626,7 @@ func (m *TLInputStickerSetShortName) Decode(dbuf *DecodeBuf) error {
 func (m *TLStickerSet) ToStickerSet() *StickerSet {
 	return &StickerSet{
 		Payload: &StickerSet_StickerSet{
-			StickerSet: &TLStickerSet{},
+			StickerSet: m,
 		},
 	}
 }
@@ -27698,7 +27698,7 @@ func (m *TLStickerSet) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesStickerSet) ToMessages_StickerSet() *Messages_StickerSet {
 	return &Messages_StickerSet{
 		Payload: &Messages_StickerSet_MessagesStickerSet{
-			MessagesStickerSet: &TLMessagesStickerSet{},
+			MessagesStickerSet: m,
 		},
 	}
 }
@@ -27763,7 +27763,7 @@ func (m *TLMessagesStickerSet) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotCommand) ToBotCommand() *BotCommand {
 	return &BotCommand{
 		Payload: &BotCommand_BotCommand{
-			BotCommand: &TLBotCommand{},
+			BotCommand: m,
 		},
 	}
 }
@@ -27786,7 +27786,7 @@ func (m *TLBotCommand) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotInfo) ToBotInfo() *BotInfo {
 	return &BotInfo{
 		Payload: &BotInfo_BotInfo{
-			BotInfo: &TLBotInfo{},
+			BotInfo: m,
 		},
 	}
 }
@@ -27830,7 +27830,7 @@ func (m *TLBotInfo) Decode(dbuf *DecodeBuf) error {
 func (m *TLKeyboardButton) ToKeyboardButton() *KeyboardButton {
 	return &KeyboardButton{
 		Payload: &KeyboardButton_KeyboardButton{
-			KeyboardButton: &TLKeyboardButton{},
+			KeyboardButton: m,
 		},
 	}
 }
@@ -27851,7 +27851,7 @@ func (m *TLKeyboardButton) Decode(dbuf *DecodeBuf) error {
 func (m *TLKeyboardButtonUrl) ToKeyboardButton() *KeyboardButton {
 	return &KeyboardButton{
 		Payload: &KeyboardButton_KeyboardButtonUrl{
-			KeyboardButtonUrl: &TLKeyboardButtonUrl{},
+			KeyboardButtonUrl: m,
 		},
 	}
 }
@@ -27874,7 +27874,7 @@ func (m *TLKeyboardButtonUrl) Decode(dbuf *DecodeBuf) error {
 func (m *TLKeyboardButtonCallback) ToKeyboardButton() *KeyboardButton {
 	return &KeyboardButton{
 		Payload: &KeyboardButton_KeyboardButtonCallback{
-			KeyboardButtonCallback: &TLKeyboardButtonCallback{},
+			KeyboardButtonCallback: m,
 		},
 	}
 }
@@ -27897,7 +27897,7 @@ func (m *TLKeyboardButtonCallback) Decode(dbuf *DecodeBuf) error {
 func (m *TLKeyboardButtonRequestPhone) ToKeyboardButton() *KeyboardButton {
 	return &KeyboardButton{
 		Payload: &KeyboardButton_KeyboardButtonRequestPhone{
-			KeyboardButtonRequestPhone: &TLKeyboardButtonRequestPhone{},
+			KeyboardButtonRequestPhone: m,
 		},
 	}
 }
@@ -27918,7 +27918,7 @@ func (m *TLKeyboardButtonRequestPhone) Decode(dbuf *DecodeBuf) error {
 func (m *TLKeyboardButtonRequestGeoLocation) ToKeyboardButton() *KeyboardButton {
 	return &KeyboardButton{
 		Payload: &KeyboardButton_KeyboardButtonRequestGeoLocation{
-			KeyboardButtonRequestGeoLocation: &TLKeyboardButtonRequestGeoLocation{},
+			KeyboardButtonRequestGeoLocation: m,
 		},
 	}
 }
@@ -27939,7 +27939,7 @@ func (m *TLKeyboardButtonRequestGeoLocation) Decode(dbuf *DecodeBuf) error {
 func (m *TLKeyboardButtonSwitchInline) ToKeyboardButton() *KeyboardButton {
 	return &KeyboardButton{
 		Payload: &KeyboardButton_KeyboardButtonSwitchInline{
-			KeyboardButtonSwitchInline: &TLKeyboardButtonSwitchInline{},
+			KeyboardButtonSwitchInline: m,
 		},
 	}
 }
@@ -27976,7 +27976,7 @@ func (m *TLKeyboardButtonSwitchInline) Decode(dbuf *DecodeBuf) error {
 func (m *TLKeyboardButtonGame) ToKeyboardButton() *KeyboardButton {
 	return &KeyboardButton{
 		Payload: &KeyboardButton_KeyboardButtonGame{
-			KeyboardButtonGame: &TLKeyboardButtonGame{},
+			KeyboardButtonGame: m,
 		},
 	}
 }
@@ -27997,7 +27997,7 @@ func (m *TLKeyboardButtonGame) Decode(dbuf *DecodeBuf) error {
 func (m *TLKeyboardButtonBuy) ToKeyboardButton() *KeyboardButton {
 	return &KeyboardButton{
 		Payload: &KeyboardButton_KeyboardButtonBuy{
-			KeyboardButtonBuy: &TLKeyboardButtonBuy{},
+			KeyboardButtonBuy: m,
 		},
 	}
 }
@@ -28018,7 +28018,7 @@ func (m *TLKeyboardButtonBuy) Decode(dbuf *DecodeBuf) error {
 func (m *TLKeyboardButtonRow) ToKeyboardButtonRow() *KeyboardButtonRow {
 	return &KeyboardButtonRow{
 		Payload: &KeyboardButtonRow_KeyboardButtonRow{
-			KeyboardButtonRow: &TLKeyboardButtonRow{},
+			KeyboardButtonRow: m,
 		},
 	}
 }
@@ -28058,7 +28058,7 @@ func (m *TLKeyboardButtonRow) Decode(dbuf *DecodeBuf) error {
 func (m *TLReplyKeyboardHide) ToReplyMarkup() *ReplyMarkup {
 	return &ReplyMarkup{
 		Payload: &ReplyMarkup_ReplyKeyboardHide{
-			ReplyKeyboardHide: &TLReplyKeyboardHide{},
+			ReplyKeyboardHide: m,
 		},
 	}
 }
@@ -28091,7 +28091,7 @@ func (m *TLReplyKeyboardHide) Decode(dbuf *DecodeBuf) error {
 func (m *TLReplyKeyboardForceReply) ToReplyMarkup() *ReplyMarkup {
 	return &ReplyMarkup{
 		Payload: &ReplyMarkup_ReplyKeyboardForceReply{
-			ReplyKeyboardForceReply: &TLReplyKeyboardForceReply{},
+			ReplyKeyboardForceReply: m,
 		},
 	}
 }
@@ -28133,7 +28133,7 @@ func (m *TLReplyKeyboardForceReply) Decode(dbuf *DecodeBuf) error {
 func (m *TLReplyKeyboardMarkup) ToReplyMarkup() *ReplyMarkup {
 	return &ReplyMarkup{
 		Payload: &ReplyMarkup_ReplyKeyboardMarkup{
-			ReplyKeyboardMarkup: &TLReplyKeyboardMarkup{},
+			ReplyKeyboardMarkup: m,
 		},
 	}
 }
@@ -28205,7 +28205,7 @@ func (m *TLReplyKeyboardMarkup) Decode(dbuf *DecodeBuf) error {
 func (m *TLReplyInlineMarkup) ToReplyMarkup() *ReplyMarkup {
 	return &ReplyMarkup{
 		Payload: &ReplyMarkup_ReplyInlineMarkup{
-			ReplyInlineMarkup: &TLReplyInlineMarkup{},
+			ReplyInlineMarkup: m,
 		},
 	}
 }
@@ -28245,7 +28245,7 @@ func (m *TLReplyInlineMarkup) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageEntityUnknown) ToMessageEntity() *MessageEntity {
 	return &MessageEntity{
 		Payload: &MessageEntity_MessageEntityUnknown{
-			MessageEntityUnknown: &TLMessageEntityUnknown{},
+			MessageEntityUnknown: m,
 		},
 	}
 }
@@ -28268,7 +28268,7 @@ func (m *TLMessageEntityUnknown) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageEntityMention) ToMessageEntity() *MessageEntity {
 	return &MessageEntity{
 		Payload: &MessageEntity_MessageEntityMention{
-			MessageEntityMention: &TLMessageEntityMention{},
+			MessageEntityMention: m,
 		},
 	}
 }
@@ -28291,7 +28291,7 @@ func (m *TLMessageEntityMention) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageEntityHashtag) ToMessageEntity() *MessageEntity {
 	return &MessageEntity{
 		Payload: &MessageEntity_MessageEntityHashtag{
-			MessageEntityHashtag: &TLMessageEntityHashtag{},
+			MessageEntityHashtag: m,
 		},
 	}
 }
@@ -28314,7 +28314,7 @@ func (m *TLMessageEntityHashtag) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageEntityBotCommand) ToMessageEntity() *MessageEntity {
 	return &MessageEntity{
 		Payload: &MessageEntity_MessageEntityBotCommand{
-			MessageEntityBotCommand: &TLMessageEntityBotCommand{},
+			MessageEntityBotCommand: m,
 		},
 	}
 }
@@ -28337,7 +28337,7 @@ func (m *TLMessageEntityBotCommand) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageEntityUrl) ToMessageEntity() *MessageEntity {
 	return &MessageEntity{
 		Payload: &MessageEntity_MessageEntityUrl{
-			MessageEntityUrl: &TLMessageEntityUrl{},
+			MessageEntityUrl: m,
 		},
 	}
 }
@@ -28360,7 +28360,7 @@ func (m *TLMessageEntityUrl) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageEntityEmail) ToMessageEntity() *MessageEntity {
 	return &MessageEntity{
 		Payload: &MessageEntity_MessageEntityEmail{
-			MessageEntityEmail: &TLMessageEntityEmail{},
+			MessageEntityEmail: m,
 		},
 	}
 }
@@ -28383,7 +28383,7 @@ func (m *TLMessageEntityEmail) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageEntityBold) ToMessageEntity() *MessageEntity {
 	return &MessageEntity{
 		Payload: &MessageEntity_MessageEntityBold{
-			MessageEntityBold: &TLMessageEntityBold{},
+			MessageEntityBold: m,
 		},
 	}
 }
@@ -28406,7 +28406,7 @@ func (m *TLMessageEntityBold) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageEntityItalic) ToMessageEntity() *MessageEntity {
 	return &MessageEntity{
 		Payload: &MessageEntity_MessageEntityItalic{
-			MessageEntityItalic: &TLMessageEntityItalic{},
+			MessageEntityItalic: m,
 		},
 	}
 }
@@ -28429,7 +28429,7 @@ func (m *TLMessageEntityItalic) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageEntityCode) ToMessageEntity() *MessageEntity {
 	return &MessageEntity{
 		Payload: &MessageEntity_MessageEntityCode{
-			MessageEntityCode: &TLMessageEntityCode{},
+			MessageEntityCode: m,
 		},
 	}
 }
@@ -28452,7 +28452,7 @@ func (m *TLMessageEntityCode) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageEntityPre) ToMessageEntity() *MessageEntity {
 	return &MessageEntity{
 		Payload: &MessageEntity_MessageEntityPre{
-			MessageEntityPre: &TLMessageEntityPre{},
+			MessageEntityPre: m,
 		},
 	}
 }
@@ -28477,7 +28477,7 @@ func (m *TLMessageEntityPre) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageEntityTextUrl) ToMessageEntity() *MessageEntity {
 	return &MessageEntity{
 		Payload: &MessageEntity_MessageEntityTextUrl{
-			MessageEntityTextUrl: &TLMessageEntityTextUrl{},
+			MessageEntityTextUrl: m,
 		},
 	}
 }
@@ -28502,7 +28502,7 @@ func (m *TLMessageEntityTextUrl) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageEntityMentionName) ToMessageEntity() *MessageEntity {
 	return &MessageEntity{
 		Payload: &MessageEntity_MessageEntityMentionName{
-			MessageEntityMentionName: &TLMessageEntityMentionName{},
+			MessageEntityMentionName: m,
 		},
 	}
 }
@@ -28527,7 +28527,7 @@ func (m *TLMessageEntityMentionName) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputMessageEntityMentionName) ToMessageEntity() *MessageEntity {
 	return &MessageEntity{
 		Payload: &MessageEntity_InputMessageEntityMentionName{
-			InputMessageEntityMentionName: &TLInputMessageEntityMentionName{},
+			InputMessageEntityMentionName: m,
 		},
 	}
 }
@@ -28554,7 +28554,7 @@ func (m *TLInputMessageEntityMentionName) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputChannelEmpty) ToInputChannel() *InputChannel {
 	return &InputChannel{
 		Payload: &InputChannel_InputChannelEmpty{
-			InputChannelEmpty: &TLInputChannelEmpty{},
+			InputChannelEmpty: m,
 		},
 	}
 }
@@ -28573,7 +28573,7 @@ func (m *TLInputChannelEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputChannel) ToInputChannel() *InputChannel {
 	return &InputChannel{
 		Payload: &InputChannel_InputChannel{
-			InputChannel: &TLInputChannel{},
+			InputChannel: m,
 		},
 	}
 }
@@ -28596,7 +28596,7 @@ func (m *TLInputChannel) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactsResolvedPeer) ToContacts_ResolvedPeer() *Contacts_ResolvedPeer {
 	return &Contacts_ResolvedPeer{
 		Payload: &Contacts_ResolvedPeer_ContactsResolvedPeer{
-			ContactsResolvedPeer: &TLContactsResolvedPeer{},
+			ContactsResolvedPeer: m,
 		},
 	}
 }
@@ -28661,7 +28661,7 @@ func (m *TLContactsResolvedPeer) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageRange) ToMessageRange() *MessageRange {
 	return &MessageRange{
 		Payload: &MessageRange_MessageRange{
-			MessageRange: &TLMessageRange{},
+			MessageRange: m,
 		},
 	}
 }
@@ -28684,7 +28684,7 @@ func (m *TLMessageRange) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatesChannelDifferenceEmpty) ToUpdates_ChannelDifference() *Updates_ChannelDifference {
 	return &Updates_ChannelDifference{
 		Payload: &Updates_ChannelDifference_UpdatesChannelDifferenceEmpty{
-			UpdatesChannelDifferenceEmpty: &TLUpdatesChannelDifferenceEmpty{},
+			UpdatesChannelDifferenceEmpty: m,
 		},
 	}
 }
@@ -28728,7 +28728,7 @@ func (m *TLUpdatesChannelDifferenceEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatesChannelDifferenceTooLong) ToUpdates_ChannelDifference() *Updates_ChannelDifference {
 	return &Updates_ChannelDifference{
 		Payload: &Updates_ChannelDifference_UpdatesChannelDifferenceTooLong{
-			UpdatesChannelDifferenceTooLong: &TLUpdatesChannelDifferenceTooLong{},
+			UpdatesChannelDifferenceTooLong: m,
 		},
 	}
 }
@@ -28845,7 +28845,7 @@ func (m *TLUpdatesChannelDifferenceTooLong) Decode(dbuf *DecodeBuf) error {
 func (m *TLUpdatesChannelDifference) ToUpdates_ChannelDifference() *Updates_ChannelDifference {
 	return &Updates_ChannelDifference{
 		Payload: &Updates_ChannelDifference_UpdatesChannelDifference{
-			UpdatesChannelDifference: &TLUpdatesChannelDifference{},
+			UpdatesChannelDifference: m,
 		},
 	}
 }
@@ -28973,7 +28973,7 @@ func (m *TLUpdatesChannelDifference) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelMessagesFilterEmpty) ToChannelMessagesFilter() *ChannelMessagesFilter {
 	return &ChannelMessagesFilter{
 		Payload: &ChannelMessagesFilter_ChannelMessagesFilterEmpty{
-			ChannelMessagesFilterEmpty: &TLChannelMessagesFilterEmpty{},
+			ChannelMessagesFilterEmpty: m,
 		},
 	}
 }
@@ -28992,7 +28992,7 @@ func (m *TLChannelMessagesFilterEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelMessagesFilter) ToChannelMessagesFilter() *ChannelMessagesFilter {
 	return &ChannelMessagesFilter{
 		Payload: &ChannelMessagesFilter_ChannelMessagesFilter{
-			ChannelMessagesFilter: &TLChannelMessagesFilter{},
+			ChannelMessagesFilter: m,
 		},
 	}
 }
@@ -29046,7 +29046,7 @@ func (m *TLChannelMessagesFilter) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelParticipant) ToChannelParticipant() *ChannelParticipant {
 	return &ChannelParticipant{
 		Payload: &ChannelParticipant_ChannelParticipant{
-			ChannelParticipant: &TLChannelParticipant{},
+			ChannelParticipant: m,
 		},
 	}
 }
@@ -29069,7 +29069,7 @@ func (m *TLChannelParticipant) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelParticipantSelf) ToChannelParticipant() *ChannelParticipant {
 	return &ChannelParticipant{
 		Payload: &ChannelParticipant_ChannelParticipantSelf{
-			ChannelParticipantSelf: &TLChannelParticipantSelf{},
+			ChannelParticipantSelf: m,
 		},
 	}
 }
@@ -29094,7 +29094,7 @@ func (m *TLChannelParticipantSelf) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelParticipantCreator) ToChannelParticipant() *ChannelParticipant {
 	return &ChannelParticipant{
 		Payload: &ChannelParticipant_ChannelParticipantCreator{
-			ChannelParticipantCreator: &TLChannelParticipantCreator{},
+			ChannelParticipantCreator: m,
 		},
 	}
 }
@@ -29115,7 +29115,7 @@ func (m *TLChannelParticipantCreator) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelParticipantAdmin) ToChannelParticipant() *ChannelParticipant {
 	return &ChannelParticipant{
 		Payload: &ChannelParticipant_ChannelParticipantAdmin{
-			ChannelParticipantAdmin: &TLChannelParticipantAdmin{},
+			ChannelParticipantAdmin: m,
 		},
 	}
 }
@@ -29160,7 +29160,7 @@ func (m *TLChannelParticipantAdmin) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelParticipantBanned) ToChannelParticipant() *ChannelParticipant {
 	return &ChannelParticipant{
 		Payload: &ChannelParticipant_ChannelParticipantBanned{
-			ChannelParticipantBanned: &TLChannelParticipantBanned{},
+			ChannelParticipantBanned: m,
 		},
 	}
 }
@@ -29203,7 +29203,7 @@ func (m *TLChannelParticipantBanned) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelParticipantsRecent) ToChannelParticipantsFilter() *ChannelParticipantsFilter {
 	return &ChannelParticipantsFilter{
 		Payload: &ChannelParticipantsFilter_ChannelParticipantsRecent{
-			ChannelParticipantsRecent: &TLChannelParticipantsRecent{},
+			ChannelParticipantsRecent: m,
 		},
 	}
 }
@@ -29222,7 +29222,7 @@ func (m *TLChannelParticipantsRecent) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelParticipantsAdmins) ToChannelParticipantsFilter() *ChannelParticipantsFilter {
 	return &ChannelParticipantsFilter{
 		Payload: &ChannelParticipantsFilter_ChannelParticipantsAdmins{
-			ChannelParticipantsAdmins: &TLChannelParticipantsAdmins{},
+			ChannelParticipantsAdmins: m,
 		},
 	}
 }
@@ -29241,7 +29241,7 @@ func (m *TLChannelParticipantsAdmins) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelParticipantsKicked) ToChannelParticipantsFilter() *ChannelParticipantsFilter {
 	return &ChannelParticipantsFilter{
 		Payload: &ChannelParticipantsFilter_ChannelParticipantsKicked{
-			ChannelParticipantsKicked: &TLChannelParticipantsKicked{},
+			ChannelParticipantsKicked: m,
 		},
 	}
 }
@@ -29262,7 +29262,7 @@ func (m *TLChannelParticipantsKicked) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelParticipantsBots) ToChannelParticipantsFilter() *ChannelParticipantsFilter {
 	return &ChannelParticipantsFilter{
 		Payload: &ChannelParticipantsFilter_ChannelParticipantsBots{
-			ChannelParticipantsBots: &TLChannelParticipantsBots{},
+			ChannelParticipantsBots: m,
 		},
 	}
 }
@@ -29281,7 +29281,7 @@ func (m *TLChannelParticipantsBots) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelParticipantsBanned) ToChannelParticipantsFilter() *ChannelParticipantsFilter {
 	return &ChannelParticipantsFilter{
 		Payload: &ChannelParticipantsFilter_ChannelParticipantsBanned{
-			ChannelParticipantsBanned: &TLChannelParticipantsBanned{},
+			ChannelParticipantsBanned: m,
 		},
 	}
 }
@@ -29302,7 +29302,7 @@ func (m *TLChannelParticipantsBanned) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelParticipantsSearch) ToChannelParticipantsFilter() *ChannelParticipantsFilter {
 	return &ChannelParticipantsFilter{
 		Payload: &ChannelParticipantsFilter_ChannelParticipantsSearch{
-			ChannelParticipantsSearch: &TLChannelParticipantsSearch{},
+			ChannelParticipantsSearch: m,
 		},
 	}
 }
@@ -29323,7 +29323,7 @@ func (m *TLChannelParticipantsSearch) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelsChannelParticipants) ToChannels_ChannelParticipants() *Channels_ChannelParticipants {
 	return &Channels_ChannelParticipants{
 		Payload: &Channels_ChannelParticipants_ChannelsChannelParticipants{
-			ChannelsChannelParticipants: &TLChannelsChannelParticipants{},
+			ChannelsChannelParticipants: m,
 		},
 	}
 }
@@ -29386,7 +29386,7 @@ func (m *TLChannelsChannelParticipants) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelsChannelParticipant) ToChannels_ChannelParticipant() *Channels_ChannelParticipant {
 	return &Channels_ChannelParticipant{
 		Payload: &Channels_ChannelParticipant_ChannelsChannelParticipant{
-			ChannelsChannelParticipant: &TLChannelsChannelParticipant{},
+			ChannelsChannelParticipant: m,
 		},
 	}
 }
@@ -29430,7 +29430,7 @@ func (m *TLChannelsChannelParticipant) Decode(dbuf *DecodeBuf) error {
 func (m *TLHelpTermsOfService) ToHelp_TermsOfService() *Help_TermsOfService {
 	return &Help_TermsOfService{
 		Payload: &Help_TermsOfService_HelpTermsOfService{
-			HelpTermsOfService: &TLHelpTermsOfService{},
+			HelpTermsOfService: m,
 		},
 	}
 }
@@ -29451,7 +29451,7 @@ func (m *TLHelpTermsOfService) Decode(dbuf *DecodeBuf) error {
 func (m *TLFoundGif) ToFoundGif() *FoundGif {
 	return &FoundGif{
 		Payload: &FoundGif_FoundGif{
-			FoundGif: &TLFoundGif{},
+			FoundGif: m,
 		},
 	}
 }
@@ -29482,7 +29482,7 @@ func (m *TLFoundGif) Decode(dbuf *DecodeBuf) error {
 func (m *TLFoundGifCached) ToFoundGif() *FoundGif {
 	return &FoundGif{
 		Payload: &FoundGif_FoundGifCached{
-			FoundGifCached: &TLFoundGifCached{},
+			FoundGifCached: m,
 		},
 	}
 }
@@ -29511,7 +29511,7 @@ func (m *TLFoundGifCached) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesFoundGifs) ToMessages_FoundGifs() *Messages_FoundGifs {
 	return &Messages_FoundGifs{
 		Payload: &Messages_FoundGifs_MessagesFoundGifs{
-			MessagesFoundGifs: &TLMessagesFoundGifs{},
+			MessagesFoundGifs: m,
 		},
 	}
 }
@@ -29553,7 +29553,7 @@ func (m *TLMessagesFoundGifs) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSavedGifsNotModified) ToMessages_SavedGifs() *Messages_SavedGifs {
 	return &Messages_SavedGifs{
 		Payload: &Messages_SavedGifs_MessagesSavedGifsNotModified{
-			MessagesSavedGifsNotModified: &TLMessagesSavedGifsNotModified{},
+			MessagesSavedGifsNotModified: m,
 		},
 	}
 }
@@ -29572,7 +29572,7 @@ func (m *TLMessagesSavedGifsNotModified) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesSavedGifs) ToMessages_SavedGifs() *Messages_SavedGifs {
 	return &Messages_SavedGifs{
 		Payload: &Messages_SavedGifs_MessagesSavedGifs{
-			MessagesSavedGifs: &TLMessagesSavedGifs{},
+			MessagesSavedGifs: m,
 		},
 	}
 }
@@ -29614,7 +29614,7 @@ func (m *TLMessagesSavedGifs) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineMessageMediaAuto) ToInputBotInlineMessage() *InputBotInlineMessage {
 	return &InputBotInlineMessage{
 		Payload: &InputBotInlineMessage_InputBotInlineMessageMediaAuto{
-			InputBotInlineMessageMediaAuto: &TLInputBotInlineMessageMediaAuto{},
+			InputBotInlineMessageMediaAuto: m,
 		},
 	}
 }
@@ -29651,7 +29651,7 @@ func (m *TLInputBotInlineMessageMediaAuto) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineMessageText) ToInputBotInlineMessage() *InputBotInlineMessage {
 	return &InputBotInlineMessage{
 		Payload: &InputBotInlineMessage_InputBotInlineMessageText{
-			InputBotInlineMessageText: &TLInputBotInlineMessageText{},
+			InputBotInlineMessageText: m,
 		},
 	}
 }
@@ -29725,7 +29725,7 @@ func (m *TLInputBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineMessageMediaGeo) ToInputBotInlineMessage() *InputBotInlineMessage {
 	return &InputBotInlineMessage{
 		Payload: &InputBotInlineMessage_InputBotInlineMessageMediaGeo{
-			InputBotInlineMessageMediaGeo: &TLInputBotInlineMessageMediaGeo{},
+			InputBotInlineMessageMediaGeo: m,
 		},
 	}
 }
@@ -29764,7 +29764,7 @@ func (m *TLInputBotInlineMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineMessageMediaVenue) ToInputBotInlineMessage() *InputBotInlineMessage {
 	return &InputBotInlineMessage{
 		Payload: &InputBotInlineMessage_InputBotInlineMessageMediaVenue{
-			InputBotInlineMessageMediaVenue: &TLInputBotInlineMessageMediaVenue{},
+			InputBotInlineMessageMediaVenue: m,
 		},
 	}
 }
@@ -29811,7 +29811,7 @@ func (m *TLInputBotInlineMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineMessageMediaContact) ToInputBotInlineMessage() *InputBotInlineMessage {
 	return &InputBotInlineMessage{
 		Payload: &InputBotInlineMessage_InputBotInlineMessageMediaContact{
-			InputBotInlineMessageMediaContact: &TLInputBotInlineMessageMediaContact{},
+			InputBotInlineMessageMediaContact: m,
 		},
 	}
 }
@@ -29852,7 +29852,7 @@ func (m *TLInputBotInlineMessageMediaContact) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineMessageGame) ToInputBotInlineMessage() *InputBotInlineMessage {
 	return &InputBotInlineMessage{
 		Payload: &InputBotInlineMessage_InputBotInlineMessageGame{
-			InputBotInlineMessageGame: &TLInputBotInlineMessageGame{},
+			InputBotInlineMessageGame: m,
 		},
 	}
 }
@@ -29887,7 +29887,7 @@ func (m *TLInputBotInlineMessageGame) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineResult) ToInputBotInlineResult() *InputBotInlineResult {
 	return &InputBotInlineResult{
 		Payload: &InputBotInlineResult_InputBotInlineResult{
-			InputBotInlineResult: &TLInputBotInlineResult{},
+			InputBotInlineResult: m,
 		},
 	}
 }
@@ -30000,7 +30000,7 @@ func (m *TLInputBotInlineResult) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineResultPhoto) ToInputBotInlineResult() *InputBotInlineResult {
 	return &InputBotInlineResult{
 		Payload: &InputBotInlineResult_InputBotInlineResultPhoto{
-			InputBotInlineResultPhoto: &TLInputBotInlineResultPhoto{},
+			InputBotInlineResultPhoto: m,
 		},
 	}
 }
@@ -30031,7 +30031,7 @@ func (m *TLInputBotInlineResultPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineResultDocument) ToInputBotInlineResult() *InputBotInlineResult {
 	return &InputBotInlineResult{
 		Payload: &InputBotInlineResult_InputBotInlineResultDocument{
-			InputBotInlineResultDocument: &TLInputBotInlineResultDocument{},
+			InputBotInlineResultDocument: m,
 		},
 	}
 }
@@ -30085,7 +30085,7 @@ func (m *TLInputBotInlineResultDocument) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineResultGame) ToInputBotInlineResult() *InputBotInlineResult {
 	return &InputBotInlineResult{
 		Payload: &InputBotInlineResult_InputBotInlineResultGame{
-			InputBotInlineResultGame: &TLInputBotInlineResultGame{},
+			InputBotInlineResultGame: m,
 		},
 	}
 }
@@ -30112,7 +30112,7 @@ func (m *TLInputBotInlineResultGame) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotInlineMessageMediaAuto) ToBotInlineMessage() *BotInlineMessage {
 	return &BotInlineMessage{
 		Payload: &BotInlineMessage_BotInlineMessageMediaAuto{
-			BotInlineMessageMediaAuto: &TLBotInlineMessageMediaAuto{},
+			BotInlineMessageMediaAuto: m,
 		},
 	}
 }
@@ -30149,7 +30149,7 @@ func (m *TLBotInlineMessageMediaAuto) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotInlineMessageText) ToBotInlineMessage() *BotInlineMessage {
 	return &BotInlineMessage{
 		Payload: &BotInlineMessage_BotInlineMessageText{
-			BotInlineMessageText: &TLBotInlineMessageText{},
+			BotInlineMessageText: m,
 		},
 	}
 }
@@ -30223,7 +30223,7 @@ func (m *TLBotInlineMessageText) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotInlineMessageMediaGeo) ToBotInlineMessage() *BotInlineMessage {
 	return &BotInlineMessage{
 		Payload: &BotInlineMessage_BotInlineMessageMediaGeo{
-			BotInlineMessageMediaGeo: &TLBotInlineMessageMediaGeo{},
+			BotInlineMessageMediaGeo: m,
 		},
 	}
 }
@@ -30262,7 +30262,7 @@ func (m *TLBotInlineMessageMediaGeo) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotInlineMessageMediaVenue) ToBotInlineMessage() *BotInlineMessage {
 	return &BotInlineMessage{
 		Payload: &BotInlineMessage_BotInlineMessageMediaVenue{
-			BotInlineMessageMediaVenue: &TLBotInlineMessageMediaVenue{},
+			BotInlineMessageMediaVenue: m,
 		},
 	}
 }
@@ -30309,7 +30309,7 @@ func (m *TLBotInlineMessageMediaVenue) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotInlineMessageMediaContact) ToBotInlineMessage() *BotInlineMessage {
 	return &BotInlineMessage{
 		Payload: &BotInlineMessage_BotInlineMessageMediaContact{
-			BotInlineMessageMediaContact: &TLBotInlineMessageMediaContact{},
+			BotInlineMessageMediaContact: m,
 		},
 	}
 }
@@ -30350,7 +30350,7 @@ func (m *TLBotInlineMessageMediaContact) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotInlineResult) ToBotInlineResult() *BotInlineResult {
 	return &BotInlineResult{
 		Payload: &BotInlineResult_BotInlineResult{
-			BotInlineResult: &TLBotInlineResult{},
+			BotInlineResult: m,
 		},
 	}
 }
@@ -30463,7 +30463,7 @@ func (m *TLBotInlineResult) Decode(dbuf *DecodeBuf) error {
 func (m *TLBotInlineMediaResult) ToBotInlineResult() *BotInlineResult {
 	return &BotInlineResult{
 		Payload: &BotInlineResult_BotInlineMediaResult{
-			BotInlineMediaResult: &TLBotInlineMediaResult{},
+			BotInlineMediaResult: m,
 		},
 	}
 }
@@ -30535,7 +30535,7 @@ func (m *TLBotInlineMediaResult) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesBotResults) ToMessages_BotResults() *Messages_BotResults {
 	return &Messages_BotResults{
 		Payload: &Messages_BotResults_MessagesBotResults{
-			MessagesBotResults: &TLMessagesBotResults{},
+			MessagesBotResults: m,
 		},
 	}
 }
@@ -30613,7 +30613,7 @@ func (m *TLMessagesBotResults) Decode(dbuf *DecodeBuf) error {
 func (m *TLExportedMessageLink) ToExportedMessageLink() *ExportedMessageLink {
 	return &ExportedMessageLink{
 		Payload: &ExportedMessageLink_ExportedMessageLink{
-			ExportedMessageLink: &TLExportedMessageLink{},
+			ExportedMessageLink: m,
 		},
 	}
 }
@@ -30634,7 +30634,7 @@ func (m *TLExportedMessageLink) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessageFwdHeader) ToMessageFwdHeader() *MessageFwdHeader {
 	return &MessageFwdHeader{
 		Payload: &MessageFwdHeader_MessageFwdHeader{
-			MessageFwdHeader: &TLMessageFwdHeader{},
+			MessageFwdHeader: m,
 		},
 	}
 }
@@ -30696,7 +30696,7 @@ func (m *TLMessageFwdHeader) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthCodeTypeSms) ToAuth_CodeType() *Auth_CodeType {
 	return &Auth_CodeType{
 		Payload: &Auth_CodeType_AuthCodeTypeSms{
-			AuthCodeTypeSms: &TLAuthCodeTypeSms{},
+			AuthCodeTypeSms: m,
 		},
 	}
 }
@@ -30715,7 +30715,7 @@ func (m *TLAuthCodeTypeSms) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthCodeTypeCall) ToAuth_CodeType() *Auth_CodeType {
 	return &Auth_CodeType{
 		Payload: &Auth_CodeType_AuthCodeTypeCall{
-			AuthCodeTypeCall: &TLAuthCodeTypeCall{},
+			AuthCodeTypeCall: m,
 		},
 	}
 }
@@ -30734,7 +30734,7 @@ func (m *TLAuthCodeTypeCall) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthCodeTypeFlashCall) ToAuth_CodeType() *Auth_CodeType {
 	return &Auth_CodeType{
 		Payload: &Auth_CodeType_AuthCodeTypeFlashCall{
-			AuthCodeTypeFlashCall: &TLAuthCodeTypeFlashCall{},
+			AuthCodeTypeFlashCall: m,
 		},
 	}
 }
@@ -30753,7 +30753,7 @@ func (m *TLAuthCodeTypeFlashCall) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthSentCodeTypeApp) ToAuth_SentCodeType() *Auth_SentCodeType {
 	return &Auth_SentCodeType{
 		Payload: &Auth_SentCodeType_AuthSentCodeTypeApp{
-			AuthSentCodeTypeApp: &TLAuthSentCodeTypeApp{},
+			AuthSentCodeTypeApp: m,
 		},
 	}
 }
@@ -30774,7 +30774,7 @@ func (m *TLAuthSentCodeTypeApp) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthSentCodeTypeSms) ToAuth_SentCodeType() *Auth_SentCodeType {
 	return &Auth_SentCodeType{
 		Payload: &Auth_SentCodeType_AuthSentCodeTypeSms{
-			AuthSentCodeTypeSms: &TLAuthSentCodeTypeSms{},
+			AuthSentCodeTypeSms: m,
 		},
 	}
 }
@@ -30795,7 +30795,7 @@ func (m *TLAuthSentCodeTypeSms) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthSentCodeTypeCall) ToAuth_SentCodeType() *Auth_SentCodeType {
 	return &Auth_SentCodeType{
 		Payload: &Auth_SentCodeType_AuthSentCodeTypeCall{
-			AuthSentCodeTypeCall: &TLAuthSentCodeTypeCall{},
+			AuthSentCodeTypeCall: m,
 		},
 	}
 }
@@ -30816,7 +30816,7 @@ func (m *TLAuthSentCodeTypeCall) Decode(dbuf *DecodeBuf) error {
 func (m *TLAuthSentCodeTypeFlashCall) ToAuth_SentCodeType() *Auth_SentCodeType {
 	return &Auth_SentCodeType{
 		Payload: &Auth_SentCodeType_AuthSentCodeTypeFlashCall{
-			AuthSentCodeTypeFlashCall: &TLAuthSentCodeTypeFlashCall{},
+			AuthSentCodeTypeFlashCall: m,
 		},
 	}
 }
@@ -30837,7 +30837,7 @@ func (m *TLAuthSentCodeTypeFlashCall) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesBotCallbackAnswer) ToMessages_BotCallbackAnswer() *Messages_BotCallbackAnswer {
 	return &Messages_BotCallbackAnswer{
 		Payload: &Messages_BotCallbackAnswer_MessagesBotCallbackAnswer{
-			MessagesBotCallbackAnswer: &TLMessagesBotCallbackAnswer{},
+			MessagesBotCallbackAnswer: m,
 		},
 	}
 }
@@ -30899,7 +30899,7 @@ func (m *TLMessagesBotCallbackAnswer) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesMessageEditData) ToMessages_MessageEditData() *Messages_MessageEditData {
 	return &Messages_MessageEditData{
 		Payload: &Messages_MessageEditData_MessagesMessageEditData{
-			MessagesMessageEditData: &TLMessagesMessageEditData{},
+			MessagesMessageEditData: m,
 		},
 	}
 }
@@ -30932,7 +30932,7 @@ func (m *TLMessagesMessageEditData) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputBotInlineMessageID) ToInputBotInlineMessageID() *InputBotInlineMessageID {
 	return &InputBotInlineMessageID{
 		Payload: &InputBotInlineMessageID_InputBotInlineMessageID{
-			InputBotInlineMessageID: &TLInputBotInlineMessageID{},
+			InputBotInlineMessageID: m,
 		},
 	}
 }
@@ -30957,7 +30957,7 @@ func (m *TLInputBotInlineMessageID) Decode(dbuf *DecodeBuf) error {
 func (m *TLInlineBotSwitchPM) ToInlineBotSwitchPM() *InlineBotSwitchPM {
 	return &InlineBotSwitchPM{
 		Payload: &InlineBotSwitchPM_InlineBotSwitchPM{
-			InlineBotSwitchPM: &TLInlineBotSwitchPM{},
+			InlineBotSwitchPM: m,
 		},
 	}
 }
@@ -30980,7 +30980,7 @@ func (m *TLInlineBotSwitchPM) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesPeerDialogs) ToMessages_PeerDialogs() *Messages_PeerDialogs {
 	return &Messages_PeerDialogs{
 		Payload: &Messages_PeerDialogs_MessagesPeerDialogs{
-			MessagesPeerDialogs: &TLMessagesPeerDialogs{},
+			MessagesPeerDialogs: m,
 		},
 	}
 }
@@ -31087,7 +31087,7 @@ func (m *TLMessagesPeerDialogs) Decode(dbuf *DecodeBuf) error {
 func (m *TLTopPeer) ToTopPeer() *TopPeer {
 	return &TopPeer{
 		Payload: &TopPeer_TopPeer{
-			TopPeer: &TLTopPeer{},
+			TopPeer: m,
 		},
 	}
 }
@@ -31112,7 +31112,7 @@ func (m *TLTopPeer) Decode(dbuf *DecodeBuf) error {
 func (m *TLTopPeerCategoryBotsPM) ToTopPeerCategory() *TopPeerCategory {
 	return &TopPeerCategory{
 		Payload: &TopPeerCategory_TopPeerCategoryBotsPM{
-			TopPeerCategoryBotsPM: &TLTopPeerCategoryBotsPM{},
+			TopPeerCategoryBotsPM: m,
 		},
 	}
 }
@@ -31131,7 +31131,7 @@ func (m *TLTopPeerCategoryBotsPM) Decode(dbuf *DecodeBuf) error {
 func (m *TLTopPeerCategoryBotsInline) ToTopPeerCategory() *TopPeerCategory {
 	return &TopPeerCategory{
 		Payload: &TopPeerCategory_TopPeerCategoryBotsInline{
-			TopPeerCategoryBotsInline: &TLTopPeerCategoryBotsInline{},
+			TopPeerCategoryBotsInline: m,
 		},
 	}
 }
@@ -31150,7 +31150,7 @@ func (m *TLTopPeerCategoryBotsInline) Decode(dbuf *DecodeBuf) error {
 func (m *TLTopPeerCategoryCorrespondents) ToTopPeerCategory() *TopPeerCategory {
 	return &TopPeerCategory{
 		Payload: &TopPeerCategory_TopPeerCategoryCorrespondents{
-			TopPeerCategoryCorrespondents: &TLTopPeerCategoryCorrespondents{},
+			TopPeerCategoryCorrespondents: m,
 		},
 	}
 }
@@ -31169,7 +31169,7 @@ func (m *TLTopPeerCategoryCorrespondents) Decode(dbuf *DecodeBuf) error {
 func (m *TLTopPeerCategoryGroups) ToTopPeerCategory() *TopPeerCategory {
 	return &TopPeerCategory{
 		Payload: &TopPeerCategory_TopPeerCategoryGroups{
-			TopPeerCategoryGroups: &TLTopPeerCategoryGroups{},
+			TopPeerCategoryGroups: m,
 		},
 	}
 }
@@ -31188,7 +31188,7 @@ func (m *TLTopPeerCategoryGroups) Decode(dbuf *DecodeBuf) error {
 func (m *TLTopPeerCategoryChannels) ToTopPeerCategory() *TopPeerCategory {
 	return &TopPeerCategory{
 		Payload: &TopPeerCategory_TopPeerCategoryChannels{
-			TopPeerCategoryChannels: &TLTopPeerCategoryChannels{},
+			TopPeerCategoryChannels: m,
 		},
 	}
 }
@@ -31207,7 +31207,7 @@ func (m *TLTopPeerCategoryChannels) Decode(dbuf *DecodeBuf) error {
 func (m *TLTopPeerCategoryPhoneCalls) ToTopPeerCategory() *TopPeerCategory {
 	return &TopPeerCategory{
 		Payload: &TopPeerCategory_TopPeerCategoryPhoneCalls{
-			TopPeerCategoryPhoneCalls: &TLTopPeerCategoryPhoneCalls{},
+			TopPeerCategoryPhoneCalls: m,
 		},
 	}
 }
@@ -31226,7 +31226,7 @@ func (m *TLTopPeerCategoryPhoneCalls) Decode(dbuf *DecodeBuf) error {
 func (m *TLTopPeerCategoryPeers) ToTopPeerCategoryPeers() *TopPeerCategoryPeers {
 	return &TopPeerCategoryPeers{
 		Payload: &TopPeerCategoryPeers_TopPeerCategoryPeers{
-			TopPeerCategoryPeers: &TLTopPeerCategoryPeers{},
+			TopPeerCategoryPeers: m,
 		},
 	}
 }
@@ -31272,7 +31272,7 @@ func (m *TLTopPeerCategoryPeers) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactsTopPeersNotModified) ToContacts_TopPeers() *Contacts_TopPeers {
 	return &Contacts_TopPeers{
 		Payload: &Contacts_TopPeers_ContactsTopPeersNotModified{
-			ContactsTopPeersNotModified: &TLContactsTopPeersNotModified{},
+			ContactsTopPeersNotModified: m,
 		},
 	}
 }
@@ -31291,7 +31291,7 @@ func (m *TLContactsTopPeersNotModified) Decode(dbuf *DecodeBuf) error {
 func (m *TLContactsTopPeers) ToContacts_TopPeers() *Contacts_TopPeers {
 	return &Contacts_TopPeers{
 		Payload: &Contacts_TopPeers_ContactsTopPeers{
-			ContactsTopPeers: &TLContactsTopPeers{},
+			ContactsTopPeers: m,
 		},
 	}
 }
@@ -31373,7 +31373,7 @@ func (m *TLContactsTopPeers) Decode(dbuf *DecodeBuf) error {
 func (m *TLDraftMessageEmpty) ToDraftMessage() *DraftMessage {
 	return &DraftMessage{
 		Payload: &DraftMessage_DraftMessageEmpty{
-			DraftMessageEmpty: &TLDraftMessageEmpty{},
+			DraftMessageEmpty: m,
 		},
 	}
 }
@@ -31392,7 +31392,7 @@ func (m *TLDraftMessageEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLDraftMessage) ToDraftMessage() *DraftMessage {
 	return &DraftMessage{
 		Payload: &DraftMessage_DraftMessage{
-			DraftMessage: &TLDraftMessage{},
+			DraftMessage: m,
 		},
 	}
 }
@@ -31466,7 +31466,7 @@ func (m *TLDraftMessage) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesFeaturedStickersNotModified) ToMessages_FeaturedStickers() *Messages_FeaturedStickers {
 	return &Messages_FeaturedStickers{
 		Payload: &Messages_FeaturedStickers_MessagesFeaturedStickersNotModified{
-			MessagesFeaturedStickersNotModified: &TLMessagesFeaturedStickersNotModified{},
+			MessagesFeaturedStickersNotModified: m,
 		},
 	}
 }
@@ -31485,7 +31485,7 @@ func (m *TLMessagesFeaturedStickersNotModified) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesFeaturedStickers) ToMessages_FeaturedStickers() *Messages_FeaturedStickers {
 	return &Messages_FeaturedStickers{
 		Payload: &Messages_FeaturedStickers_MessagesFeaturedStickers{
-			MessagesFeaturedStickers: &TLMessagesFeaturedStickers{},
+			MessagesFeaturedStickers: m,
 		},
 	}
 }
@@ -31529,7 +31529,7 @@ func (m *TLMessagesFeaturedStickers) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesRecentStickersNotModified) ToMessages_RecentStickers() *Messages_RecentStickers {
 	return &Messages_RecentStickers{
 		Payload: &Messages_RecentStickers_MessagesRecentStickersNotModified{
-			MessagesRecentStickersNotModified: &TLMessagesRecentStickersNotModified{},
+			MessagesRecentStickersNotModified: m,
 		},
 	}
 }
@@ -31548,7 +31548,7 @@ func (m *TLMessagesRecentStickersNotModified) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesRecentStickers) ToMessages_RecentStickers() *Messages_RecentStickers {
 	return &Messages_RecentStickers{
 		Payload: &Messages_RecentStickers_MessagesRecentStickers{
-			MessagesRecentStickers: &TLMessagesRecentStickers{},
+			MessagesRecentStickers: m,
 		},
 	}
 }
@@ -31590,7 +31590,7 @@ func (m *TLMessagesRecentStickers) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesArchivedStickers) ToMessages_ArchivedStickers() *Messages_ArchivedStickers {
 	return &Messages_ArchivedStickers{
 		Payload: &Messages_ArchivedStickers_MessagesArchivedStickers{
-			MessagesArchivedStickers: &TLMessagesArchivedStickers{},
+			MessagesArchivedStickers: m,
 		},
 	}
 }
@@ -31632,7 +31632,7 @@ func (m *TLMessagesArchivedStickers) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesStickerSetInstallResultSuccess) ToMessages_StickerSetInstallResult() *Messages_StickerSetInstallResult {
 	return &Messages_StickerSetInstallResult{
 		Payload: &Messages_StickerSetInstallResult_MessagesStickerSetInstallResultSuccess{
-			MessagesStickerSetInstallResultSuccess: &TLMessagesStickerSetInstallResultSuccess{},
+			MessagesStickerSetInstallResultSuccess: m,
 		},
 	}
 }
@@ -31651,7 +31651,7 @@ func (m *TLMessagesStickerSetInstallResultSuccess) Decode(dbuf *DecodeBuf) error
 func (m *TLMessagesStickerSetInstallResultArchive) ToMessages_StickerSetInstallResult() *Messages_StickerSetInstallResult {
 	return &Messages_StickerSetInstallResult{
 		Payload: &Messages_StickerSetInstallResult_MessagesStickerSetInstallResultArchive{
-			MessagesStickerSetInstallResultArchive: &TLMessagesStickerSetInstallResultArchive{},
+			MessagesStickerSetInstallResultArchive: m,
 		},
 	}
 }
@@ -31691,7 +31691,7 @@ func (m *TLMessagesStickerSetInstallResultArchive) Decode(dbuf *DecodeBuf) error
 func (m *TLStickerSetCovered) ToStickerSetCovered() *StickerSetCovered {
 	return &StickerSetCovered{
 		Payload: &StickerSetCovered_StickerSetCovered{
-			StickerSetCovered: &TLStickerSetCovered{},
+			StickerSetCovered: m,
 		},
 	}
 }
@@ -31718,7 +31718,7 @@ func (m *TLStickerSetCovered) Decode(dbuf *DecodeBuf) error {
 func (m *TLStickerSetMultiCovered) ToStickerSetCovered() *StickerSetCovered {
 	return &StickerSetCovered{
 		Payload: &StickerSetCovered_StickerSetMultiCovered{
-			StickerSetMultiCovered: &TLStickerSetMultiCovered{},
+			StickerSetMultiCovered: m,
 		},
 	}
 }
@@ -31762,7 +31762,7 @@ func (m *TLStickerSetMultiCovered) Decode(dbuf *DecodeBuf) error {
 func (m *TLMaskCoords) ToMaskCoords() *MaskCoords {
 	return &MaskCoords{
 		Payload: &MaskCoords_MaskCoords{
-			MaskCoords: &TLMaskCoords{},
+			MaskCoords: m,
 		},
 	}
 }
@@ -31789,7 +31789,7 @@ func (m *TLMaskCoords) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputStickeredMediaPhoto) ToInputStickeredMedia() *InputStickeredMedia {
 	return &InputStickeredMedia{
 		Payload: &InputStickeredMedia_InputStickeredMediaPhoto{
-			InputStickeredMediaPhoto: &TLInputStickeredMediaPhoto{},
+			InputStickeredMediaPhoto: m,
 		},
 	}
 }
@@ -31812,7 +31812,7 @@ func (m *TLInputStickeredMediaPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputStickeredMediaDocument) ToInputStickeredMedia() *InputStickeredMedia {
 	return &InputStickeredMedia{
 		Payload: &InputStickeredMedia_InputStickeredMediaDocument{
-			InputStickeredMediaDocument: &TLInputStickeredMediaDocument{},
+			InputStickeredMediaDocument: m,
 		},
 	}
 }
@@ -31835,7 +31835,7 @@ func (m *TLInputStickeredMediaDocument) Decode(dbuf *DecodeBuf) error {
 func (m *TLGame) ToGame() *Game {
 	return &Game{
 		Payload: &Game_Game{
-			Game: &TLGame{},
+			Game: m,
 		},
 	}
 }
@@ -31884,7 +31884,7 @@ func (m *TLGame) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputGameID) ToInputGame() *InputGame {
 	return &InputGame{
 		Payload: &InputGame_InputGameID{
-			InputGameID: &TLInputGameID{},
+			InputGameID: m,
 		},
 	}
 }
@@ -31907,7 +31907,7 @@ func (m *TLInputGameID) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputGameShortName) ToInputGame() *InputGame {
 	return &InputGame{
 		Payload: &InputGame_InputGameShortName{
-			InputGameShortName: &TLInputGameShortName{},
+			InputGameShortName: m,
 		},
 	}
 }
@@ -31932,7 +31932,7 @@ func (m *TLInputGameShortName) Decode(dbuf *DecodeBuf) error {
 func (m *TLHighScore) ToHighScore() *HighScore {
 	return &HighScore{
 		Payload: &HighScore_HighScore{
-			HighScore: &TLHighScore{},
+			HighScore: m,
 		},
 	}
 }
@@ -31957,7 +31957,7 @@ func (m *TLHighScore) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesHighScores) ToMessages_HighScores() *Messages_HighScores {
 	return &Messages_HighScores{
 		Payload: &Messages_HighScores_MessagesHighScores{
-			MessagesHighScores: &TLMessagesHighScores{},
+			MessagesHighScores: m,
 		},
 	}
 }
@@ -32018,7 +32018,7 @@ func (m *TLMessagesHighScores) Decode(dbuf *DecodeBuf) error {
 func (m *TLTextEmpty) ToRichText() *RichText {
 	return &RichText{
 		Payload: &RichText_TextEmpty{
-			TextEmpty: &TLTextEmpty{},
+			TextEmpty: m,
 		},
 	}
 }
@@ -32037,7 +32037,7 @@ func (m *TLTextEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLTextPlain) ToRichText() *RichText {
 	return &RichText{
 		Payload: &RichText_TextPlain{
-			TextPlain: &TLTextPlain{},
+			TextPlain: m,
 		},
 	}
 }
@@ -32058,7 +32058,7 @@ func (m *TLTextPlain) Decode(dbuf *DecodeBuf) error {
 func (m *TLTextBold) ToRichText() *RichText {
 	return &RichText{
 		Payload: &RichText_TextBold{
-			TextBold: &TLTextBold{},
+			TextBold: m,
 		},
 	}
 }
@@ -32081,7 +32081,7 @@ func (m *TLTextBold) Decode(dbuf *DecodeBuf) error {
 func (m *TLTextItalic) ToRichText() *RichText {
 	return &RichText{
 		Payload: &RichText_TextItalic{
-			TextItalic: &TLTextItalic{},
+			TextItalic: m,
 		},
 	}
 }
@@ -32104,7 +32104,7 @@ func (m *TLTextItalic) Decode(dbuf *DecodeBuf) error {
 func (m *TLTextUnderline) ToRichText() *RichText {
 	return &RichText{
 		Payload: &RichText_TextUnderline{
-			TextUnderline: &TLTextUnderline{},
+			TextUnderline: m,
 		},
 	}
 }
@@ -32127,7 +32127,7 @@ func (m *TLTextUnderline) Decode(dbuf *DecodeBuf) error {
 func (m *TLTextStrike) ToRichText() *RichText {
 	return &RichText{
 		Payload: &RichText_TextStrike{
-			TextStrike: &TLTextStrike{},
+			TextStrike: m,
 		},
 	}
 }
@@ -32150,7 +32150,7 @@ func (m *TLTextStrike) Decode(dbuf *DecodeBuf) error {
 func (m *TLTextFixed) ToRichText() *RichText {
 	return &RichText{
 		Payload: &RichText_TextFixed{
-			TextFixed: &TLTextFixed{},
+			TextFixed: m,
 		},
 	}
 }
@@ -32173,7 +32173,7 @@ func (m *TLTextFixed) Decode(dbuf *DecodeBuf) error {
 func (m *TLTextUrl) ToRichText() *RichText {
 	return &RichText{
 		Payload: &RichText_TextUrl{
-			TextUrl: &TLTextUrl{},
+			TextUrl: m,
 		},
 	}
 }
@@ -32200,7 +32200,7 @@ func (m *TLTextUrl) Decode(dbuf *DecodeBuf) error {
 func (m *TLTextEmail) ToRichText() *RichText {
 	return &RichText{
 		Payload: &RichText_TextEmail{
-			TextEmail: &TLTextEmail{},
+			TextEmail: m,
 		},
 	}
 }
@@ -32225,7 +32225,7 @@ func (m *TLTextEmail) Decode(dbuf *DecodeBuf) error {
 func (m *TLTextConcat) ToRichText() *RichText {
 	return &RichText{
 		Payload: &RichText_TextConcat{
-			TextConcat: &TLTextConcat{},
+			TextConcat: m,
 		},
 	}
 }
@@ -32265,7 +32265,7 @@ func (m *TLTextConcat) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockUnsupported) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockUnsupported{
-			PageBlockUnsupported: &TLPageBlockUnsupported{},
+			PageBlockUnsupported: m,
 		},
 	}
 }
@@ -32284,7 +32284,7 @@ func (m *TLPageBlockUnsupported) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockTitle) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockTitle{
-			PageBlockTitle: &TLPageBlockTitle{},
+			PageBlockTitle: m,
 		},
 	}
 }
@@ -32307,7 +32307,7 @@ func (m *TLPageBlockTitle) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockSubtitle) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockSubtitle{
-			PageBlockSubtitle: &TLPageBlockSubtitle{},
+			PageBlockSubtitle: m,
 		},
 	}
 }
@@ -32330,7 +32330,7 @@ func (m *TLPageBlockSubtitle) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockAuthorDate) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockAuthorDate{
-			PageBlockAuthorDate: &TLPageBlockAuthorDate{},
+			PageBlockAuthorDate: m,
 		},
 	}
 }
@@ -32355,7 +32355,7 @@ func (m *TLPageBlockAuthorDate) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockHeader) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockHeader{
-			PageBlockHeader: &TLPageBlockHeader{},
+			PageBlockHeader: m,
 		},
 	}
 }
@@ -32378,7 +32378,7 @@ func (m *TLPageBlockHeader) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockSubheader) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockSubheader{
-			PageBlockSubheader: &TLPageBlockSubheader{},
+			PageBlockSubheader: m,
 		},
 	}
 }
@@ -32401,7 +32401,7 @@ func (m *TLPageBlockSubheader) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockParagraph) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockParagraph{
-			PageBlockParagraph: &TLPageBlockParagraph{},
+			PageBlockParagraph: m,
 		},
 	}
 }
@@ -32424,7 +32424,7 @@ func (m *TLPageBlockParagraph) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockPreformatted) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockPreformatted{
-			PageBlockPreformatted: &TLPageBlockPreformatted{},
+			PageBlockPreformatted: m,
 		},
 	}
 }
@@ -32449,7 +32449,7 @@ func (m *TLPageBlockPreformatted) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockFooter) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockFooter{
-			PageBlockFooter: &TLPageBlockFooter{},
+			PageBlockFooter: m,
 		},
 	}
 }
@@ -32472,7 +32472,7 @@ func (m *TLPageBlockFooter) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockDivider) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockDivider{
-			PageBlockDivider: &TLPageBlockDivider{},
+			PageBlockDivider: m,
 		},
 	}
 }
@@ -32491,7 +32491,7 @@ func (m *TLPageBlockDivider) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockAnchor) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockAnchor{
-			PageBlockAnchor: &TLPageBlockAnchor{},
+			PageBlockAnchor: m,
 		},
 	}
 }
@@ -32512,7 +32512,7 @@ func (m *TLPageBlockAnchor) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockList) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockList{
-			PageBlockList: &TLPageBlockList{},
+			PageBlockList: m,
 		},
 	}
 }
@@ -32556,7 +32556,7 @@ func (m *TLPageBlockList) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockBlockquote) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockBlockquote{
-			PageBlockBlockquote: &TLPageBlockBlockquote{},
+			PageBlockBlockquote: m,
 		},
 	}
 }
@@ -32583,7 +32583,7 @@ func (m *TLPageBlockBlockquote) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockPullquote) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockPullquote{
-			PageBlockPullquote: &TLPageBlockPullquote{},
+			PageBlockPullquote: m,
 		},
 	}
 }
@@ -32610,7 +32610,7 @@ func (m *TLPageBlockPullquote) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockPhoto) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockPhoto{
-			PageBlockPhoto: &TLPageBlockPhoto{},
+			PageBlockPhoto: m,
 		},
 	}
 }
@@ -32635,7 +32635,7 @@ func (m *TLPageBlockPhoto) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockVideo) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockVideo{
-			PageBlockVideo: &TLPageBlockVideo{},
+			PageBlockVideo: m,
 		},
 	}
 }
@@ -32683,7 +32683,7 @@ func (m *TLPageBlockVideo) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockCover) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockCover{
-			PageBlockCover: &TLPageBlockCover{},
+			PageBlockCover: m,
 		},
 	}
 }
@@ -32706,7 +32706,7 @@ func (m *TLPageBlockCover) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockEmbed) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockEmbed{
-			PageBlockEmbed: &TLPageBlockEmbed{},
+			PageBlockEmbed: m,
 		},
 	}
 }
@@ -32783,7 +32783,7 @@ func (m *TLPageBlockEmbed) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockEmbedPost) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockEmbedPost{
-			PageBlockEmbedPost: &TLPageBlockEmbedPost{},
+			PageBlockEmbedPost: m,
 		},
 	}
 }
@@ -32837,7 +32837,7 @@ func (m *TLPageBlockEmbedPost) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockCollage) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockCollage{
-			PageBlockCollage: &TLPageBlockCollage{},
+			PageBlockCollage: m,
 		},
 	}
 }
@@ -32881,7 +32881,7 @@ func (m *TLPageBlockCollage) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockSlideshow) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockSlideshow{
-			PageBlockSlideshow: &TLPageBlockSlideshow{},
+			PageBlockSlideshow: m,
 		},
 	}
 }
@@ -32925,7 +32925,7 @@ func (m *TLPageBlockSlideshow) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockChannel) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockChannel{
-			PageBlockChannel: &TLPageBlockChannel{},
+			PageBlockChannel: m,
 		},
 	}
 }
@@ -32948,7 +32948,7 @@ func (m *TLPageBlockChannel) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageBlockAudio) ToPageBlock() *PageBlock {
 	return &PageBlock{
 		Payload: &PageBlock_PageBlockAudio{
-			PageBlockAudio: &TLPageBlockAudio{},
+			PageBlockAudio: m,
 		},
 	}
 }
@@ -32973,7 +32973,7 @@ func (m *TLPageBlockAudio) Decode(dbuf *DecodeBuf) error {
 func (m *TLPagePart) ToPage() *Page {
 	return &Page{
 		Payload: &Page_PagePart{
-			PagePart: &TLPagePart{},
+			PagePart: m,
 		},
 	}
 }
@@ -33055,7 +33055,7 @@ func (m *TLPagePart) Decode(dbuf *DecodeBuf) error {
 func (m *TLPageFull) ToPage() *Page {
 	return &Page{
 		Payload: &Page_PageFull{
-			PageFull: &TLPageFull{},
+			PageFull: m,
 		},
 	}
 }
@@ -33137,7 +33137,7 @@ func (m *TLPageFull) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoneCallDiscardReasonMissed) ToPhoneCallDiscardReason() *PhoneCallDiscardReason {
 	return &PhoneCallDiscardReason{
 		Payload: &PhoneCallDiscardReason_PhoneCallDiscardReasonMissed{
-			PhoneCallDiscardReasonMissed: &TLPhoneCallDiscardReasonMissed{},
+			PhoneCallDiscardReasonMissed: m,
 		},
 	}
 }
@@ -33156,7 +33156,7 @@ func (m *TLPhoneCallDiscardReasonMissed) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoneCallDiscardReasonDisconnect) ToPhoneCallDiscardReason() *PhoneCallDiscardReason {
 	return &PhoneCallDiscardReason{
 		Payload: &PhoneCallDiscardReason_PhoneCallDiscardReasonDisconnect{
-			PhoneCallDiscardReasonDisconnect: &TLPhoneCallDiscardReasonDisconnect{},
+			PhoneCallDiscardReasonDisconnect: m,
 		},
 	}
 }
@@ -33175,7 +33175,7 @@ func (m *TLPhoneCallDiscardReasonDisconnect) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoneCallDiscardReasonHangup) ToPhoneCallDiscardReason() *PhoneCallDiscardReason {
 	return &PhoneCallDiscardReason{
 		Payload: &PhoneCallDiscardReason_PhoneCallDiscardReasonHangup{
-			PhoneCallDiscardReasonHangup: &TLPhoneCallDiscardReasonHangup{},
+			PhoneCallDiscardReasonHangup: m,
 		},
 	}
 }
@@ -33194,7 +33194,7 @@ func (m *TLPhoneCallDiscardReasonHangup) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoneCallDiscardReasonBusy) ToPhoneCallDiscardReason() *PhoneCallDiscardReason {
 	return &PhoneCallDiscardReason{
 		Payload: &PhoneCallDiscardReason_PhoneCallDiscardReasonBusy{
-			PhoneCallDiscardReasonBusy: &TLPhoneCallDiscardReasonBusy{},
+			PhoneCallDiscardReasonBusy: m,
 		},
 	}
 }
@@ -33213,7 +33213,7 @@ func (m *TLPhoneCallDiscardReasonBusy) Decode(dbuf *DecodeBuf) error {
 func (m *TLDataJSON) ToDataJSON() *DataJSON {
 	return &DataJSON{
 		Payload: &DataJSON_DataJSON{
-			DataJSON: &TLDataJSON{},
+			DataJSON: m,
 		},
 	}
 }
@@ -33234,7 +33234,7 @@ func (m *TLDataJSON) Decode(dbuf *DecodeBuf) error {
 func (m *TLLabeledPrice) ToLabeledPrice() *LabeledPrice {
 	return &LabeledPrice{
 		Payload: &LabeledPrice_LabeledPrice{
-			LabeledPrice: &TLLabeledPrice{},
+			LabeledPrice: m,
 		},
 	}
 }
@@ -33257,7 +33257,7 @@ func (m *TLLabeledPrice) Decode(dbuf *DecodeBuf) error {
 func (m *TLInvoice) ToInvoice() *Invoice {
 	return &Invoice{
 		Payload: &Invoice_Invoice{
-			Invoice: &TLInvoice{},
+			Invoice: m,
 		},
 	}
 }
@@ -33358,7 +33358,7 @@ func (m *TLInvoice) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentCharge) ToPaymentCharge() *PaymentCharge {
 	return &PaymentCharge{
 		Payload: &PaymentCharge_PaymentCharge{
-			PaymentCharge: &TLPaymentCharge{},
+			PaymentCharge: m,
 		},
 	}
 }
@@ -33381,7 +33381,7 @@ func (m *TLPaymentCharge) Decode(dbuf *DecodeBuf) error {
 func (m *TLPostAddress) ToPostAddress() *PostAddress {
 	return &PostAddress{
 		Payload: &PostAddress_PostAddress{
-			PostAddress: &TLPostAddress{},
+			PostAddress: m,
 		},
 	}
 }
@@ -33412,7 +33412,7 @@ func (m *TLPostAddress) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentRequestedInfo) ToPaymentRequestedInfo() *PaymentRequestedInfo {
 	return &PaymentRequestedInfo{
 		Payload: &PaymentRequestedInfo_PaymentRequestedInfo{
-			PaymentRequestedInfo: &TLPaymentRequestedInfo{},
+			PaymentRequestedInfo: m,
 		},
 	}
 }
@@ -33474,7 +33474,7 @@ func (m *TLPaymentRequestedInfo) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentSavedCredentialsCard) ToPaymentSavedCredentials() *PaymentSavedCredentials {
 	return &PaymentSavedCredentials{
 		Payload: &PaymentSavedCredentials_PaymentSavedCredentialsCard{
-			PaymentSavedCredentialsCard: &TLPaymentSavedCredentialsCard{},
+			PaymentSavedCredentialsCard: m,
 		},
 	}
 }
@@ -33497,7 +33497,7 @@ func (m *TLPaymentSavedCredentialsCard) Decode(dbuf *DecodeBuf) error {
 func (m *TLWebDocument) ToWebDocument() *WebDocument {
 	return &WebDocument{
 		Payload: &WebDocument_WebDocument{
-			WebDocument: &TLWebDocument{},
+			WebDocument: m,
 		},
 	}
 }
@@ -33547,7 +33547,7 @@ func (m *TLWebDocument) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputWebDocument) ToInputWebDocument() *InputWebDocument {
 	return &InputWebDocument{
 		Payload: &InputWebDocument_InputWebDocument{
-			InputWebDocument: &TLInputWebDocument{},
+			InputWebDocument: m,
 		},
 	}
 }
@@ -33593,7 +33593,7 @@ func (m *TLInputWebDocument) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputWebFileLocation) ToInputWebFileLocation() *InputWebFileLocation {
 	return &InputWebFileLocation{
 		Payload: &InputWebFileLocation_InputWebFileLocation{
-			InputWebFileLocation: &TLInputWebFileLocation{},
+			InputWebFileLocation: m,
 		},
 	}
 }
@@ -33616,7 +33616,7 @@ func (m *TLInputWebFileLocation) Decode(dbuf *DecodeBuf) error {
 func (m *TLUploadWebFile) ToUpload_WebFile() *Upload_WebFile {
 	return &Upload_WebFile{
 		Payload: &Upload_WebFile_UploadWebFile{
-			UploadWebFile: &TLUploadWebFile{},
+			UploadWebFile: m,
 		},
 	}
 }
@@ -33647,7 +33647,7 @@ func (m *TLUploadWebFile) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentsPaymentForm) ToPayments_PaymentForm() *Payments_PaymentForm {
 	return &Payments_PaymentForm{
 		Payload: &Payments_PaymentForm_PaymentsPaymentForm{
-			PaymentsPaymentForm: &TLPaymentsPaymentForm{},
+			PaymentsPaymentForm: m,
 		},
 	}
 }
@@ -33762,7 +33762,7 @@ func (m *TLPaymentsPaymentForm) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentsValidatedRequestedInfo) ToPayments_ValidatedRequestedInfo() *Payments_ValidatedRequestedInfo {
 	return &Payments_ValidatedRequestedInfo{
 		Payload: &Payments_ValidatedRequestedInfo_PaymentsValidatedRequestedInfo{
-			PaymentsValidatedRequestedInfo: &TLPaymentsValidatedRequestedInfo{},
+			PaymentsValidatedRequestedInfo: m,
 		},
 	}
 }
@@ -33823,7 +33823,7 @@ func (m *TLPaymentsValidatedRequestedInfo) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentsPaymentResult) ToPayments_PaymentResult() *Payments_PaymentResult {
 	return &Payments_PaymentResult{
 		Payload: &Payments_PaymentResult_PaymentsPaymentResult{
-			PaymentsPaymentResult: &TLPaymentsPaymentResult{},
+			PaymentsPaymentResult: m,
 		},
 	}
 }
@@ -33846,7 +33846,7 @@ func (m *TLPaymentsPaymentResult) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentsPaymentVerficationNeeded) ToPayments_PaymentResult() *Payments_PaymentResult {
 	return &Payments_PaymentResult{
 		Payload: &Payments_PaymentResult_PaymentsPaymentVerficationNeeded{
-			PaymentsPaymentVerficationNeeded: &TLPaymentsPaymentVerficationNeeded{},
+			PaymentsPaymentVerficationNeeded: m,
 		},
 	}
 }
@@ -33867,7 +33867,7 @@ func (m *TLPaymentsPaymentVerficationNeeded) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentsPaymentReceipt) ToPayments_PaymentReceipt() *Payments_PaymentReceipt {
 	return &Payments_PaymentReceipt{
 		Payload: &Payments_PaymentReceipt_PaymentsPaymentReceipt{
-			PaymentsPaymentReceipt: &TLPaymentsPaymentReceipt{},
+			PaymentsPaymentReceipt: m,
 		},
 	}
 }
@@ -33950,7 +33950,7 @@ func (m *TLPaymentsPaymentReceipt) Decode(dbuf *DecodeBuf) error {
 func (m *TLPaymentsSavedInfo) ToPayments_SavedInfo() *Payments_SavedInfo {
 	return &Payments_SavedInfo{
 		Payload: &Payments_SavedInfo_PaymentsSavedInfo{
-			PaymentsSavedInfo: &TLPaymentsSavedInfo{},
+			PaymentsSavedInfo: m,
 		},
 	}
 }
@@ -33994,7 +33994,7 @@ func (m *TLPaymentsSavedInfo) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPaymentCredentialsSaved) ToInputPaymentCredentials() *InputPaymentCredentials {
 	return &InputPaymentCredentials{
 		Payload: &InputPaymentCredentials_InputPaymentCredentialsSaved{
-			InputPaymentCredentialsSaved: &TLInputPaymentCredentialsSaved{},
+			InputPaymentCredentialsSaved: m,
 		},
 	}
 }
@@ -34017,7 +34017,7 @@ func (m *TLInputPaymentCredentialsSaved) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPaymentCredentials) ToInputPaymentCredentials() *InputPaymentCredentials {
 	return &InputPaymentCredentials{
 		Payload: &InputPaymentCredentials_InputPaymentCredentials{
-			InputPaymentCredentials: &TLInputPaymentCredentials{},
+			InputPaymentCredentials: m,
 		},
 	}
 }
@@ -34054,7 +34054,7 @@ func (m *TLInputPaymentCredentials) Decode(dbuf *DecodeBuf) error {
 func (m *TLAccountTmpPassword) ToAccount_TmpPassword() *Account_TmpPassword {
 	return &Account_TmpPassword{
 		Payload: &Account_TmpPassword_AccountTmpPassword{
-			AccountTmpPassword: &TLAccountTmpPassword{},
+			AccountTmpPassword: m,
 		},
 	}
 }
@@ -34077,7 +34077,7 @@ func (m *TLAccountTmpPassword) Decode(dbuf *DecodeBuf) error {
 func (m *TLShippingOption) ToShippingOption() *ShippingOption {
 	return &ShippingOption{
 		Payload: &ShippingOption_ShippingOption{
-			ShippingOption: &TLShippingOption{},
+			ShippingOption: m,
 		},
 	}
 }
@@ -34121,7 +34121,7 @@ func (m *TLShippingOption) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputStickerSetItem) ToInputStickerSetItem() *InputStickerSetItem {
 	return &InputStickerSetItem{
 		Payload: &InputStickerSetItem_InputStickerSetItem{
-			InputStickerSetItem: &TLInputStickerSetItem{},
+			InputStickerSetItem: m,
 		},
 	}
 }
@@ -34162,7 +34162,7 @@ func (m *TLInputStickerSetItem) Decode(dbuf *DecodeBuf) error {
 func (m *TLInputPhoneCall) ToInputPhoneCall() *InputPhoneCall {
 	return &InputPhoneCall{
 		Payload: &InputPhoneCall_InputPhoneCall{
-			InputPhoneCall: &TLInputPhoneCall{},
+			InputPhoneCall: m,
 		},
 	}
 }
@@ -34185,7 +34185,7 @@ func (m *TLInputPhoneCall) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoneCallEmpty) ToPhoneCall() *PhoneCall {
 	return &PhoneCall{
 		Payload: &PhoneCall_PhoneCallEmpty{
-			PhoneCallEmpty: &TLPhoneCallEmpty{},
+			PhoneCallEmpty: m,
 		},
 	}
 }
@@ -34206,7 +34206,7 @@ func (m *TLPhoneCallEmpty) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoneCallWaiting) ToPhoneCall() *PhoneCall {
 	return &PhoneCall{
 		Payload: &PhoneCall_PhoneCallWaiting{
-			PhoneCallWaiting: &TLPhoneCallWaiting{},
+			PhoneCallWaiting: m,
 		},
 	}
 }
@@ -34253,7 +34253,7 @@ func (m *TLPhoneCallWaiting) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoneCallRequested) ToPhoneCall() *PhoneCall {
 	return &PhoneCall{
 		Payload: &PhoneCall_PhoneCallRequested{
-			PhoneCallRequested: &TLPhoneCallRequested{},
+			PhoneCallRequested: m,
 		},
 	}
 }
@@ -34288,7 +34288,7 @@ func (m *TLPhoneCallRequested) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoneCallAccepted) ToPhoneCall() *PhoneCall {
 	return &PhoneCall{
 		Payload: &PhoneCall_PhoneCallAccepted{
-			PhoneCallAccepted: &TLPhoneCallAccepted{},
+			PhoneCallAccepted: m,
 		},
 	}
 }
@@ -34323,7 +34323,7 @@ func (m *TLPhoneCallAccepted) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoneCall) ToPhoneCall() *PhoneCall {
 	return &PhoneCall{
 		Payload: &PhoneCall_PhoneCall{
-			PhoneCall: &TLPhoneCall{},
+			PhoneCall: m,
 		},
 	}
 }
@@ -34387,7 +34387,7 @@ func (m *TLPhoneCall) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoneCallDiscarded) ToPhoneCall() *PhoneCall {
 	return &PhoneCall{
 		Payload: &PhoneCall_PhoneCallDiscarded{
-			PhoneCallDiscarded: &TLPhoneCallDiscarded{},
+			PhoneCallDiscarded: m,
 		},
 	}
 }
@@ -34451,7 +34451,7 @@ func (m *TLPhoneCallDiscarded) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoneConnection) ToPhoneConnection() *PhoneConnection {
 	return &PhoneConnection{
 		Payload: &PhoneConnection_PhoneConnection{
-			PhoneConnection: &TLPhoneConnection{},
+			PhoneConnection: m,
 		},
 	}
 }
@@ -34480,7 +34480,7 @@ func (m *TLPhoneConnection) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhoneCallProtocol) ToPhoneCallProtocol() *PhoneCallProtocol {
 	return &PhoneCallProtocol{
 		Payload: &PhoneCallProtocol_PhoneCallProtocol{
-			PhoneCallProtocol: &TLPhoneCallProtocol{},
+			PhoneCallProtocol: m,
 		},
 	}
 }
@@ -34526,7 +34526,7 @@ func (m *TLPhoneCallProtocol) Decode(dbuf *DecodeBuf) error {
 func (m *TLPhonePhoneCall) ToPhone_PhoneCall() *Phone_PhoneCall {
 	return &Phone_PhoneCall{
 		Payload: &Phone_PhoneCall_PhonePhoneCall{
-			PhonePhoneCall: &TLPhonePhoneCall{},
+			PhonePhoneCall: m,
 		},
 	}
 }
@@ -34570,7 +34570,7 @@ func (m *TLPhonePhoneCall) Decode(dbuf *DecodeBuf) error {
 func (m *TLUploadCdnFileReuploadNeeded) ToUpload_CdnFile() *Upload_CdnFile {
 	return &Upload_CdnFile{
 		Payload: &Upload_CdnFile_UploadCdnFileReuploadNeeded{
-			UploadCdnFileReuploadNeeded: &TLUploadCdnFileReuploadNeeded{},
+			UploadCdnFileReuploadNeeded: m,
 		},
 	}
 }
@@ -34591,7 +34591,7 @@ func (m *TLUploadCdnFileReuploadNeeded) Decode(dbuf *DecodeBuf) error {
 func (m *TLUploadCdnFile) ToUpload_CdnFile() *Upload_CdnFile {
 	return &Upload_CdnFile{
 		Payload: &Upload_CdnFile_UploadCdnFile{
-			UploadCdnFile: &TLUploadCdnFile{},
+			UploadCdnFile: m,
 		},
 	}
 }
@@ -34612,7 +34612,7 @@ func (m *TLUploadCdnFile) Decode(dbuf *DecodeBuf) error {
 func (m *TLCdnPublicKey) ToCdnPublicKey() *CdnPublicKey {
 	return &CdnPublicKey{
 		Payload: &CdnPublicKey_CdnPublicKey{
-			CdnPublicKey: &TLCdnPublicKey{},
+			CdnPublicKey: m,
 		},
 	}
 }
@@ -34635,7 +34635,7 @@ func (m *TLCdnPublicKey) Decode(dbuf *DecodeBuf) error {
 func (m *TLCdnConfig) ToCdnConfig() *CdnConfig {
 	return &CdnConfig{
 		Payload: &CdnConfig_CdnConfig{
-			CdnConfig: &TLCdnConfig{},
+			CdnConfig: m,
 		},
 	}
 }
@@ -34675,7 +34675,7 @@ func (m *TLCdnConfig) Decode(dbuf *DecodeBuf) error {
 func (m *TLLangPackString) ToLangPackString() *LangPackString {
 	return &LangPackString{
 		Payload: &LangPackString_LangPackString{
-			LangPackString: &TLLangPackString{},
+			LangPackString: m,
 		},
 	}
 }
@@ -34698,7 +34698,7 @@ func (m *TLLangPackString) Decode(dbuf *DecodeBuf) error {
 func (m *TLLangPackStringPluralized) ToLangPackString() *LangPackString {
 	return &LangPackString{
 		Payload: &LangPackString_LangPackStringPluralized{
-			LangPackStringPluralized: &TLLangPackStringPluralized{},
+			LangPackStringPluralized: m,
 		},
 	}
 }
@@ -34771,7 +34771,7 @@ func (m *TLLangPackStringPluralized) Decode(dbuf *DecodeBuf) error {
 func (m *TLLangPackStringDeleted) ToLangPackString() *LangPackString {
 	return &LangPackString{
 		Payload: &LangPackString_LangPackStringDeleted{
-			LangPackStringDeleted: &TLLangPackStringDeleted{},
+			LangPackStringDeleted: m,
 		},
 	}
 }
@@ -34792,7 +34792,7 @@ func (m *TLLangPackStringDeleted) Decode(dbuf *DecodeBuf) error {
 func (m *TLLangPackDifference) ToLangPackDifference() *LangPackDifference {
 	return &LangPackDifference{
 		Payload: &LangPackDifference_LangPackDifference{
-			LangPackDifference: &TLLangPackDifference{},
+			LangPackDifference: m,
 		},
 	}
 }
@@ -34838,7 +34838,7 @@ func (m *TLLangPackDifference) Decode(dbuf *DecodeBuf) error {
 func (m *TLLangPackLanguage) ToLangPackLanguage() *LangPackLanguage {
 	return &LangPackLanguage{
 		Payload: &LangPackLanguage_LangPackLanguage{
-			LangPackLanguage: &TLLangPackLanguage{},
+			LangPackLanguage: m,
 		},
 	}
 }
@@ -34863,7 +34863,7 @@ func (m *TLLangPackLanguage) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelAdminRights) ToChannelAdminRights() *ChannelAdminRights {
 	return &ChannelAdminRights{
 		Payload: &ChannelAdminRights_ChannelAdminRights{
-			ChannelAdminRights: &TLChannelAdminRights{},
+			ChannelAdminRights: m,
 		},
 	}
 }
@@ -34968,7 +34968,7 @@ func (m *TLChannelAdminRights) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelBannedRights) ToChannelBannedRights() *ChannelBannedRights {
 	return &ChannelBannedRights{
 		Payload: &ChannelBannedRights_ChannelBannedRights{
-			ChannelBannedRights: &TLChannelBannedRights{},
+			ChannelBannedRights: m,
 		},
 	}
 }
@@ -35066,7 +35066,7 @@ func (m *TLChannelBannedRights) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelAdminLogEventActionChangeTitle) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
 	return &ChannelAdminLogEventAction{
 		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeTitle{
-			ChannelAdminLogEventActionChangeTitle: &TLChannelAdminLogEventActionChangeTitle{},
+			ChannelAdminLogEventActionChangeTitle: m,
 		},
 	}
 }
@@ -35089,7 +35089,7 @@ func (m *TLChannelAdminLogEventActionChangeTitle) Decode(dbuf *DecodeBuf) error 
 func (m *TLChannelAdminLogEventActionChangeAbout) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
 	return &ChannelAdminLogEventAction{
 		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeAbout{
-			ChannelAdminLogEventActionChangeAbout: &TLChannelAdminLogEventActionChangeAbout{},
+			ChannelAdminLogEventActionChangeAbout: m,
 		},
 	}
 }
@@ -35112,7 +35112,7 @@ func (m *TLChannelAdminLogEventActionChangeAbout) Decode(dbuf *DecodeBuf) error 
 func (m *TLChannelAdminLogEventActionChangeUsername) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
 	return &ChannelAdminLogEventAction{
 		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeUsername{
-			ChannelAdminLogEventActionChangeUsername: &TLChannelAdminLogEventActionChangeUsername{},
+			ChannelAdminLogEventActionChangeUsername: m,
 		},
 	}
 }
@@ -35135,7 +35135,7 @@ func (m *TLChannelAdminLogEventActionChangeUsername) Decode(dbuf *DecodeBuf) err
 func (m *TLChannelAdminLogEventActionChangePhoto) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
 	return &ChannelAdminLogEventAction{
 		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionChangePhoto{
-			ChannelAdminLogEventActionChangePhoto: &TLChannelAdminLogEventActionChangePhoto{},
+			ChannelAdminLogEventActionChangePhoto: m,
 		},
 	}
 }
@@ -35162,7 +35162,7 @@ func (m *TLChannelAdminLogEventActionChangePhoto) Decode(dbuf *DecodeBuf) error 
 func (m *TLChannelAdminLogEventActionToggleInvites) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
 	return &ChannelAdminLogEventAction{
 		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionToggleInvites{
-			ChannelAdminLogEventActionToggleInvites: &TLChannelAdminLogEventActionToggleInvites{},
+			ChannelAdminLogEventActionToggleInvites: m,
 		},
 	}
 }
@@ -35185,7 +35185,7 @@ func (m *TLChannelAdminLogEventActionToggleInvites) Decode(dbuf *DecodeBuf) erro
 func (m *TLChannelAdminLogEventActionToggleSignatures) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
 	return &ChannelAdminLogEventAction{
 		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionToggleSignatures{
-			ChannelAdminLogEventActionToggleSignatures: &TLChannelAdminLogEventActionToggleSignatures{},
+			ChannelAdminLogEventActionToggleSignatures: m,
 		},
 	}
 }
@@ -35208,7 +35208,7 @@ func (m *TLChannelAdminLogEventActionToggleSignatures) Decode(dbuf *DecodeBuf) e
 func (m *TLChannelAdminLogEventActionUpdatePinned) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
 	return &ChannelAdminLogEventAction{
 		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionUpdatePinned{
-			ChannelAdminLogEventActionUpdatePinned: &TLChannelAdminLogEventActionUpdatePinned{},
+			ChannelAdminLogEventActionUpdatePinned: m,
 		},
 	}
 }
@@ -35231,7 +35231,7 @@ func (m *TLChannelAdminLogEventActionUpdatePinned) Decode(dbuf *DecodeBuf) error
 func (m *TLChannelAdminLogEventActionEditMessage) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
 	return &ChannelAdminLogEventAction{
 		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionEditMessage{
-			ChannelAdminLogEventActionEditMessage: &TLChannelAdminLogEventActionEditMessage{},
+			ChannelAdminLogEventActionEditMessage: m,
 		},
 	}
 }
@@ -35258,7 +35258,7 @@ func (m *TLChannelAdminLogEventActionEditMessage) Decode(dbuf *DecodeBuf) error 
 func (m *TLChannelAdminLogEventActionDeleteMessage) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
 	return &ChannelAdminLogEventAction{
 		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionDeleteMessage{
-			ChannelAdminLogEventActionDeleteMessage: &TLChannelAdminLogEventActionDeleteMessage{},
+			ChannelAdminLogEventActionDeleteMessage: m,
 		},
 	}
 }
@@ -35281,7 +35281,7 @@ func (m *TLChannelAdminLogEventActionDeleteMessage) Decode(dbuf *DecodeBuf) erro
 func (m *TLChannelAdminLogEventActionParticipantJoin) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
 	return &ChannelAdminLogEventAction{
 		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantJoin{
-			ChannelAdminLogEventActionParticipantJoin: &TLChannelAdminLogEventActionParticipantJoin{},
+			ChannelAdminLogEventActionParticipantJoin: m,
 		},
 	}
 }
@@ -35300,7 +35300,7 @@ func (m *TLChannelAdminLogEventActionParticipantJoin) Decode(dbuf *DecodeBuf) er
 func (m *TLChannelAdminLogEventActionParticipantLeave) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
 	return &ChannelAdminLogEventAction{
 		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantLeave{
-			ChannelAdminLogEventActionParticipantLeave: &TLChannelAdminLogEventActionParticipantLeave{},
+			ChannelAdminLogEventActionParticipantLeave: m,
 		},
 	}
 }
@@ -35319,7 +35319,7 @@ func (m *TLChannelAdminLogEventActionParticipantLeave) Decode(dbuf *DecodeBuf) e
 func (m *TLChannelAdminLogEventActionParticipantInvite) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
 	return &ChannelAdminLogEventAction{
 		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantInvite{
-			ChannelAdminLogEventActionParticipantInvite: &TLChannelAdminLogEventActionParticipantInvite{},
+			ChannelAdminLogEventActionParticipantInvite: m,
 		},
 	}
 }
@@ -35342,7 +35342,7 @@ func (m *TLChannelAdminLogEventActionParticipantInvite) Decode(dbuf *DecodeBuf) 
 func (m *TLChannelAdminLogEventActionParticipantToggleBan) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
 	return &ChannelAdminLogEventAction{
 		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantToggleBan{
-			ChannelAdminLogEventActionParticipantToggleBan: &TLChannelAdminLogEventActionParticipantToggleBan{},
+			ChannelAdminLogEventActionParticipantToggleBan: m,
 		},
 	}
 }
@@ -35369,7 +35369,7 @@ func (m *TLChannelAdminLogEventActionParticipantToggleBan) Decode(dbuf *DecodeBu
 func (m *TLChannelAdminLogEventActionParticipantToggleAdmin) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
 	return &ChannelAdminLogEventAction{
 		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionParticipantToggleAdmin{
-			ChannelAdminLogEventActionParticipantToggleAdmin: &TLChannelAdminLogEventActionParticipantToggleAdmin{},
+			ChannelAdminLogEventActionParticipantToggleAdmin: m,
 		},
 	}
 }
@@ -35396,7 +35396,7 @@ func (m *TLChannelAdminLogEventActionParticipantToggleAdmin) Decode(dbuf *Decode
 func (m *TLChannelAdminLogEventActionChangeStickerSet) ToChannelAdminLogEventAction() *ChannelAdminLogEventAction {
 	return &ChannelAdminLogEventAction{
 		Payload: &ChannelAdminLogEventAction_ChannelAdminLogEventActionChangeStickerSet{
-			ChannelAdminLogEventActionChangeStickerSet: &TLChannelAdminLogEventActionChangeStickerSet{},
+			ChannelAdminLogEventActionChangeStickerSet: m,
 		},
 	}
 }
@@ -35423,7 +35423,7 @@ func (m *TLChannelAdminLogEventActionChangeStickerSet) Decode(dbuf *DecodeBuf) e
 func (m *TLChannelAdminLogEvent) ToChannelAdminLogEvent() *ChannelAdminLogEvent {
 	return &ChannelAdminLogEvent{
 		Payload: &ChannelAdminLogEvent_ChannelAdminLogEvent{
-			ChannelAdminLogEvent: &TLChannelAdminLogEvent{},
+			ChannelAdminLogEvent: m,
 		},
 	}
 }
@@ -35452,7 +35452,7 @@ func (m *TLChannelAdminLogEvent) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelsAdminLogResults) ToChannels_AdminLogResults() *Channels_AdminLogResults {
 	return &Channels_AdminLogResults{
 		Payload: &Channels_AdminLogResults_ChannelsAdminLogResults{
-			ChannelsAdminLogResults: &TLChannelsAdminLogResults{},
+			ChannelsAdminLogResults: m,
 		},
 	}
 }
@@ -35534,7 +35534,7 @@ func (m *TLChannelsAdminLogResults) Decode(dbuf *DecodeBuf) error {
 func (m *TLChannelAdminLogEventsFilter) ToChannelAdminLogEventsFilter() *ChannelAdminLogEventsFilter {
 	return &ChannelAdminLogEventsFilter{
 		Payload: &ChannelAdminLogEventsFilter_ChannelAdminLogEventsFilter{
-			ChannelAdminLogEventsFilter: &TLChannelAdminLogEventsFilter{},
+			ChannelAdminLogEventsFilter: m,
 		},
 	}
 }
@@ -35684,7 +35684,7 @@ func (m *TLChannelAdminLogEventsFilter) Decode(dbuf *DecodeBuf) error {
 func (m *TLPopularContact) ToPopularContact() *PopularContact {
 	return &PopularContact{
 		Payload: &PopularContact_PopularContact{
-			PopularContact: &TLPopularContact{},
+			PopularContact: m,
 		},
 	}
 }
@@ -35707,7 +35707,7 @@ func (m *TLPopularContact) Decode(dbuf *DecodeBuf) error {
 func (m *TLCdnFileHash) ToCdnFileHash() *CdnFileHash {
 	return &CdnFileHash{
 		Payload: &CdnFileHash_CdnFileHash{
-			CdnFileHash: &TLCdnFileHash{},
+			CdnFileHash: m,
 		},
 	}
 }
@@ -35732,7 +35732,7 @@ func (m *TLCdnFileHash) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesFavedStickersNotModified) ToMessages_FavedStickers() *Messages_FavedStickers {
 	return &Messages_FavedStickers{
 		Payload: &Messages_FavedStickers_MessagesFavedStickersNotModified{
-			MessagesFavedStickersNotModified: &TLMessagesFavedStickersNotModified{},
+			MessagesFavedStickersNotModified: m,
 		},
 	}
 }
@@ -35751,7 +35751,7 @@ func (m *TLMessagesFavedStickersNotModified) Decode(dbuf *DecodeBuf) error {
 func (m *TLMessagesFavedStickers) ToMessages_FavedStickers() *Messages_FavedStickers {
 	return &Messages_FavedStickers{
 		Payload: &Messages_FavedStickers_MessagesFavedStickers{
-			MessagesFavedStickers: &TLMessagesFavedStickers{},
+			MessagesFavedStickers: m,
 		},
 	}
 }

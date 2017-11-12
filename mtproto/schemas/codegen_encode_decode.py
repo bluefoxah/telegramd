@@ -497,7 +497,8 @@ for restype in typesList:
     classTypesTexts += 'func (m* TL' + to_proto_go_name(name) + ') To' + to_proto_go_name(resType) + '() (*' + to_proto_go_name(resType) + ') {\n'
     classTypesTexts += '  return &' + to_proto_go_name(resType) + '{\n';
     classTypesTexts += '    Payload: &' + to_proto_go_name(resType) + '_' + to_proto_go_name(name) + '{\n'
-    classTypesTexts += '      ' + to_proto_go_name(name) + ': &TL' + to_proto_go_name(name) + '{}, \n'
+    # classTypesTexts += '      ' + to_proto_go_name(name) + ': &TL' + to_proto_go_name(name) + '{}, \n'
+    classTypesTexts += '      ' + to_proto_go_name(name) + ': m, \n'
     classTypesTexts += '    },\n'
     classTypesTexts += '  }\n'
     classTypesTexts += '}\n\n'
