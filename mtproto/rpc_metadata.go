@@ -25,7 +25,7 @@ import (
 
 type RpcMetaData struct {
 	ServerId	int32
-
+	NetlibSessionId int64
 	ClientAddr	string
 	AuthId		int64
 	SessionId	int64
@@ -38,48 +38,46 @@ type RpcMetaData struct {
 	UserId		int32
 }
 
-func getFirstKeyVal(md metadata.MD, k string) (s string, empty bool) {
+func getFirstKeyVal(md metadata.MD, k string) (string, bool) {
 	if v, ok := md[k]; ok {
 		if len(v) > 0 {
-			s = v[0]
-			empty = false
+			return v[0], ok
 		}
 	}
 
-	empty = true
-	return
+	return "", false
 }
 
 func (m *RpcMetaData) Decode(md metadata.MD) {
-	if v, ok := getFirstKeyVal(md, "serverid"); !ok {
+	if v, ok := getFirstKeyVal(md, "serverid"); ok {
 		m.ServerId, _ = base.StringToInt32(v)
 	}
 
-	if v, ok := getFirstKeyVal(md, "clientaddr"); !ok {
+	if v, ok := getFirstKeyVal(md, "clientaddr"); ok {
 		m.ClientAddr = v
 	}
 
-	if v, ok := getFirstKeyVal(md, "authid"); !ok {
+	if v, ok := getFirstKeyVal(md, "authid"); ok {
 		m.AuthId, _ = base.StringToInt64(v)
 	}
 
-	if v, ok := getFirstKeyVal(md, "sessionid"); !ok {
+	if v, ok := getFirstKeyVal(md, "sessionid"); ok {
 		m.SessionId, _ = base.StringToInt64(v)
 	}
 
-	if v, ok := getFirstKeyVal(md, "traceid"); !ok {
+	if v, ok := getFirstKeyVal(md, "traceid"); ok {
 		m.TraceId, _ = base.StringToInt64(v)
 	}
 
-	if v, ok := getFirstKeyVal(md, "spanid"); !ok {
+	if v, ok := getFirstKeyVal(md, "spanid"); ok {
 		m.SpanId, _ = base.StringToInt64(v)
 	}
 
-	if v, ok := getFirstKeyVal(md, "receivetime"); !ok {
+	if v, ok := getFirstKeyVal(md, "receivetime"); ok {
 		m.ReceiveTime, _ = base.StringToInt64(v)
 	}
 
-	if v, ok := getFirstKeyVal(md, "userid"); !ok {
+	if v, ok := getFirstKeyVal(md, "userid"); ok {
 		m.UserId, _ = base.StringToInt32(v)
 	}
 }
