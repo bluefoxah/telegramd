@@ -7,7 +7,7 @@
     </operation>
     <operation name="SelectIdByAuthId">
         <sql>
-            SELECT id FROM devices WHERE user_id in (SELECT id FROM auth_users WHERE auth_id = :auth_id limit 1) AND token_type = :token_type AND token = :token limit 1
+            SELECT id FROM devices WHERE user_id in (SELECT id FROM auth_users WHERE auth_id = :auth_id) AND token_type = :token_type AND token = :token limit 1
         </sql>
     </operation>
     <operation name="UpdateStateById">

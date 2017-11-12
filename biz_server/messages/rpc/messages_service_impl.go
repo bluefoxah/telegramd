@@ -307,6 +307,7 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 	md, _ := metadata.FromIncomingContext(ctx)
 	rpcMetaData := mtproto.RpcMetaData{}
 	rpcMetaData.Decode(md)
+	glog.Infof("metadata: {%v}, rpcMetaData: {%v}", md, rpcMetaData)
 
 	// TODO(@benqi): 仅仅验证逻辑，未考虑出错处理等，
 	sentMessage := &mtproto.TLUpdateShortSentMessage{}
@@ -314,6 +315,69 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 	switch request.Peer.Payload.(type) {
 	case *mtproto.InputPeer_InputPeerEmpty:
 	case *mtproto.InputPeer_InputPeerSelf:
+		//TODO(@benqi): 消除重复代码
+
+		// TODO(@benqi): 事务
+		// 创建会话
+		dialog, _ := s.UserDialogsDAO.CheckExists(rpcMetaData.UserId, base.PEER_USER, rpcMetaData.UserId)
+		if dialog == nil {
+			dialog = &dataobject.UserDialogsDO{}
+			dialog.UserId = rpcMetaData.UserId
+			dialog.PeerType = base.PEER_USER
+			dialog.PeerId = rpcMetaData.UserId
+			s.UserDialogsDAO.Insert(dialog)
+		}
+
+		// 插入消息
+		message := &dataobject.MessagesDO{}
+		message.UserId = rpcMetaData.UserId
+		message.PeerType = base.PEER_USER
+		message.PeerId = rpcMetaData.UserId
+		message.RandomId = request.RandomId
+		message.Message = request.Message
+		messageId, _ := s.MessagesDAO.Insert(message)
+
+		// inbox和outbox
+		// 发件箱
+		messageBox := &dataobject.MessageBoxsDO{}
+		messageBox.UserId = rpcMetaData.UserId
+		messageBox.MessageBoxType = 0
+		messageBox.MessageId = int32(messageId)
+		outPts, _ := s.SequenceDAO.NextID(base2.Int32ToString(messageBox.UserId))
+		messageBox.Pts = int32(outPts)
+		s.MessageBoxsDAO.Insert(messageBox)
+
+		// 推送给sync
+		// 推给客户端的updates
+		update := mtproto.TLUpdateShortMessage{}
+		update.Id = int32(messageId)
+		update.UserId = rpcMetaData.UserId
+		update.Pts = int32(outPts)
+		update.PtsCount = 1
+		update.Message = request.Message
+		update.Date = int32(time.Now().Unix())
+		updateRawData := update.ToUpdates().Encode()
+
+		delivery := &zproto.DeliveryUpdatesToUsers{}
+		delivery.MyAuthKeyId = rpcMetaData.AuthId
+		delivery.MySessionId = rpcMetaData.SessionId
+		delivery.SendtoUserIdList = append(delivery.SendtoUserIdList, rpcMetaData.UserId)
+		delivery.RawData = updateRawData
+
+		glog.Infof("MessagesSendMessage - delivery: %v", delivery)
+		_, _ = s.SyncRPCClient.Client.DeliveryUpdates(context.Background(), delivery)
+		// update.Encode()
+
+		// 返回给客户端
+		sentMessage := &mtproto.TLUpdateShortSentMessage{}
+		sentMessage.Id = int32(messageId)
+		sentMessage.Pts = int32(outPts)
+		sentMessage.PtsCount = 1
+		sentMessage.Date = int32(time.Now().Unix())
+
+		glog.Infof("MessagesSendMessage - reply: %v", sentMessage)
+		reply = sentMessage.ToUpdates()
+
 	case *mtproto.InputPeer_InputPeerChat:
 	case *mtproto.InputPeer_InputPeerUser:
 		inputPeerUser := request.Peer.GetInputPeerUser()
@@ -322,6 +386,7 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 		// 创建会话
 		dialog1, _ := s.UserDialogsDAO.CheckExists(rpcMetaData.UserId, base.PEER_USER, inputPeerUser.UserId)
 		if dialog1 == nil {
+			dialog1 = &dataobject.UserDialogsDO{}
 			dialog1.UserId = rpcMetaData.UserId
 			dialog1.PeerType = base.PEER_USER
 			dialog1.PeerId = inputPeerUser.UserId
@@ -329,10 +394,11 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 		}
 		dialog2, _ := s.UserDialogsDAO.CheckExists(inputPeerUser.UserId, base.PEER_USER, rpcMetaData.UserId)
 		if dialog2 == nil {
-			dialog1.UserId = inputPeerUser.UserId
-			dialog1.PeerType = base.PEER_USER
-			dialog1.PeerId = rpcMetaData.UserId
-			s.UserDialogsDAO.Insert(dialog1)
+			dialog2 = &dataobject.UserDialogsDO{}
+			dialog2.UserId = inputPeerUser.UserId
+			dialog2.PeerType = base.PEER_USER
+			dialog2.PeerId = rpcMetaData.UserId
+			s.UserDialogsDAO.Insert(dialog2)
 		}
 
 		// 插入消息
@@ -375,6 +441,7 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 		delivery := &zproto.DeliveryUpdatesToUsers{}
 		delivery.MyAuthKeyId = rpcMetaData.AuthId
 		delivery.MySessionId = rpcMetaData.SessionId
+		delivery.SendtoUserIdList = append(delivery.SendtoUserIdList, rpcMetaData.UserId)
 		delivery.SendtoUserIdList = append(delivery.SendtoUserIdList, inputPeerUser.UserId)
 		delivery.RawData = updateRawData
 

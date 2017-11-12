@@ -27,10 +27,12 @@ import (
 	"time"
 	"github.com/nebulaim/telegramd/frontend/id"
 	"fmt"
+	"google.golang.org/grpc/metadata"
 )
 
 type AuthServiceImpl struct {
 	UsersDAO *dao.UsersDAO
+	AuthUsersDAO *dao.AuthUsersDAO
 	AuthPhoneTransactionsDAO *dao.AuthPhoneTransactionsDAO
 }
 
@@ -176,6 +178,10 @@ func (s *AuthServiceImpl) AuthSignUp(ctx context.Context, request *mtproto.TLAut
 func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAuthSignIn) (*mtproto.Auth_Authorization, error) {
 	glog.Infof("AuthSignIn - Process: {%v}", request)
 
+	md, _ := metadata.FromIncomingContext(ctx)
+	rpcMetaData := mtproto.RpcMetaData{}
+	rpcMetaData.Decode(md)
+
 	// Check code
 	do1, err := s.AuthPhoneTransactionsDAO.SelectByPhoneCode(request.PhoneCodeHash, request.PhoneCode, request.PhoneNumber)
 	if do1 == nil {
@@ -187,6 +193,14 @@ func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAut
 	if do2 == nil {
 		glog.Errorf("AuthSignIn - s.UsersDAO.SelectByPhoneNumber: %s", err)
 		return nil, err
+	}
+
+	do3, _ := s.AuthUsersDAO.SelectByAuthId(rpcMetaData.AuthId)
+	if do3 == nil {
+		do3 := &dataobject.AuthUsersDO{}
+		do3.AuthId = rpcMetaData.AuthId
+		do3.UserId = do2.Id
+		s.AuthUsersDAO.Insert(do3)
 	}
 
 	// TODO(@benqi): 从数据库加载

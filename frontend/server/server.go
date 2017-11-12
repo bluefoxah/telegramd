@@ -33,6 +33,7 @@ import (
 type Server struct {
 	authsDAO *dao.AuthsDAO
 	authSaltsDAO *dao.AuthSaltsDAO
+	authUsersDAO *dao.AuthUsersDAO
 
 	cacheKeys	*auth_key.AuthKeyCacheManager
 	Server      *net2.Server
@@ -49,6 +50,7 @@ func NewServer(addr, dsn string) (s *Server) {
 	s.authsDAO = dao.NewAuthsDAO(db)
 	s.authSaltsDAO = dao.NewAuthSaltsDAO(db)
 	masterKeysDAO := dao.NewMasterKeysDAO(db)
+	s.authUsersDAO = dao.NewAuthUsersDAO(db)
 
 	mtproto := NewMTProto()
 	lsn := listen("server", "0.0.0.0:12345")
@@ -76,7 +78,7 @@ func (s* Server) Serve(rpcClient *rpc.RPCClient, syncRpcClient *rpc.SyncRPCClien
 		c.Codec.AuthKeyStorager = s.cacheKeys
 		c.AuthsDAO = s.authsDAO
 		c.AuthSaltsDAO = s.authSaltsDAO
-
+		c.AuthUsersDAO = s.authUsersDAO
 		go s.sessionLoop(c)
 	}
 }

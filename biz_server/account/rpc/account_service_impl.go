@@ -25,6 +25,8 @@ import (
 	"google.golang.org/grpc/metadata"
 	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 	"github.com/cosiner/gohper/errors"
+	"github.com/nebulaim/telegramd/biz_model/model"
+	"time"
 )
 
 const (
@@ -39,6 +41,7 @@ const (
 type AccountServiceImpl struct {
 	UsersDAO *dao.UsersDAO
 	DeviceDAO *dao.DevicesDAO
+	Status *model.OnlineStatusModel
 }
 
 func (s *AccountServiceImpl) AccountRegisterDevice(ctx context.Context, request *mtproto.TLAccountRegisterDevice) (*mtproto.Bool, error) {
@@ -141,6 +144,8 @@ func (s *AccountServiceImpl) AccountUpdateStatus(ctx context.Context, request *m
 	glog.Infof("AccountUpdateStatus - Process: {%v}", request)
 
 	// TODO(@benqi): 实现逻辑
+
+
 	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
 
 	glog.Infof("AccountUpdateStatus - reply: {%v}\n", reply)
@@ -151,8 +156,30 @@ func (s *AccountServiceImpl) AccountReportPeer(ctx context.Context, request *mtp
 	glog.Info("AccountReportPeer - Process: %v", request)
 
 	// TODO(@benqi): 实现逻辑
-	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
+	md, _ := metadata.FromIncomingContext(ctx)
+	rpcMetaData := mtproto.RpcMetaData{}
+	rpcMetaData.Decode(md)
 
+	//type SessionStatus struct {
+	//	UserId			int32		//
+	//
+	//	AuthKeyId 		int64		//
+	//	SessionId		int64		//
+	//
+	//	ServerId		int32		// ServerId
+	//	NetlibSessionId	int64		// 网络库SessionID，不是
+	//	Now				int64		// 上报时间
+	//}
+
+	status := &model.SessionStatus{}
+	status.UserId = rpcMetaData.UserId
+	status.AuthKeyId = rpcMetaData.AuthId
+	status.SessionId = rpcMetaData.SessionId
+	status.ServerId = rpcMetaData.ServerId
+	status.Now = time.Now().Unix()
+	s.Status.SetOnline(status)
+
+	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
 	glog.Infof("AccountReportPeer - reply: {%v}\n", reply)
 	return reply, nil
 }

@@ -25,6 +25,7 @@ import (
 	"net"
 	"github.com/golang/glog"
 	"errors"
+	"encoding/hex"
 )
 
 const (
@@ -60,6 +61,7 @@ func (m *MTProto) NewCodec(rw io.ReadWriter) (net2.Codec, error) {
 	codec := &MTProtoCodec{}
 	codec.rw, _ = rw.(io.ReadWriteCloser)
 	codec.State = CODEC_CONNECTED
+	codec.UserId = 0
 	return codec, nil
 }
 
@@ -74,6 +76,7 @@ type MTProtoCodec struct {
 	//
 	AuthKeyId int64
 	AuthKey []byte
+	UserId  int32
 
 	Salt int64
 	SessionId int64
@@ -110,6 +113,7 @@ func (m *MTProtoCodec) Receive() (interface{}, error) {
 		return nil, err
 	}
 
+	glog.Info("first_byte: ", hex.EncodeToString(b))
 	needAck := bool(b[0] >> 7 == 1)
 
 	b[0] = b[0] & 0x7f
@@ -121,6 +125,7 @@ func (m *MTProtoCodec) Receive() (interface{}, error) {
 		if err != nil {
 			return nil, err
 		}
+		glog.Info("ReadFull1: ", hex.EncodeToString(b))
 		size = (int(b[0]) | int(b[1])<<8 | int(b[2])<<16) << 2
 	}
 
@@ -131,6 +136,7 @@ func (m *MTProtoCodec) Receive() (interface{}, error) {
 		if err != nil {
 			return nil, err
 		}
+		glog.Info("ReadFull2: ", hex.EncodeToString(buf))
 		left -= n
 	}
 
@@ -157,7 +163,7 @@ func (m *MTProtoCodec) Receive() (interface{}, error) {
 		// glog.Info("Recv authKeyId not 0")
 
 		// TODO(@benqi): 检查m.State状态，authKeyId不为0时codec状态必须是CODEC_AUTH_KEY_OK或CODEC_resPQ
-		if m.State != CODEC_AUTH_KEY_OK && m.State != CODEC_resPQ && m.State != CODEC_dh_gen_ok {
+		if m.State != CODEC_CONNECTED && m.State != CODEC_AUTH_KEY_OK && m.State != CODEC_resPQ && m.State != CODEC_dh_gen_ok {
 			// 连接需要断开
 			return nil, fmt.Errorf("Invalid state, is CODEC_AUTH_KEY_OK or CODEC_resPQ, but is %d", m.State)
 		}

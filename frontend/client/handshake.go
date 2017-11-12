@@ -307,6 +307,7 @@ func (c *Client) onSetClient_DHParams(request *UnencryptedMessage) (TLObject) {
 	c.Codec.PutAuthKey(c.Codec.AuthKeyId, c.Codec.AuthKey)
 
 	c.Session.State = CODEC_dh_gen_ok
+	glog.Info("processSetClient_DHParams - CODEC_dh_gen_ok!")
 
 	return dhGenOk
 }

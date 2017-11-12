@@ -51,7 +51,7 @@ func (dao *DevicesDAO) Insert(do *do.DevicesDO) (id int64, err error) {
 
 func (dao *DevicesDAO) SelectIdByAuthId(auth_id int64, token_type int8, token string) (*do.DevicesDO, error) {
 	// TODO(@benqi): sqlmap
-	var sql = "select id from devices where user_id in (select id from auth_users where auth_id = :auth_id limit 1) and token_type = :token_type and token = :token limit 1"
+	var sql = "select id from devices where user_id in (select id from auth_users where auth_id = :auth_id) and token_type = :token_type and token = :token limit 1"
 	do := &do.DevicesDO{AuthId: auth_id, TokenType: token_type, Token: token}
 	rows, err := dao.db.NamedQuery(sql, do)
 	if err != nil {

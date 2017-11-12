@@ -48,6 +48,7 @@ type Client struct {
 	P *big.Int
 
 	AuthsDAO *dao.AuthsDAO
+	AuthUsersDAO *dao.AuthUsersDAO
 	AuthSaltsDAO *dao.AuthSaltsDAO
 }
 
@@ -189,9 +190,21 @@ func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 
 		glog.Info("rpc request authId: ", c.Codec.AuthKeyId)
 		// TODO(@benqi): 透传UserID
+
+		if c.Codec.UserId == 0 {
+			do, _ := c.AuthUsersDAO.SelectByAuthId(c.Codec.AuthKeyId)
+			if do != nil {
+				c.Codec.UserId = do.UserId
+			}
+		} else {
+			// TODO(@benqi): 权限过滤
+		}
+
 		// 初始化metadata
 		rpcMetadata := &RpcMetaData{}
-		rpcMetadata.ServerId = 2
+		rpcMetadata.ServerId = 1
+		rpcMetadata.NetlibSessionId = int64(c.Session.ID())
+		rpcMetadata.UserId = 2
 		rpcMetadata.AuthId = c.Codec.AuthKeyId
 		rpcMetadata.SessionId = c.Codec.SessionId
 		rpcMetadata.ClientAddr = c.Codec.RemoteAddr().String()

@@ -67,7 +67,7 @@ func (c* SyncRPCClient) RunUpdatesStreamLoop(server *net2.Server) {
 				break
 			}
 			if err != nil {
-				glog.Fatalf("%v.PushUpdatesStream(_) = _, %v", update, err)
+				glog.Errorf("%v.PushUpdatesStream(_) = _, %v", update, err)
 				time.Sleep(10 * time.Second)
 				break
 			}
@@ -75,6 +75,7 @@ func (c* SyncRPCClient) RunUpdatesStreamLoop(server *net2.Server) {
 			// TODO(@benqi): 这是一种简单粗暴的实现方式
 			dbuf := mtproto.NewDecodeBuf(update.RawData)
 			o := dbuf.Object()
+			glog.Infof("RunUpdatesStreamLoop - updates: {%v}", o)
 			sendBySessionID(server, update.NetlibSessionId, o)
 		}
 	}
@@ -88,6 +89,8 @@ func sendBySessionID(server *net2.Server, sessionId int64, message mtproto.TLObj
 			NeedAck : false,
 			Object:   message,
 		}
+
+		glog.Infof("sendBySessionID - send by session: %d", sessionId)
 		session.Send(m)
 	} else {
 		glog.Errorf("SendBySessionID - can't found sessionId: %d", sessionId)

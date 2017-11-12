@@ -42,6 +42,8 @@ import (
 	"google.golang.org/grpc"
 	"net"
 	"github.com/nebulaim/telegramd/biz_server/sync_client"
+	"github.com/nebulaim/telegramd/base/redis_client"
+	"github.com/nebulaim/telegramd/biz_model/model"
 )
 
 func init() {
@@ -72,6 +74,24 @@ func main() {
 		glog.Fatalf("failed to listen: %v", err)
 	}
 
+	seqUpdatesNgen := dao.NewSeqUpdatesNgenDAO(db)
+	redisConfig := &redis_client.RedisConfig{
+		Name:         "test",
+		Addr:         "127.0.0.1:6379",
+		Idle:         100,
+		Active:       100,
+		DialTimeout:  1000000,
+		ReadTimeout:  1000000,
+		WriteTimeout: 1000000,
+		IdleTimeout:  15000000,
+		DBNum:        "0",
+		Password:     "",
+	}
+
+	redisPool := redis_client.NewRedisPool(redisConfig)
+	seq := dao.NewSequenceDAO(redisPool, seqUpdatesNgen)
+	onlineModel := model.NewOnlineStatusModel(redisPool)
+
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
 
@@ -92,14 +112,16 @@ func main() {
 
 	// AccountServiceImpl
 	mtproto.RegisterRPCAccountServer(grpcServer, &account.AccountServiceImpl{
-		UsersDAO:  usersDAO,
-		DeviceDAO: devicesDAO,
+		UsersDAO:  	usersDAO,
+		DeviceDAO: 	devicesDAO,
+		Status:		onlineModel,
 	})
 
 	// AuthServiceImpl
 	mtproto.RegisterRPCAuthServer(grpcServer, &auth.AuthServiceImpl{
 		UsersDAO:                 usersDAO,
 		AuthPhoneTransactionsDAO: authPhoneTransactionsDAO,
+		AuthUsersDAO:			  authUsersDAO,
 	})
 
 	mtproto.RegisterRPCBotsServer(grpcServer, &bots.BotsServiceImpl{})
@@ -121,6 +143,7 @@ func main() {
 		MessagesDAO: messagesDAO,
 		MessageBoxsDAO: messageBoxsDAO,
 		SyncRPCClient: c,
+		SequenceDAO: seq,
 	})
 
 	mtproto.RegisterRPCPaymentsServer(grpcServer, &payments.PaymentsServiceImpl{})
