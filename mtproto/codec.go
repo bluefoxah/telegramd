@@ -113,20 +113,24 @@ func (m *MTProtoCodec) Receive() (interface{}, error) {
 		return nil, err
 	}
 
-	glog.Info("first_byte: ", hex.EncodeToString(b))
+	// glog.Info("first_byte: ", hex.EncodeToString(b[:1]))
 	needAck := bool(b[0] >> 7 == 1)
 
 	b[0] = b[0] & 0x7f
-	if b[0] < 0xf7 {
+	// glog.Info("first_byte2: ", hex.EncodeToString(b[:1]))
+
+	if b[0] < 0x7f {
 		size = int(b[0]) << 2
+		// glog.Info("size1: ", size)
 	} else {
+		glog.Info("first_byte2: ", hex.EncodeToString(b[:1]))
 		b := make([]byte, 3)
 		n, err = io.ReadFull(m.rw, b)
 		if err != nil {
 			return nil, err
 		}
-		glog.Info("ReadFull1: ", hex.EncodeToString(b))
 		size = (int(b[0]) | int(b[1])<<8 | int(b[2])<<16) << 2
+		// glog.Info("size2: ", size)
 	}
 
 	left := size
@@ -136,7 +140,7 @@ func (m *MTProtoCodec) Receive() (interface{}, error) {
 		if err != nil {
 			return nil, err
 		}
-		glog.Info("ReadFull2: ", hex.EncodeToString(buf))
+		// glog.Info("ReadFull2: ", hex.EncodeToString(buf))
 		left -= n
 	}
 
