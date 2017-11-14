@@ -144,7 +144,19 @@ func (s *AccountServiceImpl) AccountUpdateStatus(ctx context.Context, request *m
 	glog.Infof("AccountUpdateStatus - Process: {%v}", request)
 
 	// TODO(@benqi): 实现逻辑
+	md, _ := metadata.FromIncomingContext(ctx)
+	rpcMetaData := mtproto.RpcMetaData{}
+	rpcMetaData.Decode(md)
 
+	status := &model.SessionStatus{}
+	status.UserId = rpcMetaData.UserId
+	status.AuthKeyId = rpcMetaData.AuthId
+	status.SessionId = rpcMetaData.SessionId
+	status.ServerId = rpcMetaData.ServerId
+	status.Now = time.Now().Unix()
+
+	glog.Infof("AccountUpdateStatus - SetOnline: {%v}\n", status)
+	s.Status.SetOnline(status)
 
 	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
 
@@ -154,30 +166,6 @@ func (s *AccountServiceImpl) AccountUpdateStatus(ctx context.Context, request *m
 
 func (s *AccountServiceImpl) AccountReportPeer(ctx context.Context, request *mtproto.TLAccountReportPeer) (*mtproto.Bool, error) {
 	glog.Info("AccountReportPeer - Process: %v", request)
-
-	// TODO(@benqi): 实现逻辑
-	md, _ := metadata.FromIncomingContext(ctx)
-	rpcMetaData := mtproto.RpcMetaData{}
-	rpcMetaData.Decode(md)
-
-	//type SessionStatus struct {
-	//	UserId			int32		//
-	//
-	//	AuthKeyId 		int64		//
-	//	SessionId		int64		//
-	//
-	//	ServerId		int32		// ServerId
-	//	NetlibSessionId	int64		// 网络库SessionID，不是
-	//	Now				int64		// 上报时间
-	//}
-
-	status := &model.SessionStatus{}
-	status.UserId = rpcMetaData.UserId
-	status.AuthKeyId = rpcMetaData.AuthId
-	status.SessionId = rpcMetaData.SessionId
-	status.ServerId = rpcMetaData.ServerId
-	status.Now = time.Now().Unix()
-	s.Status.SetOnline(status)
 
 	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
 	glog.Infof("AccountReportPeer - reply: {%v}\n", reply)

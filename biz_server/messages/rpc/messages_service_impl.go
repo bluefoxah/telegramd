@@ -226,8 +226,45 @@ func (s *MessagesServiceImpl) MessagesGetUnreadMentions(ctx context.Context, req
 	return nil, nil
 }
 
+// messages.getDialogs#191ba9c5
+// 	flags:#
+// 		exclude_pinned:flags.0?true
+// 	offset_date:int
+//  offset_id:int
+//  offset_peer:InputPeer
+//  limit:int = messages.Dialogs;
+// messages.dialogs#15ba6c40 dialogs:Vector<Dialog> messages:Vector<Message> chats:Vector<Chat> users:Vector<User> = messages.Dialogs;
+// dialog#e4def5db flags:# pinned:flags.2?true peer:Peer top_message:int read_inbox_max_id:int read_outbox_max_id:int unread_count:int unread_mentions_count:int notify_settings:PeerNotifySettings pts:flags.0?int draft:flags.1?DraftMessage = Dialog;
+// Message message#90dddc11 flags:# out:flags.1?true mentioned:flags.4?true media_unread:flags.5?true silent:flags.13?true post:flags.14?true id:int from_id:flags.8?int to_id:Peer fwd_from:flags.2?MessageFwdHeader via_bot_id:flags.11?int reply_to_msg_id:flags.3?int date:int message:string media:flags.9?MessageMedia reply_markup:flags.6?ReplyMarkup entities:flags.7?Vector<MessageEntity> views:flags.10?int edit_date:flags.15?int post_author:flags.16?string = Message;
+// Chat
+// User
 func (s *MessagesServiceImpl) MessagesGetDialogs(ctx context.Context, request *mtproto.TLMessagesGetDialogs) (*mtproto.Messages_Dialogs, error) {
 	glog.Infof("MessagesGetDialogs - Process: {%v}", request)
+
+	md, _ := metadata.FromIncomingContext(ctx)
+	rpcMetaData := mtproto.RpcMetaData{}
+	rpcMetaData.Decode(md)
+
+	dialogs, _ := s.UserDialogsDAO.SelectDialogsByUserID(rpcMetaData.UserId)
+	for _, dialog := range  dialogs {
+		_ = dialog
+	}
+/*
+	var reply *mtproto.Bool = nil
+	switch request.OffsetPeer.Payload.(type) {
+	case *mtproto.InputPeer_InputPeerUser:
+		reply = mtproto.MakeBool(&mtproto.TLBoolTrue{})
+		// typing.UserId = request.Peer.Payload.(*mtproto.InputPeer_InputPeerUser).InputPeerUser.UserId
+	case *mtproto.InputPeer_InputPeerChat:
+		reply = mtproto.MakeBool(&mtproto.TLBoolTrue{})
+		// typing.UserId = request.Peer.Payload.(*mtproto.InputPeer_InputPeerChat).InputPeerChat.ChatId
+	default:
+		glog.Errorf("MessagesSetTyping - BadRequest!")
+		reply = mtproto.MakeBool(&mtproto.TLBoolFalse{})
+		return reply, nil
+	}
+ */
+
 	return nil, errors.New("Not impl")
 }
 
@@ -696,7 +733,7 @@ func (s *MessagesServiceImpl) MessagesGetPinnedDialogs(ctx context.Context, requ
 	// authUsersDO, _ := s.AuthUsersDAO.SelectByAuthId(rpcMetaData.AuthId)
 	// glog.Info("user_id: ", authUsersDO)
 	// userDialogsDO, _ := s.UserDialogsDAO.SelectPinnedDialogs(authUsersDO.UserId)
-	userDialogsDO, _ := s.UserDialogsDAO.SelectPinnedDialogs(1)
+	userDialogsDO, _ := s.UserDialogsDAO.SelectPinnedDialogs(rpcMetaData.UserId)
 	_ = userDialogsDO
 
 	peerDialogs := &mtproto.TLMessagesPeerDialogs{}

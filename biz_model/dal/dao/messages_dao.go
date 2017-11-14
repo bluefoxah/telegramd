@@ -20,6 +20,7 @@ package dao
 import (
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
+	"github.com/nebulaim/telegramd/base/base"
 	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
@@ -47,4 +48,34 @@ func (dao *MessagesDAO) Insert(do *do.MessagesDO) (id int64, err error) {
 		glog.Error("MessagesDAO/LastInsertId error: ", err)
 	}
 	return
+}
+
+func (dao *MessagesDAO) SelectByIdList(idList []int32) ([]do.MessagesDO, error) {
+	// TODO(@benqi): sqlmap
+	params := make(map[string]interface{})
+	params["idList"] = base.JoinInt32List(idList, ",")
+
+	var sql = "select id, user_id, peer_type, peer_id, random_id, message, `date` from messages where id in (:idList)"
+	rows, err := dao.db.NamedQuery(sql, params)
+	if err != nil {
+		glog.Errorf("MessagesDAO/SelectByIdList error: ", err)
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	var values []do.MessagesDO
+	for rows.Next() {
+		v := do.MessagesDO{}
+
+		// TODO(@benqi): 不使用反射
+		err := rows.StructScan(&v)
+		if err != nil {
+			glog.Errorf("MessagesDAO/SelectByIdList error: %s", err)
+			return nil, err
+		}
+		values = append(values, v)
+	}
+
+	return values, nil
 }

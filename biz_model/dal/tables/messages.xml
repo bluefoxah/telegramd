@@ -5,4 +5,13 @@
             INSERT INTO messages (user_id, peer_type, peer_id, random_id, message, date, created_at) VALUES (:user_id, :peer_type, :peer_id, :random_id, :message, :date, :created_at)
         </sql>
     </operation>
+
+    <operation name="SelectByIdList" result_set="list">
+        <params>
+            <param name="idList" type="[]int32" />
+        </params>
+        <sql>
+            SELECT id, user_id, peer_type, peer_id, random_id, message, date FROM messages WHERE id IN (:idList)
+        </sql>
+    </operation>
 </table>

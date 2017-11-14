@@ -20,6 +20,7 @@ package dao
 import (
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
+	"github.com/nebulaim/telegramd/base/base"
 	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
@@ -35,7 +36,7 @@ func (dao *UserDialogsDAO) Insert(do *do.UserDialogsDO) (id int64, err error) {
 	// TODO(@benqi): sqlmap
 	id = 0
 
-	var sql = "insert into user_dialogs(user_id, peer_type, peer_id, created_at) values (:user_id, peer_type, peer_id, created_at)"
+	var sql = "insert into user_dialogs(user_id, peer_type, peer_id, created_at) values (:user_id, :peer_type, :peer_id, :created_at)"
 	r, err := dao.db.NamedExec(sql, do)
 	if err != nil {
 		glog.Error("UserDialogsDAO/Insert error: ", err)
@@ -51,9 +52,11 @@ func (dao *UserDialogsDAO) Insert(do *do.UserDialogsDO) (id int64, err error) {
 
 func (dao *UserDialogsDAO) SelectPinnedDialogs(user_id int32) ([]do.UserDialogsDO, error) {
 	// TODO(@benqi): sqlmap
+	params := make(map[string]interface{})
+	params["user_id"] = user_id
+
 	var sql = "select peer_type, peer_id from user_dialogs where user_id = :user_id and is_pinned = 1"
-	do2 := &do.UserDialogsDO{UserId: user_id}
-	rows, err := dao.db.NamedQuery(sql, do2)
+	rows, err := dao.db.NamedQuery(sql, params)
 	if err != nil {
 		glog.Errorf("UserDialogsDAO/SelectPinnedDialogs error: ", err)
 		return nil, err
@@ -77,17 +80,23 @@ func (dao *UserDialogsDAO) SelectPinnedDialogs(user_id int32) ([]do.UserDialogsD
 	return values, nil
 }
 
-func (dao *UserDialogsDAO) CheckExists(user_id int32, peer_type int32, peer_id int32) (*do.UserDialogsDO, error) {
+func (dao *UserDialogsDAO) CheckExists(peer_type int32, peer_id int32, user_id int32) (*do.UserDialogsDO, error) {
 	// TODO(@benqi): sqlmap
+	params := make(map[string]interface{})
+	params["peer_type"] = peer_type
+	params["peer_id"] = peer_id
+	params["user_id"] = user_id
+
 	var sql = "select id from user_dialogs where user_id = :user_id and peer_type = :peer_type and peer_id = :peer_id"
-	do := &do.UserDialogsDO{UserId: user_id, PeerType: peer_type, PeerId: peer_id}
-	rows, err := dao.db.NamedQuery(sql, do)
+	rows, err := dao.db.NamedQuery(sql, params)
 	if err != nil {
 		glog.Error("UserDialogsDAO/CheckExists error: ", err)
 		return nil, err
 	}
 
 	defer rows.Close()
+
+	do := &do.UserDialogsDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
@@ -99,4 +108,34 @@ func (dao *UserDialogsDAO) CheckExists(user_id int32, peer_type int32, peer_id i
 	}
 
 	return do, nil
+}
+
+func (dao *UserDialogsDAO) SelectDialogsByUserID(user_id int32) ([]do.UserDialogsDO, error) {
+	// TODO(@benqi): sqlmap
+	params := make(map[string]interface{})
+	params["user_id"] = user_id
+
+	var sql = "select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = :user_id"
+	rows, err := dao.db.NamedQuery(sql, params)
+	if err != nil {
+		glog.Errorf("UserDialogsDAO/SelectDialogsByUserID error: ", err)
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	var values []do.UserDialogsDO
+	for rows.Next() {
+		v := do.UserDialogsDO{}
+
+		// TODO(@benqi): 不使用反射
+		err := rows.StructScan(&v)
+		if err != nil {
+			glog.Errorf("UserDialogsDAO/SelectDialogsByUserID error: %s", err)
+			return nil, err
+		}
+		values = append(values, v)
+	}
+
+	return values, nil
 }

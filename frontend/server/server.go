@@ -28,12 +28,15 @@ import (
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/go-sql-driver/mysql" // import your used driver
+	"github.com/nebulaim/telegramd/base/redis_client"
+	"github.com/nebulaim/telegramd/biz_model/model"
 )
 
 type Server struct {
 	authsDAO *dao.AuthsDAO
 	authSaltsDAO *dao.AuthSaltsDAO
 	authUsersDAO *dao.AuthUsersDAO
+	onlineModel *model.OnlineStatusModel
 
 	cacheKeys	*auth_key.AuthKeyCacheManager
 	Server      *net2.Server
@@ -51,6 +54,22 @@ func NewServer(addr, dsn string) (s *Server) {
 	s.authSaltsDAO = dao.NewAuthSaltsDAO(db)
 	masterKeysDAO := dao.NewMasterKeysDAO(db)
 	s.authUsersDAO = dao.NewAuthUsersDAO(db)
+
+	redisConfig := &redis_client.RedisConfig{
+		Name:         "test",
+		Addr:         "127.0.0.1:6379",
+		Idle:         100,
+		Active:       100,
+		DialTimeout:  1000000,
+		ReadTimeout:  1000000,
+		WriteTimeout: 1000000,
+		IdleTimeout:  15000000,
+		DBNum:        "0",
+		Password:     "",
+	}
+
+	redisPool := redis_client.NewRedisPool(redisConfig)
+	s.onlineModel = model.NewOnlineStatusModel(redisPool)
 
 	mtproto := NewMTProto()
 	lsn := listen("server", "0.0.0.0:12345")
@@ -79,6 +98,8 @@ func (s* Server) Serve(rpcClient *rpc.RPCClient, syncRpcClient *rpc.SyncRPCClien
 		c.AuthsDAO = s.authsDAO
 		c.AuthSaltsDAO = s.authSaltsDAO
 		c.AuthUsersDAO = s.authUsersDAO
+		c.Status = s.onlineModel
+
 		go s.sessionLoop(c)
 	}
 }

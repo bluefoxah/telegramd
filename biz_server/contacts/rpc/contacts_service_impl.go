@@ -22,6 +22,7 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"google.golang.org/grpc/metadata"
 )
 
 type ContactsServiceImpl struct {
@@ -67,12 +68,16 @@ func (s *ContactsServiceImpl) ContactsImportCard(ctx context.Context, request *m
 func (s *ContactsServiceImpl) ContactsGetContacts(ctx context.Context, request *mtproto.TLContactsGetContacts) (*mtproto.Contacts_Contacts, error) {
 	glog.Infof("ContactsGetContacts: %v", request)
 
+	md, _ := metadata.FromIncomingContext(ctx)
+	rpcMetaData := mtproto.RpcMetaData{}
+	rpcMetaData.Decode(md)
+
 	// TODO(@benqi): Logout逻辑处理，失效AuthKey
 	// reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
 
 	contacts := &mtproto.TLContactsContacts{}
 
-	contactsDOList, _ := s.UserContactsDAO.SelectUserContacts(2)
+	contactsDOList, _ := s.UserContactsDAO.SelectUserContacts(rpcMetaData.UserId)
 	contacts.SavedCount = int32(len(contactsDOList))
 
 	for _, do := range contactsDOList {
@@ -85,7 +90,11 @@ func (s *ContactsServiceImpl) ContactsGetContacts(ctx context.Context, request *
 		userDO, _ := s.UsersDAO.SelectById(do.ContactUserId)
 		user := &mtproto.TLUser{}
 		user.Id = userDO.Id
-		user.Self = false
+		if user.Id == rpcMetaData.UserId {
+			user.Self = true
+		} else {
+			user.Self = false
+		}
 		user.Contact = true
 		user.AccessHash = userDO.AccessHash
 		user.FirstName = userDO.FirstName

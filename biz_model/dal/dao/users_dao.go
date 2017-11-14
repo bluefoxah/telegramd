@@ -20,6 +20,7 @@ package dao
 import (
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
+	"github.com/nebulaim/telegramd/base/base"
 	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
@@ -51,15 +52,19 @@ func (dao *UsersDAO) Insert(do *do.UsersDO) (id int64, err error) {
 
 func (dao *UsersDAO) SelectByPhoneNumber(phone string) (*do.UsersDO, error) {
 	// TODO(@benqi): sqlmap
+	params := make(map[string]interface{})
+	params["phone"] = phone
+
 	var sql = "select id, access_hash, first_name, last_name, username from users where phone = :phone limit 1"
-	do := &do.UsersDO{Phone: phone}
-	rows, err := dao.db.NamedQuery(sql, do)
+	rows, err := dao.db.NamedQuery(sql, params)
 	if err != nil {
 		glog.Error("UsersDAO/SelectByPhoneNumber error: ", err)
 		return nil, err
 	}
 
 	defer rows.Close()
+
+	do := &do.UsersDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
@@ -75,15 +80,19 @@ func (dao *UsersDAO) SelectByPhoneNumber(phone string) (*do.UsersDO, error) {
 
 func (dao *UsersDAO) SelectById(id int32) (*do.UsersDO, error) {
 	// TODO(@benqi): sqlmap
+	params := make(map[string]interface{})
+	params["id"] = id
+
 	var sql = "select id, access_hash, first_name, last_name, username from users where id = :id limit 1"
-	do := &do.UsersDO{Id: id}
-	rows, err := dao.db.NamedQuery(sql, do)
+	rows, err := dao.db.NamedQuery(sql, params)
 	if err != nil {
 		glog.Error("UsersDAO/SelectById error: ", err)
 		return nil, err
 	}
 
 	defer rows.Close()
+
+	do := &do.UsersDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
@@ -97,11 +106,46 @@ func (dao *UsersDAO) SelectById(id int32) (*do.UsersDO, error) {
 	return do, nil
 }
 
-func (dao *UsersDAO) SelectByQueryString(username string, first_name string, last_name string, phone string) ([]do.UsersDO, error) {
+func (dao *UsersDAO) SelectUsersByIdList(id_list []int32) ([]do.UsersDO, error) {
 	// TODO(@benqi): sqlmap
+	params := make(map[string]interface{})
+	params["id_list"] = base.JoinInt32List(id_list, ",")
+
+	var sql = "select id, access_hash, first_name, last_name, username from users where id in (:id_list)"
+	rows, err := dao.db.NamedQuery(sql, params)
+	if err != nil {
+		glog.Errorf("UsersDAO/SelectUsersByIdList error: ", err)
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	var values []do.UsersDO
+	for rows.Next() {
+		v := do.UsersDO{}
+
+		// TODO(@benqi): 不使用反射
+		err := rows.StructScan(&v)
+		if err != nil {
+			glog.Errorf("UsersDAO/SelectUsersByIdList error: %s", err)
+			return nil, err
+		}
+		values = append(values, v)
+	}
+
+	return values, nil
+}
+
+func (dao *UsersDAO) SelectByQueryString(first_name string, last_name string, phone string, username string) ([]do.UsersDO, error) {
+	// TODO(@benqi): sqlmap
+	params := make(map[string]interface{})
+	params["first_name"] = first_name
+	params["last_name"] = last_name
+	params["phone"] = phone
+	params["username"] = username
+
 	var sql = "select id, access_hash, first_name, last_name, username, phone from users where username = :username or first_name = :first_name or last_name = :last_name or phone = :phone limit 20"
-	do2 := &do.UsersDO{Username: username, FirstName: first_name, LastName: last_name, Phone: phone}
-	rows, err := dao.db.NamedQuery(sql, do2)
+	rows, err := dao.db.NamedQuery(sql, params)
 	if err != nil {
 		glog.Errorf("UsersDAO/SelectByQueryString error: ", err)
 		return nil, err

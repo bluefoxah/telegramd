@@ -17,12 +17,83 @@
 
 package model
 
-import "github.com/nebulaim/telegramd/base/redis_client"
+import (
+	"github.com/nebulaim/telegramd/mtproto"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/biz_model/base"
+	"github.com/golang/glog"
+	"time"
+)
 
 type DialogModel struct {
-	redis* redis_client.RedisPool
+	dislogsDAO *dao.UserDialogsDAO
 }
 
-func NewDialogModel(redis* redis_client.RedisPool) *DialogModel {
-	return &DialogModel{redis}
+func NewDialogModel(dislogsDAO *dao.UserDialogsDAO) *DialogModel {
+	return &DialogModel{dislogsDAO}
+}
+
+// dialog#e4def5db flags:# pinned:flags.2?true peer:Peer top_message:int read_inbox_max_id:int read_outbox_max_id:int unread_count:int unread_mentions_count:int notify_settings:PeerNotifySettings pts:flags.0?int draft:flags.1?DraftMessage = Dialog;
+//message TL_dialog {
+//	bool pinned = 1;
+//	Peer peer = 2;
+//	int32 top_message = 3;
+//	int32 read_inbox_max_id = 4;
+//	int32 read_outbox_max_id = 5;
+//	int32 unread_count = 6;
+//	int32 unread_mentions_count = 7;
+//	PeerNotifySettings notify_settings = 8;
+//	int32 pts = 9;
+//	DraftMessage draft = 10;
+//}
+func (m *DialogModel) GetDialogsByUserID(userId int32) (dialogs []*mtproto.TLDialog) {
+	dialogDOList, _ := m.dislogsDAO.SelectDialogsByUserID(userId)
+	dialogs = make([]*mtproto.TLDialog, len(dialogDOList))
+	for _, dialogDO := range dialogDOList {
+		dialog := &mtproto.TLDialog{}
+		dialog.Pinned = dialogDO.IsPinned == 1
+		switch dialogDO.PeerType {
+		case base.PEER_EMPTY:
+			continue
+		case base.PEER_SELF, base.PEER_USER:
+			peer := &mtproto.TLPeerUser{dialogDO.PeerId}
+			dialog.Peer = peer.ToPeer()
+		case base.PEER_CHAT:
+			peer := &mtproto.TLPeerChat{dialogDO.PeerId}
+			dialog.Peer = peer.ToPeer()
+		case base.PEER_CHANNEL:
+			peer := &mtproto.TLPeerChannel{dialogDO.PeerId}
+			dialog.Peer = peer.ToPeer()
+		}
+		dialog.TopMessage = dialogDO.TopMessage
+		dialog.ReadInboxMaxId = dialogDO.ReadInboxMaxId
+		dialog.ReadOutboxMaxId = dialogDO.ReadOutboxMaxId
+		dialog.UnreadCount = dialogDO.UnreadCount
+		dialog.UnreadMentionsCount = dialogDO.UnreadMentionsCount
+
+		// TODO(@benqi): pts/draft
+
+		// NotifySettings
+		peerNotifySettings := &mtproto.TLPeerNotifySettings{}
+		peerNotifySettings.ShowPreviews = true
+		peerNotifySettings.MuteUntil = 0
+		peerNotifySettings.Sound = "default"
+		dialog.NotifySettings = peerNotifySettings.ToPeerNotifySettings()
+
+		dialogs = append(dialogs, dialog)
+	}
+	return
+}
+
+func (m *DialogModel) GetPinnedDialogs(userId int32) (dialogs []*mtproto.TLDialog) {
+	//userDialogsDO, _ := s.UserDialogsDAO.SelectPinnedDialogs(rpcMetaData.UserId)
+	//_ = userDialogsDO
+	//
+	//peerDialogs := &mtproto.TLMessagesPeerDialogs{}
+	//state := &mtproto.TLUpdatesState{}
+	//state.Date = int32(time.Now().Unix())
+	//
+	//peerDialogs.State = mtproto.MakeUpdates_State(state)
+
+	return
 }

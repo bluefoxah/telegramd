@@ -91,13 +91,15 @@ func (s *SyncServiceImpl) PushUpdatesStream(auth *zproto.ServerAuthReq, stream z
 			if err = stream.Send(data); err != nil {
 				return err
 			}
+
+			glog.Infof("PushUpdatesStream: update: {%v}", data)
 		}
 	}
 	return nil
 }
 
 func (s *SyncServiceImpl) DeliveryUpdates(ctx context.Context, deliver *zproto.DeliveryUpdatesToUsers) (reply *zproto.VoidRsp, err error) {
-	glog.Info("DeliveryUpdates: {%v}", deliver)
+	glog.Infof("DeliveryUpdates: {%v}", deliver)
 
 	statusList, err := s.status.GetOnlineByUserIdList(deliver.SendtoUserIdList)
 	ss := make(map[int32][]*model.SessionStatus)
@@ -109,7 +111,11 @@ func (s *SyncServiceImpl) DeliveryUpdates(ctx context.Context, deliver *zproto.D
 		ss[status.ServerId] = append(ss[status.ServerId], status)
 	}
 
+	glog.Infof("DeliveryUpdates: ss: {%v}", ss[1])
+
 	for k, ss3 := range ss {
+		glog.Infof("DeliveryUpdates: k: {%v}, v: {%v}", k, ss3)
+
 		go s.withReadLock(func() {
 			for _, ss4 := range ss3 {
 				update := &zproto.PushUpdatesData{}
@@ -118,6 +124,8 @@ func (s *SyncServiceImpl) DeliveryUpdates(ctx context.Context, deliver *zproto.D
 				update.NetlibSessionId = ss4.NetlibSessionId
 				update.RawDataHeader = deliver.RawDataHeader
 				update.RawData = deliver.RawData
+
+				glog.Infof("DeliveryUpdates: update: {%v}", update)
 				s.updates[k] <- update
 			}
 		})

@@ -29,6 +29,7 @@ import (
 	"fmt"
 	"github.com/nebulaim/telegramd/frontend/id"
 	"time"
+	"github.com/nebulaim/telegramd/biz_model/model"
 )
 
 
@@ -47,9 +48,11 @@ type Client struct {
 	A *big.Int
 	P *big.Int
 
+	// TODO(@benqi): 推到内部服务
 	AuthsDAO *dao.AuthsDAO
 	AuthUsersDAO *dao.AuthUsersDAO
 	AuthSaltsDAO *dao.AuthSaltsDAO
+	Status *model.OnlineStatusModel
 }
 
 func NewClient(session *net2.Session, rpcClient *rpc.RPCClient) (c *Client) {
@@ -193,18 +196,21 @@ func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 
 		if c.Codec.UserId == 0 {
 			do, _ := c.AuthUsersDAO.SelectByAuthId(c.Codec.AuthKeyId)
+			glog.Info("SelectByAuthId : ", do)
 			if do != nil {
 				c.Codec.UserId = do.UserId
+				c.setOnline()
 			}
 		} else {
 			// TODO(@benqi): 权限过滤
+			c.setOnline()
 		}
 
 		// 初始化metadata
 		rpcMetadata := &RpcMetaData{}
 		rpcMetadata.ServerId = 1
 		rpcMetadata.NetlibSessionId = int64(c.Session.ID())
-		rpcMetadata.UserId = 2
+		rpcMetadata.UserId = c.Codec.UserId
 		rpcMetadata.AuthId = c.Codec.AuthKeyId
 		rpcMetadata.SessionId = c.Codec.SessionId
 		rpcMetadata.ClientAddr = c.Codec.RemoteAddr().String()

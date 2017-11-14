@@ -75,7 +75,7 @@ func (c* SyncRPCClient) RunUpdatesStreamLoop(server *net2.Server) {
 			// TODO(@benqi): 这是一种简单粗暴的实现方式
 			dbuf := mtproto.NewDecodeBuf(update.RawData)
 			o := dbuf.Object()
-			glog.Infof("RunUpdatesStreamLoop - updates: {%v}", o)
+			glog.Infof("RunUpdatesStreamLoop - updates: {%v}", update)
 			sendBySessionID(server, update.NetlibSessionId, o)
 		}
 	}

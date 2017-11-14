@@ -25,6 +25,7 @@ import (
 	"time"
 	"github.com/nebulaim/telegramd/frontend/id"
 	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/biz_model/model"
 )
 
 func (c *Client) onMsgsAck(msgId int64, seqNo int32, request TLObject) {
@@ -63,10 +64,25 @@ func (c *Client) onNewSessionCreated(sessionId, msgId int64, seqNo int32) (*TLNe
 	return notify
 }
 
+func (c *Client) setOnline() {
+	if c.Codec.UserId != 0 {
+		status := &model.SessionStatus{}
+		status.ServerId = 1
+		status.UserId = c.Codec.UserId
+		status.AuthKeyId = c.Codec.AuthKeyId
+		status.SessionId = c.Codec.SessionId
+		status.NetlibSessionId = int64(c.Session.ID())
+		status.Now = time.Now().Unix()
+		glog.Infof("setOnline - SetOnline: {%v}\n", status)
+		c.Status.SetOnline(status)
+	}
+}
+
 func (c *Client) onPing(msgId int64, seqNo int32, request TLObject) (TLObject) {
 	ping, _ := request.(*TLPing)
 	glog.Info("processPing - request data: ", ping.String())
 
+	// c.setOnline()
 	pong := &TLPong{
 		MsgId: msgId,
 		PingId: ping.PingId,
@@ -87,6 +103,7 @@ func (c *Client) onPingDelayDisconnect(msgId int64, seqNo int32, request TLObjec
 	pingDelayDissconnect, _ := request.(*TLPingDelayDisconnect)
 	glog.Info("processPingDelayDisconnect - request data: ", pingDelayDissconnect.String())
 
+	// c.setOnline()
 	pong := &TLPong{
 		MsgId: msgId,
 		PingId: pingDelayDissconnect.PingId,

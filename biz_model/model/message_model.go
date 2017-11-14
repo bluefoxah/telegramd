@@ -17,12 +17,70 @@
 
 package model
 
-import "github.com/nebulaim/telegramd/base/redis_client"
+import (
+	"github.com/nebulaim/telegramd/base/redis_client"
+	"github.com/nebulaim/telegramd/mtproto"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/biz_model/base"
+)
 
 type MessageModel struct {
-	redis* redis_client.RedisPool
+	messageDAO *dao.MessagesDAO
 }
 
-func NewMessageModel(redis* redis_client.RedisPool) *MessageModel {
-	return &MessageModel{redis}
+func NewMessageModel(messageDAO *dao.MessagesDAO) *MessageModel {
+	return &MessageModel{messageDAO}
+}
+
+/*
+// message#90dddc11 flags:# out:flags.1?true mentioned:flags.4?true media_unread:flags.5?true silent:flags.13?true post:flags.14?true id:int from_id:flags.8?int to_id:Peer fwd_from:flags.2?MessageFwdHeader via_bot_id:flags.11?int reply_to_msg_id:flags.3?int date:int message:string media:flags.9?MessageMedia reply_markup:flags.6?ReplyMarkup entities:flags.7?Vector<MessageEntity> views:flags.10?int edit_date:flags.15?int post_author:flags.16?string = Message;
+message TL_message {
+  bool out = 1;
+  bool mentioned = 2;
+  bool media_unread = 3;
+  bool silent = 4;
+  bool post = 5;
+  int32 id = 6;
+  int32 from_id = 7;
+  Peer to_id = 8;
+  MessageFwdHeader fwd_from = 9;
+  int32 via_bot_id = 10;
+  int32 reply_to_msg_id = 11;
+  int32 date = 12;
+  string message = 13;
+  MessageMedia media = 14;
+  ReplyMarkup reply_markup = 15;
+  repeated MessageEntity entities = 16;
+  int32 views = 17;
+  int32 edit_date = 18;
+  string post_author = 19;
+}
+ */
+func (m *MessageModel) GetMessagesByIDList(idList []int32) (messages []*mtproto.TLMessage) {
+	messagesDOList, _ := m.messageDAO.SelectByIdList(idList)
+	messages = make([]*mtproto.TLMessage, len(messagesDOList))
+
+	for _, messageDO := range messagesDOList {
+		message := &mtproto.TLMessage{}
+		message.Id = messageDO.Id
+		message.FromId = messageDO.UserId
+		switch messageDO.PeerType {
+		case base.PEER_EMPTY:
+			continue
+		case base.PEER_SELF, base.PEER_USER:
+			peer := &mtproto.TLPeerUser{messageDO.PeerId}
+			message.ToId = peer.ToPeer()
+		case base.PEER_CHAT:
+			peer := &mtproto.TLPeerChat{messageDO.PeerId}
+			message.ToId = peer.ToPeer()
+		case base.PEER_CHANNEL:
+			peer := &mtproto.TLPeerChannel{messageDO.PeerId}
+			message.ToId = peer.ToPeer()
+		}
+		message.Date = messageDO.Date
+		message.Message = messageDO.Message
+
+		messages = append(messages, message)
+	}
+	return
 }

@@ -21,6 +21,7 @@ import(
 	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 	"github.com/jmoiron/sqlx"
 	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/base"
 )
 
 type {{.Name}}DAO struct {
@@ -68,15 +69,23 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}(do *do.{{.TableName}}DO) (id int64, 
 {{define "SELECT_STRUCT_SINGLE"}}
 func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) (*do.{{.TableName}}DO, error) {
 	// TODO(@benqi): sqlmap
+    params := make(map[string]interface{})
+    {{ range $i, $v := .Params }} params["{{.FieldName}}"] = {{if eq .Type "[]int32"}} base.JoinInt32List({{.FieldName}}, ",")
+        {{else if eq .Type "[]int64"}} base.JoinInt32List({{.FieldName}}, ",")
+        {{else if eq .Type "[]string"}} strings.Join({{.FieldName}}, ",")
+        {{else}} {{.FieldName}} {{end}}
+    {{end}}
+
 	var sql = "{{.Sql}}"
-	do := &do.{{.TableName}}DO{ {{ range $i, $v := .Params }} {{.Name}} : {{.FieldName}}, {{end}} }
-	rows, err := dao.db.NamedQuery(sql, do)
+	rows, err := dao.db.NamedQuery(sql, params)
 	if err != nil {
 		glog.Error("{{.TableName}}DAO/{{.FuncName}} error: ", err)
 		return nil, err
 	}
 
 	defer rows.Close()
+
+	do := &do.{{.TableName}}DO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
@@ -94,9 +103,15 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if n
 {{define "SELECT_STRUCT_LIST"}}
 func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) ([]do.{{.TableName}}DO, error) {
 	// TODO(@benqi): sqlmap
+    params := make(map[string]interface{})
+    {{ range $i, $v := .Params }} params["{{.FieldName}}"] = {{if eq .Type "[]int32"}} base.JoinInt32List({{.FieldName}}, ",")
+        {{else if eq .Type "[]int64"}} base.JoinInt32List({{.FieldName}}, ",")
+        {{else if eq .Type "[]string"}} strings.Join({{.FieldName}}, ",")
+        {{else}} {{.FieldName}} {{end}}
+    {{end}}
+
 	var sql = "{{.Sql}}"
-	do2 := &do.{{.TableName}}DO{ {{ range $i, $v := .Params }} {{.Name}} : {{.FieldName}}, {{end}} }
-	rows, err := dao.db.NamedQuery(sql, do2)
+	rows, err := dao.db.NamedQuery(sql, params)
 	if err != nil {
 		glog.Errorf("{{.TableName}}DAO/{{.FuncName}} error: ", err)
 		return nil, err
@@ -127,9 +142,15 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if n
 	// TODO(@benqi): sqlmap
 	rows = 0
 
+    params := make(map[string]interface{})
+    {{ range $i, $v := .Params }} params["{{.FieldName}}"] = {{if eq .Type "[]int32"}} base.JoinInt32List({{.FieldName}}, ",")
+        {{else if eq .Type "[]int64"}} base.JoinInt32List({{.FieldName}}, ",")
+        {{else if eq .Type "[]string"}} strings.Join({{.FieldName}}, ",")
+        {{else}} {{.FieldName}} {{end}}
+    {{end}}
+
 	var sql = "{{.Sql}}"
-	do := &do.{{.TableName}}DO{ {{ range $i, $v := .Params }} {{.Name}} : {{.FieldName}}, {{end}} }
-	r, err := dao.db.NamedExec(sql, do)
+	r, err := dao.db.NamedExec(sql, params)
 	if err != nil {
 		glog.Error("{{.TableName}}DAO/{{.FuncName}} error: ", err)
 		return
@@ -148,9 +169,15 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if n
 	// TODO(@benqi): sqlmap
 	rows = 0
 
+    params := make(map[string]interface{})
+    {{ range $i, $v := .Params }} params["{{.FieldName}}"] = {{if eq .Type "[]int32"}} base.JoinInt32List({{.FieldName}}, ",")
+        {{else if eq .Type "[]int64"}} base.JoinInt32List({{.FieldName}}, ",")
+        {{else if eq .Type "[]string"}} strings.Join({{.FieldName}}, ",")
+        {{else}} {{.FieldName}} {{end}}
+    {{end}}
+
 	var sql = "{{.Sql}}"
-	do := &do.{{.TableName}}DO{ {{ range $i, $v := .Params }} {{.Name}} : {{.FieldName}}, {{end}} }
-	r, err := dao.db.NamedExec(sql, do)
+	r, err := dao.db.NamedExec(sql, params)
 	if err != nil {
 		glog.Error("{{.TableName}}DAO/{{.FuncName}} error: ", err)
 		return
