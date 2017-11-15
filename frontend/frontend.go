@@ -21,6 +21,12 @@ import (
 	server2 "github.com/nebulaim/telegramd/frontend/server"
 	"github.com/nebulaim/telegramd/frontend/rpc"
 	"flag"
+	"github.com/nebulaim/telegramd/base/mysql_client"
+	"github.com/nebulaim/telegramd/base/redis_client"
+	"github.com/BurntSushi/toml"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 )
 
 func init() {
@@ -28,11 +34,45 @@ func init() {
 	flag.Set("log_dir", "false")
 }
 
+type ServerConfig struct {
+	Addr string
+}
+
+type RpcClientConfig struct {
+	ServiceName string
+	Addr string
+}
+
+type FrontendConfig struct{
+	ServerId 	int32			// 服务器ID
+	Server 		*ServerConfig
+	BizRpcClient	*RpcClientConfig
+	SyncRpcClient	*RpcClientConfig
+	Mysql		[]mysql_client.MySQLConfig
+	Redis 		[]redis_client.RedisConfig
+}
+
 func main() {
 	flag.Parse()
-	// flag.Parse()
-	server := server2.NewServer("0.0.0.0:12345", "root:@/nebulaim?charset=utf8")
-	rpc_client, _ := rpc.NewRPCClient("127.0.0.1:10001")
-	sync_rpc_client, _ := rpc.NewSyncRPCClient("127.0.0.1:10002")
+
+	frontendConfig := &FrontendConfig{}
+	if _, err := toml.DecodeFile("./frontend.toml", frontendConfig); err != nil {
+		fmt.Errorf("%s\n", err)
+		return
+	}
+
+	glog.Info(frontendConfig)
+
+	// 初始化mysql_client、redis_client
+	redis_client.InstallRedisClientManager(frontendConfig.Redis)
+	mysql_client.InstallMysqlClientManager(frontendConfig.Mysql)
+
+	// 初始化redis_dao、mysql_dao
+	dao.InstallMysqlDAOManager(mysql_client.GetMysqlClientManager())
+	dao.InstallRedisDAOManager(redis_client.GetRedisClientManager())
+
+	server := server2.NewServer(frontendConfig.Server.Addr)
+	rpc_client, _ := rpc.NewRPCClient(frontendConfig.BizRpcClient.Addr)
+	sync_rpc_client, _ := rpc.NewSyncRPCClient(frontendConfig.SyncRpcClient.Addr)
 	server.Serve(rpc_client, sync_rpc_client)
 }

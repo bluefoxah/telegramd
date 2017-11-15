@@ -27,7 +27,7 @@ import (
 )
 
 type SyncServiceImpl struct {
-	status *model.OnlineStatusModel
+	// status *model.OnlineStatusModel
 
 	mu sync.RWMutex
 
@@ -35,9 +35,9 @@ type SyncServiceImpl struct {
 	updates map[int32]chan *zproto.PushUpdatesData
 }
 
-func NewSyncService(status *model.OnlineStatusModel) *SyncServiceImpl {
+func NewSyncService() *SyncServiceImpl {
 	s := &SyncServiceImpl{}
-	s.status = status
+	// s.status = status
 	s.updates = make(map[int32]chan *zproto.PushUpdatesData)
 	return s
 }
@@ -101,7 +101,7 @@ func (s *SyncServiceImpl) PushUpdatesStream(auth *zproto.ServerAuthReq, stream z
 func (s *SyncServiceImpl) DeliveryUpdates(ctx context.Context, deliver *zproto.DeliveryUpdatesToUsers) (reply *zproto.VoidRsp, err error) {
 	glog.Infof("DeliveryUpdates: {%v}", deliver)
 
-	statusList, err := s.status.GetOnlineByUserIdList(deliver.SendtoUserIdList)
+	statusList, err := model.GetOnlineStatusModel().GetOnlineByUserIdList(deliver.SendtoUserIdList)
 	ss := make(map[int32][]*model.SessionStatus)
 	for _, status := range statusList {
 		if _, ok := ss[status.ServerId]; !ok {

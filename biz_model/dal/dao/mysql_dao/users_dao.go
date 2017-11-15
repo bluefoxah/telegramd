@@ -15,13 +15,14 @@
  * limitations under the License.
  */
 
-package dao
+package mysql_dao
 
 import (
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
 	"github.com/nebulaim/telegramd/base/base"
 	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"fmt"
 )
 
 type UsersDAO struct {
@@ -109,9 +110,9 @@ func (dao *UsersDAO) SelectById(id int32) (*do.UsersDO, error) {
 func (dao *UsersDAO) SelectUsersByIdList(id_list []int32) ([]do.UsersDO, error) {
 	// TODO(@benqi): sqlmap
 	params := make(map[string]interface{})
-	params["id_list"] = base.JoinInt32List(id_list, ",")
+	//params["id_list"] = base.JoinInt32List(id_list, ",")
 
-	var sql = "select id, access_hash, first_name, last_name, username from users where id in (:id_list)"
+	var sql = fmt.Sprintf("select id, access_hash, first_name, last_name, username from users where id in (%s)", base.JoinInt32List(id_list, ","))
 	rows, err := dao.db.NamedQuery(sql, params)
 	if err != nil {
 		glog.Errorf("UsersDAO/SelectUsersByIdList error: ", err)

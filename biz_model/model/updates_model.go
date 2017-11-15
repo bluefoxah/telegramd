@@ -15,27 +15,32 @@
  * limitations under the License.
  */
 
-package dao
+package model
 
 import (
-	"fmt"
-	_ "github.com/go-sql-driver/mysql" // import your used driver
-	"github.com/golang/glog"
-	"github.com/jmoiron/sqlx"
-	"testing"
+	"sync"
+	"github.com/nebulaim/telegramd/mtproto"
 )
 
-func TestReflectTLObject(t *testing.T) {
-	mysqlDsn := "root:@/nebulaim?charset=utf8"
+type updatesModel struct {
+}
 
-	db, err := sqlx.Connect("mysql", mysqlDsn)
-	if err != nil {
-		glog.Fatalf("Connect mysql %s error: %s", mysqlDsn, err)
-		return
-	}
+var (
+	updatesInstance *updatesModel
+	updatesInstanceOnce sync.Once
+)
 
-	userDialogsDAO := NewUserDialogsDAO(db)
+func GetUpdatesModel() *updatesModel {
+	updatesInstanceOnce.Do(func() {
+		updatesInstance = &updatesModel{}
+	})
+	return updatesInstance
+}
 
-	vals, err := userDialogsDAO.SelectPinnedDialogs(1)
-	fmt.Println(vals)
+func (m *updatesModel) GetState(userId int32) *mtproto.TLUpdatesState {
+	state := &mtproto.TLUpdatesState{}
+
+	// updates.state#a56c2a3e pts:int qts:int date:int seq:int unread_count:int = updates.State;
+
+	return state
 }

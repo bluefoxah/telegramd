@@ -30,14 +30,10 @@ import (
 	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 	base2 "github.com/nebulaim/telegramd/base/base"
 	"github.com/nebulaim/telegramd/zproto"
+	"github.com/nebulaim/telegramd/biz_model/model"
 )
 
 type MessagesServiceImpl struct {
-	AuthUsersDAO *dao.AuthUsersDAO
-	UserDialogsDAO *dao.UserDialogsDAO
-	MessageBoxsDAO *dao.MessageBoxsDAO
-	MessagesDAO *dao.MessagesDAO
-	SequenceDAO *dao.SequenceDAO
 	SyncRPCClient *sync_client.SyncRPCClient
 }
 
@@ -245,27 +241,51 @@ func (s *MessagesServiceImpl) MessagesGetDialogs(ctx context.Context, request *m
 	rpcMetaData := mtproto.RpcMetaData{}
 	rpcMetaData.Decode(md)
 
-	dialogs, _ := s.UserDialogsDAO.SelectDialogsByUserID(rpcMetaData.UserId)
-	for _, dialog := range  dialogs {
-		_ = dialog
-	}
-/*
-	var reply *mtproto.Bool = nil
-	switch request.OffsetPeer.Payload.(type) {
-	case *mtproto.InputPeer_InputPeerUser:
-		reply = mtproto.MakeBool(&mtproto.TLBoolTrue{})
-		// typing.UserId = request.Peer.Payload.(*mtproto.InputPeer_InputPeerUser).InputPeerUser.UserId
-	case *mtproto.InputPeer_InputPeerChat:
-		reply = mtproto.MakeBool(&mtproto.TLBoolTrue{})
-		// typing.UserId = request.Peer.Payload.(*mtproto.InputPeer_InputPeerChat).InputPeerChat.ChatId
-	default:
-		glog.Errorf("MessagesSetTyping - BadRequest!")
-		reply = mtproto.MakeBool(&mtproto.TLBoolFalse{})
-		return reply, nil
-	}
- */
+	ptype := base.FromInputPeer(request.OffsetPeer)
+	messageDialogs := &mtproto.TLMessagesDialogs{}
 
-	return nil, errors.New("Not impl")
+	dialogs := model.GetDialogModel().GetDialogsByUserIDAndType(rpcMetaData.UserId, ptype)
+	messageIdList := []int32{}
+	userIdList := []int32{rpcMetaData.UserId}
+	chatIdList := []int32{}
+	for _, dialog := range dialogs {
+		// dialog.Peer
+		messageIdList = append(messageIdList, dialog.TopMessage)
+		// TODO(@benqi): 先假设只有PEER_USER
+		//if ptype == base.PEER_USER {
+		//	userIdList = append(userIdList, dialog.Peer.GetPeerUser().UserId)
+		//} else if ptype == base.PEER_CHAT {
+		//	chatIdList = append(chatIdList, dialog.Peer.GetPeerChat().ChatId)
+		//}
+		userIdList = append(userIdList, dialog.Peer.GetPeerUser().UserId)
+		messageDialogs.Dialogs = append(messageDialogs.Dialogs, dialog.ToDialog())
+
+	}
+
+	if len(messageIdList) > 0 {
+		messages := model.GetMessageModel().GetMessagesByIDList(messageIdList)
+		for _, message := range messages {
+			messageDialogs.Messages = append(messageDialogs.Messages, message.ToMessage())
+		}
+	}
+
+	if len(userIdList) > 0 {
+		users := model.GetUserModel().GetUserList(userIdList)
+		for _, user := range users {
+			messageDialogs.Users = append(messageDialogs.Users, user.ToUser())
+		}
+	}
+
+	if len(chatIdList) > 0 {
+		// TODO(@benqi): 还未实现chat
+		//chats := model.GetChatModel().GetChatList(chatIdList)
+		//for _, chat := range chats {
+		//	messageDialogs.Users = append(messageDialogs.Users, chat.ToChat())
+		//}
+	}
+
+	glog.Infof("MessagesGetDialogs - reply: %v", messageDialogs)
+	return messageDialogs.ToMessages_Dialogs(), nil
 }
 
 func (s *MessagesServiceImpl) MessagesReadHistory(ctx context.Context, request *mtproto.TLMessagesReadHistory) (*mtproto.Messages_AffectedMessages, error) {
@@ -356,13 +376,13 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 
 		// TODO(@benqi): 事务
 		// 创建会话
-		dialog, _ := s.UserDialogsDAO.CheckExists(rpcMetaData.UserId, base.PEER_USER, rpcMetaData.UserId)
+		dialog, _ := dao.GetUserDialogsDAO(dao.DB_SLAVE).CheckExists(rpcMetaData.UserId, base.PEER_USER, rpcMetaData.UserId)
 		if dialog == nil {
 			dialog = &dataobject.UserDialogsDO{}
 			dialog.UserId = rpcMetaData.UserId
 			dialog.PeerType = base.PEER_USER
 			dialog.PeerId = rpcMetaData.UserId
-			s.UserDialogsDAO.Insert(dialog)
+			dao.GetUserDialogsDAO(dao.DB_MASTER).Insert(dialog)
 		}
 
 		// 插入消息
@@ -372,7 +392,7 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 		message.PeerId = rpcMetaData.UserId
 		message.RandomId = request.RandomId
 		message.Message = request.Message
-		messageId, _ := s.MessagesDAO.Insert(message)
+		messageId, _ := dao.GetMessagesDAO(dao.DB_MASTER).Insert(message)
 
 		// inbox和outbox
 		// 发件箱
@@ -380,9 +400,9 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 		messageBox.UserId = rpcMetaData.UserId
 		messageBox.MessageBoxType = 0
 		messageBox.MessageId = int32(messageId)
-		outPts, _ := s.SequenceDAO.NextID(base2.Int32ToString(messageBox.UserId))
+		outPts, _ := model.GetSequenceModel().NextID(base2.Int32ToString(messageBox.UserId))
 		messageBox.Pts = int32(outPts)
-		s.MessageBoxsDAO.Insert(messageBox)
+		dao.GetMessageBoxsDAO(dao.DB_MASTER).Insert(messageBox)
 
 		// 推送给sync
 		// 推给客户端的updates
@@ -421,21 +441,21 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 
 		// TODO(@benqi): 事务
 		// 创建会话
-		dialog1, _ := s.UserDialogsDAO.CheckExists(rpcMetaData.UserId, base.PEER_USER, inputPeerUser.UserId)
+		dialog1, _ := dao.GetUserDialogsDAO(dao.DB_SLAVE).CheckExists(rpcMetaData.UserId, base.PEER_USER, inputPeerUser.UserId)
 		if dialog1 == nil {
 			dialog1 = &dataobject.UserDialogsDO{}
 			dialog1.UserId = rpcMetaData.UserId
 			dialog1.PeerType = base.PEER_USER
 			dialog1.PeerId = inputPeerUser.UserId
-			s.UserDialogsDAO.Insert(dialog1)
+			dao.GetUserDialogsDAO(dao.DB_MASTER).Insert(dialog1)
 		}
-		dialog2, _ := s.UserDialogsDAO.CheckExists(inputPeerUser.UserId, base.PEER_USER, rpcMetaData.UserId)
+		dialog2, _ := dao.GetUserDialogsDAO(dao.DB_SLAVE).CheckExists(inputPeerUser.UserId, base.PEER_USER, rpcMetaData.UserId)
 		if dialog2 == nil {
 			dialog2 = &dataobject.UserDialogsDO{}
 			dialog2.UserId = inputPeerUser.UserId
 			dialog2.PeerType = base.PEER_USER
 			dialog2.PeerId = rpcMetaData.UserId
-			s.UserDialogsDAO.Insert(dialog2)
+			dao.GetUserDialogsDAO(dao.DB_MASTER).Insert(dialog2)
 		}
 
 		// 插入消息
@@ -445,7 +465,7 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 		message.PeerId = inputPeerUser.UserId
 		message.RandomId = request.RandomId
 		message.Message = request.Message
-		messageId, _ := s.MessagesDAO.Insert(message)
+		messageId, _ := dao.GetMessagesDAO(dao.DB_MASTER).Insert(message)
 
 		// inbox和outbox
 		// 发件箱
@@ -453,16 +473,16 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 		messageBox.UserId = rpcMetaData.UserId
 		messageBox.MessageBoxType = 0
 		messageBox.MessageId = int32(messageId)
-		outPts, _ := s.SequenceDAO.NextID(base2.Int32ToString(messageBox.UserId))
+		outPts, _ := model.GetSequenceModel().NextID(base2.Int32ToString(messageBox.UserId))
 		messageBox.Pts = int32(outPts)
-		s.MessageBoxsDAO.Insert(messageBox)
+		dao.GetMessageBoxsDAO(dao.DB_MASTER).Insert(messageBox)
 
 		// 收件箱
 		messageBox.UserId = inputPeerUser.UserId
 		messageBox.MessageBoxType = 1
-		inPts, _ := s.SequenceDAO.NextID(base2.Int32ToString(messageBox.UserId))
+		inPts, _ := model.GetSequenceModel().NextID(base2.Int32ToString(messageBox.UserId))
 		messageBox.Pts = int32(inPts)
-		s.MessageBoxsDAO.Insert(messageBox)
+		dao.GetMessageBoxsDAO(dao.DB_MASTER).Insert(messageBox)
 
 		// 推送给sync
 		// 推给客户端的updates
@@ -733,7 +753,7 @@ func (s *MessagesServiceImpl) MessagesGetPinnedDialogs(ctx context.Context, requ
 	// authUsersDO, _ := s.AuthUsersDAO.SelectByAuthId(rpcMetaData.AuthId)
 	// glog.Info("user_id: ", authUsersDO)
 	// userDialogsDO, _ := s.UserDialogsDAO.SelectPinnedDialogs(authUsersDO.UserId)
-	userDialogsDO, _ := s.UserDialogsDAO.SelectPinnedDialogs(rpcMetaData.UserId)
+	userDialogsDO, _ := dao.GetUserDialogsDAO(dao.DB_SLAVE).SelectPinnedDialogs(rpcMetaData.UserId)
 	_ = userDialogsDO
 
 	peerDialogs := &mtproto.TLMessagesPeerDialogs{}

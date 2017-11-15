@@ -18,7 +18,6 @@
 package auth_key
 
 import (
-	_ "github.com/go-sql-driver/mysql" // import your used driver
 	"github.com/golang/glog"
 	"encoding/base64"
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
@@ -27,13 +26,11 @@ import (
 
 // "root:@/nebulaim?charset=utf8"
 // 30
-func NewAuthKeyCacheManager(dao* dao.MasterKeysDAO) *AuthKeyCacheManager {
-	return &AuthKeyCacheManager{dao}
+func NewAuthKeyCacheManager() *AuthKeyCacheManager {
+	return &AuthKeyCacheManager{}
 }
 
 type AuthKeyCacheManager struct {
-	// ZOrm orm.Ormer
-	dao *dao.MasterKeysDAO
 }
 
 // TODO(@benqi): 暂时在这里操作数据库，需要改善的地方:
@@ -43,7 +40,7 @@ type AuthKeyCacheManager struct {
 // PutAuthKey(uint64, []byte) error
 func (s *AuthKeyCacheManager) GetAuthKey(keyID int64) (authKey []byte) {
 	// k := &MasterKeys{ AuthId: keyID }
-	do, err := s.dao.SelectByAuthId(keyID)
+	do, err := dao.GetMasterKeysDAO(dao.DB_SLAVE).SelectByAuthId(keyID)
 	// err := s.ZOrm.Read(k)
 	if err != nil {
 		glog.Errorf("Read keyData error: %s\n", err)
@@ -63,7 +60,7 @@ func (s *AuthKeyCacheManager) PutAuthKey(keyID int64, key []byte) (err error) {
 	do := &dataobject.MasterKeysDO{ AuthId: keyID}
 	// k := &dao.MasterKeysDO{ AuthId: keyID, }
 	do.Body = base64.RawStdEncoding.EncodeToString(key)
-	_, err = s.dao.Insert(do)
+	_, err = dao.GetMasterKeysDAO(dao.DB_MASTER).Insert(do)
 	if err != nil {
 		glog.Errorf("Write keyData error: %s\n", err)
 	}

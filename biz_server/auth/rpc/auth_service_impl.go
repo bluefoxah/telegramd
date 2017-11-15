@@ -31,9 +31,6 @@ import (
 )
 
 type AuthServiceImpl struct {
-	UsersDAO *dao.UsersDAO
-	AuthUsersDAO *dao.AuthUsersDAO
-	AuthPhoneTransactionsDAO *dao.AuthPhoneTransactionsDAO
 }
 
 func (s *AuthServiceImpl) AuthLogOut(ctx context.Context, request *mtproto.TLAuthLogOut) (*mtproto.Bool, error) {
@@ -76,7 +73,9 @@ func (s *AuthServiceImpl) AuthCheckPhone(ctx context.Context, request *mtproto.T
 	glog.Infof("AuthCheckPhone - Process: {%v}", request)
 
 	// TODO(@benqi): panic/recovery
-	usersDO, err := s.UsersDAO.SelectByPhoneNumber(request.PhoneNumber)
+	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
+
+	usersDO, err := usersDAO.SelectByPhoneNumber(request.PhoneNumber)
 	if err != nil {
 		glog.Errorf("AuthCheckPhone - s.UsersDAO.SelectUserIdByPhoneNumber: %s", err)
 		return nil, err
@@ -119,7 +118,8 @@ func (s *AuthServiceImpl) AuthSendCode(ctx context.Context, request *mtproto.TLA
 	// 透传AuthId，UserId，终端类型等
 	// 检查满足条件的TransactionHash是否存在，可能的条件：
 	//  1. is_deleted !=0 and now - created_at < 15 分钟
-	do, err := s.AuthPhoneTransactionsDAO.SelectByPhoneAndApiIdAndHash(request.ApiId, request.ApiHash, request.PhoneNumber)
+
+	do, err := dao.GetAuthPhoneTransactionsDAO(dao.DB_SLAVE).SelectByPhoneAndApiIdAndHash(request.ApiId, request.ApiHash, request.PhoneNumber)
 	if err != nil {
 		glog.Errorf("AuthSendCode - s.AuthPhoneTransactionsDAO.SelectByPhoneAndApiIdAndHash: %s", err)
 		return nil, err
@@ -135,7 +135,7 @@ func (s *AuthServiceImpl) AuthSendCode(ctx context.Context, request *mtproto.TLA
 		// TODO(@benqi): 生成一个32字节的随机字串
 		do.TransactionHash = fmt.Sprintf("%20d", id.NextId())
 
-		_, err := s.AuthPhoneTransactionsDAO.Insert(do)
+		_, err := dao.GetAuthPhoneTransactionsDAO(dao.DB_MASTER).Insert(do)
 		if err != nil {
 			glog.Errorf("AuthSendCode - s.AuthPhoneTransactionsDAO.Insert: %s", err)
 			return nil, err
@@ -183,24 +183,26 @@ func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAut
 	rpcMetaData.Decode(md)
 
 	// Check code
-	do1, err := s.AuthPhoneTransactionsDAO.SelectByPhoneCode(request.PhoneCodeHash, request.PhoneCode, request.PhoneNumber)
+	authPhoneTransactionsDAO := dao.GetAuthPhoneTransactionsDAO(dao.DB_SLAVE)
+	do1, err := authPhoneTransactionsDAO.SelectByPhoneCode(request.PhoneCodeHash, request.PhoneCode, request.PhoneNumber)
 	if do1 == nil {
 		glog.Errorf("AuthSignIn - s.AuthPhoneTransactionsDAO.SelectByPhoneCode: %s", err)
 		return nil, err
 	}
 
-	do2, err := s.UsersDAO.SelectByPhoneNumber(request.PhoneNumber)
+	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
+	do2, err := usersDAO.SelectByPhoneNumber(request.PhoneNumber)
 	if do2 == nil {
 		glog.Errorf("AuthSignIn - s.UsersDAO.SelectByPhoneNumber: %s", err)
 		return nil, err
 	}
 
-	do3, _ := s.AuthUsersDAO.SelectByAuthId(rpcMetaData.AuthId)
+	do3, _ := dao.GetAuthUsersDAO(dao.DB_SLAVE).SelectByAuthId(rpcMetaData.AuthId)
 	if do3 == nil {
 		do3 := &dataobject.AuthUsersDO{}
 		do3.AuthId = rpcMetaData.AuthId
 		do3.UserId = do2.Id
-		s.AuthUsersDAO.Insert(do3)
+		dao.GetAuthUsersDAO(dao.DB_MASTER).Insert(do3)
 	}
 
 	// TODO(@benqi): 从数据库加载

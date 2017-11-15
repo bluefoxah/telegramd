@@ -25,30 +25,14 @@ import (
 	"github.com/nebulaim/telegramd/frontend/rpc"
 	"github.com/nebulaim/telegramd/frontend/client"
 	"github.com/nebulaim/telegramd/frontend/auth_key"
-	"github.com/nebulaim/telegramd/biz_model/dal/dao"
-	"github.com/jmoiron/sqlx"
-	_ "github.com/go-sql-driver/mysql" // import your used driver
-	"github.com/nebulaim/telegramd/base/redis_client"
-	"github.com/nebulaim/telegramd/biz_model/model"
 )
 
 type Server struct {
-	authsDAO *dao.AuthsDAO
-	authSaltsDAO *dao.AuthSaltsDAO
-	authUsersDAO *dao.AuthUsersDAO
-	onlineModel *model.OnlineStatusModel
-
-	cacheKeys	*auth_key.AuthKeyCacheManager
 	Server      *net2.Server
+	cacheKeys	*auth_key.AuthKeyCacheManager
 }
 
-func NewServer(addr, dsn string) (s *Server) {
-	db, err := sqlx.Connect("mysql", dsn)
-	if err != nil {
-		glog.Fatalf("Connect mysql %s error: %s", dsn, err)
-		return nil
-	}
-
+func NewServer(addr string) (s *Server) {
 	s = &Server{}
 	s.authsDAO = dao.NewAuthsDAO(db)
 	s.authSaltsDAO = dao.NewAuthSaltsDAO(db)
@@ -72,10 +56,11 @@ func NewServer(addr, dsn string) (s *Server) {
 	s.onlineModel = model.NewOnlineStatusModel(redisPool)
 
 	mtproto := NewMTProto()
-	lsn := listen("server", "0.0.0.0:12345")
+	lsn := listen("server", addr)
 	s.Server = net2.NewServer(lsn, mtproto, 1024, net2.HandlerFunc(emptySessionLoop))
 	s.cacheKeys = auth_key.NewAuthKeyCacheManager(masterKeysDAO)
 
+	s.cacheKeys = auth_key.NewAuthKeyCacheManager()
 	return
 }
 

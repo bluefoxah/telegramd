@@ -26,7 +26,7 @@ import (
 )
 
 type UsersServiceImpl struct {
-	UsersDAO *dao.UsersDAO
+	// UsersDAO *dao.UsersDAO
 }
 
 // func (s *UsersServiceImpl)UsersGetUsers(ctx context.Context,  request *mtproto.TLUsersGetUsers) (*mtproto.Vector<User>, error) {
@@ -64,7 +64,7 @@ func (s *UsersServiceImpl) UsersGetFullUser(ctx context.Context, request *mtprot
 	switch request.Id.Payload.(type) {
 	case *mtproto.InputUser_InputUserSelf:
 		// User
-		userDO, _ := s.UsersDAO.SelectById(2)
+		userDO, _ := dao.GetUsersDAO(dao.DB_SLAVE).SelectById(rpcMetaData.UserId)
 		user := &mtproto.TLUser{}
 		user.Self = true
 		user.Contact = false
@@ -85,7 +85,7 @@ func (s *UsersServiceImpl) UsersGetFullUser(ctx context.Context, request *mtprot
 	case *mtproto.InputUser_InputUser:
 		inputUser := request.Id.Payload.(*mtproto.InputUser_InputUser).InputUser
 		// User
-		userDO, _ := s.UsersDAO.SelectById(inputUser.UserId)
+		userDO, _ := dao.GetUsersDAO(dao.DB_SLAVE).SelectById(inputUser.UserId)
 		user := &mtproto.TLUser{}
 		user.Self = false
 		user.Contact = true

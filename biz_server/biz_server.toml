@@ -1,0 +1,37 @@
+# biz_server.toml
+
+ver = "0.0.1"
+#logPath = "/tmp/biz_server.log"
+
+[server]
+addr = "0.0.0.0:10001"
+
+[rpcClient]
+serviceName = "sync"
+addr = "localhost:10002"
+
+[[redis]]
+name = "cache"
+addr = "127.0.0.1:6379"
+idle = 100
+active = 100
+dialTimeout = "1s"
+readTimeout = "1s"
+writeTimeout = "1s"
+idleTimeout = "10s"
+dbNum = "0"
+password = ""
+
+[[mysql]]
+name = "immaster"
+dsn = "root:@/nebulaim?charset=utf8"
+#root:1@tcp(127.0.0.1:3306)/nebulaim?timeout=5s&readTimeout=5s&writeTimeout=5s&parseTime=true&loc=Local&charset=utf8,utf8mb4"
+active = 5
+idle = 2
+
+[[mysql]]
+name = "imslave"
+dsn = "root:@/nebulaim?charset=utf8"
+# root:1@tcp(127.0.0.1:3306)/nebulaim?timeout=5s&readTimeout=5s&writeTimeout=5s&parseTime=true&loc=Local&charset=utf8,utf8mb4"
+active = 5
+idle = 2

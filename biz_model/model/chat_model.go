@@ -16,3 +16,21 @@
  */
 
 package model
+
+import "sync"
+
+type chatModel struct {
+	// chatDAO *dao.UserDialogsDAO
+}
+
+var (
+	chatInstance *chatModel
+	chatInstanceOnce sync.Once
+)
+
+func GetChatModel() *chatModel {
+	chatInstanceOnce.Do(func() {
+		chatInstance = &chatModel{}
+	})
+	return chatInstance
+}

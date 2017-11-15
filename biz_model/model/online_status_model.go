@@ -25,6 +25,8 @@ import (
 	"strings"
 	"github.com/nebulaim/telegramd/base/base"
 	"time"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"sync"
 )
 
 // - 简单设计思路(@benqi)
@@ -118,16 +120,26 @@ func (status *SessionStatus) FromKeyValue(k, v string) (err error) {
 	return
 }
 
-type OnlineStatusModel struct {
-	redis* redis_client.RedisPool
+type onlineStatusModel struct {
+	// redis* redis_client.RedisPool
 }
 
-func NewOnlineStatusModel(redis* redis_client.RedisPool) *OnlineStatusModel {
-	return &OnlineStatusModel{redis}
+var (
+	statusInstance *onlineStatusModel
+	statusInstanceOnce sync.Once
+)
+
+func GetOnlineStatusModel() *onlineStatusModel {
+	statusInstanceOnce.Do(func() {
+		statusInstance = &onlineStatusModel{}
+	})
+	return statusInstance
 }
 
-func (s *OnlineStatusModel) SetOnline(status *SessionStatus) (err error) {
-	conn := s.redis.Get()
+func (s *onlineStatusModel) SetOnline(status *SessionStatus) (err error) {
+	redis_client := redis_client.GetRedisClient(dao.CACHE)
+
+	conn := redis_client.Get()
 	defer conn.Close()
 
 	// 设置键盘
@@ -143,7 +155,7 @@ func (s *OnlineStatusModel) SetOnline(status *SessionStatus) (err error) {
 	return
 }
 
-func (s *OnlineStatusModel) getOnline(conn redis.Conn, userId int32) (statusList []*SessionStatus, err error) {
+func (s *onlineStatusModel) getOnline(conn redis.Conn, userId int32) (statusList []*SessionStatus, err error) {
 	// 设置键盘
 	fmt.Printf("%s_%d\n", onlineKeyPrefix, userId)
 	m, err := redis.StringMap(conn.Do("HGETALL", fmt.Sprintf("%s_%d", onlineKeyPrefix, userId)));
@@ -169,8 +181,10 @@ func (s *OnlineStatusModel) getOnline(conn redis.Conn, userId int32) (statusList
 	return
 }
 
-func (s *OnlineStatusModel) GetOnlineByUserId(userId int32) ([]*SessionStatus, error) {
-	conn := s.redis.Get()
+func (s *onlineStatusModel) GetOnlineByUserId(userId int32) ([]*SessionStatus, error) {
+	redis_client := redis_client.GetRedisClient(dao.CACHE)
+
+	conn := redis_client.Get()
 	defer conn.Close()
 
 	return s.getOnline(conn, userId)
@@ -179,8 +193,10 @@ func (s *OnlineStatusModel) GetOnlineByUserId(userId int32) ([]*SessionStatus, e
 // TODO(@benqi): 优化
 // 取多个用户的状态信息，可以使用lua脚本，避免多次请求
 // eval "local rst={}; for i,v in pairs(KEYS) do rst[i]=redis.call('hgetall', v) end; return rst" 2 user:1 user:2
-func (s *OnlineStatusModel) GetOnlineByUserIdList(userIdList []int32) (statusList []*SessionStatus, err error) {
-	conn := s.redis.Get()
+func (s *onlineStatusModel) GetOnlineByUserIdList(userIdList []int32) (statusList []*SessionStatus, err error) {
+	redis_client := redis_client.GetRedisClient(dao.CACHE)
+
+	conn := redis_client.Get()
 	defer conn.Close()
 
 	for _, userId := range userIdList {

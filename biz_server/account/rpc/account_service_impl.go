@@ -39,9 +39,6 @@ const (
 )
 
 type AccountServiceImpl struct {
-	UsersDAO *dao.UsersDAO
-	DeviceDAO *dao.DevicesDAO
-	Status *model.OnlineStatusModel
 }
 
 func (s *AccountServiceImpl) AccountRegisterDevice(ctx context.Context, request *mtproto.TLAccountRegisterDevice) (*mtproto.Bool, error) {
@@ -54,7 +51,7 @@ func (s *AccountServiceImpl) AccountRegisterDevice(ctx context.Context, request 
 
 	// TODO(@benqi): check token_type
 
-	do, err := s.DeviceDAO.SelectIdByAuthId(rpcMetaData.AuthId, int8(request.TokenType), request.Token)
+	do, err := dao.GetDevicesDAO(dao.DB_SLAVE).SelectIdByAuthId(rpcMetaData.AuthId, int8(request.TokenType), request.Token)
 	if err != nil {
 		glog.Errorf("AccountRegisterDevice - s.DeviceDAO.SelectIdByAuthId error: %s", err)
 		return nil, err
@@ -69,13 +66,13 @@ func (s *AccountServiceImpl) AccountRegisterDevice(ctx context.Context, request 
 			Token: request.Token,
 		}
 
-		_, err := s.DeviceDAO.Insert(do)
+		_, err := dao.GetDevicesDAO(dao.DB_MASTER).Insert(do)
 		if err != nil {
 			glog.Errorf("AccountRegisterDevice - s.DeviceDAO.Insert error: %s", err)
 			return nil, err
 		}
 	} else {
-		_, err := s.DeviceDAO.UpdateStateById(0, do.Id)
+		_, err := dao.GetDevicesDAO(dao.DB_MASTER).UpdateStateById(0, do.Id)
 		if err != nil {
 			glog.Errorf("AccountRegisterDevice - s.DeviceDAO.UpdateStateById error: %s", err)
 			return nil, err
@@ -98,7 +95,7 @@ func (s *AccountServiceImpl) AccountUnregisterDevice(ctx context.Context, reques
 
 	// TODO(@benqi): check token_type
 
-	do, err := s.DeviceDAO.SelectIdByAuthId(rpcMetaData.AuthId, int8(request.TokenType), request.Token)
+	do, err := dao.GetDevicesDAO(dao.DB_SLAVE).SelectIdByAuthId(rpcMetaData.AuthId, int8(request.TokenType), request.Token)
 	if err != nil {
 		glog.Errorf("AccountUnregisterDevice - s.DeviceDAO.SelectIdByAuthId error: %s", err)
 		return nil, err
@@ -107,7 +104,7 @@ func (s *AccountServiceImpl) AccountUnregisterDevice(ctx context.Context, reques
 	if do == nil {
 		// glog.Errorf("AccountUnregisterDevice - s.DeviceDAO.Insert error: %s", err)
 	} else {
-		_, err := s.DeviceDAO.UpdateStateById(1, do.Id)
+		_, err := dao.GetDevicesDAO(dao.DB_MASTER).UpdateStateById(1, do.Id)
 		if err != nil {
 			glog.Errorf("AccountUnregisterDevice - s.DeviceDAO.UpdateStateById error: %s", err)
 			return nil, err
@@ -156,7 +153,8 @@ func (s *AccountServiceImpl) AccountUpdateStatus(ctx context.Context, request *m
 	status.Now = time.Now().Unix()
 
 	glog.Infof("AccountUpdateStatus - SetOnline: {%v}\n", status)
-	s.Status.SetOnline(status)
+
+	model.GetOnlineStatusModel().SetOnline(status)
 
 	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
 

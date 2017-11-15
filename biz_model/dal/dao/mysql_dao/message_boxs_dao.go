@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package dao
+package mysql_dao
 
 import (
 	"github.com/golang/glog"
@@ -23,53 +23,28 @@ import (
 	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
-type AuthUsersDAO struct {
+type MessageBoxsDAO struct {
 	db *sqlx.DB
 }
 
-func NewAuthUsersDAO(db *sqlx.DB) *AuthUsersDAO {
-	return &AuthUsersDAO{db}
+func NewMessageBoxsDAO(db *sqlx.DB) *MessageBoxsDAO {
+	return &MessageBoxsDAO{db}
 }
 
-func (dao *AuthUsersDAO) Insert(do *do.AuthUsersDO) (id int64, err error) {
+func (dao *MessageBoxsDAO) Insert(do *do.MessageBoxsDO) (id int64, err error) {
 	// TODO(@benqi): sqlmap
 	id = 0
 
-	var sql = "insert into auth_users(auth_id, user_id) values (:auth_id, :user_id)"
+	var sql = "insert into message_boxs(user_id, message_box_type, message_id, pts, created_at) values (:user_id, :message_box_type, :message_id, :pts, :created_at)"
 	r, err := dao.db.NamedExec(sql, do)
 	if err != nil {
-		glog.Error("AuthUsersDAO/Insert error: ", err)
+		glog.Error("MessageBoxsDAO/Insert error: ", err)
 		return
 	}
 
 	id, err = r.LastInsertId()
 	if err != nil {
-		glog.Error("AuthUsersDAO/LastInsertId error: ", err)
+		glog.Error("MessageBoxsDAO/LastInsertId error: ", err)
 	}
 	return
-}
-
-func (dao *AuthUsersDAO) SelectByAuthId(auth_id int64) (*do.AuthUsersDO, error) {
-	// TODO(@benqi): sqlmap
-	var sql = "select id, user_id from auth_users where auth_id = :auth_id"
-	do := &do.AuthUsersDO{AuthId: auth_id}
-	rows, err := dao.db.NamedQuery(sql, do)
-	if err != nil {
-		glog.Error("AuthUsersDAO/SelectById error: ", err)
-		return nil, err
-	}
-
-	defer rows.Close()
-
-	if rows.Next() {
-		err = rows.StructScan(do)
-		if err != nil {
-			glog.Error("AuthUsersDAO/SelectById error: ", err)
-			return nil, err
-		}
-	} else {
-		return nil, nil
-	}
-
-	return do, nil
 }

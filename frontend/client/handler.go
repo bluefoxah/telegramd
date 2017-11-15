@@ -26,6 +26,7 @@ import (
 	"github.com/nebulaim/telegramd/frontend/id"
 	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 	"github.com/nebulaim/telegramd/biz_model/model"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 )
 
 func (c *Client) onMsgsAck(msgId int64, seqNo int32, request TLObject) {
@@ -36,7 +37,7 @@ func (c *Client) onNewSessionCreated(sessionId, msgId int64, seqNo int32) (*TLNe
 	// glog.Info("processMsgsAck - request: %s", request.String())
 
 	// TODO(@benqi): 客户端保存的initConnection信息推到后台服务存储
-	authSaltsDO, err := c.AuthSaltsDAO.SelectByAuthId(c.Codec.AuthKeyId)
+	authSaltsDO, err := dao.GetAuthSaltsDAO(dao.DB_SLAVE).SelectByAuthId(c.Codec.AuthKeyId)
 	if err != nil {
 		// TODO(@benqi): 处理数据库出错
 		glog.Error("c.authSaltsDAO.SelectByAuthId - query error: ", err)
@@ -46,7 +47,7 @@ func (c *Client) onNewSessionCreated(sessionId, msgId int64, seqNo int32) (*TLNe
 	if authSaltsDO == nil {
 		// salts不存在，插入一条记录
 		authSaltsDO = &dataobject.AuthSaltsDO{ AuthId: c.Codec.AuthKeyId, Salt: id.NextId() }
-		_, err := c.AuthSaltsDAO.Insert(authSaltsDO)
+		_, err := dao.GetAuthSaltsDAO(dao.DB_MASTER).Insert(authSaltsDO)
 		if err != nil {
 			glog.Error("c.authSaltsDAO.Insert - insert error: ", err)
 			return nil
@@ -74,7 +75,7 @@ func (c *Client) setOnline() {
 		status.NetlibSessionId = int64(c.Session.ID())
 		status.Now = time.Now().Unix()
 		glog.Infof("setOnline - SetOnline: {%v}\n", status)
-		c.Status.SetOnline(status)
+		model.GetOnlineStatusModel().SetOnline(status)
 	}
 }
 
@@ -180,7 +181,7 @@ func (c *Client) onInvokeWithLayer(msgId int64, seqNo int32, request TLObject) e
 	}
 
 	// TODO(@benqi): 客户端保存的initConnection信息推到后台服务存储
-	do, err := c.AuthsDAO.SelectConnectionHashByAuthId(c.Codec.AuthKeyId)
+	do, err :=  dao.GetAuthsDAO(dao.DB_MASTER).SelectConnectionHashByAuthId(c.Codec.AuthKeyId)
 	if err != nil {
 		glog.Errorf("c.authsDAO.SelectConnectionHashByAuthId: query db error: %s", err)
 		return err
@@ -198,7 +199,7 @@ func (c *Client) onInvokeWithLayer(msgId int64, seqNo int32, request TLObject) e
 			LangCode: initConnection.LangCode,
 			CreatedAt: time.Now().Format("2006-01-02 15:04:05"),
 		}
-		_, err := c.AuthsDAO.Insert(do)
+		_, err := dao.GetAuthsDAO(dao.DB_MASTER).Insert(do)
 		if err != nil {
 			glog.Errorf("c.authsDAO.SelectConnectionHashByAuthId: query db error: %s", err)
 			return err

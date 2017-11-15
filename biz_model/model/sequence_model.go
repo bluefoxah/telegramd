@@ -17,3 +17,98 @@
 
 package model
 
+import (
+	"github.com/golang/glog"
+	"time"
+	"sync"
+	dao2 "github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+)
+
+var (
+	sequenceInstance *sequnceModel
+	sequenceInstanceOnce sync.Once
+)
+
+type sequnceModel struct {
+	// chatDAO *dao.UserDialogsDAO
+}
+
+func GetSequenceModel() *sequnceModel {
+	sequenceInstanceOnce.Do(func() {
+		sequenceInstance = &sequnceModel{}
+	})
+	return sequenceInstance
+}
+
+// TODO(@benqi):
+//  使用数据库和REDIS获取sequence
+//  redis: sequence
+//  暂时不考虑DB等异常处理
+func (dao *sequnceModel) NextID(key string) (seq int64, err error) {
+	sequenceDAO := dao2.GetSequenceDAO(dao2.CACHE)
+
+	seq, err = sequenceDAO.Incr(key)
+	if err != nil {
+		glog.Errorf("NextID - incr error: ", err)
+		return
+	}
+
+	var do *dataobject.SeqUpdatesNgenDO = nil
+
+	// 使用seq==1做为哨兵减少DB和REDIS操作
+	if seq == 1 {
+		// seq为1，有两种情况:
+		// 1. 没有指定key的seq，第一次生成seq，DB也无纪录
+		// 2. redis重新启动，DB里可能已经有值
+
+		SeqUpdatesNgenDAO := dao2.GetSeqUpdatesNgenDAO(dao2.DB_SLAVE)
+		do, err = SeqUpdatesNgenDAO.SelectBySeqName(key)
+		if err != nil {
+			glog.Errorf("NextID - dao.ngen.SelectBySeqName{%s}, error: %s", key, err)
+			return
+		}
+
+		if do == nil {
+			// DB无值，插入数据
+			do = &dataobject.SeqUpdatesNgenDO{
+				SeqName:   key,
+				Seq:       seq,
+				CreatedAt: time.Now().Format("2006-01-02 15:04:05"),
+			}
+		} else {
+			// DB有seq
+			do.Seq += 1
+			err = sequenceDAO.Set(key, do.Seq)
+			if err != nil {
+				glog.Errorf("NextID - set error: %s", err)
+				return
+			}
+		}
+	} else {
+		do = &dataobject.SeqUpdatesNgenDO{
+			SeqName: key,
+			Seq:     seq,
+		}
+	}
+
+	// TODO(@benqi): 使用一些策略减少存盘次数
+	SeqUpdatesNgenDAO := dao2.GetSeqUpdatesNgenDAO(dao2.DB_MASTER)
+
+	if do.Seq == 1 {
+		_, err = SeqUpdatesNgenDAO.Insert(do)
+		if err != nil {
+			glog.Errorf("NextID - dao.ngen.Insert{%v}, error: %s", do, err)
+			return
+		}
+	} else {
+		_, err = SeqUpdatesNgenDAO.UpdateSeqBySeqName(do.Seq, key)
+		if err != nil {
+			glog.Errorf("NextID - dao.ngen.UpdateSeqBySeqName{%v}, error: %s", do, err)
+			return
+		}
+	}
+
+	return
+}
+

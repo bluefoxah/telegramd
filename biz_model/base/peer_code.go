@@ -22,11 +22,12 @@ import "github.com/nebulaim/telegramd/mtproto"
 type PeerType int32
 
 const (
-	PEER_EMPTY = 9
+	PEER_EMPTY = 0
 	PEER_SELF = 1
 	PEER_USER = 2
 	PEER_CHAT = 3
 	PEER_CHANNEL = 4
+	PEER_INVALID = 5
 )
 
 func (i PeerType) String() (s string) {
@@ -45,19 +46,22 @@ func (i PeerType) String() (s string) {
 	return
 }
 
-func (i *PeerType) FromInputPeer(reason *mtproto.InputPeer) {
+func FromInputPeer(reason *mtproto.InputPeer) (i PeerType) {
 	switch reason.Payload.(type) {
 	case *mtproto.InputPeer_InputPeerEmpty:
-		*i = PEER_EMPTY
+		i = PEER_EMPTY
 	case *mtproto.InputPeer_InputPeerSelf:
-		*i = PEER_SELF
+		i = PEER_SELF
 	case *mtproto.InputPeer_InputPeerUser:
-		*i = PEER_USER
+		i = PEER_USER
 	case *mtproto.InputPeer_InputPeerChat:
-		*i = PEER_CHAT
+		i = PEER_CHAT
 	case *mtproto.InputPeer_InputPeerChannel:
-		*i = PEER_CHANNEL
+		i = PEER_CHANNEL
+	default:
+		i = PEER_INVALID
 	}
+	return
 }
 
 func (i PeerType) ToInputPeer(reason *mtproto.InputPeer) {

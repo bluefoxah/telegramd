@@ -15,26 +15,23 @@
  * limitations under the License.
  */
 
-package dao
+package redis_dao
 
 import (
-	_ "github.com/go-sql-driver/mysql" // import your used driver
-	"github.com/golang/glog"
-	"github.com/jmoiron/sqlx"
 	"github.com/nebulaim/telegramd/base/redis_client"
 	"testing"
 )
 
 func TestNextID(t *testing.T) {
-	mysqlDsn := "root:@/nebulaim?charset=utf8"
+	// mysqlDsn := "root:@/nebulaim?charset=utf8"
 
-	db, err := sqlx.Connect("mysql", mysqlDsn)
-	if err != nil {
-		glog.Fatalf("Connect mysql %s error: %s", mysqlDsn, err)
-		return
-	}
+	//db, err := sqlx.Connect("mysql", mysqlDsn)
+	//if err != nil {
+	//	glog.Fatalf("Connect mysql %s error: %s", mysqlDsn, err)
+	//	return
+	//}
 
-	seqUpdatesNgen := NewSeqUpdatesNgenDAO(db)
+	// seqUpdatesNgen := NewSeqUpdatesNgenDAO(db)
 
 	redisConfig := &redis_client.RedisConfig{
 		Name:         "test",
@@ -51,13 +48,13 @@ func TestNextID(t *testing.T) {
 
 	redisPool := redis_client.NewRedisPool(redisConfig)
 
-	seq := NewSequenceDAO(redisPool, seqUpdatesNgen)
-	seq.NextID("1")
-	seq.NextID("1")
-	seq.NextID("1")
-	seq.NextID("1")
-	seq.NextID("2")
-	seq.NextID("2")
-	seq.NextID("2")
-	seq.NextID("2")
+	_ := NewSequenceDAO(redisPool)
+	//seq.NextID("1")
+	//seq.NextID("1")
+	//seq.NextID("1")
+	//seq.NextID("1")
+	//seq.NextID("2")
+	//seq.NextID("2")
+	//seq.NextID("2")
+	//seq.NextID("2")
 }

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package dao
+package mysql_dao
 
 import (
 	"github.com/golang/glog"
@@ -23,28 +23,53 @@ import (
 	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
-type MessageBoxsDAO struct {
+type AppsDAO struct {
 	db *sqlx.DB
 }
 
-func NewMessageBoxsDAO(db *sqlx.DB) *MessageBoxsDAO {
-	return &MessageBoxsDAO{db}
+func NewAppsDAO(db *sqlx.DB) *AppsDAO {
+	return &AppsDAO{db}
 }
 
-func (dao *MessageBoxsDAO) Insert(do *do.MessageBoxsDO) (id int64, err error) {
+func (dao *AppsDAO) Insert(do *do.AppsDO) (id int64, err error) {
 	// TODO(@benqi): sqlmap
 	id = 0
 
-	var sql = "insert into message_boxs(user_id, message_box_type, message_id, pts, created_at) values (:user_id, :message_box_type, :message_id, :pts, :created_at)"
+	var sql = "insert into apps(api_id, api_hash, title, short_name) values (:api_id, :api_hash, :title, :short_name)"
 	r, err := dao.db.NamedExec(sql, do)
 	if err != nil {
-		glog.Error("MessageBoxsDAO/Insert error: ", err)
+		glog.Error("AppsDAO/Insert error: ", err)
 		return
 	}
 
 	id, err = r.LastInsertId()
 	if err != nil {
-		glog.Error("MessageBoxsDAO/LastInsertId error: ", err)
+		glog.Error("AppsDAO/LastInsertId error: ", err)
 	}
 	return
+}
+
+func (dao *AppsDAO) SelectById(id int32) (*do.AppsDO, error) {
+	// TODO(@benqi): sqlmap
+	var sql = "select id, api_id, api_hash, title, short_name from apps where id = :id"
+	do := &do.AppsDO{Id: id}
+	rows, err := dao.db.NamedQuery(sql, do)
+	if err != nil {
+		glog.Error("AppsDAO/SelectById error: ", err)
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	if rows.Next() {
+		err = rows.StructScan(do)
+		if err != nil {
+			glog.Error("AppsDAO/SelectById error: ", err)
+			return nil, err
+		}
+	} else {
+		return nil, nil
+	}
+
+	return do, nil
 }

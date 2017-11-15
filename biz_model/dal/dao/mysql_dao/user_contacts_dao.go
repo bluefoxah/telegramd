@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package dao
+package mysql_dao
 
 import (
 	"github.com/golang/glog"

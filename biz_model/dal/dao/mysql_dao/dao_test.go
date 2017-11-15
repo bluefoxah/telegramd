@@ -15,28 +15,27 @@
  * limitations under the License.
  */
 
-package mysql_client
+package mysql_dao
 
 import (
+	"fmt"
 	_ "github.com/go-sql-driver/mysql" // import your used driver
-	"github.com/jmoiron/sqlx"
 	"github.com/golang/glog"
+	"github.com/jmoiron/sqlx"
+	"testing"
 )
 
-type MySQLConfig struct {
-	Name   string // for trace
-	DSN    string // data source name
-	Active int    // pool
-	Idle   int    // pool
-}
+func TestReflectTLObject(t *testing.T) {
+	mysqlDsn := "root:@/nebulaim?charset=utf8"
 
-func NewSqlxDB(c* MySQLConfig) (db *sqlx.DB) {
-	db, err := sqlx.Connect("mysql", c.DSN);
+	db, err := sqlx.Connect("mysql", mysqlDsn)
 	if err != nil {
-		glog.Errorf("Connect db error: %s", err)
+		glog.Fatalf("Connect mysql %s error: %s", mysqlDsn, err)
+		return
 	}
 
-	db.SetMaxOpenConns(c.Active)
-	db.SetMaxIdleConns(c.Idle)
-	return
+	userDialogsDAO := NewUserDialogsDAO(db)
+
+	vals, err := userDialogsDAO.SelectPinnedDialogs(1)
+	fmt.Println(vals)
 }

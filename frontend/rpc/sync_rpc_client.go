@@ -54,7 +54,8 @@ func (c* SyncRPCClient) RunUpdatesStreamLoop(server *net2.Server) {
 	for {
 		stream, err := c.client.PushUpdatesStream(context.Background(), auth)
 		if err != nil {
-			glog.Errorf("PushUpdatesStream:", err)
+			glog.Errorf(".PushUpdatesStream(_) = _, %v", err)
+
 			time.Sleep(10 * time.Second)
 			continue
 		}

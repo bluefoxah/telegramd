@@ -18,18 +18,28 @@
 package model
 
 import (
-	"github.com/nebulaim/telegramd/base/redis_client"
 	"github.com/nebulaim/telegramd/mtproto"
-	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"github.com/nebulaim/telegramd/biz_model/base"
+	"sync"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/golang/glog"
+	base2 "github.com/nebulaim/telegramd/base/base"
 )
 
-type MessageModel struct {
-	messageDAO *dao.MessagesDAO
+type messageModel struct {
+	// messageDAO *dao.MessagesDAO
 }
 
-func NewMessageModel(messageDAO *dao.MessagesDAO) *MessageModel {
-	return &MessageModel{messageDAO}
+var (
+	messageInstance *messageModel
+	messageInstanceOnce sync.Once
+)
+
+func GetMessageModel() *messageModel {
+	messageInstanceOnce.Do(func() {
+		messageInstance = &messageModel{}
+	})
+	return messageInstance
 }
 
 /*
@@ -56,9 +66,12 @@ message TL_message {
   string post_author = 19;
 }
  */
-func (m *MessageModel) GetMessagesByIDList(idList []int32) (messages []*mtproto.TLMessage) {
-	messagesDOList, _ := m.messageDAO.SelectByIdList(idList)
-	messages = make([]*mtproto.TLMessage, len(messagesDOList))
+func (m *messageModel) GetMessagesByIDList(idList []int32) (messages []*mtproto.TLMessage) {
+	// TODO(@benqi): Check messageDAO
+	messageDAO := dao.GetMessagesDAO(dao.DB_SLAVE)
+
+	messagesDOList, _ := messageDAO.SelectByIdList(idList)
+	messages = []*mtproto.TLMessage{}
 
 	for _, messageDO := range messagesDOList {
 		message := &mtproto.TLMessage{}
@@ -82,5 +95,7 @@ func (m *MessageModel) GetMessagesByIDList(idList []int32) (messages []*mtproto.
 
 		messages = append(messages, message)
 	}
+
+	glog.Infof("SelectByIdList(%s) - {%v}", base2.JoinInt32List(idList, ","), messages)
 	return
 }

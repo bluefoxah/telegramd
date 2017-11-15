@@ -39,7 +39,7 @@ tcpoOnly = false
 cdn = false
 static = false
 id = 2
-ipAddress = "192.168.4.6"
+ipAddress = "127.0.0.1"
 port = 12345
 
 [[DisabledFeatures]]

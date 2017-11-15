@@ -19,10 +19,8 @@ package main
 
 import (
 	"flag"
-	_ "github.com/go-sql-driver/mysql" // import your used driver
 	"github.com/golang/glog"
-	"github.com/jmoiron/sqlx"
-	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+
 	account "github.com/nebulaim/telegramd/biz_server/account/rpc"
 	auth "github.com/nebulaim/telegramd/biz_server/auth/rpc"
 	bots "github.com/nebulaim/telegramd/biz_server/bots/rpc"
@@ -43,7 +41,10 @@ import (
 	"net"
 	"github.com/nebulaim/telegramd/biz_server/sync_client"
 	"github.com/nebulaim/telegramd/base/redis_client"
-	"github.com/nebulaim/telegramd/biz_model/model"
+	"github.com/nebulaim/telegramd/base/mysql_client"
+	"github.com/BurntSushi/toml"
+	"fmt"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 )
 
 func init() {
@@ -51,100 +52,73 @@ func init() {
 	flag.Set("log_dir", "false")
 }
 
+type RpcServerConfig struct {
+	Addr string
+}
+
+type RpcClientConfig struct {
+	ServiceName string
+	Addr string
+}
+
+type BizServerConfig struct{
+	Server 		*RpcServerConfig
+	RpcClient	*RpcClientConfig
+	Mysql		[]mysql_client.MySQLConfig
+	Redis 		[]redis_client.RedisConfig
+}
+
 // 整合各服务，方便开发调试
 func main() {
 	flag.Parse()
 
-	// dsl ==> root:@/nebulaim?charset=utf8
-	mysqlDsn := "root:@/nebulaim?charset=utf8"
-
-	db, err := sqlx.Connect("mysql", mysqlDsn)
-	if err != nil {
-		glog.Fatalf("Connect mysql %s error: %s", mysqlDsn, err)
+	bizServerConfig := &BizServerConfig{}
+	if _, err := toml.DecodeFile("./biz_server.toml", bizServerConfig); err != nil {
+		fmt.Errorf("%s\n", err)
 		return
 	}
 
-	lis, err := net.Listen("tcp", "0.0.0.0:10001")
+	glog.Info(bizServerConfig)
+
+
+	// 初始化mysql_client、redis_client
+	redis_client.InstallRedisClientManager(bizServerConfig.Redis)
+	mysql_client.InstallMysqlClientManager(bizServerConfig.Mysql)
+
+	// 初始化redis_dao、mysql_dao
+	dao.InstallMysqlDAOManager(mysql_client.GetMysqlClientManager())
+	dao.InstallRedisDAOManager(redis_client.GetRedisClientManager())
+
+	lis, err := net.Listen("tcp", bizServerConfig.Server.Addr)
 	if err != nil {
 		glog.Fatalf("failed to listen: %v", err)
 	}
 
-	c, err := sync_client.NewSyncRPCClient("127.0.0.1:10002")
+	c, err := sync_client.NewSyncRPCClient(bizServerConfig.RpcClient.Addr)
 	if err != nil {
 		glog.Fatalf("failed to listen: %v", err)
 	}
-
-	seqUpdatesNgen := dao.NewSeqUpdatesNgenDAO(db)
-	redisConfig := &redis_client.RedisConfig{
-		Name:         "test",
-		Addr:         "127.0.0.1:6379",
-		Idle:         100,
-		Active:       100,
-		DialTimeout:  1000000,
-		ReadTimeout:  1000000,
-		WriteTimeout: 1000000,
-		IdleTimeout:  15000000,
-		DBNum:        "0",
-		Password:     "",
-	}
-
-	redisPool := redis_client.NewRedisPool(redisConfig)
-	seq := dao.NewSequenceDAO(redisPool, seqUpdatesNgen)
-	onlineModel := model.NewOnlineStatusModel(redisPool)
 
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
 
-	usersDAO := dao.NewUsersDAO(db)
-	devicesDAO := dao.NewDevicesDAO(db)
-	// masterKeysDAO := dao.NewMasterKeysDAO(db)
-	authUsersDAO := dao.NewAuthUsersDAO(db)
-	authPhoneTransactionsDAO := dao.NewAuthPhoneTransactionsDAO(db)
-	// authsDAO := dao.NewAuthsDAO(db)
-	// authSaltsDAO := dao.NewAuthSaltsDAO(db)
-	// appsDAO := dao.NewAppsDAO(db)
-	userDialogsDAO := dao.NewUserDialogsDAO(db)
-	userContactsDAO := dao.NewUserContactsDAO(db)
-	messageBoxsDAO := dao.NewMessageBoxsDAO(db)
-	messagesDAO := dao.NewMessagesDAO(db)
-
-	// SequenceDAO *dao.SequenceDAO
-
 	// AccountServiceImpl
-	mtproto.RegisterRPCAccountServer(grpcServer, &account.AccountServiceImpl{
-		UsersDAO:  	usersDAO,
-		DeviceDAO: 	devicesDAO,
-		Status:		onlineModel,
-	})
+	mtproto.RegisterRPCAccountServer(grpcServer, &account.AccountServiceImpl{})
 
 	// AuthServiceImpl
-	mtproto.RegisterRPCAuthServer(grpcServer, &auth.AuthServiceImpl{
-		UsersDAO:                 usersDAO,
-		AuthPhoneTransactionsDAO: authPhoneTransactionsDAO,
-		AuthUsersDAO:			  authUsersDAO,
-	})
+	mtproto.RegisterRPCAuthServer(grpcServer, &auth.AuthServiceImpl{})
 
 	mtproto.RegisterRPCBotsServer(grpcServer, &bots.BotsServiceImpl{})
 	mtproto.RegisterRPCChannelsServer(grpcServer, &channels.ChannelsServiceImpl{})
 
 	// ContactsServiceImpl
-	mtproto.RegisterRPCContactsServer(grpcServer, &contacts.ContactsServiceImpl{
-		UsersDAO: usersDAO,
-		UserContactsDAO: userContactsDAO,
-	})
+	mtproto.RegisterRPCContactsServer(grpcServer, &contacts.ContactsServiceImpl{})
 
 	mtproto.RegisterRPCHelpServer(grpcServer, &help.HelpServiceImpl{})
 	mtproto.RegisterRPCLangpackServer(grpcServer, &langpack.LangpackServiceImpl{})
 
 	// MessagesServiceImpl
-	mtproto.RegisterRPCMessagesServer(grpcServer, &messages.MessagesServiceImpl{
-		AuthUsersDAO:   authUsersDAO,
-		UserDialogsDAO: userDialogsDAO,
-		MessagesDAO: messagesDAO,
-		MessageBoxsDAO: messageBoxsDAO,
-		SyncRPCClient: c,
-		SequenceDAO: seq,
-	})
+	mtproto.RegisterRPCMessagesServer(grpcServer, &messages.MessagesServiceImpl{c})
 
 	mtproto.RegisterRPCPaymentsServer(grpcServer, &payments.PaymentsServiceImpl{})
 	mtproto.RegisterRPCPhoneServer(grpcServer, &phone.PhoneServiceImpl{})
@@ -153,11 +127,9 @@ func main() {
 	mtproto.RegisterRPCUpdatesServer(grpcServer, &updates.UpdatesServiceImpl{})
 	mtproto.RegisterRPCUploadServer(grpcServer, &upload.UploadServiceImpl{})
 
-	mtproto.RegisterRPCUsersServer(grpcServer, &users.UsersServiceImpl{
-		UsersDAO: usersDAO,
-	})
+	mtproto.RegisterRPCUsersServer(grpcServer, &users.UsersServiceImpl{})
 
-	glog.Info("NewRPCServer in 0.0.0.0:10001.")
+	glog.Infof("NewRPCServer in {%v}.", bizServerConfig)
 
 	grpcServer.Serve(lis)
 }

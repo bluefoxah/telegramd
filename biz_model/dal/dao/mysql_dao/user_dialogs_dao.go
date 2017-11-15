@@ -15,12 +15,11 @@
  * limitations under the License.
  */
 
-package dao
+package mysql_dao
 
 import (
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
-	"github.com/nebulaim/telegramd/base/base"
 	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
@@ -80,12 +79,12 @@ func (dao *UserDialogsDAO) SelectPinnedDialogs(user_id int32) ([]do.UserDialogsD
 	return values, nil
 }
 
-func (dao *UserDialogsDAO) CheckExists(peer_type int32, peer_id int32, user_id int32) (*do.UserDialogsDO, error) {
+func (dao *UserDialogsDAO) CheckExists(user_id int32, peer_type int32, peer_id int32) (*do.UserDialogsDO, error) {
 	// TODO(@benqi): sqlmap
 	params := make(map[string]interface{})
+	params["user_id"] = user_id
 	params["peer_type"] = peer_type
 	params["peer_id"] = peer_id
-	params["user_id"] = user_id
 
 	var sql = "select id from user_dialogs where user_id = :user_id and peer_type = :peer_type and peer_id = :peer_id"
 	rows, err := dao.db.NamedQuery(sql, params)
@@ -132,6 +131,37 @@ func (dao *UserDialogsDAO) SelectDialogsByUserID(user_id int32) ([]do.UserDialog
 		err := rows.StructScan(&v)
 		if err != nil {
 			glog.Errorf("UserDialogsDAO/SelectDialogsByUserID error: %s", err)
+			return nil, err
+		}
+		values = append(values, v)
+	}
+
+	return values, nil
+}
+
+func (dao *UserDialogsDAO) SelectDialogsByPeerType(user_id int32, peer_type int32) ([]do.UserDialogsDO, error) {
+	// TODO(@benqi): sqlmap
+	params := make(map[string]interface{})
+	params["user_id"] = user_id
+	params["peer_type"] = peer_type
+
+	var sql = "select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = :user_id and peer_type = :peer_type"
+	rows, err := dao.db.NamedQuery(sql, params)
+	if err != nil {
+		glog.Errorf("UserDialogsDAO/SelectDialogsByPeerType error: ", err)
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	var values []do.UserDialogsDO
+	for rows.Next() {
+		v := do.UserDialogsDO{}
+
+		// TODO(@benqi): 不使用反射
+		err := rows.StructScan(&v)
+		if err != nil {
+			glog.Errorf("UserDialogsDAO/SelectDialogsByPeerType error: %s", err)
 			return nil, err
 		}
 		values = append(values, v)

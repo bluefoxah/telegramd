@@ -15,13 +15,14 @@
  * limitations under the License.
  */
 
-package dao
+package mysql_dao
 
 import (
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
 	"github.com/nebulaim/telegramd/base/base"
 	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"fmt"
 )
 
 type MessagesDAO struct {
@@ -53,9 +54,9 @@ func (dao *MessagesDAO) Insert(do *do.MessagesDO) (id int64, err error) {
 func (dao *MessagesDAO) SelectByIdList(idList []int32) ([]do.MessagesDO, error) {
 	// TODO(@benqi): sqlmap
 	params := make(map[string]interface{})
-	params["idList"] = base.JoinInt32List(idList, ",")
+	// params["idList"] = base.JoinInt32List(idList, ",")
 
-	var sql = "select id, user_id, peer_type, peer_id, random_id, message, `date` from messages where id in (:idList)"
+	var sql = fmt.Sprintf("select id, user_id, peer_type, peer_id, random_id, message, date from messages where id in (%s)", base.JoinInt32List(idList, ","))
 	rows, err := dao.db.NamedQuery(sql, params)
 	if err != nil {
 		glog.Errorf("MessagesDAO/SelectByIdList error: ", err)

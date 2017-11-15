@@ -20,19 +20,31 @@ package model
 import (
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"github.com/nebulaim/telegramd/mtproto"
-	"os/user"
+	"sync"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/base"
 )
 
-type UserModel struct {
-	usersDAO *dao.UsersDAO
+type userModel struct {
+	// usersDAO *dao.UsersDAO
 }
 
-func NewUserModel(user *dao.UsersDAO) *UserModel {
-	return &UserModel{user}
+var (
+	userInstance *userModel
+	userInstanceOnce sync.Once
+)
+
+func GetUserModel() *userModel {
+	userInstanceOnce.Do(func() {
+		userInstance = &userModel{}
+	})
+	return userInstance
 }
 
-func (m *UserModel) GetUser(userId int32) (user* mtproto.TLUser) {
-	userDO, _ := m.usersDAO.SelectById(userId)
+func (m *userModel) GetUser(userId int32) (user* mtproto.TLUser) {
+	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
+
+	userDO, _ := usersDAO.SelectById(userId)
 	if userDO != nil {
 		// TODO(@benqi): fill bot, photo, about...
 		user = &mtproto.TLUser{}
@@ -48,9 +60,11 @@ func (m *UserModel) GetUser(userId int32) (user* mtproto.TLUser) {
 	return
 }
 
-func (m *UserModel) GetUserList(userIdList []int32) (users []*mtproto.TLUser) {
-	userDOList, _ := m.usersDAO.SelectUsersByIdList(userIdList)
-	users = make([]*mtproto.TLUser, len(userDOList))
+func (m *userModel) GetUserList(userIdList []int32) (users []*mtproto.TLUser) {
+	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
+
+	userDOList, _ := usersDAO.SelectUsersByIdList(userIdList)
+	users = []*mtproto.TLUser{}
 	for _, userDO := range userDOList {
 		// TODO(@benqi): fill bot, photo, about...
 		user := &mtproto.TLUser{}
@@ -65,10 +79,13 @@ func (m *UserModel) GetUserList(userIdList []int32) (users []*mtproto.TLUser) {
 
 		users = append(users, user)
 	}
+
+	glog.Infof("SelectUsersByIdList(%s) - {%v}", base.JoinInt32List(userIdList, ","), users)
+
 	return
 }
 
-func (m *UserModel) GetUserFull(userId int32) (userFull *mtproto.TLUserFull) {
+func (m *userModel) GetUserFull(userId int32) (userFull *mtproto.TLUserFull) {
 	//TODO(@benqi): 等Link和NotifySettings实现后再来完善
 	//fullUser := &mtproto.TLUserFull{}
 	//fullUser.PhoneCallsAvailable = true

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package dao
+package mysql_dao
 
 import (
 	"github.com/golang/glog"
@@ -23,39 +23,39 @@ import (
 	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
-type MasterKeysDAO struct {
+type AuthSaltsDAO struct {
 	db *sqlx.DB
 }
 
-func NewMasterKeysDAO(db *sqlx.DB) *MasterKeysDAO {
-	return &MasterKeysDAO{db}
+func NewAuthSaltsDAO(db *sqlx.DB) *AuthSaltsDAO {
+	return &AuthSaltsDAO{db}
 }
 
-func (dao *MasterKeysDAO) Insert(do *do.MasterKeysDO) (id int64, err error) {
+func (dao *AuthSaltsDAO) Insert(do *do.AuthSaltsDO) (id int64, err error) {
 	// TODO(@benqi): sqlmap
 	id = 0
 
-	var sql = "insert into master_keys(auth_id, body) values (:auth_id, :body)"
+	var sql = "insert into auth_salts(auth_id, salt) values (:auth_id, :salt)"
 	r, err := dao.db.NamedExec(sql, do)
 	if err != nil {
-		glog.Error("MasterKeysDAO/Insert error: ", err)
+		glog.Error("AuthSaltsDAO/Insert error: ", err)
 		return
 	}
 
 	id, err = r.LastInsertId()
 	if err != nil {
-		glog.Error("MasterKeysDAO/LastInsertId error: ", err)
+		glog.Error("AuthSaltsDAO/LastInsertId error: ", err)
 	}
 	return
 }
 
-func (dao *MasterKeysDAO) SelectByAuthId(auth_id int64) (*do.MasterKeysDO, error) {
+func (dao *AuthSaltsDAO) SelectByAuthId(auth_id int64) (*do.AuthSaltsDO, error) {
 	// TODO(@benqi): sqlmap
-	var sql = "select body from master_keys where auth_id = :auth_id"
-	do := &do.MasterKeysDO{AuthId: auth_id}
+	var sql = "select auth_id, salt from auth_salts where auth_id = :auth_id"
+	do := &do.AuthSaltsDO{AuthId: auth_id}
 	rows, err := dao.db.NamedQuery(sql, do)
 	if err != nil {
-		glog.Error("MasterKeysDAO/SelectById error: ", err)
+		glog.Error("AuthSaltsDAO/SelectById error: ", err)
 		return nil, err
 	}
 
@@ -64,7 +64,7 @@ func (dao *MasterKeysDAO) SelectByAuthId(auth_id int64) (*do.MasterKeysDO, error
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("MasterKeysDAO/SelectById error: ", err)
+			glog.Error("AuthSaltsDAO/SelectById error: ", err)
 			return nil, err
 		}
 	} else {

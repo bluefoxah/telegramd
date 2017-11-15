@@ -1,0 +1,19 @@
+# sync_server.toml
+
+ver = "0.0.1"
+#logPath = "/tmp/biz_server.log"
+
+[server]
+addr = "0.0.0.0:10002"
+
+[[redis]]
+name = "cache"
+addr = "127.0.0.1:6379"
+idle = 100
+active = 100
+dialTimeout = "1s"
+readTimeout = "1s"
+writeTimeout = "1s"
+idleTimeout = "10s"
+dbNum = "0"
+password = ""

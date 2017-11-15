@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package dao
+package mysql_dao
 
 import (
 	// "github.com/golang/glog"
@@ -28,6 +28,10 @@ import (
 
 type CommonDAO struct {
 	db *sqlx.DB
+}
+
+func NewCommonDAO(db *sqlx.DB) *CommonDAO {
+	return &CommonDAO{db}
 }
 
 // 检查是否存在

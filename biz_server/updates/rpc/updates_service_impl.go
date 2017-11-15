@@ -22,6 +22,7 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
 	"errors"
+	"time"
 )
 
 type UpdatesServiceImpl struct {
@@ -29,12 +30,27 @@ type UpdatesServiceImpl struct {
 
 func (s *UpdatesServiceImpl) UpdatesGetState(ctx context.Context, request *mtproto.TLUpdatesGetState) (*mtproto.Updates_State, error) {
 	glog.Infof("UpdatesGetState - Process: {%v}", request)
-	return nil, errors.New("UpdatesGetState - Not impl")
+
+	state := mtproto.TLUpdatesState{}
+	state.Date = int32(time.Now().Unix())
+	state.Pts = 1
+	state.Qts = 0
+	state.Seq = 1
+	state.UnreadCount = 0
+
+	glog.Infof("UpdatesGetState - reply: {%v}", state)
+	return state.ToUpdates_State(), nil
 }
 
 func (s *UpdatesServiceImpl) UpdatesGetDifference(ctx context.Context, request *mtproto.TLUpdatesGetDifference) (*mtproto.Updates_Difference, error) {
 	glog.Infof("UpdatesGetDifference - Process: {%v}", request)
-	return nil, errors.New("UpdatesGetDifference - Not impl")
+
+	difference := &mtproto.TLUpdatesDifferenceEmpty{}
+	difference.Seq = 1
+	difference.Date = request.Pts
+
+	glog.Infof("UpdatesGetDifference - reply: {%v}", difference)
+	return difference.ToUpdates_Difference(), nil
 }
 
 func (s *UpdatesServiceImpl) UpdatesGetChannelDifference(ctx context.Context, request *mtproto.TLUpdatesGetChannelDifference) (*mtproto.Updates_ChannelDifference, error) {

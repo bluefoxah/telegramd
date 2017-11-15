@@ -19,18 +19,26 @@ package model
 
 import (
 	"github.com/nebulaim/telegramd/mtproto"
-	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"github.com/nebulaim/telegramd/biz_model/base"
+	"sync"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 	"github.com/golang/glog"
-	"time"
 )
 
-type DialogModel struct {
-	dislogsDAO *dao.UserDialogsDAO
+var (
+	dialogInstance *dialogModel
+	dialogInstanceOnce sync.Once
+)
+
+type dialogModel struct {
 }
 
-func NewDialogModel(dislogsDAO *dao.UserDialogsDAO) *DialogModel {
-	return &DialogModel{dislogsDAO}
+func GetDialogModel() *dialogModel {
+	dialogInstanceOnce.Do(func() {
+		dialogInstance = &dialogModel{}
+	})
+	return dialogInstance
 }
 
 // dialog#e4def5db flags:# pinned:flags.2?true peer:Peer top_message:int read_inbox_max_id:int read_outbox_max_id:int unread_count:int unread_mentions_count:int notify_settings:PeerNotifySettings pts:flags.0?int draft:flags.1?DraftMessage = Dialog;
@@ -46,9 +54,21 @@ func NewDialogModel(dislogsDAO *dao.UserDialogsDAO) *DialogModel {
 //	int32 pts = 9;
 //	DraftMessage draft = 10;
 //}
-func (m *DialogModel) GetDialogsByUserID(userId int32) (dialogs []*mtproto.TLDialog) {
-	dialogDOList, _ := m.dislogsDAO.SelectDialogsByUserID(userId)
-	dialogs = make([]*mtproto.TLDialog, len(dialogDOList))
+func (m *dialogModel) GetDialogsByUserIDAndType(userId int32, peerType base.PeerType) (dialogs []*mtproto.TLDialog) {
+	dialogsDAO := dao.GetUserDialogsDAO(dao.DB_SLAVE)
+
+	var dialogDOList []dataobject.UserDialogsDO
+	if peerType == base.PEER_INVALID || peerType == base.PEER_EMPTY {
+		dialogDOList, _ = dialogsDAO.SelectDialogsByUserID(userId)
+		glog.Infof("SelectDialogsByUserID(%d) - {%v}", userId, dialogDOList)
+	} else {
+		dialogDOList, _ = dialogsDAO.SelectDialogsByPeerType(userId, int32(peerType))
+		glog.Infof("SelectDialogsByPeerType(%d, %d) - {%v}", userId, int32(peerType), dialogDOList)
+	}
+
+	// []do.UserDialogsDO
+	// dialogDOList, _ := dialogsDAO.SelectDialogsByUserID(userId)
+	dialogs = []*mtproto.TLDialog{}
 	for _, dialogDO := range dialogDOList {
 		dialog := &mtproto.TLDialog{}
 		dialog.Pinned = dialogDO.IsPinned == 1
@@ -72,7 +92,6 @@ func (m *DialogModel) GetDialogsByUserID(userId int32) (dialogs []*mtproto.TLDia
 		dialog.UnreadMentionsCount = dialogDO.UnreadMentionsCount
 
 		// TODO(@benqi): pts/draft
-
 		// NotifySettings
 		peerNotifySettings := &mtproto.TLPeerNotifySettings{}
 		peerNotifySettings.ShowPreviews = true
@@ -82,10 +101,12 @@ func (m *DialogModel) GetDialogsByUserID(userId int32) (dialogs []*mtproto.TLDia
 
 		dialogs = append(dialogs, dialog)
 	}
+
+	glog.Infof("SelectDialogsByPeerType(%d, %d) - {%v}", userId, int32(peerType), dialogs)
 	return
 }
 
-func (m *DialogModel) GetPinnedDialogs(userId int32) (dialogs []*mtproto.TLDialog) {
+func (m *dialogModel) GetPinnedDialogs(userId int32) (dialogs []*mtproto.TLDialog) {
 	//userDialogsDO, _ := s.UserDialogsDAO.SelectPinnedDialogs(rpcMetaData.UserId)
 	//_ = userDialogsDO
 	//

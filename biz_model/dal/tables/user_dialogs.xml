@@ -20,4 +20,14 @@
             SELECT peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count FROM user_dialogs WHERE user_id=:user_id
         </sql>
     </operation>
+    <operation name="SelectDialogsByPeerType" result_set="list">
+        <sql>
+            SELECT
+                peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count
+            FROM
+                user_dialogs
+            WHERE
+                user_id=:user_id AND peer_type = :peer_type
+        </sql>
+    </operation>
 </table>

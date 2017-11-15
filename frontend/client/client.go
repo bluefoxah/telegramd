@@ -29,7 +29,6 @@ import (
 	"fmt"
 	"github.com/nebulaim/telegramd/frontend/id"
 	"time"
-	"github.com/nebulaim/telegramd/biz_model/model"
 )
 
 
@@ -47,12 +46,6 @@ type Client struct {
 	NewNonce []byte
 	A *big.Int
 	P *big.Int
-
-	// TODO(@benqi): 推到内部服务
-	AuthsDAO *dao.AuthsDAO
-	AuthUsersDAO *dao.AuthUsersDAO
-	AuthSaltsDAO *dao.AuthSaltsDAO
-	Status *model.OnlineStatusModel
 }
 
 func NewClient(session *net2.Session, rpcClient *rpc.RPCClient) (c *Client) {
@@ -195,7 +188,7 @@ func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 		// TODO(@benqi): 透传UserID
 
 		if c.Codec.UserId == 0 {
-			do, _ := c.AuthUsersDAO.SelectByAuthId(c.Codec.AuthKeyId)
+			do, _ := dao.GetAuthUsersDAO(dao.DB_SLAVE).SelectByAuthId(c.Codec.AuthKeyId)
 			glog.Info("SelectByAuthId : ", do)
 			if do != nil {
 				c.Codec.UserId = do.UserId
