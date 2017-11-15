@@ -34,32 +34,10 @@ type Server struct {
 
 func NewServer(addr string) (s *Server) {
 	s = &Server{}
-	s.authsDAO = dao.NewAuthsDAO(db)
-	s.authSaltsDAO = dao.NewAuthSaltsDAO(db)
-	masterKeysDAO := dao.NewMasterKeysDAO(db)
-	s.authUsersDAO = dao.NewAuthUsersDAO(db)
-
-	redisConfig := &redis_client.RedisConfig{
-		Name:         "test",
-		Addr:         "127.0.0.1:6379",
-		Idle:         100,
-		Active:       100,
-		DialTimeout:  1000000,
-		ReadTimeout:  1000000,
-		WriteTimeout: 1000000,
-		IdleTimeout:  15000000,
-		DBNum:        "0",
-		Password:     "",
-	}
-
-	redisPool := redis_client.NewRedisPool(redisConfig)
-	s.onlineModel = model.NewOnlineStatusModel(redisPool)
 
 	mtproto := NewMTProto()
 	lsn := listen("server", addr)
 	s.Server = net2.NewServer(lsn, mtproto, 1024, net2.HandlerFunc(emptySessionLoop))
-	s.cacheKeys = auth_key.NewAuthKeyCacheManager(masterKeysDAO)
-
 	s.cacheKeys = auth_key.NewAuthKeyCacheManager()
 	return
 }
@@ -77,13 +55,8 @@ func (s* Server) Serve(rpcClient *rpc.RPCClient, syncRpcClient *rpc.SyncRPCClien
 		glog.Info("a new client ", session.ID())
 
 		c := client.NewClient(session, rpcClient)
-
 		// 使用很土的办法，注入cacheKeys
 		c.Codec.AuthKeyStorager = s.cacheKeys
-		c.AuthsDAO = s.authsDAO
-		c.AuthSaltsDAO = s.authSaltsDAO
-		c.AuthUsersDAO = s.authUsersDAO
-		c.Status = s.onlineModel
 
 		go s.sessionLoop(c)
 	}
