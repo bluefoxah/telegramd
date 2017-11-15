@@ -24,7 +24,6 @@ import (
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"google.golang.org/grpc/metadata"
 	"time"
-	"github.com/cosiner/gohper/errors"
 	"github.com/nebulaim/telegramd/biz_server/sync_client"
 	"github.com/nebulaim/telegramd/biz_model/base"
 	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
@@ -202,9 +201,55 @@ func (s *MessagesServiceImpl) MessagesGetMessages(ctx context.Context, request *
 	return nil, nil
 }
 
+/*
+message TL_messages_getHistory {
+  InputPeer peer = 1;
+  int32 offset_id = 2;
+  int32 offset_date = 3;
+  int32 add_offset = 4;
+  int32 limit = 5;
+  int32 max_id = 6;
+  int32 min_id = 7;
+};
+ */
+// messages.getHistory#afa92846 peer:InputPeer offset_id:int offset_date:int add_offset:int limit:int max_id:int min_id:int = messages.Messages;
+// messages.messages#8c718e87 messages:Vector<Message> chats:Vector<Chat> users:Vector<User> = messages.Messages;
 func (s *MessagesServiceImpl) MessagesGetHistory(ctx context.Context, request *mtproto.TLMessagesGetHistory) (*mtproto.Messages_Messages, error) {
 	glog.Infof("MessagesGetHistory - Process: {%v}", request)
-	return nil, errors.New("Not impl")
+
+	md, _ := metadata.FromIncomingContext(ctx)
+	rpcMetaData := mtproto.RpcMetaData{}
+	rpcMetaData.Decode(md)
+
+	messagesMessages := &mtproto.TLMessagesMessages{}
+	ptype := base.FromInputPeer(request.Peer)
+
+	chatIdList := []int32{}
+	_ = chatIdList
+	userIdList := []int32{rpcMetaData.UserId}
+
+	switch ptype {
+	case base.PEER_EMPTY:
+	case base.PEER_CHAT:
+		// TODO(@benqi): chats
+	case base.PEER_USER:
+		ms := model.GetMessageModel().GetMessagesByUserIdPeerOffsetLimit(rpcMetaData.UserId, ptype, request.Peer.GetInputPeerUser().UserId, request.OffsetId, request.Limit)
+		for _, message := range ms {
+			messagesMessages.Messages = append(messagesMessages.Messages, message.ToMessage())
+		}
+		userIdList = append(userIdList, request.Peer.GetInputPeerUser().UserId)
+	case base.PEER_SELF:
+	case base.PEER_CHANNEL:
+	default:
+	}
+
+	users := model.GetUserModel().GetUserList(userIdList)
+	for _, u := range users {
+		messagesMessages.Users = append(messagesMessages.Users, u.ToUser())
+	}
+
+	glog.Infof("MessagesGetHistory - reply: {%v}", messagesMessages)
+	return messagesMessages.ToMessages_Messages(), nil
 }
 
 func (s *MessagesServiceImpl) MessagesSearch(ctx context.Context, request *mtproto.TLMessagesSearch) (*mtproto.Messages_Messages, error) {
@@ -749,6 +794,7 @@ func (s *MessagesServiceImpl) MessagesGetPinnedDialogs(ctx context.Context, requ
 	rpcMetaData := mtproto.RpcMetaData{}
 	rpcMetaData.Decode(md)
 
+/*
 	// TODO(@benqi): check error!
 	// authUsersDO, _ := s.AuthUsersDAO.SelectByAuthId(rpcMetaData.AuthId)
 	// glog.Info("user_id: ", authUsersDO)
@@ -766,6 +812,18 @@ func (s *MessagesServiceImpl) MessagesGetPinnedDialogs(ctx context.Context, requ
 	glog.Infof("MessagesGetPinnedDialogs - reply: {%v}\n", reply)
 
 	return reply, nil
+ */
+ 	peerDialogs := &mtproto.TLMessagesPeerDialogs{}
+	state := &mtproto.TLUpdatesState{}
+	state.Date = int32(time.Now().Unix())
+	state.Pts = 1
+	state.Qts = 0
+	state.Seq = 1
+	state.UnreadCount = 0
+	peerDialogs.State = state.ToUpdates_State()
+
+	glog.Infof("MessagesGetPinnedDialogs - reply: {%v}\n", peerDialogs)
+	return peerDialogs.ToMessages_PeerDialogs(), nil
 }
 
 func (s *MessagesServiceImpl) MessagesGetFeaturedStickers(ctx context.Context, request *mtproto.TLMessagesGetFeaturedStickers) (*mtproto.Messages_FeaturedStickers, error) {

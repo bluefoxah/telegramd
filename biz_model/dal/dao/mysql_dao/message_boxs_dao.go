@@ -31,12 +31,11 @@ func NewMessageBoxsDAO(db *sqlx.DB) *MessageBoxsDAO {
 	return &MessageBoxsDAO{db}
 }
 
+// insert into message_boxs(user_id, message_box_type, message_id, pts, created_at) values (:user_id, :message_box_type, :message_id, :pts, :created_at)
+// TODO(@benqi): sqlmap
 func (dao *MessageBoxsDAO) Insert(do *do.MessageBoxsDO) (id int64, err error) {
-	// TODO(@benqi): sqlmap
-	id = 0
-
-	var sql = "insert into message_boxs(user_id, message_box_type, message_id, pts, created_at) values (:user_id, :message_box_type, :message_id, :pts, :created_at)"
-	r, err := dao.db.NamedExec(sql, do)
+	var query = "insert into message_boxs(user_id, message_box_type, message_id, pts, created_at) values (:user_id, :message_box_type, :message_id, :pts, :created_at)"
+	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		glog.Error("MessageBoxsDAO/Insert error: ", err)
 		return

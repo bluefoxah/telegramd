@@ -31,12 +31,11 @@ func NewSeqUpdatesNgenDAO(db *sqlx.DB) *SeqUpdatesNgenDAO {
 	return &SeqUpdatesNgenDAO{db}
 }
 
+// insert into seq_updates_ngen(seq_name, seq, created_at) values (:seq_name, :seq, :created_at)
+// TODO(@benqi): sqlmap
 func (dao *SeqUpdatesNgenDAO) Insert(do *do.SeqUpdatesNgenDO) (id int64, err error) {
-	// TODO(@benqi): sqlmap
-	id = 0
-
-	var sql = "insert into seq_updates_ngen(seq_name, seq, created_at) values (:seq_name, :seq, :created_at)"
-	r, err := dao.db.NamedExec(sql, do)
+	var query = "insert into seq_updates_ngen(seq_name, seq, created_at) values (:seq_name, :seq, :created_at)"
+	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		glog.Error("SeqUpdatesNgenDAO/Insert error: ", err)
 		return
@@ -49,13 +48,12 @@ func (dao *SeqUpdatesNgenDAO) Insert(do *do.SeqUpdatesNgenDO) (id int64, err err
 	return
 }
 
+// update seq_updates_ngen set seq = :seq where seq_name = :seq_name
+// TODO(@benqi): sqlmap
 func (dao *SeqUpdatesNgenDAO) UpdateSeqBySeqName(seq int64, seq_name string) (rows int64, err error) {
-	// TODO(@benqi): sqlmap
-	rows = 0
+	var query = "update seq_updates_ngen set seq = ? where seq_name = ?"
+	r, err := dao.db.Exec(query, seq, seq_name)
 
-	var sql = "update seq_updates_ngen set seq = :seq where seq_name = :seq_name"
-	do := &do.SeqUpdatesNgenDO{Seq: seq, SeqName: seq_name}
-	r, err := dao.db.NamedExec(sql, do)
 	if err != nil {
 		glog.Error("SeqUpdatesNgenDAO/UpdateSeqBySeqName error: ", err)
 		return
@@ -68,17 +66,20 @@ func (dao *SeqUpdatesNgenDAO) UpdateSeqBySeqName(seq int64, seq_name string) (ro
 	return
 }
 
+// select seq_name, seq from seq_updates_ngen where seq_name = :seq_name
+// TODO(@benqi): sqlmap
 func (dao *SeqUpdatesNgenDAO) SelectBySeqName(seq_name string) (*do.SeqUpdatesNgenDO, error) {
-	// TODO(@benqi): sqlmap
-	var sql = "select seq_name, seq from seq_updates_ngen where seq_name = :seq_name"
-	do := &do.SeqUpdatesNgenDO{SeqName: seq_name}
-	rows, err := dao.db.NamedQuery(sql, do)
+	var query = "select seq_name, seq from seq_updates_ngen where seq_name = ?"
+	rows, err := dao.db.Queryx(query, seq_name)
+
 	if err != nil {
 		glog.Error("SeqUpdatesNgenDAO/SelectBySeqName error: ", err)
 		return nil, err
 	}
 
 	defer rows.Close()
+
+	do := &do.SeqUpdatesNgenDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {

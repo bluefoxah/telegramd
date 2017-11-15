@@ -75,6 +75,7 @@ func (m *messageModel) GetMessagesByIDList(idList []int32) (messages []*mtproto.
 
 	for _, messageDO := range messagesDOList {
 		message := &mtproto.TLMessage{}
+		message.Out = true
 		message.Id = messageDO.Id
 		message.FromId = messageDO.UserId
 		switch messageDO.PeerType {
@@ -97,5 +98,39 @@ func (m *messageModel) GetMessagesByIDList(idList []int32) (messages []*mtproto.
 	}
 
 	glog.Infof("SelectByIdList(%s) - {%v}", base2.JoinInt32List(idList, ","), messages)
+	return
+}
+
+//
+func (m *messageModel) GetMessagesByUserIdPeerOffsetLimit(userId int32, ptype base.PeerType, peerId int32, offset int32, limit int32) (messages []*mtproto.TLMessage) {
+	// TODO(@benqi): Check messageDAO
+	messageDAO := dao.GetMessagesDAO(dao.DB_SLAVE)
+
+	messagesDOList, _ := messageDAO.SelectByUserIdAndPeerOffsetLimit(offset, int32(ptype), userId, peerId, limit)
+	messages = []*mtproto.TLMessage{}
+
+	for _, messageDO := range messagesDOList {
+		message := &mtproto.TLMessage{}
+		message.Out = true
+		message.Id = messageDO.Id
+		message.FromId = messageDO.UserId
+		switch messageDO.PeerType {
+		case base.PEER_EMPTY:
+			continue
+		case base.PEER_SELF, base.PEER_USER:
+			peer := &mtproto.TLPeerUser{messageDO.PeerId}
+			message.ToId = peer.ToPeer()
+		case base.PEER_CHAT:
+			peer := &mtproto.TLPeerChat{messageDO.PeerId}
+			message.ToId = peer.ToPeer()
+		case base.PEER_CHANNEL:
+			peer := &mtproto.TLPeerChannel{messageDO.PeerId}
+			message.ToId = peer.ToPeer()
+		}
+		message.Date = messageDO.Date
+		message.Message = messageDO.Message
+
+		messages = append(messages, message)
+	}
 	return
 }

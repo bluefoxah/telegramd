@@ -119,7 +119,7 @@ func (s *AuthServiceImpl) AuthSendCode(ctx context.Context, request *mtproto.TLA
 	// 检查满足条件的TransactionHash是否存在，可能的条件：
 	//  1. is_deleted !=0 and now - created_at < 15 分钟
 
-	do, err := dao.GetAuthPhoneTransactionsDAO(dao.DB_SLAVE).SelectByPhoneAndApiIdAndHash(request.ApiId, request.ApiHash, request.PhoneNumber)
+	do, err := dao.GetAuthPhoneTransactionsDAO(dao.DB_SLAVE).SelectByPhoneAndApiIdAndHash(request.PhoneNumber, request.ApiId, request.ApiHash)
 	if err != nil {
 		glog.Errorf("AuthSendCode - s.AuthPhoneTransactionsDAO.SelectByPhoneAndApiIdAndHash: %s", err)
 		return nil, err

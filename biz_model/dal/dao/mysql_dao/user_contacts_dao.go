@@ -31,12 +31,11 @@ func NewUserContactsDAO(db *sqlx.DB) *UserContactsDAO {
 	return &UserContactsDAO{db}
 }
 
+// insert into user_contacts(owner_user_id, contact_user_id) values (:owner_user_id, :contact_user_id)
+// TODO(@benqi): sqlmap
 func (dao *UserContactsDAO) Insert(do *do.UserContactsDO) (id int64, err error) {
-	// TODO(@benqi): sqlmap
-	id = 0
-
-	var sql = "insert into user_contacts(owner_user_id, contact_user_id) values (:owner_user_id, :contact_user_id)"
-	r, err := dao.db.NamedExec(sql, do)
+	var query = "insert into user_contacts(owner_user_id, contact_user_id) values (:owner_user_id, :contact_user_id)"
+	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		glog.Error("UserContactsDAO/Insert error: ", err)
 		return
@@ -49,11 +48,12 @@ func (dao *UserContactsDAO) Insert(do *do.UserContactsDO) (id int64, err error) 
 	return
 }
 
+// select contact_user_id from user_contacts where owner_user_id = :owner_user_id and is_deleted = 0
+// TODO(@benqi): sqlmap
 func (dao *UserContactsDAO) SelectUserContacts(owner_user_id int32) ([]do.UserContactsDO, error) {
-	// TODO(@benqi): sqlmap
-	var sql = "select contact_user_id from user_contacts where owner_user_id = :owner_user_id and is_deleted = 0"
-	do2 := &do.UserContactsDO{OwnerUserId: owner_user_id}
-	rows, err := dao.db.NamedQuery(sql, do2)
+	var query = "select contact_user_id from user_contacts where owner_user_id = ? and is_deleted = 0"
+	rows, err := dao.db.Queryx(query, owner_user_id)
+
 	if err != nil {
 		glog.Errorf("UserContactsDAO/SelectUserContacts error: ", err)
 		return nil, err

@@ -31,12 +31,11 @@ func NewUserDialogsDAO(db *sqlx.DB) *UserDialogsDAO {
 	return &UserDialogsDAO{db}
 }
 
+// insert into user_dialogs(user_id, peer_type, peer_id, created_at) values (:user_id, :peer_type, :peer_id, :created_at)
+// TODO(@benqi): sqlmap
 func (dao *UserDialogsDAO) Insert(do *do.UserDialogsDO) (id int64, err error) {
-	// TODO(@benqi): sqlmap
-	id = 0
-
-	var sql = "insert into user_dialogs(user_id, peer_type, peer_id, created_at) values (:user_id, :peer_type, :peer_id, :created_at)"
-	r, err := dao.db.NamedExec(sql, do)
+	var query = "insert into user_dialogs(user_id, peer_type, peer_id, created_at) values (:user_id, :peer_type, :peer_id, :created_at)"
+	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		glog.Error("UserDialogsDAO/Insert error: ", err)
 		return
@@ -49,13 +48,12 @@ func (dao *UserDialogsDAO) Insert(do *do.UserDialogsDO) (id int64, err error) {
 	return
 }
 
+// select peer_type, peer_id from user_dialogs where user_id = :user_id and is_pinned = 1
+// TODO(@benqi): sqlmap
 func (dao *UserDialogsDAO) SelectPinnedDialogs(user_id int32) ([]do.UserDialogsDO, error) {
-	// TODO(@benqi): sqlmap
-	params := make(map[string]interface{})
-	params["user_id"] = user_id
+	var query = "select peer_type, peer_id from user_dialogs where user_id = ? and is_pinned = 1"
+	rows, err := dao.db.Queryx(query, user_id)
 
-	var sql = "select peer_type, peer_id from user_dialogs where user_id = :user_id and is_pinned = 1"
-	rows, err := dao.db.NamedQuery(sql, params)
 	if err != nil {
 		glog.Errorf("UserDialogsDAO/SelectPinnedDialogs error: ", err)
 		return nil, err
@@ -79,15 +77,12 @@ func (dao *UserDialogsDAO) SelectPinnedDialogs(user_id int32) ([]do.UserDialogsD
 	return values, nil
 }
 
+// select id from user_dialogs where user_id = :user_id and peer_type = :peer_type and peer_id = :peer_id
+// TODO(@benqi): sqlmap
 func (dao *UserDialogsDAO) CheckExists(user_id int32, peer_type int32, peer_id int32) (*do.UserDialogsDO, error) {
-	// TODO(@benqi): sqlmap
-	params := make(map[string]interface{})
-	params["user_id"] = user_id
-	params["peer_type"] = peer_type
-	params["peer_id"] = peer_id
+	var query = "select id from user_dialogs where user_id = ? and peer_type = ? and peer_id = ?"
+	rows, err := dao.db.Queryx(query, user_id, peer_type, peer_id)
 
-	var sql = "select id from user_dialogs where user_id = :user_id and peer_type = :peer_type and peer_id = :peer_id"
-	rows, err := dao.db.NamedQuery(sql, params)
 	if err != nil {
 		glog.Error("UserDialogsDAO/CheckExists error: ", err)
 		return nil, err
@@ -109,13 +104,12 @@ func (dao *UserDialogsDAO) CheckExists(user_id int32, peer_type int32, peer_id i
 	return do, nil
 }
 
+// select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = :user_id
+// TODO(@benqi): sqlmap
 func (dao *UserDialogsDAO) SelectDialogsByUserID(user_id int32) ([]do.UserDialogsDO, error) {
-	// TODO(@benqi): sqlmap
-	params := make(map[string]interface{})
-	params["user_id"] = user_id
+	var query = "select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = ?"
+	rows, err := dao.db.Queryx(query, user_id)
 
-	var sql = "select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = :user_id"
-	rows, err := dao.db.NamedQuery(sql, params)
 	if err != nil {
 		glog.Errorf("UserDialogsDAO/SelectDialogsByUserID error: ", err)
 		return nil, err
@@ -139,14 +133,12 @@ func (dao *UserDialogsDAO) SelectDialogsByUserID(user_id int32) ([]do.UserDialog
 	return values, nil
 }
 
+// select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = :user_id and peer_type = :peer_type
+// TODO(@benqi): sqlmap
 func (dao *UserDialogsDAO) SelectDialogsByPeerType(user_id int32, peer_type int32) ([]do.UserDialogsDO, error) {
-	// TODO(@benqi): sqlmap
-	params := make(map[string]interface{})
-	params["user_id"] = user_id
-	params["peer_type"] = peer_type
+	var query = "select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = ? and peer_type = ?"
+	rows, err := dao.db.Queryx(query, user_id, peer_type)
 
-	var sql = "select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = :user_id and peer_type = :peer_type"
-	rows, err := dao.db.NamedQuery(sql, params)
 	if err != nil {
 		glog.Errorf("UserDialogsDAO/SelectDialogsByPeerType error: ", err)
 		return nil, err

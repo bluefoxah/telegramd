@@ -15,13 +15,12 @@
  * limitations under the License.
  */
 
-package dao
+package mysql_dao
 
 import(
 	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 	"github.com/jmoiron/sqlx"
 	"github.com/golang/glog"
-	"github.com/nebulaim/telegramd/base/base"
 )
 
 type {{.Name}}DAO struct {
@@ -47,12 +46,11 @@ func New{{.Name}}DAO(db* sqlx.DB) *{{.Name}}DAO {
 {{end}}
 
 {{define "INSERT"}}
+// {{.Sql}}
+// TODO(@benqi): sqlmap
 func (dao *{{.TableName}}DAO) {{.FuncName}}(do *do.{{.TableName}}DO) (id int64, err error) {
-	// TODO(@benqi): sqlmap
-	id = 0
-
-	var sql = "{{.Sql}}"
-	r, err := dao.db.NamedExec(sql, do)
+	var query = "{{.Sql}}"
+	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		glog.Error("{{.TableName}}DAO/{{.FuncName}} error: ", err)
 		return
@@ -67,17 +65,15 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}(do *do.{{.TableName}}DO) (id int64, 
 {{end}}
 
 {{define "SELECT_STRUCT_SINGLE"}}
+// {{.Sql}}
+// TODO(@benqi): sqlmap
 func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) (*do.{{.TableName}}DO, error) {
-	// TODO(@benqi): sqlmap
-    params := make(map[string]interface{})
-    {{ range $i, $v := .Params }} params["{{.FieldName}}"] = {{if eq .Type "[]int32"}} base.JoinInt32List({{.FieldName}}, ",")
-        {{else if eq .Type "[]int64"}} base.JoinInt32List({{.FieldName}}, ",")
-        {{else if eq .Type "[]string"}} strings.Join({{.FieldName}}, ",")
-        {{else}} {{.FieldName}} {{end}}
-    {{end}}
-
-	var sql = "{{.Sql}}"
-	rows, err := dao.db.NamedQuery(sql, params)
+{{if eq .ParamHasList "true"}}  var q = "{{.CompiledByNamedSql}}"
+    query, a, err := sqlx.In(q, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
+    rows, err := dao.db.Queryx(query, a...)
+{{else}} var query = "{{.CompiledByNamedSql}}"
+    rows, err := dao.db.Queryx(query, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
+{{end}}
 	if err != nil {
 		glog.Error("{{.TableName}}DAO/{{.FuncName}} error: ", err)
 		return nil, err
@@ -101,17 +97,15 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if n
 {{end}}
 
 {{define "SELECT_STRUCT_LIST"}}
+// {{.Sql}}
+// TODO(@benqi): sqlmap
 func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) ([]do.{{.TableName}}DO, error) {
-	// TODO(@benqi): sqlmap
-    params := make(map[string]interface{})
-    {{ range $i, $v := .Params }} params["{{.FieldName}}"] = {{if eq .Type "[]int32"}} base.JoinInt32List({{.FieldName}}, ",")
-        {{else if eq .Type "[]int64"}} base.JoinInt32List({{.FieldName}}, ",")
-        {{else if eq .Type "[]string"}} strings.Join({{.FieldName}}, ",")
-        {{else}} {{.FieldName}} {{end}}
-    {{end}}
-
-	var sql = "{{.Sql}}"
-	rows, err := dao.db.NamedQuery(sql, params)
+{{if eq .ParamHasList "true"}}  var q = "{{.CompiledByNamedSql}}"
+    query, a, err := sqlx.In(q, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
+    rows, err := dao.db.Queryx(query, a...)
+{{else}} var query = "{{.CompiledByNamedSql}}"
+    rows, err := dao.db.Queryx(query, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
+{{end}}
 	if err != nil {
 		glog.Errorf("{{.TableName}}DAO/{{.FuncName}} error: ", err)
 		return nil, err
@@ -138,19 +132,15 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if n
 
 
 {{define "UPDATE"}}
+// {{.Sql}}
+// TODO(@benqi): sqlmap
 func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) (rows int64, err error) {
-	// TODO(@benqi): sqlmap
-	rows = 0
-
-    params := make(map[string]interface{})
-    {{ range $i, $v := .Params }} params["{{.FieldName}}"] = {{if eq .Type "[]int32"}} base.JoinInt32List({{.FieldName}}, ",")
-        {{else if eq .Type "[]int64"}} base.JoinInt32List({{.FieldName}}, ",")
-        {{else if eq .Type "[]string"}} strings.Join({{.FieldName}}, ",")
-        {{else}} {{.FieldName}} {{end}}
-    {{end}}
-
-	var sql = "{{.Sql}}"
-	r, err := dao.db.NamedExec(sql, params)
+{{if eq .ParamHasList "true"}}  var q = "{{.CompiledByNamedSql}}"
+    query, a, err := sqlx.In(q, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
+    r, err := dao.db.Exec(query, a...)
+{{else}} var query = "{{.CompiledByNamedSql}}"
+    r, err := dao.db.Exec(query, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
+{{end}}
 	if err != nil {
 		glog.Error("{{.TableName}}DAO/{{.FuncName}} error: ", err)
 		return
@@ -165,19 +155,15 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if n
 {{end}}
 
 {{define "DELETE"}}
+// {{.Sql}}
+// TODO(@benqi): sqlmap
 func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) (rows int64, err error) {
-	// TODO(@benqi): sqlmap
-	rows = 0
-
-    params := make(map[string]interface{})
-    {{ range $i, $v := .Params }} params["{{.FieldName}}"] = {{if eq .Type "[]int32"}} base.JoinInt32List({{.FieldName}}, ",")
-        {{else if eq .Type "[]int64"}} base.JoinInt32List({{.FieldName}}, ",")
-        {{else if eq .Type "[]string"}} strings.Join({{.FieldName}}, ",")
-        {{else}} {{.FieldName}} {{end}}
-    {{end}}
-
-	var sql = "{{.Sql}}"
-	r, err := dao.db.NamedExec(sql, params)
+{{if eq .ParamHasList "true"}}  var q = "{{.CompiledByNamedSql}}"
+    query, a, err := sqlx.In(q, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
+    r, err := dao.db.Exec(query, a...)
+{{else}} var query = "{{.CompiledByNamedSql}}"
+    r, err := dao.db.Exec(query, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
+{{end}}
 	if err != nil {
 		glog.Error("{{.TableName}}DAO/{{.FuncName}} error: ", err)
 		return

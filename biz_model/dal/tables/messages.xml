@@ -14,4 +14,32 @@
             SELECT id, user_id, peer_type, peer_id, random_id, message, date FROM messages WHERE id IN (:idList)
         </sql>
     </operation>
+
+    <operation name="SelectByUserIdAndPeer" result_set="list">
+        <sql>
+            SELECT
+                id, user_id, peer_type, peer_id, random_id, message, date
+            FROM
+                messages
+            WHERE
+            peer_type = :peer_type AND (user_id = :user_id AND peer_id = :peer_id) OR (user_id = :peer_id AND peer_id = :user_id)
+        </sql>
+    </operation>
+
+    <operation name="SelectByUserIdAndPeerOffsetLimit" result_set="list">
+        <params>
+            <param name="offset_id" type="int32" />
+            <param name="limit" type="int32" />
+        </params>
+        <sql>
+            <![CDATA[
+            SELECT
+                id, user_id, peer_type, peer_id, random_id, message, date
+            FROM
+                messages
+            WHERE
+                id > :offset_id AND peer_type = :peer_type AND ((user_id = :user_id AND peer_id = :peer_id) OR (user_id = :peer_id AND peer_id = :user_id)) LIMIT :limit
+            ]]>
+        </sql>
+    </operation>
 </table>

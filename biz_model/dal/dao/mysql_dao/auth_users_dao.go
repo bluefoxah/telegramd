@@ -31,12 +31,11 @@ func NewAuthUsersDAO(db *sqlx.DB) *AuthUsersDAO {
 	return &AuthUsersDAO{db}
 }
 
+// insert into auth_users(auth_id, user_id) values (:auth_id, :user_id)
+// TODO(@benqi): sqlmap
 func (dao *AuthUsersDAO) Insert(do *do.AuthUsersDO) (id int64, err error) {
-	// TODO(@benqi): sqlmap
-	id = 0
-
-	var sql = "insert into auth_users(auth_id, user_id) values (:auth_id, :user_id)"
-	r, err := dao.db.NamedExec(sql, do)
+	var query = "insert into auth_users(auth_id, user_id) values (:auth_id, :user_id)"
+	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		glog.Error("AuthUsersDAO/Insert error: ", err)
 		return
@@ -49,22 +48,24 @@ func (dao *AuthUsersDAO) Insert(do *do.AuthUsersDO) (id int64, err error) {
 	return
 }
 
+// select id, user_id from auth_users where auth_id = :auth_id
+// TODO(@benqi): sqlmap
 func (dao *AuthUsersDAO) SelectByAuthId(auth_id int64) (*do.AuthUsersDO, error) {
-	// TODO(@benqi): sqlmap
-	var sql = "select id, user_id from auth_users where auth_id = :auth_id"
-	do := &do.AuthUsersDO{AuthId: auth_id}
-	rows, err := dao.db.NamedQuery(sql, do)
+	var query = "select id, user_id from auth_users where auth_id = ?"
+	rows, err := dao.db.Queryx(query, auth_id)
+
 	if err != nil {
-		glog.Error("AuthUsersDAO/SelectById error: ", err)
+		glog.Error("AuthUsersDAO/SelectByAuthId error: ", err)
 		return nil, err
 	}
 
 	defer rows.Close()
 
+	do := &do.AuthUsersDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("AuthUsersDAO/SelectById error: ", err)
+			glog.Error("AuthUsersDAO/SelectByAuthId error: ", err)
 			return nil, err
 		}
 	} else {

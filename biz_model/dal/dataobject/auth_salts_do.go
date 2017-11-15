@@ -18,9 +18,11 @@
 package dataobject
 
 type AuthSaltsDO struct {
-	Id        int32  `db:"id"`
-	AuthId    int64  `db:"auth_id"`
-	Salt      int64  `db:"salt"`
-	CreatedAt string `db:"created_at"`
-	DeletedAt string `db:"deleted_at"`
+	Id         int32  `db:"id"`
+	AuthId     int64  `db:"auth_id"`
+	Salt       int64  `db:"salt"`
+	ValidSince int32  `db:"valid_since"`
+	CreatedAt  string `db:"created_at"`
+	UpdatedAt  string `db:"updated_at"`
+	DeletedAt  string `db:"deleted_at"`
 }

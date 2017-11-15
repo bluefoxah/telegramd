@@ -31,12 +31,11 @@ func NewAuthPhoneTransactionsDAO(db *sqlx.DB) *AuthPhoneTransactionsDAO {
 	return &AuthPhoneTransactionsDAO{db}
 }
 
+// insert into auth_phone_transactions(transaction_hash, api_id, api_hash, phone_number, code, created_at) values (:transaction_hash, :api_id, :api_hash, :phone_number, :code, :created_at)
+// TODO(@benqi): sqlmap
 func (dao *AuthPhoneTransactionsDAO) Insert(do *do.AuthPhoneTransactionsDO) (id int64, err error) {
-	// TODO(@benqi): sqlmap
-	id = 0
-
-	var sql = "insert into auth_phone_transactions(transaction_hash, api_id, api_hash, phone_number, code, created_at) values (:transaction_hash, :api_id, :api_hash, :phone_number, :code, :created_at)"
-	r, err := dao.db.NamedExec(sql, do)
+	var query = "insert into auth_phone_transactions(transaction_hash, api_id, api_hash, phone_number, code, created_at) values (:transaction_hash, :api_id, :api_hash, :phone_number, :code, :created_at)"
+	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		glog.Error("AuthPhoneTransactionsDAO/Insert error: ", err)
 		return
@@ -49,22 +48,24 @@ func (dao *AuthPhoneTransactionsDAO) Insert(do *do.AuthPhoneTransactionsDO) (id 
 	return
 }
 
-func (dao *AuthPhoneTransactionsDAO) SelectByPhoneAndApiIdAndHash(api_id int32, api_hash string, phone_number string) (*do.AuthPhoneTransactionsDO, error) {
-	// TODO(@benqi): sqlmap
-	var sql = "select transaction_hash from auth_phone_transactions where phone_number = :phone_number and api_id = :api_id and api_hash = :api_hash"
-	do := &do.AuthPhoneTransactionsDO{ApiId: api_id, ApiHash: api_hash, PhoneNumber: phone_number}
-	rows, err := dao.db.NamedQuery(sql, do)
+// select transaction_hash from auth_phone_transactions where phone_number = :phone_number and api_id = :api_id and api_hash = :api_hash
+// TODO(@benqi): sqlmap
+func (dao *AuthPhoneTransactionsDAO) SelectByPhoneAndApiIdAndHash(phone_number string, api_id int32, api_hash string) (*do.AuthPhoneTransactionsDO, error) {
+	var query = "select transaction_hash from auth_phone_transactions where phone_number = ? and api_id = ? and api_hash = ?"
+	rows, err := dao.db.Queryx(query, phone_number, api_id, api_hash)
+
 	if err != nil {
-		glog.Error("AuthPhoneTransactionsDAO/SelectById error: ", err)
+		glog.Error("AuthPhoneTransactionsDAO/SelectByPhoneAndApiIdAndHash error: ", err)
 		return nil, err
 	}
 
 	defer rows.Close()
 
+	do := &do.AuthPhoneTransactionsDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("AuthPhoneTransactionsDAO/SelectById error: ", err)
+			glog.Error("AuthPhoneTransactionsDAO/SelectByPhoneAndApiIdAndHash error: ", err)
 			return nil, err
 		}
 	} else {
@@ -74,22 +75,24 @@ func (dao *AuthPhoneTransactionsDAO) SelectByPhoneAndApiIdAndHash(api_id int32, 
 	return do, nil
 }
 
+// select id from auth_phone_transactions where transaction_hash = :transaction_hash and code = :code and phone_number = :phone_number
+// TODO(@benqi): sqlmap
 func (dao *AuthPhoneTransactionsDAO) SelectByPhoneCode(transaction_hash string, code string, phone_number string) (*do.AuthPhoneTransactionsDO, error) {
-	// TODO(@benqi): sqlmap
-	var sql = "select id from auth_phone_transactions where transaction_hash = :transaction_hash and code = :code and phone_number = :phone_number"
-	do := &do.AuthPhoneTransactionsDO{TransactionHash: transaction_hash, Code: code, PhoneNumber: phone_number}
-	rows, err := dao.db.NamedQuery(sql, do)
+	var query = "select id from auth_phone_transactions where transaction_hash = ? and code = ? and phone_number = ?"
+	rows, err := dao.db.Queryx(query, transaction_hash, code, phone_number)
+
 	if err != nil {
-		glog.Error("AuthPhoneTransactionsDAO/SelectById error: ", err)
+		glog.Error("AuthPhoneTransactionsDAO/SelectByPhoneCode error: ", err)
 		return nil, err
 	}
 
 	defer rows.Close()
 
+	do := &do.AuthPhoneTransactionsDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("AuthPhoneTransactionsDAO/SelectById error: ", err)
+			glog.Error("AuthPhoneTransactionsDAO/SelectByPhoneCode error: ", err)
 			return nil, err
 		}
 	} else {

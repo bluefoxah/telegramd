@@ -31,12 +31,11 @@ func NewMasterKeysDAO(db *sqlx.DB) *MasterKeysDAO {
 	return &MasterKeysDAO{db}
 }
 
+// insert into master_keys(auth_id, body) values (:auth_id, :body)
+// TODO(@benqi): sqlmap
 func (dao *MasterKeysDAO) Insert(do *do.MasterKeysDO) (id int64, err error) {
-	// TODO(@benqi): sqlmap
-	id = 0
-
-	var sql = "insert into master_keys(auth_id, body) values (:auth_id, :body)"
-	r, err := dao.db.NamedExec(sql, do)
+	var query = "insert into master_keys(auth_id, body) values (:auth_id, :body)"
+	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		glog.Error("MasterKeysDAO/Insert error: ", err)
 		return
@@ -49,22 +48,24 @@ func (dao *MasterKeysDAO) Insert(do *do.MasterKeysDO) (id int64, err error) {
 	return
 }
 
+// select body from master_keys where auth_id = :auth_id
+// TODO(@benqi): sqlmap
 func (dao *MasterKeysDAO) SelectByAuthId(auth_id int64) (*do.MasterKeysDO, error) {
-	// TODO(@benqi): sqlmap
-	var sql = "select body from master_keys where auth_id = :auth_id"
-	do := &do.MasterKeysDO{AuthId: auth_id}
-	rows, err := dao.db.NamedQuery(sql, do)
+	var query = "select body from master_keys where auth_id = ?"
+	rows, err := dao.db.Queryx(query, auth_id)
+
 	if err != nil {
-		glog.Error("MasterKeysDAO/SelectById error: ", err)
+		glog.Error("MasterKeysDAO/SelectByAuthId error: ", err)
 		return nil, err
 	}
 
 	defer rows.Close()
 
+	do := &do.MasterKeysDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("MasterKeysDAO/SelectById error: ", err)
+			glog.Error("MasterKeysDAO/SelectByAuthId error: ", err)
 			return nil, err
 		}
 	} else {

@@ -31,12 +31,11 @@ func NewAuthSaltsDAO(db *sqlx.DB) *AuthSaltsDAO {
 	return &AuthSaltsDAO{db}
 }
 
+// insert into auth_salts(auth_id, salt) values (:auth_id, :salt)
+// TODO(@benqi): sqlmap
 func (dao *AuthSaltsDAO) Insert(do *do.AuthSaltsDO) (id int64, err error) {
-	// TODO(@benqi): sqlmap
-	id = 0
-
-	var sql = "insert into auth_salts(auth_id, salt) values (:auth_id, :salt)"
-	r, err := dao.db.NamedExec(sql, do)
+	var query = "insert into auth_salts(auth_id, salt) values (:auth_id, :salt)"
+	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		glog.Error("AuthSaltsDAO/Insert error: ", err)
 		return
@@ -49,22 +48,24 @@ func (dao *AuthSaltsDAO) Insert(do *do.AuthSaltsDO) (id int64, err error) {
 	return
 }
 
+// select auth_id, salt from auth_salts where auth_id = :auth_id
+// TODO(@benqi): sqlmap
 func (dao *AuthSaltsDAO) SelectByAuthId(auth_id int64) (*do.AuthSaltsDO, error) {
-	// TODO(@benqi): sqlmap
-	var sql = "select auth_id, salt from auth_salts where auth_id = :auth_id"
-	do := &do.AuthSaltsDO{AuthId: auth_id}
-	rows, err := dao.db.NamedQuery(sql, do)
+	var query = "select auth_id, salt from auth_salts where auth_id = ?"
+	rows, err := dao.db.Queryx(query, auth_id)
+
 	if err != nil {
-		glog.Error("AuthSaltsDAO/SelectById error: ", err)
+		glog.Error("AuthSaltsDAO/SelectByAuthId error: ", err)
 		return nil, err
 	}
 
 	defer rows.Close()
 
+	do := &do.AuthSaltsDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("AuthSaltsDAO/SelectById error: ", err)
+			glog.Error("AuthSaltsDAO/SelectByAuthId error: ", err)
 			return nil, err
 		}
 	} else {

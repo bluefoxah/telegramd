@@ -31,12 +31,11 @@ func NewAppsDAO(db *sqlx.DB) *AppsDAO {
 	return &AppsDAO{db}
 }
 
+// insert into apps(api_id, api_hash, title, short_name) values (:api_id, :api_hash, :title, :short_name)
+// TODO(@benqi): sqlmap
 func (dao *AppsDAO) Insert(do *do.AppsDO) (id int64, err error) {
-	// TODO(@benqi): sqlmap
-	id = 0
-
-	var sql = "insert into apps(api_id, api_hash, title, short_name) values (:api_id, :api_hash, :title, :short_name)"
-	r, err := dao.db.NamedExec(sql, do)
+	var query = "insert into apps(api_id, api_hash, title, short_name) values (:api_id, :api_hash, :title, :short_name)"
+	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		glog.Error("AppsDAO/Insert error: ", err)
 		return
@@ -49,11 +48,12 @@ func (dao *AppsDAO) Insert(do *do.AppsDO) (id int64, err error) {
 	return
 }
 
+// select id, api_id, api_hash, title, short_name from apps where id = :id
+// TODO(@benqi): sqlmap
 func (dao *AppsDAO) SelectById(id int32) (*do.AppsDO, error) {
-	// TODO(@benqi): sqlmap
-	var sql = "select id, api_id, api_hash, title, short_name from apps where id = :id"
-	do := &do.AppsDO{Id: id}
-	rows, err := dao.db.NamedQuery(sql, do)
+	var query = "select id, api_id, api_hash, title, short_name from apps where id = ?"
+	rows, err := dao.db.Queryx(query, id)
+
 	if err != nil {
 		glog.Error("AppsDAO/SelectById error: ", err)
 		return nil, err
@@ -61,6 +61,7 @@ func (dao *AppsDAO) SelectById(id int32) (*do.AppsDO, error) {
 
 	defer rows.Close()
 
+	do := &do.AppsDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
