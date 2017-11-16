@@ -46,7 +46,7 @@ import "github.com/nebulaim/telegramd/mtproto"
 	but instead contains a single field called error_message (as in the example above),
 	it must be split into 2 components, for example, using the following regular expression: /^([A-Z_0-9]+)(: (.+))?/.
  */
-type RpcErrorCode uint32
+type RpcErrorCode int32
 
 const (
 	// The request must be repeated, but directed to a different data center.

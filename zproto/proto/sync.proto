@@ -17,15 +17,12 @@
 
 syntax = "proto3";
 
-package zproto;
-
-option java_package = "com.zchat.engine.zproto";
-option java_outer_classname = "ZProtoServers";
+option java_multiple_files = true;
+option java_package = "com.nebulaim.zproto";
+option java_outer_classname = "ZProtoSync";
 option optimize_for = CODE_SIZE;
 
-// import "messaging_base.proto";
-// import "misc.proto";
-
+package zproto;
 
 ///////////////////////////////////////////////////////////////////////
 // ServerAuthReq ==> VoidRsp

@@ -27,6 +27,7 @@ import (
 	"fmt"
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/grpc_util"
 )
 
 func init() {
@@ -72,7 +73,7 @@ func main() {
 	dao.InstallRedisDAOManager(redis_client.GetRedisClientManager())
 
 	server := server2.NewServer(frontendConfig.Server.Addr)
-	rpc_client, _ := rpc.NewRPCClient(frontendConfig.BizRpcClient.Addr)
+	rpc_client, _ := grpc_util.NewRPCClient(frontendConfig.BizRpcClient.Addr)
 	sync_rpc_client, _ := rpc.NewSyncRPCClient(frontendConfig.SyncRpcClient.Addr)
 	server.Serve(rpc_client, sync_rpc_client)
 }

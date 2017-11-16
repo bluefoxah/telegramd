@@ -25,6 +25,7 @@ import (
 	"github.com/nebulaim/telegramd/frontend/rpc"
 	"github.com/nebulaim/telegramd/frontend/client"
 	"github.com/nebulaim/telegramd/frontend/auth_key"
+	"github.com/nebulaim/telegramd/grpc_util"
 )
 
 type Server struct {
@@ -42,7 +43,7 @@ func NewServer(addr string) (s *Server) {
 	return
 }
 
-func (s* Server) Serve(rpcClient *rpc.RPCClient, syncRpcClient *rpc.SyncRPCClient) {
+func (s* Server) Serve(rpcClient *grpc_util.RPCClient, syncRpcClient *rpc.SyncRPCClient) {
 	glog.Info("Serve...")
 
 	go syncRpcClient.RunUpdatesStreamLoop(s.Server)

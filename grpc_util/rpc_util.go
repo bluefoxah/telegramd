@@ -15,28 +15,27 @@
  * limitations under the License.
  */
 
-syntax = "proto3";
+package grpc_util
 
-option java_multiple_files = true;
-option java_package = "telegramd.chart_test";
-option java_outer_classname = "ChatTest";
+import (
+	"google.golang.org/grpc/codes"
+	"context"
+	"google.golang.org/grpc/status"
+	"google.golang.org/grpc"
+	"github.com/nebulaim/telegramd/mtproto"
+)
 
-package chat_test;
-
-// Interface exported by the server.
-service ChatTest {
-    rpc Connect(Session) returns (stream ChatMessage);
-    rpc SendChat(ChatMessage) returns (VoidRsp);
+func UnaryRecoveryHandler(ctx context.Context, p interface{}) (err error) {
+	switch p.(type) {
+	case *mtproto.TLRpcError:
+		code, _ := p.(*mtproto.TLRpcError)
+		grpc.SetTrailer(ctx, code.ToMetadata())
+		return status.Errorf(codes.Unknown, "panic triggered rpc_error: {%v}", p)
+	}
+	return status.Errorf(codes.Unknown, "panic unknown triggered: %v", p)
 }
 
-message ChatMessage {
-    string sender_session_id = 1;
-    string message_data = 3;
+func StreamRecoveryHandler(stream grpc.ServerStream, p interface{}) (err error) {
+	return
 }
 
-message Session {
-    string session_id = 1;
-}
-
-message VoidRsp {
-}

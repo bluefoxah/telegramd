@@ -17,7 +17,7 @@
 
 package dataobject
 
-type MasterKeysDO struct {
+type AuthKeysDO struct {
 	Id        int32  `db:"id"`
 	AuthId    int64  `db:"auth_id"`
 	Body      string `db:"body"`

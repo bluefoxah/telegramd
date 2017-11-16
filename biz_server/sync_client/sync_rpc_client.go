@@ -18,13 +18,6 @@
 package sync_client
 
 import (
-	//"github.com/golang/glog"
-	//"google.golang.org/grpc"
-	//"github.com/nebulaim/telegramd/mtproto"
-	//"fmt"
-	//"context"
-	//"google.golang.org/grpc/metadata"
-	//"time"
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/zproto"
 	"google.golang.org/grpc"

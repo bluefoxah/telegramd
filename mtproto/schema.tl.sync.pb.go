@@ -26,7 +26,7 @@ type InputPeer struct {
 func (m *InputPeer) Reset()                    { *m = InputPeer{} }
 func (m *InputPeer) String() string            { return proto.CompactTextString(m) }
 func (*InputPeer) ProtoMessage()               {}
-func (*InputPeer) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{0} }
+func (*InputPeer) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{0} }
 
 type isInputPeer_Payload interface {
 	isInputPeer_Payload()
@@ -238,7 +238,7 @@ type InputUser struct {
 func (m *InputUser) Reset()                    { *m = InputUser{} }
 func (m *InputUser) String() string            { return proto.CompactTextString(m) }
 func (*InputUser) ProtoMessage()               {}
-func (*InputUser) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1} }
+func (*InputUser) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1} }
 
 type isInputUser_Payload interface {
 	isInputUser_Payload()
@@ -388,7 +388,7 @@ type InputContact struct {
 func (m *InputContact) Reset()                    { *m = InputContact{} }
 func (m *InputContact) String() string            { return proto.CompactTextString(m) }
 func (*InputContact) ProtoMessage()               {}
-func (*InputContact) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{2} }
+func (*InputContact) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{2} }
 
 type isInputContact_Payload interface {
 	isInputContact_Payload()
@@ -479,7 +479,7 @@ type InputFile struct {
 func (m *InputFile) Reset()                    { *m = InputFile{} }
 func (m *InputFile) String() string            { return proto.CompactTextString(m) }
 func (*InputFile) ProtoMessage()               {}
-func (*InputFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{3} }
+func (*InputFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{3} }
 
 type isInputFile_Payload interface {
 	isInputFile_Payload()
@@ -611,7 +611,7 @@ type InputMedia struct {
 func (m *InputMedia) Reset()                    { *m = InputMedia{} }
 func (m *InputMedia) String() string            { return proto.CompactTextString(m) }
 func (*InputMedia) ProtoMessage()               {}
-func (*InputMedia) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{4} }
+func (*InputMedia) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{4} }
 
 type isInputMedia_Payload interface {
 	isInputMedia_Payload()
@@ -1063,7 +1063,7 @@ type InputChatPhoto struct {
 func (m *InputChatPhoto) Reset()                    { *m = InputChatPhoto{} }
 func (m *InputChatPhoto) String() string            { return proto.CompactTextString(m) }
 func (*InputChatPhoto) ProtoMessage()               {}
-func (*InputChatPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{5} }
+func (*InputChatPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{5} }
 
 type isInputChatPhoto_Payload interface {
 	isInputChatPhoto_Payload()
@@ -1214,7 +1214,7 @@ type InputGeoPoint struct {
 func (m *InputGeoPoint) Reset()                    { *m = InputGeoPoint{} }
 func (m *InputGeoPoint) String() string            { return proto.CompactTextString(m) }
 func (*InputGeoPoint) ProtoMessage()               {}
-func (*InputGeoPoint) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{6} }
+func (*InputGeoPoint) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{6} }
 
 type isInputGeoPoint_Payload interface {
 	isInputGeoPoint_Payload()
@@ -1335,7 +1335,7 @@ type InputPhoto struct {
 func (m *InputPhoto) Reset()                    { *m = InputPhoto{} }
 func (m *InputPhoto) String() string            { return proto.CompactTextString(m) }
 func (*InputPhoto) ProtoMessage()               {}
-func (*InputPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{7} }
+func (*InputPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{7} }
 
 type isInputPhoto_Payload interface {
 	isInputPhoto_Payload()
@@ -1457,7 +1457,7 @@ type InputFileLocation struct {
 func (m *InputFileLocation) Reset()                    { *m = InputFileLocation{} }
 func (m *InputFileLocation) String() string            { return proto.CompactTextString(m) }
 func (*InputFileLocation) ProtoMessage()               {}
-func (*InputFileLocation) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{8} }
+func (*InputFileLocation) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{8} }
 
 type isInputFileLocation_Payload interface {
 	isInputFileLocation_Payload()
@@ -1607,7 +1607,7 @@ type InputAppEvent struct {
 func (m *InputAppEvent) Reset()                    { *m = InputAppEvent{} }
 func (m *InputAppEvent) String() string            { return proto.CompactTextString(m) }
 func (*InputAppEvent) ProtoMessage()               {}
-func (*InputAppEvent) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{9} }
+func (*InputAppEvent) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{9} }
 
 type isInputAppEvent_Payload interface {
 	isInputAppEvent_Payload()
@@ -1699,7 +1699,7 @@ type Peer struct {
 func (m *Peer) Reset()                    { *m = Peer{} }
 func (m *Peer) String() string            { return proto.CompactTextString(m) }
 func (*Peer) ProtoMessage()               {}
-func (*Peer) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{10} }
+func (*Peer) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{10} }
 
 type isPeer_Payload interface {
 	isPeer_Payload()
@@ -1858,7 +1858,7 @@ type Storage_FileType struct {
 func (m *Storage_FileType) Reset()                    { *m = Storage_FileType{} }
 func (m *Storage_FileType) String() string            { return proto.CompactTextString(m) }
 func (*Storage_FileType) ProtoMessage()               {}
-func (*Storage_FileType) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{11} }
+func (*Storage_FileType) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{11} }
 
 type isStorage_FileType_Payload interface {
 	isStorage_FileType_Payload()
@@ -2219,7 +2219,7 @@ type FileLocation struct {
 func (m *FileLocation) Reset()                    { *m = FileLocation{} }
 func (m *FileLocation) String() string            { return proto.CompactTextString(m) }
 func (*FileLocation) ProtoMessage()               {}
-func (*FileLocation) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{12} }
+func (*FileLocation) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{12} }
 
 type isFileLocation_Payload interface {
 	isFileLocation_Payload()
@@ -2340,7 +2340,7 @@ type User struct {
 func (m *User) Reset()                    { *m = User{} }
 func (m *User) String() string            { return proto.CompactTextString(m) }
 func (*User) ProtoMessage()               {}
-func (*User) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{13} }
+func (*User) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{13} }
 
 type isUser_Payload interface {
 	isUser_Payload()
@@ -2461,7 +2461,7 @@ type UserProfilePhoto struct {
 func (m *UserProfilePhoto) Reset()                    { *m = UserProfilePhoto{} }
 func (m *UserProfilePhoto) String() string            { return proto.CompactTextString(m) }
 func (*UserProfilePhoto) ProtoMessage()               {}
-func (*UserProfilePhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{14} }
+func (*UserProfilePhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{14} }
 
 type isUserProfilePhoto_Payload interface {
 	isUserProfilePhoto_Payload()
@@ -2586,7 +2586,7 @@ type UserStatus struct {
 func (m *UserStatus) Reset()                    { *m = UserStatus{} }
 func (m *UserStatus) String() string            { return proto.CompactTextString(m) }
 func (*UserStatus) ProtoMessage()               {}
-func (*UserStatus) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{15} }
+func (*UserStatus) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{15} }
 
 type isUserStatus_Payload interface {
 	isUserStatus_Payload()
@@ -2830,7 +2830,7 @@ type Chat struct {
 func (m *Chat) Reset()                    { *m = Chat{} }
 func (m *Chat) String() string            { return proto.CompactTextString(m) }
 func (*Chat) ProtoMessage()               {}
-func (*Chat) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{16} }
+func (*Chat) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{16} }
 
 type isChat_Payload interface {
 	isChat_Payload()
@@ -3041,7 +3041,7 @@ type ChatFull struct {
 func (m *ChatFull) Reset()                    { *m = ChatFull{} }
 func (m *ChatFull) String() string            { return proto.CompactTextString(m) }
 func (*ChatFull) ProtoMessage()               {}
-func (*ChatFull) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{17} }
+func (*ChatFull) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{17} }
 
 type isChatFull_Payload interface {
 	isChatFull_Payload()
@@ -3163,7 +3163,7 @@ type ChatParticipant struct {
 func (m *ChatParticipant) Reset()                    { *m = ChatParticipant{} }
 func (m *ChatParticipant) String() string            { return proto.CompactTextString(m) }
 func (*ChatParticipant) ProtoMessage()               {}
-func (*ChatParticipant) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{18} }
+func (*ChatParticipant) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{18} }
 
 type isChatParticipant_Payload interface {
 	isChatParticipant_Payload()
@@ -3314,7 +3314,7 @@ type ChatParticipants struct {
 func (m *ChatParticipants) Reset()                    { *m = ChatParticipants{} }
 func (m *ChatParticipants) String() string            { return proto.CompactTextString(m) }
 func (*ChatParticipants) ProtoMessage()               {}
-func (*ChatParticipants) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{19} }
+func (*ChatParticipants) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{19} }
 
 type isChatParticipants_Payload interface {
 	isChatParticipants_Payload()
@@ -3435,7 +3435,7 @@ type ChatPhoto struct {
 func (m *ChatPhoto) Reset()                    { *m = ChatPhoto{} }
 func (m *ChatPhoto) String() string            { return proto.CompactTextString(m) }
 func (*ChatPhoto) ProtoMessage()               {}
-func (*ChatPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{20} }
+func (*ChatPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{20} }
 
 type isChatPhoto_Payload interface {
 	isChatPhoto_Payload()
@@ -3557,7 +3557,7 @@ type Message struct {
 func (m *Message) Reset()                    { *m = Message{} }
 func (m *Message) String() string            { return proto.CompactTextString(m) }
 func (*Message) ProtoMessage()               {}
-func (*Message) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{21} }
+func (*Message) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{21} }
 
 type isMessage_Payload interface {
 	isMessage_Payload()
@@ -3716,7 +3716,7 @@ type MessageMedia struct {
 func (m *MessageMedia) Reset()                    { *m = MessageMedia{} }
 func (m *MessageMedia) String() string            { return proto.CompactTextString(m) }
 func (*MessageMedia) ProtoMessage()               {}
-func (*MessageMedia) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{22} }
+func (*MessageMedia) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{22} }
 
 type isMessageMedia_Payload interface {
 	isMessageMedia_Payload()
@@ -4093,7 +4093,7 @@ type MessageAction struct {
 func (m *MessageAction) Reset()                    { *m = MessageAction{} }
 func (m *MessageAction) String() string            { return proto.CompactTextString(m) }
 func (*MessageAction) ProtoMessage()               {}
-func (*MessageAction) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{23} }
+func (*MessageAction) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{23} }
 
 type isMessageAction_Payload interface {
 	isMessageAction_Payload()
@@ -4693,7 +4693,7 @@ type Dialog struct {
 func (m *Dialog) Reset()                    { *m = Dialog{} }
 func (m *Dialog) String() string            { return proto.CompactTextString(m) }
 func (*Dialog) ProtoMessage()               {}
-func (*Dialog) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{24} }
+func (*Dialog) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{24} }
 
 type isDialog_Payload interface {
 	isDialog_Payload()
@@ -4784,7 +4784,7 @@ type Photo struct {
 func (m *Photo) Reset()                    { *m = Photo{} }
 func (m *Photo) String() string            { return proto.CompactTextString(m) }
 func (*Photo) ProtoMessage()               {}
-func (*Photo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{25} }
+func (*Photo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{25} }
 
 type isPhoto_Payload interface {
 	isPhoto_Payload()
@@ -4906,7 +4906,7 @@ type PhotoSize struct {
 func (m *PhotoSize) Reset()                    { *m = PhotoSize{} }
 func (m *PhotoSize) String() string            { return proto.CompactTextString(m) }
 func (*PhotoSize) ProtoMessage()               {}
-func (*PhotoSize) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{26} }
+func (*PhotoSize) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{26} }
 
 type isPhotoSize_Payload interface {
 	isPhotoSize_Payload()
@@ -5057,7 +5057,7 @@ type GeoPoint struct {
 func (m *GeoPoint) Reset()                    { *m = GeoPoint{} }
 func (m *GeoPoint) String() string            { return proto.CompactTextString(m) }
 func (*GeoPoint) ProtoMessage()               {}
-func (*GeoPoint) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{27} }
+func (*GeoPoint) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{27} }
 
 type isGeoPoint_Payload interface {
 	isGeoPoint_Payload()
@@ -5177,7 +5177,7 @@ type Auth_CheckedPhone struct {
 func (m *Auth_CheckedPhone) Reset()                    { *m = Auth_CheckedPhone{} }
 func (m *Auth_CheckedPhone) String() string            { return proto.CompactTextString(m) }
 func (*Auth_CheckedPhone) ProtoMessage()               {}
-func (*Auth_CheckedPhone) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{28} }
+func (*Auth_CheckedPhone) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{28} }
 
 type isAuth_CheckedPhone_Payload interface {
 	isAuth_CheckedPhone_Payload()
@@ -5267,7 +5267,7 @@ type Auth_SentCode struct {
 func (m *Auth_SentCode) Reset()                    { *m = Auth_SentCode{} }
 func (m *Auth_SentCode) String() string            { return proto.CompactTextString(m) }
 func (*Auth_SentCode) ProtoMessage()               {}
-func (*Auth_SentCode) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{29} }
+func (*Auth_SentCode) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{29} }
 
 type isAuth_SentCode_Payload interface {
 	isAuth_SentCode_Payload()
@@ -5357,7 +5357,7 @@ type Auth_Authorization struct {
 func (m *Auth_Authorization) Reset()                    { *m = Auth_Authorization{} }
 func (m *Auth_Authorization) String() string            { return proto.CompactTextString(m) }
 func (*Auth_Authorization) ProtoMessage()               {}
-func (*Auth_Authorization) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{30} }
+func (*Auth_Authorization) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{30} }
 
 type isAuth_Authorization_Payload interface {
 	isAuth_Authorization_Payload()
@@ -5447,7 +5447,7 @@ type Auth_ExportedAuthorization struct {
 func (m *Auth_ExportedAuthorization) Reset()                    { *m = Auth_ExportedAuthorization{} }
 func (m *Auth_ExportedAuthorization) String() string            { return proto.CompactTextString(m) }
 func (*Auth_ExportedAuthorization) ProtoMessage()               {}
-func (*Auth_ExportedAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{31} }
+func (*Auth_ExportedAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{31} }
 
 type isAuth_ExportedAuthorization_Payload interface {
 	isAuth_ExportedAuthorization_Payload()
@@ -5540,7 +5540,7 @@ type InputNotifyPeer struct {
 func (m *InputNotifyPeer) Reset()                    { *m = InputNotifyPeer{} }
 func (m *InputNotifyPeer) String() string            { return proto.CompactTextString(m) }
 func (*InputNotifyPeer) ProtoMessage()               {}
-func (*InputNotifyPeer) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{32} }
+func (*InputNotifyPeer) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{32} }
 
 type isInputNotifyPeer_Payload interface {
 	isInputNotifyPeer_Payload()
@@ -5721,7 +5721,7 @@ type InputPeerNotifyEvents struct {
 func (m *InputPeerNotifyEvents) Reset()                    { *m = InputPeerNotifyEvents{} }
 func (m *InputPeerNotifyEvents) String() string            { return proto.CompactTextString(m) }
 func (*InputPeerNotifyEvents) ProtoMessage()               {}
-func (*InputPeerNotifyEvents) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{33} }
+func (*InputPeerNotifyEvents) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{33} }
 
 type isInputPeerNotifyEvents_Payload interface {
 	isInputPeerNotifyEvents_Payload()
@@ -5841,7 +5841,7 @@ type InputPeerNotifySettings struct {
 func (m *InputPeerNotifySettings) Reset()                    { *m = InputPeerNotifySettings{} }
 func (m *InputPeerNotifySettings) String() string            { return proto.CompactTextString(m) }
 func (*InputPeerNotifySettings) ProtoMessage()               {}
-func (*InputPeerNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{34} }
+func (*InputPeerNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{34} }
 
 type isInputPeerNotifySettings_Payload interface {
 	isInputPeerNotifySettings_Payload()
@@ -5932,7 +5932,7 @@ type PeerNotifyEvents struct {
 func (m *PeerNotifyEvents) Reset()                    { *m = PeerNotifyEvents{} }
 func (m *PeerNotifyEvents) String() string            { return proto.CompactTextString(m) }
 func (*PeerNotifyEvents) ProtoMessage()               {}
-func (*PeerNotifyEvents) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{35} }
+func (*PeerNotifyEvents) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{35} }
 
 type isPeerNotifyEvents_Payload interface {
 	isPeerNotifyEvents_Payload()
@@ -6053,7 +6053,7 @@ type PeerNotifySettings struct {
 func (m *PeerNotifySettings) Reset()                    { *m = PeerNotifySettings{} }
 func (m *PeerNotifySettings) String() string            { return proto.CompactTextString(m) }
 func (*PeerNotifySettings) ProtoMessage()               {}
-func (*PeerNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{36} }
+func (*PeerNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{36} }
 
 type isPeerNotifySettings_Payload interface {
 	isPeerNotifySettings_Payload()
@@ -6173,7 +6173,7 @@ type PeerSettings struct {
 func (m *PeerSettings) Reset()                    { *m = PeerSettings{} }
 func (m *PeerSettings) String() string            { return proto.CompactTextString(m) }
 func (*PeerSettings) ProtoMessage()               {}
-func (*PeerSettings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{37} }
+func (*PeerSettings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{37} }
 
 type isPeerSettings_Payload interface {
 	isPeerSettings_Payload()
@@ -6264,7 +6264,7 @@ type WallPaper struct {
 func (m *WallPaper) Reset()                    { *m = WallPaper{} }
 func (m *WallPaper) String() string            { return proto.CompactTextString(m) }
 func (*WallPaper) ProtoMessage()               {}
-func (*WallPaper) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{38} }
+func (*WallPaper) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{38} }
 
 type isWallPaper_Payload interface {
 	isWallPaper_Payload()
@@ -6387,7 +6387,7 @@ type ReportReason struct {
 func (m *ReportReason) Reset()                    { *m = ReportReason{} }
 func (m *ReportReason) String() string            { return proto.CompactTextString(m) }
 func (*ReportReason) ProtoMessage()               {}
-func (*ReportReason) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{39} }
+func (*ReportReason) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{39} }
 
 type isReportReason_Payload interface {
 	isReportReason_Payload()
@@ -6567,7 +6567,7 @@ type UserFull struct {
 func (m *UserFull) Reset()                    { *m = UserFull{} }
 func (m *UserFull) String() string            { return proto.CompactTextString(m) }
 func (*UserFull) ProtoMessage()               {}
-func (*UserFull) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{40} }
+func (*UserFull) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{40} }
 
 type isUserFull_Payload interface {
 	isUserFull_Payload()
@@ -6657,7 +6657,7 @@ type Contact struct {
 func (m *Contact) Reset()                    { *m = Contact{} }
 func (m *Contact) String() string            { return proto.CompactTextString(m) }
 func (*Contact) ProtoMessage()               {}
-func (*Contact) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{41} }
+func (*Contact) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{41} }
 
 type isContact_Payload interface {
 	isContact_Payload()
@@ -6747,7 +6747,7 @@ type ImportedContact struct {
 func (m *ImportedContact) Reset()                    { *m = ImportedContact{} }
 func (m *ImportedContact) String() string            { return proto.CompactTextString(m) }
 func (*ImportedContact) ProtoMessage()               {}
-func (*ImportedContact) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{42} }
+func (*ImportedContact) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{42} }
 
 type isImportedContact_Payload interface {
 	isImportedContact_Payload()
@@ -6837,7 +6837,7 @@ type ContactBlocked struct {
 func (m *ContactBlocked) Reset()                    { *m = ContactBlocked{} }
 func (m *ContactBlocked) String() string            { return proto.CompactTextString(m) }
 func (*ContactBlocked) ProtoMessage()               {}
-func (*ContactBlocked) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{43} }
+func (*ContactBlocked) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{43} }
 
 type isContactBlocked_Payload interface {
 	isContactBlocked_Payload()
@@ -6927,7 +6927,7 @@ type ContactStatus struct {
 func (m *ContactStatus) Reset()                    { *m = ContactStatus{} }
 func (m *ContactStatus) String() string            { return proto.CompactTextString(m) }
 func (*ContactStatus) ProtoMessage()               {}
-func (*ContactStatus) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{44} }
+func (*ContactStatus) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{44} }
 
 type isContactStatus_Payload interface {
 	isContactStatus_Payload()
@@ -7017,7 +7017,7 @@ type Contacts_Link struct {
 func (m *Contacts_Link) Reset()                    { *m = Contacts_Link{} }
 func (m *Contacts_Link) String() string            { return proto.CompactTextString(m) }
 func (*Contacts_Link) ProtoMessage()               {}
-func (*Contacts_Link) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{45} }
+func (*Contacts_Link) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{45} }
 
 type isContacts_Link_Payload interface {
 	isContacts_Link_Payload()
@@ -7108,7 +7108,7 @@ type Contacts_Contacts struct {
 func (m *Contacts_Contacts) Reset()                    { *m = Contacts_Contacts{} }
 func (m *Contacts_Contacts) String() string            { return proto.CompactTextString(m) }
 func (*Contacts_Contacts) ProtoMessage()               {}
-func (*Contacts_Contacts) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{46} }
+func (*Contacts_Contacts) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{46} }
 
 type isContacts_Contacts_Payload interface {
 	isContacts_Contacts_Payload()
@@ -7228,7 +7228,7 @@ type Contacts_ImportedContacts struct {
 func (m *Contacts_ImportedContacts) Reset()                    { *m = Contacts_ImportedContacts{} }
 func (m *Contacts_ImportedContacts) String() string            { return proto.CompactTextString(m) }
 func (*Contacts_ImportedContacts) ProtoMessage()               {}
-func (*Contacts_ImportedContacts) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{47} }
+func (*Contacts_ImportedContacts) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{47} }
 
 type isContacts_ImportedContacts_Payload interface {
 	isContacts_ImportedContacts_Payload()
@@ -7319,7 +7319,7 @@ type Contacts_Blocked struct {
 func (m *Contacts_Blocked) Reset()                    { *m = Contacts_Blocked{} }
 func (m *Contacts_Blocked) String() string            { return proto.CompactTextString(m) }
 func (*Contacts_Blocked) ProtoMessage()               {}
-func (*Contacts_Blocked) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{48} }
+func (*Contacts_Blocked) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{48} }
 
 type isContacts_Blocked_Payload interface {
 	isContacts_Blocked_Payload()
@@ -7440,7 +7440,7 @@ type Messages_Dialogs struct {
 func (m *Messages_Dialogs) Reset()                    { *m = Messages_Dialogs{} }
 func (m *Messages_Dialogs) String() string            { return proto.CompactTextString(m) }
 func (*Messages_Dialogs) ProtoMessage()               {}
-func (*Messages_Dialogs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{49} }
+func (*Messages_Dialogs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{49} }
 
 type isMessages_Dialogs_Payload interface {
 	isMessages_Dialogs_Payload()
@@ -7562,7 +7562,7 @@ type Messages_Messages struct {
 func (m *Messages_Messages) Reset()                    { *m = Messages_Messages{} }
 func (m *Messages_Messages) String() string            { return proto.CompactTextString(m) }
 func (*Messages_Messages) ProtoMessage()               {}
-func (*Messages_Messages) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{50} }
+func (*Messages_Messages) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{50} }
 
 type isMessages_Messages_Payload interface {
 	isMessages_Messages_Payload()
@@ -7713,7 +7713,7 @@ type Messages_Chats struct {
 func (m *Messages_Chats) Reset()                    { *m = Messages_Chats{} }
 func (m *Messages_Chats) String() string            { return proto.CompactTextString(m) }
 func (*Messages_Chats) ProtoMessage()               {}
-func (*Messages_Chats) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{51} }
+func (*Messages_Chats) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{51} }
 
 type isMessages_Chats_Payload interface {
 	isMessages_Chats_Payload()
@@ -7833,7 +7833,7 @@ type Messages_ChatFull struct {
 func (m *Messages_ChatFull) Reset()                    { *m = Messages_ChatFull{} }
 func (m *Messages_ChatFull) String() string            { return proto.CompactTextString(m) }
 func (*Messages_ChatFull) ProtoMessage()               {}
-func (*Messages_ChatFull) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{52} }
+func (*Messages_ChatFull) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{52} }
 
 type isMessages_ChatFull_Payload interface {
 	isMessages_ChatFull_Payload()
@@ -7923,7 +7923,7 @@ type Messages_AffectedHistory struct {
 func (m *Messages_AffectedHistory) Reset()                    { *m = Messages_AffectedHistory{} }
 func (m *Messages_AffectedHistory) String() string            { return proto.CompactTextString(m) }
 func (*Messages_AffectedHistory) ProtoMessage()               {}
-func (*Messages_AffectedHistory) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{53} }
+func (*Messages_AffectedHistory) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{53} }
 
 type isMessages_AffectedHistory_Payload interface {
 	isMessages_AffectedHistory_Payload()
@@ -8027,7 +8027,7 @@ type MessagesFilter struct {
 func (m *MessagesFilter) Reset()                    { *m = MessagesFilter{} }
 func (m *MessagesFilter) String() string            { return proto.CompactTextString(m) }
 func (*MessagesFilter) ProtoMessage()               {}
-func (*MessagesFilter) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{54} }
+func (*MessagesFilter) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{54} }
 
 type isMessagesFilter_Payload interface {
 	isMessagesFilter_Payload()
@@ -8601,7 +8601,7 @@ type Update struct {
 func (m *Update) Reset()                    { *m = Update{} }
 func (m *Update) String() string            { return proto.CompactTextString(m) }
 func (*Update) ProtoMessage()               {}
-func (*Update) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{55} }
+func (*Update) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{55} }
 
 type isUpdate_Payload interface {
 	isUpdate_Payload()
@@ -10611,7 +10611,7 @@ type Updates_State struct {
 func (m *Updates_State) Reset()                    { *m = Updates_State{} }
 func (m *Updates_State) String() string            { return proto.CompactTextString(m) }
 func (*Updates_State) ProtoMessage()               {}
-func (*Updates_State) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{56} }
+func (*Updates_State) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{56} }
 
 type isUpdates_State_Payload interface {
 	isUpdates_State_Payload()
@@ -10704,7 +10704,7 @@ type Updates_Difference struct {
 func (m *Updates_Difference) Reset()                    { *m = Updates_Difference{} }
 func (m *Updates_Difference) String() string            { return proto.CompactTextString(m) }
 func (*Updates_Difference) ProtoMessage()               {}
-func (*Updates_Difference) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{57} }
+func (*Updates_Difference) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{57} }
 
 type isUpdates_Difference_Payload interface {
 	isUpdates_Difference_Payload()
@@ -10890,7 +10890,7 @@ type Updates struct {
 func (m *Updates) Reset()                    { *m = Updates{} }
 func (m *Updates) String() string            { return proto.CompactTextString(m) }
 func (*Updates) ProtoMessage()               {}
-func (*Updates) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{58} }
+func (*Updates) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{58} }
 
 type isUpdates_Payload interface {
 	isUpdates_Payload()
@@ -11161,7 +11161,7 @@ type Photos_Photos struct {
 func (m *Photos_Photos) Reset()                    { *m = Photos_Photos{} }
 func (m *Photos_Photos) String() string            { return proto.CompactTextString(m) }
 func (*Photos_Photos) ProtoMessage()               {}
-func (*Photos_Photos) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{59} }
+func (*Photos_Photos) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{59} }
 
 type isPhotos_Photos_Payload interface {
 	isPhotos_Photos_Payload()
@@ -11281,7 +11281,7 @@ type Photos_Photo struct {
 func (m *Photos_Photo) Reset()                    { *m = Photos_Photo{} }
 func (m *Photos_Photo) String() string            { return proto.CompactTextString(m) }
 func (*Photos_Photo) ProtoMessage()               {}
-func (*Photos_Photo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{60} }
+func (*Photos_Photo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{60} }
 
 type isPhotos_Photo_Payload interface {
 	isPhotos_Photo_Payload()
@@ -11372,7 +11372,7 @@ type Upload_File struct {
 func (m *Upload_File) Reset()                    { *m = Upload_File{} }
 func (m *Upload_File) String() string            { return proto.CompactTextString(m) }
 func (*Upload_File) ProtoMessage()               {}
-func (*Upload_File) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{61} }
+func (*Upload_File) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{61} }
 
 type isUpload_File_Payload interface {
 	isUpload_File_Payload()
@@ -11492,7 +11492,7 @@ type DcOption struct {
 func (m *DcOption) Reset()                    { *m = DcOption{} }
 func (m *DcOption) String() string            { return proto.CompactTextString(m) }
 func (*DcOption) ProtoMessage()               {}
-func (*DcOption) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{62} }
+func (*DcOption) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{62} }
 
 type isDcOption_Payload interface {
 	isDcOption_Payload()
@@ -11582,7 +11582,7 @@ type Config struct {
 func (m *Config) Reset()                    { *m = Config{} }
 func (m *Config) String() string            { return proto.CompactTextString(m) }
 func (*Config) ProtoMessage()               {}
-func (*Config) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{63} }
+func (*Config) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{63} }
 
 type isConfig_Payload interface {
 	isConfig_Payload()
@@ -11672,7 +11672,7 @@ type NearestDc struct {
 func (m *NearestDc) Reset()                    { *m = NearestDc{} }
 func (m *NearestDc) String() string            { return proto.CompactTextString(m) }
 func (*NearestDc) ProtoMessage()               {}
-func (*NearestDc) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{64} }
+func (*NearestDc) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{64} }
 
 type isNearestDc_Payload interface {
 	isNearestDc_Payload()
@@ -11763,7 +11763,7 @@ type Help_AppUpdate struct {
 func (m *Help_AppUpdate) Reset()                    { *m = Help_AppUpdate{} }
 func (m *Help_AppUpdate) String() string            { return proto.CompactTextString(m) }
 func (*Help_AppUpdate) ProtoMessage()               {}
-func (*Help_AppUpdate) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{65} }
+func (*Help_AppUpdate) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{65} }
 
 type isHelp_AppUpdate_Payload interface {
 	isHelp_AppUpdate_Payload()
@@ -11883,7 +11883,7 @@ type Help_InviteText struct {
 func (m *Help_InviteText) Reset()                    { *m = Help_InviteText{} }
 func (m *Help_InviteText) String() string            { return proto.CompactTextString(m) }
 func (*Help_InviteText) ProtoMessage()               {}
-func (*Help_InviteText) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{66} }
+func (*Help_InviteText) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{66} }
 
 type isHelp_InviteText_Payload interface {
 	isHelp_InviteText_Payload()
@@ -11977,7 +11977,7 @@ type EncryptedChat struct {
 func (m *EncryptedChat) Reset()                    { *m = EncryptedChat{} }
 func (m *EncryptedChat) String() string            { return proto.CompactTextString(m) }
 func (*EncryptedChat) ProtoMessage()               {}
-func (*EncryptedChat) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{67} }
+func (*EncryptedChat) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{67} }
 
 type isEncryptedChat_Payload interface {
 	isEncryptedChat_Payload()
@@ -12187,7 +12187,7 @@ type InputEncryptedChat struct {
 func (m *InputEncryptedChat) Reset()                    { *m = InputEncryptedChat{} }
 func (m *InputEncryptedChat) String() string            { return proto.CompactTextString(m) }
 func (*InputEncryptedChat) ProtoMessage()               {}
-func (*InputEncryptedChat) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{68} }
+func (*InputEncryptedChat) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{68} }
 
 type isInputEncryptedChat_Payload interface {
 	isInputEncryptedChat_Payload()
@@ -12278,7 +12278,7 @@ type EncryptedFile struct {
 func (m *EncryptedFile) Reset()                    { *m = EncryptedFile{} }
 func (m *EncryptedFile) String() string            { return proto.CompactTextString(m) }
 func (*EncryptedFile) ProtoMessage()               {}
-func (*EncryptedFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{69} }
+func (*EncryptedFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{69} }
 
 type isEncryptedFile_Payload interface {
 	isEncryptedFile_Payload()
@@ -12401,7 +12401,7 @@ type InputEncryptedFile struct {
 func (m *InputEncryptedFile) Reset()                    { *m = InputEncryptedFile{} }
 func (m *InputEncryptedFile) String() string            { return proto.CompactTextString(m) }
 func (*InputEncryptedFile) ProtoMessage()               {}
-func (*InputEncryptedFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{70} }
+func (*InputEncryptedFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{70} }
 
 type isInputEncryptedFile_Payload interface {
 	isInputEncryptedFile_Payload()
@@ -12582,7 +12582,7 @@ type EncryptedMessage struct {
 func (m *EncryptedMessage) Reset()                    { *m = EncryptedMessage{} }
 func (m *EncryptedMessage) String() string            { return proto.CompactTextString(m) }
 func (*EncryptedMessage) ProtoMessage()               {}
-func (*EncryptedMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{71} }
+func (*EncryptedMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{71} }
 
 type isEncryptedMessage_Payload interface {
 	isEncryptedMessage_Payload()
@@ -12703,7 +12703,7 @@ type Messages_DhConfig struct {
 func (m *Messages_DhConfig) Reset()                    { *m = Messages_DhConfig{} }
 func (m *Messages_DhConfig) String() string            { return proto.CompactTextString(m) }
 func (*Messages_DhConfig) ProtoMessage()               {}
-func (*Messages_DhConfig) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{72} }
+func (*Messages_DhConfig) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{72} }
 
 type isMessages_DhConfig_Payload interface {
 	isMessages_DhConfig_Payload()
@@ -12824,7 +12824,7 @@ type Messages_SentEncryptedMessage struct {
 func (m *Messages_SentEncryptedMessage) Reset()                    { *m = Messages_SentEncryptedMessage{} }
 func (m *Messages_SentEncryptedMessage) String() string            { return proto.CompactTextString(m) }
 func (*Messages_SentEncryptedMessage) ProtoMessage()               {}
-func (*Messages_SentEncryptedMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{73} }
+func (*Messages_SentEncryptedMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{73} }
 
 type isMessages_SentEncryptedMessage_Payload interface {
 	isMessages_SentEncryptedMessage_Payload()
@@ -12947,7 +12947,7 @@ type InputDocument struct {
 func (m *InputDocument) Reset()                    { *m = InputDocument{} }
 func (m *InputDocument) String() string            { return proto.CompactTextString(m) }
 func (*InputDocument) ProtoMessage()               {}
-func (*InputDocument) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{74} }
+func (*InputDocument) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{74} }
 
 type isInputDocument_Payload interface {
 	isInputDocument_Payload()
@@ -13068,7 +13068,7 @@ type Document struct {
 func (m *Document) Reset()                    { *m = Document{} }
 func (m *Document) String() string            { return proto.CompactTextString(m) }
 func (*Document) ProtoMessage()               {}
-func (*Document) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{75} }
+func (*Document) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{75} }
 
 type isDocument_Payload interface {
 	isDocument_Payload()
@@ -13188,7 +13188,7 @@ type Help_Support struct {
 func (m *Help_Support) Reset()                    { *m = Help_Support{} }
 func (m *Help_Support) String() string            { return proto.CompactTextString(m) }
 func (*Help_Support) ProtoMessage()               {}
-func (*Help_Support) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{76} }
+func (*Help_Support) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{76} }
 
 type isHelp_Support_Payload interface {
 	isHelp_Support_Payload()
@@ -13281,7 +13281,7 @@ type NotifyPeer struct {
 func (m *NotifyPeer) Reset()                    { *m = NotifyPeer{} }
 func (m *NotifyPeer) String() string            { return proto.CompactTextString(m) }
 func (*NotifyPeer) ProtoMessage()               {}
-func (*NotifyPeer) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{77} }
+func (*NotifyPeer) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{77} }
 
 type isNotifyPeer_Payload interface {
 	isNotifyPeer_Payload()
@@ -13473,7 +13473,7 @@ type SendMessageAction struct {
 func (m *SendMessageAction) Reset()                    { *m = SendMessageAction{} }
 func (m *SendMessageAction) String() string            { return proto.CompactTextString(m) }
 func (*SendMessageAction) ProtoMessage()               {}
-func (*SendMessageAction) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{78} }
+func (*SendMessageAction) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{78} }
 
 type isSendMessageAction_Payload interface {
 	isSendMessageAction_Payload()
@@ -13923,7 +13923,7 @@ type Contacts_Found struct {
 func (m *Contacts_Found) Reset()                    { *m = Contacts_Found{} }
 func (m *Contacts_Found) String() string            { return proto.CompactTextString(m) }
 func (*Contacts_Found) ProtoMessage()               {}
-func (*Contacts_Found) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{79} }
+func (*Contacts_Found) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{79} }
 
 type isContacts_Found_Payload interface {
 	isContacts_Found_Payload()
@@ -14015,7 +14015,7 @@ type InputPrivacyKey struct {
 func (m *InputPrivacyKey) Reset()                    { *m = InputPrivacyKey{} }
 func (m *InputPrivacyKey) String() string            { return proto.CompactTextString(m) }
 func (*InputPrivacyKey) ProtoMessage()               {}
-func (*InputPrivacyKey) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{80} }
+func (*InputPrivacyKey) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{80} }
 
 type isInputPrivacyKey_Payload interface {
 	isInputPrivacyKey_Payload()
@@ -14167,7 +14167,7 @@ type PrivacyKey struct {
 func (m *PrivacyKey) Reset()                    { *m = PrivacyKey{} }
 func (m *PrivacyKey) String() string            { return proto.CompactTextString(m) }
 func (*PrivacyKey) ProtoMessage()               {}
-func (*PrivacyKey) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{81} }
+func (*PrivacyKey) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{81} }
 
 type isPrivacyKey_Payload interface {
 	isPrivacyKey_Payload()
@@ -14322,7 +14322,7 @@ type InputPrivacyRule struct {
 func (m *InputPrivacyRule) Reset()                    { *m = InputPrivacyRule{} }
 func (m *InputPrivacyRule) String() string            { return proto.CompactTextString(m) }
 func (*InputPrivacyRule) ProtoMessage()               {}
-func (*InputPrivacyRule) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{82} }
+func (*InputPrivacyRule) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{82} }
 
 type isInputPrivacyRule_Payload interface {
 	isInputPrivacyRule_Payload()
@@ -14567,7 +14567,7 @@ type PrivacyRule struct {
 func (m *PrivacyRule) Reset()                    { *m = PrivacyRule{} }
 func (m *PrivacyRule) String() string            { return proto.CompactTextString(m) }
 func (*PrivacyRule) ProtoMessage()               {}
-func (*PrivacyRule) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{83} }
+func (*PrivacyRule) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{83} }
 
 type isPrivacyRule_Payload interface {
 	isPrivacyRule_Payload()
@@ -14807,7 +14807,7 @@ type Account_PrivacyRules struct {
 func (m *Account_PrivacyRules) Reset()                    { *m = Account_PrivacyRules{} }
 func (m *Account_PrivacyRules) String() string            { return proto.CompactTextString(m) }
 func (*Account_PrivacyRules) ProtoMessage()               {}
-func (*Account_PrivacyRules) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{84} }
+func (*Account_PrivacyRules) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{84} }
 
 type isAccount_PrivacyRules_Payload interface {
 	isAccount_PrivacyRules_Payload()
@@ -14897,7 +14897,7 @@ type AccountDaysTTL struct {
 func (m *AccountDaysTTL) Reset()                    { *m = AccountDaysTTL{} }
 func (m *AccountDaysTTL) String() string            { return proto.CompactTextString(m) }
 func (*AccountDaysTTL) ProtoMessage()               {}
-func (*AccountDaysTTL) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{85} }
+func (*AccountDaysTTL) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{85} }
 
 type isAccountDaysTTL_Payload interface {
 	isAccountDaysTTL_Payload()
@@ -14993,7 +14993,7 @@ type DocumentAttribute struct {
 func (m *DocumentAttribute) Reset()                    { *m = DocumentAttribute{} }
 func (m *DocumentAttribute) String() string            { return proto.CompactTextString(m) }
 func (*DocumentAttribute) ProtoMessage()               {}
-func (*DocumentAttribute) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{86} }
+func (*DocumentAttribute) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{86} }
 
 type isDocumentAttribute_Payload interface {
 	isDocumentAttribute_Payload()
@@ -15264,7 +15264,7 @@ type Messages_Stickers struct {
 func (m *Messages_Stickers) Reset()                    { *m = Messages_Stickers{} }
 func (m *Messages_Stickers) String() string            { return proto.CompactTextString(m) }
 func (*Messages_Stickers) ProtoMessage()               {}
-func (*Messages_Stickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{87} }
+func (*Messages_Stickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{87} }
 
 type isMessages_Stickers_Payload interface {
 	isMessages_Stickers_Payload()
@@ -15384,7 +15384,7 @@ type StickerPack struct {
 func (m *StickerPack) Reset()                    { *m = StickerPack{} }
 func (m *StickerPack) String() string            { return proto.CompactTextString(m) }
 func (*StickerPack) ProtoMessage()               {}
-func (*StickerPack) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{88} }
+func (*StickerPack) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{88} }
 
 type isStickerPack_Payload interface {
 	isStickerPack_Payload()
@@ -15475,7 +15475,7 @@ type Messages_AllStickers struct {
 func (m *Messages_AllStickers) Reset()                    { *m = Messages_AllStickers{} }
 func (m *Messages_AllStickers) String() string            { return proto.CompactTextString(m) }
 func (*Messages_AllStickers) ProtoMessage()               {}
-func (*Messages_AllStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{89} }
+func (*Messages_AllStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{89} }
 
 type isMessages_AllStickers_Payload interface {
 	isMessages_AllStickers_Payload()
@@ -15595,7 +15595,7 @@ type DisabledFeature struct {
 func (m *DisabledFeature) Reset()                    { *m = DisabledFeature{} }
 func (m *DisabledFeature) String() string            { return proto.CompactTextString(m) }
 func (*DisabledFeature) ProtoMessage()               {}
-func (*DisabledFeature) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{90} }
+func (*DisabledFeature) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{90} }
 
 type isDisabledFeature_Payload interface {
 	isDisabledFeature_Payload()
@@ -15685,7 +15685,7 @@ type Messages_AffectedMessages struct {
 func (m *Messages_AffectedMessages) Reset()                    { *m = Messages_AffectedMessages{} }
 func (m *Messages_AffectedMessages) String() string            { return proto.CompactTextString(m) }
 func (*Messages_AffectedMessages) ProtoMessage()               {}
-func (*Messages_AffectedMessages) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{91} }
+func (*Messages_AffectedMessages) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{91} }
 
 type isMessages_AffectedMessages_Payload interface {
 	isMessages_AffectedMessages_Payload()
@@ -15778,7 +15778,7 @@ type ContactLink struct {
 func (m *ContactLink) Reset()                    { *m = ContactLink{} }
 func (m *ContactLink) String() string            { return proto.CompactTextString(m) }
 func (*ContactLink) ProtoMessage()               {}
-func (*ContactLink) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{92} }
+func (*ContactLink) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{92} }
 
 type isContactLink_Payload interface {
 	isContactLink_Payload()
@@ -15961,7 +15961,7 @@ type WebPage struct {
 func (m *WebPage) Reset()                    { *m = WebPage{} }
 func (m *WebPage) String() string            { return proto.CompactTextString(m) }
 func (*WebPage) ProtoMessage()               {}
-func (*WebPage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{93} }
+func (*WebPage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{93} }
 
 type isWebPage_Payload interface {
 	isWebPage_Payload()
@@ -16141,7 +16141,7 @@ type Authorization struct {
 func (m *Authorization) Reset()                    { *m = Authorization{} }
 func (m *Authorization) String() string            { return proto.CompactTextString(m) }
 func (*Authorization) ProtoMessage()               {}
-func (*Authorization) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{94} }
+func (*Authorization) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{94} }
 
 type isAuthorization_Payload interface {
 	isAuthorization_Payload()
@@ -16231,7 +16231,7 @@ type Account_Authorizations struct {
 func (m *Account_Authorizations) Reset()                    { *m = Account_Authorizations{} }
 func (m *Account_Authorizations) String() string            { return proto.CompactTextString(m) }
 func (*Account_Authorizations) ProtoMessage()               {}
-func (*Account_Authorizations) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{95} }
+func (*Account_Authorizations) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{95} }
 
 type isAccount_Authorizations_Payload interface {
 	isAccount_Authorizations_Payload()
@@ -16322,7 +16322,7 @@ type Account_Password struct {
 func (m *Account_Password) Reset()                    { *m = Account_Password{} }
 func (m *Account_Password) String() string            { return proto.CompactTextString(m) }
 func (*Account_Password) ProtoMessage()               {}
-func (*Account_Password) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{96} }
+func (*Account_Password) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{96} }
 
 type isAccount_Password_Payload interface {
 	isAccount_Password_Payload()
@@ -16442,7 +16442,7 @@ type Account_PasswordSettings struct {
 func (m *Account_PasswordSettings) Reset()                    { *m = Account_PasswordSettings{} }
 func (m *Account_PasswordSettings) String() string            { return proto.CompactTextString(m) }
 func (*Account_PasswordSettings) ProtoMessage()               {}
-func (*Account_PasswordSettings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{97} }
+func (*Account_PasswordSettings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{97} }
 
 type isAccount_PasswordSettings_Payload interface {
 	isAccount_PasswordSettings_Payload()
@@ -16532,7 +16532,7 @@ type Account_PasswordInputSettings struct {
 func (m *Account_PasswordInputSettings) Reset()                    { *m = Account_PasswordInputSettings{} }
 func (m *Account_PasswordInputSettings) String() string            { return proto.CompactTextString(m) }
 func (*Account_PasswordInputSettings) ProtoMessage()               {}
-func (*Account_PasswordInputSettings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{98} }
+func (*Account_PasswordInputSettings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{98} }
 
 type isAccount_PasswordInputSettings_Payload interface {
 	isAccount_PasswordInputSettings_Payload()
@@ -16623,7 +16623,7 @@ type Auth_PasswordRecovery struct {
 func (m *Auth_PasswordRecovery) Reset()                    { *m = Auth_PasswordRecovery{} }
 func (m *Auth_PasswordRecovery) String() string            { return proto.CompactTextString(m) }
 func (*Auth_PasswordRecovery) ProtoMessage()               {}
-func (*Auth_PasswordRecovery) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{99} }
+func (*Auth_PasswordRecovery) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{99} }
 
 type isAuth_PasswordRecovery_Payload interface {
 	isAuth_PasswordRecovery_Payload()
@@ -16713,7 +16713,7 @@ type ReceivedNotifyMessage struct {
 func (m *ReceivedNotifyMessage) Reset()                    { *m = ReceivedNotifyMessage{} }
 func (m *ReceivedNotifyMessage) String() string            { return proto.CompactTextString(m) }
 func (*ReceivedNotifyMessage) ProtoMessage()               {}
-func (*ReceivedNotifyMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{100} }
+func (*ReceivedNotifyMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{100} }
 
 type isReceivedNotifyMessage_Payload interface {
 	isReceivedNotifyMessage_Payload()
@@ -16804,7 +16804,7 @@ type ExportedChatInvite struct {
 func (m *ExportedChatInvite) Reset()                    { *m = ExportedChatInvite{} }
 func (m *ExportedChatInvite) String() string            { return proto.CompactTextString(m) }
 func (*ExportedChatInvite) ProtoMessage()               {}
-func (*ExportedChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{101} }
+func (*ExportedChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{101} }
 
 type isExportedChatInvite_Payload interface {
 	isExportedChatInvite_Payload()
@@ -16925,7 +16925,7 @@ type ChatInvite struct {
 func (m *ChatInvite) Reset()                    { *m = ChatInvite{} }
 func (m *ChatInvite) String() string            { return proto.CompactTextString(m) }
 func (*ChatInvite) ProtoMessage()               {}
-func (*ChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{102} }
+func (*ChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{102} }
 
 type isChatInvite_Payload interface {
 	isChatInvite_Payload()
@@ -17047,7 +17047,7 @@ type InputStickerSet struct {
 func (m *InputStickerSet) Reset()                    { *m = InputStickerSet{} }
 func (m *InputStickerSet) String() string            { return proto.CompactTextString(m) }
 func (*InputStickerSet) ProtoMessage()               {}
-func (*InputStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{103} }
+func (*InputStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{103} }
 
 type isInputStickerSet_Payload interface {
 	isInputStickerSet_Payload()
@@ -17197,7 +17197,7 @@ type StickerSet struct {
 func (m *StickerSet) Reset()                    { *m = StickerSet{} }
 func (m *StickerSet) String() string            { return proto.CompactTextString(m) }
 func (*StickerSet) ProtoMessage()               {}
-func (*StickerSet) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{104} }
+func (*StickerSet) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{104} }
 
 type isStickerSet_Payload interface {
 	isStickerSet_Payload()
@@ -17287,7 +17287,7 @@ type Messages_StickerSet struct {
 func (m *Messages_StickerSet) Reset()                    { *m = Messages_StickerSet{} }
 func (m *Messages_StickerSet) String() string            { return proto.CompactTextString(m) }
 func (*Messages_StickerSet) ProtoMessage()               {}
-func (*Messages_StickerSet) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{105} }
+func (*Messages_StickerSet) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{105} }
 
 type isMessages_StickerSet_Payload interface {
 	isMessages_StickerSet_Payload()
@@ -17377,7 +17377,7 @@ type BotCommand struct {
 func (m *BotCommand) Reset()                    { *m = BotCommand{} }
 func (m *BotCommand) String() string            { return proto.CompactTextString(m) }
 func (*BotCommand) ProtoMessage()               {}
-func (*BotCommand) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{106} }
+func (*BotCommand) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{106} }
 
 type isBotCommand_Payload interface {
 	isBotCommand_Payload()
@@ -17467,7 +17467,7 @@ type BotInfo struct {
 func (m *BotInfo) Reset()                    { *m = BotInfo{} }
 func (m *BotInfo) String() string            { return proto.CompactTextString(m) }
 func (*BotInfo) ProtoMessage()               {}
-func (*BotInfo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{107} }
+func (*BotInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{107} }
 
 type isBotInfo_Payload interface {
 	isBotInfo_Payload()
@@ -17564,7 +17564,7 @@ type KeyboardButton struct {
 func (m *KeyboardButton) Reset()                    { *m = KeyboardButton{} }
 func (m *KeyboardButton) String() string            { return proto.CompactTextString(m) }
 func (*KeyboardButton) ProtoMessage()               {}
-func (*KeyboardButton) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{108} }
+func (*KeyboardButton) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{108} }
 
 type isKeyboardButton_Payload interface {
 	isKeyboardButton_Payload()
@@ -17864,7 +17864,7 @@ type KeyboardButtonRow struct {
 func (m *KeyboardButtonRow) Reset()                    { *m = KeyboardButtonRow{} }
 func (m *KeyboardButtonRow) String() string            { return proto.CompactTextString(m) }
 func (*KeyboardButtonRow) ProtoMessage()               {}
-func (*KeyboardButtonRow) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{109} }
+func (*KeyboardButtonRow) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{109} }
 
 type isKeyboardButtonRow_Payload interface {
 	isKeyboardButtonRow_Payload()
@@ -17957,7 +17957,7 @@ type ReplyMarkup struct {
 func (m *ReplyMarkup) Reset()                    { *m = ReplyMarkup{} }
 func (m *ReplyMarkup) String() string            { return proto.CompactTextString(m) }
 func (*ReplyMarkup) ProtoMessage()               {}
-func (*ReplyMarkup) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{110} }
+func (*ReplyMarkup) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{110} }
 
 type isReplyMarkup_Payload interface {
 	isReplyMarkup_Payload()
@@ -18149,7 +18149,7 @@ type MessageEntity struct {
 func (m *MessageEntity) Reset()                    { *m = MessageEntity{} }
 func (m *MessageEntity) String() string            { return proto.CompactTextString(m) }
 func (*MessageEntity) ProtoMessage()               {}
-func (*MessageEntity) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{111} }
+func (*MessageEntity) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{111} }
 
 type isMessageEntity_Payload interface {
 	isMessageEntity_Payload()
@@ -18600,7 +18600,7 @@ type InputChannel struct {
 func (m *InputChannel) Reset()                    { *m = InputChannel{} }
 func (m *InputChannel) String() string            { return proto.CompactTextString(m) }
 func (*InputChannel) ProtoMessage()               {}
-func (*InputChannel) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{112} }
+func (*InputChannel) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{112} }
 
 type isInputChannel_Payload interface {
 	isInputChannel_Payload()
@@ -18720,7 +18720,7 @@ type Contacts_ResolvedPeer struct {
 func (m *Contacts_ResolvedPeer) Reset()                    { *m = Contacts_ResolvedPeer{} }
 func (m *Contacts_ResolvedPeer) String() string            { return proto.CompactTextString(m) }
 func (*Contacts_ResolvedPeer) ProtoMessage()               {}
-func (*Contacts_ResolvedPeer) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{113} }
+func (*Contacts_ResolvedPeer) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{113} }
 
 type isContacts_ResolvedPeer_Payload interface {
 	isContacts_ResolvedPeer_Payload()
@@ -18810,7 +18810,7 @@ type MessageRange struct {
 func (m *MessageRange) Reset()                    { *m = MessageRange{} }
 func (m *MessageRange) String() string            { return proto.CompactTextString(m) }
 func (*MessageRange) ProtoMessage()               {}
-func (*MessageRange) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{114} }
+func (*MessageRange) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{114} }
 
 type isMessageRange_Payload interface {
 	isMessageRange_Payload()
@@ -18902,7 +18902,7 @@ type Updates_ChannelDifference struct {
 func (m *Updates_ChannelDifference) Reset()                    { *m = Updates_ChannelDifference{} }
 func (m *Updates_ChannelDifference) String() string            { return proto.CompactTextString(m) }
 func (*Updates_ChannelDifference) ProtoMessage()               {}
-func (*Updates_ChannelDifference) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{115} }
+func (*Updates_ChannelDifference) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{115} }
 
 type isUpdates_ChannelDifference_Payload interface {
 	isUpdates_ChannelDifference_Payload()
@@ -19055,7 +19055,7 @@ type ChannelMessagesFilter struct {
 func (m *ChannelMessagesFilter) Reset()                    { *m = ChannelMessagesFilter{} }
 func (m *ChannelMessagesFilter) String() string            { return proto.CompactTextString(m) }
 func (*ChannelMessagesFilter) ProtoMessage()               {}
-func (*ChannelMessagesFilter) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{116} }
+func (*ChannelMessagesFilter) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{116} }
 
 type isChannelMessagesFilter_Payload interface {
 	isChannelMessagesFilter_Payload()
@@ -19179,7 +19179,7 @@ type ChannelParticipant struct {
 func (m *ChannelParticipant) Reset()                    { *m = ChannelParticipant{} }
 func (m *ChannelParticipant) String() string            { return proto.CompactTextString(m) }
 func (*ChannelParticipant) ProtoMessage()               {}
-func (*ChannelParticipant) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{117} }
+func (*ChannelParticipant) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{117} }
 
 type isChannelParticipant_Payload interface {
 	isChannelParticipant_Payload()
@@ -19394,7 +19394,7 @@ type ChannelParticipantsFilter struct {
 func (m *ChannelParticipantsFilter) Reset()                    { *m = ChannelParticipantsFilter{} }
 func (m *ChannelParticipantsFilter) String() string            { return proto.CompactTextString(m) }
 func (*ChannelParticipantsFilter) ProtoMessage()               {}
-func (*ChannelParticipantsFilter) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{118} }
+func (*ChannelParticipantsFilter) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{118} }
 
 type isChannelParticipantsFilter_Payload interface {
 	isChannelParticipantsFilter_Payload()
@@ -19634,7 +19634,7 @@ type Channels_ChannelParticipants struct {
 func (m *Channels_ChannelParticipants) Reset()                    { *m = Channels_ChannelParticipants{} }
 func (m *Channels_ChannelParticipants) String() string            { return proto.CompactTextString(m) }
 func (*Channels_ChannelParticipants) ProtoMessage()               {}
-func (*Channels_ChannelParticipants) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{119} }
+func (*Channels_ChannelParticipants) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{119} }
 
 type isChannels_ChannelParticipants_Payload interface {
 	isChannels_ChannelParticipants_Payload()
@@ -19725,7 +19725,7 @@ type Channels_ChannelParticipant struct {
 func (m *Channels_ChannelParticipant) Reset()                    { *m = Channels_ChannelParticipant{} }
 func (m *Channels_ChannelParticipant) String() string            { return proto.CompactTextString(m) }
 func (*Channels_ChannelParticipant) ProtoMessage()               {}
-func (*Channels_ChannelParticipant) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{120} }
+func (*Channels_ChannelParticipant) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{120} }
 
 type isChannels_ChannelParticipant_Payload interface {
 	isChannels_ChannelParticipant_Payload()
@@ -19816,7 +19816,7 @@ type Help_TermsOfService struct {
 func (m *Help_TermsOfService) Reset()                    { *m = Help_TermsOfService{} }
 func (m *Help_TermsOfService) String() string            { return proto.CompactTextString(m) }
 func (*Help_TermsOfService) ProtoMessage()               {}
-func (*Help_TermsOfService) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{121} }
+func (*Help_TermsOfService) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{121} }
 
 type isHelp_TermsOfService_Payload interface {
 	isHelp_TermsOfService_Payload()
@@ -19907,7 +19907,7 @@ type FoundGif struct {
 func (m *FoundGif) Reset()                    { *m = FoundGif{} }
 func (m *FoundGif) String() string            { return proto.CompactTextString(m) }
 func (*FoundGif) ProtoMessage()               {}
-func (*FoundGif) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{122} }
+func (*FoundGif) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{122} }
 
 type isFoundGif_Payload interface {
 	isFoundGif_Payload()
@@ -20027,7 +20027,7 @@ type Messages_FoundGifs struct {
 func (m *Messages_FoundGifs) Reset()                    { *m = Messages_FoundGifs{} }
 func (m *Messages_FoundGifs) String() string            { return proto.CompactTextString(m) }
 func (*Messages_FoundGifs) ProtoMessage()               {}
-func (*Messages_FoundGifs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{123} }
+func (*Messages_FoundGifs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{123} }
 
 type isMessages_FoundGifs_Payload interface {
 	isMessages_FoundGifs_Payload()
@@ -20118,7 +20118,7 @@ type Messages_SavedGifs struct {
 func (m *Messages_SavedGifs) Reset()                    { *m = Messages_SavedGifs{} }
 func (m *Messages_SavedGifs) String() string            { return proto.CompactTextString(m) }
 func (*Messages_SavedGifs) ProtoMessage()               {}
-func (*Messages_SavedGifs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{124} }
+func (*Messages_SavedGifs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{124} }
 
 type isMessages_SavedGifs_Payload interface {
 	isMessages_SavedGifs_Payload()
@@ -20243,7 +20243,7 @@ type InputBotInlineMessage struct {
 func (m *InputBotInlineMessage) Reset()                    { *m = InputBotInlineMessage{} }
 func (m *InputBotInlineMessage) String() string            { return proto.CompactTextString(m) }
 func (*InputBotInlineMessage) ProtoMessage()               {}
-func (*InputBotInlineMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{125} }
+func (*InputBotInlineMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{125} }
 
 type isInputBotInlineMessage_Payload interface {
 	isInputBotInlineMessage_Payload()
@@ -20486,7 +20486,7 @@ type InputBotInlineResult struct {
 func (m *InputBotInlineResult) Reset()                    { *m = InputBotInlineResult{} }
 func (m *InputBotInlineResult) String() string            { return proto.CompactTextString(m) }
 func (*InputBotInlineResult) ProtoMessage()               {}
-func (*InputBotInlineResult) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{126} }
+func (*InputBotInlineResult) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{126} }
 
 type isInputBotInlineResult_Payload interface {
 	isInputBotInlineResult_Payload()
@@ -20670,7 +20670,7 @@ type BotInlineMessage struct {
 func (m *BotInlineMessage) Reset()                    { *m = BotInlineMessage{} }
 func (m *BotInlineMessage) String() string            { return proto.CompactTextString(m) }
 func (*BotInlineMessage) ProtoMessage()               {}
-func (*BotInlineMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{127} }
+func (*BotInlineMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{127} }
 
 type isBotInlineMessage_Payload interface {
 	isBotInlineMessage_Payload()
@@ -20881,7 +20881,7 @@ type BotInlineResult struct {
 func (m *BotInlineResult) Reset()                    { *m = BotInlineResult{} }
 func (m *BotInlineResult) String() string            { return proto.CompactTextString(m) }
 func (*BotInlineResult) ProtoMessage()               {}
-func (*BotInlineResult) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{128} }
+func (*BotInlineResult) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{128} }
 
 type isBotInlineResult_Payload interface {
 	isBotInlineResult_Payload()
@@ -21001,7 +21001,7 @@ type Messages_BotResults struct {
 func (m *Messages_BotResults) Reset()                    { *m = Messages_BotResults{} }
 func (m *Messages_BotResults) String() string            { return proto.CompactTextString(m) }
 func (*Messages_BotResults) ProtoMessage()               {}
-func (*Messages_BotResults) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{129} }
+func (*Messages_BotResults) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{129} }
 
 type isMessages_BotResults_Payload interface {
 	isMessages_BotResults_Payload()
@@ -21091,7 +21091,7 @@ type ExportedMessageLink struct {
 func (m *ExportedMessageLink) Reset()                    { *m = ExportedMessageLink{} }
 func (m *ExportedMessageLink) String() string            { return proto.CompactTextString(m) }
 func (*ExportedMessageLink) ProtoMessage()               {}
-func (*ExportedMessageLink) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{130} }
+func (*ExportedMessageLink) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{130} }
 
 type isExportedMessageLink_Payload interface {
 	isExportedMessageLink_Payload()
@@ -21181,7 +21181,7 @@ type MessageFwdHeader struct {
 func (m *MessageFwdHeader) Reset()                    { *m = MessageFwdHeader{} }
 func (m *MessageFwdHeader) String() string            { return proto.CompactTextString(m) }
 func (*MessageFwdHeader) ProtoMessage()               {}
-func (*MessageFwdHeader) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{131} }
+func (*MessageFwdHeader) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{131} }
 
 type isMessageFwdHeader_Payload interface {
 	isMessageFwdHeader_Payload()
@@ -21273,7 +21273,7 @@ type Auth_CodeType struct {
 func (m *Auth_CodeType) Reset()                    { *m = Auth_CodeType{} }
 func (m *Auth_CodeType) String() string            { return proto.CompactTextString(m) }
 func (*Auth_CodeType) ProtoMessage()               {}
-func (*Auth_CodeType) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{132} }
+func (*Auth_CodeType) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{132} }
 
 type isAuth_CodeType_Payload interface {
 	isAuth_CodeType_Payload()
@@ -21426,7 +21426,7 @@ type Auth_SentCodeType struct {
 func (m *Auth_SentCodeType) Reset()                    { *m = Auth_SentCodeType{} }
 func (m *Auth_SentCodeType) String() string            { return proto.CompactTextString(m) }
 func (*Auth_SentCodeType) ProtoMessage()               {}
-func (*Auth_SentCodeType) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{133} }
+func (*Auth_SentCodeType) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{133} }
 
 type isAuth_SentCodeType_Payload interface {
 	isAuth_SentCodeType_Payload()
@@ -21606,7 +21606,7 @@ type Messages_BotCallbackAnswer struct {
 func (m *Messages_BotCallbackAnswer) Reset()                    { *m = Messages_BotCallbackAnswer{} }
 func (m *Messages_BotCallbackAnswer) String() string            { return proto.CompactTextString(m) }
 func (*Messages_BotCallbackAnswer) ProtoMessage()               {}
-func (*Messages_BotCallbackAnswer) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{134} }
+func (*Messages_BotCallbackAnswer) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{134} }
 
 type isMessages_BotCallbackAnswer_Payload interface {
 	isMessages_BotCallbackAnswer_Payload()
@@ -21696,7 +21696,7 @@ type Messages_MessageEditData struct {
 func (m *Messages_MessageEditData) Reset()                    { *m = Messages_MessageEditData{} }
 func (m *Messages_MessageEditData) String() string            { return proto.CompactTextString(m) }
 func (*Messages_MessageEditData) ProtoMessage()               {}
-func (*Messages_MessageEditData) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{135} }
+func (*Messages_MessageEditData) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{135} }
 
 type isMessages_MessageEditData_Payload interface {
 	isMessages_MessageEditData_Payload()
@@ -21786,7 +21786,7 @@ type InputBotInlineMessageID struct {
 func (m *InputBotInlineMessageID) Reset()                    { *m = InputBotInlineMessageID{} }
 func (m *InputBotInlineMessageID) String() string            { return proto.CompactTextString(m) }
 func (*InputBotInlineMessageID) ProtoMessage()               {}
-func (*InputBotInlineMessageID) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{136} }
+func (*InputBotInlineMessageID) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{136} }
 
 type isInputBotInlineMessageID_Payload interface {
 	isInputBotInlineMessageID_Payload()
@@ -21876,7 +21876,7 @@ type InlineBotSwitchPM struct {
 func (m *InlineBotSwitchPM) Reset()                    { *m = InlineBotSwitchPM{} }
 func (m *InlineBotSwitchPM) String() string            { return proto.CompactTextString(m) }
 func (*InlineBotSwitchPM) ProtoMessage()               {}
-func (*InlineBotSwitchPM) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{137} }
+func (*InlineBotSwitchPM) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{137} }
 
 type isInlineBotSwitchPM_Payload interface {
 	isInlineBotSwitchPM_Payload()
@@ -21966,7 +21966,7 @@ type Messages_PeerDialogs struct {
 func (m *Messages_PeerDialogs) Reset()                    { *m = Messages_PeerDialogs{} }
 func (m *Messages_PeerDialogs) String() string            { return proto.CompactTextString(m) }
 func (*Messages_PeerDialogs) ProtoMessage()               {}
-func (*Messages_PeerDialogs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{138} }
+func (*Messages_PeerDialogs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{138} }
 
 type isMessages_PeerDialogs_Payload interface {
 	isMessages_PeerDialogs_Payload()
@@ -22056,7 +22056,7 @@ type TopPeer struct {
 func (m *TopPeer) Reset()                    { *m = TopPeer{} }
 func (m *TopPeer) String() string            { return proto.CompactTextString(m) }
 func (*TopPeer) ProtoMessage()               {}
-func (*TopPeer) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{139} }
+func (*TopPeer) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{139} }
 
 type isTopPeer_Payload interface {
 	isTopPeer_Payload()
@@ -22151,7 +22151,7 @@ type TopPeerCategory struct {
 func (m *TopPeerCategory) Reset()                    { *m = TopPeerCategory{} }
 func (m *TopPeerCategory) String() string            { return proto.CompactTextString(m) }
 func (*TopPeerCategory) ProtoMessage()               {}
-func (*TopPeerCategory) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{140} }
+func (*TopPeerCategory) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{140} }
 
 type isTopPeerCategory_Payload interface {
 	isTopPeerCategory_Payload()
@@ -22391,7 +22391,7 @@ type TopPeerCategoryPeers struct {
 func (m *TopPeerCategoryPeers) Reset()                    { *m = TopPeerCategoryPeers{} }
 func (m *TopPeerCategoryPeers) String() string            { return proto.CompactTextString(m) }
 func (*TopPeerCategoryPeers) ProtoMessage()               {}
-func (*TopPeerCategoryPeers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{141} }
+func (*TopPeerCategoryPeers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{141} }
 
 type isTopPeerCategoryPeers_Payload interface {
 	isTopPeerCategoryPeers_Payload()
@@ -22482,7 +22482,7 @@ type Contacts_TopPeers struct {
 func (m *Contacts_TopPeers) Reset()                    { *m = Contacts_TopPeers{} }
 func (m *Contacts_TopPeers) String() string            { return proto.CompactTextString(m) }
 func (*Contacts_TopPeers) ProtoMessage()               {}
-func (*Contacts_TopPeers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{142} }
+func (*Contacts_TopPeers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{142} }
 
 type isContacts_TopPeers_Payload interface {
 	isContacts_TopPeers_Payload()
@@ -22603,7 +22603,7 @@ type DraftMessage struct {
 func (m *DraftMessage) Reset()                    { *m = DraftMessage{} }
 func (m *DraftMessage) String() string            { return proto.CompactTextString(m) }
 func (*DraftMessage) ProtoMessage()               {}
-func (*DraftMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{143} }
+func (*DraftMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{143} }
 
 type isDraftMessage_Payload interface {
 	isDraftMessage_Payload()
@@ -22724,7 +22724,7 @@ type Messages_FeaturedStickers struct {
 func (m *Messages_FeaturedStickers) Reset()                    { *m = Messages_FeaturedStickers{} }
 func (m *Messages_FeaturedStickers) String() string            { return proto.CompactTextString(m) }
 func (*Messages_FeaturedStickers) ProtoMessage()               {}
-func (*Messages_FeaturedStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{144} }
+func (*Messages_FeaturedStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{144} }
 
 type isMessages_FeaturedStickers_Payload interface {
 	isMessages_FeaturedStickers_Payload()
@@ -22846,7 +22846,7 @@ type Messages_RecentStickers struct {
 func (m *Messages_RecentStickers) Reset()                    { *m = Messages_RecentStickers{} }
 func (m *Messages_RecentStickers) String() string            { return proto.CompactTextString(m) }
 func (*Messages_RecentStickers) ProtoMessage()               {}
-func (*Messages_RecentStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{145} }
+func (*Messages_RecentStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{145} }
 
 type isMessages_RecentStickers_Payload interface {
 	isMessages_RecentStickers_Payload()
@@ -22967,7 +22967,7 @@ type Messages_ArchivedStickers struct {
 func (m *Messages_ArchivedStickers) Reset()                    { *m = Messages_ArchivedStickers{} }
 func (m *Messages_ArchivedStickers) String() string            { return proto.CompactTextString(m) }
 func (*Messages_ArchivedStickers) ProtoMessage()               {}
-func (*Messages_ArchivedStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{146} }
+func (*Messages_ArchivedStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{146} }
 
 type isMessages_ArchivedStickers_Payload interface {
 	isMessages_ArchivedStickers_Payload()
@@ -23059,7 +23059,7 @@ func (m *Messages_StickerSetInstallResult) Reset()         { *m = Messages_Stick
 func (m *Messages_StickerSetInstallResult) String() string { return proto.CompactTextString(m) }
 func (*Messages_StickerSetInstallResult) ProtoMessage()    {}
 func (*Messages_StickerSetInstallResult) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{147}
+	return fileDescriptor4, []int{147}
 }
 
 type isMessages_StickerSetInstallResult_Payload interface {
@@ -23183,7 +23183,7 @@ type StickerSetCovered struct {
 func (m *StickerSetCovered) Reset()                    { *m = StickerSetCovered{} }
 func (m *StickerSetCovered) String() string            { return proto.CompactTextString(m) }
 func (*StickerSetCovered) ProtoMessage()               {}
-func (*StickerSetCovered) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{148} }
+func (*StickerSetCovered) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{148} }
 
 type isStickerSetCovered_Payload interface {
 	isStickerSetCovered_Payload()
@@ -23303,7 +23303,7 @@ type MaskCoords struct {
 func (m *MaskCoords) Reset()                    { *m = MaskCoords{} }
 func (m *MaskCoords) String() string            { return proto.CompactTextString(m) }
 func (*MaskCoords) ProtoMessage()               {}
-func (*MaskCoords) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{149} }
+func (*MaskCoords) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{149} }
 
 type isMaskCoords_Payload interface {
 	isMaskCoords_Payload()
@@ -23394,7 +23394,7 @@ type InputStickeredMedia struct {
 func (m *InputStickeredMedia) Reset()                    { *m = InputStickeredMedia{} }
 func (m *InputStickeredMedia) String() string            { return proto.CompactTextString(m) }
 func (*InputStickeredMedia) ProtoMessage()               {}
-func (*InputStickeredMedia) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{150} }
+func (*InputStickeredMedia) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{150} }
 
 type isInputStickeredMedia_Payload interface {
 	isInputStickeredMedia_Payload()
@@ -23514,7 +23514,7 @@ type Game struct {
 func (m *Game) Reset()                    { *m = Game{} }
 func (m *Game) String() string            { return proto.CompactTextString(m) }
 func (*Game) ProtoMessage()               {}
-func (*Game) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{151} }
+func (*Game) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{151} }
 
 type isGame_Payload interface {
 	isGame_Payload()
@@ -23605,7 +23605,7 @@ type InputGame struct {
 func (m *InputGame) Reset()                    { *m = InputGame{} }
 func (m *InputGame) String() string            { return proto.CompactTextString(m) }
 func (*InputGame) ProtoMessage()               {}
-func (*InputGame) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{152} }
+func (*InputGame) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{152} }
 
 type isInputGame_Payload interface {
 	isInputGame_Payload()
@@ -23725,7 +23725,7 @@ type HighScore struct {
 func (m *HighScore) Reset()                    { *m = HighScore{} }
 func (m *HighScore) String() string            { return proto.CompactTextString(m) }
 func (*HighScore) ProtoMessage()               {}
-func (*HighScore) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{153} }
+func (*HighScore) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{153} }
 
 type isHighScore_Payload interface {
 	isHighScore_Payload()
@@ -23815,7 +23815,7 @@ type Messages_HighScores struct {
 func (m *Messages_HighScores) Reset()                    { *m = Messages_HighScores{} }
 func (m *Messages_HighScores) String() string            { return proto.CompactTextString(m) }
 func (*Messages_HighScores) ProtoMessage()               {}
-func (*Messages_HighScores) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{154} }
+func (*Messages_HighScores) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{154} }
 
 type isMessages_HighScores_Payload interface {
 	isMessages_HighScores_Payload()
@@ -23914,7 +23914,7 @@ type RichText struct {
 func (m *RichText) Reset()                    { *m = RichText{} }
 func (m *RichText) String() string            { return proto.CompactTextString(m) }
 func (*RichText) ProtoMessage()               {}
-func (*RichText) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{155} }
+func (*RichText) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{155} }
 
 type isRichText_Payload interface {
 	isRichText_Payload()
@@ -24296,7 +24296,7 @@ type PageBlock struct {
 func (m *PageBlock) Reset()                    { *m = PageBlock{} }
 func (m *PageBlock) String() string            { return proto.CompactTextString(m) }
 func (*PageBlock) ProtoMessage()               {}
-func (*PageBlock) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{156} }
+func (*PageBlock) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{156} }
 
 type isPageBlock_Payload interface {
 	isPageBlock_Payload()
@@ -25047,7 +25047,7 @@ type Page struct {
 func (m *Page) Reset()                    { *m = Page{} }
 func (m *Page) String() string            { return proto.CompactTextString(m) }
 func (*Page) ProtoMessage()               {}
-func (*Page) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{157} }
+func (*Page) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{157} }
 
 type isPage_Payload interface {
 	isPage_Payload()
@@ -25170,7 +25170,7 @@ type PhoneCallDiscardReason struct {
 func (m *PhoneCallDiscardReason) Reset()                    { *m = PhoneCallDiscardReason{} }
 func (m *PhoneCallDiscardReason) String() string            { return proto.CompactTextString(m) }
 func (*PhoneCallDiscardReason) ProtoMessage()               {}
-func (*PhoneCallDiscardReason) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{158} }
+func (*PhoneCallDiscardReason) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{158} }
 
 type isPhoneCallDiscardReason_Payload interface {
 	isPhoneCallDiscardReason_Payload()
@@ -25350,7 +25350,7 @@ type DataJSON struct {
 func (m *DataJSON) Reset()                    { *m = DataJSON{} }
 func (m *DataJSON) String() string            { return proto.CompactTextString(m) }
 func (*DataJSON) ProtoMessage()               {}
-func (*DataJSON) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{159} }
+func (*DataJSON) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{159} }
 
 type isDataJSON_Payload interface {
 	isDataJSON_Payload()
@@ -25440,7 +25440,7 @@ type LabeledPrice struct {
 func (m *LabeledPrice) Reset()                    { *m = LabeledPrice{} }
 func (m *LabeledPrice) String() string            { return proto.CompactTextString(m) }
 func (*LabeledPrice) ProtoMessage()               {}
-func (*LabeledPrice) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{160} }
+func (*LabeledPrice) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{160} }
 
 type isLabeledPrice_Payload interface {
 	isLabeledPrice_Payload()
@@ -25530,7 +25530,7 @@ type Invoice struct {
 func (m *Invoice) Reset()                    { *m = Invoice{} }
 func (m *Invoice) String() string            { return proto.CompactTextString(m) }
 func (*Invoice) ProtoMessage()               {}
-func (*Invoice) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{161} }
+func (*Invoice) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{161} }
 
 type isInvoice_Payload interface {
 	isInvoice_Payload()
@@ -25620,7 +25620,7 @@ type PaymentCharge struct {
 func (m *PaymentCharge) Reset()                    { *m = PaymentCharge{} }
 func (m *PaymentCharge) String() string            { return proto.CompactTextString(m) }
 func (*PaymentCharge) ProtoMessage()               {}
-func (*PaymentCharge) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{162} }
+func (*PaymentCharge) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{162} }
 
 type isPaymentCharge_Payload interface {
 	isPaymentCharge_Payload()
@@ -25710,7 +25710,7 @@ type PostAddress struct {
 func (m *PostAddress) Reset()                    { *m = PostAddress{} }
 func (m *PostAddress) String() string            { return proto.CompactTextString(m) }
 func (*PostAddress) ProtoMessage()               {}
-func (*PostAddress) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{163} }
+func (*PostAddress) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{163} }
 
 type isPostAddress_Payload interface {
 	isPostAddress_Payload()
@@ -25800,7 +25800,7 @@ type PaymentRequestedInfo struct {
 func (m *PaymentRequestedInfo) Reset()                    { *m = PaymentRequestedInfo{} }
 func (m *PaymentRequestedInfo) String() string            { return proto.CompactTextString(m) }
 func (*PaymentRequestedInfo) ProtoMessage()               {}
-func (*PaymentRequestedInfo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{164} }
+func (*PaymentRequestedInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{164} }
 
 type isPaymentRequestedInfo_Payload interface {
 	isPaymentRequestedInfo_Payload()
@@ -25890,7 +25890,7 @@ type PaymentSavedCredentials struct {
 func (m *PaymentSavedCredentials) Reset()                    { *m = PaymentSavedCredentials{} }
 func (m *PaymentSavedCredentials) String() string            { return proto.CompactTextString(m) }
 func (*PaymentSavedCredentials) ProtoMessage()               {}
-func (*PaymentSavedCredentials) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{165} }
+func (*PaymentSavedCredentials) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{165} }
 
 type isPaymentSavedCredentials_Payload interface {
 	isPaymentSavedCredentials_Payload()
@@ -25980,7 +25980,7 @@ type WebDocument struct {
 func (m *WebDocument) Reset()                    { *m = WebDocument{} }
 func (m *WebDocument) String() string            { return proto.CompactTextString(m) }
 func (*WebDocument) ProtoMessage()               {}
-func (*WebDocument) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{166} }
+func (*WebDocument) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{166} }
 
 type isWebDocument_Payload interface {
 	isWebDocument_Payload()
@@ -26070,7 +26070,7 @@ type InputWebDocument struct {
 func (m *InputWebDocument) Reset()                    { *m = InputWebDocument{} }
 func (m *InputWebDocument) String() string            { return proto.CompactTextString(m) }
 func (*InputWebDocument) ProtoMessage()               {}
-func (*InputWebDocument) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{167} }
+func (*InputWebDocument) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{167} }
 
 type isInputWebDocument_Payload interface {
 	isInputWebDocument_Payload()
@@ -26160,7 +26160,7 @@ type InputWebFileLocation struct {
 func (m *InputWebFileLocation) Reset()                    { *m = InputWebFileLocation{} }
 func (m *InputWebFileLocation) String() string            { return proto.CompactTextString(m) }
 func (*InputWebFileLocation) ProtoMessage()               {}
-func (*InputWebFileLocation) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{168} }
+func (*InputWebFileLocation) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{168} }
 
 type isInputWebFileLocation_Payload interface {
 	isInputWebFileLocation_Payload()
@@ -26250,7 +26250,7 @@ type Upload_WebFile struct {
 func (m *Upload_WebFile) Reset()                    { *m = Upload_WebFile{} }
 func (m *Upload_WebFile) String() string            { return proto.CompactTextString(m) }
 func (*Upload_WebFile) ProtoMessage()               {}
-func (*Upload_WebFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{169} }
+func (*Upload_WebFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{169} }
 
 type isUpload_WebFile_Payload interface {
 	isUpload_WebFile_Payload()
@@ -26340,7 +26340,7 @@ type Payments_PaymentForm struct {
 func (m *Payments_PaymentForm) Reset()                    { *m = Payments_PaymentForm{} }
 func (m *Payments_PaymentForm) String() string            { return proto.CompactTextString(m) }
 func (*Payments_PaymentForm) ProtoMessage()               {}
-func (*Payments_PaymentForm) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{170} }
+func (*Payments_PaymentForm) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{170} }
 
 type isPayments_PaymentForm_Payload interface {
 	isPayments_PaymentForm_Payload()
@@ -26431,7 +26431,7 @@ func (m *Payments_ValidatedRequestedInfo) Reset()         { *m = Payments_Valida
 func (m *Payments_ValidatedRequestedInfo) String() string { return proto.CompactTextString(m) }
 func (*Payments_ValidatedRequestedInfo) ProtoMessage()    {}
 func (*Payments_ValidatedRequestedInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{171}
+	return fileDescriptor4, []int{171}
 }
 
 type isPayments_ValidatedRequestedInfo_Payload interface {
@@ -26524,7 +26524,7 @@ type Payments_PaymentResult struct {
 func (m *Payments_PaymentResult) Reset()                    { *m = Payments_PaymentResult{} }
 func (m *Payments_PaymentResult) String() string            { return proto.CompactTextString(m) }
 func (*Payments_PaymentResult) ProtoMessage()               {}
-func (*Payments_PaymentResult) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{172} }
+func (*Payments_PaymentResult) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{172} }
 
 type isPayments_PaymentResult_Payload interface {
 	isPayments_PaymentResult_Payload()
@@ -26644,7 +26644,7 @@ type Payments_PaymentReceipt struct {
 func (m *Payments_PaymentReceipt) Reset()                    { *m = Payments_PaymentReceipt{} }
 func (m *Payments_PaymentReceipt) String() string            { return proto.CompactTextString(m) }
 func (*Payments_PaymentReceipt) ProtoMessage()               {}
-func (*Payments_PaymentReceipt) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{173} }
+func (*Payments_PaymentReceipt) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{173} }
 
 type isPayments_PaymentReceipt_Payload interface {
 	isPayments_PaymentReceipt_Payload()
@@ -26734,7 +26734,7 @@ type Payments_SavedInfo struct {
 func (m *Payments_SavedInfo) Reset()                    { *m = Payments_SavedInfo{} }
 func (m *Payments_SavedInfo) String() string            { return proto.CompactTextString(m) }
 func (*Payments_SavedInfo) ProtoMessage()               {}
-func (*Payments_SavedInfo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{174} }
+func (*Payments_SavedInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{174} }
 
 type isPayments_SavedInfo_Payload interface {
 	isPayments_SavedInfo_Payload()
@@ -26825,7 +26825,7 @@ type InputPaymentCredentials struct {
 func (m *InputPaymentCredentials) Reset()                    { *m = InputPaymentCredentials{} }
 func (m *InputPaymentCredentials) String() string            { return proto.CompactTextString(m) }
 func (*InputPaymentCredentials) ProtoMessage()               {}
-func (*InputPaymentCredentials) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{175} }
+func (*InputPaymentCredentials) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{175} }
 
 type isInputPaymentCredentials_Payload interface {
 	isInputPaymentCredentials_Payload()
@@ -26945,7 +26945,7 @@ type Account_TmpPassword struct {
 func (m *Account_TmpPassword) Reset()                    { *m = Account_TmpPassword{} }
 func (m *Account_TmpPassword) String() string            { return proto.CompactTextString(m) }
 func (*Account_TmpPassword) ProtoMessage()               {}
-func (*Account_TmpPassword) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{176} }
+func (*Account_TmpPassword) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{176} }
 
 type isAccount_TmpPassword_Payload interface {
 	isAccount_TmpPassword_Payload()
@@ -27035,7 +27035,7 @@ type ShippingOption struct {
 func (m *ShippingOption) Reset()                    { *m = ShippingOption{} }
 func (m *ShippingOption) String() string            { return proto.CompactTextString(m) }
 func (*ShippingOption) ProtoMessage()               {}
-func (*ShippingOption) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{177} }
+func (*ShippingOption) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{177} }
 
 type isShippingOption_Payload interface {
 	isShippingOption_Payload()
@@ -27125,7 +27125,7 @@ type InputStickerSetItem struct {
 func (m *InputStickerSetItem) Reset()                    { *m = InputStickerSetItem{} }
 func (m *InputStickerSetItem) String() string            { return proto.CompactTextString(m) }
 func (*InputStickerSetItem) ProtoMessage()               {}
-func (*InputStickerSetItem) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{178} }
+func (*InputStickerSetItem) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{178} }
 
 type isInputStickerSetItem_Payload interface {
 	isInputStickerSetItem_Payload()
@@ -27215,7 +27215,7 @@ type InputPhoneCall struct {
 func (m *InputPhoneCall) Reset()                    { *m = InputPhoneCall{} }
 func (m *InputPhoneCall) String() string            { return proto.CompactTextString(m) }
 func (*InputPhoneCall) ProtoMessage()               {}
-func (*InputPhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{179} }
+func (*InputPhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{179} }
 
 type isInputPhoneCall_Payload interface {
 	isInputPhoneCall_Payload()
@@ -27310,7 +27310,7 @@ type PhoneCall struct {
 func (m *PhoneCall) Reset()                    { *m = PhoneCall{} }
 func (m *PhoneCall) String() string            { return proto.CompactTextString(m) }
 func (*PhoneCall) ProtoMessage()               {}
-func (*PhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{180} }
+func (*PhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{180} }
 
 type isPhoneCall_Payload interface {
 	isPhoneCall_Payload()
@@ -27550,7 +27550,7 @@ type PhoneConnection struct {
 func (m *PhoneConnection) Reset()                    { *m = PhoneConnection{} }
 func (m *PhoneConnection) String() string            { return proto.CompactTextString(m) }
 func (*PhoneConnection) ProtoMessage()               {}
-func (*PhoneConnection) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{181} }
+func (*PhoneConnection) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{181} }
 
 type isPhoneConnection_Payload interface {
 	isPhoneConnection_Payload()
@@ -27640,7 +27640,7 @@ type PhoneCallProtocol struct {
 func (m *PhoneCallProtocol) Reset()                    { *m = PhoneCallProtocol{} }
 func (m *PhoneCallProtocol) String() string            { return proto.CompactTextString(m) }
 func (*PhoneCallProtocol) ProtoMessage()               {}
-func (*PhoneCallProtocol) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{182} }
+func (*PhoneCallProtocol) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{182} }
 
 type isPhoneCallProtocol_Payload interface {
 	isPhoneCallProtocol_Payload()
@@ -27730,7 +27730,7 @@ type Phone_PhoneCall struct {
 func (m *Phone_PhoneCall) Reset()                    { *m = Phone_PhoneCall{} }
 func (m *Phone_PhoneCall) String() string            { return proto.CompactTextString(m) }
 func (*Phone_PhoneCall) ProtoMessage()               {}
-func (*Phone_PhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{183} }
+func (*Phone_PhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{183} }
 
 type isPhone_PhoneCall_Payload interface {
 	isPhone_PhoneCall_Payload()
@@ -27821,7 +27821,7 @@ type Upload_CdnFile struct {
 func (m *Upload_CdnFile) Reset()                    { *m = Upload_CdnFile{} }
 func (m *Upload_CdnFile) String() string            { return proto.CompactTextString(m) }
 func (*Upload_CdnFile) ProtoMessage()               {}
-func (*Upload_CdnFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{184} }
+func (*Upload_CdnFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{184} }
 
 type isUpload_CdnFile_Payload interface {
 	isUpload_CdnFile_Payload()
@@ -27941,7 +27941,7 @@ type CdnPublicKey struct {
 func (m *CdnPublicKey) Reset()                    { *m = CdnPublicKey{} }
 func (m *CdnPublicKey) String() string            { return proto.CompactTextString(m) }
 func (*CdnPublicKey) ProtoMessage()               {}
-func (*CdnPublicKey) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{185} }
+func (*CdnPublicKey) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{185} }
 
 type isCdnPublicKey_Payload interface {
 	isCdnPublicKey_Payload()
@@ -28031,7 +28031,7 @@ type CdnConfig struct {
 func (m *CdnConfig) Reset()                    { *m = CdnConfig{} }
 func (m *CdnConfig) String() string            { return proto.CompactTextString(m) }
 func (*CdnConfig) ProtoMessage()               {}
-func (*CdnConfig) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{186} }
+func (*CdnConfig) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{186} }
 
 type isCdnConfig_Payload interface {
 	isCdnConfig_Payload()
@@ -28123,7 +28123,7 @@ type LangPackString struct {
 func (m *LangPackString) Reset()                    { *m = LangPackString{} }
 func (m *LangPackString) String() string            { return proto.CompactTextString(m) }
 func (*LangPackString) ProtoMessage()               {}
-func (*LangPackString) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{187} }
+func (*LangPackString) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{187} }
 
 type isLangPackString_Payload interface {
 	isLangPackString_Payload()
@@ -28273,7 +28273,7 @@ type LangPackDifference struct {
 func (m *LangPackDifference) Reset()                    { *m = LangPackDifference{} }
 func (m *LangPackDifference) String() string            { return proto.CompactTextString(m) }
 func (*LangPackDifference) ProtoMessage()               {}
-func (*LangPackDifference) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{188} }
+func (*LangPackDifference) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{188} }
 
 type isLangPackDifference_Payload interface {
 	isLangPackDifference_Payload()
@@ -28363,7 +28363,7 @@ type LangPackLanguage struct {
 func (m *LangPackLanguage) Reset()                    { *m = LangPackLanguage{} }
 func (m *LangPackLanguage) String() string            { return proto.CompactTextString(m) }
 func (*LangPackLanguage) ProtoMessage()               {}
-func (*LangPackLanguage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{189} }
+func (*LangPackLanguage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{189} }
 
 type isLangPackLanguage_Payload interface {
 	isLangPackLanguage_Payload()
@@ -28453,7 +28453,7 @@ type ChannelAdminRights struct {
 func (m *ChannelAdminRights) Reset()                    { *m = ChannelAdminRights{} }
 func (m *ChannelAdminRights) String() string            { return proto.CompactTextString(m) }
 func (*ChannelAdminRights) ProtoMessage()               {}
-func (*ChannelAdminRights) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{190} }
+func (*ChannelAdminRights) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{190} }
 
 type isChannelAdminRights_Payload interface {
 	isChannelAdminRights_Payload()
@@ -28543,7 +28543,7 @@ type ChannelBannedRights struct {
 func (m *ChannelBannedRights) Reset()                    { *m = ChannelBannedRights{} }
 func (m *ChannelBannedRights) String() string            { return proto.CompactTextString(m) }
 func (*ChannelBannedRights) ProtoMessage()               {}
-func (*ChannelBannedRights) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{191} }
+func (*ChannelBannedRights) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{191} }
 
 type isChannelBannedRights_Payload interface {
 	isChannelBannedRights_Payload()
@@ -28647,7 +28647,7 @@ type ChannelAdminLogEventAction struct {
 func (m *ChannelAdminLogEventAction) Reset()                    { *m = ChannelAdminLogEventAction{} }
 func (m *ChannelAdminLogEventAction) String() string            { return proto.CompactTextString(m) }
 func (*ChannelAdminLogEventAction) ProtoMessage()               {}
-func (*ChannelAdminLogEventAction) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{192} }
+func (*ChannelAdminLogEventAction) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{192} }
 
 type isChannelAdminLogEventAction_Payload interface {
 	isChannelAdminLogEventAction_Payload()
@@ -29172,7 +29172,7 @@ type ChannelAdminLogEvent struct {
 func (m *ChannelAdminLogEvent) Reset()                    { *m = ChannelAdminLogEvent{} }
 func (m *ChannelAdminLogEvent) String() string            { return proto.CompactTextString(m) }
 func (*ChannelAdminLogEvent) ProtoMessage()               {}
-func (*ChannelAdminLogEvent) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{193} }
+func (*ChannelAdminLogEvent) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{193} }
 
 type isChannelAdminLogEvent_Payload interface {
 	isChannelAdminLogEvent_Payload()
@@ -29262,7 +29262,7 @@ type Channels_AdminLogResults struct {
 func (m *Channels_AdminLogResults) Reset()                    { *m = Channels_AdminLogResults{} }
 func (m *Channels_AdminLogResults) String() string            { return proto.CompactTextString(m) }
 func (*Channels_AdminLogResults) ProtoMessage()               {}
-func (*Channels_AdminLogResults) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{194} }
+func (*Channels_AdminLogResults) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{194} }
 
 type isChannels_AdminLogResults_Payload interface {
 	isChannels_AdminLogResults_Payload()
@@ -29352,7 +29352,7 @@ type ChannelAdminLogEventsFilter struct {
 func (m *ChannelAdminLogEventsFilter) Reset()                    { *m = ChannelAdminLogEventsFilter{} }
 func (m *ChannelAdminLogEventsFilter) String() string            { return proto.CompactTextString(m) }
 func (*ChannelAdminLogEventsFilter) ProtoMessage()               {}
-func (*ChannelAdminLogEventsFilter) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{195} }
+func (*ChannelAdminLogEventsFilter) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{195} }
 
 type isChannelAdminLogEventsFilter_Payload interface {
 	isChannelAdminLogEventsFilter_Payload()
@@ -29443,7 +29443,7 @@ type PopularContact struct {
 func (m *PopularContact) Reset()                    { *m = PopularContact{} }
 func (m *PopularContact) String() string            { return proto.CompactTextString(m) }
 func (*PopularContact) ProtoMessage()               {}
-func (*PopularContact) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{196} }
+func (*PopularContact) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{196} }
 
 type isPopularContact_Payload interface {
 	isPopularContact_Payload()
@@ -29533,7 +29533,7 @@ type CdnFileHash struct {
 func (m *CdnFileHash) Reset()                    { *m = CdnFileHash{} }
 func (m *CdnFileHash) String() string            { return proto.CompactTextString(m) }
 func (*CdnFileHash) ProtoMessage()               {}
-func (*CdnFileHash) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{197} }
+func (*CdnFileHash) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{197} }
 
 type isCdnFileHash_Payload interface {
 	isCdnFileHash_Payload()
@@ -29624,7 +29624,7 @@ type Messages_FavedStickers struct {
 func (m *Messages_FavedStickers) Reset()                    { *m = Messages_FavedStickers{} }
 func (m *Messages_FavedStickers) String() string            { return proto.CompactTextString(m) }
 func (*Messages_FavedStickers) ProtoMessage()               {}
-func (*Messages_FavedStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{198} }
+func (*Messages_FavedStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{198} }
 
 type isMessages_FavedStickers_Payload interface {
 	isMessages_FavedStickers_Payload()
@@ -29742,7 +29742,7 @@ type TLInputPeerEmpty struct {
 func (m *TLInputPeerEmpty) Reset()                    { *m = TLInputPeerEmpty{} }
 func (m *TLInputPeerEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPeerEmpty) ProtoMessage()               {}
-func (*TLInputPeerEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{199} }
+func (*TLInputPeerEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{199} }
 
 // inputPeerSelf#7da07ec9 = InputPeer;
 type TLInputPeerSelf struct {
@@ -29751,7 +29751,7 @@ type TLInputPeerSelf struct {
 func (m *TLInputPeerSelf) Reset()                    { *m = TLInputPeerSelf{} }
 func (m *TLInputPeerSelf) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPeerSelf) ProtoMessage()               {}
-func (*TLInputPeerSelf) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{200} }
+func (*TLInputPeerSelf) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{200} }
 
 // inputPeerChat#179be863 chat_id:int = InputPeer;
 type TLInputPeerChat struct {
@@ -29761,7 +29761,7 @@ type TLInputPeerChat struct {
 func (m *TLInputPeerChat) Reset()                    { *m = TLInputPeerChat{} }
 func (m *TLInputPeerChat) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPeerChat) ProtoMessage()               {}
-func (*TLInputPeerChat) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{201} }
+func (*TLInputPeerChat) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{201} }
 
 func (m *TLInputPeerChat) GetChatId() int32 {
 	if m != nil {
@@ -29779,7 +29779,7 @@ type TLInputPeerUser struct {
 func (m *TLInputPeerUser) Reset()                    { *m = TLInputPeerUser{} }
 func (m *TLInputPeerUser) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPeerUser) ProtoMessage()               {}
-func (*TLInputPeerUser) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{202} }
+func (*TLInputPeerUser) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{202} }
 
 func (m *TLInputPeerUser) GetUserId() int32 {
 	if m != nil {
@@ -29804,7 +29804,7 @@ type TLInputPeerChannel struct {
 func (m *TLInputPeerChannel) Reset()                    { *m = TLInputPeerChannel{} }
 func (m *TLInputPeerChannel) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPeerChannel) ProtoMessage()               {}
-func (*TLInputPeerChannel) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{203} }
+func (*TLInputPeerChannel) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{203} }
 
 func (m *TLInputPeerChannel) GetChannelId() int32 {
 	if m != nil {
@@ -29827,7 +29827,7 @@ type TLInputUserEmpty struct {
 func (m *TLInputUserEmpty) Reset()                    { *m = TLInputUserEmpty{} }
 func (m *TLInputUserEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLInputUserEmpty) ProtoMessage()               {}
-func (*TLInputUserEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{204} }
+func (*TLInputUserEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{204} }
 
 // inputUserSelf#f7c1b13f = InputUser;
 type TLInputUserSelf struct {
@@ -29836,7 +29836,7 @@ type TLInputUserSelf struct {
 func (m *TLInputUserSelf) Reset()                    { *m = TLInputUserSelf{} }
 func (m *TLInputUserSelf) String() string            { return proto.CompactTextString(m) }
 func (*TLInputUserSelf) ProtoMessage()               {}
-func (*TLInputUserSelf) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{205} }
+func (*TLInputUserSelf) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{205} }
 
 // inputUser#d8292816 user_id:int access_hash:long = InputUser;
 type TLInputUser struct {
@@ -29847,7 +29847,7 @@ type TLInputUser struct {
 func (m *TLInputUser) Reset()                    { *m = TLInputUser{} }
 func (m *TLInputUser) String() string            { return proto.CompactTextString(m) }
 func (*TLInputUser) ProtoMessage()               {}
-func (*TLInputUser) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{206} }
+func (*TLInputUser) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{206} }
 
 func (m *TLInputUser) GetUserId() int32 {
 	if m != nil {
@@ -29874,7 +29874,7 @@ type TLInputPhoneContact struct {
 func (m *TLInputPhoneContact) Reset()                    { *m = TLInputPhoneContact{} }
 func (m *TLInputPhoneContact) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPhoneContact) ProtoMessage()               {}
-func (*TLInputPhoneContact) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{207} }
+func (*TLInputPhoneContact) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{207} }
 
 func (m *TLInputPhoneContact) GetClientId() int64 {
 	if m != nil {
@@ -29915,7 +29915,7 @@ type TLInputFile struct {
 func (m *TLInputFile) Reset()                    { *m = TLInputFile{} }
 func (m *TLInputFile) String() string            { return proto.CompactTextString(m) }
 func (*TLInputFile) ProtoMessage()               {}
-func (*TLInputFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{208} }
+func (*TLInputFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{208} }
 
 func (m *TLInputFile) GetId() int64 {
 	if m != nil {
@@ -29955,7 +29955,7 @@ type TLInputFileBig struct {
 func (m *TLInputFileBig) Reset()                    { *m = TLInputFileBig{} }
 func (m *TLInputFileBig) String() string            { return proto.CompactTextString(m) }
 func (*TLInputFileBig) ProtoMessage()               {}
-func (*TLInputFileBig) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{209} }
+func (*TLInputFileBig) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{209} }
 
 func (m *TLInputFileBig) GetId() int64 {
 	if m != nil {
@@ -29985,7 +29985,7 @@ type TLInputMediaEmpty struct {
 func (m *TLInputMediaEmpty) Reset()                    { *m = TLInputMediaEmpty{} }
 func (m *TLInputMediaEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMediaEmpty) ProtoMessage()               {}
-func (*TLInputMediaEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{210} }
+func (*TLInputMediaEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{210} }
 
 // inputMediaUploadedPhoto#2f37e231 flags:# file:InputFile caption:string stickers:flags.0?Vector<InputDocument> ttl_seconds:flags.1?int = InputMedia;
 type TLInputMediaUploadedPhoto struct {
@@ -29998,7 +29998,7 @@ type TLInputMediaUploadedPhoto struct {
 func (m *TLInputMediaUploadedPhoto) Reset()                    { *m = TLInputMediaUploadedPhoto{} }
 func (m *TLInputMediaUploadedPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMediaUploadedPhoto) ProtoMessage()               {}
-func (*TLInputMediaUploadedPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{211} }
+func (*TLInputMediaUploadedPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{211} }
 
 func (m *TLInputMediaUploadedPhoto) GetFile() *InputFile {
 	if m != nil {
@@ -30038,7 +30038,7 @@ type TLInputMediaPhoto struct {
 func (m *TLInputMediaPhoto) Reset()                    { *m = TLInputMediaPhoto{} }
 func (m *TLInputMediaPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMediaPhoto) ProtoMessage()               {}
-func (*TLInputMediaPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{212} }
+func (*TLInputMediaPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{212} }
 
 func (m *TLInputMediaPhoto) GetId() *InputPhoto {
 	if m != nil {
@@ -30069,7 +30069,7 @@ type TLInputMediaGeoPoint struct {
 func (m *TLInputMediaGeoPoint) Reset()                    { *m = TLInputMediaGeoPoint{} }
 func (m *TLInputMediaGeoPoint) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMediaGeoPoint) ProtoMessage()               {}
-func (*TLInputMediaGeoPoint) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{213} }
+func (*TLInputMediaGeoPoint) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{213} }
 
 func (m *TLInputMediaGeoPoint) GetGeoPoint() *InputGeoPoint {
 	if m != nil {
@@ -30088,7 +30088,7 @@ type TLInputMediaContact struct {
 func (m *TLInputMediaContact) Reset()                    { *m = TLInputMediaContact{} }
 func (m *TLInputMediaContact) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMediaContact) ProtoMessage()               {}
-func (*TLInputMediaContact) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{214} }
+func (*TLInputMediaContact) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{214} }
 
 func (m *TLInputMediaContact) GetPhoneNumber() string {
 	if m != nil {
@@ -30125,7 +30125,7 @@ type TLInputMediaUploadedDocument struct {
 func (m *TLInputMediaUploadedDocument) Reset()                    { *m = TLInputMediaUploadedDocument{} }
 func (m *TLInputMediaUploadedDocument) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMediaUploadedDocument) ProtoMessage()               {}
-func (*TLInputMediaUploadedDocument) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{215} }
+func (*TLInputMediaUploadedDocument) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{215} }
 
 func (m *TLInputMediaUploadedDocument) GetFile() *InputFile {
 	if m != nil {
@@ -30186,7 +30186,7 @@ type TLInputMediaDocument struct {
 func (m *TLInputMediaDocument) Reset()                    { *m = TLInputMediaDocument{} }
 func (m *TLInputMediaDocument) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMediaDocument) ProtoMessage()               {}
-func (*TLInputMediaDocument) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{216} }
+func (*TLInputMediaDocument) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{216} }
 
 func (m *TLInputMediaDocument) GetId() *InputDocument {
 	if m != nil {
@@ -30221,7 +30221,7 @@ type TLInputMediaVenue struct {
 func (m *TLInputMediaVenue) Reset()                    { *m = TLInputMediaVenue{} }
 func (m *TLInputMediaVenue) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMediaVenue) ProtoMessage()               {}
-func (*TLInputMediaVenue) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{217} }
+func (*TLInputMediaVenue) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{217} }
 
 func (m *TLInputMediaVenue) GetGeoPoint() *InputGeoPoint {
 	if m != nil {
@@ -30267,7 +30267,7 @@ type TLInputMediaGifExternal struct {
 func (m *TLInputMediaGifExternal) Reset()                    { *m = TLInputMediaGifExternal{} }
 func (m *TLInputMediaGifExternal) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMediaGifExternal) ProtoMessage()               {}
-func (*TLInputMediaGifExternal) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{218} }
+func (*TLInputMediaGifExternal) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{218} }
 
 func (m *TLInputMediaGifExternal) GetUrl() string {
 	if m != nil {
@@ -30293,7 +30293,7 @@ type TLInputMediaPhotoExternal struct {
 func (m *TLInputMediaPhotoExternal) Reset()                    { *m = TLInputMediaPhotoExternal{} }
 func (m *TLInputMediaPhotoExternal) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMediaPhotoExternal) ProtoMessage()               {}
-func (*TLInputMediaPhotoExternal) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{219} }
+func (*TLInputMediaPhotoExternal) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{219} }
 
 func (m *TLInputMediaPhotoExternal) GetUrl() string {
 	if m != nil {
@@ -30326,7 +30326,7 @@ type TLInputMediaDocumentExternal struct {
 func (m *TLInputMediaDocumentExternal) Reset()                    { *m = TLInputMediaDocumentExternal{} }
 func (m *TLInputMediaDocumentExternal) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMediaDocumentExternal) ProtoMessage()               {}
-func (*TLInputMediaDocumentExternal) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{220} }
+func (*TLInputMediaDocumentExternal) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{220} }
 
 func (m *TLInputMediaDocumentExternal) GetUrl() string {
 	if m != nil {
@@ -30357,7 +30357,7 @@ type TLInputMediaGame struct {
 func (m *TLInputMediaGame) Reset()                    { *m = TLInputMediaGame{} }
 func (m *TLInputMediaGame) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMediaGame) ProtoMessage()               {}
-func (*TLInputMediaGame) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{221} }
+func (*TLInputMediaGame) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{221} }
 
 func (m *TLInputMediaGame) GetId() *InputGame {
 	if m != nil {
@@ -30380,7 +30380,7 @@ type TLInputMediaInvoice struct {
 func (m *TLInputMediaInvoice) Reset()                    { *m = TLInputMediaInvoice{} }
 func (m *TLInputMediaInvoice) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMediaInvoice) ProtoMessage()               {}
-func (*TLInputMediaInvoice) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{222} }
+func (*TLInputMediaInvoice) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{222} }
 
 func (m *TLInputMediaInvoice) GetTitle() string {
 	if m != nil {
@@ -30438,7 +30438,7 @@ type TLInputChatPhotoEmpty struct {
 func (m *TLInputChatPhotoEmpty) Reset()                    { *m = TLInputChatPhotoEmpty{} }
 func (m *TLInputChatPhotoEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLInputChatPhotoEmpty) ProtoMessage()               {}
-func (*TLInputChatPhotoEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{223} }
+func (*TLInputChatPhotoEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{223} }
 
 // inputChatUploadedPhoto#927c55b4 file:InputFile = InputChatPhoto;
 type TLInputChatUploadedPhoto struct {
@@ -30448,7 +30448,7 @@ type TLInputChatUploadedPhoto struct {
 func (m *TLInputChatUploadedPhoto) Reset()                    { *m = TLInputChatUploadedPhoto{} }
 func (m *TLInputChatUploadedPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLInputChatUploadedPhoto) ProtoMessage()               {}
-func (*TLInputChatUploadedPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{224} }
+func (*TLInputChatUploadedPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{224} }
 
 func (m *TLInputChatUploadedPhoto) GetFile() *InputFile {
 	if m != nil {
@@ -30465,7 +30465,7 @@ type TLInputChatPhoto struct {
 func (m *TLInputChatPhoto) Reset()                    { *m = TLInputChatPhoto{} }
 func (m *TLInputChatPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLInputChatPhoto) ProtoMessage()               {}
-func (*TLInputChatPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{225} }
+func (*TLInputChatPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{225} }
 
 func (m *TLInputChatPhoto) GetId() *InputPhoto {
 	if m != nil {
@@ -30481,7 +30481,7 @@ type TLInputGeoPointEmpty struct {
 func (m *TLInputGeoPointEmpty) Reset()                    { *m = TLInputGeoPointEmpty{} }
 func (m *TLInputGeoPointEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLInputGeoPointEmpty) ProtoMessage()               {}
-func (*TLInputGeoPointEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{226} }
+func (*TLInputGeoPointEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{226} }
 
 // inputGeoPoint#f3b7acc9 lat:double long:double = InputGeoPoint;
 type TLInputGeoPoint struct {
@@ -30492,7 +30492,7 @@ type TLInputGeoPoint struct {
 func (m *TLInputGeoPoint) Reset()                    { *m = TLInputGeoPoint{} }
 func (m *TLInputGeoPoint) String() string            { return proto.CompactTextString(m) }
 func (*TLInputGeoPoint) ProtoMessage()               {}
-func (*TLInputGeoPoint) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{227} }
+func (*TLInputGeoPoint) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{227} }
 
 func (m *TLInputGeoPoint) GetLat() float64 {
 	if m != nil {
@@ -30515,7 +30515,7 @@ type TLInputPhotoEmpty struct {
 func (m *TLInputPhotoEmpty) Reset()                    { *m = TLInputPhotoEmpty{} }
 func (m *TLInputPhotoEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPhotoEmpty) ProtoMessage()               {}
-func (*TLInputPhotoEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{228} }
+func (*TLInputPhotoEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{228} }
 
 // inputPhoto#fb95c6c4 id:long access_hash:long = InputPhoto;
 type TLInputPhoto struct {
@@ -30526,7 +30526,7 @@ type TLInputPhoto struct {
 func (m *TLInputPhoto) Reset()                    { *m = TLInputPhoto{} }
 func (m *TLInputPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPhoto) ProtoMessage()               {}
-func (*TLInputPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{229} }
+func (*TLInputPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{229} }
 
 func (m *TLInputPhoto) GetId() int64 {
 	if m != nil {
@@ -30552,7 +30552,7 @@ type TLInputFileLocation struct {
 func (m *TLInputFileLocation) Reset()                    { *m = TLInputFileLocation{} }
 func (m *TLInputFileLocation) String() string            { return proto.CompactTextString(m) }
 func (*TLInputFileLocation) ProtoMessage()               {}
-func (*TLInputFileLocation) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{230} }
+func (*TLInputFileLocation) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{230} }
 
 func (m *TLInputFileLocation) GetVolumeId() int64 {
 	if m != nil {
@@ -30584,7 +30584,7 @@ type TLInputEncryptedFileLocation struct {
 func (m *TLInputEncryptedFileLocation) Reset()                    { *m = TLInputEncryptedFileLocation{} }
 func (m *TLInputEncryptedFileLocation) String() string            { return proto.CompactTextString(m) }
 func (*TLInputEncryptedFileLocation) ProtoMessage()               {}
-func (*TLInputEncryptedFileLocation) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{231} }
+func (*TLInputEncryptedFileLocation) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{231} }
 
 func (m *TLInputEncryptedFileLocation) GetId() int64 {
 	if m != nil {
@@ -30610,7 +30610,7 @@ type TLInputDocumentFileLocation struct {
 func (m *TLInputDocumentFileLocation) Reset()                    { *m = TLInputDocumentFileLocation{} }
 func (m *TLInputDocumentFileLocation) String() string            { return proto.CompactTextString(m) }
 func (*TLInputDocumentFileLocation) ProtoMessage()               {}
-func (*TLInputDocumentFileLocation) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{232} }
+func (*TLInputDocumentFileLocation) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{232} }
 
 func (m *TLInputDocumentFileLocation) GetId() int64 {
 	if m != nil {
@@ -30644,7 +30644,7 @@ type TLInputAppEvent struct {
 func (m *TLInputAppEvent) Reset()                    { *m = TLInputAppEvent{} }
 func (m *TLInputAppEvent) String() string            { return proto.CompactTextString(m) }
 func (*TLInputAppEvent) ProtoMessage()               {}
-func (*TLInputAppEvent) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{233} }
+func (*TLInputAppEvent) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{233} }
 
 func (m *TLInputAppEvent) GetTime() float64 {
 	if m != nil {
@@ -30682,7 +30682,7 @@ type TLPeerUser struct {
 func (m *TLPeerUser) Reset()                    { *m = TLPeerUser{} }
 func (m *TLPeerUser) String() string            { return proto.CompactTextString(m) }
 func (*TLPeerUser) ProtoMessage()               {}
-func (*TLPeerUser) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{234} }
+func (*TLPeerUser) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{234} }
 
 func (m *TLPeerUser) GetUserId() int32 {
 	if m != nil {
@@ -30699,7 +30699,7 @@ type TLPeerChat struct {
 func (m *TLPeerChat) Reset()                    { *m = TLPeerChat{} }
 func (m *TLPeerChat) String() string            { return proto.CompactTextString(m) }
 func (*TLPeerChat) ProtoMessage()               {}
-func (*TLPeerChat) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{235} }
+func (*TLPeerChat) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{235} }
 
 func (m *TLPeerChat) GetChatId() int32 {
 	if m != nil {
@@ -30716,7 +30716,7 @@ type TLPeerChannel struct {
 func (m *TLPeerChannel) Reset()                    { *m = TLPeerChannel{} }
 func (m *TLPeerChannel) String() string            { return proto.CompactTextString(m) }
 func (*TLPeerChannel) ProtoMessage()               {}
-func (*TLPeerChannel) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{236} }
+func (*TLPeerChannel) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{236} }
 
 func (m *TLPeerChannel) GetChannelId() int32 {
 	if m != nil {
@@ -30732,7 +30732,7 @@ type TLStorageFileUnknown struct {
 func (m *TLStorageFileUnknown) Reset()                    { *m = TLStorageFileUnknown{} }
 func (m *TLStorageFileUnknown) String() string            { return proto.CompactTextString(m) }
 func (*TLStorageFileUnknown) ProtoMessage()               {}
-func (*TLStorageFileUnknown) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{237} }
+func (*TLStorageFileUnknown) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{237} }
 
 // storage.filePartial#40bc6f52 = storage.FileType;
 type TLStorageFilePartial struct {
@@ -30741,7 +30741,7 @@ type TLStorageFilePartial struct {
 func (m *TLStorageFilePartial) Reset()                    { *m = TLStorageFilePartial{} }
 func (m *TLStorageFilePartial) String() string            { return proto.CompactTextString(m) }
 func (*TLStorageFilePartial) ProtoMessage()               {}
-func (*TLStorageFilePartial) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{238} }
+func (*TLStorageFilePartial) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{238} }
 
 // storage.fileJpeg#7efe0e = storage.FileType;
 type TLStorageFileJpeg struct {
@@ -30750,7 +30750,7 @@ type TLStorageFileJpeg struct {
 func (m *TLStorageFileJpeg) Reset()                    { *m = TLStorageFileJpeg{} }
 func (m *TLStorageFileJpeg) String() string            { return proto.CompactTextString(m) }
 func (*TLStorageFileJpeg) ProtoMessage()               {}
-func (*TLStorageFileJpeg) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{239} }
+func (*TLStorageFileJpeg) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{239} }
 
 // storage.fileGif#cae1aadf = storage.FileType;
 type TLStorageFileGif struct {
@@ -30759,7 +30759,7 @@ type TLStorageFileGif struct {
 func (m *TLStorageFileGif) Reset()                    { *m = TLStorageFileGif{} }
 func (m *TLStorageFileGif) String() string            { return proto.CompactTextString(m) }
 func (*TLStorageFileGif) ProtoMessage()               {}
-func (*TLStorageFileGif) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{240} }
+func (*TLStorageFileGif) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{240} }
 
 // storage.filePng#a4f63c0 = storage.FileType;
 type TLStorageFilePng struct {
@@ -30768,7 +30768,7 @@ type TLStorageFilePng struct {
 func (m *TLStorageFilePng) Reset()                    { *m = TLStorageFilePng{} }
 func (m *TLStorageFilePng) String() string            { return proto.CompactTextString(m) }
 func (*TLStorageFilePng) ProtoMessage()               {}
-func (*TLStorageFilePng) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{241} }
+func (*TLStorageFilePng) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{241} }
 
 // storage.filePdf#ae1e508d = storage.FileType;
 type TLStorageFilePdf struct {
@@ -30777,7 +30777,7 @@ type TLStorageFilePdf struct {
 func (m *TLStorageFilePdf) Reset()                    { *m = TLStorageFilePdf{} }
 func (m *TLStorageFilePdf) String() string            { return proto.CompactTextString(m) }
 func (*TLStorageFilePdf) ProtoMessage()               {}
-func (*TLStorageFilePdf) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{242} }
+func (*TLStorageFilePdf) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{242} }
 
 // storage.fileMp3#528a0677 = storage.FileType;
 type TLStorageFileMp3 struct {
@@ -30786,7 +30786,7 @@ type TLStorageFileMp3 struct {
 func (m *TLStorageFileMp3) Reset()                    { *m = TLStorageFileMp3{} }
 func (m *TLStorageFileMp3) String() string            { return proto.CompactTextString(m) }
 func (*TLStorageFileMp3) ProtoMessage()               {}
-func (*TLStorageFileMp3) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{243} }
+func (*TLStorageFileMp3) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{243} }
 
 // storage.fileMov#4b09ebbc = storage.FileType;
 type TLStorageFileMov struct {
@@ -30795,7 +30795,7 @@ type TLStorageFileMov struct {
 func (m *TLStorageFileMov) Reset()                    { *m = TLStorageFileMov{} }
 func (m *TLStorageFileMov) String() string            { return proto.CompactTextString(m) }
 func (*TLStorageFileMov) ProtoMessage()               {}
-func (*TLStorageFileMov) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{244} }
+func (*TLStorageFileMov) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{244} }
 
 // storage.fileMp4#b3cea0e4 = storage.FileType;
 type TLStorageFileMp4 struct {
@@ -30804,7 +30804,7 @@ type TLStorageFileMp4 struct {
 func (m *TLStorageFileMp4) Reset()                    { *m = TLStorageFileMp4{} }
 func (m *TLStorageFileMp4) String() string            { return proto.CompactTextString(m) }
 func (*TLStorageFileMp4) ProtoMessage()               {}
-func (*TLStorageFileMp4) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{245} }
+func (*TLStorageFileMp4) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{245} }
 
 // storage.fileWebp#1081464c = storage.FileType;
 type TLStorageFileWebp struct {
@@ -30813,7 +30813,7 @@ type TLStorageFileWebp struct {
 func (m *TLStorageFileWebp) Reset()                    { *m = TLStorageFileWebp{} }
 func (m *TLStorageFileWebp) String() string            { return proto.CompactTextString(m) }
 func (*TLStorageFileWebp) ProtoMessage()               {}
-func (*TLStorageFileWebp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{246} }
+func (*TLStorageFileWebp) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{246} }
 
 // fileLocationUnavailable#7c596b46 volume_id:long local_id:int secret:long = FileLocation;
 type TLFileLocationUnavailable struct {
@@ -30825,7 +30825,7 @@ type TLFileLocationUnavailable struct {
 func (m *TLFileLocationUnavailable) Reset()                    { *m = TLFileLocationUnavailable{} }
 func (m *TLFileLocationUnavailable) String() string            { return proto.CompactTextString(m) }
 func (*TLFileLocationUnavailable) ProtoMessage()               {}
-func (*TLFileLocationUnavailable) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{247} }
+func (*TLFileLocationUnavailable) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{247} }
 
 func (m *TLFileLocationUnavailable) GetVolumeId() int64 {
 	if m != nil {
@@ -30859,7 +30859,7 @@ type TLFileLocation struct {
 func (m *TLFileLocation) Reset()                    { *m = TLFileLocation{} }
 func (m *TLFileLocation) String() string            { return proto.CompactTextString(m) }
 func (*TLFileLocation) ProtoMessage()               {}
-func (*TLFileLocation) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{248} }
+func (*TLFileLocation) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{248} }
 
 func (m *TLFileLocation) GetDcId() int32 {
 	if m != nil {
@@ -30897,7 +30897,7 @@ type TLUserEmpty struct {
 func (m *TLUserEmpty) Reset()                    { *m = TLUserEmpty{} }
 func (m *TLUserEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLUserEmpty) ProtoMessage()               {}
-func (*TLUserEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{249} }
+func (*TLUserEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{249} }
 
 func (m *TLUserEmpty) GetId() int32 {
 	if m != nil {
@@ -30936,7 +30936,7 @@ type TLUser struct {
 func (m *TLUser) Reset()                    { *m = TLUser{} }
 func (m *TLUser) String() string            { return proto.CompactTextString(m) }
 func (*TLUser) ProtoMessage()               {}
-func (*TLUser) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{250} }
+func (*TLUser) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{250} }
 
 func (m *TLUser) GetSelf() bool {
 	if m != nil {
@@ -31106,7 +31106,7 @@ type TLUserProfilePhotoEmpty struct {
 func (m *TLUserProfilePhotoEmpty) Reset()                    { *m = TLUserProfilePhotoEmpty{} }
 func (m *TLUserProfilePhotoEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLUserProfilePhotoEmpty) ProtoMessage()               {}
-func (*TLUserProfilePhotoEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{251} }
+func (*TLUserProfilePhotoEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{251} }
 
 // userProfilePhoto#d559d8c8 photo_id:long photo_small:FileLocation photo_big:FileLocation = UserProfilePhoto;
 type TLUserProfilePhoto struct {
@@ -31118,7 +31118,7 @@ type TLUserProfilePhoto struct {
 func (m *TLUserProfilePhoto) Reset()                    { *m = TLUserProfilePhoto{} }
 func (m *TLUserProfilePhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLUserProfilePhoto) ProtoMessage()               {}
-func (*TLUserProfilePhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{252} }
+func (*TLUserProfilePhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{252} }
 
 func (m *TLUserProfilePhoto) GetPhotoId() int64 {
 	if m != nil {
@@ -31148,7 +31148,7 @@ type TLUserStatusEmpty struct {
 func (m *TLUserStatusEmpty) Reset()                    { *m = TLUserStatusEmpty{} }
 func (m *TLUserStatusEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLUserStatusEmpty) ProtoMessage()               {}
-func (*TLUserStatusEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{253} }
+func (*TLUserStatusEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{253} }
 
 // userStatusOnline#edb93949 expires:int = UserStatus;
 type TLUserStatusOnline struct {
@@ -31158,7 +31158,7 @@ type TLUserStatusOnline struct {
 func (m *TLUserStatusOnline) Reset()                    { *m = TLUserStatusOnline{} }
 func (m *TLUserStatusOnline) String() string            { return proto.CompactTextString(m) }
 func (*TLUserStatusOnline) ProtoMessage()               {}
-func (*TLUserStatusOnline) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{254} }
+func (*TLUserStatusOnline) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{254} }
 
 func (m *TLUserStatusOnline) GetExpires() int32 {
 	if m != nil {
@@ -31175,7 +31175,7 @@ type TLUserStatusOffline struct {
 func (m *TLUserStatusOffline) Reset()                    { *m = TLUserStatusOffline{} }
 func (m *TLUserStatusOffline) String() string            { return proto.CompactTextString(m) }
 func (*TLUserStatusOffline) ProtoMessage()               {}
-func (*TLUserStatusOffline) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{255} }
+func (*TLUserStatusOffline) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{255} }
 
 func (m *TLUserStatusOffline) GetWasOnline() int32 {
 	if m != nil {
@@ -31191,7 +31191,7 @@ type TLUserStatusRecently struct {
 func (m *TLUserStatusRecently) Reset()                    { *m = TLUserStatusRecently{} }
 func (m *TLUserStatusRecently) String() string            { return proto.CompactTextString(m) }
 func (*TLUserStatusRecently) ProtoMessage()               {}
-func (*TLUserStatusRecently) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{256} }
+func (*TLUserStatusRecently) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{256} }
 
 // userStatusLastWeek#7bf09fc = UserStatus;
 type TLUserStatusLastWeek struct {
@@ -31200,7 +31200,7 @@ type TLUserStatusLastWeek struct {
 func (m *TLUserStatusLastWeek) Reset()                    { *m = TLUserStatusLastWeek{} }
 func (m *TLUserStatusLastWeek) String() string            { return proto.CompactTextString(m) }
 func (*TLUserStatusLastWeek) ProtoMessage()               {}
-func (*TLUserStatusLastWeek) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{257} }
+func (*TLUserStatusLastWeek) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{257} }
 
 // userStatusLastMonth#77ebc742 = UserStatus;
 type TLUserStatusLastMonth struct {
@@ -31209,7 +31209,7 @@ type TLUserStatusLastMonth struct {
 func (m *TLUserStatusLastMonth) Reset()                    { *m = TLUserStatusLastMonth{} }
 func (m *TLUserStatusLastMonth) String() string            { return proto.CompactTextString(m) }
 func (*TLUserStatusLastMonth) ProtoMessage()               {}
-func (*TLUserStatusLastMonth) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{258} }
+func (*TLUserStatusLastMonth) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{258} }
 
 // chatEmpty#9ba2d800 id:int = Chat;
 type TLChatEmpty struct {
@@ -31219,7 +31219,7 @@ type TLChatEmpty struct {
 func (m *TLChatEmpty) Reset()                    { *m = TLChatEmpty{} }
 func (m *TLChatEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLChatEmpty) ProtoMessage()               {}
-func (*TLChatEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{259} }
+func (*TLChatEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{259} }
 
 func (m *TLChatEmpty) GetId() int32 {
 	if m != nil {
@@ -31248,7 +31248,7 @@ type TLChat struct {
 func (m *TLChat) Reset()                    { *m = TLChat{} }
 func (m *TLChat) String() string            { return proto.CompactTextString(m) }
 func (*TLChat) ProtoMessage()               {}
-func (*TLChat) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{260} }
+func (*TLChat) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{260} }
 
 func (m *TLChat) GetCreator() bool {
 	if m != nil {
@@ -31350,7 +31350,7 @@ type TLChatForbidden struct {
 func (m *TLChatForbidden) Reset()                    { *m = TLChatForbidden{} }
 func (m *TLChatForbidden) String() string            { return proto.CompactTextString(m) }
 func (*TLChatForbidden) ProtoMessage()               {}
-func (*TLChatForbidden) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{261} }
+func (*TLChatForbidden) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{261} }
 
 func (m *TLChatForbidden) GetId() int32 {
 	if m != nil {
@@ -31393,7 +31393,7 @@ type TLChannel struct {
 func (m *TLChannel) Reset()                    { *m = TLChannel{} }
 func (m *TLChannel) String() string            { return proto.CompactTextString(m) }
 func (*TLChannel) ProtoMessage()               {}
-func (*TLChannel) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{262} }
+func (*TLChannel) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{262} }
 
 func (m *TLChannel) GetCreator() bool {
 	if m != nil {
@@ -31548,7 +31548,7 @@ type TLChannelForbidden struct {
 func (m *TLChannelForbidden) Reset()                    { *m = TLChannelForbidden{} }
 func (m *TLChannelForbidden) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelForbidden) ProtoMessage()               {}
-func (*TLChannelForbidden) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{263} }
+func (*TLChannelForbidden) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{263} }
 
 func (m *TLChannelForbidden) GetBroadcast() bool {
 	if m != nil {
@@ -31605,7 +31605,7 @@ type TLChatFull struct {
 func (m *TLChatFull) Reset()                    { *m = TLChatFull{} }
 func (m *TLChatFull) String() string            { return proto.CompactTextString(m) }
 func (*TLChatFull) ProtoMessage()               {}
-func (*TLChatFull) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{264} }
+func (*TLChatFull) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{264} }
 
 func (m *TLChatFull) GetId() int32 {
 	if m != nil {
@@ -31676,7 +31676,7 @@ type TLChannelFull struct {
 func (m *TLChannelFull) Reset()                    { *m = TLChannelFull{} }
 func (m *TLChannelFull) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelFull) ProtoMessage()               {}
-func (*TLChannelFull) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{265} }
+func (*TLChannelFull) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{265} }
 
 func (m *TLChannelFull) GetCanViewParticipants() bool {
 	if m != nil {
@@ -31828,7 +31828,7 @@ type TLChatParticipant struct {
 func (m *TLChatParticipant) Reset()                    { *m = TLChatParticipant{} }
 func (m *TLChatParticipant) String() string            { return proto.CompactTextString(m) }
 func (*TLChatParticipant) ProtoMessage()               {}
-func (*TLChatParticipant) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{266} }
+func (*TLChatParticipant) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{266} }
 
 func (m *TLChatParticipant) GetUserId() int32 {
 	if m != nil {
@@ -31859,7 +31859,7 @@ type TLChatParticipantCreator struct {
 func (m *TLChatParticipantCreator) Reset()                    { *m = TLChatParticipantCreator{} }
 func (m *TLChatParticipantCreator) String() string            { return proto.CompactTextString(m) }
 func (*TLChatParticipantCreator) ProtoMessage()               {}
-func (*TLChatParticipantCreator) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{267} }
+func (*TLChatParticipantCreator) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{267} }
 
 func (m *TLChatParticipantCreator) GetUserId() int32 {
 	if m != nil {
@@ -31878,7 +31878,7 @@ type TLChatParticipantAdmin struct {
 func (m *TLChatParticipantAdmin) Reset()                    { *m = TLChatParticipantAdmin{} }
 func (m *TLChatParticipantAdmin) String() string            { return proto.CompactTextString(m) }
 func (*TLChatParticipantAdmin) ProtoMessage()               {}
-func (*TLChatParticipantAdmin) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{268} }
+func (*TLChatParticipantAdmin) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{268} }
 
 func (m *TLChatParticipantAdmin) GetUserId() int32 {
 	if m != nil {
@@ -31910,7 +31910,7 @@ type TLChatParticipantsForbidden struct {
 func (m *TLChatParticipantsForbidden) Reset()                    { *m = TLChatParticipantsForbidden{} }
 func (m *TLChatParticipantsForbidden) String() string            { return proto.CompactTextString(m) }
 func (*TLChatParticipantsForbidden) ProtoMessage()               {}
-func (*TLChatParticipantsForbidden) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{269} }
+func (*TLChatParticipantsForbidden) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{269} }
 
 func (m *TLChatParticipantsForbidden) GetChatId() int32 {
 	if m != nil {
@@ -31936,7 +31936,7 @@ type TLChatParticipants struct {
 func (m *TLChatParticipants) Reset()                    { *m = TLChatParticipants{} }
 func (m *TLChatParticipants) String() string            { return proto.CompactTextString(m) }
 func (*TLChatParticipants) ProtoMessage()               {}
-func (*TLChatParticipants) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{270} }
+func (*TLChatParticipants) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{270} }
 
 func (m *TLChatParticipants) GetChatId() int32 {
 	if m != nil {
@@ -31966,7 +31966,7 @@ type TLChatPhotoEmpty struct {
 func (m *TLChatPhotoEmpty) Reset()                    { *m = TLChatPhotoEmpty{} }
 func (m *TLChatPhotoEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLChatPhotoEmpty) ProtoMessage()               {}
-func (*TLChatPhotoEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{271} }
+func (*TLChatPhotoEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{271} }
 
 // chatPhoto#6153276a photo_small:FileLocation photo_big:FileLocation = ChatPhoto;
 type TLChatPhoto struct {
@@ -31977,7 +31977,7 @@ type TLChatPhoto struct {
 func (m *TLChatPhoto) Reset()                    { *m = TLChatPhoto{} }
 func (m *TLChatPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLChatPhoto) ProtoMessage()               {}
-func (*TLChatPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{272} }
+func (*TLChatPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{272} }
 
 func (m *TLChatPhoto) GetPhotoSmall() *FileLocation {
 	if m != nil {
@@ -32001,7 +32001,7 @@ type TLMessageEmpty struct {
 func (m *TLMessageEmpty) Reset()                    { *m = TLMessageEmpty{} }
 func (m *TLMessageEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageEmpty) ProtoMessage()               {}
-func (*TLMessageEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{273} }
+func (*TLMessageEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{273} }
 
 func (m *TLMessageEmpty) GetId() int32 {
 	if m != nil {
@@ -32036,7 +32036,7 @@ type TLMessage struct {
 func (m *TLMessage) Reset()                    { *m = TLMessage{} }
 func (m *TLMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLMessage) ProtoMessage()               {}
-func (*TLMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{274} }
+func (*TLMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{274} }
 
 func (m *TLMessage) GetOut() bool {
 	if m != nil {
@@ -32189,7 +32189,7 @@ type TLMessageService struct {
 func (m *TLMessageService) Reset()                    { *m = TLMessageService{} }
 func (m *TLMessageService) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageService) ProtoMessage()               {}
-func (*TLMessageService) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{275} }
+func (*TLMessageService) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{275} }
 
 func (m *TLMessageService) GetOut() bool {
 	if m != nil {
@@ -32275,7 +32275,7 @@ type TLMessageMediaEmpty struct {
 func (m *TLMessageMediaEmpty) Reset()                    { *m = TLMessageMediaEmpty{} }
 func (m *TLMessageMediaEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageMediaEmpty) ProtoMessage()               {}
-func (*TLMessageMediaEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{276} }
+func (*TLMessageMediaEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{276} }
 
 // messageMediaPhoto#b5223b0f flags:# photo:flags.0?Photo caption:flags.1?string ttl_seconds:flags.2?int = MessageMedia;
 type TLMessageMediaPhoto struct {
@@ -32287,7 +32287,7 @@ type TLMessageMediaPhoto struct {
 func (m *TLMessageMediaPhoto) Reset()                    { *m = TLMessageMediaPhoto{} }
 func (m *TLMessageMediaPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageMediaPhoto) ProtoMessage()               {}
-func (*TLMessageMediaPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{277} }
+func (*TLMessageMediaPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{277} }
 
 func (m *TLMessageMediaPhoto) GetPhoto() *Photo {
 	if m != nil {
@@ -32318,7 +32318,7 @@ type TLMessageMediaGeo struct {
 func (m *TLMessageMediaGeo) Reset()                    { *m = TLMessageMediaGeo{} }
 func (m *TLMessageMediaGeo) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageMediaGeo) ProtoMessage()               {}
-func (*TLMessageMediaGeo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{278} }
+func (*TLMessageMediaGeo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{278} }
 
 func (m *TLMessageMediaGeo) GetGeo() *GeoPoint {
 	if m != nil {
@@ -32338,7 +32338,7 @@ type TLMessageMediaContact struct {
 func (m *TLMessageMediaContact) Reset()                    { *m = TLMessageMediaContact{} }
 func (m *TLMessageMediaContact) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageMediaContact) ProtoMessage()               {}
-func (*TLMessageMediaContact) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{279} }
+func (*TLMessageMediaContact) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{279} }
 
 func (m *TLMessageMediaContact) GetPhoneNumber() string {
 	if m != nil {
@@ -32375,7 +32375,7 @@ type TLMessageMediaUnsupported struct {
 func (m *TLMessageMediaUnsupported) Reset()                    { *m = TLMessageMediaUnsupported{} }
 func (m *TLMessageMediaUnsupported) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageMediaUnsupported) ProtoMessage()               {}
-func (*TLMessageMediaUnsupported) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{280} }
+func (*TLMessageMediaUnsupported) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{280} }
 
 // messageMediaDocument#7c4414d3 flags:# document:flags.0?Document caption:flags.1?string ttl_seconds:flags.2?int = MessageMedia;
 type TLMessageMediaDocument struct {
@@ -32387,7 +32387,7 @@ type TLMessageMediaDocument struct {
 func (m *TLMessageMediaDocument) Reset()                    { *m = TLMessageMediaDocument{} }
 func (m *TLMessageMediaDocument) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageMediaDocument) ProtoMessage()               {}
-func (*TLMessageMediaDocument) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{281} }
+func (*TLMessageMediaDocument) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{281} }
 
 func (m *TLMessageMediaDocument) GetDocument() *Document {
 	if m != nil {
@@ -32418,7 +32418,7 @@ type TLMessageMediaWebPage struct {
 func (m *TLMessageMediaWebPage) Reset()                    { *m = TLMessageMediaWebPage{} }
 func (m *TLMessageMediaWebPage) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageMediaWebPage) ProtoMessage()               {}
-func (*TLMessageMediaWebPage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{282} }
+func (*TLMessageMediaWebPage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{282} }
 
 func (m *TLMessageMediaWebPage) GetWebpage() *WebPage {
 	if m != nil {
@@ -32439,7 +32439,7 @@ type TLMessageMediaVenue struct {
 func (m *TLMessageMediaVenue) Reset()                    { *m = TLMessageMediaVenue{} }
 func (m *TLMessageMediaVenue) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageMediaVenue) ProtoMessage()               {}
-func (*TLMessageMediaVenue) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{283} }
+func (*TLMessageMediaVenue) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{283} }
 
 func (m *TLMessageMediaVenue) GetGeo() *GeoPoint {
 	if m != nil {
@@ -32484,7 +32484,7 @@ type TLMessageMediaGame struct {
 func (m *TLMessageMediaGame) Reset()                    { *m = TLMessageMediaGame{} }
 func (m *TLMessageMediaGame) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageMediaGame) ProtoMessage()               {}
-func (*TLMessageMediaGame) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{284} }
+func (*TLMessageMediaGame) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{284} }
 
 func (m *TLMessageMediaGame) GetGame() *Game {
 	if m != nil {
@@ -32509,7 +32509,7 @@ type TLMessageMediaInvoice struct {
 func (m *TLMessageMediaInvoice) Reset()                    { *m = TLMessageMediaInvoice{} }
 func (m *TLMessageMediaInvoice) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageMediaInvoice) ProtoMessage()               {}
-func (*TLMessageMediaInvoice) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{285} }
+func (*TLMessageMediaInvoice) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{285} }
 
 func (m *TLMessageMediaInvoice) GetShippingAddressRequested() bool {
 	if m != nil {
@@ -32581,7 +32581,7 @@ type TLMessageActionEmpty struct {
 func (m *TLMessageActionEmpty) Reset()                    { *m = TLMessageActionEmpty{} }
 func (m *TLMessageActionEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageActionEmpty) ProtoMessage()               {}
-func (*TLMessageActionEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{286} }
+func (*TLMessageActionEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{286} }
 
 // messageActionChatCreate#a6638b9a title:string users:Vector<int> = MessageAction;
 type TLMessageActionChatCreate struct {
@@ -32592,7 +32592,7 @@ type TLMessageActionChatCreate struct {
 func (m *TLMessageActionChatCreate) Reset()                    { *m = TLMessageActionChatCreate{} }
 func (m *TLMessageActionChatCreate) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageActionChatCreate) ProtoMessage()               {}
-func (*TLMessageActionChatCreate) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{287} }
+func (*TLMessageActionChatCreate) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{287} }
 
 func (m *TLMessageActionChatCreate) GetTitle() string {
 	if m != nil {
@@ -32616,7 +32616,7 @@ type TLMessageActionChatEditTitle struct {
 func (m *TLMessageActionChatEditTitle) Reset()                    { *m = TLMessageActionChatEditTitle{} }
 func (m *TLMessageActionChatEditTitle) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageActionChatEditTitle) ProtoMessage()               {}
-func (*TLMessageActionChatEditTitle) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{288} }
+func (*TLMessageActionChatEditTitle) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{288} }
 
 func (m *TLMessageActionChatEditTitle) GetTitle() string {
 	if m != nil {
@@ -32633,7 +32633,7 @@ type TLMessageActionChatEditPhoto struct {
 func (m *TLMessageActionChatEditPhoto) Reset()                    { *m = TLMessageActionChatEditPhoto{} }
 func (m *TLMessageActionChatEditPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageActionChatEditPhoto) ProtoMessage()               {}
-func (*TLMessageActionChatEditPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{289} }
+func (*TLMessageActionChatEditPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{289} }
 
 func (m *TLMessageActionChatEditPhoto) GetPhoto() *Photo {
 	if m != nil {
@@ -32650,7 +32650,7 @@ func (m *TLMessageActionChatDeletePhoto) Reset()         { *m = TLMessageActionC
 func (m *TLMessageActionChatDeletePhoto) String() string { return proto.CompactTextString(m) }
 func (*TLMessageActionChatDeletePhoto) ProtoMessage()    {}
 func (*TLMessageActionChatDeletePhoto) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{290}
+	return fileDescriptor4, []int{290}
 }
 
 // messageActionChatAddUser#488a7337 users:Vector<int> = MessageAction;
@@ -32661,7 +32661,7 @@ type TLMessageActionChatAddUser struct {
 func (m *TLMessageActionChatAddUser) Reset()                    { *m = TLMessageActionChatAddUser{} }
 func (m *TLMessageActionChatAddUser) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageActionChatAddUser) ProtoMessage()               {}
-func (*TLMessageActionChatAddUser) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{291} }
+func (*TLMessageActionChatAddUser) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{291} }
 
 func (m *TLMessageActionChatAddUser) GetUsers() []int32 {
 	if m != nil {
@@ -32678,7 +32678,7 @@ type TLMessageActionChatDeleteUser struct {
 func (m *TLMessageActionChatDeleteUser) Reset()                    { *m = TLMessageActionChatDeleteUser{} }
 func (m *TLMessageActionChatDeleteUser) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageActionChatDeleteUser) ProtoMessage()               {}
-func (*TLMessageActionChatDeleteUser) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{292} }
+func (*TLMessageActionChatDeleteUser) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{292} }
 
 func (m *TLMessageActionChatDeleteUser) GetUserId() int32 {
 	if m != nil {
@@ -32696,7 +32696,7 @@ func (m *TLMessageActionChatJoinedByLink) Reset()         { *m = TLMessageAction
 func (m *TLMessageActionChatJoinedByLink) String() string { return proto.CompactTextString(m) }
 func (*TLMessageActionChatJoinedByLink) ProtoMessage()    {}
 func (*TLMessageActionChatJoinedByLink) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{293}
+	return fileDescriptor4, []int{293}
 }
 
 func (m *TLMessageActionChatJoinedByLink) GetInviterId() int32 {
@@ -32714,7 +32714,7 @@ type TLMessageActionChannelCreate struct {
 func (m *TLMessageActionChannelCreate) Reset()                    { *m = TLMessageActionChannelCreate{} }
 func (m *TLMessageActionChannelCreate) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageActionChannelCreate) ProtoMessage()               {}
-func (*TLMessageActionChannelCreate) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{294} }
+func (*TLMessageActionChannelCreate) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{294} }
 
 func (m *TLMessageActionChannelCreate) GetTitle() string {
 	if m != nil {
@@ -32731,7 +32731,7 @@ type TLMessageActionChatMigrateTo struct {
 func (m *TLMessageActionChatMigrateTo) Reset()                    { *m = TLMessageActionChatMigrateTo{} }
 func (m *TLMessageActionChatMigrateTo) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageActionChatMigrateTo) ProtoMessage()               {}
-func (*TLMessageActionChatMigrateTo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{295} }
+func (*TLMessageActionChatMigrateTo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{295} }
 
 func (m *TLMessageActionChatMigrateTo) GetChannelId() int32 {
 	if m != nil {
@@ -32750,7 +32750,7 @@ func (m *TLMessageActionChannelMigrateFrom) Reset()         { *m = TLMessageActi
 func (m *TLMessageActionChannelMigrateFrom) String() string { return proto.CompactTextString(m) }
 func (*TLMessageActionChannelMigrateFrom) ProtoMessage()    {}
 func (*TLMessageActionChannelMigrateFrom) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{296}
+	return fileDescriptor4, []int{296}
 }
 
 func (m *TLMessageActionChannelMigrateFrom) GetTitle() string {
@@ -32774,7 +32774,7 @@ type TLMessageActionPinMessage struct {
 func (m *TLMessageActionPinMessage) Reset()                    { *m = TLMessageActionPinMessage{} }
 func (m *TLMessageActionPinMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageActionPinMessage) ProtoMessage()               {}
-func (*TLMessageActionPinMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{297} }
+func (*TLMessageActionPinMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{297} }
 
 // messageActionHistoryClear#9fbab604 = MessageAction;
 type TLMessageActionHistoryClear struct {
@@ -32783,7 +32783,7 @@ type TLMessageActionHistoryClear struct {
 func (m *TLMessageActionHistoryClear) Reset()                    { *m = TLMessageActionHistoryClear{} }
 func (m *TLMessageActionHistoryClear) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageActionHistoryClear) ProtoMessage()               {}
-func (*TLMessageActionHistoryClear) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{298} }
+func (*TLMessageActionHistoryClear) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{298} }
 
 // messageActionGameScore#92a72876 game_id:long score:int = MessageAction;
 type TLMessageActionGameScore struct {
@@ -32794,7 +32794,7 @@ type TLMessageActionGameScore struct {
 func (m *TLMessageActionGameScore) Reset()                    { *m = TLMessageActionGameScore{} }
 func (m *TLMessageActionGameScore) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageActionGameScore) ProtoMessage()               {}
-func (*TLMessageActionGameScore) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{299} }
+func (*TLMessageActionGameScore) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{299} }
 
 func (m *TLMessageActionGameScore) GetGameId() int64 {
 	if m != nil {
@@ -32823,7 +32823,7 @@ type TLMessageActionPaymentSentMe struct {
 func (m *TLMessageActionPaymentSentMe) Reset()                    { *m = TLMessageActionPaymentSentMe{} }
 func (m *TLMessageActionPaymentSentMe) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageActionPaymentSentMe) ProtoMessage()               {}
-func (*TLMessageActionPaymentSentMe) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{300} }
+func (*TLMessageActionPaymentSentMe) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{300} }
 
 func (m *TLMessageActionPaymentSentMe) GetCurrency() string {
 	if m != nil {
@@ -32876,7 +32876,7 @@ type TLMessageActionPaymentSent struct {
 func (m *TLMessageActionPaymentSent) Reset()                    { *m = TLMessageActionPaymentSent{} }
 func (m *TLMessageActionPaymentSent) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageActionPaymentSent) ProtoMessage()               {}
-func (*TLMessageActionPaymentSent) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{301} }
+func (*TLMessageActionPaymentSent) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{301} }
 
 func (m *TLMessageActionPaymentSent) GetCurrency() string {
 	if m != nil {
@@ -32902,7 +32902,7 @@ type TLMessageActionPhoneCall struct {
 func (m *TLMessageActionPhoneCall) Reset()                    { *m = TLMessageActionPhoneCall{} }
 func (m *TLMessageActionPhoneCall) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageActionPhoneCall) ProtoMessage()               {}
-func (*TLMessageActionPhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{302} }
+func (*TLMessageActionPhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{302} }
 
 func (m *TLMessageActionPhoneCall) GetCallId() int64 {
 	if m != nil {
@@ -32933,7 +32933,7 @@ func (m *TLMessageActionScreenshotTaken) Reset()         { *m = TLMessageActionS
 func (m *TLMessageActionScreenshotTaken) String() string { return proto.CompactTextString(m) }
 func (*TLMessageActionScreenshotTaken) ProtoMessage()    {}
 func (*TLMessageActionScreenshotTaken) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{303}
+	return fileDescriptor4, []int{303}
 }
 
 // dialog#e4def5db flags:# pinned:flags.2?true peer:Peer top_message:int read_inbox_max_id:int read_outbox_max_id:int unread_count:int unread_mentions_count:int notify_settings:PeerNotifySettings pts:flags.0?int draft:flags.1?DraftMessage = Dialog;
@@ -32953,7 +32953,7 @@ type TLDialog struct {
 func (m *TLDialog) Reset()                    { *m = TLDialog{} }
 func (m *TLDialog) String() string            { return proto.CompactTextString(m) }
 func (*TLDialog) ProtoMessage()               {}
-func (*TLDialog) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{304} }
+func (*TLDialog) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{304} }
 
 func (m *TLDialog) GetPinned() bool {
 	if m != nil {
@@ -33033,7 +33033,7 @@ type TLPhotoEmpty struct {
 func (m *TLPhotoEmpty) Reset()                    { *m = TLPhotoEmpty{} }
 func (m *TLPhotoEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLPhotoEmpty) ProtoMessage()               {}
-func (*TLPhotoEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{305} }
+func (*TLPhotoEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{305} }
 
 func (m *TLPhotoEmpty) GetId() int64 {
 	if m != nil {
@@ -33054,7 +33054,7 @@ type TLPhoto struct {
 func (m *TLPhoto) Reset()                    { *m = TLPhoto{} }
 func (m *TLPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoto) ProtoMessage()               {}
-func (*TLPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{306} }
+func (*TLPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{306} }
 
 func (m *TLPhoto) GetHasStickers() bool {
 	if m != nil {
@@ -33099,7 +33099,7 @@ type TLPhotoSizeEmpty struct {
 func (m *TLPhotoSizeEmpty) Reset()                    { *m = TLPhotoSizeEmpty{} }
 func (m *TLPhotoSizeEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLPhotoSizeEmpty) ProtoMessage()               {}
-func (*TLPhotoSizeEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{307} }
+func (*TLPhotoSizeEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{307} }
 
 func (m *TLPhotoSizeEmpty) GetType() string {
 	if m != nil {
@@ -33120,7 +33120,7 @@ type TLPhotoSize struct {
 func (m *TLPhotoSize) Reset()                    { *m = TLPhotoSize{} }
 func (m *TLPhotoSize) String() string            { return proto.CompactTextString(m) }
 func (*TLPhotoSize) ProtoMessage()               {}
-func (*TLPhotoSize) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{308} }
+func (*TLPhotoSize) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{308} }
 
 func (m *TLPhotoSize) GetType() string {
 	if m != nil {
@@ -33169,7 +33169,7 @@ type TLPhotoCachedSize struct {
 func (m *TLPhotoCachedSize) Reset()                    { *m = TLPhotoCachedSize{} }
 func (m *TLPhotoCachedSize) String() string            { return proto.CompactTextString(m) }
 func (*TLPhotoCachedSize) ProtoMessage()               {}
-func (*TLPhotoCachedSize) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{309} }
+func (*TLPhotoCachedSize) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{309} }
 
 func (m *TLPhotoCachedSize) GetType() string {
 	if m != nil {
@@ -33213,7 +33213,7 @@ type TLGeoPointEmpty struct {
 func (m *TLGeoPointEmpty) Reset()                    { *m = TLGeoPointEmpty{} }
 func (m *TLGeoPointEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLGeoPointEmpty) ProtoMessage()               {}
-func (*TLGeoPointEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{310} }
+func (*TLGeoPointEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{310} }
 
 // geoPoint#2049d70c long:double lat:double = GeoPoint;
 type TLGeoPoint struct {
@@ -33224,7 +33224,7 @@ type TLGeoPoint struct {
 func (m *TLGeoPoint) Reset()                    { *m = TLGeoPoint{} }
 func (m *TLGeoPoint) String() string            { return proto.CompactTextString(m) }
 func (*TLGeoPoint) ProtoMessage()               {}
-func (*TLGeoPoint) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{311} }
+func (*TLGeoPoint) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{311} }
 
 func (m *TLGeoPoint) GetLong() float64 {
 	if m != nil {
@@ -33248,7 +33248,7 @@ type TLAuthCheckedPhone struct {
 func (m *TLAuthCheckedPhone) Reset()                    { *m = TLAuthCheckedPhone{} }
 func (m *TLAuthCheckedPhone) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthCheckedPhone) ProtoMessage()               {}
-func (*TLAuthCheckedPhone) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{312} }
+func (*TLAuthCheckedPhone) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{312} }
 
 func (m *TLAuthCheckedPhone) GetPhoneRegistered() *Bool {
 	if m != nil {
@@ -33269,7 +33269,7 @@ type TLAuthSentCode struct {
 func (m *TLAuthSentCode) Reset()                    { *m = TLAuthSentCode{} }
 func (m *TLAuthSentCode) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthSentCode) ProtoMessage()               {}
-func (*TLAuthSentCode) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{313} }
+func (*TLAuthSentCode) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{313} }
 
 func (m *TLAuthSentCode) GetPhoneRegistered() bool {
 	if m != nil {
@@ -33315,7 +33315,7 @@ type TLAuthAuthorization struct {
 func (m *TLAuthAuthorization) Reset()                    { *m = TLAuthAuthorization{} }
 func (m *TLAuthAuthorization) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthAuthorization) ProtoMessage()               {}
-func (*TLAuthAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{314} }
+func (*TLAuthAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{314} }
 
 func (m *TLAuthAuthorization) GetTmpSessions() int32 {
 	if m != nil {
@@ -33340,7 +33340,7 @@ type TLAuthExportedAuthorization struct {
 func (m *TLAuthExportedAuthorization) Reset()                    { *m = TLAuthExportedAuthorization{} }
 func (m *TLAuthExportedAuthorization) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthExportedAuthorization) ProtoMessage()               {}
-func (*TLAuthExportedAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{315} }
+func (*TLAuthExportedAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{315} }
 
 func (m *TLAuthExportedAuthorization) GetId() int32 {
 	if m != nil {
@@ -33364,7 +33364,7 @@ type TLInputNotifyPeer struct {
 func (m *TLInputNotifyPeer) Reset()                    { *m = TLInputNotifyPeer{} }
 func (m *TLInputNotifyPeer) String() string            { return proto.CompactTextString(m) }
 func (*TLInputNotifyPeer) ProtoMessage()               {}
-func (*TLInputNotifyPeer) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{316} }
+func (*TLInputNotifyPeer) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{316} }
 
 func (m *TLInputNotifyPeer) GetPeer() *InputPeer {
 	if m != nil {
@@ -33380,7 +33380,7 @@ type TLInputNotifyUsers struct {
 func (m *TLInputNotifyUsers) Reset()                    { *m = TLInputNotifyUsers{} }
 func (m *TLInputNotifyUsers) String() string            { return proto.CompactTextString(m) }
 func (*TLInputNotifyUsers) ProtoMessage()               {}
-func (*TLInputNotifyUsers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{317} }
+func (*TLInputNotifyUsers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{317} }
 
 // inputNotifyChats#4a95e84e = InputNotifyPeer;
 type TLInputNotifyChats struct {
@@ -33389,7 +33389,7 @@ type TLInputNotifyChats struct {
 func (m *TLInputNotifyChats) Reset()                    { *m = TLInputNotifyChats{} }
 func (m *TLInputNotifyChats) String() string            { return proto.CompactTextString(m) }
 func (*TLInputNotifyChats) ProtoMessage()               {}
-func (*TLInputNotifyChats) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{318} }
+func (*TLInputNotifyChats) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{318} }
 
 // inputNotifyAll#a429b886 = InputNotifyPeer;
 type TLInputNotifyAll struct {
@@ -33398,7 +33398,7 @@ type TLInputNotifyAll struct {
 func (m *TLInputNotifyAll) Reset()                    { *m = TLInputNotifyAll{} }
 func (m *TLInputNotifyAll) String() string            { return proto.CompactTextString(m) }
 func (*TLInputNotifyAll) ProtoMessage()               {}
-func (*TLInputNotifyAll) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{319} }
+func (*TLInputNotifyAll) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{319} }
 
 // inputPeerNotifyEventsEmpty#f03064d8 = InputPeerNotifyEvents;
 type TLInputPeerNotifyEventsEmpty struct {
@@ -33407,7 +33407,7 @@ type TLInputPeerNotifyEventsEmpty struct {
 func (m *TLInputPeerNotifyEventsEmpty) Reset()                    { *m = TLInputPeerNotifyEventsEmpty{} }
 func (m *TLInputPeerNotifyEventsEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPeerNotifyEventsEmpty) ProtoMessage()               {}
-func (*TLInputPeerNotifyEventsEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{320} }
+func (*TLInputPeerNotifyEventsEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{320} }
 
 // inputPeerNotifyEventsAll#e86a2c74 = InputPeerNotifyEvents;
 type TLInputPeerNotifyEventsAll struct {
@@ -33416,7 +33416,7 @@ type TLInputPeerNotifyEventsAll struct {
 func (m *TLInputPeerNotifyEventsAll) Reset()                    { *m = TLInputPeerNotifyEventsAll{} }
 func (m *TLInputPeerNotifyEventsAll) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPeerNotifyEventsAll) ProtoMessage()               {}
-func (*TLInputPeerNotifyEventsAll) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{321} }
+func (*TLInputPeerNotifyEventsAll) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{321} }
 
 // inputPeerNotifySettings#38935eb2 flags:# show_previews:flags.0?true silent:flags.1?true mute_until:int sound:string = InputPeerNotifySettings;
 type TLInputPeerNotifySettings struct {
@@ -33429,7 +33429,7 @@ type TLInputPeerNotifySettings struct {
 func (m *TLInputPeerNotifySettings) Reset()                    { *m = TLInputPeerNotifySettings{} }
 func (m *TLInputPeerNotifySettings) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPeerNotifySettings) ProtoMessage()               {}
-func (*TLInputPeerNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{322} }
+func (*TLInputPeerNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{322} }
 
 func (m *TLInputPeerNotifySettings) GetShowPreviews() bool {
 	if m != nil {
@@ -33466,7 +33466,7 @@ type TLPeerNotifyEventsEmpty struct {
 func (m *TLPeerNotifyEventsEmpty) Reset()                    { *m = TLPeerNotifyEventsEmpty{} }
 func (m *TLPeerNotifyEventsEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLPeerNotifyEventsEmpty) ProtoMessage()               {}
-func (*TLPeerNotifyEventsEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{323} }
+func (*TLPeerNotifyEventsEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{323} }
 
 // peerNotifyEventsAll#6d1ded88 = PeerNotifyEvents;
 type TLPeerNotifyEventsAll struct {
@@ -33475,7 +33475,7 @@ type TLPeerNotifyEventsAll struct {
 func (m *TLPeerNotifyEventsAll) Reset()                    { *m = TLPeerNotifyEventsAll{} }
 func (m *TLPeerNotifyEventsAll) String() string            { return proto.CompactTextString(m) }
 func (*TLPeerNotifyEventsAll) ProtoMessage()               {}
-func (*TLPeerNotifyEventsAll) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{324} }
+func (*TLPeerNotifyEventsAll) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{324} }
 
 // peerNotifySettingsEmpty#70a68512 = PeerNotifySettings;
 type TLPeerNotifySettingsEmpty struct {
@@ -33484,7 +33484,7 @@ type TLPeerNotifySettingsEmpty struct {
 func (m *TLPeerNotifySettingsEmpty) Reset()                    { *m = TLPeerNotifySettingsEmpty{} }
 func (m *TLPeerNotifySettingsEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLPeerNotifySettingsEmpty) ProtoMessage()               {}
-func (*TLPeerNotifySettingsEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{325} }
+func (*TLPeerNotifySettingsEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{325} }
 
 // peerNotifySettings#9acda4c0 flags:# show_previews:flags.0?true silent:flags.1?true mute_until:int sound:string = PeerNotifySettings;
 type TLPeerNotifySettings struct {
@@ -33497,7 +33497,7 @@ type TLPeerNotifySettings struct {
 func (m *TLPeerNotifySettings) Reset()                    { *m = TLPeerNotifySettings{} }
 func (m *TLPeerNotifySettings) String() string            { return proto.CompactTextString(m) }
 func (*TLPeerNotifySettings) ProtoMessage()               {}
-func (*TLPeerNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{326} }
+func (*TLPeerNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{326} }
 
 func (m *TLPeerNotifySettings) GetShowPreviews() bool {
 	if m != nil {
@@ -33535,7 +33535,7 @@ type TLPeerSettings struct {
 func (m *TLPeerSettings) Reset()                    { *m = TLPeerSettings{} }
 func (m *TLPeerSettings) String() string            { return proto.CompactTextString(m) }
 func (*TLPeerSettings) ProtoMessage()               {}
-func (*TLPeerSettings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{327} }
+func (*TLPeerSettings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{327} }
 
 func (m *TLPeerSettings) GetReportSpam() bool {
 	if m != nil {
@@ -33555,7 +33555,7 @@ type TLWallPaper struct {
 func (m *TLWallPaper) Reset()                    { *m = TLWallPaper{} }
 func (m *TLWallPaper) String() string            { return proto.CompactTextString(m) }
 func (*TLWallPaper) ProtoMessage()               {}
-func (*TLWallPaper) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{328} }
+func (*TLWallPaper) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{328} }
 
 func (m *TLWallPaper) GetId() int32 {
 	if m != nil {
@@ -33596,7 +33596,7 @@ type TLWallPaperSolid struct {
 func (m *TLWallPaperSolid) Reset()                    { *m = TLWallPaperSolid{} }
 func (m *TLWallPaperSolid) String() string            { return proto.CompactTextString(m) }
 func (*TLWallPaperSolid) ProtoMessage()               {}
-func (*TLWallPaperSolid) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{329} }
+func (*TLWallPaperSolid) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{329} }
 
 func (m *TLWallPaperSolid) GetId() int32 {
 	if m != nil {
@@ -33633,7 +33633,7 @@ type TLInputReportReasonSpam struct {
 func (m *TLInputReportReasonSpam) Reset()                    { *m = TLInputReportReasonSpam{} }
 func (m *TLInputReportReasonSpam) String() string            { return proto.CompactTextString(m) }
 func (*TLInputReportReasonSpam) ProtoMessage()               {}
-func (*TLInputReportReasonSpam) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{330} }
+func (*TLInputReportReasonSpam) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{330} }
 
 // inputReportReasonViolence#1e22c78d = ReportReason;
 type TLInputReportReasonViolence struct {
@@ -33642,7 +33642,7 @@ type TLInputReportReasonViolence struct {
 func (m *TLInputReportReasonViolence) Reset()                    { *m = TLInputReportReasonViolence{} }
 func (m *TLInputReportReasonViolence) String() string            { return proto.CompactTextString(m) }
 func (*TLInputReportReasonViolence) ProtoMessage()               {}
-func (*TLInputReportReasonViolence) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{331} }
+func (*TLInputReportReasonViolence) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{331} }
 
 // inputReportReasonPornography#2e59d922 = ReportReason;
 type TLInputReportReasonPornography struct {
@@ -33652,7 +33652,7 @@ func (m *TLInputReportReasonPornography) Reset()         { *m = TLInputReportRea
 func (m *TLInputReportReasonPornography) String() string { return proto.CompactTextString(m) }
 func (*TLInputReportReasonPornography) ProtoMessage()    {}
 func (*TLInputReportReasonPornography) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{332}
+	return fileDescriptor4, []int{332}
 }
 
 // inputReportReasonOther#e1746d0a text:string = ReportReason;
@@ -33663,7 +33663,7 @@ type TLInputReportReasonOther struct {
 func (m *TLInputReportReasonOther) Reset()                    { *m = TLInputReportReasonOther{} }
 func (m *TLInputReportReasonOther) String() string            { return proto.CompactTextString(m) }
 func (*TLInputReportReasonOther) ProtoMessage()               {}
-func (*TLInputReportReasonOther) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{333} }
+func (*TLInputReportReasonOther) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{333} }
 
 func (m *TLInputReportReasonOther) GetText() string {
 	if m != nil {
@@ -33689,7 +33689,7 @@ type TLUserFull struct {
 func (m *TLUserFull) Reset()                    { *m = TLUserFull{} }
 func (m *TLUserFull) String() string            { return proto.CompactTextString(m) }
 func (*TLUserFull) ProtoMessage()               {}
-func (*TLUserFull) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{334} }
+func (*TLUserFull) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{334} }
 
 func (m *TLUserFull) GetBlocked() bool {
 	if m != nil {
@@ -33770,7 +33770,7 @@ type TLContact struct {
 func (m *TLContact) Reset()                    { *m = TLContact{} }
 func (m *TLContact) String() string            { return proto.CompactTextString(m) }
 func (*TLContact) ProtoMessage()               {}
-func (*TLContact) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{335} }
+func (*TLContact) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{335} }
 
 func (m *TLContact) GetUserId() int32 {
 	if m != nil {
@@ -33795,7 +33795,7 @@ type TLImportedContact struct {
 func (m *TLImportedContact) Reset()                    { *m = TLImportedContact{} }
 func (m *TLImportedContact) String() string            { return proto.CompactTextString(m) }
 func (*TLImportedContact) ProtoMessage()               {}
-func (*TLImportedContact) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{336} }
+func (*TLImportedContact) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{336} }
 
 func (m *TLImportedContact) GetUserId() int32 {
 	if m != nil {
@@ -33820,7 +33820,7 @@ type TLContactBlocked struct {
 func (m *TLContactBlocked) Reset()                    { *m = TLContactBlocked{} }
 func (m *TLContactBlocked) String() string            { return proto.CompactTextString(m) }
 func (*TLContactBlocked) ProtoMessage()               {}
-func (*TLContactBlocked) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{337} }
+func (*TLContactBlocked) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{337} }
 
 func (m *TLContactBlocked) GetUserId() int32 {
 	if m != nil {
@@ -33845,7 +33845,7 @@ type TLContactStatus struct {
 func (m *TLContactStatus) Reset()                    { *m = TLContactStatus{} }
 func (m *TLContactStatus) String() string            { return proto.CompactTextString(m) }
 func (*TLContactStatus) ProtoMessage()               {}
-func (*TLContactStatus) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{338} }
+func (*TLContactStatus) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{338} }
 
 func (m *TLContactStatus) GetUserId() int32 {
 	if m != nil {
@@ -33871,7 +33871,7 @@ type TLContactsLink struct {
 func (m *TLContactsLink) Reset()                    { *m = TLContactsLink{} }
 func (m *TLContactsLink) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsLink) ProtoMessage()               {}
-func (*TLContactsLink) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{339} }
+func (*TLContactsLink) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{339} }
 
 func (m *TLContactsLink) GetMyLink() *ContactLink {
 	if m != nil {
@@ -33901,7 +33901,7 @@ type TLContactsContactsNotModified struct {
 func (m *TLContactsContactsNotModified) Reset()                    { *m = TLContactsContactsNotModified{} }
 func (m *TLContactsContactsNotModified) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsContactsNotModified) ProtoMessage()               {}
-func (*TLContactsContactsNotModified) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{340} }
+func (*TLContactsContactsNotModified) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{340} }
 
 // contacts.contacts#eae87e42 contacts:Vector<Contact> saved_count:int users:Vector<User> = contacts.Contacts;
 type TLContactsContacts struct {
@@ -33913,7 +33913,7 @@ type TLContactsContacts struct {
 func (m *TLContactsContacts) Reset()                    { *m = TLContactsContacts{} }
 func (m *TLContactsContacts) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsContacts) ProtoMessage()               {}
-func (*TLContactsContacts) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{341} }
+func (*TLContactsContacts) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{341} }
 
 func (m *TLContactsContacts) GetContacts() []*Contact {
 	if m != nil {
@@ -33947,7 +33947,7 @@ type TLContactsImportedContacts struct {
 func (m *TLContactsImportedContacts) Reset()                    { *m = TLContactsImportedContacts{} }
 func (m *TLContactsImportedContacts) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsImportedContacts) ProtoMessage()               {}
-func (*TLContactsImportedContacts) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{342} }
+func (*TLContactsImportedContacts) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{342} }
 
 func (m *TLContactsImportedContacts) GetImported() []*ImportedContact {
 	if m != nil {
@@ -33986,7 +33986,7 @@ type TLContactsBlocked struct {
 func (m *TLContactsBlocked) Reset()                    { *m = TLContactsBlocked{} }
 func (m *TLContactsBlocked) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsBlocked) ProtoMessage()               {}
-func (*TLContactsBlocked) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{343} }
+func (*TLContactsBlocked) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{343} }
 
 func (m *TLContactsBlocked) GetBlocked() []*ContactBlocked {
 	if m != nil {
@@ -34012,7 +34012,7 @@ type TLContactsBlockedSlice struct {
 func (m *TLContactsBlockedSlice) Reset()                    { *m = TLContactsBlockedSlice{} }
 func (m *TLContactsBlockedSlice) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsBlockedSlice) ProtoMessage()               {}
-func (*TLContactsBlockedSlice) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{344} }
+func (*TLContactsBlockedSlice) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{344} }
 
 func (m *TLContactsBlockedSlice) GetCount() int32 {
 	if m != nil {
@@ -34046,7 +34046,7 @@ type TLMessagesDialogs struct {
 func (m *TLMessagesDialogs) Reset()                    { *m = TLMessagesDialogs{} }
 func (m *TLMessagesDialogs) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesDialogs) ProtoMessage()               {}
-func (*TLMessagesDialogs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{345} }
+func (*TLMessagesDialogs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{345} }
 
 func (m *TLMessagesDialogs) GetDialogs() []*Dialog {
 	if m != nil {
@@ -34088,7 +34088,7 @@ type TLMessagesDialogsSlice struct {
 func (m *TLMessagesDialogsSlice) Reset()                    { *m = TLMessagesDialogsSlice{} }
 func (m *TLMessagesDialogsSlice) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesDialogsSlice) ProtoMessage()               {}
-func (*TLMessagesDialogsSlice) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{346} }
+func (*TLMessagesDialogsSlice) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{346} }
 
 func (m *TLMessagesDialogsSlice) GetCount() int32 {
 	if m != nil {
@@ -34135,7 +34135,7 @@ type TLMessagesMessages struct {
 func (m *TLMessagesMessages) Reset()                    { *m = TLMessagesMessages{} }
 func (m *TLMessagesMessages) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesMessages) ProtoMessage()               {}
-func (*TLMessagesMessages) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{347} }
+func (*TLMessagesMessages) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{347} }
 
 func (m *TLMessagesMessages) GetMessages() []*Message {
 	if m != nil {
@@ -34169,7 +34169,7 @@ type TLMessagesMessagesSlice struct {
 func (m *TLMessagesMessagesSlice) Reset()                    { *m = TLMessagesMessagesSlice{} }
 func (m *TLMessagesMessagesSlice) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesMessagesSlice) ProtoMessage()               {}
-func (*TLMessagesMessagesSlice) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{348} }
+func (*TLMessagesMessagesSlice) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{348} }
 
 func (m *TLMessagesMessagesSlice) GetCount() int32 {
 	if m != nil {
@@ -34211,7 +34211,7 @@ type TLMessagesChannelMessages struct {
 func (m *TLMessagesChannelMessages) Reset()                    { *m = TLMessagesChannelMessages{} }
 func (m *TLMessagesChannelMessages) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesChannelMessages) ProtoMessage()               {}
-func (*TLMessagesChannelMessages) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{349} }
+func (*TLMessagesChannelMessages) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{349} }
 
 func (m *TLMessagesChannelMessages) GetPts() int32 {
 	if m != nil {
@@ -34256,7 +34256,7 @@ type TLMessagesChats struct {
 func (m *TLMessagesChats) Reset()                    { *m = TLMessagesChats{} }
 func (m *TLMessagesChats) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesChats) ProtoMessage()               {}
-func (*TLMessagesChats) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{350} }
+func (*TLMessagesChats) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{350} }
 
 func (m *TLMessagesChats) GetChats() []*Chat {
 	if m != nil {
@@ -34274,7 +34274,7 @@ type TLMessagesChatsSlice struct {
 func (m *TLMessagesChatsSlice) Reset()                    { *m = TLMessagesChatsSlice{} }
 func (m *TLMessagesChatsSlice) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesChatsSlice) ProtoMessage()               {}
-func (*TLMessagesChatsSlice) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{351} }
+func (*TLMessagesChatsSlice) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{351} }
 
 func (m *TLMessagesChatsSlice) GetCount() int32 {
 	if m != nil {
@@ -34300,7 +34300,7 @@ type TLMessagesChatFull struct {
 func (m *TLMessagesChatFull) Reset()                    { *m = TLMessagesChatFull{} }
 func (m *TLMessagesChatFull) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesChatFull) ProtoMessage()               {}
-func (*TLMessagesChatFull) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{352} }
+func (*TLMessagesChatFull) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{352} }
 
 func (m *TLMessagesChatFull) GetFullChat() *ChatFull {
 	if m != nil {
@@ -34333,7 +34333,7 @@ type TLMessagesAffectedHistory struct {
 func (m *TLMessagesAffectedHistory) Reset()                    { *m = TLMessagesAffectedHistory{} }
 func (m *TLMessagesAffectedHistory) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesAffectedHistory) ProtoMessage()               {}
-func (*TLMessagesAffectedHistory) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{353} }
+func (*TLMessagesAffectedHistory) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{353} }
 
 func (m *TLMessagesAffectedHistory) GetPts() int32 {
 	if m != nil {
@@ -34363,7 +34363,7 @@ type TLInputMessagesFilterEmpty struct {
 func (m *TLInputMessagesFilterEmpty) Reset()                    { *m = TLInputMessagesFilterEmpty{} }
 func (m *TLInputMessagesFilterEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMessagesFilterEmpty) ProtoMessage()               {}
-func (*TLInputMessagesFilterEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{354} }
+func (*TLInputMessagesFilterEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{354} }
 
 // inputMessagesFilterPhotos#9609a51c = MessagesFilter;
 type TLInputMessagesFilterPhotos struct {
@@ -34372,7 +34372,7 @@ type TLInputMessagesFilterPhotos struct {
 func (m *TLInputMessagesFilterPhotos) Reset()                    { *m = TLInputMessagesFilterPhotos{} }
 func (m *TLInputMessagesFilterPhotos) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMessagesFilterPhotos) ProtoMessage()               {}
-func (*TLInputMessagesFilterPhotos) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{355} }
+func (*TLInputMessagesFilterPhotos) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{355} }
 
 // inputMessagesFilterVideo#9fc00e65 = MessagesFilter;
 type TLInputMessagesFilterVideo struct {
@@ -34381,7 +34381,7 @@ type TLInputMessagesFilterVideo struct {
 func (m *TLInputMessagesFilterVideo) Reset()                    { *m = TLInputMessagesFilterVideo{} }
 func (m *TLInputMessagesFilterVideo) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMessagesFilterVideo) ProtoMessage()               {}
-func (*TLInputMessagesFilterVideo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{356} }
+func (*TLInputMessagesFilterVideo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{356} }
 
 // inputMessagesFilterPhotoVideo#56e9f0e4 = MessagesFilter;
 type TLInputMessagesFilterPhotoVideo struct {
@@ -34391,7 +34391,7 @@ func (m *TLInputMessagesFilterPhotoVideo) Reset()         { *m = TLInputMessages
 func (m *TLInputMessagesFilterPhotoVideo) String() string { return proto.CompactTextString(m) }
 func (*TLInputMessagesFilterPhotoVideo) ProtoMessage()    {}
 func (*TLInputMessagesFilterPhotoVideo) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{357}
+	return fileDescriptor4, []int{357}
 }
 
 // inputMessagesFilterPhotoVideoDocuments#d95e73bb = MessagesFilter;
@@ -34404,7 +34404,7 @@ func (m *TLInputMessagesFilterPhotoVideoDocuments) Reset() {
 func (m *TLInputMessagesFilterPhotoVideoDocuments) String() string { return proto.CompactTextString(m) }
 func (*TLInputMessagesFilterPhotoVideoDocuments) ProtoMessage()    {}
 func (*TLInputMessagesFilterPhotoVideoDocuments) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{358}
+	return fileDescriptor4, []int{358}
 }
 
 // inputMessagesFilterDocument#9eddf188 = MessagesFilter;
@@ -34414,7 +34414,7 @@ type TLInputMessagesFilterDocument struct {
 func (m *TLInputMessagesFilterDocument) Reset()                    { *m = TLInputMessagesFilterDocument{} }
 func (m *TLInputMessagesFilterDocument) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMessagesFilterDocument) ProtoMessage()               {}
-func (*TLInputMessagesFilterDocument) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{359} }
+func (*TLInputMessagesFilterDocument) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{359} }
 
 // inputMessagesFilterUrl#7ef0dd87 = MessagesFilter;
 type TLInputMessagesFilterUrl struct {
@@ -34423,7 +34423,7 @@ type TLInputMessagesFilterUrl struct {
 func (m *TLInputMessagesFilterUrl) Reset()                    { *m = TLInputMessagesFilterUrl{} }
 func (m *TLInputMessagesFilterUrl) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMessagesFilterUrl) ProtoMessage()               {}
-func (*TLInputMessagesFilterUrl) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{360} }
+func (*TLInputMessagesFilterUrl) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{360} }
 
 // inputMessagesFilterGif#ffc86587 = MessagesFilter;
 type TLInputMessagesFilterGif struct {
@@ -34432,7 +34432,7 @@ type TLInputMessagesFilterGif struct {
 func (m *TLInputMessagesFilterGif) Reset()                    { *m = TLInputMessagesFilterGif{} }
 func (m *TLInputMessagesFilterGif) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMessagesFilterGif) ProtoMessage()               {}
-func (*TLInputMessagesFilterGif) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{361} }
+func (*TLInputMessagesFilterGif) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{361} }
 
 // inputMessagesFilterVoice#50f5c392 = MessagesFilter;
 type TLInputMessagesFilterVoice struct {
@@ -34441,7 +34441,7 @@ type TLInputMessagesFilterVoice struct {
 func (m *TLInputMessagesFilterVoice) Reset()                    { *m = TLInputMessagesFilterVoice{} }
 func (m *TLInputMessagesFilterVoice) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMessagesFilterVoice) ProtoMessage()               {}
-func (*TLInputMessagesFilterVoice) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{362} }
+func (*TLInputMessagesFilterVoice) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{362} }
 
 // inputMessagesFilterMusic#3751b49e = MessagesFilter;
 type TLInputMessagesFilterMusic struct {
@@ -34450,7 +34450,7 @@ type TLInputMessagesFilterMusic struct {
 func (m *TLInputMessagesFilterMusic) Reset()                    { *m = TLInputMessagesFilterMusic{} }
 func (m *TLInputMessagesFilterMusic) String() string            { return proto.CompactTextString(m) }
 func (*TLInputMessagesFilterMusic) ProtoMessage()               {}
-func (*TLInputMessagesFilterMusic) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{363} }
+func (*TLInputMessagesFilterMusic) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{363} }
 
 // inputMessagesFilterChatPhotos#3a20ecb8 = MessagesFilter;
 type TLInputMessagesFilterChatPhotos struct {
@@ -34460,7 +34460,7 @@ func (m *TLInputMessagesFilterChatPhotos) Reset()         { *m = TLInputMessages
 func (m *TLInputMessagesFilterChatPhotos) String() string { return proto.CompactTextString(m) }
 func (*TLInputMessagesFilterChatPhotos) ProtoMessage()    {}
 func (*TLInputMessagesFilterChatPhotos) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{364}
+	return fileDescriptor4, []int{364}
 }
 
 // inputMessagesFilterPhoneCalls#80c99768 flags:# missed:flags.0?true = MessagesFilter;
@@ -34472,7 +34472,7 @@ func (m *TLInputMessagesFilterPhoneCalls) Reset()         { *m = TLInputMessages
 func (m *TLInputMessagesFilterPhoneCalls) String() string { return proto.CompactTextString(m) }
 func (*TLInputMessagesFilterPhoneCalls) ProtoMessage()    {}
 func (*TLInputMessagesFilterPhoneCalls) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{365}
+	return fileDescriptor4, []int{365}
 }
 
 func (m *TLInputMessagesFilterPhoneCalls) GetMissed() bool {
@@ -34490,7 +34490,7 @@ func (m *TLInputMessagesFilterRoundVoice) Reset()         { *m = TLInputMessages
 func (m *TLInputMessagesFilterRoundVoice) String() string { return proto.CompactTextString(m) }
 func (*TLInputMessagesFilterRoundVoice) ProtoMessage()    {}
 func (*TLInputMessagesFilterRoundVoice) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{366}
+	return fileDescriptor4, []int{366}
 }
 
 // inputMessagesFilterRoundVideo#b549da53 = MessagesFilter;
@@ -34501,7 +34501,7 @@ func (m *TLInputMessagesFilterRoundVideo) Reset()         { *m = TLInputMessages
 func (m *TLInputMessagesFilterRoundVideo) String() string { return proto.CompactTextString(m) }
 func (*TLInputMessagesFilterRoundVideo) ProtoMessage()    {}
 func (*TLInputMessagesFilterRoundVideo) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{367}
+	return fileDescriptor4, []int{367}
 }
 
 // inputMessagesFilterMyMentions#c1f8e69a = MessagesFilter;
@@ -34512,7 +34512,7 @@ func (m *TLInputMessagesFilterMyMentions) Reset()         { *m = TLInputMessages
 func (m *TLInputMessagesFilterMyMentions) String() string { return proto.CompactTextString(m) }
 func (*TLInputMessagesFilterMyMentions) ProtoMessage()    {}
 func (*TLInputMessagesFilterMyMentions) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{368}
+	return fileDescriptor4, []int{368}
 }
 
 // updateNewMessage#1f2b0afd message:Message pts:int pts_count:int = Update;
@@ -34525,7 +34525,7 @@ type TLUpdateNewMessage struct {
 func (m *TLUpdateNewMessage) Reset()                    { *m = TLUpdateNewMessage{} }
 func (m *TLUpdateNewMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateNewMessage) ProtoMessage()               {}
-func (*TLUpdateNewMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{369} }
+func (*TLUpdateNewMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{369} }
 
 func (m *TLUpdateNewMessage) GetMessage() *Message {
 	if m != nil {
@@ -34557,7 +34557,7 @@ type TLUpdateMessageID struct {
 func (m *TLUpdateMessageID) Reset()                    { *m = TLUpdateMessageID{} }
 func (m *TLUpdateMessageID) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateMessageID) ProtoMessage()               {}
-func (*TLUpdateMessageID) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{370} }
+func (*TLUpdateMessageID) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{370} }
 
 func (m *TLUpdateMessageID) GetId() int32 {
 	if m != nil {
@@ -34583,7 +34583,7 @@ type TLUpdateDeleteMessages struct {
 func (m *TLUpdateDeleteMessages) Reset()                    { *m = TLUpdateDeleteMessages{} }
 func (m *TLUpdateDeleteMessages) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateDeleteMessages) ProtoMessage()               {}
-func (*TLUpdateDeleteMessages) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{371} }
+func (*TLUpdateDeleteMessages) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{371} }
 
 func (m *TLUpdateDeleteMessages) GetMessages() []int32 {
 	if m != nil {
@@ -34615,7 +34615,7 @@ type TLUpdateUserTyping struct {
 func (m *TLUpdateUserTyping) Reset()                    { *m = TLUpdateUserTyping{} }
 func (m *TLUpdateUserTyping) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateUserTyping) ProtoMessage()               {}
-func (*TLUpdateUserTyping) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{372} }
+func (*TLUpdateUserTyping) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{372} }
 
 func (m *TLUpdateUserTyping) GetUserId() int32 {
 	if m != nil {
@@ -34641,7 +34641,7 @@ type TLUpdateChatUserTyping struct {
 func (m *TLUpdateChatUserTyping) Reset()                    { *m = TLUpdateChatUserTyping{} }
 func (m *TLUpdateChatUserTyping) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateChatUserTyping) ProtoMessage()               {}
-func (*TLUpdateChatUserTyping) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{373} }
+func (*TLUpdateChatUserTyping) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{373} }
 
 func (m *TLUpdateChatUserTyping) GetChatId() int32 {
 	if m != nil {
@@ -34672,7 +34672,7 @@ type TLUpdateChatParticipants struct {
 func (m *TLUpdateChatParticipants) Reset()                    { *m = TLUpdateChatParticipants{} }
 func (m *TLUpdateChatParticipants) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateChatParticipants) ProtoMessage()               {}
-func (*TLUpdateChatParticipants) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{374} }
+func (*TLUpdateChatParticipants) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{374} }
 
 func (m *TLUpdateChatParticipants) GetParticipants() *ChatParticipants {
 	if m != nil {
@@ -34690,7 +34690,7 @@ type TLUpdateUserStatus struct {
 func (m *TLUpdateUserStatus) Reset()                    { *m = TLUpdateUserStatus{} }
 func (m *TLUpdateUserStatus) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateUserStatus) ProtoMessage()               {}
-func (*TLUpdateUserStatus) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{375} }
+func (*TLUpdateUserStatus) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{375} }
 
 func (m *TLUpdateUserStatus) GetUserId() int32 {
 	if m != nil {
@@ -34717,7 +34717,7 @@ type TLUpdateUserName struct {
 func (m *TLUpdateUserName) Reset()                    { *m = TLUpdateUserName{} }
 func (m *TLUpdateUserName) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateUserName) ProtoMessage()               {}
-func (*TLUpdateUserName) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{376} }
+func (*TLUpdateUserName) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{376} }
 
 func (m *TLUpdateUserName) GetUserId() int32 {
 	if m != nil {
@@ -34758,7 +34758,7 @@ type TLUpdateUserPhoto struct {
 func (m *TLUpdateUserPhoto) Reset()                    { *m = TLUpdateUserPhoto{} }
 func (m *TLUpdateUserPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateUserPhoto) ProtoMessage()               {}
-func (*TLUpdateUserPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{377} }
+func (*TLUpdateUserPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{377} }
 
 func (m *TLUpdateUserPhoto) GetUserId() int32 {
 	if m != nil {
@@ -34797,7 +34797,7 @@ type TLUpdateContactRegistered struct {
 func (m *TLUpdateContactRegistered) Reset()                    { *m = TLUpdateContactRegistered{} }
 func (m *TLUpdateContactRegistered) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateContactRegistered) ProtoMessage()               {}
-func (*TLUpdateContactRegistered) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{378} }
+func (*TLUpdateContactRegistered) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{378} }
 
 func (m *TLUpdateContactRegistered) GetUserId() int32 {
 	if m != nil {
@@ -34823,7 +34823,7 @@ type TLUpdateContactLink struct {
 func (m *TLUpdateContactLink) Reset()                    { *m = TLUpdateContactLink{} }
 func (m *TLUpdateContactLink) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateContactLink) ProtoMessage()               {}
-func (*TLUpdateContactLink) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{379} }
+func (*TLUpdateContactLink) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{379} }
 
 func (m *TLUpdateContactLink) GetUserId() int32 {
 	if m != nil {
@@ -34855,7 +34855,7 @@ type TLUpdateNewEncryptedMessage struct {
 func (m *TLUpdateNewEncryptedMessage) Reset()                    { *m = TLUpdateNewEncryptedMessage{} }
 func (m *TLUpdateNewEncryptedMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateNewEncryptedMessage) ProtoMessage()               {}
-func (*TLUpdateNewEncryptedMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{380} }
+func (*TLUpdateNewEncryptedMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{380} }
 
 func (m *TLUpdateNewEncryptedMessage) GetMessage() *EncryptedMessage {
 	if m != nil {
@@ -34879,7 +34879,7 @@ type TLUpdateEncryptedChatTyping struct {
 func (m *TLUpdateEncryptedChatTyping) Reset()                    { *m = TLUpdateEncryptedChatTyping{} }
 func (m *TLUpdateEncryptedChatTyping) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateEncryptedChatTyping) ProtoMessage()               {}
-func (*TLUpdateEncryptedChatTyping) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{381} }
+func (*TLUpdateEncryptedChatTyping) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{381} }
 
 func (m *TLUpdateEncryptedChatTyping) GetChatId() int32 {
 	if m != nil {
@@ -34897,7 +34897,7 @@ type TLUpdateEncryption struct {
 func (m *TLUpdateEncryption) Reset()                    { *m = TLUpdateEncryption{} }
 func (m *TLUpdateEncryption) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateEncryption) ProtoMessage()               {}
-func (*TLUpdateEncryption) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{382} }
+func (*TLUpdateEncryption) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{382} }
 
 func (m *TLUpdateEncryption) GetChat() *EncryptedChat {
 	if m != nil {
@@ -34923,7 +34923,7 @@ type TLUpdateEncryptedMessagesRead struct {
 func (m *TLUpdateEncryptedMessagesRead) Reset()                    { *m = TLUpdateEncryptedMessagesRead{} }
 func (m *TLUpdateEncryptedMessagesRead) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateEncryptedMessagesRead) ProtoMessage()               {}
-func (*TLUpdateEncryptedMessagesRead) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{383} }
+func (*TLUpdateEncryptedMessagesRead) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{383} }
 
 func (m *TLUpdateEncryptedMessagesRead) GetChatId() int32 {
 	if m != nil {
@@ -34958,7 +34958,7 @@ type TLUpdateChatParticipantAdd struct {
 func (m *TLUpdateChatParticipantAdd) Reset()                    { *m = TLUpdateChatParticipantAdd{} }
 func (m *TLUpdateChatParticipantAdd) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateChatParticipantAdd) ProtoMessage()               {}
-func (*TLUpdateChatParticipantAdd) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{384} }
+func (*TLUpdateChatParticipantAdd) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{384} }
 
 func (m *TLUpdateChatParticipantAdd) GetChatId() int32 {
 	if m != nil {
@@ -35005,7 +35005,7 @@ type TLUpdateChatParticipantDelete struct {
 func (m *TLUpdateChatParticipantDelete) Reset()                    { *m = TLUpdateChatParticipantDelete{} }
 func (m *TLUpdateChatParticipantDelete) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateChatParticipantDelete) ProtoMessage()               {}
-func (*TLUpdateChatParticipantDelete) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{385} }
+func (*TLUpdateChatParticipantDelete) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{385} }
 
 func (m *TLUpdateChatParticipantDelete) GetChatId() int32 {
 	if m != nil {
@@ -35036,7 +35036,7 @@ type TLUpdateDcOptions struct {
 func (m *TLUpdateDcOptions) Reset()                    { *m = TLUpdateDcOptions{} }
 func (m *TLUpdateDcOptions) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateDcOptions) ProtoMessage()               {}
-func (*TLUpdateDcOptions) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{386} }
+func (*TLUpdateDcOptions) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{386} }
 
 func (m *TLUpdateDcOptions) GetDcOptions() []*DcOption {
 	if m != nil {
@@ -35054,7 +35054,7 @@ type TLUpdateUserBlocked struct {
 func (m *TLUpdateUserBlocked) Reset()                    { *m = TLUpdateUserBlocked{} }
 func (m *TLUpdateUserBlocked) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateUserBlocked) ProtoMessage()               {}
-func (*TLUpdateUserBlocked) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{387} }
+func (*TLUpdateUserBlocked) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{387} }
 
 func (m *TLUpdateUserBlocked) GetUserId() int32 {
 	if m != nil {
@@ -35079,7 +35079,7 @@ type TLUpdateNotifySettings struct {
 func (m *TLUpdateNotifySettings) Reset()                    { *m = TLUpdateNotifySettings{} }
 func (m *TLUpdateNotifySettings) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateNotifySettings) ProtoMessage()               {}
-func (*TLUpdateNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{388} }
+func (*TLUpdateNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{388} }
 
 func (m *TLUpdateNotifySettings) GetPeer() *NotifyPeer {
 	if m != nil {
@@ -35108,7 +35108,7 @@ type TLUpdateServiceNotification struct {
 func (m *TLUpdateServiceNotification) Reset()                    { *m = TLUpdateServiceNotification{} }
 func (m *TLUpdateServiceNotification) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateServiceNotification) ProtoMessage()               {}
-func (*TLUpdateServiceNotification) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{389} }
+func (*TLUpdateServiceNotification) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{389} }
 
 func (m *TLUpdateServiceNotification) GetPopup() bool {
 	if m != nil {
@@ -35161,7 +35161,7 @@ type TLUpdatePrivacy struct {
 func (m *TLUpdatePrivacy) Reset()                    { *m = TLUpdatePrivacy{} }
 func (m *TLUpdatePrivacy) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdatePrivacy) ProtoMessage()               {}
-func (*TLUpdatePrivacy) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{390} }
+func (*TLUpdatePrivacy) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{390} }
 
 func (m *TLUpdatePrivacy) GetKey() *PrivacyKey {
 	if m != nil {
@@ -35186,7 +35186,7 @@ type TLUpdateUserPhone struct {
 func (m *TLUpdateUserPhone) Reset()                    { *m = TLUpdateUserPhone{} }
 func (m *TLUpdateUserPhone) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateUserPhone) ProtoMessage()               {}
-func (*TLUpdateUserPhone) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{391} }
+func (*TLUpdateUserPhone) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{391} }
 
 func (m *TLUpdateUserPhone) GetUserId() int32 {
 	if m != nil {
@@ -35213,7 +35213,7 @@ type TLUpdateReadHistoryInbox struct {
 func (m *TLUpdateReadHistoryInbox) Reset()                    { *m = TLUpdateReadHistoryInbox{} }
 func (m *TLUpdateReadHistoryInbox) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateReadHistoryInbox) ProtoMessage()               {}
-func (*TLUpdateReadHistoryInbox) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{392} }
+func (*TLUpdateReadHistoryInbox) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{392} }
 
 func (m *TLUpdateReadHistoryInbox) GetPeer() *Peer {
 	if m != nil {
@@ -35254,7 +35254,7 @@ type TLUpdateReadHistoryOutbox struct {
 func (m *TLUpdateReadHistoryOutbox) Reset()                    { *m = TLUpdateReadHistoryOutbox{} }
 func (m *TLUpdateReadHistoryOutbox) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateReadHistoryOutbox) ProtoMessage()               {}
-func (*TLUpdateReadHistoryOutbox) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{393} }
+func (*TLUpdateReadHistoryOutbox) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{393} }
 
 func (m *TLUpdateReadHistoryOutbox) GetPeer() *Peer {
 	if m != nil {
@@ -35294,7 +35294,7 @@ type TLUpdateWebPage struct {
 func (m *TLUpdateWebPage) Reset()                    { *m = TLUpdateWebPage{} }
 func (m *TLUpdateWebPage) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateWebPage) ProtoMessage()               {}
-func (*TLUpdateWebPage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{394} }
+func (*TLUpdateWebPage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{394} }
 
 func (m *TLUpdateWebPage) GetWebpage() *WebPage {
 	if m != nil {
@@ -35327,7 +35327,7 @@ type TLUpdateReadMessagesContents struct {
 func (m *TLUpdateReadMessagesContents) Reset()                    { *m = TLUpdateReadMessagesContents{} }
 func (m *TLUpdateReadMessagesContents) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateReadMessagesContents) ProtoMessage()               {}
-func (*TLUpdateReadMessagesContents) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{395} }
+func (*TLUpdateReadMessagesContents) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{395} }
 
 func (m *TLUpdateReadMessagesContents) GetMessages() []int32 {
 	if m != nil {
@@ -35359,7 +35359,7 @@ type TLUpdateChannelTooLong struct {
 func (m *TLUpdateChannelTooLong) Reset()                    { *m = TLUpdateChannelTooLong{} }
 func (m *TLUpdateChannelTooLong) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateChannelTooLong) ProtoMessage()               {}
-func (*TLUpdateChannelTooLong) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{396} }
+func (*TLUpdateChannelTooLong) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{396} }
 
 func (m *TLUpdateChannelTooLong) GetChannelId() int32 {
 	if m != nil {
@@ -35383,7 +35383,7 @@ type TLUpdateChannel struct {
 func (m *TLUpdateChannel) Reset()                    { *m = TLUpdateChannel{} }
 func (m *TLUpdateChannel) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateChannel) ProtoMessage()               {}
-func (*TLUpdateChannel) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{397} }
+func (*TLUpdateChannel) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{397} }
 
 func (m *TLUpdateChannel) GetChannelId() int32 {
 	if m != nil {
@@ -35402,7 +35402,7 @@ type TLUpdateNewChannelMessage struct {
 func (m *TLUpdateNewChannelMessage) Reset()                    { *m = TLUpdateNewChannelMessage{} }
 func (m *TLUpdateNewChannelMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateNewChannelMessage) ProtoMessage()               {}
-func (*TLUpdateNewChannelMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{398} }
+func (*TLUpdateNewChannelMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{398} }
 
 func (m *TLUpdateNewChannelMessage) GetMessage() *Message {
 	if m != nil {
@@ -35434,7 +35434,7 @@ type TLUpdateReadChannelInbox struct {
 func (m *TLUpdateReadChannelInbox) Reset()                    { *m = TLUpdateReadChannelInbox{} }
 func (m *TLUpdateReadChannelInbox) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateReadChannelInbox) ProtoMessage()               {}
-func (*TLUpdateReadChannelInbox) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{399} }
+func (*TLUpdateReadChannelInbox) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{399} }
 
 func (m *TLUpdateReadChannelInbox) GetChannelId() int32 {
 	if m != nil {
@@ -35461,7 +35461,7 @@ type TLUpdateDeleteChannelMessages struct {
 func (m *TLUpdateDeleteChannelMessages) Reset()                    { *m = TLUpdateDeleteChannelMessages{} }
 func (m *TLUpdateDeleteChannelMessages) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateDeleteChannelMessages) ProtoMessage()               {}
-func (*TLUpdateDeleteChannelMessages) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{400} }
+func (*TLUpdateDeleteChannelMessages) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{400} }
 
 func (m *TLUpdateDeleteChannelMessages) GetChannelId() int32 {
 	if m != nil {
@@ -35501,7 +35501,7 @@ type TLUpdateChannelMessageViews struct {
 func (m *TLUpdateChannelMessageViews) Reset()                    { *m = TLUpdateChannelMessageViews{} }
 func (m *TLUpdateChannelMessageViews) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateChannelMessageViews) ProtoMessage()               {}
-func (*TLUpdateChannelMessageViews) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{401} }
+func (*TLUpdateChannelMessageViews) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{401} }
 
 func (m *TLUpdateChannelMessageViews) GetChannelId() int32 {
 	if m != nil {
@@ -35534,7 +35534,7 @@ type TLUpdateChatAdmins struct {
 func (m *TLUpdateChatAdmins) Reset()                    { *m = TLUpdateChatAdmins{} }
 func (m *TLUpdateChatAdmins) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateChatAdmins) ProtoMessage()               {}
-func (*TLUpdateChatAdmins) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{402} }
+func (*TLUpdateChatAdmins) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{402} }
 
 func (m *TLUpdateChatAdmins) GetChatId() int32 {
 	if m != nil {
@@ -35568,7 +35568,7 @@ type TLUpdateChatParticipantAdmin struct {
 func (m *TLUpdateChatParticipantAdmin) Reset()                    { *m = TLUpdateChatParticipantAdmin{} }
 func (m *TLUpdateChatParticipantAdmin) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateChatParticipantAdmin) ProtoMessage()               {}
-func (*TLUpdateChatParticipantAdmin) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{403} }
+func (*TLUpdateChatParticipantAdmin) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{403} }
 
 func (m *TLUpdateChatParticipantAdmin) GetChatId() int32 {
 	if m != nil {
@@ -35606,7 +35606,7 @@ type TLUpdateNewStickerSet struct {
 func (m *TLUpdateNewStickerSet) Reset()                    { *m = TLUpdateNewStickerSet{} }
 func (m *TLUpdateNewStickerSet) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateNewStickerSet) ProtoMessage()               {}
-func (*TLUpdateNewStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{404} }
+func (*TLUpdateNewStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{404} }
 
 func (m *TLUpdateNewStickerSet) GetStickerset() *Messages_StickerSet {
 	if m != nil {
@@ -35624,7 +35624,7 @@ type TLUpdateStickerSetsOrder struct {
 func (m *TLUpdateStickerSetsOrder) Reset()                    { *m = TLUpdateStickerSetsOrder{} }
 func (m *TLUpdateStickerSetsOrder) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateStickerSetsOrder) ProtoMessage()               {}
-func (*TLUpdateStickerSetsOrder) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{405} }
+func (*TLUpdateStickerSetsOrder) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{405} }
 
 func (m *TLUpdateStickerSetsOrder) GetMasks() bool {
 	if m != nil {
@@ -35647,7 +35647,7 @@ type TLUpdateStickerSets struct {
 func (m *TLUpdateStickerSets) Reset()                    { *m = TLUpdateStickerSets{} }
 func (m *TLUpdateStickerSets) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateStickerSets) ProtoMessage()               {}
-func (*TLUpdateStickerSets) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{406} }
+func (*TLUpdateStickerSets) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{406} }
 
 // updateSavedGifs#9375341e = Update;
 type TLUpdateSavedGifs struct {
@@ -35656,7 +35656,7 @@ type TLUpdateSavedGifs struct {
 func (m *TLUpdateSavedGifs) Reset()                    { *m = TLUpdateSavedGifs{} }
 func (m *TLUpdateSavedGifs) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateSavedGifs) ProtoMessage()               {}
-func (*TLUpdateSavedGifs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{407} }
+func (*TLUpdateSavedGifs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{407} }
 
 // updateBotInlineQuery#54826690 flags:# query_id:long user_id:int query:string geo:flags.0?GeoPoint offset:string = Update;
 type TLUpdateBotInlineQuery struct {
@@ -35670,7 +35670,7 @@ type TLUpdateBotInlineQuery struct {
 func (m *TLUpdateBotInlineQuery) Reset()                    { *m = TLUpdateBotInlineQuery{} }
 func (m *TLUpdateBotInlineQuery) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateBotInlineQuery) ProtoMessage()               {}
-func (*TLUpdateBotInlineQuery) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{408} }
+func (*TLUpdateBotInlineQuery) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{408} }
 
 func (m *TLUpdateBotInlineQuery) GetQueryId() int64 {
 	if m != nil {
@@ -35719,7 +35719,7 @@ type TLUpdateBotInlineSend struct {
 func (m *TLUpdateBotInlineSend) Reset()                    { *m = TLUpdateBotInlineSend{} }
 func (m *TLUpdateBotInlineSend) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateBotInlineSend) ProtoMessage()               {}
-func (*TLUpdateBotInlineSend) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{409} }
+func (*TLUpdateBotInlineSend) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{409} }
 
 func (m *TLUpdateBotInlineSend) GetUserId() int32 {
 	if m != nil {
@@ -35766,7 +35766,7 @@ type TLUpdateEditChannelMessage struct {
 func (m *TLUpdateEditChannelMessage) Reset()                    { *m = TLUpdateEditChannelMessage{} }
 func (m *TLUpdateEditChannelMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateEditChannelMessage) ProtoMessage()               {}
-func (*TLUpdateEditChannelMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{410} }
+func (*TLUpdateEditChannelMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{410} }
 
 func (m *TLUpdateEditChannelMessage) GetMessage() *Message {
 	if m != nil {
@@ -35798,7 +35798,7 @@ type TLUpdateChannelPinnedMessage struct {
 func (m *TLUpdateChannelPinnedMessage) Reset()                    { *m = TLUpdateChannelPinnedMessage{} }
 func (m *TLUpdateChannelPinnedMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateChannelPinnedMessage) ProtoMessage()               {}
-func (*TLUpdateChannelPinnedMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{411} }
+func (*TLUpdateChannelPinnedMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{411} }
 
 func (m *TLUpdateChannelPinnedMessage) GetChannelId() int32 {
 	if m != nil {
@@ -35828,7 +35828,7 @@ type TLUpdateBotCallbackQuery struct {
 func (m *TLUpdateBotCallbackQuery) Reset()                    { *m = TLUpdateBotCallbackQuery{} }
 func (m *TLUpdateBotCallbackQuery) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateBotCallbackQuery) ProtoMessage()               {}
-func (*TLUpdateBotCallbackQuery) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{412} }
+func (*TLUpdateBotCallbackQuery) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{412} }
 
 func (m *TLUpdateBotCallbackQuery) GetQueryId() int64 {
 	if m != nil {
@@ -35889,7 +35889,7 @@ type TLUpdateEditMessage struct {
 func (m *TLUpdateEditMessage) Reset()                    { *m = TLUpdateEditMessage{} }
 func (m *TLUpdateEditMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateEditMessage) ProtoMessage()               {}
-func (*TLUpdateEditMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{413} }
+func (*TLUpdateEditMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{413} }
 
 func (m *TLUpdateEditMessage) GetMessage() *Message {
 	if m != nil {
@@ -35926,7 +35926,7 @@ func (m *TLUpdateInlineBotCallbackQuery) Reset()         { *m = TLUpdateInlineBo
 func (m *TLUpdateInlineBotCallbackQuery) String() string { return proto.CompactTextString(m) }
 func (*TLUpdateInlineBotCallbackQuery) ProtoMessage()    {}
 func (*TLUpdateInlineBotCallbackQuery) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{414}
+	return fileDescriptor4, []int{414}
 }
 
 func (m *TLUpdateInlineBotCallbackQuery) GetQueryId() int64 {
@@ -35980,7 +35980,7 @@ type TLUpdateReadChannelOutbox struct {
 func (m *TLUpdateReadChannelOutbox) Reset()                    { *m = TLUpdateReadChannelOutbox{} }
 func (m *TLUpdateReadChannelOutbox) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateReadChannelOutbox) ProtoMessage()               {}
-func (*TLUpdateReadChannelOutbox) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{415} }
+func (*TLUpdateReadChannelOutbox) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{415} }
 
 func (m *TLUpdateReadChannelOutbox) GetChannelId() int32 {
 	if m != nil {
@@ -36005,7 +36005,7 @@ type TLUpdateDraftMessage struct {
 func (m *TLUpdateDraftMessage) Reset()                    { *m = TLUpdateDraftMessage{} }
 func (m *TLUpdateDraftMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateDraftMessage) ProtoMessage()               {}
-func (*TLUpdateDraftMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{416} }
+func (*TLUpdateDraftMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{416} }
 
 func (m *TLUpdateDraftMessage) GetPeer() *Peer {
 	if m != nil {
@@ -36028,7 +36028,7 @@ type TLUpdateReadFeaturedStickers struct {
 func (m *TLUpdateReadFeaturedStickers) Reset()                    { *m = TLUpdateReadFeaturedStickers{} }
 func (m *TLUpdateReadFeaturedStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateReadFeaturedStickers) ProtoMessage()               {}
-func (*TLUpdateReadFeaturedStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{417} }
+func (*TLUpdateReadFeaturedStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{417} }
 
 // updateRecentStickers#9a422c20 = Update;
 type TLUpdateRecentStickers struct {
@@ -36037,7 +36037,7 @@ type TLUpdateRecentStickers struct {
 func (m *TLUpdateRecentStickers) Reset()                    { *m = TLUpdateRecentStickers{} }
 func (m *TLUpdateRecentStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateRecentStickers) ProtoMessage()               {}
-func (*TLUpdateRecentStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{418} }
+func (*TLUpdateRecentStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{418} }
 
 // updateConfig#a229dd06 = Update;
 type TLUpdateConfig struct {
@@ -36046,7 +36046,7 @@ type TLUpdateConfig struct {
 func (m *TLUpdateConfig) Reset()                    { *m = TLUpdateConfig{} }
 func (m *TLUpdateConfig) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateConfig) ProtoMessage()               {}
-func (*TLUpdateConfig) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{419} }
+func (*TLUpdateConfig) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{419} }
 
 // updatePtsChanged#3354678f = Update;
 type TLUpdatePtsChanged struct {
@@ -36055,7 +36055,7 @@ type TLUpdatePtsChanged struct {
 func (m *TLUpdatePtsChanged) Reset()                    { *m = TLUpdatePtsChanged{} }
 func (m *TLUpdatePtsChanged) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdatePtsChanged) ProtoMessage()               {}
-func (*TLUpdatePtsChanged) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{420} }
+func (*TLUpdatePtsChanged) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{420} }
 
 // updateChannelWebPage#40771900 channel_id:int webpage:WebPage pts:int pts_count:int = Update;
 type TLUpdateChannelWebPage struct {
@@ -36068,7 +36068,7 @@ type TLUpdateChannelWebPage struct {
 func (m *TLUpdateChannelWebPage) Reset()                    { *m = TLUpdateChannelWebPage{} }
 func (m *TLUpdateChannelWebPage) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateChannelWebPage) ProtoMessage()               {}
-func (*TLUpdateChannelWebPage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{421} }
+func (*TLUpdateChannelWebPage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{421} }
 
 func (m *TLUpdateChannelWebPage) GetChannelId() int32 {
 	if m != nil {
@@ -36107,7 +36107,7 @@ type TLUpdateDialogPinned struct {
 func (m *TLUpdateDialogPinned) Reset()                    { *m = TLUpdateDialogPinned{} }
 func (m *TLUpdateDialogPinned) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateDialogPinned) ProtoMessage()               {}
-func (*TLUpdateDialogPinned) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{422} }
+func (*TLUpdateDialogPinned) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{422} }
 
 func (m *TLUpdateDialogPinned) GetPinned() bool {
 	if m != nil {
@@ -36131,7 +36131,7 @@ type TLUpdatePinnedDialogs struct {
 func (m *TLUpdatePinnedDialogs) Reset()                    { *m = TLUpdatePinnedDialogs{} }
 func (m *TLUpdatePinnedDialogs) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdatePinnedDialogs) ProtoMessage()               {}
-func (*TLUpdatePinnedDialogs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{423} }
+func (*TLUpdatePinnedDialogs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{423} }
 
 func (m *TLUpdatePinnedDialogs) GetOrder() []*Peer {
 	if m != nil {
@@ -36148,7 +36148,7 @@ type TLUpdateBotWebhookJSON struct {
 func (m *TLUpdateBotWebhookJSON) Reset()                    { *m = TLUpdateBotWebhookJSON{} }
 func (m *TLUpdateBotWebhookJSON) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateBotWebhookJSON) ProtoMessage()               {}
-func (*TLUpdateBotWebhookJSON) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{424} }
+func (*TLUpdateBotWebhookJSON) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{424} }
 
 func (m *TLUpdateBotWebhookJSON) GetData() *DataJSON {
 	if m != nil {
@@ -36167,7 +36167,7 @@ type TLUpdateBotWebhookJSONQuery struct {
 func (m *TLUpdateBotWebhookJSONQuery) Reset()                    { *m = TLUpdateBotWebhookJSONQuery{} }
 func (m *TLUpdateBotWebhookJSONQuery) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateBotWebhookJSONQuery) ProtoMessage()               {}
-func (*TLUpdateBotWebhookJSONQuery) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{425} }
+func (*TLUpdateBotWebhookJSONQuery) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{425} }
 
 func (m *TLUpdateBotWebhookJSONQuery) GetQueryId() int64 {
 	if m != nil {
@@ -36201,7 +36201,7 @@ type TLUpdateBotShippingQuery struct {
 func (m *TLUpdateBotShippingQuery) Reset()                    { *m = TLUpdateBotShippingQuery{} }
 func (m *TLUpdateBotShippingQuery) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateBotShippingQuery) ProtoMessage()               {}
-func (*TLUpdateBotShippingQuery) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{426} }
+func (*TLUpdateBotShippingQuery) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{426} }
 
 func (m *TLUpdateBotShippingQuery) GetQueryId() int64 {
 	if m != nil {
@@ -36245,7 +36245,7 @@ type TLUpdateBotPrecheckoutQuery struct {
 func (m *TLUpdateBotPrecheckoutQuery) Reset()                    { *m = TLUpdateBotPrecheckoutQuery{} }
 func (m *TLUpdateBotPrecheckoutQuery) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateBotPrecheckoutQuery) ProtoMessage()               {}
-func (*TLUpdateBotPrecheckoutQuery) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{427} }
+func (*TLUpdateBotPrecheckoutQuery) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{427} }
 
 func (m *TLUpdateBotPrecheckoutQuery) GetQueryId() int64 {
 	if m != nil {
@@ -36304,7 +36304,7 @@ type TLUpdatePhoneCall struct {
 func (m *TLUpdatePhoneCall) Reset()                    { *m = TLUpdatePhoneCall{} }
 func (m *TLUpdatePhoneCall) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdatePhoneCall) ProtoMessage()               {}
-func (*TLUpdatePhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{428} }
+func (*TLUpdatePhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{428} }
 
 func (m *TLUpdatePhoneCall) GetPhoneCall() *PhoneCall {
 	if m != nil {
@@ -36320,7 +36320,7 @@ type TLUpdateLangPackTooLong struct {
 func (m *TLUpdateLangPackTooLong) Reset()                    { *m = TLUpdateLangPackTooLong{} }
 func (m *TLUpdateLangPackTooLong) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateLangPackTooLong) ProtoMessage()               {}
-func (*TLUpdateLangPackTooLong) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{429} }
+func (*TLUpdateLangPackTooLong) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{429} }
 
 // updateLangPack#56022f4d difference:LangPackDifference = Update;
 type TLUpdateLangPack struct {
@@ -36330,7 +36330,7 @@ type TLUpdateLangPack struct {
 func (m *TLUpdateLangPack) Reset()                    { *m = TLUpdateLangPack{} }
 func (m *TLUpdateLangPack) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateLangPack) ProtoMessage()               {}
-func (*TLUpdateLangPack) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{430} }
+func (*TLUpdateLangPack) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{430} }
 
 func (m *TLUpdateLangPack) GetDifference() *LangPackDifference {
 	if m != nil {
@@ -36346,7 +36346,7 @@ type TLUpdateFavedStickers struct {
 func (m *TLUpdateFavedStickers) Reset()                    { *m = TLUpdateFavedStickers{} }
 func (m *TLUpdateFavedStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateFavedStickers) ProtoMessage()               {}
-func (*TLUpdateFavedStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{431} }
+func (*TLUpdateFavedStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{431} }
 
 // updateChannelReadMessagesContents#89893b45 channel_id:int messages:Vector<int> = Update;
 type TLUpdateChannelReadMessagesContents struct {
@@ -36358,7 +36358,7 @@ func (m *TLUpdateChannelReadMessagesContents) Reset()         { *m = TLUpdateCha
 func (m *TLUpdateChannelReadMessagesContents) String() string { return proto.CompactTextString(m) }
 func (*TLUpdateChannelReadMessagesContents) ProtoMessage()    {}
 func (*TLUpdateChannelReadMessagesContents) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{432}
+	return fileDescriptor4, []int{432}
 }
 
 func (m *TLUpdateChannelReadMessagesContents) GetChannelId() int32 {
@@ -36382,7 +36382,7 @@ type TLUpdateContactsReset struct {
 func (m *TLUpdateContactsReset) Reset()                    { *m = TLUpdateContactsReset{} }
 func (m *TLUpdateContactsReset) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateContactsReset) ProtoMessage()               {}
-func (*TLUpdateContactsReset) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{433} }
+func (*TLUpdateContactsReset) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{433} }
 
 // updates.state#a56c2a3e pts:int qts:int date:int seq:int unread_count:int = updates.State;
 type TLUpdatesState struct {
@@ -36396,7 +36396,7 @@ type TLUpdatesState struct {
 func (m *TLUpdatesState) Reset()                    { *m = TLUpdatesState{} }
 func (m *TLUpdatesState) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdatesState) ProtoMessage()               {}
-func (*TLUpdatesState) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{434} }
+func (*TLUpdatesState) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{434} }
 
 func (m *TLUpdatesState) GetPts() int32 {
 	if m != nil {
@@ -36442,7 +36442,7 @@ type TLUpdatesDifferenceEmpty struct {
 func (m *TLUpdatesDifferenceEmpty) Reset()                    { *m = TLUpdatesDifferenceEmpty{} }
 func (m *TLUpdatesDifferenceEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdatesDifferenceEmpty) ProtoMessage()               {}
-func (*TLUpdatesDifferenceEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{435} }
+func (*TLUpdatesDifferenceEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{435} }
 
 func (m *TLUpdatesDifferenceEmpty) GetDate() int32 {
 	if m != nil {
@@ -36471,7 +36471,7 @@ type TLUpdatesDifference struct {
 func (m *TLUpdatesDifference) Reset()                    { *m = TLUpdatesDifference{} }
 func (m *TLUpdatesDifference) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdatesDifference) ProtoMessage()               {}
-func (*TLUpdatesDifference) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{436} }
+func (*TLUpdatesDifference) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{436} }
 
 func (m *TLUpdatesDifference) GetNewMessages() []*Message {
 	if m != nil {
@@ -36528,7 +36528,7 @@ type TLUpdatesDifferenceSlice struct {
 func (m *TLUpdatesDifferenceSlice) Reset()                    { *m = TLUpdatesDifferenceSlice{} }
 func (m *TLUpdatesDifferenceSlice) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdatesDifferenceSlice) ProtoMessage()               {}
-func (*TLUpdatesDifferenceSlice) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{437} }
+func (*TLUpdatesDifferenceSlice) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{437} }
 
 func (m *TLUpdatesDifferenceSlice) GetNewMessages() []*Message {
 	if m != nil {
@@ -36580,7 +36580,7 @@ type TLUpdatesDifferenceTooLong struct {
 func (m *TLUpdatesDifferenceTooLong) Reset()                    { *m = TLUpdatesDifferenceTooLong{} }
 func (m *TLUpdatesDifferenceTooLong) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdatesDifferenceTooLong) ProtoMessage()               {}
-func (*TLUpdatesDifferenceTooLong) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{438} }
+func (*TLUpdatesDifferenceTooLong) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{438} }
 
 func (m *TLUpdatesDifferenceTooLong) GetPts() int32 {
 	if m != nil {
@@ -36596,7 +36596,7 @@ type TLUpdatesTooLong struct {
 func (m *TLUpdatesTooLong) Reset()                    { *m = TLUpdatesTooLong{} }
 func (m *TLUpdatesTooLong) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdatesTooLong) ProtoMessage()               {}
-func (*TLUpdatesTooLong) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{439} }
+func (*TLUpdatesTooLong) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{439} }
 
 // updateShortMessage#914fbf11 flags:# out:flags.1?true mentioned:flags.4?true media_unread:flags.5?true silent:flags.13?true id:int user_id:int message:string pts:int pts_count:int date:int fwd_from:flags.2?MessageFwdHeader via_bot_id:flags.11?int reply_to_msg_id:flags.3?int entities:flags.7?Vector<MessageEntity> = Updates;
 type TLUpdateShortMessage struct {
@@ -36619,7 +36619,7 @@ type TLUpdateShortMessage struct {
 func (m *TLUpdateShortMessage) Reset()                    { *m = TLUpdateShortMessage{} }
 func (m *TLUpdateShortMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateShortMessage) ProtoMessage()               {}
-func (*TLUpdateShortMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{440} }
+func (*TLUpdateShortMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{440} }
 
 func (m *TLUpdateShortMessage) GetOut() bool {
 	if m != nil {
@@ -36741,7 +36741,7 @@ type TLUpdateShortChatMessage struct {
 func (m *TLUpdateShortChatMessage) Reset()                    { *m = TLUpdateShortChatMessage{} }
 func (m *TLUpdateShortChatMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateShortChatMessage) ProtoMessage()               {}
-func (*TLUpdateShortChatMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{441} }
+func (*TLUpdateShortChatMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{441} }
 
 func (m *TLUpdateShortChatMessage) GetOut() bool {
 	if m != nil {
@@ -36857,7 +36857,7 @@ type TLUpdateShort struct {
 func (m *TLUpdateShort) Reset()                    { *m = TLUpdateShort{} }
 func (m *TLUpdateShort) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateShort) ProtoMessage()               {}
-func (*TLUpdateShort) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{442} }
+func (*TLUpdateShort) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{442} }
 
 func (m *TLUpdateShort) GetUpdate() *Update {
 	if m != nil {
@@ -36886,7 +36886,7 @@ type TLUpdatesCombined struct {
 func (m *TLUpdatesCombined) Reset()                    { *m = TLUpdatesCombined{} }
 func (m *TLUpdatesCombined) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdatesCombined) ProtoMessage()               {}
-func (*TLUpdatesCombined) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{443} }
+func (*TLUpdatesCombined) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{443} }
 
 func (m *TLUpdatesCombined) GetUpdates() []*Update {
 	if m != nil {
@@ -36942,7 +36942,7 @@ type TLUpdates struct {
 func (m *TLUpdates) Reset()                    { *m = TLUpdates{} }
 func (m *TLUpdates) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdates) ProtoMessage()               {}
-func (*TLUpdates) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{444} }
+func (*TLUpdates) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{444} }
 
 func (m *TLUpdates) GetUpdates() []*Update {
 	if m != nil {
@@ -36993,7 +36993,7 @@ type TLUpdateShortSentMessage struct {
 func (m *TLUpdateShortSentMessage) Reset()                    { *m = TLUpdateShortSentMessage{} }
 func (m *TLUpdateShortSentMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdateShortSentMessage) ProtoMessage()               {}
-func (*TLUpdateShortSentMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{445} }
+func (*TLUpdateShortSentMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{445} }
 
 func (m *TLUpdateShortSentMessage) GetOut() bool {
 	if m != nil {
@@ -37053,7 +37053,7 @@ type TLPhotosPhotos struct {
 func (m *TLPhotosPhotos) Reset()                    { *m = TLPhotosPhotos{} }
 func (m *TLPhotosPhotos) String() string            { return proto.CompactTextString(m) }
 func (*TLPhotosPhotos) ProtoMessage()               {}
-func (*TLPhotosPhotos) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{446} }
+func (*TLPhotosPhotos) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{446} }
 
 func (m *TLPhotosPhotos) GetPhotos() []*Photo {
 	if m != nil {
@@ -37079,7 +37079,7 @@ type TLPhotosPhotosSlice struct {
 func (m *TLPhotosPhotosSlice) Reset()                    { *m = TLPhotosPhotosSlice{} }
 func (m *TLPhotosPhotosSlice) String() string            { return proto.CompactTextString(m) }
 func (*TLPhotosPhotosSlice) ProtoMessage()               {}
-func (*TLPhotosPhotosSlice) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{447} }
+func (*TLPhotosPhotosSlice) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{447} }
 
 func (m *TLPhotosPhotosSlice) GetCount() int32 {
 	if m != nil {
@@ -37111,7 +37111,7 @@ type TLPhotosPhoto struct {
 func (m *TLPhotosPhoto) Reset()                    { *m = TLPhotosPhoto{} }
 func (m *TLPhotosPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLPhotosPhoto) ProtoMessage()               {}
-func (*TLPhotosPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{448} }
+func (*TLPhotosPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{448} }
 
 func (m *TLPhotosPhoto) GetPhoto() *Photo {
 	if m != nil {
@@ -37137,7 +37137,7 @@ type TLUploadFile struct {
 func (m *TLUploadFile) Reset()                    { *m = TLUploadFile{} }
 func (m *TLUploadFile) String() string            { return proto.CompactTextString(m) }
 func (*TLUploadFile) ProtoMessage()               {}
-func (*TLUploadFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{449} }
+func (*TLUploadFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{449} }
 
 func (m *TLUploadFile) GetType() *Storage_FileType {
 	if m != nil {
@@ -37172,7 +37172,7 @@ type TLUploadFileCdnRedirect struct {
 func (m *TLUploadFileCdnRedirect) Reset()                    { *m = TLUploadFileCdnRedirect{} }
 func (m *TLUploadFileCdnRedirect) String() string            { return proto.CompactTextString(m) }
 func (*TLUploadFileCdnRedirect) ProtoMessage()               {}
-func (*TLUploadFileCdnRedirect) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{450} }
+func (*TLUploadFileCdnRedirect) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{450} }
 
 func (m *TLUploadFileCdnRedirect) GetDcId() int32 {
 	if m != nil {
@@ -37224,7 +37224,7 @@ type TLDcOption struct {
 func (m *TLDcOption) Reset()                    { *m = TLDcOption{} }
 func (m *TLDcOption) String() string            { return proto.CompactTextString(m) }
 func (*TLDcOption) ProtoMessage()               {}
-func (*TLDcOption) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{451} }
+func (*TLDcOption) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{451} }
 
 func (m *TLDcOption) GetIpv6() bool {
 	if m != nil {
@@ -37322,7 +37322,7 @@ type TLConfig struct {
 func (m *TLConfig) Reset()                    { *m = TLConfig{} }
 func (m *TLConfig) String() string            { return proto.CompactTextString(m) }
 func (*TLConfig) ProtoMessage()               {}
-func (*TLConfig) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{452} }
+func (*TLConfig) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{452} }
 
 func (m *TLConfig) GetPhonecallsEnabled() bool {
 	if m != nil {
@@ -37565,7 +37565,7 @@ type TLNearestDc struct {
 func (m *TLNearestDc) Reset()                    { *m = TLNearestDc{} }
 func (m *TLNearestDc) String() string            { return proto.CompactTextString(m) }
 func (*TLNearestDc) ProtoMessage()               {}
-func (*TLNearestDc) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{453} }
+func (*TLNearestDc) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{453} }
 
 func (m *TLNearestDc) GetCountry() string {
 	if m != nil {
@@ -37599,7 +37599,7 @@ type TLHelpAppUpdate struct {
 func (m *TLHelpAppUpdate) Reset()                    { *m = TLHelpAppUpdate{} }
 func (m *TLHelpAppUpdate) String() string            { return proto.CompactTextString(m) }
 func (*TLHelpAppUpdate) ProtoMessage()               {}
-func (*TLHelpAppUpdate) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{454} }
+func (*TLHelpAppUpdate) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{454} }
 
 func (m *TLHelpAppUpdate) GetId() int32 {
 	if m != nil {
@@ -37636,7 +37636,7 @@ type TLHelpNoAppUpdate struct {
 func (m *TLHelpNoAppUpdate) Reset()                    { *m = TLHelpNoAppUpdate{} }
 func (m *TLHelpNoAppUpdate) String() string            { return proto.CompactTextString(m) }
 func (*TLHelpNoAppUpdate) ProtoMessage()               {}
-func (*TLHelpNoAppUpdate) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{455} }
+func (*TLHelpNoAppUpdate) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{455} }
 
 // help.inviteText#18cb9f78 message:string = help.InviteText;
 type TLHelpInviteText struct {
@@ -37646,7 +37646,7 @@ type TLHelpInviteText struct {
 func (m *TLHelpInviteText) Reset()                    { *m = TLHelpInviteText{} }
 func (m *TLHelpInviteText) String() string            { return proto.CompactTextString(m) }
 func (*TLHelpInviteText) ProtoMessage()               {}
-func (*TLHelpInviteText) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{456} }
+func (*TLHelpInviteText) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{456} }
 
 func (m *TLHelpInviteText) GetMessage() string {
 	if m != nil {
@@ -37663,7 +37663,7 @@ type TLEncryptedChatEmpty struct {
 func (m *TLEncryptedChatEmpty) Reset()                    { *m = TLEncryptedChatEmpty{} }
 func (m *TLEncryptedChatEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLEncryptedChatEmpty) ProtoMessage()               {}
-func (*TLEncryptedChatEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{457} }
+func (*TLEncryptedChatEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{457} }
 
 func (m *TLEncryptedChatEmpty) GetId() int32 {
 	if m != nil {
@@ -37684,7 +37684,7 @@ type TLEncryptedChatWaiting struct {
 func (m *TLEncryptedChatWaiting) Reset()                    { *m = TLEncryptedChatWaiting{} }
 func (m *TLEncryptedChatWaiting) String() string            { return proto.CompactTextString(m) }
 func (*TLEncryptedChatWaiting) ProtoMessage()               {}
-func (*TLEncryptedChatWaiting) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{458} }
+func (*TLEncryptedChatWaiting) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{458} }
 
 func (m *TLEncryptedChatWaiting) GetId() int32 {
 	if m != nil {
@@ -37734,7 +37734,7 @@ type TLEncryptedChatRequested struct {
 func (m *TLEncryptedChatRequested) Reset()                    { *m = TLEncryptedChatRequested{} }
 func (m *TLEncryptedChatRequested) String() string            { return proto.CompactTextString(m) }
 func (*TLEncryptedChatRequested) ProtoMessage()               {}
-func (*TLEncryptedChatRequested) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{459} }
+func (*TLEncryptedChatRequested) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{459} }
 
 func (m *TLEncryptedChatRequested) GetId() int32 {
 	if m != nil {
@@ -37792,7 +37792,7 @@ type TLEncryptedChat struct {
 func (m *TLEncryptedChat) Reset()                    { *m = TLEncryptedChat{} }
 func (m *TLEncryptedChat) String() string            { return proto.CompactTextString(m) }
 func (*TLEncryptedChat) ProtoMessage()               {}
-func (*TLEncryptedChat) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{460} }
+func (*TLEncryptedChat) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{460} }
 
 func (m *TLEncryptedChat) GetId() int32 {
 	if m != nil {
@@ -37851,7 +37851,7 @@ type TLEncryptedChatDiscarded struct {
 func (m *TLEncryptedChatDiscarded) Reset()                    { *m = TLEncryptedChatDiscarded{} }
 func (m *TLEncryptedChatDiscarded) String() string            { return proto.CompactTextString(m) }
 func (*TLEncryptedChatDiscarded) ProtoMessage()               {}
-func (*TLEncryptedChatDiscarded) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{461} }
+func (*TLEncryptedChatDiscarded) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{461} }
 
 func (m *TLEncryptedChatDiscarded) GetId() int32 {
 	if m != nil {
@@ -37869,7 +37869,7 @@ type TLInputEncryptedChat struct {
 func (m *TLInputEncryptedChat) Reset()                    { *m = TLInputEncryptedChat{} }
 func (m *TLInputEncryptedChat) String() string            { return proto.CompactTextString(m) }
 func (*TLInputEncryptedChat) ProtoMessage()               {}
-func (*TLInputEncryptedChat) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{462} }
+func (*TLInputEncryptedChat) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{462} }
 
 func (m *TLInputEncryptedChat) GetChatId() int32 {
 	if m != nil {
@@ -37892,7 +37892,7 @@ type TLEncryptedFileEmpty struct {
 func (m *TLEncryptedFileEmpty) Reset()                    { *m = TLEncryptedFileEmpty{} }
 func (m *TLEncryptedFileEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLEncryptedFileEmpty) ProtoMessage()               {}
-func (*TLEncryptedFileEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{463} }
+func (*TLEncryptedFileEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{463} }
 
 // encryptedFile#4a70994c id:long access_hash:long size:int dc_id:int key_fingerprint:int = EncryptedFile;
 type TLEncryptedFile struct {
@@ -37906,7 +37906,7 @@ type TLEncryptedFile struct {
 func (m *TLEncryptedFile) Reset()                    { *m = TLEncryptedFile{} }
 func (m *TLEncryptedFile) String() string            { return proto.CompactTextString(m) }
 func (*TLEncryptedFile) ProtoMessage()               {}
-func (*TLEncryptedFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{464} }
+func (*TLEncryptedFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{464} }
 
 func (m *TLEncryptedFile) GetId() int64 {
 	if m != nil {
@@ -37950,7 +37950,7 @@ type TLInputEncryptedFileEmpty struct {
 func (m *TLInputEncryptedFileEmpty) Reset()                    { *m = TLInputEncryptedFileEmpty{} }
 func (m *TLInputEncryptedFileEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLInputEncryptedFileEmpty) ProtoMessage()               {}
-func (*TLInputEncryptedFileEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{465} }
+func (*TLInputEncryptedFileEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{465} }
 
 // inputEncryptedFileUploaded#64bd0306 id:long parts:int md5_checksum:string key_fingerprint:int = InputEncryptedFile;
 type TLInputEncryptedFileUploaded struct {
@@ -37963,7 +37963,7 @@ type TLInputEncryptedFileUploaded struct {
 func (m *TLInputEncryptedFileUploaded) Reset()                    { *m = TLInputEncryptedFileUploaded{} }
 func (m *TLInputEncryptedFileUploaded) String() string            { return proto.CompactTextString(m) }
 func (*TLInputEncryptedFileUploaded) ProtoMessage()               {}
-func (*TLInputEncryptedFileUploaded) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{466} }
+func (*TLInputEncryptedFileUploaded) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{466} }
 
 func (m *TLInputEncryptedFileUploaded) GetId() int64 {
 	if m != nil {
@@ -38002,7 +38002,7 @@ type TLInputEncryptedFile struct {
 func (m *TLInputEncryptedFile) Reset()                    { *m = TLInputEncryptedFile{} }
 func (m *TLInputEncryptedFile) String() string            { return proto.CompactTextString(m) }
 func (*TLInputEncryptedFile) ProtoMessage()               {}
-func (*TLInputEncryptedFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{467} }
+func (*TLInputEncryptedFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{467} }
 
 func (m *TLInputEncryptedFile) GetId() int64 {
 	if m != nil {
@@ -38029,7 +38029,7 @@ func (m *TLInputEncryptedFileBigUploaded) Reset()         { *m = TLInputEncrypte
 func (m *TLInputEncryptedFileBigUploaded) String() string { return proto.CompactTextString(m) }
 func (*TLInputEncryptedFileBigUploaded) ProtoMessage()    {}
 func (*TLInputEncryptedFileBigUploaded) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{468}
+	return fileDescriptor4, []int{468}
 }
 
 func (m *TLInputEncryptedFileBigUploaded) GetId() int64 {
@@ -38065,7 +38065,7 @@ type TLEncryptedMessage struct {
 func (m *TLEncryptedMessage) Reset()                    { *m = TLEncryptedMessage{} }
 func (m *TLEncryptedMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLEncryptedMessage) ProtoMessage()               {}
-func (*TLEncryptedMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{469} }
+func (*TLEncryptedMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{469} }
 
 func (m *TLEncryptedMessage) GetRandomId() int64 {
 	if m != nil {
@@ -38113,7 +38113,7 @@ type TLEncryptedMessageService struct {
 func (m *TLEncryptedMessageService) Reset()                    { *m = TLEncryptedMessageService{} }
 func (m *TLEncryptedMessageService) String() string            { return proto.CompactTextString(m) }
 func (*TLEncryptedMessageService) ProtoMessage()               {}
-func (*TLEncryptedMessageService) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{470} }
+func (*TLEncryptedMessageService) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{470} }
 
 func (m *TLEncryptedMessageService) GetRandomId() int64 {
 	if m != nil {
@@ -38151,7 +38151,7 @@ type TLMessagesDhConfigNotModified struct {
 func (m *TLMessagesDhConfigNotModified) Reset()                    { *m = TLMessagesDhConfigNotModified{} }
 func (m *TLMessagesDhConfigNotModified) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesDhConfigNotModified) ProtoMessage()               {}
-func (*TLMessagesDhConfigNotModified) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{471} }
+func (*TLMessagesDhConfigNotModified) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{471} }
 
 func (m *TLMessagesDhConfigNotModified) GetRandom() []byte {
 	if m != nil {
@@ -38171,7 +38171,7 @@ type TLMessagesDhConfig struct {
 func (m *TLMessagesDhConfig) Reset()                    { *m = TLMessagesDhConfig{} }
 func (m *TLMessagesDhConfig) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesDhConfig) ProtoMessage()               {}
-func (*TLMessagesDhConfig) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{472} }
+func (*TLMessagesDhConfig) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{472} }
 
 func (m *TLMessagesDhConfig) GetG() int32 {
 	if m != nil {
@@ -38210,7 +38210,7 @@ func (m *TLMessagesSentEncryptedMessage) Reset()         { *m = TLMessagesSentEn
 func (m *TLMessagesSentEncryptedMessage) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesSentEncryptedMessage) ProtoMessage()    {}
 func (*TLMessagesSentEncryptedMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{473}
+	return fileDescriptor4, []int{473}
 }
 
 func (m *TLMessagesSentEncryptedMessage) GetDate() int32 {
@@ -38229,7 +38229,7 @@ type TLMessagesSentEncryptedFile struct {
 func (m *TLMessagesSentEncryptedFile) Reset()                    { *m = TLMessagesSentEncryptedFile{} }
 func (m *TLMessagesSentEncryptedFile) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSentEncryptedFile) ProtoMessage()               {}
-func (*TLMessagesSentEncryptedFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{474} }
+func (*TLMessagesSentEncryptedFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{474} }
 
 func (m *TLMessagesSentEncryptedFile) GetDate() int32 {
 	if m != nil {
@@ -38252,7 +38252,7 @@ type TLInputDocumentEmpty struct {
 func (m *TLInputDocumentEmpty) Reset()                    { *m = TLInputDocumentEmpty{} }
 func (m *TLInputDocumentEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLInputDocumentEmpty) ProtoMessage()               {}
-func (*TLInputDocumentEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{475} }
+func (*TLInputDocumentEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{475} }
 
 // inputDocument#18798952 id:long access_hash:long = InputDocument;
 type TLInputDocument struct {
@@ -38263,7 +38263,7 @@ type TLInputDocument struct {
 func (m *TLInputDocument) Reset()                    { *m = TLInputDocument{} }
 func (m *TLInputDocument) String() string            { return proto.CompactTextString(m) }
 func (*TLInputDocument) ProtoMessage()               {}
-func (*TLInputDocument) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{476} }
+func (*TLInputDocument) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{476} }
 
 func (m *TLInputDocument) GetId() int64 {
 	if m != nil {
@@ -38287,7 +38287,7 @@ type TLDocumentEmpty struct {
 func (m *TLDocumentEmpty) Reset()                    { *m = TLDocumentEmpty{} }
 func (m *TLDocumentEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLDocumentEmpty) ProtoMessage()               {}
-func (*TLDocumentEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{477} }
+func (*TLDocumentEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{477} }
 
 func (m *TLDocumentEmpty) GetId() int64 {
 	if m != nil {
@@ -38312,7 +38312,7 @@ type TLDocument struct {
 func (m *TLDocument) Reset()                    { *m = TLDocument{} }
 func (m *TLDocument) String() string            { return proto.CompactTextString(m) }
 func (*TLDocument) ProtoMessage()               {}
-func (*TLDocument) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{478} }
+func (*TLDocument) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{478} }
 
 func (m *TLDocument) GetId() int64 {
 	if m != nil {
@@ -38386,7 +38386,7 @@ type TLHelpSupport struct {
 func (m *TLHelpSupport) Reset()                    { *m = TLHelpSupport{} }
 func (m *TLHelpSupport) String() string            { return proto.CompactTextString(m) }
 func (*TLHelpSupport) ProtoMessage()               {}
-func (*TLHelpSupport) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{479} }
+func (*TLHelpSupport) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{479} }
 
 func (m *TLHelpSupport) GetPhoneNumber() string {
 	if m != nil {
@@ -38410,7 +38410,7 @@ type TLNotifyPeer struct {
 func (m *TLNotifyPeer) Reset()                    { *m = TLNotifyPeer{} }
 func (m *TLNotifyPeer) String() string            { return proto.CompactTextString(m) }
 func (*TLNotifyPeer) ProtoMessage()               {}
-func (*TLNotifyPeer) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{480} }
+func (*TLNotifyPeer) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{480} }
 
 func (m *TLNotifyPeer) GetPeer() *Peer {
 	if m != nil {
@@ -38426,7 +38426,7 @@ type TLNotifyUsers struct {
 func (m *TLNotifyUsers) Reset()                    { *m = TLNotifyUsers{} }
 func (m *TLNotifyUsers) String() string            { return proto.CompactTextString(m) }
 func (*TLNotifyUsers) ProtoMessage()               {}
-func (*TLNotifyUsers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{481} }
+func (*TLNotifyUsers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{481} }
 
 // notifyChats#c007cec3 = NotifyPeer;
 type TLNotifyChats struct {
@@ -38435,7 +38435,7 @@ type TLNotifyChats struct {
 func (m *TLNotifyChats) Reset()                    { *m = TLNotifyChats{} }
 func (m *TLNotifyChats) String() string            { return proto.CompactTextString(m) }
 func (*TLNotifyChats) ProtoMessage()               {}
-func (*TLNotifyChats) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{482} }
+func (*TLNotifyChats) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{482} }
 
 // notifyAll#74d07c60 = NotifyPeer;
 type TLNotifyAll struct {
@@ -38444,7 +38444,7 @@ type TLNotifyAll struct {
 func (m *TLNotifyAll) Reset()                    { *m = TLNotifyAll{} }
 func (m *TLNotifyAll) String() string            { return proto.CompactTextString(m) }
 func (*TLNotifyAll) ProtoMessage()               {}
-func (*TLNotifyAll) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{483} }
+func (*TLNotifyAll) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{483} }
 
 // sendMessageTypingAction#16bf744e = SendMessageAction;
 type TLSendMessageTypingAction struct {
@@ -38453,7 +38453,7 @@ type TLSendMessageTypingAction struct {
 func (m *TLSendMessageTypingAction) Reset()                    { *m = TLSendMessageTypingAction{} }
 func (m *TLSendMessageTypingAction) String() string            { return proto.CompactTextString(m) }
 func (*TLSendMessageTypingAction) ProtoMessage()               {}
-func (*TLSendMessageTypingAction) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{484} }
+func (*TLSendMessageTypingAction) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{484} }
 
 // sendMessageCancelAction#fd5ec8f5 = SendMessageAction;
 type TLSendMessageCancelAction struct {
@@ -38462,7 +38462,7 @@ type TLSendMessageCancelAction struct {
 func (m *TLSendMessageCancelAction) Reset()                    { *m = TLSendMessageCancelAction{} }
 func (m *TLSendMessageCancelAction) String() string            { return proto.CompactTextString(m) }
 func (*TLSendMessageCancelAction) ProtoMessage()               {}
-func (*TLSendMessageCancelAction) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{485} }
+func (*TLSendMessageCancelAction) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{485} }
 
 // sendMessageRecordVideoAction#a187d66f = SendMessageAction;
 type TLSendMessageRecordVideoAction struct {
@@ -38472,7 +38472,7 @@ func (m *TLSendMessageRecordVideoAction) Reset()         { *m = TLSendMessageRec
 func (m *TLSendMessageRecordVideoAction) String() string { return proto.CompactTextString(m) }
 func (*TLSendMessageRecordVideoAction) ProtoMessage()    {}
 func (*TLSendMessageRecordVideoAction) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{486}
+	return fileDescriptor4, []int{486}
 }
 
 // sendMessageUploadVideoAction#e9763aec progress:int = SendMessageAction;
@@ -38484,7 +38484,7 @@ func (m *TLSendMessageUploadVideoAction) Reset()         { *m = TLSendMessageUpl
 func (m *TLSendMessageUploadVideoAction) String() string { return proto.CompactTextString(m) }
 func (*TLSendMessageUploadVideoAction) ProtoMessage()    {}
 func (*TLSendMessageUploadVideoAction) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{487}
+	return fileDescriptor4, []int{487}
 }
 
 func (m *TLSendMessageUploadVideoAction) GetProgress() int32 {
@@ -38502,7 +38502,7 @@ func (m *TLSendMessageRecordAudioAction) Reset()         { *m = TLSendMessageRec
 func (m *TLSendMessageRecordAudioAction) String() string { return proto.CompactTextString(m) }
 func (*TLSendMessageRecordAudioAction) ProtoMessage()    {}
 func (*TLSendMessageRecordAudioAction) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{488}
+	return fileDescriptor4, []int{488}
 }
 
 // sendMessageUploadAudioAction#f351d7ab progress:int = SendMessageAction;
@@ -38514,7 +38514,7 @@ func (m *TLSendMessageUploadAudioAction) Reset()         { *m = TLSendMessageUpl
 func (m *TLSendMessageUploadAudioAction) String() string { return proto.CompactTextString(m) }
 func (*TLSendMessageUploadAudioAction) ProtoMessage()    {}
 func (*TLSendMessageUploadAudioAction) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{489}
+	return fileDescriptor4, []int{489}
 }
 
 func (m *TLSendMessageUploadAudioAction) GetProgress() int32 {
@@ -38533,7 +38533,7 @@ func (m *TLSendMessageUploadPhotoAction) Reset()         { *m = TLSendMessageUpl
 func (m *TLSendMessageUploadPhotoAction) String() string { return proto.CompactTextString(m) }
 func (*TLSendMessageUploadPhotoAction) ProtoMessage()    {}
 func (*TLSendMessageUploadPhotoAction) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{490}
+	return fileDescriptor4, []int{490}
 }
 
 func (m *TLSendMessageUploadPhotoAction) GetProgress() int32 {
@@ -38552,7 +38552,7 @@ func (m *TLSendMessageUploadDocumentAction) Reset()         { *m = TLSendMessage
 func (m *TLSendMessageUploadDocumentAction) String() string { return proto.CompactTextString(m) }
 func (*TLSendMessageUploadDocumentAction) ProtoMessage()    {}
 func (*TLSendMessageUploadDocumentAction) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{491}
+	return fileDescriptor4, []int{491}
 }
 
 func (m *TLSendMessageUploadDocumentAction) GetProgress() int32 {
@@ -38570,7 +38570,7 @@ func (m *TLSendMessageGeoLocationAction) Reset()         { *m = TLSendMessageGeo
 func (m *TLSendMessageGeoLocationAction) String() string { return proto.CompactTextString(m) }
 func (*TLSendMessageGeoLocationAction) ProtoMessage()    {}
 func (*TLSendMessageGeoLocationAction) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{492}
+	return fileDescriptor4, []int{492}
 }
 
 // sendMessageChooseContactAction#628cbc6f = SendMessageAction;
@@ -38581,7 +38581,7 @@ func (m *TLSendMessageChooseContactAction) Reset()         { *m = TLSendMessageC
 func (m *TLSendMessageChooseContactAction) String() string { return proto.CompactTextString(m) }
 func (*TLSendMessageChooseContactAction) ProtoMessage()    {}
 func (*TLSendMessageChooseContactAction) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{493}
+	return fileDescriptor4, []int{493}
 }
 
 // sendMessageGamePlayAction#dd6a8f48 = SendMessageAction;
@@ -38591,7 +38591,7 @@ type TLSendMessageGamePlayAction struct {
 func (m *TLSendMessageGamePlayAction) Reset()                    { *m = TLSendMessageGamePlayAction{} }
 func (m *TLSendMessageGamePlayAction) String() string            { return proto.CompactTextString(m) }
 func (*TLSendMessageGamePlayAction) ProtoMessage()               {}
-func (*TLSendMessageGamePlayAction) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{494} }
+func (*TLSendMessageGamePlayAction) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{494} }
 
 // sendMessageRecordRoundAction#88f27fbc = SendMessageAction;
 type TLSendMessageRecordRoundAction struct {
@@ -38601,7 +38601,7 @@ func (m *TLSendMessageRecordRoundAction) Reset()         { *m = TLSendMessageRec
 func (m *TLSendMessageRecordRoundAction) String() string { return proto.CompactTextString(m) }
 func (*TLSendMessageRecordRoundAction) ProtoMessage()    {}
 func (*TLSendMessageRecordRoundAction) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{495}
+	return fileDescriptor4, []int{495}
 }
 
 // sendMessageUploadRoundAction#243e1c66 progress:int = SendMessageAction;
@@ -38613,7 +38613,7 @@ func (m *TLSendMessageUploadRoundAction) Reset()         { *m = TLSendMessageUpl
 func (m *TLSendMessageUploadRoundAction) String() string { return proto.CompactTextString(m) }
 func (*TLSendMessageUploadRoundAction) ProtoMessage()    {}
 func (*TLSendMessageUploadRoundAction) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{496}
+	return fileDescriptor4, []int{496}
 }
 
 func (m *TLSendMessageUploadRoundAction) GetProgress() int32 {
@@ -38633,7 +38633,7 @@ type TLContactsFound struct {
 func (m *TLContactsFound) Reset()                    { *m = TLContactsFound{} }
 func (m *TLContactsFound) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsFound) ProtoMessage()               {}
-func (*TLContactsFound) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{497} }
+func (*TLContactsFound) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{497} }
 
 func (m *TLContactsFound) GetResults() []*Peer {
 	if m != nil {
@@ -38664,7 +38664,7 @@ func (m *TLInputPrivacyKeyStatusTimestamp) Reset()         { *m = TLInputPrivacy
 func (m *TLInputPrivacyKeyStatusTimestamp) String() string { return proto.CompactTextString(m) }
 func (*TLInputPrivacyKeyStatusTimestamp) ProtoMessage()    {}
 func (*TLInputPrivacyKeyStatusTimestamp) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{498}
+	return fileDescriptor4, []int{498}
 }
 
 // inputPrivacyKeyChatInvite#bdfb0426 = InputPrivacyKey;
@@ -38674,7 +38674,7 @@ type TLInputPrivacyKeyChatInvite struct {
 func (m *TLInputPrivacyKeyChatInvite) Reset()                    { *m = TLInputPrivacyKeyChatInvite{} }
 func (m *TLInputPrivacyKeyChatInvite) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPrivacyKeyChatInvite) ProtoMessage()               {}
-func (*TLInputPrivacyKeyChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{499} }
+func (*TLInputPrivacyKeyChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{499} }
 
 // inputPrivacyKeyPhoneCall#fabadc5f = InputPrivacyKey;
 type TLInputPrivacyKeyPhoneCall struct {
@@ -38683,7 +38683,7 @@ type TLInputPrivacyKeyPhoneCall struct {
 func (m *TLInputPrivacyKeyPhoneCall) Reset()                    { *m = TLInputPrivacyKeyPhoneCall{} }
 func (m *TLInputPrivacyKeyPhoneCall) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPrivacyKeyPhoneCall) ProtoMessage()               {}
-func (*TLInputPrivacyKeyPhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{500} }
+func (*TLInputPrivacyKeyPhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{500} }
 
 // privacyKeyStatusTimestamp#bc2eab30 = PrivacyKey;
 type TLPrivacyKeyStatusTimestamp struct {
@@ -38692,7 +38692,7 @@ type TLPrivacyKeyStatusTimestamp struct {
 func (m *TLPrivacyKeyStatusTimestamp) Reset()                    { *m = TLPrivacyKeyStatusTimestamp{} }
 func (m *TLPrivacyKeyStatusTimestamp) String() string            { return proto.CompactTextString(m) }
 func (*TLPrivacyKeyStatusTimestamp) ProtoMessage()               {}
-func (*TLPrivacyKeyStatusTimestamp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{501} }
+func (*TLPrivacyKeyStatusTimestamp) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{501} }
 
 // privacyKeyChatInvite#500e6dfa = PrivacyKey;
 type TLPrivacyKeyChatInvite struct {
@@ -38701,7 +38701,7 @@ type TLPrivacyKeyChatInvite struct {
 func (m *TLPrivacyKeyChatInvite) Reset()                    { *m = TLPrivacyKeyChatInvite{} }
 func (m *TLPrivacyKeyChatInvite) String() string            { return proto.CompactTextString(m) }
 func (*TLPrivacyKeyChatInvite) ProtoMessage()               {}
-func (*TLPrivacyKeyChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{502} }
+func (*TLPrivacyKeyChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{502} }
 
 // privacyKeyPhoneCall#3d662b7b = PrivacyKey;
 type TLPrivacyKeyPhoneCall struct {
@@ -38710,7 +38710,7 @@ type TLPrivacyKeyPhoneCall struct {
 func (m *TLPrivacyKeyPhoneCall) Reset()                    { *m = TLPrivacyKeyPhoneCall{} }
 func (m *TLPrivacyKeyPhoneCall) String() string            { return proto.CompactTextString(m) }
 func (*TLPrivacyKeyPhoneCall) ProtoMessage()               {}
-func (*TLPrivacyKeyPhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{503} }
+func (*TLPrivacyKeyPhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{503} }
 
 // inputPrivacyValueAllowContacts#d09e07b = InputPrivacyRule;
 type TLInputPrivacyValueAllowContacts struct {
@@ -38720,7 +38720,7 @@ func (m *TLInputPrivacyValueAllowContacts) Reset()         { *m = TLInputPrivacy
 func (m *TLInputPrivacyValueAllowContacts) String() string { return proto.CompactTextString(m) }
 func (*TLInputPrivacyValueAllowContacts) ProtoMessage()    {}
 func (*TLInputPrivacyValueAllowContacts) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{504}
+	return fileDescriptor4, []int{504}
 }
 
 // inputPrivacyValueAllowAll#184b35ce = InputPrivacyRule;
@@ -38730,7 +38730,7 @@ type TLInputPrivacyValueAllowAll struct {
 func (m *TLInputPrivacyValueAllowAll) Reset()                    { *m = TLInputPrivacyValueAllowAll{} }
 func (m *TLInputPrivacyValueAllowAll) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPrivacyValueAllowAll) ProtoMessage()               {}
-func (*TLInputPrivacyValueAllowAll) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{505} }
+func (*TLInputPrivacyValueAllowAll) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{505} }
 
 // inputPrivacyValueAllowUsers#131cc67f users:Vector<InputUser> = InputPrivacyRule;
 type TLInputPrivacyValueAllowUsers struct {
@@ -38740,7 +38740,7 @@ type TLInputPrivacyValueAllowUsers struct {
 func (m *TLInputPrivacyValueAllowUsers) Reset()                    { *m = TLInputPrivacyValueAllowUsers{} }
 func (m *TLInputPrivacyValueAllowUsers) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPrivacyValueAllowUsers) ProtoMessage()               {}
-func (*TLInputPrivacyValueAllowUsers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{506} }
+func (*TLInputPrivacyValueAllowUsers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{506} }
 
 func (m *TLInputPrivacyValueAllowUsers) GetUsers() []*InputUser {
 	if m != nil {
@@ -38757,7 +38757,7 @@ func (m *TLInputPrivacyValueDisallowContacts) Reset()         { *m = TLInputPriv
 func (m *TLInputPrivacyValueDisallowContacts) String() string { return proto.CompactTextString(m) }
 func (*TLInputPrivacyValueDisallowContacts) ProtoMessage()    {}
 func (*TLInputPrivacyValueDisallowContacts) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{507}
+	return fileDescriptor4, []int{507}
 }
 
 // inputPrivacyValueDisallowAll#d66b66c9 = InputPrivacyRule;
@@ -38768,7 +38768,7 @@ func (m *TLInputPrivacyValueDisallowAll) Reset()         { *m = TLInputPrivacyVa
 func (m *TLInputPrivacyValueDisallowAll) String() string { return proto.CompactTextString(m) }
 func (*TLInputPrivacyValueDisallowAll) ProtoMessage()    {}
 func (*TLInputPrivacyValueDisallowAll) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{508}
+	return fileDescriptor4, []int{508}
 }
 
 // inputPrivacyValueDisallowUsers#90110467 users:Vector<InputUser> = InputPrivacyRule;
@@ -38780,7 +38780,7 @@ func (m *TLInputPrivacyValueDisallowUsers) Reset()         { *m = TLInputPrivacy
 func (m *TLInputPrivacyValueDisallowUsers) String() string { return proto.CompactTextString(m) }
 func (*TLInputPrivacyValueDisallowUsers) ProtoMessage()    {}
 func (*TLInputPrivacyValueDisallowUsers) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{509}
+	return fileDescriptor4, []int{509}
 }
 
 func (m *TLInputPrivacyValueDisallowUsers) GetUsers() []*InputUser {
@@ -38797,7 +38797,7 @@ type TLPrivacyValueAllowContacts struct {
 func (m *TLPrivacyValueAllowContacts) Reset()                    { *m = TLPrivacyValueAllowContacts{} }
 func (m *TLPrivacyValueAllowContacts) String() string            { return proto.CompactTextString(m) }
 func (*TLPrivacyValueAllowContacts) ProtoMessage()               {}
-func (*TLPrivacyValueAllowContacts) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{510} }
+func (*TLPrivacyValueAllowContacts) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{510} }
 
 // privacyValueAllowAll#65427b82 = PrivacyRule;
 type TLPrivacyValueAllowAll struct {
@@ -38806,7 +38806,7 @@ type TLPrivacyValueAllowAll struct {
 func (m *TLPrivacyValueAllowAll) Reset()                    { *m = TLPrivacyValueAllowAll{} }
 func (m *TLPrivacyValueAllowAll) String() string            { return proto.CompactTextString(m) }
 func (*TLPrivacyValueAllowAll) ProtoMessage()               {}
-func (*TLPrivacyValueAllowAll) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{511} }
+func (*TLPrivacyValueAllowAll) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{511} }
 
 // privacyValueAllowUsers#4d5bbe0c users:Vector<int> = PrivacyRule;
 type TLPrivacyValueAllowUsers struct {
@@ -38816,7 +38816,7 @@ type TLPrivacyValueAllowUsers struct {
 func (m *TLPrivacyValueAllowUsers) Reset()                    { *m = TLPrivacyValueAllowUsers{} }
 func (m *TLPrivacyValueAllowUsers) String() string            { return proto.CompactTextString(m) }
 func (*TLPrivacyValueAllowUsers) ProtoMessage()               {}
-func (*TLPrivacyValueAllowUsers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{512} }
+func (*TLPrivacyValueAllowUsers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{512} }
 
 func (m *TLPrivacyValueAllowUsers) GetUsers() []int32 {
 	if m != nil {
@@ -38833,7 +38833,7 @@ func (m *TLPrivacyValueDisallowContacts) Reset()         { *m = TLPrivacyValueDi
 func (m *TLPrivacyValueDisallowContacts) String() string { return proto.CompactTextString(m) }
 func (*TLPrivacyValueDisallowContacts) ProtoMessage()    {}
 func (*TLPrivacyValueDisallowContacts) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{513}
+	return fileDescriptor4, []int{513}
 }
 
 // privacyValueDisallowAll#8b73e763 = PrivacyRule;
@@ -38843,7 +38843,7 @@ type TLPrivacyValueDisallowAll struct {
 func (m *TLPrivacyValueDisallowAll) Reset()                    { *m = TLPrivacyValueDisallowAll{} }
 func (m *TLPrivacyValueDisallowAll) String() string            { return proto.CompactTextString(m) }
 func (*TLPrivacyValueDisallowAll) ProtoMessage()               {}
-func (*TLPrivacyValueDisallowAll) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{514} }
+func (*TLPrivacyValueDisallowAll) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{514} }
 
 // privacyValueDisallowUsers#c7f49b7 users:Vector<int> = PrivacyRule;
 type TLPrivacyValueDisallowUsers struct {
@@ -38853,7 +38853,7 @@ type TLPrivacyValueDisallowUsers struct {
 func (m *TLPrivacyValueDisallowUsers) Reset()                    { *m = TLPrivacyValueDisallowUsers{} }
 func (m *TLPrivacyValueDisallowUsers) String() string            { return proto.CompactTextString(m) }
 func (*TLPrivacyValueDisallowUsers) ProtoMessage()               {}
-func (*TLPrivacyValueDisallowUsers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{515} }
+func (*TLPrivacyValueDisallowUsers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{515} }
 
 func (m *TLPrivacyValueDisallowUsers) GetUsers() []int32 {
 	if m != nil {
@@ -38871,7 +38871,7 @@ type TLAccountPrivacyRules struct {
 func (m *TLAccountPrivacyRules) Reset()                    { *m = TLAccountPrivacyRules{} }
 func (m *TLAccountPrivacyRules) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountPrivacyRules) ProtoMessage()               {}
-func (*TLAccountPrivacyRules) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{516} }
+func (*TLAccountPrivacyRules) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{516} }
 
 func (m *TLAccountPrivacyRules) GetRules() []*PrivacyRule {
 	if m != nil {
@@ -38895,7 +38895,7 @@ type TLAccountDaysTTL struct {
 func (m *TLAccountDaysTTL) Reset()                    { *m = TLAccountDaysTTL{} }
 func (m *TLAccountDaysTTL) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountDaysTTL) ProtoMessage()               {}
-func (*TLAccountDaysTTL) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{517} }
+func (*TLAccountDaysTTL) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{517} }
 
 func (m *TLAccountDaysTTL) GetDays() int32 {
 	if m != nil {
@@ -38913,7 +38913,7 @@ type TLDocumentAttributeImageSize struct {
 func (m *TLDocumentAttributeImageSize) Reset()                    { *m = TLDocumentAttributeImageSize{} }
 func (m *TLDocumentAttributeImageSize) String() string            { return proto.CompactTextString(m) }
 func (*TLDocumentAttributeImageSize) ProtoMessage()               {}
-func (*TLDocumentAttributeImageSize) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{518} }
+func (*TLDocumentAttributeImageSize) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{518} }
 
 func (m *TLDocumentAttributeImageSize) GetW() int32 {
 	if m != nil {
@@ -38936,7 +38936,7 @@ type TLDocumentAttributeAnimated struct {
 func (m *TLDocumentAttributeAnimated) Reset()                    { *m = TLDocumentAttributeAnimated{} }
 func (m *TLDocumentAttributeAnimated) String() string            { return proto.CompactTextString(m) }
 func (*TLDocumentAttributeAnimated) ProtoMessage()               {}
-func (*TLDocumentAttributeAnimated) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{519} }
+func (*TLDocumentAttributeAnimated) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{519} }
 
 // documentAttributeSticker#6319d612 flags:# mask:flags.1?true alt:string stickerset:InputStickerSet mask_coords:flags.0?MaskCoords = DocumentAttribute;
 type TLDocumentAttributeSticker struct {
@@ -38949,7 +38949,7 @@ type TLDocumentAttributeSticker struct {
 func (m *TLDocumentAttributeSticker) Reset()                    { *m = TLDocumentAttributeSticker{} }
 func (m *TLDocumentAttributeSticker) String() string            { return proto.CompactTextString(m) }
 func (*TLDocumentAttributeSticker) ProtoMessage()               {}
-func (*TLDocumentAttributeSticker) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{520} }
+func (*TLDocumentAttributeSticker) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{520} }
 
 func (m *TLDocumentAttributeSticker) GetMask() bool {
 	if m != nil {
@@ -38990,7 +38990,7 @@ type TLDocumentAttributeVideo struct {
 func (m *TLDocumentAttributeVideo) Reset()                    { *m = TLDocumentAttributeVideo{} }
 func (m *TLDocumentAttributeVideo) String() string            { return proto.CompactTextString(m) }
 func (*TLDocumentAttributeVideo) ProtoMessage()               {}
-func (*TLDocumentAttributeVideo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{521} }
+func (*TLDocumentAttributeVideo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{521} }
 
 func (m *TLDocumentAttributeVideo) GetRoundMessage() bool {
 	if m != nil {
@@ -39032,7 +39032,7 @@ type TLDocumentAttributeAudio struct {
 func (m *TLDocumentAttributeAudio) Reset()                    { *m = TLDocumentAttributeAudio{} }
 func (m *TLDocumentAttributeAudio) String() string            { return proto.CompactTextString(m) }
 func (*TLDocumentAttributeAudio) ProtoMessage()               {}
-func (*TLDocumentAttributeAudio) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{522} }
+func (*TLDocumentAttributeAudio) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{522} }
 
 func (m *TLDocumentAttributeAudio) GetVoice() bool {
 	if m != nil {
@@ -39077,7 +39077,7 @@ type TLDocumentAttributeFilename struct {
 func (m *TLDocumentAttributeFilename) Reset()                    { *m = TLDocumentAttributeFilename{} }
 func (m *TLDocumentAttributeFilename) String() string            { return proto.CompactTextString(m) }
 func (*TLDocumentAttributeFilename) ProtoMessage()               {}
-func (*TLDocumentAttributeFilename) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{523} }
+func (*TLDocumentAttributeFilename) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{523} }
 
 func (m *TLDocumentAttributeFilename) GetFileName() string {
 	if m != nil {
@@ -39094,7 +39094,7 @@ func (m *TLDocumentAttributeHasStickers) Reset()         { *m = TLDocumentAttrib
 func (m *TLDocumentAttributeHasStickers) String() string { return proto.CompactTextString(m) }
 func (*TLDocumentAttributeHasStickers) ProtoMessage()    {}
 func (*TLDocumentAttributeHasStickers) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{524}
+	return fileDescriptor4, []int{524}
 }
 
 // messages.stickersNotModified#f1749a22 = messages.Stickers;
@@ -39104,7 +39104,7 @@ type TLMessagesStickersNotModified struct {
 func (m *TLMessagesStickersNotModified) Reset()                    { *m = TLMessagesStickersNotModified{} }
 func (m *TLMessagesStickersNotModified) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesStickersNotModified) ProtoMessage()               {}
-func (*TLMessagesStickersNotModified) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{525} }
+func (*TLMessagesStickersNotModified) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{525} }
 
 // messages.stickers#8a8ecd32 hash:string stickers:Vector<Document> = messages.Stickers;
 type TLMessagesStickers struct {
@@ -39115,7 +39115,7 @@ type TLMessagesStickers struct {
 func (m *TLMessagesStickers) Reset()                    { *m = TLMessagesStickers{} }
 func (m *TLMessagesStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesStickers) ProtoMessage()               {}
-func (*TLMessagesStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{526} }
+func (*TLMessagesStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{526} }
 
 func (m *TLMessagesStickers) GetHash() string {
 	if m != nil {
@@ -39140,7 +39140,7 @@ type TLStickerPack struct {
 func (m *TLStickerPack) Reset()                    { *m = TLStickerPack{} }
 func (m *TLStickerPack) String() string            { return proto.CompactTextString(m) }
 func (*TLStickerPack) ProtoMessage()               {}
-func (*TLStickerPack) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{527} }
+func (*TLStickerPack) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{527} }
 
 func (m *TLStickerPack) GetEmoticon() string {
 	if m != nil {
@@ -39164,7 +39164,7 @@ func (m *TLMessagesAllStickersNotModified) Reset()         { *m = TLMessagesAllS
 func (m *TLMessagesAllStickersNotModified) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesAllStickersNotModified) ProtoMessage()    {}
 func (*TLMessagesAllStickersNotModified) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{528}
+	return fileDescriptor4, []int{528}
 }
 
 // messages.allStickers#edfd405f hash:int sets:Vector<StickerSet> = messages.AllStickers;
@@ -39176,7 +39176,7 @@ type TLMessagesAllStickers struct {
 func (m *TLMessagesAllStickers) Reset()                    { *m = TLMessagesAllStickers{} }
 func (m *TLMessagesAllStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesAllStickers) ProtoMessage()               {}
-func (*TLMessagesAllStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{529} }
+func (*TLMessagesAllStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{529} }
 
 func (m *TLMessagesAllStickers) GetHash() int32 {
 	if m != nil {
@@ -39201,7 +39201,7 @@ type TLDisabledFeature struct {
 func (m *TLDisabledFeature) Reset()                    { *m = TLDisabledFeature{} }
 func (m *TLDisabledFeature) String() string            { return proto.CompactTextString(m) }
 func (*TLDisabledFeature) ProtoMessage()               {}
-func (*TLDisabledFeature) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{530} }
+func (*TLDisabledFeature) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{530} }
 
 func (m *TLDisabledFeature) GetFeature() string {
 	if m != nil {
@@ -39226,7 +39226,7 @@ type TLMessagesAffectedMessages struct {
 func (m *TLMessagesAffectedMessages) Reset()                    { *m = TLMessagesAffectedMessages{} }
 func (m *TLMessagesAffectedMessages) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesAffectedMessages) ProtoMessage()               {}
-func (*TLMessagesAffectedMessages) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{531} }
+func (*TLMessagesAffectedMessages) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{531} }
 
 func (m *TLMessagesAffectedMessages) GetPts() int32 {
 	if m != nil {
@@ -39249,7 +39249,7 @@ type TLContactLinkUnknown struct {
 func (m *TLContactLinkUnknown) Reset()                    { *m = TLContactLinkUnknown{} }
 func (m *TLContactLinkUnknown) String() string            { return proto.CompactTextString(m) }
 func (*TLContactLinkUnknown) ProtoMessage()               {}
-func (*TLContactLinkUnknown) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{532} }
+func (*TLContactLinkUnknown) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{532} }
 
 // contactLinkNone#feedd3ad = ContactLink;
 type TLContactLinkNone struct {
@@ -39258,7 +39258,7 @@ type TLContactLinkNone struct {
 func (m *TLContactLinkNone) Reset()                    { *m = TLContactLinkNone{} }
 func (m *TLContactLinkNone) String() string            { return proto.CompactTextString(m) }
 func (*TLContactLinkNone) ProtoMessage()               {}
-func (*TLContactLinkNone) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{533} }
+func (*TLContactLinkNone) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{533} }
 
 // contactLinkHasPhone#268f3f59 = ContactLink;
 type TLContactLinkHasPhone struct {
@@ -39267,7 +39267,7 @@ type TLContactLinkHasPhone struct {
 func (m *TLContactLinkHasPhone) Reset()                    { *m = TLContactLinkHasPhone{} }
 func (m *TLContactLinkHasPhone) String() string            { return proto.CompactTextString(m) }
 func (*TLContactLinkHasPhone) ProtoMessage()               {}
-func (*TLContactLinkHasPhone) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{534} }
+func (*TLContactLinkHasPhone) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{534} }
 
 // contactLinkContact#d502c2d0 = ContactLink;
 type TLContactLinkContact struct {
@@ -39276,7 +39276,7 @@ type TLContactLinkContact struct {
 func (m *TLContactLinkContact) Reset()                    { *m = TLContactLinkContact{} }
 func (m *TLContactLinkContact) String() string            { return proto.CompactTextString(m) }
 func (*TLContactLinkContact) ProtoMessage()               {}
-func (*TLContactLinkContact) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{535} }
+func (*TLContactLinkContact) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{535} }
 
 // webPageEmpty#eb1477e8 id:long = WebPage;
 type TLWebPageEmpty struct {
@@ -39286,7 +39286,7 @@ type TLWebPageEmpty struct {
 func (m *TLWebPageEmpty) Reset()                    { *m = TLWebPageEmpty{} }
 func (m *TLWebPageEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLWebPageEmpty) ProtoMessage()               {}
-func (*TLWebPageEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{536} }
+func (*TLWebPageEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{536} }
 
 func (m *TLWebPageEmpty) GetId() int64 {
 	if m != nil {
@@ -39304,7 +39304,7 @@ type TLWebPagePending struct {
 func (m *TLWebPagePending) Reset()                    { *m = TLWebPagePending{} }
 func (m *TLWebPagePending) String() string            { return proto.CompactTextString(m) }
 func (*TLWebPagePending) ProtoMessage()               {}
-func (*TLWebPagePending) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{537} }
+func (*TLWebPagePending) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{537} }
 
 func (m *TLWebPagePending) GetId() int64 {
 	if m != nil {
@@ -39344,7 +39344,7 @@ type TLWebPage struct {
 func (m *TLWebPage) Reset()                    { *m = TLWebPage{} }
 func (m *TLWebPage) String() string            { return proto.CompactTextString(m) }
 func (*TLWebPage) ProtoMessage()               {}
-func (*TLWebPage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{538} }
+func (*TLWebPage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{538} }
 
 func (m *TLWebPage) GetId() int64 {
 	if m != nil {
@@ -39472,7 +39472,7 @@ type TLWebPageNotModified struct {
 func (m *TLWebPageNotModified) Reset()                    { *m = TLWebPageNotModified{} }
 func (m *TLWebPageNotModified) String() string            { return proto.CompactTextString(m) }
 func (*TLWebPageNotModified) ProtoMessage()               {}
-func (*TLWebPageNotModified) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{539} }
+func (*TLWebPageNotModified) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{539} }
 
 // authorization#7bf2e6f6 hash:long flags:int device_model:string platform:string system_version:string api_id:int app_name:string app_version:string date_created:int date_active:int ip:string country:string region:string = Authorization;
 type TLAuthorization struct {
@@ -39493,7 +39493,7 @@ type TLAuthorization struct {
 func (m *TLAuthorization) Reset()                    { *m = TLAuthorization{} }
 func (m *TLAuthorization) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthorization) ProtoMessage()               {}
-func (*TLAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{540} }
+func (*TLAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{540} }
 
 func (m *TLAuthorization) GetHash() int64 {
 	if m != nil {
@@ -39587,7 +39587,7 @@ type TLAccountAuthorizations struct {
 func (m *TLAccountAuthorizations) Reset()                    { *m = TLAccountAuthorizations{} }
 func (m *TLAccountAuthorizations) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountAuthorizations) ProtoMessage()               {}
-func (*TLAccountAuthorizations) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{541} }
+func (*TLAccountAuthorizations) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{541} }
 
 func (m *TLAccountAuthorizations) GetAuthorizations() []*Authorization {
 	if m != nil {
@@ -39605,7 +39605,7 @@ type TLAccountNoPassword struct {
 func (m *TLAccountNoPassword) Reset()                    { *m = TLAccountNoPassword{} }
 func (m *TLAccountNoPassword) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountNoPassword) ProtoMessage()               {}
-func (*TLAccountNoPassword) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{542} }
+func (*TLAccountNoPassword) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{542} }
 
 func (m *TLAccountNoPassword) GetNewSalt() []byte {
 	if m != nil {
@@ -39633,7 +39633,7 @@ type TLAccountPassword struct {
 func (m *TLAccountPassword) Reset()                    { *m = TLAccountPassword{} }
 func (m *TLAccountPassword) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountPassword) ProtoMessage()               {}
-func (*TLAccountPassword) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{543} }
+func (*TLAccountPassword) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{543} }
 
 func (m *TLAccountPassword) GetCurrentSalt() []byte {
 	if m != nil {
@@ -39678,7 +39678,7 @@ type TLAccountPasswordSettings struct {
 func (m *TLAccountPasswordSettings) Reset()                    { *m = TLAccountPasswordSettings{} }
 func (m *TLAccountPasswordSettings) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountPasswordSettings) ProtoMessage()               {}
-func (*TLAccountPasswordSettings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{544} }
+func (*TLAccountPasswordSettings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{544} }
 
 func (m *TLAccountPasswordSettings) GetEmail() string {
 	if m != nil {
@@ -39699,7 +39699,7 @@ func (m *TLAccountPasswordInputSettings) Reset()         { *m = TLAccountPasswor
 func (m *TLAccountPasswordInputSettings) String() string { return proto.CompactTextString(m) }
 func (*TLAccountPasswordInputSettings) ProtoMessage()    {}
 func (*TLAccountPasswordInputSettings) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{545}
+	return fileDescriptor4, []int{545}
 }
 
 func (m *TLAccountPasswordInputSettings) GetNewSalt() []byte {
@@ -39738,7 +39738,7 @@ type TLAuthPasswordRecovery struct {
 func (m *TLAuthPasswordRecovery) Reset()                    { *m = TLAuthPasswordRecovery{} }
 func (m *TLAuthPasswordRecovery) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthPasswordRecovery) ProtoMessage()               {}
-func (*TLAuthPasswordRecovery) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{546} }
+func (*TLAuthPasswordRecovery) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{546} }
 
 func (m *TLAuthPasswordRecovery) GetEmailPattern() string {
 	if m != nil {
@@ -39755,7 +39755,7 @@ type TLReceivedNotifyMessage struct {
 func (m *TLReceivedNotifyMessage) Reset()                    { *m = TLReceivedNotifyMessage{} }
 func (m *TLReceivedNotifyMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLReceivedNotifyMessage) ProtoMessage()               {}
-func (*TLReceivedNotifyMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{547} }
+func (*TLReceivedNotifyMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{547} }
 
 func (m *TLReceivedNotifyMessage) GetId() int32 {
 	if m != nil {
@@ -39771,7 +39771,7 @@ type TLChatInviteEmpty struct {
 func (m *TLChatInviteEmpty) Reset()                    { *m = TLChatInviteEmpty{} }
 func (m *TLChatInviteEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLChatInviteEmpty) ProtoMessage()               {}
-func (*TLChatInviteEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{548} }
+func (*TLChatInviteEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{548} }
 
 // chatInviteExported#fc2e05bc link:string = ExportedChatInvite;
 type TLChatInviteExported struct {
@@ -39781,7 +39781,7 @@ type TLChatInviteExported struct {
 func (m *TLChatInviteExported) Reset()                    { *m = TLChatInviteExported{} }
 func (m *TLChatInviteExported) String() string            { return proto.CompactTextString(m) }
 func (*TLChatInviteExported) ProtoMessage()               {}
-func (*TLChatInviteExported) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{549} }
+func (*TLChatInviteExported) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{549} }
 
 func (m *TLChatInviteExported) GetLink() string {
 	if m != nil {
@@ -39798,7 +39798,7 @@ type TLChatInviteAlready struct {
 func (m *TLChatInviteAlready) Reset()                    { *m = TLChatInviteAlready{} }
 func (m *TLChatInviteAlready) String() string            { return proto.CompactTextString(m) }
 func (*TLChatInviteAlready) ProtoMessage()               {}
-func (*TLChatInviteAlready) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{550} }
+func (*TLChatInviteAlready) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{550} }
 
 func (m *TLChatInviteAlready) GetChat() *Chat {
 	if m != nil {
@@ -39822,7 +39822,7 @@ type TLChatInvite struct {
 func (m *TLChatInvite) Reset()                    { *m = TLChatInvite{} }
 func (m *TLChatInvite) String() string            { return proto.CompactTextString(m) }
 func (*TLChatInvite) ProtoMessage()               {}
-func (*TLChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{551} }
+func (*TLChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{551} }
 
 func (m *TLChatInvite) GetChannel() bool {
 	if m != nil {
@@ -39887,7 +39887,7 @@ type TLInputStickerSetEmpty struct {
 func (m *TLInputStickerSetEmpty) Reset()                    { *m = TLInputStickerSetEmpty{} }
 func (m *TLInputStickerSetEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLInputStickerSetEmpty) ProtoMessage()               {}
-func (*TLInputStickerSetEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{552} }
+func (*TLInputStickerSetEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{552} }
 
 // inputStickerSetID#9de7a269 id:long access_hash:long = InputStickerSet;
 type TLInputStickerSetID struct {
@@ -39898,7 +39898,7 @@ type TLInputStickerSetID struct {
 func (m *TLInputStickerSetID) Reset()                    { *m = TLInputStickerSetID{} }
 func (m *TLInputStickerSetID) String() string            { return proto.CompactTextString(m) }
 func (*TLInputStickerSetID) ProtoMessage()               {}
-func (*TLInputStickerSetID) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{553} }
+func (*TLInputStickerSetID) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{553} }
 
 func (m *TLInputStickerSetID) GetId() int64 {
 	if m != nil {
@@ -39922,7 +39922,7 @@ type TLInputStickerSetShortName struct {
 func (m *TLInputStickerSetShortName) Reset()                    { *m = TLInputStickerSetShortName{} }
 func (m *TLInputStickerSetShortName) String() string            { return proto.CompactTextString(m) }
 func (*TLInputStickerSetShortName) ProtoMessage()               {}
-func (*TLInputStickerSetShortName) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{554} }
+func (*TLInputStickerSetShortName) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{554} }
 
 func (m *TLInputStickerSetShortName) GetShortName() string {
 	if m != nil {
@@ -39948,7 +39948,7 @@ type TLStickerSet struct {
 func (m *TLStickerSet) Reset()                    { *m = TLStickerSet{} }
 func (m *TLStickerSet) String() string            { return proto.CompactTextString(m) }
 func (*TLStickerSet) ProtoMessage()               {}
-func (*TLStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{555} }
+func (*TLStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{555} }
 
 func (m *TLStickerSet) GetInstalled() bool {
 	if m != nil {
@@ -40030,7 +40030,7 @@ type TLMessagesStickerSet struct {
 func (m *TLMessagesStickerSet) Reset()                    { *m = TLMessagesStickerSet{} }
 func (m *TLMessagesStickerSet) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesStickerSet) ProtoMessage()               {}
-func (*TLMessagesStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{556} }
+func (*TLMessagesStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{556} }
 
 func (m *TLMessagesStickerSet) GetSet() *StickerSet {
 	if m != nil {
@@ -40062,7 +40062,7 @@ type TLBotCommand struct {
 func (m *TLBotCommand) Reset()                    { *m = TLBotCommand{} }
 func (m *TLBotCommand) String() string            { return proto.CompactTextString(m) }
 func (*TLBotCommand) ProtoMessage()               {}
-func (*TLBotCommand) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{557} }
+func (*TLBotCommand) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{557} }
 
 func (m *TLBotCommand) GetCommand() string {
 	if m != nil {
@@ -40088,7 +40088,7 @@ type TLBotInfo struct {
 func (m *TLBotInfo) Reset()                    { *m = TLBotInfo{} }
 func (m *TLBotInfo) String() string            { return proto.CompactTextString(m) }
 func (*TLBotInfo) ProtoMessage()               {}
-func (*TLBotInfo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{558} }
+func (*TLBotInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{558} }
 
 func (m *TLBotInfo) GetUserId() int32 {
 	if m != nil {
@@ -40119,7 +40119,7 @@ type TLKeyboardButton struct {
 func (m *TLKeyboardButton) Reset()                    { *m = TLKeyboardButton{} }
 func (m *TLKeyboardButton) String() string            { return proto.CompactTextString(m) }
 func (*TLKeyboardButton) ProtoMessage()               {}
-func (*TLKeyboardButton) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{559} }
+func (*TLKeyboardButton) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{559} }
 
 func (m *TLKeyboardButton) GetText() string {
 	if m != nil {
@@ -40137,7 +40137,7 @@ type TLKeyboardButtonUrl struct {
 func (m *TLKeyboardButtonUrl) Reset()                    { *m = TLKeyboardButtonUrl{} }
 func (m *TLKeyboardButtonUrl) String() string            { return proto.CompactTextString(m) }
 func (*TLKeyboardButtonUrl) ProtoMessage()               {}
-func (*TLKeyboardButtonUrl) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{560} }
+func (*TLKeyboardButtonUrl) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{560} }
 
 func (m *TLKeyboardButtonUrl) GetText() string {
 	if m != nil {
@@ -40162,7 +40162,7 @@ type TLKeyboardButtonCallback struct {
 func (m *TLKeyboardButtonCallback) Reset()                    { *m = TLKeyboardButtonCallback{} }
 func (m *TLKeyboardButtonCallback) String() string            { return proto.CompactTextString(m) }
 func (*TLKeyboardButtonCallback) ProtoMessage()               {}
-func (*TLKeyboardButtonCallback) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{561} }
+func (*TLKeyboardButtonCallback) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{561} }
 
 func (m *TLKeyboardButtonCallback) GetText() string {
 	if m != nil {
@@ -40186,7 +40186,7 @@ type TLKeyboardButtonRequestPhone struct {
 func (m *TLKeyboardButtonRequestPhone) Reset()                    { *m = TLKeyboardButtonRequestPhone{} }
 func (m *TLKeyboardButtonRequestPhone) String() string            { return proto.CompactTextString(m) }
 func (*TLKeyboardButtonRequestPhone) ProtoMessage()               {}
-func (*TLKeyboardButtonRequestPhone) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{562} }
+func (*TLKeyboardButtonRequestPhone) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{562} }
 
 func (m *TLKeyboardButtonRequestPhone) GetText() string {
 	if m != nil {
@@ -40204,7 +40204,7 @@ func (m *TLKeyboardButtonRequestGeoLocation) Reset()         { *m = TLKeyboardBu
 func (m *TLKeyboardButtonRequestGeoLocation) String() string { return proto.CompactTextString(m) }
 func (*TLKeyboardButtonRequestGeoLocation) ProtoMessage()    {}
 func (*TLKeyboardButtonRequestGeoLocation) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{563}
+	return fileDescriptor4, []int{563}
 }
 
 func (m *TLKeyboardButtonRequestGeoLocation) GetText() string {
@@ -40224,7 +40224,7 @@ type TLKeyboardButtonSwitchInline struct {
 func (m *TLKeyboardButtonSwitchInline) Reset()                    { *m = TLKeyboardButtonSwitchInline{} }
 func (m *TLKeyboardButtonSwitchInline) String() string            { return proto.CompactTextString(m) }
 func (*TLKeyboardButtonSwitchInline) ProtoMessage()               {}
-func (*TLKeyboardButtonSwitchInline) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{564} }
+func (*TLKeyboardButtonSwitchInline) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{564} }
 
 func (m *TLKeyboardButtonSwitchInline) GetSamePeer() bool {
 	if m != nil {
@@ -40255,7 +40255,7 @@ type TLKeyboardButtonGame struct {
 func (m *TLKeyboardButtonGame) Reset()                    { *m = TLKeyboardButtonGame{} }
 func (m *TLKeyboardButtonGame) String() string            { return proto.CompactTextString(m) }
 func (*TLKeyboardButtonGame) ProtoMessage()               {}
-func (*TLKeyboardButtonGame) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{565} }
+func (*TLKeyboardButtonGame) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{565} }
 
 func (m *TLKeyboardButtonGame) GetText() string {
 	if m != nil {
@@ -40272,7 +40272,7 @@ type TLKeyboardButtonBuy struct {
 func (m *TLKeyboardButtonBuy) Reset()                    { *m = TLKeyboardButtonBuy{} }
 func (m *TLKeyboardButtonBuy) String() string            { return proto.CompactTextString(m) }
 func (*TLKeyboardButtonBuy) ProtoMessage()               {}
-func (*TLKeyboardButtonBuy) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{566} }
+func (*TLKeyboardButtonBuy) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{566} }
 
 func (m *TLKeyboardButtonBuy) GetText() string {
 	if m != nil {
@@ -40289,7 +40289,7 @@ type TLKeyboardButtonRow struct {
 func (m *TLKeyboardButtonRow) Reset()                    { *m = TLKeyboardButtonRow{} }
 func (m *TLKeyboardButtonRow) String() string            { return proto.CompactTextString(m) }
 func (*TLKeyboardButtonRow) ProtoMessage()               {}
-func (*TLKeyboardButtonRow) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{567} }
+func (*TLKeyboardButtonRow) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{567} }
 
 func (m *TLKeyboardButtonRow) GetButtons() []*KeyboardButton {
 	if m != nil {
@@ -40306,7 +40306,7 @@ type TLReplyKeyboardHide struct {
 func (m *TLReplyKeyboardHide) Reset()                    { *m = TLReplyKeyboardHide{} }
 func (m *TLReplyKeyboardHide) String() string            { return proto.CompactTextString(m) }
 func (*TLReplyKeyboardHide) ProtoMessage()               {}
-func (*TLReplyKeyboardHide) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{568} }
+func (*TLReplyKeyboardHide) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{568} }
 
 func (m *TLReplyKeyboardHide) GetSelective() bool {
 	if m != nil {
@@ -40324,7 +40324,7 @@ type TLReplyKeyboardForceReply struct {
 func (m *TLReplyKeyboardForceReply) Reset()                    { *m = TLReplyKeyboardForceReply{} }
 func (m *TLReplyKeyboardForceReply) String() string            { return proto.CompactTextString(m) }
 func (*TLReplyKeyboardForceReply) ProtoMessage()               {}
-func (*TLReplyKeyboardForceReply) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{569} }
+func (*TLReplyKeyboardForceReply) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{569} }
 
 func (m *TLReplyKeyboardForceReply) GetSingleUse() bool {
 	if m != nil {
@@ -40351,7 +40351,7 @@ type TLReplyKeyboardMarkup struct {
 func (m *TLReplyKeyboardMarkup) Reset()                    { *m = TLReplyKeyboardMarkup{} }
 func (m *TLReplyKeyboardMarkup) String() string            { return proto.CompactTextString(m) }
 func (*TLReplyKeyboardMarkup) ProtoMessage()               {}
-func (*TLReplyKeyboardMarkup) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{570} }
+func (*TLReplyKeyboardMarkup) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{570} }
 
 func (m *TLReplyKeyboardMarkup) GetResize() bool {
 	if m != nil {
@@ -40389,7 +40389,7 @@ type TLReplyInlineMarkup struct {
 func (m *TLReplyInlineMarkup) Reset()                    { *m = TLReplyInlineMarkup{} }
 func (m *TLReplyInlineMarkup) String() string            { return proto.CompactTextString(m) }
 func (*TLReplyInlineMarkup) ProtoMessage()               {}
-func (*TLReplyInlineMarkup) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{571} }
+func (*TLReplyInlineMarkup) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{571} }
 
 func (m *TLReplyInlineMarkup) GetRows() []*KeyboardButtonRow {
 	if m != nil {
@@ -40407,7 +40407,7 @@ type TLMessageEntityUnknown struct {
 func (m *TLMessageEntityUnknown) Reset()                    { *m = TLMessageEntityUnknown{} }
 func (m *TLMessageEntityUnknown) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageEntityUnknown) ProtoMessage()               {}
-func (*TLMessageEntityUnknown) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{572} }
+func (*TLMessageEntityUnknown) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{572} }
 
 func (m *TLMessageEntityUnknown) GetOffset() int32 {
 	if m != nil {
@@ -40432,7 +40432,7 @@ type TLMessageEntityMention struct {
 func (m *TLMessageEntityMention) Reset()                    { *m = TLMessageEntityMention{} }
 func (m *TLMessageEntityMention) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageEntityMention) ProtoMessage()               {}
-func (*TLMessageEntityMention) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{573} }
+func (*TLMessageEntityMention) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{573} }
 
 func (m *TLMessageEntityMention) GetOffset() int32 {
 	if m != nil {
@@ -40457,7 +40457,7 @@ type TLMessageEntityHashtag struct {
 func (m *TLMessageEntityHashtag) Reset()                    { *m = TLMessageEntityHashtag{} }
 func (m *TLMessageEntityHashtag) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageEntityHashtag) ProtoMessage()               {}
-func (*TLMessageEntityHashtag) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{574} }
+func (*TLMessageEntityHashtag) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{574} }
 
 func (m *TLMessageEntityHashtag) GetOffset() int32 {
 	if m != nil {
@@ -40482,7 +40482,7 @@ type TLMessageEntityBotCommand struct {
 func (m *TLMessageEntityBotCommand) Reset()                    { *m = TLMessageEntityBotCommand{} }
 func (m *TLMessageEntityBotCommand) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageEntityBotCommand) ProtoMessage()               {}
-func (*TLMessageEntityBotCommand) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{575} }
+func (*TLMessageEntityBotCommand) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{575} }
 
 func (m *TLMessageEntityBotCommand) GetOffset() int32 {
 	if m != nil {
@@ -40507,7 +40507,7 @@ type TLMessageEntityUrl struct {
 func (m *TLMessageEntityUrl) Reset()                    { *m = TLMessageEntityUrl{} }
 func (m *TLMessageEntityUrl) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageEntityUrl) ProtoMessage()               {}
-func (*TLMessageEntityUrl) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{576} }
+func (*TLMessageEntityUrl) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{576} }
 
 func (m *TLMessageEntityUrl) GetOffset() int32 {
 	if m != nil {
@@ -40532,7 +40532,7 @@ type TLMessageEntityEmail struct {
 func (m *TLMessageEntityEmail) Reset()                    { *m = TLMessageEntityEmail{} }
 func (m *TLMessageEntityEmail) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageEntityEmail) ProtoMessage()               {}
-func (*TLMessageEntityEmail) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{577} }
+func (*TLMessageEntityEmail) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{577} }
 
 func (m *TLMessageEntityEmail) GetOffset() int32 {
 	if m != nil {
@@ -40557,7 +40557,7 @@ type TLMessageEntityBold struct {
 func (m *TLMessageEntityBold) Reset()                    { *m = TLMessageEntityBold{} }
 func (m *TLMessageEntityBold) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageEntityBold) ProtoMessage()               {}
-func (*TLMessageEntityBold) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{578} }
+func (*TLMessageEntityBold) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{578} }
 
 func (m *TLMessageEntityBold) GetOffset() int32 {
 	if m != nil {
@@ -40582,7 +40582,7 @@ type TLMessageEntityItalic struct {
 func (m *TLMessageEntityItalic) Reset()                    { *m = TLMessageEntityItalic{} }
 func (m *TLMessageEntityItalic) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageEntityItalic) ProtoMessage()               {}
-func (*TLMessageEntityItalic) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{579} }
+func (*TLMessageEntityItalic) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{579} }
 
 func (m *TLMessageEntityItalic) GetOffset() int32 {
 	if m != nil {
@@ -40607,7 +40607,7 @@ type TLMessageEntityCode struct {
 func (m *TLMessageEntityCode) Reset()                    { *m = TLMessageEntityCode{} }
 func (m *TLMessageEntityCode) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageEntityCode) ProtoMessage()               {}
-func (*TLMessageEntityCode) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{580} }
+func (*TLMessageEntityCode) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{580} }
 
 func (m *TLMessageEntityCode) GetOffset() int32 {
 	if m != nil {
@@ -40633,7 +40633,7 @@ type TLMessageEntityPre struct {
 func (m *TLMessageEntityPre) Reset()                    { *m = TLMessageEntityPre{} }
 func (m *TLMessageEntityPre) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageEntityPre) ProtoMessage()               {}
-func (*TLMessageEntityPre) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{581} }
+func (*TLMessageEntityPre) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{581} }
 
 func (m *TLMessageEntityPre) GetOffset() int32 {
 	if m != nil {
@@ -40666,7 +40666,7 @@ type TLMessageEntityTextUrl struct {
 func (m *TLMessageEntityTextUrl) Reset()                    { *m = TLMessageEntityTextUrl{} }
 func (m *TLMessageEntityTextUrl) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageEntityTextUrl) ProtoMessage()               {}
-func (*TLMessageEntityTextUrl) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{582} }
+func (*TLMessageEntityTextUrl) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{582} }
 
 func (m *TLMessageEntityTextUrl) GetOffset() int32 {
 	if m != nil {
@@ -40699,7 +40699,7 @@ type TLMessageEntityMentionName struct {
 func (m *TLMessageEntityMentionName) Reset()                    { *m = TLMessageEntityMentionName{} }
 func (m *TLMessageEntityMentionName) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageEntityMentionName) ProtoMessage()               {}
-func (*TLMessageEntityMentionName) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{583} }
+func (*TLMessageEntityMentionName) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{583} }
 
 func (m *TLMessageEntityMentionName) GetOffset() int32 {
 	if m != nil {
@@ -40733,7 +40733,7 @@ func (m *TLInputMessageEntityMentionName) Reset()         { *m = TLInputMessageE
 func (m *TLInputMessageEntityMentionName) String() string { return proto.CompactTextString(m) }
 func (*TLInputMessageEntityMentionName) ProtoMessage()    {}
 func (*TLInputMessageEntityMentionName) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{584}
+	return fileDescriptor4, []int{584}
 }
 
 func (m *TLInputMessageEntityMentionName) GetOffset() int32 {
@@ -40764,7 +40764,7 @@ type TLInputChannelEmpty struct {
 func (m *TLInputChannelEmpty) Reset()                    { *m = TLInputChannelEmpty{} }
 func (m *TLInputChannelEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLInputChannelEmpty) ProtoMessage()               {}
-func (*TLInputChannelEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{585} }
+func (*TLInputChannelEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{585} }
 
 // inputChannel#afeb712e channel_id:int access_hash:long = InputChannel;
 type TLInputChannel struct {
@@ -40775,7 +40775,7 @@ type TLInputChannel struct {
 func (m *TLInputChannel) Reset()                    { *m = TLInputChannel{} }
 func (m *TLInputChannel) String() string            { return proto.CompactTextString(m) }
 func (*TLInputChannel) ProtoMessage()               {}
-func (*TLInputChannel) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{586} }
+func (*TLInputChannel) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{586} }
 
 func (m *TLInputChannel) GetChannelId() int32 {
 	if m != nil {
@@ -40801,7 +40801,7 @@ type TLContactsResolvedPeer struct {
 func (m *TLContactsResolvedPeer) Reset()                    { *m = TLContactsResolvedPeer{} }
 func (m *TLContactsResolvedPeer) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsResolvedPeer) ProtoMessage()               {}
-func (*TLContactsResolvedPeer) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{587} }
+func (*TLContactsResolvedPeer) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{587} }
 
 func (m *TLContactsResolvedPeer) GetPeer() *Peer {
 	if m != nil {
@@ -40833,7 +40833,7 @@ type TLMessageRange struct {
 func (m *TLMessageRange) Reset()                    { *m = TLMessageRange{} }
 func (m *TLMessageRange) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageRange) ProtoMessage()               {}
-func (*TLMessageRange) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{588} }
+func (*TLMessageRange) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{588} }
 
 func (m *TLMessageRange) GetMinId() int32 {
 	if m != nil {
@@ -40860,7 +40860,7 @@ func (m *TLUpdatesChannelDifferenceEmpty) Reset()         { *m = TLUpdatesChanne
 func (m *TLUpdatesChannelDifferenceEmpty) String() string { return proto.CompactTextString(m) }
 func (*TLUpdatesChannelDifferenceEmpty) ProtoMessage()    {}
 func (*TLUpdatesChannelDifferenceEmpty) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{589}
+	return fileDescriptor4, []int{589}
 }
 
 func (m *TLUpdatesChannelDifferenceEmpty) GetFinal() bool {
@@ -40903,7 +40903,7 @@ func (m *TLUpdatesChannelDifferenceTooLong) Reset()         { *m = TLUpdatesChan
 func (m *TLUpdatesChannelDifferenceTooLong) String() string { return proto.CompactTextString(m) }
 func (*TLUpdatesChannelDifferenceTooLong) ProtoMessage()    {}
 func (*TLUpdatesChannelDifferenceTooLong) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{590}
+	return fileDescriptor4, []int{590}
 }
 
 func (m *TLUpdatesChannelDifferenceTooLong) GetFinal() bool {
@@ -40997,7 +40997,7 @@ type TLUpdatesChannelDifference struct {
 func (m *TLUpdatesChannelDifference) Reset()                    { *m = TLUpdatesChannelDifference{} }
 func (m *TLUpdatesChannelDifference) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdatesChannelDifference) ProtoMessage()               {}
-func (*TLUpdatesChannelDifference) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{591} }
+func (*TLUpdatesChannelDifference) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{591} }
 
 func (m *TLUpdatesChannelDifference) GetFinal() bool {
 	if m != nil {
@@ -41055,7 +41055,7 @@ type TLChannelMessagesFilterEmpty struct {
 func (m *TLChannelMessagesFilterEmpty) Reset()                    { *m = TLChannelMessagesFilterEmpty{} }
 func (m *TLChannelMessagesFilterEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelMessagesFilterEmpty) ProtoMessage()               {}
-func (*TLChannelMessagesFilterEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{592} }
+func (*TLChannelMessagesFilterEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{592} }
 
 // channelMessagesFilter#cd77d957 flags:# exclude_new_messages:flags.1?true ranges:Vector<MessageRange> = ChannelMessagesFilter;
 type TLChannelMessagesFilter struct {
@@ -41066,7 +41066,7 @@ type TLChannelMessagesFilter struct {
 func (m *TLChannelMessagesFilter) Reset()                    { *m = TLChannelMessagesFilter{} }
 func (m *TLChannelMessagesFilter) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelMessagesFilter) ProtoMessage()               {}
-func (*TLChannelMessagesFilter) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{593} }
+func (*TLChannelMessagesFilter) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{593} }
 
 func (m *TLChannelMessagesFilter) GetExcludeNewMessages() bool {
 	if m != nil {
@@ -41091,7 +41091,7 @@ type TLChannelParticipant struct {
 func (m *TLChannelParticipant) Reset()                    { *m = TLChannelParticipant{} }
 func (m *TLChannelParticipant) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelParticipant) ProtoMessage()               {}
-func (*TLChannelParticipant) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{594} }
+func (*TLChannelParticipant) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{594} }
 
 func (m *TLChannelParticipant) GetUserId() int32 {
 	if m != nil {
@@ -41117,7 +41117,7 @@ type TLChannelParticipantSelf struct {
 func (m *TLChannelParticipantSelf) Reset()                    { *m = TLChannelParticipantSelf{} }
 func (m *TLChannelParticipantSelf) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelParticipantSelf) ProtoMessage()               {}
-func (*TLChannelParticipantSelf) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{595} }
+func (*TLChannelParticipantSelf) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{595} }
 
 func (m *TLChannelParticipantSelf) GetUserId() int32 {
 	if m != nil {
@@ -41148,7 +41148,7 @@ type TLChannelParticipantCreator struct {
 func (m *TLChannelParticipantCreator) Reset()                    { *m = TLChannelParticipantCreator{} }
 func (m *TLChannelParticipantCreator) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelParticipantCreator) ProtoMessage()               {}
-func (*TLChannelParticipantCreator) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{596} }
+func (*TLChannelParticipantCreator) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{596} }
 
 func (m *TLChannelParticipantCreator) GetUserId() int32 {
 	if m != nil {
@@ -41170,7 +41170,7 @@ type TLChannelParticipantAdmin struct {
 func (m *TLChannelParticipantAdmin) Reset()                    { *m = TLChannelParticipantAdmin{} }
 func (m *TLChannelParticipantAdmin) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelParticipantAdmin) ProtoMessage()               {}
-func (*TLChannelParticipantAdmin) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{597} }
+func (*TLChannelParticipantAdmin) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{597} }
 
 func (m *TLChannelParticipantAdmin) GetCanEdit() bool {
 	if m != nil {
@@ -41226,7 +41226,7 @@ type TLChannelParticipantBanned struct {
 func (m *TLChannelParticipantBanned) Reset()                    { *m = TLChannelParticipantBanned{} }
 func (m *TLChannelParticipantBanned) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelParticipantBanned) ProtoMessage()               {}
-func (*TLChannelParticipantBanned) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{598} }
+func (*TLChannelParticipantBanned) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{598} }
 
 func (m *TLChannelParticipantBanned) GetLeft() bool {
 	if m != nil {
@@ -41270,7 +41270,7 @@ type TLChannelParticipantsRecent struct {
 func (m *TLChannelParticipantsRecent) Reset()                    { *m = TLChannelParticipantsRecent{} }
 func (m *TLChannelParticipantsRecent) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelParticipantsRecent) ProtoMessage()               {}
-func (*TLChannelParticipantsRecent) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{599} }
+func (*TLChannelParticipantsRecent) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{599} }
 
 // channelParticipantsAdmins#b4608969 = ChannelParticipantsFilter;
 type TLChannelParticipantsAdmins struct {
@@ -41279,7 +41279,7 @@ type TLChannelParticipantsAdmins struct {
 func (m *TLChannelParticipantsAdmins) Reset()                    { *m = TLChannelParticipantsAdmins{} }
 func (m *TLChannelParticipantsAdmins) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelParticipantsAdmins) ProtoMessage()               {}
-func (*TLChannelParticipantsAdmins) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{600} }
+func (*TLChannelParticipantsAdmins) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{600} }
 
 // channelParticipantsKicked#a3b54985 q:string = ChannelParticipantsFilter;
 type TLChannelParticipantsKicked struct {
@@ -41289,7 +41289,7 @@ type TLChannelParticipantsKicked struct {
 func (m *TLChannelParticipantsKicked) Reset()                    { *m = TLChannelParticipantsKicked{} }
 func (m *TLChannelParticipantsKicked) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelParticipantsKicked) ProtoMessage()               {}
-func (*TLChannelParticipantsKicked) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{601} }
+func (*TLChannelParticipantsKicked) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{601} }
 
 func (m *TLChannelParticipantsKicked) GetQ() string {
 	if m != nil {
@@ -41305,7 +41305,7 @@ type TLChannelParticipantsBots struct {
 func (m *TLChannelParticipantsBots) Reset()                    { *m = TLChannelParticipantsBots{} }
 func (m *TLChannelParticipantsBots) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelParticipantsBots) ProtoMessage()               {}
-func (*TLChannelParticipantsBots) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{602} }
+func (*TLChannelParticipantsBots) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{602} }
 
 // channelParticipantsBanned#1427a5e1 q:string = ChannelParticipantsFilter;
 type TLChannelParticipantsBanned struct {
@@ -41315,7 +41315,7 @@ type TLChannelParticipantsBanned struct {
 func (m *TLChannelParticipantsBanned) Reset()                    { *m = TLChannelParticipantsBanned{} }
 func (m *TLChannelParticipantsBanned) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelParticipantsBanned) ProtoMessage()               {}
-func (*TLChannelParticipantsBanned) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{603} }
+func (*TLChannelParticipantsBanned) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{603} }
 
 func (m *TLChannelParticipantsBanned) GetQ() string {
 	if m != nil {
@@ -41332,7 +41332,7 @@ type TLChannelParticipantsSearch struct {
 func (m *TLChannelParticipantsSearch) Reset()                    { *m = TLChannelParticipantsSearch{} }
 func (m *TLChannelParticipantsSearch) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelParticipantsSearch) ProtoMessage()               {}
-func (*TLChannelParticipantsSearch) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{604} }
+func (*TLChannelParticipantsSearch) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{604} }
 
 func (m *TLChannelParticipantsSearch) GetQ() string {
 	if m != nil {
@@ -41351,7 +41351,7 @@ type TLChannelsChannelParticipants struct {
 func (m *TLChannelsChannelParticipants) Reset()                    { *m = TLChannelsChannelParticipants{} }
 func (m *TLChannelsChannelParticipants) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsChannelParticipants) ProtoMessage()               {}
-func (*TLChannelsChannelParticipants) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{605} }
+func (*TLChannelsChannelParticipants) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{605} }
 
 func (m *TLChannelsChannelParticipants) GetCount() int32 {
 	if m != nil {
@@ -41383,7 +41383,7 @@ type TLChannelsChannelParticipant struct {
 func (m *TLChannelsChannelParticipant) Reset()                    { *m = TLChannelsChannelParticipant{} }
 func (m *TLChannelsChannelParticipant) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsChannelParticipant) ProtoMessage()               {}
-func (*TLChannelsChannelParticipant) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{606} }
+func (*TLChannelsChannelParticipant) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{606} }
 
 func (m *TLChannelsChannelParticipant) GetParticipant() *ChannelParticipant {
 	if m != nil {
@@ -41407,7 +41407,7 @@ type TLHelpTermsOfService struct {
 func (m *TLHelpTermsOfService) Reset()                    { *m = TLHelpTermsOfService{} }
 func (m *TLHelpTermsOfService) String() string            { return proto.CompactTextString(m) }
 func (*TLHelpTermsOfService) ProtoMessage()               {}
-func (*TLHelpTermsOfService) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{607} }
+func (*TLHelpTermsOfService) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{607} }
 
 func (m *TLHelpTermsOfService) GetText() string {
 	if m != nil {
@@ -41429,7 +41429,7 @@ type TLFoundGif struct {
 func (m *TLFoundGif) Reset()                    { *m = TLFoundGif{} }
 func (m *TLFoundGif) String() string            { return proto.CompactTextString(m) }
 func (*TLFoundGif) ProtoMessage()               {}
-func (*TLFoundGif) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{608} }
+func (*TLFoundGif) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{608} }
 
 func (m *TLFoundGif) GetUrl() string {
 	if m != nil {
@@ -41483,7 +41483,7 @@ type TLFoundGifCached struct {
 func (m *TLFoundGifCached) Reset()                    { *m = TLFoundGifCached{} }
 func (m *TLFoundGifCached) String() string            { return proto.CompactTextString(m) }
 func (*TLFoundGifCached) ProtoMessage()               {}
-func (*TLFoundGifCached) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{609} }
+func (*TLFoundGifCached) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{609} }
 
 func (m *TLFoundGifCached) GetUrl() string {
 	if m != nil {
@@ -41515,7 +41515,7 @@ type TLMessagesFoundGifs struct {
 func (m *TLMessagesFoundGifs) Reset()                    { *m = TLMessagesFoundGifs{} }
 func (m *TLMessagesFoundGifs) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesFoundGifs) ProtoMessage()               {}
-func (*TLMessagesFoundGifs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{610} }
+func (*TLMessagesFoundGifs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{610} }
 
 func (m *TLMessagesFoundGifs) GetNextOffset() int32 {
 	if m != nil {
@@ -41539,7 +41539,7 @@ func (m *TLMessagesSavedGifsNotModified) Reset()         { *m = TLMessagesSavedG
 func (m *TLMessagesSavedGifsNotModified) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesSavedGifsNotModified) ProtoMessage()    {}
 func (*TLMessagesSavedGifsNotModified) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{611}
+	return fileDescriptor4, []int{611}
 }
 
 // messages.savedGifs#2e0709a5 hash:int gifs:Vector<Document> = messages.SavedGifs;
@@ -41551,7 +41551,7 @@ type TLMessagesSavedGifs struct {
 func (m *TLMessagesSavedGifs) Reset()                    { *m = TLMessagesSavedGifs{} }
 func (m *TLMessagesSavedGifs) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSavedGifs) ProtoMessage()               {}
-func (*TLMessagesSavedGifs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{612} }
+func (*TLMessagesSavedGifs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{612} }
 
 func (m *TLMessagesSavedGifs) GetHash() int32 {
 	if m != nil {
@@ -41577,7 +41577,7 @@ func (m *TLInputBotInlineMessageMediaAuto) Reset()         { *m = TLInputBotInli
 func (m *TLInputBotInlineMessageMediaAuto) String() string { return proto.CompactTextString(m) }
 func (*TLInputBotInlineMessageMediaAuto) ProtoMessage()    {}
 func (*TLInputBotInlineMessageMediaAuto) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{613}
+	return fileDescriptor4, []int{613}
 }
 
 func (m *TLInputBotInlineMessageMediaAuto) GetCaption() string {
@@ -41605,7 +41605,7 @@ type TLInputBotInlineMessageText struct {
 func (m *TLInputBotInlineMessageText) Reset()                    { *m = TLInputBotInlineMessageText{} }
 func (m *TLInputBotInlineMessageText) String() string            { return proto.CompactTextString(m) }
 func (*TLInputBotInlineMessageText) ProtoMessage()               {}
-func (*TLInputBotInlineMessageText) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{614} }
+func (*TLInputBotInlineMessageText) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{614} }
 
 func (m *TLInputBotInlineMessageText) GetNoWebpage() bool {
 	if m != nil {
@@ -41645,7 +41645,7 @@ func (m *TLInputBotInlineMessageMediaGeo) Reset()         { *m = TLInputBotInlin
 func (m *TLInputBotInlineMessageMediaGeo) String() string { return proto.CompactTextString(m) }
 func (*TLInputBotInlineMessageMediaGeo) ProtoMessage()    {}
 func (*TLInputBotInlineMessageMediaGeo) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{615}
+	return fileDescriptor4, []int{615}
 }
 
 func (m *TLInputBotInlineMessageMediaGeo) GetGeoPoint() *InputGeoPoint {
@@ -41676,7 +41676,7 @@ func (m *TLInputBotInlineMessageMediaVenue) Reset()         { *m = TLInputBotInl
 func (m *TLInputBotInlineMessageMediaVenue) String() string { return proto.CompactTextString(m) }
 func (*TLInputBotInlineMessageMediaVenue) ProtoMessage()    {}
 func (*TLInputBotInlineMessageMediaVenue) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{616}
+	return fileDescriptor4, []int{616}
 }
 
 func (m *TLInputBotInlineMessageMediaVenue) GetGeoPoint() *InputGeoPoint {
@@ -41733,7 +41733,7 @@ func (m *TLInputBotInlineMessageMediaContact) Reset()         { *m = TLInputBotI
 func (m *TLInputBotInlineMessageMediaContact) String() string { return proto.CompactTextString(m) }
 func (*TLInputBotInlineMessageMediaContact) ProtoMessage()    {}
 func (*TLInputBotInlineMessageMediaContact) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{617}
+	return fileDescriptor4, []int{617}
 }
 
 func (m *TLInputBotInlineMessageMediaContact) GetPhoneNumber() string {
@@ -41772,7 +41772,7 @@ type TLInputBotInlineMessageGame struct {
 func (m *TLInputBotInlineMessageGame) Reset()                    { *m = TLInputBotInlineMessageGame{} }
 func (m *TLInputBotInlineMessageGame) String() string            { return proto.CompactTextString(m) }
 func (*TLInputBotInlineMessageGame) ProtoMessage()               {}
-func (*TLInputBotInlineMessageGame) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{618} }
+func (*TLInputBotInlineMessageGame) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{618} }
 
 func (m *TLInputBotInlineMessageGame) GetReplyMarkup() *ReplyMarkup {
 	if m != nil {
@@ -41800,7 +41800,7 @@ type TLInputBotInlineResult struct {
 func (m *TLInputBotInlineResult) Reset()                    { *m = TLInputBotInlineResult{} }
 func (m *TLInputBotInlineResult) String() string            { return proto.CompactTextString(m) }
 func (*TLInputBotInlineResult) ProtoMessage()               {}
-func (*TLInputBotInlineResult) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{619} }
+func (*TLInputBotInlineResult) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{619} }
 
 func (m *TLInputBotInlineResult) GetId() string {
 	if m != nil {
@@ -41897,7 +41897,7 @@ type TLInputBotInlineResultPhoto struct {
 func (m *TLInputBotInlineResultPhoto) Reset()                    { *m = TLInputBotInlineResultPhoto{} }
 func (m *TLInputBotInlineResultPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLInputBotInlineResultPhoto) ProtoMessage()               {}
-func (*TLInputBotInlineResultPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{620} }
+func (*TLInputBotInlineResultPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{620} }
 
 func (m *TLInputBotInlineResultPhoto) GetId() string {
 	if m != nil {
@@ -41941,7 +41941,7 @@ func (m *TLInputBotInlineResultDocument) Reset()         { *m = TLInputBotInline
 func (m *TLInputBotInlineResultDocument) String() string { return proto.CompactTextString(m) }
 func (*TLInputBotInlineResultDocument) ProtoMessage()    {}
 func (*TLInputBotInlineResultDocument) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{621}
+	return fileDescriptor4, []int{621}
 }
 
 func (m *TLInputBotInlineResultDocument) GetId() string {
@@ -41996,7 +41996,7 @@ type TLInputBotInlineResultGame struct {
 func (m *TLInputBotInlineResultGame) Reset()                    { *m = TLInputBotInlineResultGame{} }
 func (m *TLInputBotInlineResultGame) String() string            { return proto.CompactTextString(m) }
 func (*TLInputBotInlineResultGame) ProtoMessage()               {}
-func (*TLInputBotInlineResultGame) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{622} }
+func (*TLInputBotInlineResultGame) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{622} }
 
 func (m *TLInputBotInlineResultGame) GetId() string {
 	if m != nil {
@@ -42028,7 +42028,7 @@ type TLBotInlineMessageMediaAuto struct {
 func (m *TLBotInlineMessageMediaAuto) Reset()                    { *m = TLBotInlineMessageMediaAuto{} }
 func (m *TLBotInlineMessageMediaAuto) String() string            { return proto.CompactTextString(m) }
 func (*TLBotInlineMessageMediaAuto) ProtoMessage()               {}
-func (*TLBotInlineMessageMediaAuto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{623} }
+func (*TLBotInlineMessageMediaAuto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{623} }
 
 func (m *TLBotInlineMessageMediaAuto) GetCaption() string {
 	if m != nil {
@@ -42055,7 +42055,7 @@ type TLBotInlineMessageText struct {
 func (m *TLBotInlineMessageText) Reset()                    { *m = TLBotInlineMessageText{} }
 func (m *TLBotInlineMessageText) String() string            { return proto.CompactTextString(m) }
 func (*TLBotInlineMessageText) ProtoMessage()               {}
-func (*TLBotInlineMessageText) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{624} }
+func (*TLBotInlineMessageText) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{624} }
 
 func (m *TLBotInlineMessageText) GetNoWebpage() bool {
 	if m != nil {
@@ -42094,7 +42094,7 @@ type TLBotInlineMessageMediaGeo struct {
 func (m *TLBotInlineMessageMediaGeo) Reset()                    { *m = TLBotInlineMessageMediaGeo{} }
 func (m *TLBotInlineMessageMediaGeo) String() string            { return proto.CompactTextString(m) }
 func (*TLBotInlineMessageMediaGeo) ProtoMessage()               {}
-func (*TLBotInlineMessageMediaGeo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{625} }
+func (*TLBotInlineMessageMediaGeo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{625} }
 
 func (m *TLBotInlineMessageMediaGeo) GetGeo() *GeoPoint {
 	if m != nil {
@@ -42123,7 +42123,7 @@ type TLBotInlineMessageMediaVenue struct {
 func (m *TLBotInlineMessageMediaVenue) Reset()                    { *m = TLBotInlineMessageMediaVenue{} }
 func (m *TLBotInlineMessageMediaVenue) String() string            { return proto.CompactTextString(m) }
 func (*TLBotInlineMessageMediaVenue) ProtoMessage()               {}
-func (*TLBotInlineMessageMediaVenue) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{626} }
+func (*TLBotInlineMessageMediaVenue) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{626} }
 
 func (m *TLBotInlineMessageMediaVenue) GetGeo() *GeoPoint {
 	if m != nil {
@@ -42179,7 +42179,7 @@ func (m *TLBotInlineMessageMediaContact) Reset()         { *m = TLBotInlineMessa
 func (m *TLBotInlineMessageMediaContact) String() string { return proto.CompactTextString(m) }
 func (*TLBotInlineMessageMediaContact) ProtoMessage()    {}
 func (*TLBotInlineMessageMediaContact) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{627}
+	return fileDescriptor4, []int{627}
 }
 
 func (m *TLBotInlineMessageMediaContact) GetPhoneNumber() string {
@@ -42229,7 +42229,7 @@ type TLBotInlineResult struct {
 func (m *TLBotInlineResult) Reset()                    { *m = TLBotInlineResult{} }
 func (m *TLBotInlineResult) String() string            { return proto.CompactTextString(m) }
 func (*TLBotInlineResult) ProtoMessage()               {}
-func (*TLBotInlineResult) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{628} }
+func (*TLBotInlineResult) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{628} }
 
 func (m *TLBotInlineResult) GetId() string {
 	if m != nil {
@@ -42329,7 +42329,7 @@ type TLBotInlineMediaResult struct {
 func (m *TLBotInlineMediaResult) Reset()                    { *m = TLBotInlineMediaResult{} }
 func (m *TLBotInlineMediaResult) String() string            { return proto.CompactTextString(m) }
 func (*TLBotInlineMediaResult) ProtoMessage()               {}
-func (*TLBotInlineMediaResult) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{629} }
+func (*TLBotInlineMediaResult) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{629} }
 
 func (m *TLBotInlineMediaResult) GetId() string {
 	if m != nil {
@@ -42393,7 +42393,7 @@ type TLMessagesBotResults struct {
 func (m *TLMessagesBotResults) Reset()                    { *m = TLMessagesBotResults{} }
 func (m *TLMessagesBotResults) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesBotResults) ProtoMessage()               {}
-func (*TLMessagesBotResults) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{630} }
+func (*TLMessagesBotResults) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{630} }
 
 func (m *TLMessagesBotResults) GetGallery() bool {
 	if m != nil {
@@ -42445,7 +42445,7 @@ type TLExportedMessageLink struct {
 func (m *TLExportedMessageLink) Reset()                    { *m = TLExportedMessageLink{} }
 func (m *TLExportedMessageLink) String() string            { return proto.CompactTextString(m) }
 func (*TLExportedMessageLink) ProtoMessage()               {}
-func (*TLExportedMessageLink) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{631} }
+func (*TLExportedMessageLink) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{631} }
 
 func (m *TLExportedMessageLink) GetLink() string {
 	if m != nil {
@@ -42466,7 +42466,7 @@ type TLMessageFwdHeader struct {
 func (m *TLMessageFwdHeader) Reset()                    { *m = TLMessageFwdHeader{} }
 func (m *TLMessageFwdHeader) String() string            { return proto.CompactTextString(m) }
 func (*TLMessageFwdHeader) ProtoMessage()               {}
-func (*TLMessageFwdHeader) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{632} }
+func (*TLMessageFwdHeader) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{632} }
 
 func (m *TLMessageFwdHeader) GetFromId() int32 {
 	if m != nil {
@@ -42510,7 +42510,7 @@ type TLAuthCodeTypeSms struct {
 func (m *TLAuthCodeTypeSms) Reset()                    { *m = TLAuthCodeTypeSms{} }
 func (m *TLAuthCodeTypeSms) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthCodeTypeSms) ProtoMessage()               {}
-func (*TLAuthCodeTypeSms) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{633} }
+func (*TLAuthCodeTypeSms) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{633} }
 
 // auth.codeTypeCall#741cd3e3 = auth.CodeType;
 type TLAuthCodeTypeCall struct {
@@ -42519,7 +42519,7 @@ type TLAuthCodeTypeCall struct {
 func (m *TLAuthCodeTypeCall) Reset()                    { *m = TLAuthCodeTypeCall{} }
 func (m *TLAuthCodeTypeCall) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthCodeTypeCall) ProtoMessage()               {}
-func (*TLAuthCodeTypeCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{634} }
+func (*TLAuthCodeTypeCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{634} }
 
 // auth.codeTypeFlashCall#226ccefb = auth.CodeType;
 type TLAuthCodeTypeFlashCall struct {
@@ -42528,7 +42528,7 @@ type TLAuthCodeTypeFlashCall struct {
 func (m *TLAuthCodeTypeFlashCall) Reset()                    { *m = TLAuthCodeTypeFlashCall{} }
 func (m *TLAuthCodeTypeFlashCall) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthCodeTypeFlashCall) ProtoMessage()               {}
-func (*TLAuthCodeTypeFlashCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{635} }
+func (*TLAuthCodeTypeFlashCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{635} }
 
 // auth.sentCodeTypeApp#3dbb5986 length:int = auth.SentCodeType;
 type TLAuthSentCodeTypeApp struct {
@@ -42538,7 +42538,7 @@ type TLAuthSentCodeTypeApp struct {
 func (m *TLAuthSentCodeTypeApp) Reset()                    { *m = TLAuthSentCodeTypeApp{} }
 func (m *TLAuthSentCodeTypeApp) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthSentCodeTypeApp) ProtoMessage()               {}
-func (*TLAuthSentCodeTypeApp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{636} }
+func (*TLAuthSentCodeTypeApp) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{636} }
 
 func (m *TLAuthSentCodeTypeApp) GetLength() int32 {
 	if m != nil {
@@ -42555,7 +42555,7 @@ type TLAuthSentCodeTypeSms struct {
 func (m *TLAuthSentCodeTypeSms) Reset()                    { *m = TLAuthSentCodeTypeSms{} }
 func (m *TLAuthSentCodeTypeSms) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthSentCodeTypeSms) ProtoMessage()               {}
-func (*TLAuthSentCodeTypeSms) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{637} }
+func (*TLAuthSentCodeTypeSms) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{637} }
 
 func (m *TLAuthSentCodeTypeSms) GetLength() int32 {
 	if m != nil {
@@ -42572,7 +42572,7 @@ type TLAuthSentCodeTypeCall struct {
 func (m *TLAuthSentCodeTypeCall) Reset()                    { *m = TLAuthSentCodeTypeCall{} }
 func (m *TLAuthSentCodeTypeCall) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthSentCodeTypeCall) ProtoMessage()               {}
-func (*TLAuthSentCodeTypeCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{638} }
+func (*TLAuthSentCodeTypeCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{638} }
 
 func (m *TLAuthSentCodeTypeCall) GetLength() int32 {
 	if m != nil {
@@ -42589,7 +42589,7 @@ type TLAuthSentCodeTypeFlashCall struct {
 func (m *TLAuthSentCodeTypeFlashCall) Reset()                    { *m = TLAuthSentCodeTypeFlashCall{} }
 func (m *TLAuthSentCodeTypeFlashCall) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthSentCodeTypeFlashCall) ProtoMessage()               {}
-func (*TLAuthSentCodeTypeFlashCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{639} }
+func (*TLAuthSentCodeTypeFlashCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{639} }
 
 func (m *TLAuthSentCodeTypeFlashCall) GetPattern() string {
 	if m != nil {
@@ -42610,7 +42610,7 @@ type TLMessagesBotCallbackAnswer struct {
 func (m *TLMessagesBotCallbackAnswer) Reset()                    { *m = TLMessagesBotCallbackAnswer{} }
 func (m *TLMessagesBotCallbackAnswer) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesBotCallbackAnswer) ProtoMessage()               {}
-func (*TLMessagesBotCallbackAnswer) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{640} }
+func (*TLMessagesBotCallbackAnswer) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{640} }
 
 func (m *TLMessagesBotCallbackAnswer) GetAlert() bool {
 	if m != nil {
@@ -42655,7 +42655,7 @@ type TLMessagesMessageEditData struct {
 func (m *TLMessagesMessageEditData) Reset()                    { *m = TLMessagesMessageEditData{} }
 func (m *TLMessagesMessageEditData) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesMessageEditData) ProtoMessage()               {}
-func (*TLMessagesMessageEditData) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{641} }
+func (*TLMessagesMessageEditData) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{641} }
 
 func (m *TLMessagesMessageEditData) GetCaption() bool {
 	if m != nil {
@@ -42674,7 +42674,7 @@ type TLInputBotInlineMessageID struct {
 func (m *TLInputBotInlineMessageID) Reset()                    { *m = TLInputBotInlineMessageID{} }
 func (m *TLInputBotInlineMessageID) String() string            { return proto.CompactTextString(m) }
 func (*TLInputBotInlineMessageID) ProtoMessage()               {}
-func (*TLInputBotInlineMessageID) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{642} }
+func (*TLInputBotInlineMessageID) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{642} }
 
 func (m *TLInputBotInlineMessageID) GetDcId() int32 {
 	if m != nil {
@@ -42706,7 +42706,7 @@ type TLInlineBotSwitchPM struct {
 func (m *TLInlineBotSwitchPM) Reset()                    { *m = TLInlineBotSwitchPM{} }
 func (m *TLInlineBotSwitchPM) String() string            { return proto.CompactTextString(m) }
 func (*TLInlineBotSwitchPM) ProtoMessage()               {}
-func (*TLInlineBotSwitchPM) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{643} }
+func (*TLInlineBotSwitchPM) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{643} }
 
 func (m *TLInlineBotSwitchPM) GetText() string {
 	if m != nil {
@@ -42734,7 +42734,7 @@ type TLMessagesPeerDialogs struct {
 func (m *TLMessagesPeerDialogs) Reset()                    { *m = TLMessagesPeerDialogs{} }
 func (m *TLMessagesPeerDialogs) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesPeerDialogs) ProtoMessage()               {}
-func (*TLMessagesPeerDialogs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{644} }
+func (*TLMessagesPeerDialogs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{644} }
 
 func (m *TLMessagesPeerDialogs) GetDialogs() []*Dialog {
 	if m != nil {
@@ -42780,7 +42780,7 @@ type TLTopPeer struct {
 func (m *TLTopPeer) Reset()                    { *m = TLTopPeer{} }
 func (m *TLTopPeer) String() string            { return proto.CompactTextString(m) }
 func (*TLTopPeer) ProtoMessage()               {}
-func (*TLTopPeer) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{645} }
+func (*TLTopPeer) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{645} }
 
 func (m *TLTopPeer) GetPeer() *Peer {
 	if m != nil {
@@ -42803,7 +42803,7 @@ type TLTopPeerCategoryBotsPM struct {
 func (m *TLTopPeerCategoryBotsPM) Reset()                    { *m = TLTopPeerCategoryBotsPM{} }
 func (m *TLTopPeerCategoryBotsPM) String() string            { return proto.CompactTextString(m) }
 func (*TLTopPeerCategoryBotsPM) ProtoMessage()               {}
-func (*TLTopPeerCategoryBotsPM) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{646} }
+func (*TLTopPeerCategoryBotsPM) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{646} }
 
 // topPeerCategoryBotsInline#148677e2 = TopPeerCategory;
 type TLTopPeerCategoryBotsInline struct {
@@ -42812,7 +42812,7 @@ type TLTopPeerCategoryBotsInline struct {
 func (m *TLTopPeerCategoryBotsInline) Reset()                    { *m = TLTopPeerCategoryBotsInline{} }
 func (m *TLTopPeerCategoryBotsInline) String() string            { return proto.CompactTextString(m) }
 func (*TLTopPeerCategoryBotsInline) ProtoMessage()               {}
-func (*TLTopPeerCategoryBotsInline) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{647} }
+func (*TLTopPeerCategoryBotsInline) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{647} }
 
 // topPeerCategoryCorrespondents#637b7ed = TopPeerCategory;
 type TLTopPeerCategoryCorrespondents struct {
@@ -42822,7 +42822,7 @@ func (m *TLTopPeerCategoryCorrespondents) Reset()         { *m = TLTopPeerCatego
 func (m *TLTopPeerCategoryCorrespondents) String() string { return proto.CompactTextString(m) }
 func (*TLTopPeerCategoryCorrespondents) ProtoMessage()    {}
 func (*TLTopPeerCategoryCorrespondents) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{648}
+	return fileDescriptor4, []int{648}
 }
 
 // topPeerCategoryGroups#bd17a14a = TopPeerCategory;
@@ -42832,7 +42832,7 @@ type TLTopPeerCategoryGroups struct {
 func (m *TLTopPeerCategoryGroups) Reset()                    { *m = TLTopPeerCategoryGroups{} }
 func (m *TLTopPeerCategoryGroups) String() string            { return proto.CompactTextString(m) }
 func (*TLTopPeerCategoryGroups) ProtoMessage()               {}
-func (*TLTopPeerCategoryGroups) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{649} }
+func (*TLTopPeerCategoryGroups) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{649} }
 
 // topPeerCategoryChannels#161d9628 = TopPeerCategory;
 type TLTopPeerCategoryChannels struct {
@@ -42841,7 +42841,7 @@ type TLTopPeerCategoryChannels struct {
 func (m *TLTopPeerCategoryChannels) Reset()                    { *m = TLTopPeerCategoryChannels{} }
 func (m *TLTopPeerCategoryChannels) String() string            { return proto.CompactTextString(m) }
 func (*TLTopPeerCategoryChannels) ProtoMessage()               {}
-func (*TLTopPeerCategoryChannels) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{650} }
+func (*TLTopPeerCategoryChannels) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{650} }
 
 // topPeerCategoryPhoneCalls#1e76a78c = TopPeerCategory;
 type TLTopPeerCategoryPhoneCalls struct {
@@ -42850,7 +42850,7 @@ type TLTopPeerCategoryPhoneCalls struct {
 func (m *TLTopPeerCategoryPhoneCalls) Reset()                    { *m = TLTopPeerCategoryPhoneCalls{} }
 func (m *TLTopPeerCategoryPhoneCalls) String() string            { return proto.CompactTextString(m) }
 func (*TLTopPeerCategoryPhoneCalls) ProtoMessage()               {}
-func (*TLTopPeerCategoryPhoneCalls) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{651} }
+func (*TLTopPeerCategoryPhoneCalls) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{651} }
 
 // topPeerCategoryPeers#fb834291 category:TopPeerCategory count:int peers:Vector<TopPeer> = TopPeerCategoryPeers;
 type TLTopPeerCategoryPeers struct {
@@ -42862,7 +42862,7 @@ type TLTopPeerCategoryPeers struct {
 func (m *TLTopPeerCategoryPeers) Reset()                    { *m = TLTopPeerCategoryPeers{} }
 func (m *TLTopPeerCategoryPeers) String() string            { return proto.CompactTextString(m) }
 func (*TLTopPeerCategoryPeers) ProtoMessage()               {}
-func (*TLTopPeerCategoryPeers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{652} }
+func (*TLTopPeerCategoryPeers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{652} }
 
 func (m *TLTopPeerCategoryPeers) GetCategory() *TopPeerCategory {
 	if m != nil {
@@ -42892,7 +42892,7 @@ type TLContactsTopPeersNotModified struct {
 func (m *TLContactsTopPeersNotModified) Reset()                    { *m = TLContactsTopPeersNotModified{} }
 func (m *TLContactsTopPeersNotModified) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsTopPeersNotModified) ProtoMessage()               {}
-func (*TLContactsTopPeersNotModified) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{653} }
+func (*TLContactsTopPeersNotModified) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{653} }
 
 // contacts.topPeers#70b772a8 categories:Vector<TopPeerCategoryPeers> chats:Vector<Chat> users:Vector<User> = contacts.TopPeers;
 type TLContactsTopPeers struct {
@@ -42904,7 +42904,7 @@ type TLContactsTopPeers struct {
 func (m *TLContactsTopPeers) Reset()                    { *m = TLContactsTopPeers{} }
 func (m *TLContactsTopPeers) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsTopPeers) ProtoMessage()               {}
-func (*TLContactsTopPeers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{654} }
+func (*TLContactsTopPeers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{654} }
 
 func (m *TLContactsTopPeers) GetCategories() []*TopPeerCategoryPeers {
 	if m != nil {
@@ -42934,7 +42934,7 @@ type TLDraftMessageEmpty struct {
 func (m *TLDraftMessageEmpty) Reset()                    { *m = TLDraftMessageEmpty{} }
 func (m *TLDraftMessageEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLDraftMessageEmpty) ProtoMessage()               {}
-func (*TLDraftMessageEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{655} }
+func (*TLDraftMessageEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{655} }
 
 // draftMessage#fd8e711f flags:# no_webpage:flags.1?true reply_to_msg_id:flags.0?int message:string entities:flags.3?Vector<MessageEntity> date:int = DraftMessage;
 type TLDraftMessage struct {
@@ -42948,7 +42948,7 @@ type TLDraftMessage struct {
 func (m *TLDraftMessage) Reset()                    { *m = TLDraftMessage{} }
 func (m *TLDraftMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLDraftMessage) ProtoMessage()               {}
-func (*TLDraftMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{656} }
+func (*TLDraftMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{656} }
 
 func (m *TLDraftMessage) GetNoWebpage() bool {
 	if m != nil {
@@ -42993,7 +42993,7 @@ func (m *TLMessagesFeaturedStickersNotModified) Reset()         { *m = TLMessage
 func (m *TLMessagesFeaturedStickersNotModified) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesFeaturedStickersNotModified) ProtoMessage()    {}
 func (*TLMessagesFeaturedStickersNotModified) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{657}
+	return fileDescriptor4, []int{657}
 }
 
 // messages.featuredStickers#f89d88e5 hash:int sets:Vector<StickerSetCovered> unread:Vector<long> = messages.FeaturedStickers;
@@ -43006,7 +43006,7 @@ type TLMessagesFeaturedStickers struct {
 func (m *TLMessagesFeaturedStickers) Reset()                    { *m = TLMessagesFeaturedStickers{} }
 func (m *TLMessagesFeaturedStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesFeaturedStickers) ProtoMessage()               {}
-func (*TLMessagesFeaturedStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{658} }
+func (*TLMessagesFeaturedStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{658} }
 
 func (m *TLMessagesFeaturedStickers) GetHash() int32 {
 	if m != nil {
@@ -43037,7 +43037,7 @@ func (m *TLMessagesRecentStickersNotModified) Reset()         { *m = TLMessagesR
 func (m *TLMessagesRecentStickersNotModified) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesRecentStickersNotModified) ProtoMessage()    {}
 func (*TLMessagesRecentStickersNotModified) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{659}
+	return fileDescriptor4, []int{659}
 }
 
 // messages.recentStickers#5ce20970 hash:int stickers:Vector<Document> = messages.RecentStickers;
@@ -43049,7 +43049,7 @@ type TLMessagesRecentStickers struct {
 func (m *TLMessagesRecentStickers) Reset()                    { *m = TLMessagesRecentStickers{} }
 func (m *TLMessagesRecentStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesRecentStickers) ProtoMessage()               {}
-func (*TLMessagesRecentStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{660} }
+func (*TLMessagesRecentStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{660} }
 
 func (m *TLMessagesRecentStickers) GetHash() int32 {
 	if m != nil {
@@ -43074,7 +43074,7 @@ type TLMessagesArchivedStickers struct {
 func (m *TLMessagesArchivedStickers) Reset()                    { *m = TLMessagesArchivedStickers{} }
 func (m *TLMessagesArchivedStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesArchivedStickers) ProtoMessage()               {}
-func (*TLMessagesArchivedStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{661} }
+func (*TLMessagesArchivedStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{661} }
 
 func (m *TLMessagesArchivedStickers) GetCount() int32 {
 	if m != nil {
@@ -43100,7 +43100,7 @@ func (m *TLMessagesStickerSetInstallResultSuccess) Reset() {
 func (m *TLMessagesStickerSetInstallResultSuccess) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesStickerSetInstallResultSuccess) ProtoMessage()    {}
 func (*TLMessagesStickerSetInstallResultSuccess) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{662}
+	return fileDescriptor4, []int{662}
 }
 
 // messages.stickerSetInstallResultArchive#35e410a8 sets:Vector<StickerSetCovered> = messages.StickerSetInstallResult;
@@ -43114,7 +43114,7 @@ func (m *TLMessagesStickerSetInstallResultArchive) Reset() {
 func (m *TLMessagesStickerSetInstallResultArchive) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesStickerSetInstallResultArchive) ProtoMessage()    {}
 func (*TLMessagesStickerSetInstallResultArchive) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{663}
+	return fileDescriptor4, []int{663}
 }
 
 func (m *TLMessagesStickerSetInstallResultArchive) GetSets() []*StickerSetCovered {
@@ -43133,7 +43133,7 @@ type TLStickerSetCovered struct {
 func (m *TLStickerSetCovered) Reset()                    { *m = TLStickerSetCovered{} }
 func (m *TLStickerSetCovered) String() string            { return proto.CompactTextString(m) }
 func (*TLStickerSetCovered) ProtoMessage()               {}
-func (*TLStickerSetCovered) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{664} }
+func (*TLStickerSetCovered) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{664} }
 
 func (m *TLStickerSetCovered) GetSet() *StickerSet {
 	if m != nil {
@@ -43158,7 +43158,7 @@ type TLStickerSetMultiCovered struct {
 func (m *TLStickerSetMultiCovered) Reset()                    { *m = TLStickerSetMultiCovered{} }
 func (m *TLStickerSetMultiCovered) String() string            { return proto.CompactTextString(m) }
 func (*TLStickerSetMultiCovered) ProtoMessage()               {}
-func (*TLStickerSetMultiCovered) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{665} }
+func (*TLStickerSetMultiCovered) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{665} }
 
 func (m *TLStickerSetMultiCovered) GetSet() *StickerSet {
 	if m != nil {
@@ -43185,7 +43185,7 @@ type TLMaskCoords struct {
 func (m *TLMaskCoords) Reset()                    { *m = TLMaskCoords{} }
 func (m *TLMaskCoords) String() string            { return proto.CompactTextString(m) }
 func (*TLMaskCoords) ProtoMessage()               {}
-func (*TLMaskCoords) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{666} }
+func (*TLMaskCoords) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{666} }
 
 func (m *TLMaskCoords) GetN() int32 {
 	if m != nil {
@@ -43223,7 +43223,7 @@ type TLInputStickeredMediaPhoto struct {
 func (m *TLInputStickeredMediaPhoto) Reset()                    { *m = TLInputStickeredMediaPhoto{} }
 func (m *TLInputStickeredMediaPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLInputStickeredMediaPhoto) ProtoMessage()               {}
-func (*TLInputStickeredMediaPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{667} }
+func (*TLInputStickeredMediaPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{667} }
 
 func (m *TLInputStickeredMediaPhoto) GetId() *InputPhoto {
 	if m != nil {
@@ -43240,7 +43240,7 @@ type TLInputStickeredMediaDocument struct {
 func (m *TLInputStickeredMediaDocument) Reset()                    { *m = TLInputStickeredMediaDocument{} }
 func (m *TLInputStickeredMediaDocument) String() string            { return proto.CompactTextString(m) }
 func (*TLInputStickeredMediaDocument) ProtoMessage()               {}
-func (*TLInputStickeredMediaDocument) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{668} }
+func (*TLInputStickeredMediaDocument) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{668} }
 
 func (m *TLInputStickeredMediaDocument) GetId() *InputDocument {
 	if m != nil {
@@ -43263,7 +43263,7 @@ type TLGame struct {
 func (m *TLGame) Reset()                    { *m = TLGame{} }
 func (m *TLGame) String() string            { return proto.CompactTextString(m) }
 func (*TLGame) ProtoMessage()               {}
-func (*TLGame) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{669} }
+func (*TLGame) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{669} }
 
 func (m *TLGame) GetId() int64 {
 	if m != nil {
@@ -43323,7 +43323,7 @@ type TLInputGameID struct {
 func (m *TLInputGameID) Reset()                    { *m = TLInputGameID{} }
 func (m *TLInputGameID) String() string            { return proto.CompactTextString(m) }
 func (*TLInputGameID) ProtoMessage()               {}
-func (*TLInputGameID) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{670} }
+func (*TLInputGameID) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{670} }
 
 func (m *TLInputGameID) GetId() int64 {
 	if m != nil {
@@ -43348,7 +43348,7 @@ type TLInputGameShortName struct {
 func (m *TLInputGameShortName) Reset()                    { *m = TLInputGameShortName{} }
 func (m *TLInputGameShortName) String() string            { return proto.CompactTextString(m) }
 func (*TLInputGameShortName) ProtoMessage()               {}
-func (*TLInputGameShortName) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{671} }
+func (*TLInputGameShortName) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{671} }
 
 func (m *TLInputGameShortName) GetBotId() *InputUser {
 	if m != nil {
@@ -43374,7 +43374,7 @@ type TLHighScore struct {
 func (m *TLHighScore) Reset()                    { *m = TLHighScore{} }
 func (m *TLHighScore) String() string            { return proto.CompactTextString(m) }
 func (*TLHighScore) ProtoMessage()               {}
-func (*TLHighScore) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{672} }
+func (*TLHighScore) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{672} }
 
 func (m *TLHighScore) GetPos() int32 {
 	if m != nil {
@@ -43406,7 +43406,7 @@ type TLMessagesHighScores struct {
 func (m *TLMessagesHighScores) Reset()                    { *m = TLMessagesHighScores{} }
 func (m *TLMessagesHighScores) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesHighScores) ProtoMessage()               {}
-func (*TLMessagesHighScores) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{673} }
+func (*TLMessagesHighScores) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{673} }
 
 func (m *TLMessagesHighScores) GetScores() []*HighScore {
 	if m != nil {
@@ -43429,7 +43429,7 @@ type TLTextEmpty struct {
 func (m *TLTextEmpty) Reset()                    { *m = TLTextEmpty{} }
 func (m *TLTextEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLTextEmpty) ProtoMessage()               {}
-func (*TLTextEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{674} }
+func (*TLTextEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{674} }
 
 // textPlain#744694e0 text:string = RichText;
 type TLTextPlain struct {
@@ -43439,7 +43439,7 @@ type TLTextPlain struct {
 func (m *TLTextPlain) Reset()                    { *m = TLTextPlain{} }
 func (m *TLTextPlain) String() string            { return proto.CompactTextString(m) }
 func (*TLTextPlain) ProtoMessage()               {}
-func (*TLTextPlain) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{675} }
+func (*TLTextPlain) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{675} }
 
 func (m *TLTextPlain) GetText() string {
 	if m != nil {
@@ -43456,7 +43456,7 @@ type TLTextBold struct {
 func (m *TLTextBold) Reset()                    { *m = TLTextBold{} }
 func (m *TLTextBold) String() string            { return proto.CompactTextString(m) }
 func (*TLTextBold) ProtoMessage()               {}
-func (*TLTextBold) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{676} }
+func (*TLTextBold) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{676} }
 
 func (m *TLTextBold) GetText() *RichText {
 	if m != nil {
@@ -43473,7 +43473,7 @@ type TLTextItalic struct {
 func (m *TLTextItalic) Reset()                    { *m = TLTextItalic{} }
 func (m *TLTextItalic) String() string            { return proto.CompactTextString(m) }
 func (*TLTextItalic) ProtoMessage()               {}
-func (*TLTextItalic) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{677} }
+func (*TLTextItalic) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{677} }
 
 func (m *TLTextItalic) GetText() *RichText {
 	if m != nil {
@@ -43490,7 +43490,7 @@ type TLTextUnderline struct {
 func (m *TLTextUnderline) Reset()                    { *m = TLTextUnderline{} }
 func (m *TLTextUnderline) String() string            { return proto.CompactTextString(m) }
 func (*TLTextUnderline) ProtoMessage()               {}
-func (*TLTextUnderline) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{678} }
+func (*TLTextUnderline) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{678} }
 
 func (m *TLTextUnderline) GetText() *RichText {
 	if m != nil {
@@ -43507,7 +43507,7 @@ type TLTextStrike struct {
 func (m *TLTextStrike) Reset()                    { *m = TLTextStrike{} }
 func (m *TLTextStrike) String() string            { return proto.CompactTextString(m) }
 func (*TLTextStrike) ProtoMessage()               {}
-func (*TLTextStrike) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{679} }
+func (*TLTextStrike) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{679} }
 
 func (m *TLTextStrike) GetText() *RichText {
 	if m != nil {
@@ -43524,7 +43524,7 @@ type TLTextFixed struct {
 func (m *TLTextFixed) Reset()                    { *m = TLTextFixed{} }
 func (m *TLTextFixed) String() string            { return proto.CompactTextString(m) }
 func (*TLTextFixed) ProtoMessage()               {}
-func (*TLTextFixed) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{680} }
+func (*TLTextFixed) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{680} }
 
 func (m *TLTextFixed) GetText() *RichText {
 	if m != nil {
@@ -43543,7 +43543,7 @@ type TLTextUrl struct {
 func (m *TLTextUrl) Reset()                    { *m = TLTextUrl{} }
 func (m *TLTextUrl) String() string            { return proto.CompactTextString(m) }
 func (*TLTextUrl) ProtoMessage()               {}
-func (*TLTextUrl) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{681} }
+func (*TLTextUrl) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{681} }
 
 func (m *TLTextUrl) GetText() *RichText {
 	if m != nil {
@@ -43575,7 +43575,7 @@ type TLTextEmail struct {
 func (m *TLTextEmail) Reset()                    { *m = TLTextEmail{} }
 func (m *TLTextEmail) String() string            { return proto.CompactTextString(m) }
 func (*TLTextEmail) ProtoMessage()               {}
-func (*TLTextEmail) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{682} }
+func (*TLTextEmail) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{682} }
 
 func (m *TLTextEmail) GetText() *RichText {
 	if m != nil {
@@ -43599,7 +43599,7 @@ type TLTextConcat struct {
 func (m *TLTextConcat) Reset()                    { *m = TLTextConcat{} }
 func (m *TLTextConcat) String() string            { return proto.CompactTextString(m) }
 func (*TLTextConcat) ProtoMessage()               {}
-func (*TLTextConcat) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{683} }
+func (*TLTextConcat) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{683} }
 
 func (m *TLTextConcat) GetTexts() []*RichText {
 	if m != nil {
@@ -43615,7 +43615,7 @@ type TLPageBlockUnsupported struct {
 func (m *TLPageBlockUnsupported) Reset()                    { *m = TLPageBlockUnsupported{} }
 func (m *TLPageBlockUnsupported) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockUnsupported) ProtoMessage()               {}
-func (*TLPageBlockUnsupported) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{684} }
+func (*TLPageBlockUnsupported) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{684} }
 
 // pageBlockTitle#70abc3fd text:RichText = PageBlock;
 type TLPageBlockTitle struct {
@@ -43625,7 +43625,7 @@ type TLPageBlockTitle struct {
 func (m *TLPageBlockTitle) Reset()                    { *m = TLPageBlockTitle{} }
 func (m *TLPageBlockTitle) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockTitle) ProtoMessage()               {}
-func (*TLPageBlockTitle) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{685} }
+func (*TLPageBlockTitle) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{685} }
 
 func (m *TLPageBlockTitle) GetText() *RichText {
 	if m != nil {
@@ -43642,7 +43642,7 @@ type TLPageBlockSubtitle struct {
 func (m *TLPageBlockSubtitle) Reset()                    { *m = TLPageBlockSubtitle{} }
 func (m *TLPageBlockSubtitle) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockSubtitle) ProtoMessage()               {}
-func (*TLPageBlockSubtitle) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{686} }
+func (*TLPageBlockSubtitle) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{686} }
 
 func (m *TLPageBlockSubtitle) GetText() *RichText {
 	if m != nil {
@@ -43660,7 +43660,7 @@ type TLPageBlockAuthorDate struct {
 func (m *TLPageBlockAuthorDate) Reset()                    { *m = TLPageBlockAuthorDate{} }
 func (m *TLPageBlockAuthorDate) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockAuthorDate) ProtoMessage()               {}
-func (*TLPageBlockAuthorDate) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{687} }
+func (*TLPageBlockAuthorDate) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{687} }
 
 func (m *TLPageBlockAuthorDate) GetAuthor() *RichText {
 	if m != nil {
@@ -43684,7 +43684,7 @@ type TLPageBlockHeader struct {
 func (m *TLPageBlockHeader) Reset()                    { *m = TLPageBlockHeader{} }
 func (m *TLPageBlockHeader) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockHeader) ProtoMessage()               {}
-func (*TLPageBlockHeader) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{688} }
+func (*TLPageBlockHeader) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{688} }
 
 func (m *TLPageBlockHeader) GetText() *RichText {
 	if m != nil {
@@ -43701,7 +43701,7 @@ type TLPageBlockSubheader struct {
 func (m *TLPageBlockSubheader) Reset()                    { *m = TLPageBlockSubheader{} }
 func (m *TLPageBlockSubheader) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockSubheader) ProtoMessage()               {}
-func (*TLPageBlockSubheader) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{689} }
+func (*TLPageBlockSubheader) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{689} }
 
 func (m *TLPageBlockSubheader) GetText() *RichText {
 	if m != nil {
@@ -43718,7 +43718,7 @@ type TLPageBlockParagraph struct {
 func (m *TLPageBlockParagraph) Reset()                    { *m = TLPageBlockParagraph{} }
 func (m *TLPageBlockParagraph) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockParagraph) ProtoMessage()               {}
-func (*TLPageBlockParagraph) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{690} }
+func (*TLPageBlockParagraph) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{690} }
 
 func (m *TLPageBlockParagraph) GetText() *RichText {
 	if m != nil {
@@ -43736,7 +43736,7 @@ type TLPageBlockPreformatted struct {
 func (m *TLPageBlockPreformatted) Reset()                    { *m = TLPageBlockPreformatted{} }
 func (m *TLPageBlockPreformatted) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockPreformatted) ProtoMessage()               {}
-func (*TLPageBlockPreformatted) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{691} }
+func (*TLPageBlockPreformatted) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{691} }
 
 func (m *TLPageBlockPreformatted) GetText() *RichText {
 	if m != nil {
@@ -43760,7 +43760,7 @@ type TLPageBlockFooter struct {
 func (m *TLPageBlockFooter) Reset()                    { *m = TLPageBlockFooter{} }
 func (m *TLPageBlockFooter) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockFooter) ProtoMessage()               {}
-func (*TLPageBlockFooter) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{692} }
+func (*TLPageBlockFooter) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{692} }
 
 func (m *TLPageBlockFooter) GetText() *RichText {
 	if m != nil {
@@ -43776,7 +43776,7 @@ type TLPageBlockDivider struct {
 func (m *TLPageBlockDivider) Reset()                    { *m = TLPageBlockDivider{} }
 func (m *TLPageBlockDivider) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockDivider) ProtoMessage()               {}
-func (*TLPageBlockDivider) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{693} }
+func (*TLPageBlockDivider) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{693} }
 
 // pageBlockAnchor#ce0d37b0 name:string = PageBlock;
 type TLPageBlockAnchor struct {
@@ -43786,7 +43786,7 @@ type TLPageBlockAnchor struct {
 func (m *TLPageBlockAnchor) Reset()                    { *m = TLPageBlockAnchor{} }
 func (m *TLPageBlockAnchor) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockAnchor) ProtoMessage()               {}
-func (*TLPageBlockAnchor) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{694} }
+func (*TLPageBlockAnchor) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{694} }
 
 func (m *TLPageBlockAnchor) GetName() string {
 	if m != nil {
@@ -43804,7 +43804,7 @@ type TLPageBlockList struct {
 func (m *TLPageBlockList) Reset()                    { *m = TLPageBlockList{} }
 func (m *TLPageBlockList) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockList) ProtoMessage()               {}
-func (*TLPageBlockList) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{695} }
+func (*TLPageBlockList) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{695} }
 
 func (m *TLPageBlockList) GetOrdered() *Bool {
 	if m != nil {
@@ -43829,7 +43829,7 @@ type TLPageBlockBlockquote struct {
 func (m *TLPageBlockBlockquote) Reset()                    { *m = TLPageBlockBlockquote{} }
 func (m *TLPageBlockBlockquote) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockBlockquote) ProtoMessage()               {}
-func (*TLPageBlockBlockquote) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{696} }
+func (*TLPageBlockBlockquote) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{696} }
 
 func (m *TLPageBlockBlockquote) GetText() *RichText {
 	if m != nil {
@@ -43854,7 +43854,7 @@ type TLPageBlockPullquote struct {
 func (m *TLPageBlockPullquote) Reset()                    { *m = TLPageBlockPullquote{} }
 func (m *TLPageBlockPullquote) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockPullquote) ProtoMessage()               {}
-func (*TLPageBlockPullquote) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{697} }
+func (*TLPageBlockPullquote) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{697} }
 
 func (m *TLPageBlockPullquote) GetText() *RichText {
 	if m != nil {
@@ -43879,7 +43879,7 @@ type TLPageBlockPhoto struct {
 func (m *TLPageBlockPhoto) Reset()                    { *m = TLPageBlockPhoto{} }
 func (m *TLPageBlockPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockPhoto) ProtoMessage()               {}
-func (*TLPageBlockPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{698} }
+func (*TLPageBlockPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{698} }
 
 func (m *TLPageBlockPhoto) GetPhotoId() int64 {
 	if m != nil {
@@ -43906,7 +43906,7 @@ type TLPageBlockVideo struct {
 func (m *TLPageBlockVideo) Reset()                    { *m = TLPageBlockVideo{} }
 func (m *TLPageBlockVideo) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockVideo) ProtoMessage()               {}
-func (*TLPageBlockVideo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{699} }
+func (*TLPageBlockVideo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{699} }
 
 func (m *TLPageBlockVideo) GetAutoplay() bool {
 	if m != nil {
@@ -43944,7 +43944,7 @@ type TLPageBlockCover struct {
 func (m *TLPageBlockCover) Reset()                    { *m = TLPageBlockCover{} }
 func (m *TLPageBlockCover) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockCover) ProtoMessage()               {}
-func (*TLPageBlockCover) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{700} }
+func (*TLPageBlockCover) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{700} }
 
 func (m *TLPageBlockCover) GetCover() *PageBlock {
 	if m != nil {
@@ -43968,7 +43968,7 @@ type TLPageBlockEmbed struct {
 func (m *TLPageBlockEmbed) Reset()                    { *m = TLPageBlockEmbed{} }
 func (m *TLPageBlockEmbed) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockEmbed) ProtoMessage()               {}
-func (*TLPageBlockEmbed) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{701} }
+func (*TLPageBlockEmbed) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{701} }
 
 func (m *TLPageBlockEmbed) GetFullWidth() bool {
 	if m != nil {
@@ -44040,7 +44040,7 @@ type TLPageBlockEmbedPost struct {
 func (m *TLPageBlockEmbedPost) Reset()                    { *m = TLPageBlockEmbedPost{} }
 func (m *TLPageBlockEmbedPost) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockEmbedPost) ProtoMessage()               {}
-func (*TLPageBlockEmbedPost) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{702} }
+func (*TLPageBlockEmbedPost) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{702} }
 
 func (m *TLPageBlockEmbedPost) GetUrl() string {
 	if m != nil {
@@ -44100,7 +44100,7 @@ type TLPageBlockCollage struct {
 func (m *TLPageBlockCollage) Reset()                    { *m = TLPageBlockCollage{} }
 func (m *TLPageBlockCollage) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockCollage) ProtoMessage()               {}
-func (*TLPageBlockCollage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{703} }
+func (*TLPageBlockCollage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{703} }
 
 func (m *TLPageBlockCollage) GetItems() []*PageBlock {
 	if m != nil {
@@ -44125,7 +44125,7 @@ type TLPageBlockSlideshow struct {
 func (m *TLPageBlockSlideshow) Reset()                    { *m = TLPageBlockSlideshow{} }
 func (m *TLPageBlockSlideshow) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockSlideshow) ProtoMessage()               {}
-func (*TLPageBlockSlideshow) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{704} }
+func (*TLPageBlockSlideshow) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{704} }
 
 func (m *TLPageBlockSlideshow) GetItems() []*PageBlock {
 	if m != nil {
@@ -44149,7 +44149,7 @@ type TLPageBlockChannel struct {
 func (m *TLPageBlockChannel) Reset()                    { *m = TLPageBlockChannel{} }
 func (m *TLPageBlockChannel) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockChannel) ProtoMessage()               {}
-func (*TLPageBlockChannel) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{705} }
+func (*TLPageBlockChannel) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{705} }
 
 func (m *TLPageBlockChannel) GetChannel() *Chat {
 	if m != nil {
@@ -44167,7 +44167,7 @@ type TLPageBlockAudio struct {
 func (m *TLPageBlockAudio) Reset()                    { *m = TLPageBlockAudio{} }
 func (m *TLPageBlockAudio) String() string            { return proto.CompactTextString(m) }
 func (*TLPageBlockAudio) ProtoMessage()               {}
-func (*TLPageBlockAudio) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{706} }
+func (*TLPageBlockAudio) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{706} }
 
 func (m *TLPageBlockAudio) GetAudioId() int64 {
 	if m != nil {
@@ -44193,7 +44193,7 @@ type TLPagePart struct {
 func (m *TLPagePart) Reset()                    { *m = TLPagePart{} }
 func (m *TLPagePart) String() string            { return proto.CompactTextString(m) }
 func (*TLPagePart) ProtoMessage()               {}
-func (*TLPagePart) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{707} }
+func (*TLPagePart) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{707} }
 
 func (m *TLPagePart) GetBlocks() []*PageBlock {
 	if m != nil {
@@ -44226,7 +44226,7 @@ type TLPageFull struct {
 func (m *TLPageFull) Reset()                    { *m = TLPageFull{} }
 func (m *TLPageFull) String() string            { return proto.CompactTextString(m) }
 func (*TLPageFull) ProtoMessage()               {}
-func (*TLPageFull) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{708} }
+func (*TLPageFull) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{708} }
 
 func (m *TLPageFull) GetBlocks() []*PageBlock {
 	if m != nil {
@@ -44257,7 +44257,7 @@ func (m *TLPhoneCallDiscardReasonMissed) Reset()         { *m = TLPhoneCallDisca
 func (m *TLPhoneCallDiscardReasonMissed) String() string { return proto.CompactTextString(m) }
 func (*TLPhoneCallDiscardReasonMissed) ProtoMessage()    {}
 func (*TLPhoneCallDiscardReasonMissed) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{709}
+	return fileDescriptor4, []int{709}
 }
 
 // phoneCallDiscardReasonDisconnect#e095c1a0 = PhoneCallDiscardReason;
@@ -44268,7 +44268,7 @@ func (m *TLPhoneCallDiscardReasonDisconnect) Reset()         { *m = TLPhoneCallD
 func (m *TLPhoneCallDiscardReasonDisconnect) String() string { return proto.CompactTextString(m) }
 func (*TLPhoneCallDiscardReasonDisconnect) ProtoMessage()    {}
 func (*TLPhoneCallDiscardReasonDisconnect) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{710}
+	return fileDescriptor4, []int{710}
 }
 
 // phoneCallDiscardReasonHangup#57adc690 = PhoneCallDiscardReason;
@@ -44279,7 +44279,7 @@ func (m *TLPhoneCallDiscardReasonHangup) Reset()         { *m = TLPhoneCallDisca
 func (m *TLPhoneCallDiscardReasonHangup) String() string { return proto.CompactTextString(m) }
 func (*TLPhoneCallDiscardReasonHangup) ProtoMessage()    {}
 func (*TLPhoneCallDiscardReasonHangup) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{711}
+	return fileDescriptor4, []int{711}
 }
 
 // phoneCallDiscardReasonBusy#faf7e8c9 = PhoneCallDiscardReason;
@@ -44289,7 +44289,7 @@ type TLPhoneCallDiscardReasonBusy struct {
 func (m *TLPhoneCallDiscardReasonBusy) Reset()                    { *m = TLPhoneCallDiscardReasonBusy{} }
 func (m *TLPhoneCallDiscardReasonBusy) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneCallDiscardReasonBusy) ProtoMessage()               {}
-func (*TLPhoneCallDiscardReasonBusy) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{712} }
+func (*TLPhoneCallDiscardReasonBusy) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{712} }
 
 // dataJSON#7d748d04 data:string = DataJSON;
 type TLDataJSON struct {
@@ -44299,7 +44299,7 @@ type TLDataJSON struct {
 func (m *TLDataJSON) Reset()                    { *m = TLDataJSON{} }
 func (m *TLDataJSON) String() string            { return proto.CompactTextString(m) }
 func (*TLDataJSON) ProtoMessage()               {}
-func (*TLDataJSON) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{713} }
+func (*TLDataJSON) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{713} }
 
 func (m *TLDataJSON) GetData() string {
 	if m != nil {
@@ -44317,7 +44317,7 @@ type TLLabeledPrice struct {
 func (m *TLLabeledPrice) Reset()                    { *m = TLLabeledPrice{} }
 func (m *TLLabeledPrice) String() string            { return proto.CompactTextString(m) }
 func (*TLLabeledPrice) ProtoMessage()               {}
-func (*TLLabeledPrice) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{714} }
+func (*TLLabeledPrice) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{714} }
 
 func (m *TLLabeledPrice) GetLabel() string {
 	if m != nil {
@@ -44348,7 +44348,7 @@ type TLInvoice struct {
 func (m *TLInvoice) Reset()                    { *m = TLInvoice{} }
 func (m *TLInvoice) String() string            { return proto.CompactTextString(m) }
 func (*TLInvoice) ProtoMessage()               {}
-func (*TLInvoice) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{715} }
+func (*TLInvoice) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{715} }
 
 func (m *TLInvoice) GetTest() bool {
 	if m != nil {
@@ -44415,7 +44415,7 @@ type TLPaymentCharge struct {
 func (m *TLPaymentCharge) Reset()                    { *m = TLPaymentCharge{} }
 func (m *TLPaymentCharge) String() string            { return proto.CompactTextString(m) }
 func (*TLPaymentCharge) ProtoMessage()               {}
-func (*TLPaymentCharge) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{716} }
+func (*TLPaymentCharge) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{716} }
 
 func (m *TLPaymentCharge) GetId() string {
 	if m != nil {
@@ -44444,7 +44444,7 @@ type TLPostAddress struct {
 func (m *TLPostAddress) Reset()                    { *m = TLPostAddress{} }
 func (m *TLPostAddress) String() string            { return proto.CompactTextString(m) }
 func (*TLPostAddress) ProtoMessage()               {}
-func (*TLPostAddress) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{717} }
+func (*TLPostAddress) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{717} }
 
 func (m *TLPostAddress) GetStreetLine1() string {
 	if m != nil {
@@ -44499,7 +44499,7 @@ type TLPaymentRequestedInfo struct {
 func (m *TLPaymentRequestedInfo) Reset()                    { *m = TLPaymentRequestedInfo{} }
 func (m *TLPaymentRequestedInfo) String() string            { return proto.CompactTextString(m) }
 func (*TLPaymentRequestedInfo) ProtoMessage()               {}
-func (*TLPaymentRequestedInfo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{718} }
+func (*TLPaymentRequestedInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{718} }
 
 func (m *TLPaymentRequestedInfo) GetName() string {
 	if m != nil {
@@ -44538,7 +44538,7 @@ type TLPaymentSavedCredentialsCard struct {
 func (m *TLPaymentSavedCredentialsCard) Reset()                    { *m = TLPaymentSavedCredentialsCard{} }
 func (m *TLPaymentSavedCredentialsCard) String() string            { return proto.CompactTextString(m) }
 func (*TLPaymentSavedCredentialsCard) ProtoMessage()               {}
-func (*TLPaymentSavedCredentialsCard) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{719} }
+func (*TLPaymentSavedCredentialsCard) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{719} }
 
 func (m *TLPaymentSavedCredentialsCard) GetId() string {
 	if m != nil {
@@ -44567,7 +44567,7 @@ type TLWebDocument struct {
 func (m *TLWebDocument) Reset()                    { *m = TLWebDocument{} }
 func (m *TLWebDocument) String() string            { return proto.CompactTextString(m) }
 func (*TLWebDocument) ProtoMessage()               {}
-func (*TLWebDocument) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{720} }
+func (*TLWebDocument) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{720} }
 
 func (m *TLWebDocument) GetUrl() string {
 	if m != nil {
@@ -44622,7 +44622,7 @@ type TLInputWebDocument struct {
 func (m *TLInputWebDocument) Reset()                    { *m = TLInputWebDocument{} }
 func (m *TLInputWebDocument) String() string            { return proto.CompactTextString(m) }
 func (*TLInputWebDocument) ProtoMessage()               {}
-func (*TLInputWebDocument) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{721} }
+func (*TLInputWebDocument) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{721} }
 
 func (m *TLInputWebDocument) GetUrl() string {
 	if m != nil {
@@ -44661,7 +44661,7 @@ type TLInputWebFileLocation struct {
 func (m *TLInputWebFileLocation) Reset()                    { *m = TLInputWebFileLocation{} }
 func (m *TLInputWebFileLocation) String() string            { return proto.CompactTextString(m) }
 func (*TLInputWebFileLocation) ProtoMessage()               {}
-func (*TLInputWebFileLocation) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{722} }
+func (*TLInputWebFileLocation) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{722} }
 
 func (m *TLInputWebFileLocation) GetUrl() string {
 	if m != nil {
@@ -44689,7 +44689,7 @@ type TLUploadWebFile struct {
 func (m *TLUploadWebFile) Reset()                    { *m = TLUploadWebFile{} }
 func (m *TLUploadWebFile) String() string            { return proto.CompactTextString(m) }
 func (*TLUploadWebFile) ProtoMessage()               {}
-func (*TLUploadWebFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{723} }
+func (*TLUploadWebFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{723} }
 
 func (m *TLUploadWebFile) GetSize() int32 {
 	if m != nil {
@@ -44744,7 +44744,7 @@ type TLPaymentsPaymentForm struct {
 func (m *TLPaymentsPaymentForm) Reset()                    { *m = TLPaymentsPaymentForm{} }
 func (m *TLPaymentsPaymentForm) String() string            { return proto.CompactTextString(m) }
 func (*TLPaymentsPaymentForm) ProtoMessage()               {}
-func (*TLPaymentsPaymentForm) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{724} }
+func (*TLPaymentsPaymentForm) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{724} }
 
 func (m *TLPaymentsPaymentForm) GetCanSaveCredentials() bool {
 	if m != nil {
@@ -44833,7 +44833,7 @@ func (m *TLPaymentsValidatedRequestedInfo) Reset()         { *m = TLPaymentsVali
 func (m *TLPaymentsValidatedRequestedInfo) String() string { return proto.CompactTextString(m) }
 func (*TLPaymentsValidatedRequestedInfo) ProtoMessage()    {}
 func (*TLPaymentsValidatedRequestedInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{725}
+	return fileDescriptor4, []int{725}
 }
 
 func (m *TLPaymentsValidatedRequestedInfo) GetId() string {
@@ -44858,7 +44858,7 @@ type TLPaymentsPaymentResult struct {
 func (m *TLPaymentsPaymentResult) Reset()                    { *m = TLPaymentsPaymentResult{} }
 func (m *TLPaymentsPaymentResult) String() string            { return proto.CompactTextString(m) }
 func (*TLPaymentsPaymentResult) ProtoMessage()               {}
-func (*TLPaymentsPaymentResult) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{726} }
+func (*TLPaymentsPaymentResult) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{726} }
 
 func (m *TLPaymentsPaymentResult) GetUpdates() *Updates {
 	if m != nil {
@@ -44876,7 +44876,7 @@ func (m *TLPaymentsPaymentVerficationNeeded) Reset()         { *m = TLPaymentsPa
 func (m *TLPaymentsPaymentVerficationNeeded) String() string { return proto.CompactTextString(m) }
 func (*TLPaymentsPaymentVerficationNeeded) ProtoMessage()    {}
 func (*TLPaymentsPaymentVerficationNeeded) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{727}
+	return fileDescriptor4, []int{727}
 }
 
 func (m *TLPaymentsPaymentVerficationNeeded) GetUrl() string {
@@ -44903,7 +44903,7 @@ type TLPaymentsPaymentReceipt struct {
 func (m *TLPaymentsPaymentReceipt) Reset()                    { *m = TLPaymentsPaymentReceipt{} }
 func (m *TLPaymentsPaymentReceipt) String() string            { return proto.CompactTextString(m) }
 func (*TLPaymentsPaymentReceipt) ProtoMessage()               {}
-func (*TLPaymentsPaymentReceipt) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{728} }
+func (*TLPaymentsPaymentReceipt) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{728} }
 
 func (m *TLPaymentsPaymentReceipt) GetDate() int32 {
 	if m != nil {
@@ -44984,7 +44984,7 @@ type TLPaymentsSavedInfo struct {
 func (m *TLPaymentsSavedInfo) Reset()                    { *m = TLPaymentsSavedInfo{} }
 func (m *TLPaymentsSavedInfo) String() string            { return proto.CompactTextString(m) }
 func (*TLPaymentsSavedInfo) ProtoMessage()               {}
-func (*TLPaymentsSavedInfo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{729} }
+func (*TLPaymentsSavedInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{729} }
 
 func (m *TLPaymentsSavedInfo) GetHasSavedCredentials() bool {
 	if m != nil {
@@ -45010,7 +45010,7 @@ func (m *TLInputPaymentCredentialsSaved) Reset()         { *m = TLInputPaymentCr
 func (m *TLInputPaymentCredentialsSaved) String() string { return proto.CompactTextString(m) }
 func (*TLInputPaymentCredentialsSaved) ProtoMessage()    {}
 func (*TLInputPaymentCredentialsSaved) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{730}
+	return fileDescriptor4, []int{730}
 }
 
 func (m *TLInputPaymentCredentialsSaved) GetId() string {
@@ -45036,7 +45036,7 @@ type TLInputPaymentCredentials struct {
 func (m *TLInputPaymentCredentials) Reset()                    { *m = TLInputPaymentCredentials{} }
 func (m *TLInputPaymentCredentials) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPaymentCredentials) ProtoMessage()               {}
-func (*TLInputPaymentCredentials) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{731} }
+func (*TLInputPaymentCredentials) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{731} }
 
 func (m *TLInputPaymentCredentials) GetSave() bool {
 	if m != nil {
@@ -45061,7 +45061,7 @@ type TLAccountTmpPassword struct {
 func (m *TLAccountTmpPassword) Reset()                    { *m = TLAccountTmpPassword{} }
 func (m *TLAccountTmpPassword) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountTmpPassword) ProtoMessage()               {}
-func (*TLAccountTmpPassword) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{732} }
+func (*TLAccountTmpPassword) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{732} }
 
 func (m *TLAccountTmpPassword) GetTmpPassword() []byte {
 	if m != nil {
@@ -45087,7 +45087,7 @@ type TLShippingOption struct {
 func (m *TLShippingOption) Reset()                    { *m = TLShippingOption{} }
 func (m *TLShippingOption) String() string            { return proto.CompactTextString(m) }
 func (*TLShippingOption) ProtoMessage()               {}
-func (*TLShippingOption) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{733} }
+func (*TLShippingOption) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{733} }
 
 func (m *TLShippingOption) GetId() string {
 	if m != nil {
@@ -45120,7 +45120,7 @@ type TLInputStickerSetItem struct {
 func (m *TLInputStickerSetItem) Reset()                    { *m = TLInputStickerSetItem{} }
 func (m *TLInputStickerSetItem) String() string            { return proto.CompactTextString(m) }
 func (*TLInputStickerSetItem) ProtoMessage()               {}
-func (*TLInputStickerSetItem) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{734} }
+func (*TLInputStickerSetItem) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{734} }
 
 func (m *TLInputStickerSetItem) GetDocument() *InputDocument {
 	if m != nil {
@@ -45152,7 +45152,7 @@ type TLInputPhoneCall struct {
 func (m *TLInputPhoneCall) Reset()                    { *m = TLInputPhoneCall{} }
 func (m *TLInputPhoneCall) String() string            { return proto.CompactTextString(m) }
 func (*TLInputPhoneCall) ProtoMessage()               {}
-func (*TLInputPhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{735} }
+func (*TLInputPhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{735} }
 
 func (m *TLInputPhoneCall) GetId() int64 {
 	if m != nil {
@@ -45176,7 +45176,7 @@ type TLPhoneCallEmpty struct {
 func (m *TLPhoneCallEmpty) Reset()                    { *m = TLPhoneCallEmpty{} }
 func (m *TLPhoneCallEmpty) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneCallEmpty) ProtoMessage()               {}
-func (*TLPhoneCallEmpty) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{736} }
+func (*TLPhoneCallEmpty) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{736} }
 
 func (m *TLPhoneCallEmpty) GetId() int64 {
 	if m != nil {
@@ -45199,7 +45199,7 @@ type TLPhoneCallWaiting struct {
 func (m *TLPhoneCallWaiting) Reset()                    { *m = TLPhoneCallWaiting{} }
 func (m *TLPhoneCallWaiting) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneCallWaiting) ProtoMessage()               {}
-func (*TLPhoneCallWaiting) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{737} }
+func (*TLPhoneCallWaiting) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{737} }
 
 func (m *TLPhoneCallWaiting) GetId() int64 {
 	if m != nil {
@@ -45264,7 +45264,7 @@ type TLPhoneCallRequested struct {
 func (m *TLPhoneCallRequested) Reset()                    { *m = TLPhoneCallRequested{} }
 func (m *TLPhoneCallRequested) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneCallRequested) ProtoMessage()               {}
-func (*TLPhoneCallRequested) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{738} }
+func (*TLPhoneCallRequested) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{738} }
 
 func (m *TLPhoneCallRequested) GetId() int64 {
 	if m != nil {
@@ -45329,7 +45329,7 @@ type TLPhoneCallAccepted struct {
 func (m *TLPhoneCallAccepted) Reset()                    { *m = TLPhoneCallAccepted{} }
 func (m *TLPhoneCallAccepted) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneCallAccepted) ProtoMessage()               {}
-func (*TLPhoneCallAccepted) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{739} }
+func (*TLPhoneCallAccepted) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{739} }
 
 func (m *TLPhoneCallAccepted) GetId() int64 {
 	if m != nil {
@@ -45398,7 +45398,7 @@ type TLPhoneCall struct {
 func (m *TLPhoneCall) Reset()                    { *m = TLPhoneCall{} }
 func (m *TLPhoneCall) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneCall) ProtoMessage()               {}
-func (*TLPhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{740} }
+func (*TLPhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{740} }
 
 func (m *TLPhoneCall) GetId() int64 {
 	if m != nil {
@@ -45489,7 +45489,7 @@ type TLPhoneCallDiscarded struct {
 func (m *TLPhoneCallDiscarded) Reset()                    { *m = TLPhoneCallDiscarded{} }
 func (m *TLPhoneCallDiscarded) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneCallDiscarded) ProtoMessage()               {}
-func (*TLPhoneCallDiscarded) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{741} }
+func (*TLPhoneCallDiscarded) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{741} }
 
 func (m *TLPhoneCallDiscarded) GetNeedRating() bool {
 	if m != nil {
@@ -45538,7 +45538,7 @@ type TLPhoneConnection struct {
 func (m *TLPhoneConnection) Reset()                    { *m = TLPhoneConnection{} }
 func (m *TLPhoneConnection) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneConnection) ProtoMessage()               {}
-func (*TLPhoneConnection) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{742} }
+func (*TLPhoneConnection) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{742} }
 
 func (m *TLPhoneConnection) GetId() int64 {
 	if m != nil {
@@ -45586,7 +45586,7 @@ type TLPhoneCallProtocol struct {
 func (m *TLPhoneCallProtocol) Reset()                    { *m = TLPhoneCallProtocol{} }
 func (m *TLPhoneCallProtocol) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneCallProtocol) ProtoMessage()               {}
-func (*TLPhoneCallProtocol) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{743} }
+func (*TLPhoneCallProtocol) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{743} }
 
 func (m *TLPhoneCallProtocol) GetUdpP2P() bool {
 	if m != nil {
@@ -45625,7 +45625,7 @@ type TLPhonePhoneCall struct {
 func (m *TLPhonePhoneCall) Reset()                    { *m = TLPhonePhoneCall{} }
 func (m *TLPhonePhoneCall) String() string            { return proto.CompactTextString(m) }
 func (*TLPhonePhoneCall) ProtoMessage()               {}
-func (*TLPhonePhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{744} }
+func (*TLPhonePhoneCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{744} }
 
 func (m *TLPhonePhoneCall) GetPhoneCall() *PhoneCall {
 	if m != nil {
@@ -45649,7 +45649,7 @@ type TLUploadCdnFileReuploadNeeded struct {
 func (m *TLUploadCdnFileReuploadNeeded) Reset()                    { *m = TLUploadCdnFileReuploadNeeded{} }
 func (m *TLUploadCdnFileReuploadNeeded) String() string            { return proto.CompactTextString(m) }
 func (*TLUploadCdnFileReuploadNeeded) ProtoMessage()               {}
-func (*TLUploadCdnFileReuploadNeeded) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{745} }
+func (*TLUploadCdnFileReuploadNeeded) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{745} }
 
 func (m *TLUploadCdnFileReuploadNeeded) GetRequestToken() []byte {
 	if m != nil {
@@ -45666,7 +45666,7 @@ type TLUploadCdnFile struct {
 func (m *TLUploadCdnFile) Reset()                    { *m = TLUploadCdnFile{} }
 func (m *TLUploadCdnFile) String() string            { return proto.CompactTextString(m) }
 func (*TLUploadCdnFile) ProtoMessage()               {}
-func (*TLUploadCdnFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{746} }
+func (*TLUploadCdnFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{746} }
 
 func (m *TLUploadCdnFile) GetBytes() []byte {
 	if m != nil {
@@ -45684,7 +45684,7 @@ type TLCdnPublicKey struct {
 func (m *TLCdnPublicKey) Reset()                    { *m = TLCdnPublicKey{} }
 func (m *TLCdnPublicKey) String() string            { return proto.CompactTextString(m) }
 func (*TLCdnPublicKey) ProtoMessage()               {}
-func (*TLCdnPublicKey) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{747} }
+func (*TLCdnPublicKey) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{747} }
 
 func (m *TLCdnPublicKey) GetDcId() int32 {
 	if m != nil {
@@ -45708,7 +45708,7 @@ type TLCdnConfig struct {
 func (m *TLCdnConfig) Reset()                    { *m = TLCdnConfig{} }
 func (m *TLCdnConfig) String() string            { return proto.CompactTextString(m) }
 func (*TLCdnConfig) ProtoMessage()               {}
-func (*TLCdnConfig) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{748} }
+func (*TLCdnConfig) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{748} }
 
 func (m *TLCdnConfig) GetPublicKeys() []*CdnPublicKey {
 	if m != nil {
@@ -45726,7 +45726,7 @@ type TLLangPackString struct {
 func (m *TLLangPackString) Reset()                    { *m = TLLangPackString{} }
 func (m *TLLangPackString) String() string            { return proto.CompactTextString(m) }
 func (*TLLangPackString) ProtoMessage()               {}
-func (*TLLangPackString) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{749} }
+func (*TLLangPackString) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{749} }
 
 func (m *TLLangPackString) GetKey() string {
 	if m != nil {
@@ -45756,7 +45756,7 @@ type TLLangPackStringPluralized struct {
 func (m *TLLangPackStringPluralized) Reset()                    { *m = TLLangPackStringPluralized{} }
 func (m *TLLangPackStringPluralized) String() string            { return proto.CompactTextString(m) }
 func (*TLLangPackStringPluralized) ProtoMessage()               {}
-func (*TLLangPackStringPluralized) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{750} }
+func (*TLLangPackStringPluralized) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{750} }
 
 func (m *TLLangPackStringPluralized) GetKey() string {
 	if m != nil {
@@ -45815,7 +45815,7 @@ type TLLangPackStringDeleted struct {
 func (m *TLLangPackStringDeleted) Reset()                    { *m = TLLangPackStringDeleted{} }
 func (m *TLLangPackStringDeleted) String() string            { return proto.CompactTextString(m) }
 func (*TLLangPackStringDeleted) ProtoMessage()               {}
-func (*TLLangPackStringDeleted) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{751} }
+func (*TLLangPackStringDeleted) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{751} }
 
 func (m *TLLangPackStringDeleted) GetKey() string {
 	if m != nil {
@@ -45835,7 +45835,7 @@ type TLLangPackDifference struct {
 func (m *TLLangPackDifference) Reset()                    { *m = TLLangPackDifference{} }
 func (m *TLLangPackDifference) String() string            { return proto.CompactTextString(m) }
 func (*TLLangPackDifference) ProtoMessage()               {}
-func (*TLLangPackDifference) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{752} }
+func (*TLLangPackDifference) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{752} }
 
 func (m *TLLangPackDifference) GetLangCode() string {
 	if m != nil {
@@ -45875,7 +45875,7 @@ type TLLangPackLanguage struct {
 func (m *TLLangPackLanguage) Reset()                    { *m = TLLangPackLanguage{} }
 func (m *TLLangPackLanguage) String() string            { return proto.CompactTextString(m) }
 func (*TLLangPackLanguage) ProtoMessage()               {}
-func (*TLLangPackLanguage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{753} }
+func (*TLLangPackLanguage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{753} }
 
 func (m *TLLangPackLanguage) GetName() string {
 	if m != nil {
@@ -45914,7 +45914,7 @@ type TLChannelAdminRights struct {
 func (m *TLChannelAdminRights) Reset()                    { *m = TLChannelAdminRights{} }
 func (m *TLChannelAdminRights) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelAdminRights) ProtoMessage()               {}
-func (*TLChannelAdminRights) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{754} }
+func (*TLChannelAdminRights) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{754} }
 
 func (m *TLChannelAdminRights) GetChangeInfo() bool {
 	if m != nil {
@@ -45995,7 +45995,7 @@ type TLChannelBannedRights struct {
 func (m *TLChannelBannedRights) Reset()                    { *m = TLChannelBannedRights{} }
 func (m *TLChannelBannedRights) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelBannedRights) ProtoMessage()               {}
-func (*TLChannelBannedRights) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{755} }
+func (*TLChannelBannedRights) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{755} }
 
 func (m *TLChannelBannedRights) GetViewMessages() bool {
 	if m != nil {
@@ -46072,7 +46072,7 @@ func (m *TLChannelAdminLogEventActionChangeTitle) Reset() {
 func (m *TLChannelAdminLogEventActionChangeTitle) String() string { return proto.CompactTextString(m) }
 func (*TLChannelAdminLogEventActionChangeTitle) ProtoMessage()    {}
 func (*TLChannelAdminLogEventActionChangeTitle) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{756}
+	return fileDescriptor4, []int{756}
 }
 
 func (m *TLChannelAdminLogEventActionChangeTitle) GetPrevValue() string {
@@ -46101,7 +46101,7 @@ func (m *TLChannelAdminLogEventActionChangeAbout) Reset() {
 func (m *TLChannelAdminLogEventActionChangeAbout) String() string { return proto.CompactTextString(m) }
 func (*TLChannelAdminLogEventActionChangeAbout) ProtoMessage()    {}
 func (*TLChannelAdminLogEventActionChangeAbout) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{757}
+	return fileDescriptor4, []int{757}
 }
 
 func (m *TLChannelAdminLogEventActionChangeAbout) GetPrevValue() string {
@@ -46132,7 +46132,7 @@ func (m *TLChannelAdminLogEventActionChangeUsername) String() string {
 }
 func (*TLChannelAdminLogEventActionChangeUsername) ProtoMessage() {}
 func (*TLChannelAdminLogEventActionChangeUsername) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{758}
+	return fileDescriptor4, []int{758}
 }
 
 func (m *TLChannelAdminLogEventActionChangeUsername) GetPrevValue() string {
@@ -46161,7 +46161,7 @@ func (m *TLChannelAdminLogEventActionChangePhoto) Reset() {
 func (m *TLChannelAdminLogEventActionChangePhoto) String() string { return proto.CompactTextString(m) }
 func (*TLChannelAdminLogEventActionChangePhoto) ProtoMessage()    {}
 func (*TLChannelAdminLogEventActionChangePhoto) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{759}
+	return fileDescriptor4, []int{759}
 }
 
 func (m *TLChannelAdminLogEventActionChangePhoto) GetPrevPhoto() *ChatPhoto {
@@ -46189,7 +46189,7 @@ func (m *TLChannelAdminLogEventActionToggleInvites) Reset() {
 func (m *TLChannelAdminLogEventActionToggleInvites) String() string { return proto.CompactTextString(m) }
 func (*TLChannelAdminLogEventActionToggleInvites) ProtoMessage()    {}
 func (*TLChannelAdminLogEventActionToggleInvites) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{760}
+	return fileDescriptor4, []int{760}
 }
 
 func (m *TLChannelAdminLogEventActionToggleInvites) GetNewValue() *Bool {
@@ -46212,7 +46212,7 @@ func (m *TLChannelAdminLogEventActionToggleSignatures) String() string {
 }
 func (*TLChannelAdminLogEventActionToggleSignatures) ProtoMessage() {}
 func (*TLChannelAdminLogEventActionToggleSignatures) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{761}
+	return fileDescriptor4, []int{761}
 }
 
 func (m *TLChannelAdminLogEventActionToggleSignatures) GetNewValue() *Bool {
@@ -46233,7 +46233,7 @@ func (m *TLChannelAdminLogEventActionUpdatePinned) Reset() {
 func (m *TLChannelAdminLogEventActionUpdatePinned) String() string { return proto.CompactTextString(m) }
 func (*TLChannelAdminLogEventActionUpdatePinned) ProtoMessage()    {}
 func (*TLChannelAdminLogEventActionUpdatePinned) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{762}
+	return fileDescriptor4, []int{762}
 }
 
 func (m *TLChannelAdminLogEventActionUpdatePinned) GetMessage() *Message {
@@ -46255,7 +46255,7 @@ func (m *TLChannelAdminLogEventActionEditMessage) Reset() {
 func (m *TLChannelAdminLogEventActionEditMessage) String() string { return proto.CompactTextString(m) }
 func (*TLChannelAdminLogEventActionEditMessage) ProtoMessage()    {}
 func (*TLChannelAdminLogEventActionEditMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{763}
+	return fileDescriptor4, []int{763}
 }
 
 func (m *TLChannelAdminLogEventActionEditMessage) GetPrevMessage() *Message {
@@ -46283,7 +46283,7 @@ func (m *TLChannelAdminLogEventActionDeleteMessage) Reset() {
 func (m *TLChannelAdminLogEventActionDeleteMessage) String() string { return proto.CompactTextString(m) }
 func (*TLChannelAdminLogEventActionDeleteMessage) ProtoMessage()    {}
 func (*TLChannelAdminLogEventActionDeleteMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{764}
+	return fileDescriptor4, []int{764}
 }
 
 func (m *TLChannelAdminLogEventActionDeleteMessage) GetMessage() *Message {
@@ -46305,7 +46305,7 @@ func (m *TLChannelAdminLogEventActionParticipantJoin) String() string {
 }
 func (*TLChannelAdminLogEventActionParticipantJoin) ProtoMessage() {}
 func (*TLChannelAdminLogEventActionParticipantJoin) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{765}
+	return fileDescriptor4, []int{765}
 }
 
 // channelAdminLogEventActionParticipantLeave#f89777f2 = ChannelAdminLogEventAction;
@@ -46320,7 +46320,7 @@ func (m *TLChannelAdminLogEventActionParticipantLeave) String() string {
 }
 func (*TLChannelAdminLogEventActionParticipantLeave) ProtoMessage() {}
 func (*TLChannelAdminLogEventActionParticipantLeave) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{766}
+	return fileDescriptor4, []int{766}
 }
 
 // channelAdminLogEventActionParticipantInvite#e31c34d8 participant:ChannelParticipant = ChannelAdminLogEventAction;
@@ -46336,7 +46336,7 @@ func (m *TLChannelAdminLogEventActionParticipantInvite) String() string {
 }
 func (*TLChannelAdminLogEventActionParticipantInvite) ProtoMessage() {}
 func (*TLChannelAdminLogEventActionParticipantInvite) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{767}
+	return fileDescriptor4, []int{767}
 }
 
 func (m *TLChannelAdminLogEventActionParticipantInvite) GetParticipant() *ChannelParticipant {
@@ -46360,7 +46360,7 @@ func (m *TLChannelAdminLogEventActionParticipantToggleBan) String() string {
 }
 func (*TLChannelAdminLogEventActionParticipantToggleBan) ProtoMessage() {}
 func (*TLChannelAdminLogEventActionParticipantToggleBan) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{768}
+	return fileDescriptor4, []int{768}
 }
 
 func (m *TLChannelAdminLogEventActionParticipantToggleBan) GetPrevParticipant() *ChannelParticipant {
@@ -46391,7 +46391,7 @@ func (m *TLChannelAdminLogEventActionParticipantToggleAdmin) String() string {
 }
 func (*TLChannelAdminLogEventActionParticipantToggleAdmin) ProtoMessage() {}
 func (*TLChannelAdminLogEventActionParticipantToggleAdmin) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{769}
+	return fileDescriptor4, []int{769}
 }
 
 func (m *TLChannelAdminLogEventActionParticipantToggleAdmin) GetPrevParticipant() *ChannelParticipant {
@@ -46422,7 +46422,7 @@ func (m *TLChannelAdminLogEventActionChangeStickerSet) String() string {
 }
 func (*TLChannelAdminLogEventActionChangeStickerSet) ProtoMessage() {}
 func (*TLChannelAdminLogEventActionChangeStickerSet) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{770}
+	return fileDescriptor4, []int{770}
 }
 
 func (m *TLChannelAdminLogEventActionChangeStickerSet) GetPrevStickerset() *InputStickerSet {
@@ -46450,7 +46450,7 @@ type TLChannelAdminLogEvent struct {
 func (m *TLChannelAdminLogEvent) Reset()                    { *m = TLChannelAdminLogEvent{} }
 func (m *TLChannelAdminLogEvent) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelAdminLogEvent) ProtoMessage()               {}
-func (*TLChannelAdminLogEvent) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{771} }
+func (*TLChannelAdminLogEvent) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{771} }
 
 func (m *TLChannelAdminLogEvent) GetId() int64 {
 	if m != nil {
@@ -46490,7 +46490,7 @@ type TLChannelsAdminLogResults struct {
 func (m *TLChannelsAdminLogResults) Reset()                    { *m = TLChannelsAdminLogResults{} }
 func (m *TLChannelsAdminLogResults) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsAdminLogResults) ProtoMessage()               {}
-func (*TLChannelsAdminLogResults) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{772} }
+func (*TLChannelsAdminLogResults) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{772} }
 
 func (m *TLChannelsAdminLogResults) GetEvents() []*ChannelAdminLogEvent {
 	if m != nil {
@@ -46534,7 +46534,7 @@ type TLChannelAdminLogEventsFilter struct {
 func (m *TLChannelAdminLogEventsFilter) Reset()                    { *m = TLChannelAdminLogEventsFilter{} }
 func (m *TLChannelAdminLogEventsFilter) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelAdminLogEventsFilter) ProtoMessage()               {}
-func (*TLChannelAdminLogEventsFilter) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{773} }
+func (*TLChannelAdminLogEventsFilter) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{773} }
 
 func (m *TLChannelAdminLogEventsFilter) GetJoin() bool {
 	if m != nil {
@@ -46643,7 +46643,7 @@ type TLPopularContact struct {
 func (m *TLPopularContact) Reset()                    { *m = TLPopularContact{} }
 func (m *TLPopularContact) String() string            { return proto.CompactTextString(m) }
 func (*TLPopularContact) ProtoMessage()               {}
-func (*TLPopularContact) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{774} }
+func (*TLPopularContact) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{774} }
 
 func (m *TLPopularContact) GetClientId() int64 {
 	if m != nil {
@@ -46669,7 +46669,7 @@ type TLCdnFileHash struct {
 func (m *TLCdnFileHash) Reset()                    { *m = TLCdnFileHash{} }
 func (m *TLCdnFileHash) String() string            { return proto.CompactTextString(m) }
 func (*TLCdnFileHash) ProtoMessage()               {}
-func (*TLCdnFileHash) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{775} }
+func (*TLCdnFileHash) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{775} }
 
 func (m *TLCdnFileHash) GetOffset() int32 {
 	if m != nil {
@@ -46700,7 +46700,7 @@ func (m *TLMessagesFavedStickersNotModified) Reset()         { *m = TLMessagesFa
 func (m *TLMessagesFavedStickersNotModified) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesFavedStickersNotModified) ProtoMessage()    {}
 func (*TLMessagesFavedStickersNotModified) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{776}
+	return fileDescriptor4, []int{776}
 }
 
 // messages.favedStickers#f37f2f16 hash:int packs:Vector<StickerPack> stickers:Vector<Document> = messages.FavedStickers;
@@ -46713,7 +46713,7 @@ type TLMessagesFavedStickers struct {
 func (m *TLMessagesFavedStickers) Reset()                    { *m = TLMessagesFavedStickers{} }
 func (m *TLMessagesFavedStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesFavedStickers) ProtoMessage()               {}
-func (*TLMessagesFavedStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{777} }
+func (*TLMessagesFavedStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{777} }
 
 func (m *TLMessagesFavedStickers) GetHash() int32 {
 	if m != nil {
@@ -46746,7 +46746,7 @@ type TLInvokeAfterMsg struct {
 func (m *TLInvokeAfterMsg) Reset()                    { *m = TLInvokeAfterMsg{} }
 func (m *TLInvokeAfterMsg) String() string            { return proto.CompactTextString(m) }
 func (*TLInvokeAfterMsg) ProtoMessage()               {}
-func (*TLInvokeAfterMsg) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{778} }
+func (*TLInvokeAfterMsg) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{778} }
 
 func (m *TLInvokeAfterMsg) GetMsgId() int64 {
 	if m != nil {
@@ -46771,7 +46771,7 @@ type TLInvokeAfterMsgs struct {
 func (m *TLInvokeAfterMsgs) Reset()                    { *m = TLInvokeAfterMsgs{} }
 func (m *TLInvokeAfterMsgs) String() string            { return proto.CompactTextString(m) }
 func (*TLInvokeAfterMsgs) ProtoMessage()               {}
-func (*TLInvokeAfterMsgs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{779} }
+func (*TLInvokeAfterMsgs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{779} }
 
 func (m *TLInvokeAfterMsgs) GetMsgIds() []int64 {
 	if m != nil {
@@ -46802,7 +46802,7 @@ type TLInitConnection struct {
 func (m *TLInitConnection) Reset()                    { *m = TLInitConnection{} }
 func (m *TLInitConnection) String() string            { return proto.CompactTextString(m) }
 func (*TLInitConnection) ProtoMessage()               {}
-func (*TLInitConnection) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{780} }
+func (*TLInitConnection) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{780} }
 
 func (m *TLInitConnection) GetApiId() int32 {
 	if m != nil {
@@ -46869,7 +46869,7 @@ type TLInvokeWithLayer struct {
 func (m *TLInvokeWithLayer) Reset()                    { *m = TLInvokeWithLayer{} }
 func (m *TLInvokeWithLayer) String() string            { return proto.CompactTextString(m) }
 func (*TLInvokeWithLayer) ProtoMessage()               {}
-func (*TLInvokeWithLayer) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{781} }
+func (*TLInvokeWithLayer) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{781} }
 
 func (m *TLInvokeWithLayer) GetLayer() int32 {
 	if m != nil {
@@ -46893,7 +46893,7 @@ type TLInvokeWithoutUpdates struct {
 func (m *TLInvokeWithoutUpdates) Reset()                    { *m = TLInvokeWithoutUpdates{} }
 func (m *TLInvokeWithoutUpdates) String() string            { return proto.CompactTextString(m) }
 func (*TLInvokeWithoutUpdates) ProtoMessage()               {}
-func (*TLInvokeWithoutUpdates) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{782} }
+func (*TLInvokeWithoutUpdates) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{782} }
 
 func (m *TLInvokeWithoutUpdates) GetQuery() []byte {
 	if m != nil {
@@ -46910,7 +46910,7 @@ type TLAuthCheckPhone struct {
 func (m *TLAuthCheckPhone) Reset()                    { *m = TLAuthCheckPhone{} }
 func (m *TLAuthCheckPhone) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthCheckPhone) ProtoMessage()               {}
-func (*TLAuthCheckPhone) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{783} }
+func (*TLAuthCheckPhone) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{783} }
 
 func (m *TLAuthCheckPhone) GetPhoneNumber() string {
 	if m != nil {
@@ -46931,7 +46931,7 @@ type TLAuthSendCode struct {
 func (m *TLAuthSendCode) Reset()                    { *m = TLAuthSendCode{} }
 func (m *TLAuthSendCode) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthSendCode) ProtoMessage()               {}
-func (*TLAuthSendCode) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{784} }
+func (*TLAuthSendCode) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{784} }
 
 func (m *TLAuthSendCode) GetAllowFlashcall() bool {
 	if m != nil {
@@ -46977,7 +46977,7 @@ type TLAuthResendCode struct {
 func (m *TLAuthResendCode) Reset()                    { *m = TLAuthResendCode{} }
 func (m *TLAuthResendCode) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthResendCode) ProtoMessage()               {}
-func (*TLAuthResendCode) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{785} }
+func (*TLAuthResendCode) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{785} }
 
 func (m *TLAuthResendCode) GetPhoneNumber() string {
 	if m != nil {
@@ -47003,7 +47003,7 @@ type TLAccountSendChangePhoneCode struct {
 func (m *TLAccountSendChangePhoneCode) Reset()                    { *m = TLAccountSendChangePhoneCode{} }
 func (m *TLAccountSendChangePhoneCode) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountSendChangePhoneCode) ProtoMessage()               {}
-func (*TLAccountSendChangePhoneCode) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{786} }
+func (*TLAccountSendChangePhoneCode) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{786} }
 
 func (m *TLAccountSendChangePhoneCode) GetAllowFlashcall() bool {
 	if m != nil {
@@ -47036,7 +47036,7 @@ type TLAccountSendConfirmPhoneCode struct {
 func (m *TLAccountSendConfirmPhoneCode) Reset()                    { *m = TLAccountSendConfirmPhoneCode{} }
 func (m *TLAccountSendConfirmPhoneCode) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountSendConfirmPhoneCode) ProtoMessage()               {}
-func (*TLAccountSendConfirmPhoneCode) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{787} }
+func (*TLAccountSendConfirmPhoneCode) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{787} }
 
 func (m *TLAccountSendConfirmPhoneCode) GetAllowFlashcall() bool {
 	if m != nil {
@@ -47071,7 +47071,7 @@ type TLAuthSignUp struct {
 func (m *TLAuthSignUp) Reset()                    { *m = TLAuthSignUp{} }
 func (m *TLAuthSignUp) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthSignUp) ProtoMessage()               {}
-func (*TLAuthSignUp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{788} }
+func (*TLAuthSignUp) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{788} }
 
 func (m *TLAuthSignUp) GetPhoneNumber() string {
 	if m != nil {
@@ -47118,7 +47118,7 @@ type TLAuthSignIn struct {
 func (m *TLAuthSignIn) Reset()                    { *m = TLAuthSignIn{} }
 func (m *TLAuthSignIn) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthSignIn) ProtoMessage()               {}
-func (*TLAuthSignIn) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{789} }
+func (*TLAuthSignIn) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{789} }
 
 func (m *TLAuthSignIn) GetPhoneNumber() string {
 	if m != nil {
@@ -47150,7 +47150,7 @@ type TLAuthImportAuthorization struct {
 func (m *TLAuthImportAuthorization) Reset()                    { *m = TLAuthImportAuthorization{} }
 func (m *TLAuthImportAuthorization) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthImportAuthorization) ProtoMessage()               {}
-func (*TLAuthImportAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{790} }
+func (*TLAuthImportAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{790} }
 
 func (m *TLAuthImportAuthorization) GetId() int32 {
 	if m != nil {
@@ -47176,7 +47176,7 @@ type TLAuthImportBotAuthorization struct {
 func (m *TLAuthImportBotAuthorization) Reset()                    { *m = TLAuthImportBotAuthorization{} }
 func (m *TLAuthImportBotAuthorization) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthImportBotAuthorization) ProtoMessage()               {}
-func (*TLAuthImportBotAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{791} }
+func (*TLAuthImportBotAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{791} }
 
 func (m *TLAuthImportBotAuthorization) GetApiId() int32 {
 	if m != nil {
@@ -47207,7 +47207,7 @@ type TLAuthCheckPassword struct {
 func (m *TLAuthCheckPassword) Reset()                    { *m = TLAuthCheckPassword{} }
 func (m *TLAuthCheckPassword) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthCheckPassword) ProtoMessage()               {}
-func (*TLAuthCheckPassword) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{792} }
+func (*TLAuthCheckPassword) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{792} }
 
 func (m *TLAuthCheckPassword) GetPasswordHash() []byte {
 	if m != nil {
@@ -47224,7 +47224,7 @@ type TLAuthRecoverPassword struct {
 func (m *TLAuthRecoverPassword) Reset()                    { *m = TLAuthRecoverPassword{} }
 func (m *TLAuthRecoverPassword) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthRecoverPassword) ProtoMessage()               {}
-func (*TLAuthRecoverPassword) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{793} }
+func (*TLAuthRecoverPassword) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{793} }
 
 func (m *TLAuthRecoverPassword) GetCode() string {
 	if m != nil {
@@ -47240,7 +47240,7 @@ type TLAuthLogOut struct {
 func (m *TLAuthLogOut) Reset()                    { *m = TLAuthLogOut{} }
 func (m *TLAuthLogOut) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthLogOut) ProtoMessage()               {}
-func (*TLAuthLogOut) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{794} }
+func (*TLAuthLogOut) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{794} }
 
 // auth.resetAuthorizations#9fab0d1a = Bool;
 type TLAuthResetAuthorizations struct {
@@ -47249,7 +47249,7 @@ type TLAuthResetAuthorizations struct {
 func (m *TLAuthResetAuthorizations) Reset()                    { *m = TLAuthResetAuthorizations{} }
 func (m *TLAuthResetAuthorizations) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthResetAuthorizations) ProtoMessage()               {}
-func (*TLAuthResetAuthorizations) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{795} }
+func (*TLAuthResetAuthorizations) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{795} }
 
 // auth.sendInvites#771c1d97 phone_numbers:Vector<string> message:string = Bool;
 type TLAuthSendInvites struct {
@@ -47260,7 +47260,7 @@ type TLAuthSendInvites struct {
 func (m *TLAuthSendInvites) Reset()                    { *m = TLAuthSendInvites{} }
 func (m *TLAuthSendInvites) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthSendInvites) ProtoMessage()               {}
-func (*TLAuthSendInvites) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{796} }
+func (*TLAuthSendInvites) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{796} }
 
 func (m *TLAuthSendInvites) GetPhoneNumbers() []string {
 	if m != nil {
@@ -47287,7 +47287,7 @@ type TLAuthBindTempAuthKey struct {
 func (m *TLAuthBindTempAuthKey) Reset()                    { *m = TLAuthBindTempAuthKey{} }
 func (m *TLAuthBindTempAuthKey) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthBindTempAuthKey) ProtoMessage()               {}
-func (*TLAuthBindTempAuthKey) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{797} }
+func (*TLAuthBindTempAuthKey) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{797} }
 
 func (m *TLAuthBindTempAuthKey) GetPermAuthKeyId() int64 {
 	if m != nil {
@@ -47326,7 +47326,7 @@ type TLAuthCancelCode struct {
 func (m *TLAuthCancelCode) Reset()                    { *m = TLAuthCancelCode{} }
 func (m *TLAuthCancelCode) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthCancelCode) ProtoMessage()               {}
-func (*TLAuthCancelCode) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{798} }
+func (*TLAuthCancelCode) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{798} }
 
 func (m *TLAuthCancelCode) GetPhoneNumber() string {
 	if m != nil {
@@ -47350,7 +47350,7 @@ type TLAuthDropTempAuthKeys struct {
 func (m *TLAuthDropTempAuthKeys) Reset()                    { *m = TLAuthDropTempAuthKeys{} }
 func (m *TLAuthDropTempAuthKeys) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthDropTempAuthKeys) ProtoMessage()               {}
-func (*TLAuthDropTempAuthKeys) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{799} }
+func (*TLAuthDropTempAuthKeys) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{799} }
 
 func (m *TLAuthDropTempAuthKeys) GetExceptAuthKeys() []int64 {
 	if m != nil {
@@ -47368,7 +47368,7 @@ type TLAccountRegisterDevice struct {
 func (m *TLAccountRegisterDevice) Reset()                    { *m = TLAccountRegisterDevice{} }
 func (m *TLAccountRegisterDevice) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountRegisterDevice) ProtoMessage()               {}
-func (*TLAccountRegisterDevice) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{800} }
+func (*TLAccountRegisterDevice) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{800} }
 
 func (m *TLAccountRegisterDevice) GetTokenType() int32 {
 	if m != nil {
@@ -47393,7 +47393,7 @@ type TLAccountUnregisterDevice struct {
 func (m *TLAccountUnregisterDevice) Reset()                    { *m = TLAccountUnregisterDevice{} }
 func (m *TLAccountUnregisterDevice) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountUnregisterDevice) ProtoMessage()               {}
-func (*TLAccountUnregisterDevice) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{801} }
+func (*TLAccountUnregisterDevice) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{801} }
 
 func (m *TLAccountUnregisterDevice) GetTokenType() int32 {
 	if m != nil {
@@ -47418,7 +47418,7 @@ type TLAccountUpdateNotifySettings struct {
 func (m *TLAccountUpdateNotifySettings) Reset()                    { *m = TLAccountUpdateNotifySettings{} }
 func (m *TLAccountUpdateNotifySettings) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountUpdateNotifySettings) ProtoMessage()               {}
-func (*TLAccountUpdateNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{802} }
+func (*TLAccountUpdateNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{802} }
 
 func (m *TLAccountUpdateNotifySettings) GetPeer() *InputNotifyPeer {
 	if m != nil {
@@ -47441,7 +47441,7 @@ type TLAccountResetNotifySettings struct {
 func (m *TLAccountResetNotifySettings) Reset()                    { *m = TLAccountResetNotifySettings{} }
 func (m *TLAccountResetNotifySettings) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountResetNotifySettings) ProtoMessage()               {}
-func (*TLAccountResetNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{803} }
+func (*TLAccountResetNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{803} }
 
 // account.updateStatus#6628562c offline:Bool = Bool;
 type TLAccountUpdateStatus struct {
@@ -47451,7 +47451,7 @@ type TLAccountUpdateStatus struct {
 func (m *TLAccountUpdateStatus) Reset()                    { *m = TLAccountUpdateStatus{} }
 func (m *TLAccountUpdateStatus) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountUpdateStatus) ProtoMessage()               {}
-func (*TLAccountUpdateStatus) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{804} }
+func (*TLAccountUpdateStatus) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{804} }
 
 func (m *TLAccountUpdateStatus) GetOffline() *Bool {
 	if m != nil {
@@ -47469,7 +47469,7 @@ type TLAccountReportPeer struct {
 func (m *TLAccountReportPeer) Reset()                    { *m = TLAccountReportPeer{} }
 func (m *TLAccountReportPeer) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountReportPeer) ProtoMessage()               {}
-func (*TLAccountReportPeer) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{805} }
+func (*TLAccountReportPeer) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{805} }
 
 func (m *TLAccountReportPeer) GetPeer() *InputPeer {
 	if m != nil {
@@ -47493,7 +47493,7 @@ type TLAccountCheckUsername struct {
 func (m *TLAccountCheckUsername) Reset()                    { *m = TLAccountCheckUsername{} }
 func (m *TLAccountCheckUsername) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountCheckUsername) ProtoMessage()               {}
-func (*TLAccountCheckUsername) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{806} }
+func (*TLAccountCheckUsername) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{806} }
 
 func (m *TLAccountCheckUsername) GetUsername() string {
 	if m != nil {
@@ -47510,7 +47510,7 @@ type TLAccountDeleteAccount struct {
 func (m *TLAccountDeleteAccount) Reset()                    { *m = TLAccountDeleteAccount{} }
 func (m *TLAccountDeleteAccount) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountDeleteAccount) ProtoMessage()               {}
-func (*TLAccountDeleteAccount) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{807} }
+func (*TLAccountDeleteAccount) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{807} }
 
 func (m *TLAccountDeleteAccount) GetReason() string {
 	if m != nil {
@@ -47527,7 +47527,7 @@ type TLAccountSetAccountTTL struct {
 func (m *TLAccountSetAccountTTL) Reset()                    { *m = TLAccountSetAccountTTL{} }
 func (m *TLAccountSetAccountTTL) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountSetAccountTTL) ProtoMessage()               {}
-func (*TLAccountSetAccountTTL) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{808} }
+func (*TLAccountSetAccountTTL) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{808} }
 
 func (m *TLAccountSetAccountTTL) GetTtl() *AccountDaysTTL {
 	if m != nil {
@@ -47544,7 +47544,7 @@ type TLAccountUpdateDeviceLocked struct {
 func (m *TLAccountUpdateDeviceLocked) Reset()                    { *m = TLAccountUpdateDeviceLocked{} }
 func (m *TLAccountUpdateDeviceLocked) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountUpdateDeviceLocked) ProtoMessage()               {}
-func (*TLAccountUpdateDeviceLocked) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{809} }
+func (*TLAccountUpdateDeviceLocked) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{809} }
 
 func (m *TLAccountUpdateDeviceLocked) GetPeriod() int32 {
 	if m != nil {
@@ -47561,7 +47561,7 @@ type TLAccountResetAuthorization struct {
 func (m *TLAccountResetAuthorization) Reset()                    { *m = TLAccountResetAuthorization{} }
 func (m *TLAccountResetAuthorization) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountResetAuthorization) ProtoMessage()               {}
-func (*TLAccountResetAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{810} }
+func (*TLAccountResetAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{810} }
 
 func (m *TLAccountResetAuthorization) GetHash() int64 {
 	if m != nil {
@@ -47580,7 +47580,7 @@ func (m *TLAccountUpdatePasswordSettings) Reset()         { *m = TLAccountUpdate
 func (m *TLAccountUpdatePasswordSettings) String() string { return proto.CompactTextString(m) }
 func (*TLAccountUpdatePasswordSettings) ProtoMessage()    {}
 func (*TLAccountUpdatePasswordSettings) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{811}
+	return fileDescriptor4, []int{811}
 }
 
 func (m *TLAccountUpdatePasswordSettings) GetCurrentPasswordHash() []byte {
@@ -47606,7 +47606,7 @@ type TLAccountConfirmPhone struct {
 func (m *TLAccountConfirmPhone) Reset()                    { *m = TLAccountConfirmPhone{} }
 func (m *TLAccountConfirmPhone) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountConfirmPhone) ProtoMessage()               {}
-func (*TLAccountConfirmPhone) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{812} }
+func (*TLAccountConfirmPhone) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{812} }
 
 func (m *TLAccountConfirmPhone) GetPhoneCodeHash() string {
 	if m != nil {
@@ -47630,7 +47630,7 @@ type TLContactsDeleteContacts struct {
 func (m *TLContactsDeleteContacts) Reset()                    { *m = TLContactsDeleteContacts{} }
 func (m *TLContactsDeleteContacts) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsDeleteContacts) ProtoMessage()               {}
-func (*TLContactsDeleteContacts) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{813} }
+func (*TLContactsDeleteContacts) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{813} }
 
 func (m *TLContactsDeleteContacts) GetId() []*InputUser {
 	if m != nil {
@@ -47647,7 +47647,7 @@ type TLContactsBlock struct {
 func (m *TLContactsBlock) Reset()                    { *m = TLContactsBlock{} }
 func (m *TLContactsBlock) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsBlock) ProtoMessage()               {}
-func (*TLContactsBlock) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{814} }
+func (*TLContactsBlock) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{814} }
 
 func (m *TLContactsBlock) GetId() *InputUser {
 	if m != nil {
@@ -47664,7 +47664,7 @@ type TLContactsUnblock struct {
 func (m *TLContactsUnblock) Reset()                    { *m = TLContactsUnblock{} }
 func (m *TLContactsUnblock) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsUnblock) ProtoMessage()               {}
-func (*TLContactsUnblock) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{815} }
+func (*TLContactsUnblock) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{815} }
 
 func (m *TLContactsUnblock) GetId() *InputUser {
 	if m != nil {
@@ -47682,7 +47682,7 @@ type TLContactsResetTopPeerRating struct {
 func (m *TLContactsResetTopPeerRating) Reset()                    { *m = TLContactsResetTopPeerRating{} }
 func (m *TLContactsResetTopPeerRating) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsResetTopPeerRating) ProtoMessage()               {}
-func (*TLContactsResetTopPeerRating) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{816} }
+func (*TLContactsResetTopPeerRating) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{816} }
 
 func (m *TLContactsResetTopPeerRating) GetCategory() *TopPeerCategory {
 	if m != nil {
@@ -47705,7 +47705,7 @@ type TLContactsResetSaved struct {
 func (m *TLContactsResetSaved) Reset()                    { *m = TLContactsResetSaved{} }
 func (m *TLContactsResetSaved) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsResetSaved) ProtoMessage()               {}
-func (*TLContactsResetSaved) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{817} }
+func (*TLContactsResetSaved) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{817} }
 
 // messages.setTyping#a3825e50 peer:InputPeer action:SendMessageAction = Bool;
 type TLMessagesSetTyping struct {
@@ -47716,7 +47716,7 @@ type TLMessagesSetTyping struct {
 func (m *TLMessagesSetTyping) Reset()                    { *m = TLMessagesSetTyping{} }
 func (m *TLMessagesSetTyping) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSetTyping) ProtoMessage()               {}
-func (*TLMessagesSetTyping) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{818} }
+func (*TLMessagesSetTyping) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{818} }
 
 func (m *TLMessagesSetTyping) GetPeer() *InputPeer {
 	if m != nil {
@@ -47740,7 +47740,7 @@ type TLMessagesReportSpam struct {
 func (m *TLMessagesReportSpam) Reset()                    { *m = TLMessagesReportSpam{} }
 func (m *TLMessagesReportSpam) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesReportSpam) ProtoMessage()               {}
-func (*TLMessagesReportSpam) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{819} }
+func (*TLMessagesReportSpam) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{819} }
 
 func (m *TLMessagesReportSpam) GetPeer() *InputPeer {
 	if m != nil {
@@ -47757,7 +47757,7 @@ type TLMessagesHideReportSpam struct {
 func (m *TLMessagesHideReportSpam) Reset()                    { *m = TLMessagesHideReportSpam{} }
 func (m *TLMessagesHideReportSpam) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesHideReportSpam) ProtoMessage()               {}
-func (*TLMessagesHideReportSpam) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{820} }
+func (*TLMessagesHideReportSpam) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{820} }
 
 func (m *TLMessagesHideReportSpam) GetPeer() *InputPeer {
 	if m != nil {
@@ -47774,7 +47774,7 @@ type TLMessagesDiscardEncryption struct {
 func (m *TLMessagesDiscardEncryption) Reset()                    { *m = TLMessagesDiscardEncryption{} }
 func (m *TLMessagesDiscardEncryption) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesDiscardEncryption) ProtoMessage()               {}
-func (*TLMessagesDiscardEncryption) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{821} }
+func (*TLMessagesDiscardEncryption) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{821} }
 
 func (m *TLMessagesDiscardEncryption) GetChatId() int32 {
 	if m != nil {
@@ -47792,7 +47792,7 @@ type TLMessagesSetEncryptedTyping struct {
 func (m *TLMessagesSetEncryptedTyping) Reset()                    { *m = TLMessagesSetEncryptedTyping{} }
 func (m *TLMessagesSetEncryptedTyping) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSetEncryptedTyping) ProtoMessage()               {}
-func (*TLMessagesSetEncryptedTyping) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{822} }
+func (*TLMessagesSetEncryptedTyping) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{822} }
 
 func (m *TLMessagesSetEncryptedTyping) GetPeer() *InputEncryptedChat {
 	if m != nil {
@@ -47818,7 +47818,7 @@ func (m *TLMessagesReadEncryptedHistory) Reset()         { *m = TLMessagesReadEn
 func (m *TLMessagesReadEncryptedHistory) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesReadEncryptedHistory) ProtoMessage()    {}
 func (*TLMessagesReadEncryptedHistory) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{823}
+	return fileDescriptor4, []int{823}
 }
 
 func (m *TLMessagesReadEncryptedHistory) GetPeer() *InputEncryptedChat {
@@ -47843,7 +47843,7 @@ type TLMessagesReportEncryptedSpam struct {
 func (m *TLMessagesReportEncryptedSpam) Reset()                    { *m = TLMessagesReportEncryptedSpam{} }
 func (m *TLMessagesReportEncryptedSpam) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesReportEncryptedSpam) ProtoMessage()               {}
-func (*TLMessagesReportEncryptedSpam) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{824} }
+func (*TLMessagesReportEncryptedSpam) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{824} }
 
 func (m *TLMessagesReportEncryptedSpam) GetPeer() *InputEncryptedChat {
 	if m != nil {
@@ -47860,7 +47860,7 @@ type TLMessagesUninstallStickerSet struct {
 func (m *TLMessagesUninstallStickerSet) Reset()                    { *m = TLMessagesUninstallStickerSet{} }
 func (m *TLMessagesUninstallStickerSet) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesUninstallStickerSet) ProtoMessage()               {}
-func (*TLMessagesUninstallStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{825} }
+func (*TLMessagesUninstallStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{825} }
 
 func (m *TLMessagesUninstallStickerSet) GetStickerset() *InputStickerSet {
 	if m != nil {
@@ -47879,7 +47879,7 @@ type TLMessagesEditChatAdmin struct {
 func (m *TLMessagesEditChatAdmin) Reset()                    { *m = TLMessagesEditChatAdmin{} }
 func (m *TLMessagesEditChatAdmin) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesEditChatAdmin) ProtoMessage()               {}
-func (*TLMessagesEditChatAdmin) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{826} }
+func (*TLMessagesEditChatAdmin) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{826} }
 
 func (m *TLMessagesEditChatAdmin) GetChatId() int32 {
 	if m != nil {
@@ -47911,7 +47911,7 @@ type TLMessagesReorderStickerSets struct {
 func (m *TLMessagesReorderStickerSets) Reset()                    { *m = TLMessagesReorderStickerSets{} }
 func (m *TLMessagesReorderStickerSets) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesReorderStickerSets) ProtoMessage()               {}
-func (*TLMessagesReorderStickerSets) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{827} }
+func (*TLMessagesReorderStickerSets) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{827} }
 
 func (m *TLMessagesReorderStickerSets) GetMasks() bool {
 	if m != nil {
@@ -47936,7 +47936,7 @@ type TLMessagesSaveGif struct {
 func (m *TLMessagesSaveGif) Reset()                    { *m = TLMessagesSaveGif{} }
 func (m *TLMessagesSaveGif) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSaveGif) ProtoMessage()               {}
-func (*TLMessagesSaveGif) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{828} }
+func (*TLMessagesSaveGif) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{828} }
 
 func (m *TLMessagesSaveGif) GetId() *InputDocument {
 	if m != nil {
@@ -47966,7 +47966,7 @@ type TLMessagesSetInlineBotResults struct {
 func (m *TLMessagesSetInlineBotResults) Reset()                    { *m = TLMessagesSetInlineBotResults{} }
 func (m *TLMessagesSetInlineBotResults) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSetInlineBotResults) ProtoMessage()               {}
-func (*TLMessagesSetInlineBotResults) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{829} }
+func (*TLMessagesSetInlineBotResults) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{829} }
 
 func (m *TLMessagesSetInlineBotResults) GetGallery() bool {
 	if m != nil {
@@ -48030,7 +48030,7 @@ func (m *TLMessagesEditInlineBotMessage) Reset()         { *m = TLMessagesEditIn
 func (m *TLMessagesEditInlineBotMessage) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesEditInlineBotMessage) ProtoMessage()    {}
 func (*TLMessagesEditInlineBotMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{830}
+	return fileDescriptor4, []int{830}
 }
 
 func (m *TLMessagesEditInlineBotMessage) GetNoWebpage() bool {
@@ -48081,7 +48081,7 @@ func (m *TLMessagesSetBotCallbackAnswer) Reset()         { *m = TLMessagesSetBot
 func (m *TLMessagesSetBotCallbackAnswer) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesSetBotCallbackAnswer) ProtoMessage()    {}
 func (*TLMessagesSetBotCallbackAnswer) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{831}
+	return fileDescriptor4, []int{831}
 }
 
 func (m *TLMessagesSetBotCallbackAnswer) GetAlert() bool {
@@ -48131,7 +48131,7 @@ type TLMessagesSaveDraft struct {
 func (m *TLMessagesSaveDraft) Reset()                    { *m = TLMessagesSaveDraft{} }
 func (m *TLMessagesSaveDraft) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSaveDraft) ProtoMessage()               {}
-func (*TLMessagesSaveDraft) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{832} }
+func (*TLMessagesSaveDraft) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{832} }
 
 func (m *TLMessagesSaveDraft) GetNoWebpage() bool {
 	if m != nil {
@@ -48177,7 +48177,7 @@ func (m *TLMessagesReadFeaturedStickers) Reset()         { *m = TLMessagesReadFe
 func (m *TLMessagesReadFeaturedStickers) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesReadFeaturedStickers) ProtoMessage()    {}
 func (*TLMessagesReadFeaturedStickers) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{833}
+	return fileDescriptor4, []int{833}
 }
 
 func (m *TLMessagesReadFeaturedStickers) GetId() []int64 {
@@ -48197,7 +48197,7 @@ type TLMessagesSaveRecentSticker struct {
 func (m *TLMessagesSaveRecentSticker) Reset()                    { *m = TLMessagesSaveRecentSticker{} }
 func (m *TLMessagesSaveRecentSticker) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSaveRecentSticker) ProtoMessage()               {}
-func (*TLMessagesSaveRecentSticker) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{834} }
+func (*TLMessagesSaveRecentSticker) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{834} }
 
 func (m *TLMessagesSaveRecentSticker) GetAttached() bool {
 	if m != nil {
@@ -48228,7 +48228,7 @@ type TLMessagesClearRecentStickers struct {
 func (m *TLMessagesClearRecentStickers) Reset()                    { *m = TLMessagesClearRecentStickers{} }
 func (m *TLMessagesClearRecentStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesClearRecentStickers) ProtoMessage()               {}
-func (*TLMessagesClearRecentStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{835} }
+func (*TLMessagesClearRecentStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{835} }
 
 func (m *TLMessagesClearRecentStickers) GetAttached() bool {
 	if m != nil {
@@ -48249,7 +48249,7 @@ type TLMessagesSetInlineGameScore struct {
 func (m *TLMessagesSetInlineGameScore) Reset()                    { *m = TLMessagesSetInlineGameScore{} }
 func (m *TLMessagesSetInlineGameScore) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSetInlineGameScore) ProtoMessage()               {}
-func (*TLMessagesSetInlineGameScore) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{836} }
+func (*TLMessagesSetInlineGameScore) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{836} }
 
 func (m *TLMessagesSetInlineGameScore) GetEditMessage() bool {
 	if m != nil {
@@ -48295,7 +48295,7 @@ type TLMessagesToggleDialogPin struct {
 func (m *TLMessagesToggleDialogPin) Reset()                    { *m = TLMessagesToggleDialogPin{} }
 func (m *TLMessagesToggleDialogPin) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesToggleDialogPin) ProtoMessage()               {}
-func (*TLMessagesToggleDialogPin) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{837} }
+func (*TLMessagesToggleDialogPin) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{837} }
 
 func (m *TLMessagesToggleDialogPin) GetPinned() bool {
 	if m != nil {
@@ -48321,7 +48321,7 @@ func (m *TLMessagesReorderPinnedDialogs) Reset()         { *m = TLMessagesReorde
 func (m *TLMessagesReorderPinnedDialogs) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesReorderPinnedDialogs) ProtoMessage()    {}
 func (*TLMessagesReorderPinnedDialogs) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{838}
+	return fileDescriptor4, []int{838}
 }
 
 func (m *TLMessagesReorderPinnedDialogs) GetForce() bool {
@@ -48349,7 +48349,7 @@ func (m *TLMessagesSetBotShippingResults) Reset()         { *m = TLMessagesSetBo
 func (m *TLMessagesSetBotShippingResults) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesSetBotShippingResults) ProtoMessage()    {}
 func (*TLMessagesSetBotShippingResults) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{839}
+	return fileDescriptor4, []int{839}
 }
 
 func (m *TLMessagesSetBotShippingResults) GetQueryId() int64 {
@@ -48384,7 +48384,7 @@ func (m *TLMessagesSetBotPrecheckoutResults) Reset()         { *m = TLMessagesSe
 func (m *TLMessagesSetBotPrecheckoutResults) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesSetBotPrecheckoutResults) ProtoMessage()    {}
 func (*TLMessagesSetBotPrecheckoutResults) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{840}
+	return fileDescriptor4, []int{840}
 }
 
 func (m *TLMessagesSetBotPrecheckoutResults) GetSuccess() bool {
@@ -48417,7 +48417,7 @@ type TLMessagesFaveSticker struct {
 func (m *TLMessagesFaveSticker) Reset()                    { *m = TLMessagesFaveSticker{} }
 func (m *TLMessagesFaveSticker) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesFaveSticker) ProtoMessage()               {}
-func (*TLMessagesFaveSticker) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{841} }
+func (*TLMessagesFaveSticker) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{841} }
 
 func (m *TLMessagesFaveSticker) GetId() *InputDocument {
 	if m != nil {
@@ -48443,7 +48443,7 @@ type TLUploadSaveFilePart struct {
 func (m *TLUploadSaveFilePart) Reset()                    { *m = TLUploadSaveFilePart{} }
 func (m *TLUploadSaveFilePart) String() string            { return proto.CompactTextString(m) }
 func (*TLUploadSaveFilePart) ProtoMessage()               {}
-func (*TLUploadSaveFilePart) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{842} }
+func (*TLUploadSaveFilePart) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{842} }
 
 func (m *TLUploadSaveFilePart) GetFileId() int64 {
 	if m != nil {
@@ -48477,7 +48477,7 @@ type TLUploadSaveBigFilePart struct {
 func (m *TLUploadSaveBigFilePart) Reset()                    { *m = TLUploadSaveBigFilePart{} }
 func (m *TLUploadSaveBigFilePart) String() string            { return proto.CompactTextString(m) }
 func (*TLUploadSaveBigFilePart) ProtoMessage()               {}
-func (*TLUploadSaveBigFilePart) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{843} }
+func (*TLUploadSaveBigFilePart) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{843} }
 
 func (m *TLUploadSaveBigFilePart) GetFileId() int64 {
 	if m != nil {
@@ -48515,7 +48515,7 @@ type TLHelpSaveAppLog struct {
 func (m *TLHelpSaveAppLog) Reset()                    { *m = TLHelpSaveAppLog{} }
 func (m *TLHelpSaveAppLog) String() string            { return proto.CompactTextString(m) }
 func (*TLHelpSaveAppLog) ProtoMessage()               {}
-func (*TLHelpSaveAppLog) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{844} }
+func (*TLHelpSaveAppLog) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{844} }
 
 func (m *TLHelpSaveAppLog) GetEvents() []*InputAppEvent {
 	if m != nil {
@@ -48533,7 +48533,7 @@ type TLHelpSetBotUpdatesStatus struct {
 func (m *TLHelpSetBotUpdatesStatus) Reset()                    { *m = TLHelpSetBotUpdatesStatus{} }
 func (m *TLHelpSetBotUpdatesStatus) String() string            { return proto.CompactTextString(m) }
 func (*TLHelpSetBotUpdatesStatus) ProtoMessage()               {}
-func (*TLHelpSetBotUpdatesStatus) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{845} }
+func (*TLHelpSetBotUpdatesStatus) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{845} }
 
 func (m *TLHelpSetBotUpdatesStatus) GetPendingUpdatesCount() int32 {
 	if m != nil {
@@ -48558,7 +48558,7 @@ type TLChannelsReadHistory struct {
 func (m *TLChannelsReadHistory) Reset()                    { *m = TLChannelsReadHistory{} }
 func (m *TLChannelsReadHistory) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsReadHistory) ProtoMessage()               {}
-func (*TLChannelsReadHistory) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{846} }
+func (*TLChannelsReadHistory) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{846} }
 
 func (m *TLChannelsReadHistory) GetChannel() *InputChannel {
 	if m != nil {
@@ -48584,7 +48584,7 @@ type TLChannelsReportSpam struct {
 func (m *TLChannelsReportSpam) Reset()                    { *m = TLChannelsReportSpam{} }
 func (m *TLChannelsReportSpam) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsReportSpam) ProtoMessage()               {}
-func (*TLChannelsReportSpam) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{847} }
+func (*TLChannelsReportSpam) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{847} }
 
 func (m *TLChannelsReportSpam) GetChannel() *InputChannel {
 	if m != nil {
@@ -48616,7 +48616,7 @@ type TLChannelsEditAbout struct {
 func (m *TLChannelsEditAbout) Reset()                    { *m = TLChannelsEditAbout{} }
 func (m *TLChannelsEditAbout) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsEditAbout) ProtoMessage()               {}
-func (*TLChannelsEditAbout) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{848} }
+func (*TLChannelsEditAbout) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{848} }
 
 func (m *TLChannelsEditAbout) GetChannel() *InputChannel {
 	if m != nil {
@@ -48641,7 +48641,7 @@ type TLChannelsCheckUsername struct {
 func (m *TLChannelsCheckUsername) Reset()                    { *m = TLChannelsCheckUsername{} }
 func (m *TLChannelsCheckUsername) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsCheckUsername) ProtoMessage()               {}
-func (*TLChannelsCheckUsername) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{849} }
+func (*TLChannelsCheckUsername) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{849} }
 
 func (m *TLChannelsCheckUsername) GetChannel() *InputChannel {
 	if m != nil {
@@ -48666,7 +48666,7 @@ type TLChannelsUpdateUsername struct {
 func (m *TLChannelsUpdateUsername) Reset()                    { *m = TLChannelsUpdateUsername{} }
 func (m *TLChannelsUpdateUsername) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsUpdateUsername) ProtoMessage()               {}
-func (*TLChannelsUpdateUsername) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{850} }
+func (*TLChannelsUpdateUsername) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{850} }
 
 func (m *TLChannelsUpdateUsername) GetChannel() *InputChannel {
 	if m != nil {
@@ -48691,7 +48691,7 @@ type TLChannelsSetStickers struct {
 func (m *TLChannelsSetStickers) Reset()                    { *m = TLChannelsSetStickers{} }
 func (m *TLChannelsSetStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsSetStickers) ProtoMessage()               {}
-func (*TLChannelsSetStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{851} }
+func (*TLChannelsSetStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{851} }
 
 func (m *TLChannelsSetStickers) GetChannel() *InputChannel {
 	if m != nil {
@@ -48716,7 +48716,7 @@ type TLChannelsReadMessageContents struct {
 func (m *TLChannelsReadMessageContents) Reset()                    { *m = TLChannelsReadMessageContents{} }
 func (m *TLChannelsReadMessageContents) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsReadMessageContents) ProtoMessage()               {}
-func (*TLChannelsReadMessageContents) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{852} }
+func (*TLChannelsReadMessageContents) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{852} }
 
 func (m *TLChannelsReadMessageContents) GetChannel() *InputChannel {
 	if m != nil {
@@ -48741,7 +48741,7 @@ type TLBotsAnswerWebhookJSONQuery struct {
 func (m *TLBotsAnswerWebhookJSONQuery) Reset()                    { *m = TLBotsAnswerWebhookJSONQuery{} }
 func (m *TLBotsAnswerWebhookJSONQuery) String() string            { return proto.CompactTextString(m) }
 func (*TLBotsAnswerWebhookJSONQuery) ProtoMessage()               {}
-func (*TLBotsAnswerWebhookJSONQuery) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{853} }
+func (*TLBotsAnswerWebhookJSONQuery) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{853} }
 
 func (m *TLBotsAnswerWebhookJSONQuery) GetQueryId() int64 {
 	if m != nil {
@@ -48766,7 +48766,7 @@ type TLPaymentsClearSavedInfo struct {
 func (m *TLPaymentsClearSavedInfo) Reset()                    { *m = TLPaymentsClearSavedInfo{} }
 func (m *TLPaymentsClearSavedInfo) String() string            { return proto.CompactTextString(m) }
 func (*TLPaymentsClearSavedInfo) ProtoMessage()               {}
-func (*TLPaymentsClearSavedInfo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{854} }
+func (*TLPaymentsClearSavedInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{854} }
 
 func (m *TLPaymentsClearSavedInfo) GetCredentials() bool {
 	if m != nil {
@@ -48790,7 +48790,7 @@ type TLPhoneReceivedCall struct {
 func (m *TLPhoneReceivedCall) Reset()                    { *m = TLPhoneReceivedCall{} }
 func (m *TLPhoneReceivedCall) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneReceivedCall) ProtoMessage()               {}
-func (*TLPhoneReceivedCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{855} }
+func (*TLPhoneReceivedCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{855} }
 
 func (m *TLPhoneReceivedCall) GetPeer() *InputPhoneCall {
 	if m != nil {
@@ -48808,7 +48808,7 @@ type TLPhoneSaveCallDebug struct {
 func (m *TLPhoneSaveCallDebug) Reset()                    { *m = TLPhoneSaveCallDebug{} }
 func (m *TLPhoneSaveCallDebug) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneSaveCallDebug) ProtoMessage()               {}
-func (*TLPhoneSaveCallDebug) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{856} }
+func (*TLPhoneSaveCallDebug) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{856} }
 
 func (m *TLPhoneSaveCallDebug) GetPeer() *InputPhoneCall {
 	if m != nil {
@@ -48832,7 +48832,7 @@ type TLAuthExportAuthorization struct {
 func (m *TLAuthExportAuthorization) Reset()                    { *m = TLAuthExportAuthorization{} }
 func (m *TLAuthExportAuthorization) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthExportAuthorization) ProtoMessage()               {}
-func (*TLAuthExportAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{857} }
+func (*TLAuthExportAuthorization) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{857} }
 
 func (m *TLAuthExportAuthorization) GetDcId() int32 {
 	if m != nil {
@@ -48848,7 +48848,7 @@ type TLAuthRequestPasswordRecovery struct {
 func (m *TLAuthRequestPasswordRecovery) Reset()                    { *m = TLAuthRequestPasswordRecovery{} }
 func (m *TLAuthRequestPasswordRecovery) String() string            { return proto.CompactTextString(m) }
 func (*TLAuthRequestPasswordRecovery) ProtoMessage()               {}
-func (*TLAuthRequestPasswordRecovery) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{858} }
+func (*TLAuthRequestPasswordRecovery) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{858} }
 
 // account.getNotifySettings#12b3ad31 peer:InputNotifyPeer = PeerNotifySettings;
 type TLAccountGetNotifySettings struct {
@@ -48858,7 +48858,7 @@ type TLAccountGetNotifySettings struct {
 func (m *TLAccountGetNotifySettings) Reset()                    { *m = TLAccountGetNotifySettings{} }
 func (m *TLAccountGetNotifySettings) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountGetNotifySettings) ProtoMessage()               {}
-func (*TLAccountGetNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{859} }
+func (*TLAccountGetNotifySettings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{859} }
 
 func (m *TLAccountGetNotifySettings) GetPeer() *InputNotifyPeer {
 	if m != nil {
@@ -48877,7 +48877,7 @@ type TLAccountUpdateProfile struct {
 func (m *TLAccountUpdateProfile) Reset()                    { *m = TLAccountUpdateProfile{} }
 func (m *TLAccountUpdateProfile) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountUpdateProfile) ProtoMessage()               {}
-func (*TLAccountUpdateProfile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{860} }
+func (*TLAccountUpdateProfile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{860} }
 
 func (m *TLAccountUpdateProfile) GetFirstName() string {
 	if m != nil {
@@ -48908,7 +48908,7 @@ type TLAccountUpdateUsername struct {
 func (m *TLAccountUpdateUsername) Reset()                    { *m = TLAccountUpdateUsername{} }
 func (m *TLAccountUpdateUsername) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountUpdateUsername) ProtoMessage()               {}
-func (*TLAccountUpdateUsername) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{861} }
+func (*TLAccountUpdateUsername) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{861} }
 
 func (m *TLAccountUpdateUsername) GetUsername() string {
 	if m != nil {
@@ -48927,7 +48927,7 @@ type TLAccountChangePhone struct {
 func (m *TLAccountChangePhone) Reset()                    { *m = TLAccountChangePhone{} }
 func (m *TLAccountChangePhone) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountChangePhone) ProtoMessage()               {}
-func (*TLAccountChangePhone) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{862} }
+func (*TLAccountChangePhone) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{862} }
 
 func (m *TLAccountChangePhone) GetPhoneNumber() string {
 	if m != nil {
@@ -48958,7 +48958,7 @@ type TLContactsImportCard struct {
 func (m *TLContactsImportCard) Reset()                    { *m = TLContactsImportCard{} }
 func (m *TLContactsImportCard) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsImportCard) ProtoMessage()               {}
-func (*TLContactsImportCard) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{863} }
+func (*TLContactsImportCard) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{863} }
 
 func (m *TLContactsImportCard) GetExportCard() []int32 {
 	if m != nil {
@@ -48974,7 +48974,7 @@ type TLAccountGetWallPapers struct {
 func (m *TLAccountGetWallPapers) Reset()                    { *m = TLAccountGetWallPapers{} }
 func (m *TLAccountGetWallPapers) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountGetWallPapers) ProtoMessage()               {}
-func (*TLAccountGetWallPapers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{864} }
+func (*TLAccountGetWallPapers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{864} }
 
 // account.getPrivacy#dadbc950 key:InputPrivacyKey = account.PrivacyRules;
 type TLAccountGetPrivacy struct {
@@ -48984,7 +48984,7 @@ type TLAccountGetPrivacy struct {
 func (m *TLAccountGetPrivacy) Reset()                    { *m = TLAccountGetPrivacy{} }
 func (m *TLAccountGetPrivacy) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountGetPrivacy) ProtoMessage()               {}
-func (*TLAccountGetPrivacy) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{865} }
+func (*TLAccountGetPrivacy) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{865} }
 
 func (m *TLAccountGetPrivacy) GetKey() *InputPrivacyKey {
 	if m != nil {
@@ -49002,7 +49002,7 @@ type TLAccountSetPrivacy struct {
 func (m *TLAccountSetPrivacy) Reset()                    { *m = TLAccountSetPrivacy{} }
 func (m *TLAccountSetPrivacy) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountSetPrivacy) ProtoMessage()               {}
-func (*TLAccountSetPrivacy) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{866} }
+func (*TLAccountSetPrivacy) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{866} }
 
 func (m *TLAccountSetPrivacy) GetKey() *InputPrivacyKey {
 	if m != nil {
@@ -49025,7 +49025,7 @@ type TLAccountGetAccountTTL struct {
 func (m *TLAccountGetAccountTTL) Reset()                    { *m = TLAccountGetAccountTTL{} }
 func (m *TLAccountGetAccountTTL) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountGetAccountTTL) ProtoMessage()               {}
-func (*TLAccountGetAccountTTL) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{867} }
+func (*TLAccountGetAccountTTL) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{867} }
 
 // account.getAuthorizations#e320c158 = account.Authorizations;
 type TLAccountGetAuthorizations struct {
@@ -49034,7 +49034,7 @@ type TLAccountGetAuthorizations struct {
 func (m *TLAccountGetAuthorizations) Reset()                    { *m = TLAccountGetAuthorizations{} }
 func (m *TLAccountGetAuthorizations) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountGetAuthorizations) ProtoMessage()               {}
-func (*TLAccountGetAuthorizations) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{868} }
+func (*TLAccountGetAuthorizations) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{868} }
 
 // account.getPassword#548a30f5 = account.Password;
 type TLAccountGetPassword struct {
@@ -49043,7 +49043,7 @@ type TLAccountGetPassword struct {
 func (m *TLAccountGetPassword) Reset()                    { *m = TLAccountGetPassword{} }
 func (m *TLAccountGetPassword) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountGetPassword) ProtoMessage()               {}
-func (*TLAccountGetPassword) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{869} }
+func (*TLAccountGetPassword) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{869} }
 
 // account.getPasswordSettings#bc8d11bb current_password_hash:bytes = account.PasswordSettings;
 type TLAccountGetPasswordSettings struct {
@@ -49053,7 +49053,7 @@ type TLAccountGetPasswordSettings struct {
 func (m *TLAccountGetPasswordSettings) Reset()                    { *m = TLAccountGetPasswordSettings{} }
 func (m *TLAccountGetPasswordSettings) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountGetPasswordSettings) ProtoMessage()               {}
-func (*TLAccountGetPasswordSettings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{870} }
+func (*TLAccountGetPasswordSettings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{870} }
 
 func (m *TLAccountGetPasswordSettings) GetCurrentPasswordHash() []byte {
 	if m != nil {
@@ -49071,7 +49071,7 @@ type TLAccountGetTmpPassword struct {
 func (m *TLAccountGetTmpPassword) Reset()                    { *m = TLAccountGetTmpPassword{} }
 func (m *TLAccountGetTmpPassword) String() string            { return proto.CompactTextString(m) }
 func (*TLAccountGetTmpPassword) ProtoMessage()               {}
-func (*TLAccountGetTmpPassword) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{871} }
+func (*TLAccountGetTmpPassword) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{871} }
 
 func (m *TLAccountGetTmpPassword) GetPasswordHash() []byte {
 	if m != nil {
@@ -49095,7 +49095,7 @@ type TLUsersGetUsers struct {
 func (m *TLUsersGetUsers) Reset()                    { *m = TLUsersGetUsers{} }
 func (m *TLUsersGetUsers) String() string            { return proto.CompactTextString(m) }
 func (*TLUsersGetUsers) ProtoMessage()               {}
-func (*TLUsersGetUsers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{872} }
+func (*TLUsersGetUsers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{872} }
 
 func (m *TLUsersGetUsers) GetId() []*InputUser {
 	if m != nil {
@@ -49112,7 +49112,7 @@ type TLUsersGetFullUser struct {
 func (m *TLUsersGetFullUser) Reset()                    { *m = TLUsersGetFullUser{} }
 func (m *TLUsersGetFullUser) String() string            { return proto.CompactTextString(m) }
 func (*TLUsersGetFullUser) ProtoMessage()               {}
-func (*TLUsersGetFullUser) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{873} }
+func (*TLUsersGetFullUser) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{873} }
 
 func (m *TLUsersGetFullUser) GetId() *InputUser {
 	if m != nil {
@@ -49128,7 +49128,7 @@ type TLContactsGetStatuses struct {
 func (m *TLContactsGetStatuses) Reset()                    { *m = TLContactsGetStatuses{} }
 func (m *TLContactsGetStatuses) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsGetStatuses) ProtoMessage()               {}
-func (*TLContactsGetStatuses) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{874} }
+func (*TLContactsGetStatuses) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{874} }
 
 // contacts.getContacts#c023849f hash:int = contacts.Contacts;
 type TLContactsGetContacts struct {
@@ -49138,7 +49138,7 @@ type TLContactsGetContacts struct {
 func (m *TLContactsGetContacts) Reset()                    { *m = TLContactsGetContacts{} }
 func (m *TLContactsGetContacts) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsGetContacts) ProtoMessage()               {}
-func (*TLContactsGetContacts) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{875} }
+func (*TLContactsGetContacts) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{875} }
 
 func (m *TLContactsGetContacts) GetHash() int32 {
 	if m != nil {
@@ -49155,7 +49155,7 @@ type TLContactsImportContacts struct {
 func (m *TLContactsImportContacts) Reset()                    { *m = TLContactsImportContacts{} }
 func (m *TLContactsImportContacts) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsImportContacts) ProtoMessage()               {}
-func (*TLContactsImportContacts) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{876} }
+func (*TLContactsImportContacts) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{876} }
 
 func (m *TLContactsImportContacts) GetContacts() []*InputContact {
 	if m != nil {
@@ -49172,7 +49172,7 @@ type TLContactsDeleteContact struct {
 func (m *TLContactsDeleteContact) Reset()                    { *m = TLContactsDeleteContact{} }
 func (m *TLContactsDeleteContact) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsDeleteContact) ProtoMessage()               {}
-func (*TLContactsDeleteContact) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{877} }
+func (*TLContactsDeleteContact) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{877} }
 
 func (m *TLContactsDeleteContact) GetId() *InputUser {
 	if m != nil {
@@ -49190,7 +49190,7 @@ type TLContactsGetBlocked struct {
 func (m *TLContactsGetBlocked) Reset()                    { *m = TLContactsGetBlocked{} }
 func (m *TLContactsGetBlocked) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsGetBlocked) ProtoMessage()               {}
-func (*TLContactsGetBlocked) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{878} }
+func (*TLContactsGetBlocked) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{878} }
 
 func (m *TLContactsGetBlocked) GetOffset() int32 {
 	if m != nil {
@@ -49213,7 +49213,7 @@ type TLContactsExportCard struct {
 func (m *TLContactsExportCard) Reset()                    { *m = TLContactsExportCard{} }
 func (m *TLContactsExportCard) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsExportCard) ProtoMessage()               {}
-func (*TLContactsExportCard) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{879} }
+func (*TLContactsExportCard) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{879} }
 
 // messages.getMessagesViews#c4c8a55d peer:InputPeer id:Vector<int> increment:Bool = Vector<int>;
 type TLMessagesGetMessagesViews struct {
@@ -49225,7 +49225,7 @@ type TLMessagesGetMessagesViews struct {
 func (m *TLMessagesGetMessagesViews) Reset()                    { *m = TLMessagesGetMessagesViews{} }
 func (m *TLMessagesGetMessagesViews) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetMessagesViews) ProtoMessage()               {}
-func (*TLMessagesGetMessagesViews) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{880} }
+func (*TLMessagesGetMessagesViews) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{880} }
 
 func (m *TLMessagesGetMessagesViews) GetPeer() *InputPeer {
 	if m != nil {
@@ -49257,7 +49257,7 @@ type TLContactsSearch struct {
 func (m *TLContactsSearch) Reset()                    { *m = TLContactsSearch{} }
 func (m *TLContactsSearch) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsSearch) ProtoMessage()               {}
-func (*TLContactsSearch) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{881} }
+func (*TLContactsSearch) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{881} }
 
 func (m *TLContactsSearch) GetQ() string {
 	if m != nil {
@@ -49281,7 +49281,7 @@ type TLContactsResolveUsername struct {
 func (m *TLContactsResolveUsername) Reset()                    { *m = TLContactsResolveUsername{} }
 func (m *TLContactsResolveUsername) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsResolveUsername) ProtoMessage()               {}
-func (*TLContactsResolveUsername) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{882} }
+func (*TLContactsResolveUsername) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{882} }
 
 func (m *TLContactsResolveUsername) GetUsername() string {
 	if m != nil {
@@ -49306,7 +49306,7 @@ type TLContactsGetTopPeers struct {
 func (m *TLContactsGetTopPeers) Reset()                    { *m = TLContactsGetTopPeers{} }
 func (m *TLContactsGetTopPeers) String() string            { return proto.CompactTextString(m) }
 func (*TLContactsGetTopPeers) ProtoMessage()               {}
-func (*TLContactsGetTopPeers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{883} }
+func (*TLContactsGetTopPeers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{883} }
 
 func (m *TLContactsGetTopPeers) GetCorrespondents() bool {
 	if m != nil {
@@ -49379,7 +49379,7 @@ type TLMessagesGetMessages struct {
 func (m *TLMessagesGetMessages) Reset()                    { *m = TLMessagesGetMessages{} }
 func (m *TLMessagesGetMessages) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetMessages) ProtoMessage()               {}
-func (*TLMessagesGetMessages) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{884} }
+func (*TLMessagesGetMessages) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{884} }
 
 func (m *TLMessagesGetMessages) GetId() []int32 {
 	if m != nil {
@@ -49402,7 +49402,7 @@ type TLMessagesGetHistory struct {
 func (m *TLMessagesGetHistory) Reset()                    { *m = TLMessagesGetHistory{} }
 func (m *TLMessagesGetHistory) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetHistory) ProtoMessage()               {}
-func (*TLMessagesGetHistory) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{885} }
+func (*TLMessagesGetHistory) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{885} }
 
 func (m *TLMessagesGetHistory) GetPeer() *InputPeer {
 	if m != nil {
@@ -49471,7 +49471,7 @@ type TLMessagesSearch struct {
 func (m *TLMessagesSearch) Reset()                    { *m = TLMessagesSearch{} }
 func (m *TLMessagesSearch) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSearch) ProtoMessage()               {}
-func (*TLMessagesSearch) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{886} }
+func (*TLMessagesSearch) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{886} }
 
 func (m *TLMessagesSearch) GetPeer() *InputPeer {
 	if m != nil {
@@ -49562,7 +49562,7 @@ type TLMessagesSearchGlobal struct {
 func (m *TLMessagesSearchGlobal) Reset()                    { *m = TLMessagesSearchGlobal{} }
 func (m *TLMessagesSearchGlobal) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSearchGlobal) ProtoMessage()               {}
-func (*TLMessagesSearchGlobal) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{887} }
+func (*TLMessagesSearchGlobal) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{887} }
 
 func (m *TLMessagesSearchGlobal) GetQ() string {
 	if m != nil {
@@ -49612,7 +49612,7 @@ type TLMessagesGetUnreadMentions struct {
 func (m *TLMessagesGetUnreadMentions) Reset()                    { *m = TLMessagesGetUnreadMentions{} }
 func (m *TLMessagesGetUnreadMentions) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetUnreadMentions) ProtoMessage()               {}
-func (*TLMessagesGetUnreadMentions) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{888} }
+func (*TLMessagesGetUnreadMentions) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{888} }
 
 func (m *TLMessagesGetUnreadMentions) GetPeer() *InputPeer {
 	if m != nil {
@@ -49665,7 +49665,7 @@ type TLChannelsGetMessages struct {
 func (m *TLChannelsGetMessages) Reset()                    { *m = TLChannelsGetMessages{} }
 func (m *TLChannelsGetMessages) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsGetMessages) ProtoMessage()               {}
-func (*TLChannelsGetMessages) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{889} }
+func (*TLChannelsGetMessages) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{889} }
 
 func (m *TLChannelsGetMessages) GetChannel() *InputChannel {
 	if m != nil {
@@ -49693,7 +49693,7 @@ type TLMessagesGetDialogs struct {
 func (m *TLMessagesGetDialogs) Reset()                    { *m = TLMessagesGetDialogs{} }
 func (m *TLMessagesGetDialogs) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetDialogs) ProtoMessage()               {}
-func (*TLMessagesGetDialogs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{890} }
+func (*TLMessagesGetDialogs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{890} }
 
 func (m *TLMessagesGetDialogs) GetExcludePinned() bool {
 	if m != nil {
@@ -49739,7 +49739,7 @@ type TLMessagesReadHistory struct {
 func (m *TLMessagesReadHistory) Reset()                    { *m = TLMessagesReadHistory{} }
 func (m *TLMessagesReadHistory) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesReadHistory) ProtoMessage()               {}
-func (*TLMessagesReadHistory) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{891} }
+func (*TLMessagesReadHistory) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{891} }
 
 func (m *TLMessagesReadHistory) GetPeer() *InputPeer {
 	if m != nil {
@@ -49764,7 +49764,7 @@ type TLMessagesDeleteMessages struct {
 func (m *TLMessagesDeleteMessages) Reset()                    { *m = TLMessagesDeleteMessages{} }
 func (m *TLMessagesDeleteMessages) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesDeleteMessages) ProtoMessage()               {}
-func (*TLMessagesDeleteMessages) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{892} }
+func (*TLMessagesDeleteMessages) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{892} }
 
 func (m *TLMessagesDeleteMessages) GetRevoke() bool {
 	if m != nil {
@@ -49788,7 +49788,7 @@ type TLMessagesReadMessageContents struct {
 func (m *TLMessagesReadMessageContents) Reset()                    { *m = TLMessagesReadMessageContents{} }
 func (m *TLMessagesReadMessageContents) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesReadMessageContents) ProtoMessage()               {}
-func (*TLMessagesReadMessageContents) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{893} }
+func (*TLMessagesReadMessageContents) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{893} }
 
 func (m *TLMessagesReadMessageContents) GetId() []int32 {
 	if m != nil {
@@ -49806,7 +49806,7 @@ type TLChannelsDeleteMessages struct {
 func (m *TLChannelsDeleteMessages) Reset()                    { *m = TLChannelsDeleteMessages{} }
 func (m *TLChannelsDeleteMessages) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsDeleteMessages) ProtoMessage()               {}
-func (*TLChannelsDeleteMessages) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{894} }
+func (*TLChannelsDeleteMessages) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{894} }
 
 func (m *TLChannelsDeleteMessages) GetChannel() *InputChannel {
 	if m != nil {
@@ -49832,7 +49832,7 @@ type TLMessagesDeleteHistory struct {
 func (m *TLMessagesDeleteHistory) Reset()                    { *m = TLMessagesDeleteHistory{} }
 func (m *TLMessagesDeleteHistory) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesDeleteHistory) ProtoMessage()               {}
-func (*TLMessagesDeleteHistory) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{895} }
+func (*TLMessagesDeleteHistory) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{895} }
 
 func (m *TLMessagesDeleteHistory) GetJustClear() bool {
 	if m != nil {
@@ -49864,7 +49864,7 @@ type TLChannelsDeleteUserHistory struct {
 func (m *TLChannelsDeleteUserHistory) Reset()                    { *m = TLChannelsDeleteUserHistory{} }
 func (m *TLChannelsDeleteUserHistory) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsDeleteUserHistory) ProtoMessage()               {}
-func (*TLChannelsDeleteUserHistory) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{896} }
+func (*TLChannelsDeleteUserHistory) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{896} }
 
 func (m *TLChannelsDeleteUserHistory) GetChannel() *InputChannel {
 	if m != nil {
@@ -49888,7 +49888,7 @@ type TLMessagesReceivedMessages struct {
 func (m *TLMessagesReceivedMessages) Reset()                    { *m = TLMessagesReceivedMessages{} }
 func (m *TLMessagesReceivedMessages) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesReceivedMessages) ProtoMessage()               {}
-func (*TLMessagesReceivedMessages) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{897} }
+func (*TLMessagesReceivedMessages) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{897} }
 
 func (m *TLMessagesReceivedMessages) GetMaxId() int32 {
 	if m != nil {
@@ -49914,7 +49914,7 @@ type TLMessagesSendMessage struct {
 func (m *TLMessagesSendMessage) Reset()                    { *m = TLMessagesSendMessage{} }
 func (m *TLMessagesSendMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSendMessage) ProtoMessage()               {}
-func (*TLMessagesSendMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{898} }
+func (*TLMessagesSendMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{898} }
 
 func (m *TLMessagesSendMessage) GetNoWebpage() bool {
 	if m != nil {
@@ -50001,7 +50001,7 @@ type TLMessagesSendMedia struct {
 func (m *TLMessagesSendMedia) Reset()                    { *m = TLMessagesSendMedia{} }
 func (m *TLMessagesSendMedia) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSendMedia) ProtoMessage()               {}
-func (*TLMessagesSendMedia) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{899} }
+func (*TLMessagesSendMedia) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{899} }
 
 func (m *TLMessagesSendMedia) GetSilent() bool {
 	if m != nil {
@@ -50073,7 +50073,7 @@ type TLMessagesForwardMessages struct {
 func (m *TLMessagesForwardMessages) Reset()                    { *m = TLMessagesForwardMessages{} }
 func (m *TLMessagesForwardMessages) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesForwardMessages) ProtoMessage()               {}
-func (*TLMessagesForwardMessages) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{900} }
+func (*TLMessagesForwardMessages) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{900} }
 
 func (m *TLMessagesForwardMessages) GetSilent() bool {
 	if m != nil {
@@ -50133,7 +50133,7 @@ type TLMessagesEditChatTitle struct {
 func (m *TLMessagesEditChatTitle) Reset()                    { *m = TLMessagesEditChatTitle{} }
 func (m *TLMessagesEditChatTitle) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesEditChatTitle) ProtoMessage()               {}
-func (*TLMessagesEditChatTitle) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{901} }
+func (*TLMessagesEditChatTitle) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{901} }
 
 func (m *TLMessagesEditChatTitle) GetChatId() int32 {
 	if m != nil {
@@ -50158,7 +50158,7 @@ type TLMessagesEditChatPhoto struct {
 func (m *TLMessagesEditChatPhoto) Reset()                    { *m = TLMessagesEditChatPhoto{} }
 func (m *TLMessagesEditChatPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesEditChatPhoto) ProtoMessage()               {}
-func (*TLMessagesEditChatPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{902} }
+func (*TLMessagesEditChatPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{902} }
 
 func (m *TLMessagesEditChatPhoto) GetChatId() int32 {
 	if m != nil {
@@ -50184,7 +50184,7 @@ type TLMessagesAddChatUser struct {
 func (m *TLMessagesAddChatUser) Reset()                    { *m = TLMessagesAddChatUser{} }
 func (m *TLMessagesAddChatUser) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesAddChatUser) ProtoMessage()               {}
-func (*TLMessagesAddChatUser) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{903} }
+func (*TLMessagesAddChatUser) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{903} }
 
 func (m *TLMessagesAddChatUser) GetChatId() int32 {
 	if m != nil {
@@ -50216,7 +50216,7 @@ type TLMessagesDeleteChatUser struct {
 func (m *TLMessagesDeleteChatUser) Reset()                    { *m = TLMessagesDeleteChatUser{} }
 func (m *TLMessagesDeleteChatUser) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesDeleteChatUser) ProtoMessage()               {}
-func (*TLMessagesDeleteChatUser) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{904} }
+func (*TLMessagesDeleteChatUser) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{904} }
 
 func (m *TLMessagesDeleteChatUser) GetChatId() int32 {
 	if m != nil {
@@ -50241,7 +50241,7 @@ type TLMessagesCreateChat struct {
 func (m *TLMessagesCreateChat) Reset()                    { *m = TLMessagesCreateChat{} }
 func (m *TLMessagesCreateChat) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesCreateChat) ProtoMessage()               {}
-func (*TLMessagesCreateChat) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{905} }
+func (*TLMessagesCreateChat) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{905} }
 
 func (m *TLMessagesCreateChat) GetUsers() []*InputUser {
 	if m != nil {
@@ -50267,7 +50267,7 @@ type TLMessagesForwardMessage struct {
 func (m *TLMessagesForwardMessage) Reset()                    { *m = TLMessagesForwardMessage{} }
 func (m *TLMessagesForwardMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesForwardMessage) ProtoMessage()               {}
-func (*TLMessagesForwardMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{906} }
+func (*TLMessagesForwardMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{906} }
 
 func (m *TLMessagesForwardMessage) GetPeer() *InputPeer {
 	if m != nil {
@@ -50298,7 +50298,7 @@ type TLMessagesImportChatInvite struct {
 func (m *TLMessagesImportChatInvite) Reset()                    { *m = TLMessagesImportChatInvite{} }
 func (m *TLMessagesImportChatInvite) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesImportChatInvite) ProtoMessage()               {}
-func (*TLMessagesImportChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{907} }
+func (*TLMessagesImportChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{907} }
 
 func (m *TLMessagesImportChatInvite) GetHash() string {
 	if m != nil {
@@ -50318,7 +50318,7 @@ type TLMessagesStartBot struct {
 func (m *TLMessagesStartBot) Reset()                    { *m = TLMessagesStartBot{} }
 func (m *TLMessagesStartBot) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesStartBot) ProtoMessage()               {}
-func (*TLMessagesStartBot) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{908} }
+func (*TLMessagesStartBot) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{908} }
 
 func (m *TLMessagesStartBot) GetBot() *InputUser {
 	if m != nil {
@@ -50357,7 +50357,7 @@ type TLMessagesToggleChatAdmins struct {
 func (m *TLMessagesToggleChatAdmins) Reset()                    { *m = TLMessagesToggleChatAdmins{} }
 func (m *TLMessagesToggleChatAdmins) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesToggleChatAdmins) ProtoMessage()               {}
-func (*TLMessagesToggleChatAdmins) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{909} }
+func (*TLMessagesToggleChatAdmins) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{909} }
 
 func (m *TLMessagesToggleChatAdmins) GetChatId() int32 {
 	if m != nil {
@@ -50381,7 +50381,7 @@ type TLMessagesMigrateChat struct {
 func (m *TLMessagesMigrateChat) Reset()                    { *m = TLMessagesMigrateChat{} }
 func (m *TLMessagesMigrateChat) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesMigrateChat) ProtoMessage()               {}
-func (*TLMessagesMigrateChat) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{910} }
+func (*TLMessagesMigrateChat) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{910} }
 
 func (m *TLMessagesMigrateChat) GetChatId() int32 {
 	if m != nil {
@@ -50405,7 +50405,7 @@ type TLMessagesSendInlineBotResult struct {
 func (m *TLMessagesSendInlineBotResult) Reset()                    { *m = TLMessagesSendInlineBotResult{} }
 func (m *TLMessagesSendInlineBotResult) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSendInlineBotResult) ProtoMessage()               {}
-func (*TLMessagesSendInlineBotResult) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{911} }
+func (*TLMessagesSendInlineBotResult) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{911} }
 
 func (m *TLMessagesSendInlineBotResult) GetSilent() bool {
 	if m != nil {
@@ -50476,7 +50476,7 @@ type TLMessagesEditMessage struct {
 func (m *TLMessagesEditMessage) Reset()                    { *m = TLMessagesEditMessage{} }
 func (m *TLMessagesEditMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesEditMessage) ProtoMessage()               {}
-func (*TLMessagesEditMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{912} }
+func (*TLMessagesEditMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{912} }
 
 func (m *TLMessagesEditMessage) GetNoWebpage() bool {
 	if m != nil {
@@ -50527,7 +50527,7 @@ type TLMessagesGetAllDrafts struct {
 func (m *TLMessagesGetAllDrafts) Reset()                    { *m = TLMessagesGetAllDrafts{} }
 func (m *TLMessagesGetAllDrafts) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetAllDrafts) ProtoMessage()               {}
-func (*TLMessagesGetAllDrafts) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{913} }
+func (*TLMessagesGetAllDrafts) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{913} }
 
 // messages.setGameScore#8ef8ecc0 flags:# edit_message:flags.0?true force:flags.1?true peer:InputPeer id:int user_id:InputUser score:int = Updates;
 type TLMessagesSetGameScore struct {
@@ -50542,7 +50542,7 @@ type TLMessagesSetGameScore struct {
 func (m *TLMessagesSetGameScore) Reset()                    { *m = TLMessagesSetGameScore{} }
 func (m *TLMessagesSetGameScore) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSetGameScore) ProtoMessage()               {}
-func (*TLMessagesSetGameScore) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{914} }
+func (*TLMessagesSetGameScore) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{914} }
 
 func (m *TLMessagesSetGameScore) GetEditMessage() bool {
 	if m != nil {
@@ -50597,7 +50597,7 @@ func (m *TLMessagesSendScreenshotNotification) Reset()         { *m = TLMessages
 func (m *TLMessagesSendScreenshotNotification) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesSendScreenshotNotification) ProtoMessage()    {}
 func (*TLMessagesSendScreenshotNotification) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{915}
+	return fileDescriptor4, []int{915}
 }
 
 func (m *TLMessagesSendScreenshotNotification) GetPeer() *InputPeer {
@@ -50629,7 +50629,7 @@ type TLHelpGetAppChangelog struct {
 func (m *TLHelpGetAppChangelog) Reset()                    { *m = TLHelpGetAppChangelog{} }
 func (m *TLHelpGetAppChangelog) String() string            { return proto.CompactTextString(m) }
 func (*TLHelpGetAppChangelog) ProtoMessage()               {}
-func (*TLHelpGetAppChangelog) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{916} }
+func (*TLHelpGetAppChangelog) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{916} }
 
 func (m *TLHelpGetAppChangelog) GetPrevAppVersion() string {
 	if m != nil {
@@ -50649,7 +50649,7 @@ type TLChannelsCreateChannel struct {
 func (m *TLChannelsCreateChannel) Reset()                    { *m = TLChannelsCreateChannel{} }
 func (m *TLChannelsCreateChannel) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsCreateChannel) ProtoMessage()               {}
-func (*TLChannelsCreateChannel) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{917} }
+func (*TLChannelsCreateChannel) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{917} }
 
 func (m *TLChannelsCreateChannel) GetBroadcast() bool {
 	if m != nil {
@@ -50689,7 +50689,7 @@ type TLChannelsEditAdmin struct {
 func (m *TLChannelsEditAdmin) Reset()                    { *m = TLChannelsEditAdmin{} }
 func (m *TLChannelsEditAdmin) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsEditAdmin) ProtoMessage()               {}
-func (*TLChannelsEditAdmin) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{918} }
+func (*TLChannelsEditAdmin) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{918} }
 
 func (m *TLChannelsEditAdmin) GetChannel() *InputChannel {
 	if m != nil {
@@ -50721,7 +50721,7 @@ type TLChannelsEditTitle struct {
 func (m *TLChannelsEditTitle) Reset()                    { *m = TLChannelsEditTitle{} }
 func (m *TLChannelsEditTitle) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsEditTitle) ProtoMessage()               {}
-func (*TLChannelsEditTitle) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{919} }
+func (*TLChannelsEditTitle) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{919} }
 
 func (m *TLChannelsEditTitle) GetChannel() *InputChannel {
 	if m != nil {
@@ -50746,7 +50746,7 @@ type TLChannelsEditPhoto struct {
 func (m *TLChannelsEditPhoto) Reset()                    { *m = TLChannelsEditPhoto{} }
 func (m *TLChannelsEditPhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsEditPhoto) ProtoMessage()               {}
-func (*TLChannelsEditPhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{920} }
+func (*TLChannelsEditPhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{920} }
 
 func (m *TLChannelsEditPhoto) GetChannel() *InputChannel {
 	if m != nil {
@@ -50770,7 +50770,7 @@ type TLChannelsJoinChannel struct {
 func (m *TLChannelsJoinChannel) Reset()                    { *m = TLChannelsJoinChannel{} }
 func (m *TLChannelsJoinChannel) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsJoinChannel) ProtoMessage()               {}
-func (*TLChannelsJoinChannel) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{921} }
+func (*TLChannelsJoinChannel) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{921} }
 
 func (m *TLChannelsJoinChannel) GetChannel() *InputChannel {
 	if m != nil {
@@ -50787,7 +50787,7 @@ type TLChannelsLeaveChannel struct {
 func (m *TLChannelsLeaveChannel) Reset()                    { *m = TLChannelsLeaveChannel{} }
 func (m *TLChannelsLeaveChannel) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsLeaveChannel) ProtoMessage()               {}
-func (*TLChannelsLeaveChannel) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{922} }
+func (*TLChannelsLeaveChannel) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{922} }
 
 func (m *TLChannelsLeaveChannel) GetChannel() *InputChannel {
 	if m != nil {
@@ -50805,7 +50805,7 @@ type TLChannelsInviteToChannel struct {
 func (m *TLChannelsInviteToChannel) Reset()                    { *m = TLChannelsInviteToChannel{} }
 func (m *TLChannelsInviteToChannel) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsInviteToChannel) ProtoMessage()               {}
-func (*TLChannelsInviteToChannel) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{923} }
+func (*TLChannelsInviteToChannel) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{923} }
 
 func (m *TLChannelsInviteToChannel) GetChannel() *InputChannel {
 	if m != nil {
@@ -50829,7 +50829,7 @@ type TLChannelsDeleteChannel struct {
 func (m *TLChannelsDeleteChannel) Reset()                    { *m = TLChannelsDeleteChannel{} }
 func (m *TLChannelsDeleteChannel) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsDeleteChannel) ProtoMessage()               {}
-func (*TLChannelsDeleteChannel) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{924} }
+func (*TLChannelsDeleteChannel) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{924} }
 
 func (m *TLChannelsDeleteChannel) GetChannel() *InputChannel {
 	if m != nil {
@@ -50847,7 +50847,7 @@ type TLChannelsToggleInvites struct {
 func (m *TLChannelsToggleInvites) Reset()                    { *m = TLChannelsToggleInvites{} }
 func (m *TLChannelsToggleInvites) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsToggleInvites) ProtoMessage()               {}
-func (*TLChannelsToggleInvites) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{925} }
+func (*TLChannelsToggleInvites) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{925} }
 
 func (m *TLChannelsToggleInvites) GetChannel() *InputChannel {
 	if m != nil {
@@ -50872,7 +50872,7 @@ type TLChannelsToggleSignatures struct {
 func (m *TLChannelsToggleSignatures) Reset()                    { *m = TLChannelsToggleSignatures{} }
 func (m *TLChannelsToggleSignatures) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsToggleSignatures) ProtoMessage()               {}
-func (*TLChannelsToggleSignatures) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{926} }
+func (*TLChannelsToggleSignatures) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{926} }
 
 func (m *TLChannelsToggleSignatures) GetChannel() *InputChannel {
 	if m != nil {
@@ -50898,7 +50898,7 @@ type TLChannelsUpdatePinnedMessage struct {
 func (m *TLChannelsUpdatePinnedMessage) Reset()                    { *m = TLChannelsUpdatePinnedMessage{} }
 func (m *TLChannelsUpdatePinnedMessage) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsUpdatePinnedMessage) ProtoMessage()               {}
-func (*TLChannelsUpdatePinnedMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{927} }
+func (*TLChannelsUpdatePinnedMessage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{927} }
 
 func (m *TLChannelsUpdatePinnedMessage) GetSilent() bool {
 	if m != nil {
@@ -50931,7 +50931,7 @@ type TLChannelsEditBanned struct {
 func (m *TLChannelsEditBanned) Reset()                    { *m = TLChannelsEditBanned{} }
 func (m *TLChannelsEditBanned) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsEditBanned) ProtoMessage()               {}
-func (*TLChannelsEditBanned) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{928} }
+func (*TLChannelsEditBanned) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{928} }
 
 func (m *TLChannelsEditBanned) GetChannel() *InputChannel {
 	if m != nil {
@@ -50965,7 +50965,7 @@ type TLPhoneDiscardCall struct {
 func (m *TLPhoneDiscardCall) Reset()                    { *m = TLPhoneDiscardCall{} }
 func (m *TLPhoneDiscardCall) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneDiscardCall) ProtoMessage()               {}
-func (*TLPhoneDiscardCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{929} }
+func (*TLPhoneDiscardCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{929} }
 
 func (m *TLPhoneDiscardCall) GetPeer() *InputPhoneCall {
 	if m != nil {
@@ -51005,7 +51005,7 @@ type TLPhoneSetCallRating struct {
 func (m *TLPhoneSetCallRating) Reset()                    { *m = TLPhoneSetCallRating{} }
 func (m *TLPhoneSetCallRating) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneSetCallRating) ProtoMessage()               {}
-func (*TLPhoneSetCallRating) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{930} }
+func (*TLPhoneSetCallRating) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{930} }
 
 func (m *TLPhoneSetCallRating) GetPeer() *InputPhoneCall {
 	if m != nil {
@@ -51036,7 +51036,7 @@ type TLMessagesGetPeerSettings struct {
 func (m *TLMessagesGetPeerSettings) Reset()                    { *m = TLMessagesGetPeerSettings{} }
 func (m *TLMessagesGetPeerSettings) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetPeerSettings) ProtoMessage()               {}
-func (*TLMessagesGetPeerSettings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{931} }
+func (*TLMessagesGetPeerSettings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{931} }
 
 func (m *TLMessagesGetPeerSettings) GetPeer() *InputPeer {
 	if m != nil {
@@ -51053,7 +51053,7 @@ type TLMessagesGetChats struct {
 func (m *TLMessagesGetChats) Reset()                    { *m = TLMessagesGetChats{} }
 func (m *TLMessagesGetChats) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetChats) ProtoMessage()               {}
-func (*TLMessagesGetChats) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{932} }
+func (*TLMessagesGetChats) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{932} }
 
 func (m *TLMessagesGetChats) GetId() []int32 {
 	if m != nil {
@@ -51072,7 +51072,7 @@ type TLMessagesGetCommonChats struct {
 func (m *TLMessagesGetCommonChats) Reset()                    { *m = TLMessagesGetCommonChats{} }
 func (m *TLMessagesGetCommonChats) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetCommonChats) ProtoMessage()               {}
-func (*TLMessagesGetCommonChats) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{933} }
+func (*TLMessagesGetCommonChats) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{933} }
 
 func (m *TLMessagesGetCommonChats) GetUserId() *InputUser {
 	if m != nil {
@@ -51103,7 +51103,7 @@ type TLMessagesGetAllChats struct {
 func (m *TLMessagesGetAllChats) Reset()                    { *m = TLMessagesGetAllChats{} }
 func (m *TLMessagesGetAllChats) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetAllChats) ProtoMessage()               {}
-func (*TLMessagesGetAllChats) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{934} }
+func (*TLMessagesGetAllChats) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{934} }
 
 func (m *TLMessagesGetAllChats) GetExceptIds() []int32 {
 	if m != nil {
@@ -51120,7 +51120,7 @@ type TLChannelsGetChannels struct {
 func (m *TLChannelsGetChannels) Reset()                    { *m = TLChannelsGetChannels{} }
 func (m *TLChannelsGetChannels) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsGetChannels) ProtoMessage()               {}
-func (*TLChannelsGetChannels) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{935} }
+func (*TLChannelsGetChannels) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{935} }
 
 func (m *TLChannelsGetChannels) GetId() []*InputChannel {
 	if m != nil {
@@ -51137,7 +51137,7 @@ func (m *TLChannelsGetAdminedPublicChannels) Reset()         { *m = TLChannelsGe
 func (m *TLChannelsGetAdminedPublicChannels) String() string { return proto.CompactTextString(m) }
 func (*TLChannelsGetAdminedPublicChannels) ProtoMessage()    {}
 func (*TLChannelsGetAdminedPublicChannels) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{936}
+	return fileDescriptor4, []int{936}
 }
 
 // messages.getFullChat#3b831c66 chat_id:int = messages.ChatFull;
@@ -51148,7 +51148,7 @@ type TLMessagesGetFullChat struct {
 func (m *TLMessagesGetFullChat) Reset()                    { *m = TLMessagesGetFullChat{} }
 func (m *TLMessagesGetFullChat) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetFullChat) ProtoMessage()               {}
-func (*TLMessagesGetFullChat) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{937} }
+func (*TLMessagesGetFullChat) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{937} }
 
 func (m *TLMessagesGetFullChat) GetChatId() int32 {
 	if m != nil {
@@ -51165,7 +51165,7 @@ type TLChannelsGetFullChannel struct {
 func (m *TLChannelsGetFullChannel) Reset()                    { *m = TLChannelsGetFullChannel{} }
 func (m *TLChannelsGetFullChannel) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsGetFullChannel) ProtoMessage()               {}
-func (*TLChannelsGetFullChannel) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{938} }
+func (*TLChannelsGetFullChannel) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{938} }
 
 func (m *TLChannelsGetFullChannel) GetChannel() *InputChannel {
 	if m != nil {
@@ -51183,7 +51183,7 @@ type TLMessagesGetDhConfig struct {
 func (m *TLMessagesGetDhConfig) Reset()                    { *m = TLMessagesGetDhConfig{} }
 func (m *TLMessagesGetDhConfig) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetDhConfig) ProtoMessage()               {}
-func (*TLMessagesGetDhConfig) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{939} }
+func (*TLMessagesGetDhConfig) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{939} }
 
 func (m *TLMessagesGetDhConfig) GetVersion() int32 {
 	if m != nil {
@@ -51209,7 +51209,7 @@ type TLMessagesRequestEncryption struct {
 func (m *TLMessagesRequestEncryption) Reset()                    { *m = TLMessagesRequestEncryption{} }
 func (m *TLMessagesRequestEncryption) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesRequestEncryption) ProtoMessage()               {}
-func (*TLMessagesRequestEncryption) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{940} }
+func (*TLMessagesRequestEncryption) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{940} }
 
 func (m *TLMessagesRequestEncryption) GetUserId() *InputUser {
 	if m != nil {
@@ -51242,7 +51242,7 @@ type TLMessagesAcceptEncryption struct {
 func (m *TLMessagesAcceptEncryption) Reset()                    { *m = TLMessagesAcceptEncryption{} }
 func (m *TLMessagesAcceptEncryption) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesAcceptEncryption) ProtoMessage()               {}
-func (*TLMessagesAcceptEncryption) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{941} }
+func (*TLMessagesAcceptEncryption) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{941} }
 
 func (m *TLMessagesAcceptEncryption) GetPeer() *InputEncryptedChat {
 	if m != nil {
@@ -51275,7 +51275,7 @@ type TLMessagesSendEncrypted struct {
 func (m *TLMessagesSendEncrypted) Reset()                    { *m = TLMessagesSendEncrypted{} }
 func (m *TLMessagesSendEncrypted) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSendEncrypted) ProtoMessage()               {}
-func (*TLMessagesSendEncrypted) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{942} }
+func (*TLMessagesSendEncrypted) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{942} }
 
 func (m *TLMessagesSendEncrypted) GetPeer() *InputEncryptedChat {
 	if m != nil {
@@ -51309,7 +51309,7 @@ type TLMessagesSendEncryptedFile struct {
 func (m *TLMessagesSendEncryptedFile) Reset()                    { *m = TLMessagesSendEncryptedFile{} }
 func (m *TLMessagesSendEncryptedFile) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSendEncryptedFile) ProtoMessage()               {}
-func (*TLMessagesSendEncryptedFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{943} }
+func (*TLMessagesSendEncryptedFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{943} }
 
 func (m *TLMessagesSendEncryptedFile) GetPeer() *InputEncryptedChat {
 	if m != nil {
@@ -51350,7 +51350,7 @@ func (m *TLMessagesSendEncryptedService) Reset()         { *m = TLMessagesSendEn
 func (m *TLMessagesSendEncryptedService) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesSendEncryptedService) ProtoMessage()    {}
 func (*TLMessagesSendEncryptedService) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{944}
+	return fileDescriptor4, []int{944}
 }
 
 func (m *TLMessagesSendEncryptedService) GetPeer() *InputEncryptedChat {
@@ -51382,7 +51382,7 @@ type TLMessagesReceivedQueue struct {
 func (m *TLMessagesReceivedQueue) Reset()                    { *m = TLMessagesReceivedQueue{} }
 func (m *TLMessagesReceivedQueue) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesReceivedQueue) ProtoMessage()               {}
-func (*TLMessagesReceivedQueue) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{945} }
+func (*TLMessagesReceivedQueue) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{945} }
 
 func (m *TLMessagesReceivedQueue) GetMaxQts() int32 {
 	if m != nil {
@@ -51399,7 +51399,7 @@ type TLPhotosDeletePhotos struct {
 func (m *TLPhotosDeletePhotos) Reset()                    { *m = TLPhotosDeletePhotos{} }
 func (m *TLPhotosDeletePhotos) String() string            { return proto.CompactTextString(m) }
 func (*TLPhotosDeletePhotos) ProtoMessage()               {}
-func (*TLPhotosDeletePhotos) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{946} }
+func (*TLPhotosDeletePhotos) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{946} }
 
 func (m *TLPhotosDeletePhotos) GetId() []*InputPhoto {
 	if m != nil {
@@ -51416,7 +51416,7 @@ type TLMessagesGetAllStickers struct {
 func (m *TLMessagesGetAllStickers) Reset()                    { *m = TLMessagesGetAllStickers{} }
 func (m *TLMessagesGetAllStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetAllStickers) ProtoMessage()               {}
-func (*TLMessagesGetAllStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{947} }
+func (*TLMessagesGetAllStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{947} }
 
 func (m *TLMessagesGetAllStickers) GetHash() int32 {
 	if m != nil {
@@ -51433,7 +51433,7 @@ type TLMessagesGetMaskStickers struct {
 func (m *TLMessagesGetMaskStickers) Reset()                    { *m = TLMessagesGetMaskStickers{} }
 func (m *TLMessagesGetMaskStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetMaskStickers) ProtoMessage()               {}
-func (*TLMessagesGetMaskStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{948} }
+func (*TLMessagesGetMaskStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{948} }
 
 func (m *TLMessagesGetMaskStickers) GetHash() int32 {
 	if m != nil {
@@ -51450,7 +51450,7 @@ type TLMessagesGetWebPagePreview struct {
 func (m *TLMessagesGetWebPagePreview) Reset()                    { *m = TLMessagesGetWebPagePreview{} }
 func (m *TLMessagesGetWebPagePreview) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetWebPagePreview) ProtoMessage()               {}
-func (*TLMessagesGetWebPagePreview) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{949} }
+func (*TLMessagesGetWebPagePreview) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{949} }
 
 func (m *TLMessagesGetWebPagePreview) GetMessage() string {
 	if m != nil {
@@ -51468,7 +51468,7 @@ type TLMessagesUploadMedia struct {
 func (m *TLMessagesUploadMedia) Reset()                    { *m = TLMessagesUploadMedia{} }
 func (m *TLMessagesUploadMedia) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesUploadMedia) ProtoMessage()               {}
-func (*TLMessagesUploadMedia) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{950} }
+func (*TLMessagesUploadMedia) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{950} }
 
 func (m *TLMessagesUploadMedia) GetPeer() *InputPeer {
 	if m != nil {
@@ -51492,7 +51492,7 @@ type TLMessagesExportChatInvite struct {
 func (m *TLMessagesExportChatInvite) Reset()                    { *m = TLMessagesExportChatInvite{} }
 func (m *TLMessagesExportChatInvite) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesExportChatInvite) ProtoMessage()               {}
-func (*TLMessagesExportChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{951} }
+func (*TLMessagesExportChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{951} }
 
 func (m *TLMessagesExportChatInvite) GetChatId() int32 {
 	if m != nil {
@@ -51509,7 +51509,7 @@ type TLChannelsExportInvite struct {
 func (m *TLChannelsExportInvite) Reset()                    { *m = TLChannelsExportInvite{} }
 func (m *TLChannelsExportInvite) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsExportInvite) ProtoMessage()               {}
-func (*TLChannelsExportInvite) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{952} }
+func (*TLChannelsExportInvite) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{952} }
 
 func (m *TLChannelsExportInvite) GetChannel() *InputChannel {
 	if m != nil {
@@ -51526,7 +51526,7 @@ type TLMessagesCheckChatInvite struct {
 func (m *TLMessagesCheckChatInvite) Reset()                    { *m = TLMessagesCheckChatInvite{} }
 func (m *TLMessagesCheckChatInvite) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesCheckChatInvite) ProtoMessage()               {}
-func (*TLMessagesCheckChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{953} }
+func (*TLMessagesCheckChatInvite) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{953} }
 
 func (m *TLMessagesCheckChatInvite) GetHash() string {
 	if m != nil {
@@ -51543,7 +51543,7 @@ type TLMessagesGetStickerSet struct {
 func (m *TLMessagesGetStickerSet) Reset()                    { *m = TLMessagesGetStickerSet{} }
 func (m *TLMessagesGetStickerSet) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetStickerSet) ProtoMessage()               {}
-func (*TLMessagesGetStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{954} }
+func (*TLMessagesGetStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{954} }
 
 func (m *TLMessagesGetStickerSet) GetStickerset() *InputStickerSet {
 	if m != nil {
@@ -51564,7 +51564,7 @@ type TLStickersCreateStickerSet struct {
 func (m *TLStickersCreateStickerSet) Reset()                    { *m = TLStickersCreateStickerSet{} }
 func (m *TLStickersCreateStickerSet) String() string            { return proto.CompactTextString(m) }
 func (*TLStickersCreateStickerSet) ProtoMessage()               {}
-func (*TLStickersCreateStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{955} }
+func (*TLStickersCreateStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{955} }
 
 func (m *TLStickersCreateStickerSet) GetMasks() bool {
 	if m != nil {
@@ -51610,7 +51610,7 @@ func (m *TLStickersRemoveStickerFromSet) Reset()         { *m = TLStickersRemove
 func (m *TLStickersRemoveStickerFromSet) String() string { return proto.CompactTextString(m) }
 func (*TLStickersRemoveStickerFromSet) ProtoMessage()    {}
 func (*TLStickersRemoveStickerFromSet) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{956}
+	return fileDescriptor4, []int{956}
 }
 
 func (m *TLStickersRemoveStickerFromSet) GetSticker() *InputDocument {
@@ -51630,7 +51630,7 @@ func (m *TLStickersChangeStickerPosition) Reset()         { *m = TLStickersChang
 func (m *TLStickersChangeStickerPosition) String() string { return proto.CompactTextString(m) }
 func (*TLStickersChangeStickerPosition) ProtoMessage()    {}
 func (*TLStickersChangeStickerPosition) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{957}
+	return fileDescriptor4, []int{957}
 }
 
 func (m *TLStickersChangeStickerPosition) GetSticker() *InputDocument {
@@ -51656,7 +51656,7 @@ type TLStickersAddStickerToSet struct {
 func (m *TLStickersAddStickerToSet) Reset()                    { *m = TLStickersAddStickerToSet{} }
 func (m *TLStickersAddStickerToSet) String() string            { return proto.CompactTextString(m) }
 func (*TLStickersAddStickerToSet) ProtoMessage()               {}
-func (*TLStickersAddStickerToSet) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{958} }
+func (*TLStickersAddStickerToSet) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{958} }
 
 func (m *TLStickersAddStickerToSet) GetStickerset() *InputStickerSet {
 	if m != nil {
@@ -51681,7 +51681,7 @@ type TLMessagesInstallStickerSet struct {
 func (m *TLMessagesInstallStickerSet) Reset()                    { *m = TLMessagesInstallStickerSet{} }
 func (m *TLMessagesInstallStickerSet) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesInstallStickerSet) ProtoMessage()               {}
-func (*TLMessagesInstallStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{959} }
+func (*TLMessagesInstallStickerSet) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{959} }
 
 func (m *TLMessagesInstallStickerSet) GetStickerset() *InputStickerSet {
 	if m != nil {
@@ -51707,7 +51707,7 @@ type TLMessagesGetDocumentByHash struct {
 func (m *TLMessagesGetDocumentByHash) Reset()                    { *m = TLMessagesGetDocumentByHash{} }
 func (m *TLMessagesGetDocumentByHash) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetDocumentByHash) ProtoMessage()               {}
-func (*TLMessagesGetDocumentByHash) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{960} }
+func (*TLMessagesGetDocumentByHash) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{960} }
 
 func (m *TLMessagesGetDocumentByHash) GetSha256() []byte {
 	if m != nil {
@@ -51739,7 +51739,7 @@ type TLMessagesSearchGifs struct {
 func (m *TLMessagesSearchGifs) Reset()                    { *m = TLMessagesSearchGifs{} }
 func (m *TLMessagesSearchGifs) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesSearchGifs) ProtoMessage()               {}
-func (*TLMessagesSearchGifs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{961} }
+func (*TLMessagesSearchGifs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{961} }
 
 func (m *TLMessagesSearchGifs) GetQ() string {
 	if m != nil {
@@ -51763,7 +51763,7 @@ type TLMessagesGetSavedGifs struct {
 func (m *TLMessagesGetSavedGifs) Reset()                    { *m = TLMessagesGetSavedGifs{} }
 func (m *TLMessagesGetSavedGifs) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetSavedGifs) ProtoMessage()               {}
-func (*TLMessagesGetSavedGifs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{962} }
+func (*TLMessagesGetSavedGifs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{962} }
 
 func (m *TLMessagesGetSavedGifs) GetHash() int32 {
 	if m != nil {
@@ -51784,7 +51784,7 @@ type TLMessagesGetInlineBotResults struct {
 func (m *TLMessagesGetInlineBotResults) Reset()                    { *m = TLMessagesGetInlineBotResults{} }
 func (m *TLMessagesGetInlineBotResults) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetInlineBotResults) ProtoMessage()               {}
-func (*TLMessagesGetInlineBotResults) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{963} }
+func (*TLMessagesGetInlineBotResults) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{963} }
 
 func (m *TLMessagesGetInlineBotResults) GetBot() *InputUser {
 	if m != nil {
@@ -51830,7 +51830,7 @@ type TLMessagesGetMessageEditData struct {
 func (m *TLMessagesGetMessageEditData) Reset()                    { *m = TLMessagesGetMessageEditData{} }
 func (m *TLMessagesGetMessageEditData) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetMessageEditData) ProtoMessage()               {}
-func (*TLMessagesGetMessageEditData) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{964} }
+func (*TLMessagesGetMessageEditData) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{964} }
 
 func (m *TLMessagesGetMessageEditData) GetPeer() *InputPeer {
 	if m != nil {
@@ -51858,7 +51858,7 @@ func (m *TLMessagesGetBotCallbackAnswer) Reset()         { *m = TLMessagesGetBot
 func (m *TLMessagesGetBotCallbackAnswer) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesGetBotCallbackAnswer) ProtoMessage()    {}
 func (*TLMessagesGetBotCallbackAnswer) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{965}
+	return fileDescriptor4, []int{965}
 }
 
 func (m *TLMessagesGetBotCallbackAnswer) GetGame() bool {
@@ -51897,7 +51897,7 @@ type TLMessagesGetPeerDialogs struct {
 func (m *TLMessagesGetPeerDialogs) Reset()                    { *m = TLMessagesGetPeerDialogs{} }
 func (m *TLMessagesGetPeerDialogs) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetPeerDialogs) ProtoMessage()               {}
-func (*TLMessagesGetPeerDialogs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{966} }
+func (*TLMessagesGetPeerDialogs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{966} }
 
 func (m *TLMessagesGetPeerDialogs) GetPeers() []*InputPeer {
 	if m != nil {
@@ -51913,7 +51913,7 @@ type TLMessagesGetPinnedDialogs struct {
 func (m *TLMessagesGetPinnedDialogs) Reset()                    { *m = TLMessagesGetPinnedDialogs{} }
 func (m *TLMessagesGetPinnedDialogs) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetPinnedDialogs) ProtoMessage()               {}
-func (*TLMessagesGetPinnedDialogs) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{967} }
+func (*TLMessagesGetPinnedDialogs) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{967} }
 
 // messages.getFeaturedStickers#2dacca4f hash:int = messages.FeaturedStickers;
 type TLMessagesGetFeaturedStickers struct {
@@ -51923,7 +51923,7 @@ type TLMessagesGetFeaturedStickers struct {
 func (m *TLMessagesGetFeaturedStickers) Reset()                    { *m = TLMessagesGetFeaturedStickers{} }
 func (m *TLMessagesGetFeaturedStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetFeaturedStickers) ProtoMessage()               {}
-func (*TLMessagesGetFeaturedStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{968} }
+func (*TLMessagesGetFeaturedStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{968} }
 
 func (m *TLMessagesGetFeaturedStickers) GetHash() int32 {
 	if m != nil {
@@ -51941,7 +51941,7 @@ type TLMessagesGetRecentStickers struct {
 func (m *TLMessagesGetRecentStickers) Reset()                    { *m = TLMessagesGetRecentStickers{} }
 func (m *TLMessagesGetRecentStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetRecentStickers) ProtoMessage()               {}
-func (*TLMessagesGetRecentStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{969} }
+func (*TLMessagesGetRecentStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{969} }
 
 func (m *TLMessagesGetRecentStickers) GetAttached() bool {
 	if m != nil {
@@ -51967,7 +51967,7 @@ type TLMessagesGetArchivedStickers struct {
 func (m *TLMessagesGetArchivedStickers) Reset()                    { *m = TLMessagesGetArchivedStickers{} }
 func (m *TLMessagesGetArchivedStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetArchivedStickers) ProtoMessage()               {}
-func (*TLMessagesGetArchivedStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{970} }
+func (*TLMessagesGetArchivedStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{970} }
 
 func (m *TLMessagesGetArchivedStickers) GetMasks() bool {
 	if m != nil {
@@ -51998,7 +51998,7 @@ type TLMessagesGetAttachedStickers struct {
 func (m *TLMessagesGetAttachedStickers) Reset()                    { *m = TLMessagesGetAttachedStickers{} }
 func (m *TLMessagesGetAttachedStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetAttachedStickers) ProtoMessage()               {}
-func (*TLMessagesGetAttachedStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{971} }
+func (*TLMessagesGetAttachedStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{971} }
 
 func (m *TLMessagesGetAttachedStickers) GetMedia() *InputStickeredMedia {
 	if m != nil {
@@ -52017,7 +52017,7 @@ type TLMessagesGetGameHighScores struct {
 func (m *TLMessagesGetGameHighScores) Reset()                    { *m = TLMessagesGetGameHighScores{} }
 func (m *TLMessagesGetGameHighScores) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetGameHighScores) ProtoMessage()               {}
-func (*TLMessagesGetGameHighScores) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{972} }
+func (*TLMessagesGetGameHighScores) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{972} }
 
 func (m *TLMessagesGetGameHighScores) GetPeer() *InputPeer {
 	if m != nil {
@@ -52050,7 +52050,7 @@ func (m *TLMessagesGetInlineGameHighScores) Reset()         { *m = TLMessagesGet
 func (m *TLMessagesGetInlineGameHighScores) String() string { return proto.CompactTextString(m) }
 func (*TLMessagesGetInlineGameHighScores) ProtoMessage()    {}
 func (*TLMessagesGetInlineGameHighScores) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{973}
+	return fileDescriptor4, []int{973}
 }
 
 func (m *TLMessagesGetInlineGameHighScores) GetId() *InputBotInlineMessageID {
@@ -52076,7 +52076,7 @@ type TLMessagesGetWebPage struct {
 func (m *TLMessagesGetWebPage) Reset()                    { *m = TLMessagesGetWebPage{} }
 func (m *TLMessagesGetWebPage) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetWebPage) ProtoMessage()               {}
-func (*TLMessagesGetWebPage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{974} }
+func (*TLMessagesGetWebPage) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{974} }
 
 func (m *TLMessagesGetWebPage) GetUrl() string {
 	if m != nil {
@@ -52100,7 +52100,7 @@ type TLMessagesGetFavedStickers struct {
 func (m *TLMessagesGetFavedStickers) Reset()                    { *m = TLMessagesGetFavedStickers{} }
 func (m *TLMessagesGetFavedStickers) String() string            { return proto.CompactTextString(m) }
 func (*TLMessagesGetFavedStickers) ProtoMessage()               {}
-func (*TLMessagesGetFavedStickers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{975} }
+func (*TLMessagesGetFavedStickers) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{975} }
 
 func (m *TLMessagesGetFavedStickers) GetHash() int32 {
 	if m != nil {
@@ -52116,7 +52116,7 @@ type TLUpdatesGetState struct {
 func (m *TLUpdatesGetState) Reset()                    { *m = TLUpdatesGetState{} }
 func (m *TLUpdatesGetState) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdatesGetState) ProtoMessage()               {}
-func (*TLUpdatesGetState) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{976} }
+func (*TLUpdatesGetState) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{976} }
 
 // updates.getDifference#25939651 flags:# pts:int pts_total_limit:flags.0?int date:int qts:int = updates.Difference;
 type TLUpdatesGetDifference struct {
@@ -52129,7 +52129,7 @@ type TLUpdatesGetDifference struct {
 func (m *TLUpdatesGetDifference) Reset()                    { *m = TLUpdatesGetDifference{} }
 func (m *TLUpdatesGetDifference) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdatesGetDifference) ProtoMessage()               {}
-func (*TLUpdatesGetDifference) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{977} }
+func (*TLUpdatesGetDifference) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{977} }
 
 func (m *TLUpdatesGetDifference) GetPts() int32 {
 	if m != nil {
@@ -52171,7 +52171,7 @@ type TLUpdatesGetChannelDifference struct {
 func (m *TLUpdatesGetChannelDifference) Reset()                    { *m = TLUpdatesGetChannelDifference{} }
 func (m *TLUpdatesGetChannelDifference) String() string            { return proto.CompactTextString(m) }
 func (*TLUpdatesGetChannelDifference) ProtoMessage()               {}
-func (*TLUpdatesGetChannelDifference) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{978} }
+func (*TLUpdatesGetChannelDifference) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{978} }
 
 func (m *TLUpdatesGetChannelDifference) GetForce() bool {
 	if m != nil {
@@ -52216,7 +52216,7 @@ type TLPhotosUpdateProfilePhoto struct {
 func (m *TLPhotosUpdateProfilePhoto) Reset()                    { *m = TLPhotosUpdateProfilePhoto{} }
 func (m *TLPhotosUpdateProfilePhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLPhotosUpdateProfilePhoto) ProtoMessage()               {}
-func (*TLPhotosUpdateProfilePhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{979} }
+func (*TLPhotosUpdateProfilePhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{979} }
 
 func (m *TLPhotosUpdateProfilePhoto) GetId() *InputPhoto {
 	if m != nil {
@@ -52233,7 +52233,7 @@ type TLPhotosUploadProfilePhoto struct {
 func (m *TLPhotosUploadProfilePhoto) Reset()                    { *m = TLPhotosUploadProfilePhoto{} }
 func (m *TLPhotosUploadProfilePhoto) String() string            { return proto.CompactTextString(m) }
 func (*TLPhotosUploadProfilePhoto) ProtoMessage()               {}
-func (*TLPhotosUploadProfilePhoto) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{980} }
+func (*TLPhotosUploadProfilePhoto) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{980} }
 
 func (m *TLPhotosUploadProfilePhoto) GetFile() *InputFile {
 	if m != nil {
@@ -52253,7 +52253,7 @@ type TLPhotosGetUserPhotos struct {
 func (m *TLPhotosGetUserPhotos) Reset()                    { *m = TLPhotosGetUserPhotos{} }
 func (m *TLPhotosGetUserPhotos) String() string            { return proto.CompactTextString(m) }
 func (*TLPhotosGetUserPhotos) ProtoMessage()               {}
-func (*TLPhotosGetUserPhotos) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{981} }
+func (*TLPhotosGetUserPhotos) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{981} }
 
 func (m *TLPhotosGetUserPhotos) GetUserId() *InputUser {
 	if m != nil {
@@ -52293,7 +52293,7 @@ type TLUploadGetFile struct {
 func (m *TLUploadGetFile) Reset()                    { *m = TLUploadGetFile{} }
 func (m *TLUploadGetFile) String() string            { return proto.CompactTextString(m) }
 func (*TLUploadGetFile) ProtoMessage()               {}
-func (*TLUploadGetFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{982} }
+func (*TLUploadGetFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{982} }
 
 func (m *TLUploadGetFile) GetLocation() *InputFileLocation {
 	if m != nil {
@@ -52326,7 +52326,7 @@ type TLUploadGetWebFile struct {
 func (m *TLUploadGetWebFile) Reset()                    { *m = TLUploadGetWebFile{} }
 func (m *TLUploadGetWebFile) String() string            { return proto.CompactTextString(m) }
 func (*TLUploadGetWebFile) ProtoMessage()               {}
-func (*TLUploadGetWebFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{983} }
+func (*TLUploadGetWebFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{983} }
 
 func (m *TLUploadGetWebFile) GetLocation() *InputWebFileLocation {
 	if m != nil {
@@ -52359,7 +52359,7 @@ type TLUploadGetCdnFile struct {
 func (m *TLUploadGetCdnFile) Reset()                    { *m = TLUploadGetCdnFile{} }
 func (m *TLUploadGetCdnFile) String() string            { return proto.CompactTextString(m) }
 func (*TLUploadGetCdnFile) ProtoMessage()               {}
-func (*TLUploadGetCdnFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{984} }
+func (*TLUploadGetCdnFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{984} }
 
 func (m *TLUploadGetCdnFile) GetFileToken() []byte {
 	if m != nil {
@@ -52391,7 +52391,7 @@ type TLUploadReuploadCdnFile struct {
 func (m *TLUploadReuploadCdnFile) Reset()                    { *m = TLUploadReuploadCdnFile{} }
 func (m *TLUploadReuploadCdnFile) String() string            { return proto.CompactTextString(m) }
 func (*TLUploadReuploadCdnFile) ProtoMessage()               {}
-func (*TLUploadReuploadCdnFile) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{985} }
+func (*TLUploadReuploadCdnFile) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{985} }
 
 func (m *TLUploadReuploadCdnFile) GetFileToken() []byte {
 	if m != nil {
@@ -52416,7 +52416,7 @@ type TLUploadGetCdnFileHashes struct {
 func (m *TLUploadGetCdnFileHashes) Reset()                    { *m = TLUploadGetCdnFileHashes{} }
 func (m *TLUploadGetCdnFileHashes) String() string            { return proto.CompactTextString(m) }
 func (*TLUploadGetCdnFileHashes) ProtoMessage()               {}
-func (*TLUploadGetCdnFileHashes) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{986} }
+func (*TLUploadGetCdnFileHashes) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{986} }
 
 func (m *TLUploadGetCdnFileHashes) GetFileToken() []byte {
 	if m != nil {
@@ -52439,7 +52439,7 @@ type TLHelpGetConfig struct {
 func (m *TLHelpGetConfig) Reset()                    { *m = TLHelpGetConfig{} }
 func (m *TLHelpGetConfig) String() string            { return proto.CompactTextString(m) }
 func (*TLHelpGetConfig) ProtoMessage()               {}
-func (*TLHelpGetConfig) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{987} }
+func (*TLHelpGetConfig) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{987} }
 
 // help.getNearestDc#1fb33026 = NearestDc;
 type TLHelpGetNearestDc struct {
@@ -52448,7 +52448,7 @@ type TLHelpGetNearestDc struct {
 func (m *TLHelpGetNearestDc) Reset()                    { *m = TLHelpGetNearestDc{} }
 func (m *TLHelpGetNearestDc) String() string            { return proto.CompactTextString(m) }
 func (*TLHelpGetNearestDc) ProtoMessage()               {}
-func (*TLHelpGetNearestDc) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{988} }
+func (*TLHelpGetNearestDc) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{988} }
 
 // help.getAppUpdate#ae2de196 = help.AppUpdate;
 type TLHelpGetAppUpdate struct {
@@ -52457,7 +52457,7 @@ type TLHelpGetAppUpdate struct {
 func (m *TLHelpGetAppUpdate) Reset()                    { *m = TLHelpGetAppUpdate{} }
 func (m *TLHelpGetAppUpdate) String() string            { return proto.CompactTextString(m) }
 func (*TLHelpGetAppUpdate) ProtoMessage()               {}
-func (*TLHelpGetAppUpdate) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{989} }
+func (*TLHelpGetAppUpdate) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{989} }
 
 // help.getInviteText#4d392343 = help.InviteText;
 type TLHelpGetInviteText struct {
@@ -52466,7 +52466,7 @@ type TLHelpGetInviteText struct {
 func (m *TLHelpGetInviteText) Reset()                    { *m = TLHelpGetInviteText{} }
 func (m *TLHelpGetInviteText) String() string            { return proto.CompactTextString(m) }
 func (*TLHelpGetInviteText) ProtoMessage()               {}
-func (*TLHelpGetInviteText) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{990} }
+func (*TLHelpGetInviteText) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{990} }
 
 // help.getSupport#9cdf08cd = help.Support;
 type TLHelpGetSupport struct {
@@ -52475,7 +52475,7 @@ type TLHelpGetSupport struct {
 func (m *TLHelpGetSupport) Reset()                    { *m = TLHelpGetSupport{} }
 func (m *TLHelpGetSupport) String() string            { return proto.CompactTextString(m) }
 func (*TLHelpGetSupport) ProtoMessage()               {}
-func (*TLHelpGetSupport) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{991} }
+func (*TLHelpGetSupport) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{991} }
 
 // help.getTermsOfService#350170f3 = help.TermsOfService;
 type TLHelpGetTermsOfService struct {
@@ -52484,7 +52484,7 @@ type TLHelpGetTermsOfService struct {
 func (m *TLHelpGetTermsOfService) Reset()                    { *m = TLHelpGetTermsOfService{} }
 func (m *TLHelpGetTermsOfService) String() string            { return proto.CompactTextString(m) }
 func (*TLHelpGetTermsOfService) ProtoMessage()               {}
-func (*TLHelpGetTermsOfService) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{992} }
+func (*TLHelpGetTermsOfService) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{992} }
 
 // help.getCdnConfig#52029342 = CdnConfig;
 type TLHelpGetCdnConfig struct {
@@ -52493,7 +52493,7 @@ type TLHelpGetCdnConfig struct {
 func (m *TLHelpGetCdnConfig) Reset()                    { *m = TLHelpGetCdnConfig{} }
 func (m *TLHelpGetCdnConfig) String() string            { return proto.CompactTextString(m) }
 func (*TLHelpGetCdnConfig) ProtoMessage()               {}
-func (*TLHelpGetCdnConfig) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{993} }
+func (*TLHelpGetCdnConfig) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{993} }
 
 // channels.getParticipants#24d98f92 channel:InputChannel filter:ChannelParticipantsFilter offset:int limit:int = channels.ChannelParticipants;
 type TLChannelsGetParticipants struct {
@@ -52506,7 +52506,7 @@ type TLChannelsGetParticipants struct {
 func (m *TLChannelsGetParticipants) Reset()                    { *m = TLChannelsGetParticipants{} }
 func (m *TLChannelsGetParticipants) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsGetParticipants) ProtoMessage()               {}
-func (*TLChannelsGetParticipants) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{994} }
+func (*TLChannelsGetParticipants) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{994} }
 
 func (m *TLChannelsGetParticipants) GetChannel() *InputChannel {
 	if m != nil {
@@ -52545,7 +52545,7 @@ type TLChannelsGetParticipant struct {
 func (m *TLChannelsGetParticipant) Reset()                    { *m = TLChannelsGetParticipant{} }
 func (m *TLChannelsGetParticipant) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsGetParticipant) ProtoMessage()               {}
-func (*TLChannelsGetParticipant) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{995} }
+func (*TLChannelsGetParticipant) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{995} }
 
 func (m *TLChannelsGetParticipant) GetChannel() *InputChannel {
 	if m != nil {
@@ -52570,7 +52570,7 @@ type TLChannelsExportMessageLink struct {
 func (m *TLChannelsExportMessageLink) Reset()                    { *m = TLChannelsExportMessageLink{} }
 func (m *TLChannelsExportMessageLink) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsExportMessageLink) ProtoMessage()               {}
-func (*TLChannelsExportMessageLink) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{996} }
+func (*TLChannelsExportMessageLink) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{996} }
 
 func (m *TLChannelsExportMessageLink) GetChannel() *InputChannel {
 	if m != nil {
@@ -52600,7 +52600,7 @@ type TLChannelsGetAdminLog struct {
 func (m *TLChannelsGetAdminLog) Reset()                    { *m = TLChannelsGetAdminLog{} }
 func (m *TLChannelsGetAdminLog) String() string            { return proto.CompactTextString(m) }
 func (*TLChannelsGetAdminLog) ProtoMessage()               {}
-func (*TLChannelsGetAdminLog) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{997} }
+func (*TLChannelsGetAdminLog) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{997} }
 
 func (m *TLChannelsGetAdminLog) GetChannel() *InputChannel {
 	if m != nil {
@@ -52660,7 +52660,7 @@ type TLBotsSendCustomRequest struct {
 func (m *TLBotsSendCustomRequest) Reset()                    { *m = TLBotsSendCustomRequest{} }
 func (m *TLBotsSendCustomRequest) String() string            { return proto.CompactTextString(m) }
 func (*TLBotsSendCustomRequest) ProtoMessage()               {}
-func (*TLBotsSendCustomRequest) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{998} }
+func (*TLBotsSendCustomRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{998} }
 
 func (m *TLBotsSendCustomRequest) GetCustomMethod() string {
 	if m != nil {
@@ -52683,7 +52683,7 @@ type TLPhoneGetCallConfig struct {
 func (m *TLPhoneGetCallConfig) Reset()                    { *m = TLPhoneGetCallConfig{} }
 func (m *TLPhoneGetCallConfig) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneGetCallConfig) ProtoMessage()               {}
-func (*TLPhoneGetCallConfig) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{999} }
+func (*TLPhoneGetCallConfig) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{999} }
 
 // payments.getPaymentForm#99f09745 msg_id:int = payments.PaymentForm;
 type TLPaymentsGetPaymentForm struct {
@@ -52693,7 +52693,7 @@ type TLPaymentsGetPaymentForm struct {
 func (m *TLPaymentsGetPaymentForm) Reset()                    { *m = TLPaymentsGetPaymentForm{} }
 func (m *TLPaymentsGetPaymentForm) String() string            { return proto.CompactTextString(m) }
 func (*TLPaymentsGetPaymentForm) ProtoMessage()               {}
-func (*TLPaymentsGetPaymentForm) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1000} }
+func (*TLPaymentsGetPaymentForm) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1000} }
 
 func (m *TLPaymentsGetPaymentForm) GetMsgId() int32 {
 	if m != nil {
@@ -52710,7 +52710,7 @@ type TLPaymentsGetPaymentReceipt struct {
 func (m *TLPaymentsGetPaymentReceipt) Reset()                    { *m = TLPaymentsGetPaymentReceipt{} }
 func (m *TLPaymentsGetPaymentReceipt) String() string            { return proto.CompactTextString(m) }
 func (*TLPaymentsGetPaymentReceipt) ProtoMessage()               {}
-func (*TLPaymentsGetPaymentReceipt) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1001} }
+func (*TLPaymentsGetPaymentReceipt) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1001} }
 
 func (m *TLPaymentsGetPaymentReceipt) GetMsgId() int32 {
 	if m != nil {
@@ -52730,7 +52730,7 @@ func (m *TLPaymentsValidateRequestedInfo) Reset()         { *m = TLPaymentsValid
 func (m *TLPaymentsValidateRequestedInfo) String() string { return proto.CompactTextString(m) }
 func (*TLPaymentsValidateRequestedInfo) ProtoMessage()    {}
 func (*TLPaymentsValidateRequestedInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{1002}
+	return fileDescriptor4, []int{1002}
 }
 
 func (m *TLPaymentsValidateRequestedInfo) GetSave() bool {
@@ -52765,7 +52765,7 @@ type TLPaymentsSendPaymentForm struct {
 func (m *TLPaymentsSendPaymentForm) Reset()                    { *m = TLPaymentsSendPaymentForm{} }
 func (m *TLPaymentsSendPaymentForm) String() string            { return proto.CompactTextString(m) }
 func (*TLPaymentsSendPaymentForm) ProtoMessage()               {}
-func (*TLPaymentsSendPaymentForm) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1003} }
+func (*TLPaymentsSendPaymentForm) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1003} }
 
 func (m *TLPaymentsSendPaymentForm) GetMsgId() int32 {
 	if m != nil {
@@ -52802,7 +52802,7 @@ type TLPaymentsGetSavedInfo struct {
 func (m *TLPaymentsGetSavedInfo) Reset()                    { *m = TLPaymentsGetSavedInfo{} }
 func (m *TLPaymentsGetSavedInfo) String() string            { return proto.CompactTextString(m) }
 func (*TLPaymentsGetSavedInfo) ProtoMessage()               {}
-func (*TLPaymentsGetSavedInfo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1004} }
+func (*TLPaymentsGetSavedInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1004} }
 
 // phone.requestCall#5b95b3d4 user_id:InputUser random_id:int g_a_hash:bytes protocol:PhoneCallProtocol = phone.PhoneCall;
 type TLPhoneRequestCall struct {
@@ -52815,7 +52815,7 @@ type TLPhoneRequestCall struct {
 func (m *TLPhoneRequestCall) Reset()                    { *m = TLPhoneRequestCall{} }
 func (m *TLPhoneRequestCall) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneRequestCall) ProtoMessage()               {}
-func (*TLPhoneRequestCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1005} }
+func (*TLPhoneRequestCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1005} }
 
 func (m *TLPhoneRequestCall) GetUserId() *InputUser {
 	if m != nil {
@@ -52855,7 +52855,7 @@ type TLPhoneAcceptCall struct {
 func (m *TLPhoneAcceptCall) Reset()                    { *m = TLPhoneAcceptCall{} }
 func (m *TLPhoneAcceptCall) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneAcceptCall) ProtoMessage()               {}
-func (*TLPhoneAcceptCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1006} }
+func (*TLPhoneAcceptCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1006} }
 
 func (m *TLPhoneAcceptCall) GetPeer() *InputPhoneCall {
 	if m != nil {
@@ -52889,7 +52889,7 @@ type TLPhoneConfirmCall struct {
 func (m *TLPhoneConfirmCall) Reset()                    { *m = TLPhoneConfirmCall{} }
 func (m *TLPhoneConfirmCall) String() string            { return proto.CompactTextString(m) }
 func (*TLPhoneConfirmCall) ProtoMessage()               {}
-func (*TLPhoneConfirmCall) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1007} }
+func (*TLPhoneConfirmCall) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1007} }
 
 func (m *TLPhoneConfirmCall) GetPeer() *InputPhoneCall {
 	if m != nil {
@@ -52927,7 +52927,7 @@ type TLLangpackGetLangPack struct {
 func (m *TLLangpackGetLangPack) Reset()                    { *m = TLLangpackGetLangPack{} }
 func (m *TLLangpackGetLangPack) String() string            { return proto.CompactTextString(m) }
 func (*TLLangpackGetLangPack) ProtoMessage()               {}
-func (*TLLangpackGetLangPack) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1008} }
+func (*TLLangpackGetLangPack) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1008} }
 
 func (m *TLLangpackGetLangPack) GetLangCode() string {
 	if m != nil {
@@ -52944,7 +52944,7 @@ type TLLangpackGetDifference struct {
 func (m *TLLangpackGetDifference) Reset()                    { *m = TLLangpackGetDifference{} }
 func (m *TLLangpackGetDifference) String() string            { return proto.CompactTextString(m) }
 func (*TLLangpackGetDifference) ProtoMessage()               {}
-func (*TLLangpackGetDifference) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1009} }
+func (*TLLangpackGetDifference) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1009} }
 
 func (m *TLLangpackGetDifference) GetFromVersion() int32 {
 	if m != nil {
@@ -52962,7 +52962,7 @@ type TLLangpackGetStrings struct {
 func (m *TLLangpackGetStrings) Reset()                    { *m = TLLangpackGetStrings{} }
 func (m *TLLangpackGetStrings) String() string            { return proto.CompactTextString(m) }
 func (*TLLangpackGetStrings) ProtoMessage()               {}
-func (*TLLangpackGetStrings) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1010} }
+func (*TLLangpackGetStrings) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1010} }
 
 func (m *TLLangpackGetStrings) GetLangCode() string {
 	if m != nil {
@@ -52985,7 +52985,7 @@ type TLLangpackGetLanguages struct {
 func (m *TLLangpackGetLanguages) Reset()                    { *m = TLLangpackGetLanguages{} }
 func (m *TLLangpackGetLanguages) String() string            { return proto.CompactTextString(m) }
 func (*TLLangpackGetLanguages) ProtoMessage()               {}
-func (*TLLangpackGetLanguages) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1011} }
+func (*TLLangpackGetLanguages) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1011} }
 
 func init() {
 	proto.RegisterType((*InputPeer)(nil), "mtproto.InputPeer")
@@ -54002,9 +54002,9 @@ func init() {
 	proto.RegisterType((*TLLangpackGetLanguages)(nil), "mtproto.TL_langpack_getLanguages")
 }
 
-func init() { proto.RegisterFile("schema.tl.sync.proto", fileDescriptor3) }
+func init() { proto.RegisterFile("schema.tl.sync.proto", fileDescriptor4) }
 
-var fileDescriptor3 = []byte{
+var fileDescriptor4 = []byte{
 	// 32913 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0xbd, 0x69, 0x90, 0x24, 0x59,
 	0x9a, 0x10, 0x96, 0x11, 0x79, 0xbf, 0x3c, 0x2a, 0xcb, 0xeb, 0xca, 0xba, 0xba, 0xba, 0xbc, 0xbb,

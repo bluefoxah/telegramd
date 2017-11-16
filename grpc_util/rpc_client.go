@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package rpc
+package grpc_util
 
 import (
 	"github.com/golang/glog"
@@ -25,6 +25,9 @@ import (
 	"context"
 	"google.golang.org/grpc/metadata"
 	"time"
+	"go/types"
+	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/codes"
 )
 
 type RPCClient struct {
@@ -55,23 +58,38 @@ func (c* RPCClient) Invoke(rpcMetaData *mtproto.RpcMetaData, object mtproto.TLOb
 	r := t.NewReplyFunc()
 	// glog.Infof("Invoke - NewReplyFunc: {%v}\n", r)
 
+	var header, trailer metadata.MD
 	ctx := metadata.NewOutgoingContext(context.Background(), rpcMetaData.Encode())
 	// ctx := context.Background()
-	err := c.conn.Invoke(ctx, t.Method, object, r)
-	if err != nil {
+	err := c.conn.Invoke(ctx, t.Method, object, r, grpc.Header(&header), grpc.Trailer(&trailer))
+
+	// TODO(@benqi): 哪些情况需要断开客户端连接
+	if s, ok := status.FromError(err); !ok {
 		glog.Errorf("RPC method: %s,  >> %v.Invoke(_) = _, %v: \n", t.Method, c.conn, err)
-		return nil, err
+		return mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_INTERNAL), "INTERNAL_SERVER_ERROR"), nil
+	} else {
+		switch s.Code() {
+		case codes.OK:
+			glog.Infof("Invoke - Invoke reply: {%v}\n", r)
+			reply, ok := r.(mtproto.TLObject)
+
+			glog.Infof("Invoke %s time: %d", t.Method, (time.Now().Unix() - rpcMetaData.ReceiveTime))
+
+			if !ok {
+				err = fmt.Errorf("Invalid reply type, maybe server side bug, %v\n", reply)
+				glog.Error(err)
+				return nil, err
+			}
+			return reply, nil
+		case codes.Unknown:
+			rpcErr, err := mtproto.NewRpcErrorFromMetadata(trailer)
+			if err != nil {
+				return mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_INTERNAL), "INTERNAL_SERVER_ERROR"), nil
+			} else {
+				return rpcErr, nil
+			}
+		default:
+			return mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_INTERNAL), "INTERNAL_SERVER_ERROR"), nil
+		}
 	}
-
-	glog.Infof("Invoke - Invoke reply: {%v}\n", r)
-	reply, ok := r.(mtproto.TLObject)
-
-	glog.Infof("Invoke %s time: %d", t.Method, (time.Now().Unix() - rpcMetaData.ReceiveTime))
-
-	if !ok {
-		err = fmt.Errorf("Invalid reply type, maybe server side bug, %v\n", reply)
-		glog.Error(err)
-		return nil, err
-	}
-	return reply, nil
 }

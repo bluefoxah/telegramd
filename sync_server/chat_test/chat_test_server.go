@@ -24,16 +24,17 @@ import (
 	"sync"
 	"errors"
 	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/zproto"
 )
 
 type RpcChatTestServer struct {
 	mu   sync.RWMutex
-	buf  map[string]chan *ChatMessage
+	buf  map[string]chan *zproto.ChatMessage
 }
 
 func NewChatTestServer() *RpcChatTestServer {
 	return &RpcChatTestServer{
-		buf:  make(map[string]chan *ChatMessage),
+		// buf:  make(map[string]chan *zproto.ChatMessage),
 	}
 }
 
@@ -56,8 +57,8 @@ func (s *RpcChatTestServer) unsafeExpire(sid string) {
 	delete(s.buf, sid)
 }
 
-func (s *RpcChatTestServer) Connect(request *Session, stream ChatTest_ConnectServer) (err error) {
-	var buf  chan *ChatMessage = make(chan *ChatMessage, 1000)
+func (s *RpcChatTestServer) Connect(request *zproto.ChatSession, stream zproto.ChatTest_ConnectServer) (err error) {
+	var buf  chan *zproto.ChatMessage = make(chan *zproto.ChatMessage, 1000)
 
 	s.withWriteLock(func() {
 		if _, ok := s.buf[request.SessionId]; ok {
@@ -86,7 +87,7 @@ func (s *RpcChatTestServer) Connect(request *Session, stream ChatTest_ConnectSer
 	return nil
 }
 
-func (s *RpcChatTestServer) SendChat(ctx context.Context, request *ChatMessage) (reply *VoidRsp, err error) {
+func (s *RpcChatTestServer) SendChat(ctx context.Context, request *zproto.ChatMessage) (reply *zproto.VoidRsp2, err error) {
 	if len(request.MessageData) == 0 {
 		return nil, errors.New("message must be not empty")
 	}
@@ -100,17 +101,21 @@ func (s *RpcChatTestServer) SendChat(ctx context.Context, request *ChatMessage) 
 			buf <- request
 		}
 	})
-	return &VoidRsp{}, nil
+	return &zproto.VoidRsp2{}, nil
 }
 
 func DoChatServe() {
-	lis, err := net.Listen("tcp", "0.0.0.0:12345")
+	lis, err := net.Listen("tcp", "0.0.0.0:22345")
 	if err != nil {
 		panic(err)
 		// glog.Fatalf("failed to listen: %v", err)
 	}
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
-	RegisterChatTestServer(grpcServer, NewChatTestServer())
+	// zproto.RegisterChatTestServer(grpcServer, &RpcChatTestServer{})
+	// zproto.RegisterChatTestServer(grpcServer, NewChatTestServer2())
+
+	zproto.RegisterChatTestServer(grpcServer, NewChatTestServer())
+
 	grpcServer.Serve(lis)
 }

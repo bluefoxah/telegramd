@@ -40,7 +40,7 @@ type AuthKeyCacheManager struct {
 // PutAuthKey(uint64, []byte) error
 func (s *AuthKeyCacheManager) GetAuthKey(keyID int64) (authKey []byte) {
 	// k := &MasterKeys{ AuthId: keyID }
-	do, err := dao.GetMasterKeysDAO(dao.DB_SLAVE).SelectByAuthId(keyID)
+	do, err := dao.GetAuthKeysDAO(dao.DB_SLAVE).SelectByAuthId(keyID)
 	// err := s.ZOrm.Read(k)
 	if err != nil {
 		glog.Errorf("Read keyData error: %s\n", err)
@@ -57,10 +57,10 @@ func (s *AuthKeyCacheManager) GetAuthKey(keyID int64) (authKey []byte) {
 }
 
 func (s *AuthKeyCacheManager) PutAuthKey(keyID int64, key []byte) (err error) {
-	do := &dataobject.MasterKeysDO{ AuthId: keyID}
+	do := &dataobject.AuthKeysDO{ AuthId: keyID}
 	// k := &dao.MasterKeysDO{ AuthId: keyID, }
 	do.Body = base64.RawStdEncoding.EncodeToString(key)
-	_, err = dao.GetMasterKeysDAO(dao.DB_MASTER).Insert(do)
+	_, err = dao.GetAuthKeysDAO(dao.DB_MASTER).Insert(do)
 	if err != nil {
 		glog.Errorf("Write keyData error: %s\n", err)
 	}

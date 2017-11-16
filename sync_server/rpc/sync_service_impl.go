@@ -122,7 +122,7 @@ func (s *SyncServiceImpl) DeliveryUpdates(ctx context.Context, deliver *zproto.D
 				update.AuthKeyId = ss4.AuthKeyId
 				update.SessionId = ss4.SessionId
 				update.NetlibSessionId = ss4.NetlibSessionId
-				update.RawDataHeader = deliver.RawDataHeader
+				// update.RawDataHeader = deliver.RawDataHeader
 				update.RawData = deliver.RawData
 
 				glog.Infof("DeliveryUpdates: update: {%v}", update)

@@ -15,19 +15,29 @@
  * limitations under the License.
  */
 
-package main
+syntax = "proto3";
 
-import (
-	"github.com/nebulaim/telegramd/sync_server/chat_test"
-	"flag"
-)
+option java_multiple_files = true;
+option java_package = "com.nebulaim.zproto";
+option java_outer_classname = "ZProtoChatTest";
+option optimize_for = CODE_SIZE;
 
-func init() {
-	flag.Set("alsologtostderr", "true")
-	flag.Set("log_dir", "false")
+package zproto;
+
+// Interface exported by the server.
+service ChatTest {
+    rpc Connect(ChatSession) returns (stream ChatMessage);
+    rpc SendChat(ChatMessage) returns (VoidRsp2);
 }
 
-func main() {
-	flag.Parse()
-	chat_test.DoChatTestClient()
+message ChatMessage {
+    string sender_session_id = 1;
+    string message_data = 3;
+}
+
+message ChatSession {
+    string session_id = 1;
+}
+
+message VoidRsp2 {
 }

@@ -18,7 +18,7 @@
 package main
 
 import (
-	"github.com/nebulaim/telegramd/sync/chat_test"
+	"github.com/nebulaim/telegramd/sync_server/chat_test"
 	"flag"
 )
 

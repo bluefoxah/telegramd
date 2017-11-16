@@ -36,7 +36,7 @@ type MysqlDAOList struct {
 	CommonDAO *mysql_dao.CommonDAO
 
 	// auth_key
-	MasterKeysDAO* mysql_dao.MasterKeysDAO
+	AuthKeysDAO* mysql_dao.AuthKeysDAO
 	AuthsDAO *mysql_dao.AuthsDAO
 	AuthSaltsDAO *mysql_dao.AuthSaltsDAO
 	AuthUsersDAO *mysql_dao.AuthUsersDAO
@@ -67,7 +67,7 @@ func InstallMysqlDAOManager(clients map[string]*sqlx.DB) {
 		daoList.CommonDAO = mysql_dao.NewCommonDAO(v)
 
 		// auth_key
-		daoList.MasterKeysDAO = mysql_dao.NewMasterKeysDAO(v)
+		daoList.AuthKeysDAO = mysql_dao.NewAuthKeysDAO(v)
 		daoList.AuthsDAO = mysql_dao.NewAuthsDAO(v)
 		daoList.AuthSaltsDAO = mysql_dao.NewAuthSaltsDAO(v)
 		daoList.AuthUsersDAO = mysql_dao.NewAuthUsersDAO(v)
@@ -98,11 +98,11 @@ func  GetMysqlDAOList(dbName string) (daoList *MysqlDAOList) {
 	return
 }
 
-func GetMasterKeysDAO(dbName string) (dao *mysql_dao.MasterKeysDAO) {
+func GetAuthKeysDAO(dbName string) (dao *mysql_dao.AuthKeysDAO) {
 	daoList := GetMysqlDAOList(dbName)
 	// err := mysqlDAOManager.daoListMap[dbName]
 	if daoList != nil {
-		dao = daoList.MasterKeysDAO
+		dao = daoList.AuthKeysDAO
 	}
 	return
 }

@@ -15,63 +15,29 @@
  * limitations under the License.
  */
 
-package chat_test
+package main
 
 import (
-	"fmt"
-	"github.com/golang/glog"
-	"google.golang.org/grpc"
-	"context"
-	"math/rand"
-	"github.com/nebulaim/telegramd/base/base"
-	"io"
 	"time"
+	"fmt"
 	"github.com/nebulaim/telegramd/zproto"
+	"io"
+	"math/rand"
+	"google.golang.org/grpc"
+	"github.com/nebulaim/telegramd/base/base"
+	"context"
 )
 
-func DoChatTestClient() {
+func main() {
 	rand.Seed(time.Now().UnixNano())
-
-	fmt.Println("TestRPCClient...")
 	conn, err := grpc.Dial("127.0.0.1:22345", grpc.WithInsecure())
 	if err != nil {
-		glog.Fatalf("fail to dial: %v\n", err)
+		fmt.Printf("fail to dial: %v\n", err)
 	}
 	defer conn.Close()
 	client := zproto.NewChatTestClient(conn)
-
 	sess := &zproto.ChatSession{base.Int64ToString(rand.Int63())}
 	fmt.Println("sessionId : ", sess.SessionId)
-
-	stream, err := client.Connect(context.Background(), &zproto.ChatSession{base.Int64ToString(rand.Int63())})
-	if err != nil {
-		glog.Fatalln("connect:", err)
-	}
-
-	chatMessages := make(chan *zproto.ChatMessage, 1000)
-	go func() {
-		defer func() { close(chatMessages) }()
-		for {
-			chatMessage, err := stream.Recv()
-			if err == io.EOF {
-				return
-			}
-			if err != nil {
-				glog.Fatalln("stream.Recv", err)
-			}
-			chatMessages <- chatMessage
-		}
-	}()
-
-
-	go func() {
-		for {
-			select {
-			case chat := <-chatMessages:
-				fmt.Printf("Recv chat_message: {session_id: %s, message_data: %s}\n", chat.SenderSessionId, chat.MessageData)
-			}
-		}
-	}()
 
 	var message string
 	for {
@@ -79,10 +45,15 @@ func DoChatTestClient() {
 		if n, err := fmt.Scanln(&message); err == io.EOF {
 			return
 		} else if n > 0 {
-			_, err := client.SendChat(context.Background(), &zproto.ChatMessage{SenderSessionId: sess.SessionId, MessageData: message})
-			if err != nil {
-				glog.Fatalln("sendChat:", err)
+			if message == "quit" {
+				return
+			} else {
+				_, err := client.SendChat(context.Background(), &zproto.ChatMessage{SenderSessionId: sess.SessionId, MessageData: message})
+				if err != nil {
+					fmt.Printf("%v.SendChat(_) = _, %v\n", client, err)
+				}
 			}
 		}
 	}
 }
+

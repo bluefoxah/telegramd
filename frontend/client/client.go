@@ -24,17 +24,17 @@ import (
 	"github.com/golang/glog"
 	"math/big"
 	"errors"
-	"github.com/nebulaim/telegramd/frontend/rpc"
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"fmt"
 	"github.com/nebulaim/telegramd/frontend/id"
 	"time"
+	"github.com/nebulaim/telegramd/grpc_util"
 )
 
 
 type Client struct {
 	Session *net2.Session
-	RPCClient *rpc.RPCClient
+	RPCClient *grpc_util.RPCClient
 	Codec   *MTProtoCodec
 
 	RemoteAddr net.Addr
@@ -48,7 +48,7 @@ type Client struct {
 	P *big.Int
 }
 
-func NewClient(session *net2.Session, rpcClient *rpc.RPCClient) (c *Client) {
+func NewClient(session *net2.Session, rpcClient *grpc_util.RPCClient) (c *Client) {
 	c = &Client{
 		Session: 	session,
 		RPCClient:	rpcClient,

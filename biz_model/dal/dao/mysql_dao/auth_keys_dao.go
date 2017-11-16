@@ -23,49 +23,49 @@ import (
 	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
-type MasterKeysDAO struct {
+type AuthKeysDAO struct {
 	db *sqlx.DB
 }
 
-func NewMasterKeysDAO(db *sqlx.DB) *MasterKeysDAO {
-	return &MasterKeysDAO{db}
+func NewAuthKeysDAO(db *sqlx.DB) *AuthKeysDAO {
+	return &AuthKeysDAO{db}
 }
 
-// insert into master_keys(auth_id, body) values (:auth_id, :body)
+// insert into auth_keys(auth_id, body) values (:auth_id, :body)
 // TODO(@benqi): sqlmap
-func (dao *MasterKeysDAO) Insert(do *do.MasterKeysDO) (id int64, err error) {
-	var query = "insert into master_keys(auth_id, body) values (:auth_id, :body)"
+func (dao *AuthKeysDAO) Insert(do *do.AuthKeysDO) (id int64, err error) {
+	var query = "insert into auth_keys(auth_id, body) values (:auth_id, :body)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
-		glog.Error("MasterKeysDAO/Insert error: ", err)
+		glog.Error("AuthKeysDAO/Insert error: ", err)
 		return
 	}
 
 	id, err = r.LastInsertId()
 	if err != nil {
-		glog.Error("MasterKeysDAO/LastInsertId error: ", err)
+		glog.Error("AuthKeysDAO/LastInsertId error: ", err)
 	}
 	return
 }
 
-// select body from master_keys where auth_id = :auth_id
+// select body from auth_keys where auth_id = :auth_id
 // TODO(@benqi): sqlmap
-func (dao *MasterKeysDAO) SelectByAuthId(auth_id int64) (*do.MasterKeysDO, error) {
-	var query = "select body from master_keys where auth_id = ?"
+func (dao *AuthKeysDAO) SelectByAuthId(auth_id int64) (*do.AuthKeysDO, error) {
+	var query = "select body from auth_keys where auth_id = ?"
 	rows, err := dao.db.Queryx(query, auth_id)
 
 	if err != nil {
-		glog.Error("MasterKeysDAO/SelectByAuthId error: ", err)
+		glog.Error("AuthKeysDAO/SelectByAuthId error: ", err)
 		return nil, err
 	}
 
 	defer rows.Close()
 
-	do := &do.MasterKeysDO{}
+	do := &do.AuthKeysDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("MasterKeysDAO/SelectByAuthId error: ", err)
+			glog.Error("AuthKeysDAO/SelectByAuthId error: ", err)
 			return nil, err
 		}
 	} else {
