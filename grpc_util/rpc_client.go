@@ -25,7 +25,6 @@ import (
 	"context"
 	"google.golang.org/grpc/metadata"
 	"time"
-	"go/types"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/codes"
 )
