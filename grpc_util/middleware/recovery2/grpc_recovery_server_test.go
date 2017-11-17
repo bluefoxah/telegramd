@@ -47,7 +47,6 @@ func (s *ChatTestServiceImpl) SendChat(ctx context.Context, request *zproto.Chat
 	return &zproto.VoidRsp2{}, nil
 }
 
-
 func unaryRecoveryHandler(ctx context.Context, p interface{}) (err error) {
 	return status.Errorf(codes.Unknown, "panic triggered: %v", p)
 }
