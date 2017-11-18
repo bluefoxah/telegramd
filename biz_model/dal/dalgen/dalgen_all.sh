@@ -4,7 +4,7 @@
 ./dalgen.sh auth_users
 ./dalgen.sh auths
 ./dalgen.sh devices
-./dalgen.sh master_keys
+./dalgen.sh auth_keys
 ./dalgen.sh message_boxs
 ./dalgen.sh messages
 ./dalgen.sh seq_updates_ngen

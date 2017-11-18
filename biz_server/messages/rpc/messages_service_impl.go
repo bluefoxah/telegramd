@@ -421,7 +421,7 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 
 		// TODO(@benqi): 事务
 		// 创建会话
-		dialog, _ := dao.GetUserDialogsDAO(dao.DB_SLAVE).CheckExists(rpcMetaData.UserId, base.PEER_USER, rpcMetaData.UserId)
+		dialog := dao.GetUserDialogsDAO(dao.DB_SLAVE).CheckExists(rpcMetaData.UserId, base.PEER_USER, rpcMetaData.UserId)
 		if dialog == nil {
 			dialog = &dataobject.UserDialogsDO{}
 			dialog.UserId = rpcMetaData.UserId
@@ -437,7 +437,7 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 		message.PeerId = rpcMetaData.UserId
 		message.RandomId = request.RandomId
 		message.Message = request.Message
-		messageId, _ := dao.GetMessagesDAO(dao.DB_MASTER).Insert(message)
+		messageId := dao.GetMessagesDAO(dao.DB_MASTER).Insert(message)
 
 		// inbox和outbox
 		// 发件箱
@@ -445,7 +445,7 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 		messageBox.UserId = rpcMetaData.UserId
 		messageBox.MessageBoxType = 0
 		messageBox.MessageId = int32(messageId)
-		outPts, _ := model.GetSequenceModel().NextID(base2.Int32ToString(messageBox.UserId))
+		outPts := model.GetSequenceModel().NextID(base2.Int32ToString(messageBox.UserId))
 		messageBox.Pts = int32(outPts)
 		dao.GetMessageBoxsDAO(dao.DB_MASTER).Insert(messageBox)
 
@@ -486,7 +486,7 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 
 		// TODO(@benqi): 事务
 		// 创建会话
-		dialog1, _ := dao.GetUserDialogsDAO(dao.DB_SLAVE).CheckExists(rpcMetaData.UserId, base.PEER_USER, inputPeerUser.UserId)
+		dialog1 := dao.GetUserDialogsDAO(dao.DB_SLAVE).CheckExists(rpcMetaData.UserId, base.PEER_USER, inputPeerUser.UserId)
 		if dialog1 == nil {
 			dialog1 = &dataobject.UserDialogsDO{}
 			dialog1.UserId = rpcMetaData.UserId
@@ -494,7 +494,7 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 			dialog1.PeerId = inputPeerUser.UserId
 			dao.GetUserDialogsDAO(dao.DB_MASTER).Insert(dialog1)
 		}
-		dialog2, _ := dao.GetUserDialogsDAO(dao.DB_SLAVE).CheckExists(inputPeerUser.UserId, base.PEER_USER, rpcMetaData.UserId)
+		dialog2 := dao.GetUserDialogsDAO(dao.DB_SLAVE).CheckExists(inputPeerUser.UserId, base.PEER_USER, rpcMetaData.UserId)
 		if dialog2 == nil {
 			dialog2 = &dataobject.UserDialogsDO{}
 			dialog2.UserId = inputPeerUser.UserId
@@ -510,7 +510,7 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 		message.PeerId = inputPeerUser.UserId
 		message.RandomId = request.RandomId
 		message.Message = request.Message
-		messageId, _ := dao.GetMessagesDAO(dao.DB_MASTER).Insert(message)
+		messageId := dao.GetMessagesDAO(dao.DB_MASTER).Insert(message)
 
 		// inbox和outbox
 		// 发件箱
@@ -518,14 +518,14 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 		messageBox.UserId = rpcMetaData.UserId
 		messageBox.MessageBoxType = 0
 		messageBox.MessageId = int32(messageId)
-		outPts, _ := model.GetSequenceModel().NextID(base2.Int32ToString(messageBox.UserId))
+		outPts := model.GetSequenceModel().NextID(base2.Int32ToString(messageBox.UserId))
 		messageBox.Pts = int32(outPts)
 		dao.GetMessageBoxsDAO(dao.DB_MASTER).Insert(messageBox)
 
 		// 收件箱
 		messageBox.UserId = inputPeerUser.UserId
 		messageBox.MessageBoxType = 1
-		inPts, _ := model.GetSequenceModel().NextID(base2.Int32ToString(messageBox.UserId))
+		inPts := model.GetSequenceModel().NextID(base2.Int32ToString(messageBox.UserId))
 		messageBox.Pts = int32(inPts)
 		dao.GetMessageBoxsDAO(dao.DB_MASTER).Insert(messageBox)
 

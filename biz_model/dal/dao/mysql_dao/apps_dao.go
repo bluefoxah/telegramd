@@ -18,9 +18,11 @@
 package mysql_dao
 
 import (
+	"fmt"
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
-	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/mtproto"
 )
 
 type AppsDAO struct {
@@ -33,44 +35,49 @@ func NewAppsDAO(db *sqlx.DB) *AppsDAO {
 
 // insert into apps(api_id, api_hash, title, short_name) values (:api_id, :api_hash, :title, :short_name)
 // TODO(@benqi): sqlmap
-func (dao *AppsDAO) Insert(do *do.AppsDO) (id int64, err error) {
+func (dao *AppsDAO) Insert(do *dataobject.AppsDO) int64 {
 	var query = "insert into apps(api_id, api_hash, title, short_name) values (:api_id, :api_hash, :title, :short_name)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
-		glog.Error("AppsDAO/Insert error: ", err)
-		return
+		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	id, err = r.LastInsertId()
+	id, err := r.LastInsertId()
 	if err != nil {
-		glog.Error("AppsDAO/LastInsertId error: ", err)
+		errDesc := fmt.Sprintf("LastInsertId in Insert(%v)_error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+	return id
 }
 
 // select id, api_id, api_hash, title, short_name from apps where id = :id
 // TODO(@benqi): sqlmap
-func (dao *AppsDAO) SelectById(id int32) (*do.AppsDO, error) {
+func (dao *AppsDAO) SelectById(id int32) *dataobject.AppsDO {
 	var query = "select id, api_id, api_hash, title, short_name from apps where id = ?"
 	rows, err := dao.db.Queryx(query, id)
 
 	if err != nil {
-		glog.Error("AppsDAO/SelectById error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in SelectById(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	do := &do.AppsDO{}
+	do := &dataobject.AppsDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("AppsDAO/SelectById error: ", err)
-			return nil, err
+			errDesc := fmt.Sprintf("StructScan in SelectById(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 	} else {
-		return nil, nil
+		return nil
 	}
 
-	return do, nil
+	return do
 }

@@ -51,14 +51,8 @@ func (s *AccountServiceImpl) AccountRegisterDevice(ctx context.Context, request 
 
 	// TODO(@benqi): check token_type
 
-	do, err := dao.GetDevicesDAO(dao.DB_SLAVE).SelectIdByAuthId(rpcMetaData.AuthId, int8(request.TokenType), request.Token)
-	if err != nil {
-		glog.Errorf("AccountRegisterDevice - s.DeviceDAO.SelectIdByAuthId error: %s", err)
-		return nil, err
-	}
-
+	do := dao.GetDevicesDAO(dao.DB_SLAVE).SelectIdByAuthId(rpcMetaData.AuthId, int8(request.TokenType), request.Token)
 	if do == nil {
-		//
 		do = &dataobject.DevicesDO{
 			AuthId: rpcMetaData.AuthId,
 			UserId: rpcMetaData.UserId,
@@ -66,17 +60,9 @@ func (s *AccountServiceImpl) AccountRegisterDevice(ctx context.Context, request 
 			Token: request.Token,
 		}
 
-		_, err := dao.GetDevicesDAO(dao.DB_MASTER).Insert(do)
-		if err != nil {
-			glog.Errorf("AccountRegisterDevice - s.DeviceDAO.Insert error: %s", err)
-			return nil, err
-		}
+		dao.GetDevicesDAO(dao.DB_MASTER).Insert(do)
 	} else {
-		_, err := dao.GetDevicesDAO(dao.DB_MASTER).UpdateStateById(0, do.Id)
-		if err != nil {
-			glog.Errorf("AccountRegisterDevice - s.DeviceDAO.UpdateStateById error: %s", err)
-			return nil, err
-		}
+		dao.GetDevicesDAO(dao.DB_MASTER).UpdateStateById(0, do.Id)
 	}
 
 	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
@@ -95,20 +81,12 @@ func (s *AccountServiceImpl) AccountUnregisterDevice(ctx context.Context, reques
 
 	// TODO(@benqi): check token_type
 
-	do, err := dao.GetDevicesDAO(dao.DB_SLAVE).SelectIdByAuthId(rpcMetaData.AuthId, int8(request.TokenType), request.Token)
-	if err != nil {
-		glog.Errorf("AccountUnregisterDevice - s.DeviceDAO.SelectIdByAuthId error: %s", err)
-		return nil, err
-	}
+	do := dao.GetDevicesDAO(dao.DB_SLAVE).SelectIdByAuthId(rpcMetaData.AuthId, int8(request.TokenType), request.Token)
 
 	if do == nil {
 		// glog.Errorf("AccountUnregisterDevice - s.DeviceDAO.Insert error: %s", err)
 	} else {
-		_, err := dao.GetDevicesDAO(dao.DB_MASTER).UpdateStateById(1, do.Id)
-		if err != nil {
-			glog.Errorf("AccountUnregisterDevice - s.DeviceDAO.UpdateStateById error: %s", err)
-			return nil, err
-		}
+		dao.GetDevicesDAO(dao.DB_MASTER).UpdateStateById(1, do.Id)
 	}
 
 	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})

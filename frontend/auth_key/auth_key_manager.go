@@ -22,6 +22,7 @@ import (
 	"encoding/base64"
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/cosiner/gohper/errors"
 )
 
 // "root:@/nebulaim?charset=utf8"
@@ -39,32 +40,31 @@ type AuthKeyCacheManager struct {
 // GetAuthKey(uint64) []byte
 // PutAuthKey(uint64, []byte) error
 func (s *AuthKeyCacheManager) GetAuthKey(keyID int64) (authKey []byte) {
-	// k := &MasterKeys{ AuthId: keyID }
-	do, err := dao.GetAuthKeysDAO(dao.DB_SLAVE).SelectByAuthId(keyID)
-	// err := s.ZOrm.Read(k)
-	if err != nil {
-		glog.Errorf("Read keyData error: %s\n", err)
-		return nil
-	}
+	defer func() {
+		if r := recover(); r != nil {
+			authKey = nil
+		}
+	}()
 
+	do := dao.GetAuthKeysDAO(dao.DB_SLAVE).SelectByAuthId(keyID)
 	if do == nil {
 		glog.Errorf("Read keyData error: not find keyId\n")
 		return nil
 	}
-
-	authKey, err = base64.RawStdEncoding.DecodeString(do.Body)
+	authKey, _ = base64.RawStdEncoding.DecodeString(do.Body)
 	return
 }
 
 func (s *AuthKeyCacheManager) PutAuthKey(keyID int64, key []byte) (err error) {
-	do := &dataobject.AuthKeysDO{ AuthId: keyID}
-	// k := &dao.MasterKeysDO{ AuthId: keyID, }
-	do.Body = base64.RawStdEncoding.EncodeToString(key)
-	_, err = dao.GetAuthKeysDAO(dao.DB_MASTER).Insert(do)
-	if err != nil {
-		glog.Errorf("Write keyData error: %s\n", err)
-	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = errors.New(r)
+		}
+	}()
 
-	return err
+	do := &dataobject.AuthKeysDO{ AuthId: keyID}
+	do.Body = base64.RawStdEncoding.EncodeToString(key)
+	dao.GetAuthKeysDAO(dao.DB_MASTER).Insert(do)
+	return
 }
 

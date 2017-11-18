@@ -18,9 +18,11 @@
 package mysql_dao
 
 import (
+	"fmt"
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
-	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/mtproto"
 )
 
 type SeqUpdatesNgenDAO struct {
@@ -33,62 +35,71 @@ func NewSeqUpdatesNgenDAO(db *sqlx.DB) *SeqUpdatesNgenDAO {
 
 // insert into seq_updates_ngen(seq_name, seq, created_at) values (:seq_name, :seq, :created_at)
 // TODO(@benqi): sqlmap
-func (dao *SeqUpdatesNgenDAO) Insert(do *do.SeqUpdatesNgenDO) (id int64, err error) {
+func (dao *SeqUpdatesNgenDAO) Insert(do *dataobject.SeqUpdatesNgenDO) int64 {
 	var query = "insert into seq_updates_ngen(seq_name, seq, created_at) values (:seq_name, :seq, :created_at)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
-		glog.Error("SeqUpdatesNgenDAO/Insert error: ", err)
-		return
+		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	id, err = r.LastInsertId()
+	id, err := r.LastInsertId()
 	if err != nil {
-		glog.Error("SeqUpdatesNgenDAO/LastInsertId error: ", err)
+		errDesc := fmt.Sprintf("LastInsertId in Insert(%v)_error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+	return id
 }
 
 // update seq_updates_ngen set seq = :seq where seq_name = :seq_name
 // TODO(@benqi): sqlmap
-func (dao *SeqUpdatesNgenDAO) UpdateSeqBySeqName(seq int64, seq_name string) (rows int64, err error) {
+func (dao *SeqUpdatesNgenDAO) UpdateSeqBySeqName(seq int64, seq_name string) int64 {
 	var query = "update seq_updates_ngen set seq = ? where seq_name = ?"
 	r, err := dao.db.Exec(query, seq, seq_name)
 
 	if err != nil {
-		glog.Error("SeqUpdatesNgenDAO/UpdateSeqBySeqName error: ", err)
-		return
+		errDesc := fmt.Sprintf("Exec in UpdateSeqBySeqName(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	rows, err = r.RowsAffected()
+	rows, err := r.RowsAffected()
 	if err != nil {
-		glog.Error("SeqUpdatesNgenDAO/RowsAffected error: ", err)
+		errDesc := fmt.Sprintf("RowsAffected in UpdateSeqBySeqName(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+
+	return rows
 }
 
 // select seq_name, seq from seq_updates_ngen where seq_name = :seq_name
 // TODO(@benqi): sqlmap
-func (dao *SeqUpdatesNgenDAO) SelectBySeqName(seq_name string) (*do.SeqUpdatesNgenDO, error) {
+func (dao *SeqUpdatesNgenDAO) SelectBySeqName(seq_name string) *dataobject.SeqUpdatesNgenDO {
 	var query = "select seq_name, seq from seq_updates_ngen where seq_name = ?"
 	rows, err := dao.db.Queryx(query, seq_name)
 
 	if err != nil {
-		glog.Error("SeqUpdatesNgenDAO/SelectBySeqName error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in SelectBySeqName(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	do := &do.SeqUpdatesNgenDO{}
+	do := &dataobject.SeqUpdatesNgenDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("SeqUpdatesNgenDAO/SelectBySeqName error: ", err)
-			return nil, err
+			errDesc := fmt.Sprintf("StructScan in SelectBySeqName(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 	} else {
-		return nil, nil
+		return nil
 	}
 
-	return do, nil
+	return do
 }

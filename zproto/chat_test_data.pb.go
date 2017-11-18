@@ -6,12 +6,14 @@ Package zproto is a generated protocol buffer package.
 
 It is generated from these files:
 	chat_test_data.proto
+	rpc_metadata.proto
 	sync.proto
 
 It has these top-level messages:
 	ChatMessage
 	ChatSession
 	VoidRsp2
+	RpcMetadata
 	ServerAuthReq
 	VoidRsp
 	DeliveryUpdatesToUsers

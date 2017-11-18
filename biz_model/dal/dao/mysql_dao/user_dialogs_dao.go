@@ -18,9 +18,11 @@
 package mysql_dao
 
 import (
+	"fmt"
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
-	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/mtproto"
 )
 
 type UserDialogsDAO struct {
@@ -33,131 +35,142 @@ func NewUserDialogsDAO(db *sqlx.DB) *UserDialogsDAO {
 
 // insert into user_dialogs(user_id, peer_type, peer_id, created_at) values (:user_id, :peer_type, :peer_id, :created_at)
 // TODO(@benqi): sqlmap
-func (dao *UserDialogsDAO) Insert(do *do.UserDialogsDO) (id int64, err error) {
+func (dao *UserDialogsDAO) Insert(do *dataobject.UserDialogsDO) int64 {
 	var query = "insert into user_dialogs(user_id, peer_type, peer_id, created_at) values (:user_id, :peer_type, :peer_id, :created_at)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
-		glog.Error("UserDialogsDAO/Insert error: ", err)
-		return
+		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	id, err = r.LastInsertId()
+	id, err := r.LastInsertId()
 	if err != nil {
-		glog.Error("UserDialogsDAO/LastInsertId error: ", err)
+		errDesc := fmt.Sprintf("LastInsertId in Insert(%v)_error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+	return id
 }
 
 // select peer_type, peer_id from user_dialogs where user_id = :user_id and is_pinned = 1
 // TODO(@benqi): sqlmap
-func (dao *UserDialogsDAO) SelectPinnedDialogs(user_id int32) ([]do.UserDialogsDO, error) {
+func (dao *UserDialogsDAO) SelectPinnedDialogs(user_id int32) []dataobject.UserDialogsDO {
 	var query = "select peer_type, peer_id from user_dialogs where user_id = ? and is_pinned = 1"
 	rows, err := dao.db.Queryx(query, user_id)
 
 	if err != nil {
-		glog.Errorf("UserDialogsDAO/SelectPinnedDialogs error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in SelectPinnedDialogs(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	var values []do.UserDialogsDO
+	var values []dataobject.UserDialogsDO
 	for rows.Next() {
-		v := do.UserDialogsDO{}
+		v := dataobject.UserDialogsDO{}
 
 		// TODO(@benqi): 不使用反射
 		err := rows.StructScan(&v)
 		if err != nil {
-			glog.Errorf("UserDialogsDAO/SelectPinnedDialogs error: %s", err)
-			return nil, err
+			errDesc := fmt.Sprintf("StructScan in SelectPinnedDialogs(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 		values = append(values, v)
 	}
 
-	return values, nil
+	return values
 }
 
 // select id from user_dialogs where user_id = :user_id and peer_type = :peer_type and peer_id = :peer_id
 // TODO(@benqi): sqlmap
-func (dao *UserDialogsDAO) CheckExists(user_id int32, peer_type int32, peer_id int32) (*do.UserDialogsDO, error) {
+func (dao *UserDialogsDAO) CheckExists(user_id int32, peer_type int32, peer_id int32) *dataobject.UserDialogsDO {
 	var query = "select id from user_dialogs where user_id = ? and peer_type = ? and peer_id = ?"
 	rows, err := dao.db.Queryx(query, user_id, peer_type, peer_id)
 
 	if err != nil {
-		glog.Error("UserDialogsDAO/CheckExists error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in CheckExists(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	do := &do.UserDialogsDO{}
+	do := &dataobject.UserDialogsDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("UserDialogsDAO/CheckExists error: ", err)
-			return nil, err
+			errDesc := fmt.Sprintf("StructScan in CheckExists(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 	} else {
-		return nil, nil
+		return nil
 	}
 
-	return do, nil
+	return do
 }
 
 // select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = :user_id
 // TODO(@benqi): sqlmap
-func (dao *UserDialogsDAO) SelectDialogsByUserID(user_id int32) ([]do.UserDialogsDO, error) {
+func (dao *UserDialogsDAO) SelectDialogsByUserID(user_id int32) []dataobject.UserDialogsDO {
 	var query = "select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = ?"
 	rows, err := dao.db.Queryx(query, user_id)
 
 	if err != nil {
-		glog.Errorf("UserDialogsDAO/SelectDialogsByUserID error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in SelectDialogsByUserID(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	var values []do.UserDialogsDO
+	var values []dataobject.UserDialogsDO
 	for rows.Next() {
-		v := do.UserDialogsDO{}
+		v := dataobject.UserDialogsDO{}
 
 		// TODO(@benqi): 不使用反射
 		err := rows.StructScan(&v)
 		if err != nil {
-			glog.Errorf("UserDialogsDAO/SelectDialogsByUserID error: %s", err)
-			return nil, err
+			errDesc := fmt.Sprintf("StructScan in SelectDialogsByUserID(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 		values = append(values, v)
 	}
 
-	return values, nil
+	return values
 }
 
 // select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = :user_id and peer_type = :peer_type
 // TODO(@benqi): sqlmap
-func (dao *UserDialogsDAO) SelectDialogsByPeerType(user_id int32, peer_type int32) ([]do.UserDialogsDO, error) {
+func (dao *UserDialogsDAO) SelectDialogsByPeerType(user_id int32, peer_type int32) []dataobject.UserDialogsDO {
 	var query = "select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = ? and peer_type = ?"
 	rows, err := dao.db.Queryx(query, user_id, peer_type)
 
 	if err != nil {
-		glog.Errorf("UserDialogsDAO/SelectDialogsByPeerType error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in SelectDialogsByPeerType(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	var values []do.UserDialogsDO
+	var values []dataobject.UserDialogsDO
 	for rows.Next() {
-		v := do.UserDialogsDO{}
+		v := dataobject.UserDialogsDO{}
 
 		// TODO(@benqi): 不使用反射
 		err := rows.StructScan(&v)
 		if err != nil {
-			glog.Errorf("UserDialogsDAO/SelectDialogsByPeerType error: %s", err)
-			return nil, err
+			errDesc := fmt.Sprintf("StructScan in SelectDialogsByPeerType(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 		values = append(values, v)
 	}
 
-	return values, nil
+	return values
 }

@@ -29,6 +29,7 @@ import (
 	"github.com/nebulaim/telegramd/frontend/id"
 	"time"
 	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/zproto"
 )
 
 
@@ -188,7 +189,13 @@ func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 		// TODO(@benqi): 透传UserID
 
 		if c.Codec.UserId == 0 {
-			do, _ := dao.GetAuthUsersDAO(dao.DB_SLAVE).SelectByAuthId(c.Codec.AuthKeyId)
+			defer func() {
+				if r := recover(); r != nil {
+					glog.Error(r)
+				}
+			}()
+
+			do := dao.GetAuthUsersDAO(dao.DB_SLAVE).SelectByAuthId(c.Codec.AuthKeyId)
 			glog.Info("SelectByAuthId : ", do)
 			if do != nil {
 				c.Codec.UserId = do.UserId
@@ -200,7 +207,7 @@ func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 		}
 
 		// 初始化metadata
-		rpcMetadata := &RpcMetaData{}
+		rpcMetadata := &zproto.RpcMetadata{}
 		rpcMetadata.ServerId = 1
 		rpcMetadata.NetlibSessionId = int64(c.Session.ID())
 		rpcMetadata.UserId = c.Codec.UserId

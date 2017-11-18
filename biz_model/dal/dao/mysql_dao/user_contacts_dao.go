@@ -18,9 +18,11 @@
 package mysql_dao
 
 import (
+	"fmt"
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
-	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/mtproto"
 )
 
 type UserContactsDAO struct {
@@ -33,46 +35,51 @@ func NewUserContactsDAO(db *sqlx.DB) *UserContactsDAO {
 
 // insert into user_contacts(owner_user_id, contact_user_id) values (:owner_user_id, :contact_user_id)
 // TODO(@benqi): sqlmap
-func (dao *UserContactsDAO) Insert(do *do.UserContactsDO) (id int64, err error) {
+func (dao *UserContactsDAO) Insert(do *dataobject.UserContactsDO) int64 {
 	var query = "insert into user_contacts(owner_user_id, contact_user_id) values (:owner_user_id, :contact_user_id)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
-		glog.Error("UserContactsDAO/Insert error: ", err)
-		return
+		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	id, err = r.LastInsertId()
+	id, err := r.LastInsertId()
 	if err != nil {
-		glog.Error("UserContactsDAO/LastInsertId error: ", err)
+		errDesc := fmt.Sprintf("LastInsertId in Insert(%v)_error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+	return id
 }
 
 // select contact_user_id from user_contacts where owner_user_id = :owner_user_id and is_deleted = 0
 // TODO(@benqi): sqlmap
-func (dao *UserContactsDAO) SelectUserContacts(owner_user_id int32) ([]do.UserContactsDO, error) {
+func (dao *UserContactsDAO) SelectUserContacts(owner_user_id int32) []dataobject.UserContactsDO {
 	var query = "select contact_user_id from user_contacts where owner_user_id = ? and is_deleted = 0"
 	rows, err := dao.db.Queryx(query, owner_user_id)
 
 	if err != nil {
-		glog.Errorf("UserContactsDAO/SelectUserContacts error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in SelectUserContacts(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	var values []do.UserContactsDO
+	var values []dataobject.UserContactsDO
 	for rows.Next() {
-		v := do.UserContactsDO{}
+		v := dataobject.UserContactsDO{}
 
 		// TODO(@benqi): 不使用反射
 		err := rows.StructScan(&v)
 		if err != nil {
-			glog.Errorf("UserContactsDAO/SelectUserContacts error: %s", err)
-			return nil, err
+			errDesc := fmt.Sprintf("StructScan in SelectUserContacts(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 		values = append(values, v)
 	}
 
-	return values, nil
+	return values
 }

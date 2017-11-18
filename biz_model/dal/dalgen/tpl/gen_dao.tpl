@@ -18,9 +18,11 @@
 package mysql_dao
 
 import(
-	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/mtproto"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 	"github.com/jmoiron/sqlx"
 	"github.com/golang/glog"
+	"fmt"
 )
 
 type {{.Name}}DAO struct {
@@ -48,26 +50,29 @@ func New{{.Name}}DAO(db* sqlx.DB) *{{.Name}}DAO {
 {{define "INSERT"}}
 // {{.Sql}}
 // TODO(@benqi): sqlmap
-func (dao *{{.TableName}}DAO) {{.FuncName}}(do *do.{{.TableName}}DO) (id int64, err error) {
+func (dao *{{.TableName}}DAO) {{.FuncName}}(do *dataobject.{{.TableName}}DO) int64 {
 	var query = "{{.Sql}}"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
-		glog.Error("{{.TableName}}DAO/{{.FuncName}} error: ", err)
-		return
+		errDesc := fmt.Sprintf("NamedExec in {{.FuncName}}(%v), error: %v", do, err)
+		glog.Error(errDesc)
+	    panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	id, err = r.LastInsertId()
+	id, err := r.LastInsertId()
 	if err != nil {
-		glog.Error("{{.TableName}}DAO/LastInsertId error: ", err)
+		errDesc := fmt.Sprintf("LastInsertId in {{.FuncName}}(%v)_error: %v", do, err)
+		glog.Error(errDesc)
+	    panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+	return id
 }
 {{end}}
 
 {{define "SELECT_STRUCT_SINGLE"}}
 // {{.Sql}}
 // TODO(@benqi): sqlmap
-func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) (*do.{{.TableName}}DO, error) {
+func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) (*dataobject.{{.TableName}}DO) {
 {{if eq .ParamHasList "true"}}  var q = "{{.CompiledByNamedSql}}"
     query, a, err := sqlx.In(q, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
     rows, err := dao.db.Queryx(query, a...)
@@ -75,31 +80,33 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if n
     rows, err := dao.db.Queryx(query, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
 {{end}}
 	if err != nil {
-		glog.Error("{{.TableName}}DAO/{{.FuncName}} error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in {{.FuncName}}(_), error: %v", err)
+		glog.Error(errDesc)
+	    panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	do := &do.{{.TableName}}DO{}
+	do := &dataobject.{{.TableName}}DO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("{{.TableName}}DAO/{{.FuncName}} error: ", err)
-			return nil, err
+            errDesc := fmt.Sprintf("StructScan in {{.FuncName}}(_), error: %v", err)
+            glog.Error(errDesc)
+            panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 	} else {
-		return nil, nil
+		return nil
 	}
 
-	return do, nil
+	return do
 }
 {{end}}
 
 {{define "SELECT_STRUCT_LIST"}}
 // {{.Sql}}
 // TODO(@benqi): sqlmap
-func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) ([]do.{{.TableName}}DO, error) {
+func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) ([]dataobject.{{.TableName}}DO) {
 {{if eq .ParamHasList "true"}}  var q = "{{.CompiledByNamedSql}}"
     query, a, err := sqlx.In(q, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
     rows, err := dao.db.Queryx(query, a...)
@@ -107,26 +114,28 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if n
     rows, err := dao.db.Queryx(query, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
 {{end}}
 	if err != nil {
-		glog.Errorf("{{.TableName}}DAO/{{.FuncName}} error: ", err)
-		return nil, err
+        errDesc := fmt.Sprintf("Queryx in {{.FuncName}}(_), error: %v", err)
+        glog.Error(errDesc)
+        panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	var values []do.{{.TableName}}DO
+	var values []dataobject.{{.TableName}}DO
 	for rows.Next() {
-        v := do.{{.TableName}}DO{}
+        v := dataobject.{{.TableName}}DO{}
 
         // TODO(@benqi): 不使用反射
         err := rows.StructScan(&v)
         if err != nil {
-            glog.Errorf("{{.TableName}}DAO/{{.FuncName}} error: %s", err)
-            return nil, err
+            errDesc := fmt.Sprintf("StructScan in {{.FuncName}}(_), error: %v", err)
+            glog.Error(errDesc)
+            panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
         }
 		values = append(values, v)
     }
 
-    return values, nil
+    return values
 }
 {{end}}
 
@@ -134,7 +143,7 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if n
 {{define "UPDATE"}}
 // {{.Sql}}
 // TODO(@benqi): sqlmap
-func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) (rows int64, err error) {
+func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) int64 {
 {{if eq .ParamHasList "true"}}  var q = "{{.CompiledByNamedSql}}"
     query, a, err := sqlx.In(q, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
     r, err := dao.db.Exec(query, a...)
@@ -142,22 +151,26 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if n
     r, err := dao.db.Exec(query, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
 {{end}}
 	if err != nil {
-		glog.Error("{{.TableName}}DAO/{{.FuncName}} error: ", err)
-		return
+        errDesc := fmt.Sprintf("Exec in {{.FuncName}}(_), error: %v", err)
+        glog.Error(errDesc)
+        panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	rows, err = r.RowsAffected()
+	rows, err := r.RowsAffected()
 	if err != nil {
-		glog.Error("{{.TableName}}DAO/RowsAffected error: ", err)
+        errDesc := fmt.Sprintf("RowsAffected in {{.FuncName}}(_), error: %v", err)
+        glog.Error(errDesc)
+        panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+
+	return rows
 }
 {{end}}
 
 {{define "DELETE"}}
 // {{.Sql}}
 // TODO(@benqi): sqlmap
-func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) (rows int64, err error) {
+func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) int64 {
 {{if eq .ParamHasList "true"}}  var q = "{{.CompiledByNamedSql}}"
     query, a, err := sqlx.In(q, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
     r, err := dao.db.Exec(query, a...)
@@ -165,14 +178,17 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if n
     r, err := dao.db.Exec(query, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
 {{end}}
 	if err != nil {
-		glog.Error("{{.TableName}}DAO/{{.FuncName}} error: ", err)
-		return
+        errDesc := fmt.Sprintf("Exec in {{.FuncName}}(_), error: %v", err)
+        glog.Error(errDesc)
+        panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	rows, err = r.RowsAffected()
+	rows, err := r.RowsAffected()
 	if err != nil {
-		glog.Error("{{.TableName}}DAO/RowsAffected error: ", err)
+        errDesc := fmt.Sprintf("RowsAffected in {{.FuncName}}(_), error: %v", err)
+        glog.Error(errDesc)
+        panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+	return rows
 }
 {{end}}

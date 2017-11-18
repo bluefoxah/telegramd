@@ -18,9 +18,11 @@
 package mysql_dao
 
 import (
+	"fmt"
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
-	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/mtproto"
 )
 
 type DevicesDAO struct {
@@ -33,80 +35,93 @@ func NewDevicesDAO(db *sqlx.DB) *DevicesDAO {
 
 // insert into devices(user_id, token_type, token, state) values (:user_id, :token_type, :token, :state)
 // TODO(@benqi): sqlmap
-func (dao *DevicesDAO) Insert(do *do.DevicesDO) (id int64, err error) {
+func (dao *DevicesDAO) Insert(do *dataobject.DevicesDO) int64 {
 	var query = "insert into devices(user_id, token_type, token, state) values (:user_id, :token_type, :token, :state)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
-		glog.Error("DevicesDAO/Insert error: ", err)
-		return
+		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	id, err = r.LastInsertId()
+	id, err := r.LastInsertId()
 	if err != nil {
-		glog.Error("DevicesDAO/LastInsertId error: ", err)
+		errDesc := fmt.Sprintf("LastInsertId in Insert(%v)_error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+	return id
 }
 
 // select id from devices where user_id in (select id from auth_users where auth_id = :auth_id) and token_type = :token_type and token = :token limit 1
 // TODO(@benqi): sqlmap
-func (dao *DevicesDAO) SelectIdByAuthId(auth_id int64, token_type int8, token string) (*do.DevicesDO, error) {
+func (dao *DevicesDAO) SelectIdByAuthId(auth_id int64, token_type int8, token string) *dataobject.DevicesDO {
 	var query = "select id from devices where user_id in (select id from auth_users where auth_id = ?) and token_type = ? and token = ? limit 1"
 	rows, err := dao.db.Queryx(query, auth_id, token_type, token)
 
 	if err != nil {
-		glog.Error("DevicesDAO/SelectIdByAuthId error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in SelectIdByAuthId(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	do := &do.DevicesDO{}
+	do := &dataobject.DevicesDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("DevicesDAO/SelectIdByAuthId error: ", err)
-			return nil, err
+			errDesc := fmt.Sprintf("StructScan in SelectIdByAuthId(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 	} else {
-		return nil, nil
+		return nil
 	}
 
-	return do, nil
+	return do
 }
 
 // update devices set state = :state where id = :id
 // TODO(@benqi): sqlmap
-func (dao *DevicesDAO) UpdateStateById(state int8, id int32) (rows int64, err error) {
+func (dao *DevicesDAO) UpdateStateById(state int8, id int32) int64 {
 	var query = "update devices set state = ? where id = ?"
 	r, err := dao.db.Exec(query, state, id)
 
 	if err != nil {
-		glog.Error("DevicesDAO/UpdateStateById error: ", err)
-		return
+		errDesc := fmt.Sprintf("Exec in UpdateStateById(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	rows, err = r.RowsAffected()
+	rows, err := r.RowsAffected()
 	if err != nil {
-		glog.Error("DevicesDAO/RowsAffected error: ", err)
+		errDesc := fmt.Sprintf("RowsAffected in UpdateStateById(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+
+	return rows
 }
 
 // update devices set state = 1 where id = :id
 // TODO(@benqi): sqlmap
-func (dao *DevicesDAO) UpdateStateByAuthId(id int32) (rows int64, err error) {
+func (dao *DevicesDAO) UpdateStateByAuthId(id int32) int64 {
 	var query = "update devices set state = 1 where id = ?"
 	r, err := dao.db.Exec(query, id)
 
 	if err != nil {
-		glog.Error("DevicesDAO/UpdateStateByAuthId error: ", err)
-		return
+		errDesc := fmt.Sprintf("Exec in UpdateStateByAuthId(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	rows, err = r.RowsAffected()
+	rows, err := r.RowsAffected()
 	if err != nil {
-		glog.Error("DevicesDAO/RowsAffected error: ", err)
+		errDesc := fmt.Sprintf("RowsAffected in UpdateStateByAuthId(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+
+	return rows
 }

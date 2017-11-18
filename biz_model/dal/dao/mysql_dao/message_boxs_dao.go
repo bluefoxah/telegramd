@@ -18,9 +18,11 @@
 package mysql_dao
 
 import (
+	"fmt"
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
-	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/mtproto"
 )
 
 type MessageBoxsDAO struct {
@@ -33,17 +35,20 @@ func NewMessageBoxsDAO(db *sqlx.DB) *MessageBoxsDAO {
 
 // insert into message_boxs(user_id, message_box_type, message_id, pts, created_at) values (:user_id, :message_box_type, :message_id, :pts, :created_at)
 // TODO(@benqi): sqlmap
-func (dao *MessageBoxsDAO) Insert(do *do.MessageBoxsDO) (id int64, err error) {
+func (dao *MessageBoxsDAO) Insert(do *dataobject.MessageBoxsDO) int64 {
 	var query = "insert into message_boxs(user_id, message_box_type, message_id, pts, created_at) values (:user_id, :message_box_type, :message_id, :pts, :created_at)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
-		glog.Error("MessageBoxsDAO/Insert error: ", err)
-		return
+		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	id, err = r.LastInsertId()
+	id, err := r.LastInsertId()
 	if err != nil {
-		glog.Error("MessageBoxsDAO/LastInsertId error: ", err)
+		errDesc := fmt.Sprintf("LastInsertId in Insert(%v)_error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+	return id
 }

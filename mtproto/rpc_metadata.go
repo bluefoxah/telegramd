@@ -93,3 +93,7 @@ func (m *RpcMetaData) Encode() (metadata.MD) {
 		"receivetime", strconv.FormatInt(m.ReceiveTime, 10),
 		"userid", strconv.FormatInt(int64(m.UserId), 10))
 }
+
+//md, _ := metadata.FromIncomingContext(ctx)
+//rpcMetaData := mtproto.RpcMetaData{}
+//rpcMetaData.Decode(md)

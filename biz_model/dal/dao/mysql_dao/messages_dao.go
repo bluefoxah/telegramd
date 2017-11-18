@@ -18,9 +18,11 @@
 package mysql_dao
 
 import (
+	"fmt"
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
-	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/mtproto"
 )
 
 type MessagesDAO struct {
@@ -33,105 +35,114 @@ func NewMessagesDAO(db *sqlx.DB) *MessagesDAO {
 
 // insert into messages(user_id, peer_type, peer_id, random_id, message, `date`, created_at) values (:user_id, :peer_type, :peer_id, :random_id, :message, :date, :created_at)
 // TODO(@benqi): sqlmap
-func (dao *MessagesDAO) Insert(do *do.MessagesDO) (id int64, err error) {
+func (dao *MessagesDAO) Insert(do *dataobject.MessagesDO) int64 {
 	var query = "insert into messages(user_id, peer_type, peer_id, random_id, message, `date`, created_at) values (:user_id, :peer_type, :peer_id, :random_id, :message, :date, :created_at)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
-		glog.Error("MessagesDAO/Insert error: ", err)
-		return
+		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	id, err = r.LastInsertId()
+	id, err := r.LastInsertId()
 	if err != nil {
-		glog.Error("MessagesDAO/LastInsertId error: ", err)
+		errDesc := fmt.Sprintf("LastInsertId in Insert(%v)_error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+	return id
 }
 
 // select id, user_id, peer_type, peer_id, random_id, message, `date` from messages where id in (:idList)
 // TODO(@benqi): sqlmap
-func (dao *MessagesDAO) SelectByIdList(idList []int32) ([]do.MessagesDO, error) {
+func (dao *MessagesDAO) SelectByIdList(idList []int32) []dataobject.MessagesDO {
 	var q = "select id, user_id, peer_type, peer_id, random_id, message, `date` from messages where id in (?)"
 	query, a, err := sqlx.In(q, idList)
 	rows, err := dao.db.Queryx(query, a...)
 
 	if err != nil {
-		glog.Errorf("MessagesDAO/SelectByIdList error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in SelectByIdList(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	var values []do.MessagesDO
+	var values []dataobject.MessagesDO
 	for rows.Next() {
-		v := do.MessagesDO{}
+		v := dataobject.MessagesDO{}
 
 		// TODO(@benqi): 不使用反射
 		err := rows.StructScan(&v)
 		if err != nil {
-			glog.Errorf("MessagesDAO/SelectByIdList error: %s", err)
-			return nil, err
+			errDesc := fmt.Sprintf("StructScan in SelectByIdList(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 		values = append(values, v)
 	}
 
-	return values, nil
+	return values
 }
 
 // select id, user_id, peer_type, peer_id, random_id, message, `date` from messages where peer_type = :peer_type and (user_id = :user_id and peer_id = :peer_id) or (user_id = :peer_id and peer_id = :user_id)
 // TODO(@benqi): sqlmap
-func (dao *MessagesDAO) SelectByUserIdAndPeer(peer_type int32, user_id int32, peer_id int32) ([]do.MessagesDO, error) {
+func (dao *MessagesDAO) SelectByUserIdAndPeer(peer_type int32, user_id int32, peer_id int32) []dataobject.MessagesDO {
 	var query = "select id, user_id, peer_type, peer_id, random_id, message, `date` from messages where peer_type = ? and (user_id = ? and peer_id = ?) or (user_id = ? and peer_id = ?)"
 	rows, err := dao.db.Queryx(query, peer_type, user_id, peer_id, peer_id, user_id)
 
 	if err != nil {
-		glog.Errorf("MessagesDAO/SelectByUserIdAndPeer error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in SelectByUserIdAndPeer(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	var values []do.MessagesDO
+	var values []dataobject.MessagesDO
 	for rows.Next() {
-		v := do.MessagesDO{}
+		v := dataobject.MessagesDO{}
 
 		// TODO(@benqi): 不使用反射
 		err := rows.StructScan(&v)
 		if err != nil {
-			glog.Errorf("MessagesDAO/SelectByUserIdAndPeer error: %s", err)
-			return nil, err
+			errDesc := fmt.Sprintf("StructScan in SelectByUserIdAndPeer(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 		values = append(values, v)
 	}
 
-	return values, nil
+	return values
 }
 
 // select id, user_id, peer_type, peer_id, random_id, message, `date` from messages where id > :offset_id and peer_type = :peer_type and ((user_id = :user_id and peer_id = :peer_id) or (user_id = :peer_id and peer_id = :user_id)) limit :limit
 // TODO(@benqi): sqlmap
-func (dao *MessagesDAO) SelectByUserIdAndPeerOffsetLimit(offset_id int32, peer_type int32, user_id int32, peer_id int32, limit int32) ([]do.MessagesDO, error) {
+func (dao *MessagesDAO) SelectByUserIdAndPeerOffsetLimit(offset_id int32, peer_type int32, user_id int32, peer_id int32, limit int32) []dataobject.MessagesDO {
 	var query = "select id, user_id, peer_type, peer_id, random_id, message, `date` from messages where id > ? and peer_type = ? and ((user_id = ? and peer_id = ?) or (user_id = ? and peer_id = ?)) limit ?"
 	rows, err := dao.db.Queryx(query, offset_id, peer_type, user_id, peer_id, peer_id, user_id, limit)
 
 	if err != nil {
-		glog.Errorf("MessagesDAO/SelectByUserIdAndPeerOffsetLimit error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in SelectByUserIdAndPeerOffsetLimit(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	var values []do.MessagesDO
+	var values []dataobject.MessagesDO
 	for rows.Next() {
-		v := do.MessagesDO{}
+		v := dataobject.MessagesDO{}
 
 		// TODO(@benqi): 不使用反射
 		err := rows.StructScan(&v)
 		if err != nil {
-			glog.Errorf("MessagesDAO/SelectByUserIdAndPeerOffsetLimit error: %s", err)
-			return nil, err
+			errDesc := fmt.Sprintf("StructScan in SelectByUserIdAndPeerOffsetLimit(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 		values = append(values, v)
 	}
 
-	return values, nil
+	return values
 }

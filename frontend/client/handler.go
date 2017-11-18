@@ -33,36 +33,32 @@ func (c *Client) onMsgsAck(msgId int64, seqNo int32, request TLObject) {
 	glog.Info("processMsgsAck - request: %s", request.String())
 }
 
-func (c *Client) onNewSessionCreated(sessionId, msgId int64, seqNo int32) (*TLNewSessionCreated) {
+func (c *Client) onNewSessionCreated(sessionId, msgId int64, seqNo int32) (notify *TLNewSessionCreated) {
 	// glog.Info("processMsgsAck - request: %s", request.String())
 
-	// TODO(@benqi): 客户端保存的initConnection信息推到后台服务存储
-	authSaltsDO, err := dao.GetAuthSaltsDAO(dao.DB_SLAVE).SelectByAuthId(c.Codec.AuthKeyId)
-	if err != nil {
-		// TODO(@benqi): 处理数据库出错
-		glog.Error("c.authSaltsDAO.SelectByAuthId - query error: ", err)
-		return nil
-	}
+	defer func() {
+		if r := recover(); r != nil {
+			glog.Error(r)
+			notify = nil
+		}
+	}()
 
+	// TODO(@benqi): 客户端保存的initConnection信息推到后台服务存储
+	authSaltsDO := dao.GetAuthSaltsDAO(dao.DB_SLAVE).SelectByAuthId(c.Codec.AuthKeyId)
 	if authSaltsDO == nil {
 		// salts不存在，插入一条记录
 		authSaltsDO = &dataobject.AuthSaltsDO{ AuthId: c.Codec.AuthKeyId, Salt: id.NextId() }
-		_, err := dao.GetAuthSaltsDAO(dao.DB_MASTER).Insert(authSaltsDO)
-		if err != nil {
-			glog.Error("c.authSaltsDAO.Insert - insert error: ", err)
-			return nil
-		}
 	} else {
 		// TODO(@benqi): salts是否已经过有效期
 	}
 
 	// c.Codec.SessionId =
-	notify := &TLNewSessionCreated{
+	notify = &TLNewSessionCreated{
 		FirstMsgId: msgId,
 		UniqueId: id.NextId(),
 		ServerSalt: authSaltsDO.Salt,
 	}
-	return notify
+	return
 }
 
 func (c *Client) setOnline() {
@@ -154,7 +150,7 @@ func (c *Client) onContestSaveDeveloperInfo(msgId int64, seqNo int32, request TL
 	return r
 }
 
-func (c *Client) onInvokeWithLayer(msgId int64, seqNo int32, request TLObject) error {
+func (c *Client) onInvokeWithLayer(msgId int64, seqNo int32, request TLObject) (err error) {
 	invokeWithLayer, _ := request.(*TLInvokeWithLayer)
 	glog.Info("processInvokeWithLayer - request data: ", invokeWithLayer.String())
 
@@ -174,19 +170,21 @@ func (c *Client) onInvokeWithLayer(msgId int64, seqNo int32, request TLObject) e
 	}
 
 	initConnection := &TLInitConnection{}
-	err := initConnection.Decode(dbuf)
+	err = initConnection.Decode(dbuf)
 	if err != nil {
 		glog.Error("Decode initConnection error: ", err)
-		return err
+		return
 	}
+
+	defer func() {
+		if r := recover(); r != nil {
+			glog.Error(r)
+			err = fmt.Errorf("%v", r)
+		}
+	}()
 
 	// TODO(@benqi): 客户端保存的initConnection信息推到后台服务存储
-	do, err :=  dao.GetAuthsDAO(dao.DB_MASTER).SelectConnectionHashByAuthId(c.Codec.AuthKeyId)
-	if err != nil {
-		glog.Errorf("c.authsDAO.SelectConnectionHashByAuthId: query db error: %s", err)
-		return err
-	}
-
+	do :=  dao.GetAuthsDAO(dao.DB_MASTER).SelectConnectionHashByAuthId(c.Codec.AuthKeyId)
 	if do == nil {
 		do = &dataobject.AuthsDO{
 			AuthId: c.Codec.AuthKeyId,
@@ -199,11 +197,7 @@ func (c *Client) onInvokeWithLayer(msgId int64, seqNo int32, request TLObject) e
 			LangCode: initConnection.LangCode,
 			CreatedAt: time.Now().Format("2006-01-02 15:04:05"),
 		}
-		_, err := dao.GetAuthsDAO(dao.DB_MASTER).Insert(do)
-		if err != nil {
-			glog.Errorf("c.authsDAO.SelectConnectionHashByAuthId: query db error: %s", err)
-			return err
-		}
+		dao.GetAuthsDAO(dao.DB_MASTER).Insert(do)
 	} else {
 		// TODO(@benqi): 更新initConnection信息
 	}

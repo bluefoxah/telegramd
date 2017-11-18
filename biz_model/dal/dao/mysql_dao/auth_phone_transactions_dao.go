@@ -18,9 +18,11 @@
 package mysql_dao
 
 import (
+	"fmt"
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
-	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/mtproto"
 )
 
 type AuthPhoneTransactionsDAO struct {
@@ -33,71 +35,78 @@ func NewAuthPhoneTransactionsDAO(db *sqlx.DB) *AuthPhoneTransactionsDAO {
 
 // insert into auth_phone_transactions(transaction_hash, api_id, api_hash, phone_number, code, created_at) values (:transaction_hash, :api_id, :api_hash, :phone_number, :code, :created_at)
 // TODO(@benqi): sqlmap
-func (dao *AuthPhoneTransactionsDAO) Insert(do *do.AuthPhoneTransactionsDO) (id int64, err error) {
+func (dao *AuthPhoneTransactionsDAO) Insert(do *dataobject.AuthPhoneTransactionsDO) int64 {
 	var query = "insert into auth_phone_transactions(transaction_hash, api_id, api_hash, phone_number, code, created_at) values (:transaction_hash, :api_id, :api_hash, :phone_number, :code, :created_at)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
-		glog.Error("AuthPhoneTransactionsDAO/Insert error: ", err)
-		return
+		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	id, err = r.LastInsertId()
+	id, err := r.LastInsertId()
 	if err != nil {
-		glog.Error("AuthPhoneTransactionsDAO/LastInsertId error: ", err)
+		errDesc := fmt.Sprintf("LastInsertId in Insert(%v)_error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+	return id
 }
 
 // select transaction_hash from auth_phone_transactions where phone_number = :phone_number and api_id = :api_id and api_hash = :api_hash
 // TODO(@benqi): sqlmap
-func (dao *AuthPhoneTransactionsDAO) SelectByPhoneAndApiIdAndHash(phone_number string, api_id int32, api_hash string) (*do.AuthPhoneTransactionsDO, error) {
+func (dao *AuthPhoneTransactionsDAO) SelectByPhoneAndApiIdAndHash(phone_number string, api_id int32, api_hash string) *dataobject.AuthPhoneTransactionsDO {
 	var query = "select transaction_hash from auth_phone_transactions where phone_number = ? and api_id = ? and api_hash = ?"
 	rows, err := dao.db.Queryx(query, phone_number, api_id, api_hash)
 
 	if err != nil {
-		glog.Error("AuthPhoneTransactionsDAO/SelectByPhoneAndApiIdAndHash error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in SelectByPhoneAndApiIdAndHash(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	do := &do.AuthPhoneTransactionsDO{}
+	do := &dataobject.AuthPhoneTransactionsDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("AuthPhoneTransactionsDAO/SelectByPhoneAndApiIdAndHash error: ", err)
-			return nil, err
+			errDesc := fmt.Sprintf("StructScan in SelectByPhoneAndApiIdAndHash(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 	} else {
-		return nil, nil
+		return nil
 	}
 
-	return do, nil
+	return do
 }
 
 // select id from auth_phone_transactions where transaction_hash = :transaction_hash and code = :code and phone_number = :phone_number
 // TODO(@benqi): sqlmap
-func (dao *AuthPhoneTransactionsDAO) SelectByPhoneCode(transaction_hash string, code string, phone_number string) (*do.AuthPhoneTransactionsDO, error) {
+func (dao *AuthPhoneTransactionsDAO) SelectByPhoneCode(transaction_hash string, code string, phone_number string) *dataobject.AuthPhoneTransactionsDO {
 	var query = "select id from auth_phone_transactions where transaction_hash = ? and code = ? and phone_number = ?"
 	rows, err := dao.db.Queryx(query, transaction_hash, code, phone_number)
 
 	if err != nil {
-		glog.Error("AuthPhoneTransactionsDAO/SelectByPhoneCode error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in SelectByPhoneCode(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	do := &do.AuthPhoneTransactionsDO{}
+	do := &dataobject.AuthPhoneTransactionsDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("AuthPhoneTransactionsDAO/SelectByPhoneCode error: ", err)
-			return nil, err
+			errDesc := fmt.Sprintf("StructScan in SelectByPhoneCode(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 	} else {
-		return nil, nil
+		return nil
 	}
 
-	return do, nil
+	return do
 }

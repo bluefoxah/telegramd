@@ -18,9 +18,11 @@
 package mysql_dao
 
 import (
+	"fmt"
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
-	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/mtproto"
 )
 
 type AuthsDAO struct {
@@ -33,44 +35,49 @@ func NewAuthsDAO(db *sqlx.DB) *AuthsDAO {
 
 // insert into auths(auth_id, api_id, device_model, system_version, app_version, system_lang_code, lang_pack, lang_code, connection_hash) values (:auth_id, :api_id, :device_model, :system_version, :app_version, :system_lang_code, :lang_pack, :lang_code, :connection_hash)
 // TODO(@benqi): sqlmap
-func (dao *AuthsDAO) Insert(do *do.AuthsDO) (id int64, err error) {
+func (dao *AuthsDAO) Insert(do *dataobject.AuthsDO) int64 {
 	var query = "insert into auths(auth_id, api_id, device_model, system_version, app_version, system_lang_code, lang_pack, lang_code, connection_hash) values (:auth_id, :api_id, :device_model, :system_version, :app_version, :system_lang_code, :lang_pack, :lang_code, :connection_hash)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
-		glog.Error("AuthsDAO/Insert error: ", err)
-		return
+		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	id, err = r.LastInsertId()
+	id, err := r.LastInsertId()
 	if err != nil {
-		glog.Error("AuthsDAO/LastInsertId error: ", err)
+		errDesc := fmt.Sprintf("LastInsertId in Insert(%v)_error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+	return id
 }
 
 // select connection_hash from auths where auth_id = :auth_id
 // TODO(@benqi): sqlmap
-func (dao *AuthsDAO) SelectConnectionHashByAuthId(auth_id int64) (*do.AuthsDO, error) {
+func (dao *AuthsDAO) SelectConnectionHashByAuthId(auth_id int64) *dataobject.AuthsDO {
 	var query = "select connection_hash from auths where auth_id = ?"
 	rows, err := dao.db.Queryx(query, auth_id)
 
 	if err != nil {
-		glog.Error("AuthsDAO/SelectConnectionHashByAuthId error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in SelectConnectionHashByAuthId(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	do := &do.AuthsDO{}
+	do := &dataobject.AuthsDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("AuthsDAO/SelectConnectionHashByAuthId error: ", err)
-			return nil, err
+			errDesc := fmt.Sprintf("StructScan in SelectConnectionHashByAuthId(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 	} else {
-		return nil, nil
+		return nil
 	}
 
-	return do, nil
+	return do
 }

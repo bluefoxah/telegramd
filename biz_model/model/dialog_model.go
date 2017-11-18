@@ -59,10 +59,10 @@ func (m *dialogModel) GetDialogsByUserIDAndType(userId int32, peerType base.Peer
 
 	var dialogDOList []dataobject.UserDialogsDO
 	if peerType == base.PEER_INVALID || peerType == base.PEER_EMPTY {
-		dialogDOList, _ = dialogsDAO.SelectDialogsByUserID(userId)
+		dialogDOList = dialogsDAO.SelectDialogsByUserID(userId)
 		glog.Infof("SelectDialogsByUserID(%d) - {%v}", userId, dialogDOList)
 	} else {
-		dialogDOList, _ = dialogsDAO.SelectDialogsByPeerType(userId, int32(peerType))
+		dialogDOList = dialogsDAO.SelectDialogsByPeerType(userId, int32(peerType))
 		glog.Infof("SelectDialogsByPeerType(%d, %d) - {%v}", userId, int32(peerType), dialogDOList)
 	}
 

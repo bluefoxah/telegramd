@@ -29,7 +29,8 @@ func BizUnaryRecoveryHandler(ctx context.Context, p interface{}) (err error) {
 	switch p.(type) {
 	case *mtproto.TLRpcError:
 		code, _ := p.(*mtproto.TLRpcError)
-		grpc.SetTrailer(ctx, code.ToMetadata())
+		md, _ := RpcErrorToMD(code)
+		grpc.SetTrailer(ctx, md)
 		return status.Errorf(codes.Unknown, "panic triggered rpc_error: {%v}", p)
 	}
 	return status.Errorf(codes.Unknown, "panic unknown triggered: %v", p)

@@ -18,7 +18,6 @@
 package model
 
 import (
-	"github.com/golang/glog"
 	"time"
 	"sync"
 	dao2 "github.com/nebulaim/telegramd/biz_model/dal/dao"
@@ -45,15 +44,10 @@ func GetSequenceModel() *sequnceModel {
 //  使用数据库和REDIS获取sequence
 //  redis: sequence
 //  暂时不考虑DB等异常处理
-func (dao *sequnceModel) NextID(key string) (seq int64, err error) {
+func (dao *sequnceModel) NextID(key string) (seq int64) {
 	sequenceDAO := dao2.GetSequenceDAO(dao2.CACHE)
 
-	seq, err = sequenceDAO.Incr(key)
-	if err != nil {
-		glog.Errorf("NextID - incr error: ", err)
-		return
-	}
-
+	seq, _ = sequenceDAO.Incr(key)
 	var do *dataobject.SeqUpdatesNgenDO = nil
 
 	// 使用seq==1做为哨兵减少DB和REDIS操作
@@ -63,12 +57,7 @@ func (dao *sequnceModel) NextID(key string) (seq int64, err error) {
 		// 2. redis重新启动，DB里可能已经有值
 
 		SeqUpdatesNgenDAO := dao2.GetSeqUpdatesNgenDAO(dao2.DB_SLAVE)
-		do, err = SeqUpdatesNgenDAO.SelectBySeqName(key)
-		if err != nil {
-			glog.Errorf("NextID - dao.ngen.SelectBySeqName{%s}, error: %s", key, err)
-			return
-		}
-
+		do = SeqUpdatesNgenDAO.SelectBySeqName(key)
 		if do == nil {
 			// DB无值，插入数据
 			do = &dataobject.SeqUpdatesNgenDO{
@@ -79,11 +68,7 @@ func (dao *sequnceModel) NextID(key string) (seq int64, err error) {
 		} else {
 			// DB有seq
 			do.Seq += 1
-			err = sequenceDAO.Set(key, do.Seq)
-			if err != nil {
-				glog.Errorf("NextID - set error: %s", err)
-				return
-			}
+			sequenceDAO.Set(key, do.Seq)
 		}
 	} else {
 		do = &dataobject.SeqUpdatesNgenDO{
@@ -96,17 +81,9 @@ func (dao *sequnceModel) NextID(key string) (seq int64, err error) {
 	SeqUpdatesNgenDAO := dao2.GetSeqUpdatesNgenDAO(dao2.DB_MASTER)
 
 	if do.Seq == 1 {
-		_, err = SeqUpdatesNgenDAO.Insert(do)
-		if err != nil {
-			glog.Errorf("NextID - dao.ngen.Insert{%v}, error: %s", do, err)
-			return
-		}
+		SeqUpdatesNgenDAO.Insert(do)
 	} else {
-		_, err = SeqUpdatesNgenDAO.UpdateSeqBySeqName(do.Seq, key)
-		if err != nil {
-			glog.Errorf("NextID - dao.ngen.UpdateSeqBySeqName{%v}, error: %s", do, err)
-			return
-		}
+		SeqUpdatesNgenDAO.UpdateSeqBySeqName(do.Seq, key)
 	}
 
 	return

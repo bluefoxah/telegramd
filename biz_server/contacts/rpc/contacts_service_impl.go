@@ -75,7 +75,7 @@ func (s *ContactsServiceImpl) ContactsGetContacts(ctx context.Context, request *
 
 	contacts := &mtproto.TLContactsContacts{}
 
-	contactsDOList, _ := dao.GetUserContactsDAO(dao.DB_SLAVE).SelectUserContacts(rpcMetaData.UserId)
+	contactsDOList := dao.GetUserContactsDAO(dao.DB_SLAVE).SelectUserContacts(rpcMetaData.UserId)
 	contacts.SavedCount = int32(len(contactsDOList))
 
 	for _, do := range contactsDOList {
@@ -85,7 +85,7 @@ func (s *ContactsServiceImpl) ContactsGetContacts(ctx context.Context, request *
 
 		contacts.Contacts = append(contacts.Contacts, mtproto.MakeContact(contact))
 
-		userDO, _ := dao.GetUsersDAO(dao.DB_SLAVE).SelectById(do.ContactUserId)
+		userDO := dao.GetUsersDAO(dao.DB_SLAVE).SelectById(do.ContactUserId)
 		user := &mtproto.TLUser{}
 		user.Id = userDO.Id
 		if user.Id == rpcMetaData.UserId {
@@ -133,7 +133,7 @@ func (s *ContactsServiceImpl) ContactsSearch(ctx context.Context, request *mtpro
 	glog.Infof("ContactsSearch - Process: {%v}", request)
 
 	// TODO(@benqi) 使用ES查询
-	usersDOList, _ := dao.GetUsersDAO(dao.DB_SLAVE).SelectByQueryString(request.Q, request.Q, request.Q, request.Q)
+	usersDOList := dao.GetUsersDAO(dao.DB_SLAVE).SelectByQueryString(request.Q, request.Q, request.Q, request.Q)
 
 	found := &mtproto.TLContactsFound{}
 	// Peer/Chat/User

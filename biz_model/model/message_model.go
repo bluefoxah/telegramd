@@ -70,7 +70,7 @@ func (m *messageModel) GetMessagesByIDList(idList []int32) (messages []*mtproto.
 	// TODO(@benqi): Check messageDAO
 	messageDAO := dao.GetMessagesDAO(dao.DB_SLAVE)
 
-	messagesDOList, _ := messageDAO.SelectByIdList(idList)
+	messagesDOList := messageDAO.SelectByIdList(idList)
 	messages = []*mtproto.TLMessage{}
 
 	for _, messageDO := range messagesDOList {
@@ -106,7 +106,7 @@ func (m *messageModel) GetMessagesByUserIdPeerOffsetLimit(userId int32, ptype ba
 	// TODO(@benqi): Check messageDAO
 	messageDAO := dao.GetMessagesDAO(dao.DB_SLAVE)
 
-	messagesDOList, _ := messageDAO.SelectByUserIdAndPeerOffsetLimit(offset, int32(ptype), userId, peerId, limit)
+	messagesDOList := messageDAO.SelectByUserIdAndPeerOffsetLimit(offset, int32(ptype), userId, peerId, limit)
 	messages = []*mtproto.TLMessage{}
 
 	for _, messageDO := range messagesDOList {

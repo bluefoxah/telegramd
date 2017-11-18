@@ -75,11 +75,7 @@ func (s *AuthServiceImpl) AuthCheckPhone(ctx context.Context, request *mtproto.T
 	// TODO(@benqi): panic/recovery
 	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
 
-	usersDO, err := usersDAO.SelectByPhoneNumber(request.PhoneNumber)
-	if err != nil {
-		glog.Errorf("AuthCheckPhone - s.UsersDAO.SelectUserIdByPhoneNumber: %s", err)
-		return nil, err
-	}
+	usersDO := usersDAO.SelectByPhoneNumber(request.PhoneNumber)
 
 	var reply *mtproto.Auth_CheckedPhone
 
@@ -119,12 +115,7 @@ func (s *AuthServiceImpl) AuthSendCode(ctx context.Context, request *mtproto.TLA
 	// 检查满足条件的TransactionHash是否存在，可能的条件：
 	//  1. is_deleted !=0 and now - created_at < 15 分钟
 
-	do, err := dao.GetAuthPhoneTransactionsDAO(dao.DB_SLAVE).SelectByPhoneAndApiIdAndHash(request.PhoneNumber, request.ApiId, request.ApiHash)
-	if err != nil {
-		glog.Errorf("AuthSendCode - s.AuthPhoneTransactionsDAO.SelectByPhoneAndApiIdAndHash: %s", err)
-		return nil, err
-	}
-
+	do := dao.GetAuthPhoneTransactionsDAO(dao.DB_SLAVE).SelectByPhoneAndApiIdAndHash(request.PhoneNumber, request.ApiId, request.ApiHash)
 	if do == nil {
 		do = &dataobject.AuthPhoneTransactionsDO{}
 		do.ApiId = request.ApiId
@@ -135,11 +126,7 @@ func (s *AuthServiceImpl) AuthSendCode(ctx context.Context, request *mtproto.TLA
 		// TODO(@benqi): 生成一个32字节的随机字串
 		do.TransactionHash = fmt.Sprintf("%20d", id.NextId())
 
-		_, err := dao.GetAuthPhoneTransactionsDAO(dao.DB_MASTER).Insert(do)
-		if err != nil {
-			glog.Errorf("AuthSendCode - s.AuthPhoneTransactionsDAO.Insert: %s", err)
-			return nil, err
-		}
+		dao.GetAuthPhoneTransactionsDAO(dao.DB_MASTER).Insert(do)
 	} else {
 		// TODO(@benqi): 检查是否已经过了失效期
 	}
@@ -184,20 +171,24 @@ func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAut
 
 	// Check code
 	authPhoneTransactionsDAO := dao.GetAuthPhoneTransactionsDAO(dao.DB_SLAVE)
-	do1, err := authPhoneTransactionsDAO.SelectByPhoneCode(request.PhoneCodeHash, request.PhoneCode, request.PhoneNumber)
+	do1 := authPhoneTransactionsDAO.SelectByPhoneCode(request.PhoneCodeHash, request.PhoneCode, request.PhoneNumber)
 	if do1 == nil {
-		glog.Errorf("AuthSignIn - s.AuthPhoneTransactionsDAO.SelectByPhoneCode: %s", err)
+		err := fmt.Errorf("SelectByPhoneCode(_) return empty in request: {}%v", request)
+		glog.Error(err)
 		return nil, err
 	}
 
 	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
-	do2, err := usersDAO.SelectByPhoneNumber(request.PhoneNumber)
+	do2 := usersDAO.SelectByPhoneNumber(request.PhoneNumber)
 	if do2 == nil {
-		glog.Errorf("AuthSignIn - s.UsersDAO.SelectByPhoneNumber: %s", err)
-		return nil, err
+		if do1 == nil {
+			err := fmt.Errorf("SelectByPhoneNumber(_) return empty in request{}%v", request)
+			glog.Error(err)
+			return nil, err
+		}
 	}
 
-	do3, _ := dao.GetAuthUsersDAO(dao.DB_SLAVE).SelectByAuthId(rpcMetaData.AuthId)
+	do3 := dao.GetAuthUsersDAO(dao.DB_SLAVE).SelectByAuthId(rpcMetaData.AuthId)
 	if do3 == nil {
 		do3 := &dataobject.AuthUsersDO{}
 		do3.AuthId = rpcMetaData.AuthId

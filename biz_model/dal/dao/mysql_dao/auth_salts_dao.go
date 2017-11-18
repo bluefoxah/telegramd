@@ -18,9 +18,11 @@
 package mysql_dao
 
 import (
+	"fmt"
 	"github.com/golang/glog"
 	"github.com/jmoiron/sqlx"
-	do "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/mtproto"
 )
 
 type AuthSaltsDAO struct {
@@ -33,44 +35,49 @@ func NewAuthSaltsDAO(db *sqlx.DB) *AuthSaltsDAO {
 
 // insert into auth_salts(auth_id, salt) values (:auth_id, :salt)
 // TODO(@benqi): sqlmap
-func (dao *AuthSaltsDAO) Insert(do *do.AuthSaltsDO) (id int64, err error) {
+func (dao *AuthSaltsDAO) Insert(do *dataobject.AuthSaltsDO) int64 {
 	var query = "insert into auth_salts(auth_id, salt) values (:auth_id, :salt)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
-		glog.Error("AuthSaltsDAO/Insert error: ", err)
-		return
+		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
-	id, err = r.LastInsertId()
+	id, err := r.LastInsertId()
 	if err != nil {
-		glog.Error("AuthSaltsDAO/LastInsertId error: ", err)
+		errDesc := fmt.Sprintf("LastInsertId in Insert(%v)_error: %v", do, err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
-	return
+	return id
 }
 
 // select auth_id, salt from auth_salts where auth_id = :auth_id
 // TODO(@benqi): sqlmap
-func (dao *AuthSaltsDAO) SelectByAuthId(auth_id int64) (*do.AuthSaltsDO, error) {
+func (dao *AuthSaltsDAO) SelectByAuthId(auth_id int64) *dataobject.AuthSaltsDO {
 	var query = "select auth_id, salt from auth_salts where auth_id = ?"
 	rows, err := dao.db.Queryx(query, auth_id)
 
 	if err != nil {
-		glog.Error("AuthSaltsDAO/SelectByAuthId error: ", err)
-		return nil, err
+		errDesc := fmt.Sprintf("Queryx in SelectByAuthId(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	do := &do.AuthSaltsDO{}
+	do := &dataobject.AuthSaltsDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			glog.Error("AuthSaltsDAO/SelectByAuthId error: ", err)
-			return nil, err
+			errDesc := fmt.Sprintf("StructScan in SelectByAuthId(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
 	} else {
-		return nil, nil
+		return nil
 	}
 
-	return do, nil
+	return do
 }

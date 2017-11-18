@@ -22,7 +22,6 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"github.com/golang/glog"
-	"google.golang.org/grpc/metadata"
 )
 
 // FILE_MIGRATE_X = 303000;
@@ -124,6 +123,7 @@ func (e *TLRpcError) ToGrpcStatus() *status.Status {
 	return status.New(codes.Internal, e.Error())
 }
 
+/*
 // Impl error interface
 func (e *TLRpcError) ToMetadata() (metadata.MD) {
 	// return status.New(codes.Internal, e.Error())
@@ -159,3 +159,4 @@ func NewRpcErrorFromMetadata(md metadata.MD) (*TLRpcError, error) {
 
 	return e, nil
 }
+*/

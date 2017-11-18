@@ -44,7 +44,7 @@ func GetUserModel() *userModel {
 func (m *userModel) GetUser(userId int32) (user* mtproto.TLUser) {
 	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
 
-	userDO, _ := usersDAO.SelectById(userId)
+	userDO := usersDAO.SelectById(userId)
 	if userDO != nil {
 		// TODO(@benqi): fill bot, photo, about...
 		user = &mtproto.TLUser{}
@@ -63,7 +63,7 @@ func (m *userModel) GetUser(userId int32) (user* mtproto.TLUser) {
 func (m *userModel) GetUserList(userIdList []int32) (users []*mtproto.TLUser) {
 	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
 
-	userDOList, _ := usersDAO.SelectUsersByIdList(userIdList)
+	userDOList := usersDAO.SelectUsersByIdList(userIdList)
 	users = []*mtproto.TLUser{}
 	for _, userDO := range userDOList {
 		// TODO(@benqi): fill bot, photo, about...
