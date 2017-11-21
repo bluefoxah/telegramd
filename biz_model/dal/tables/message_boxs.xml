@@ -5,4 +5,16 @@
             INSERT INTO message_boxs (user_id, message_box_type, message_id, pts, created_at) VALUES (:user_id, :message_box_type, :message_id, :pts, :created_at)
         </sql>
     </operation>
+
+    <operation name="SelectLastPts">
+        <sql>
+            SELECT pts FROM message_boxs WHERE user_id = :user_id ORDER BY pts DESC LIMIT 1
+        </sql>
+    </operation>
+
+    <operation name="SelectPtsByGTMessageID" result_set="list">
+        <sql>
+            SELECT pts FROM message_boxs WHERE user_id = :user_id AND message_id > :message_id ORDER BY pts
+        </sql>
+    </operation>
 </table>

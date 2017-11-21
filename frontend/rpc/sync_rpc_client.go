@@ -91,7 +91,7 @@ func sendBySessionID(server *net2.Server, sessionId int64, message mtproto.TLObj
 			Object:   message,
 		}
 
-		glog.Infof("sendBySessionID - send by session: %d", sessionId)
+		glog.Infof("sendBySessionID - send by session: %d, message: {%v}", sessionId, m)
 		session.Send(m)
 	} else {
 		glog.Errorf("SendBySessionID - can't found sessionId: %d", sessionId)

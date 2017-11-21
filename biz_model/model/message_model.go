@@ -24,6 +24,7 @@ import (
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"github.com/golang/glog"
 	base2 "github.com/nebulaim/telegramd/base/base"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
 type messageModel struct {
@@ -66,6 +67,31 @@ message TL_message {
   string post_author = 19;
 }
  */
+
+func messagesDOToMessage(do *dataobject.MessagesDO) (message *mtproto.TLMessage) {
+	message = &mtproto.TLMessage{}
+	message.Out = true
+	message.Id = do.Id
+	message.FromId = do.UserId
+	switch do.PeerType {
+	//case base.PEER_EMPTY:
+	//	peer := &mtproto.TLInputPeerEmpty{}
+	//	message.ToId = peer.ToPeer()
+	case base.PEER_SELF, base.PEER_USER:
+		peer := &mtproto.TLPeerUser{do.PeerId}
+		message.ToId = peer.ToPeer()
+	case base.PEER_CHAT:
+		peer := &mtproto.TLPeerChat{do.PeerId}
+		message.ToId = peer.ToPeer()
+	case base.PEER_CHANNEL:
+		peer := &mtproto.TLPeerChannel{do.PeerId}
+		message.ToId = peer.ToPeer()
+	}
+	message.Date = do.Date2
+	message.Message = do.Message
+	return message
+}
+
 func (m *messageModel) GetMessagesByIDList(idList []int32) (messages []*mtproto.TLMessage) {
 	// TODO(@benqi): Check messageDAO
 	messageDAO := dao.GetMessagesDAO(dao.DB_SLAVE)
@@ -91,7 +117,7 @@ func (m *messageModel) GetMessagesByIDList(idList []int32) (messages []*mtproto.
 			peer := &mtproto.TLPeerChannel{messageDO.PeerId}
 			message.ToId = peer.ToPeer()
 		}
-		message.Date = messageDO.Date
+		message.Date = messageDO.Date2
 		message.Message = messageDO.Message
 
 		messages = append(messages, message)
@@ -101,23 +127,33 @@ func (m *messageModel) GetMessagesByIDList(idList []int32) (messages []*mtproto.
 	return
 }
 
-//
-func (m *messageModel) GetMessagesByUserIdPeerOffsetLimit(userId int32, ptype base.PeerType, peerId int32, offset int32, limit int32) (messages []*mtproto.TLMessage) {
+func (m *messageModel) GetMessagesByUserIdPeerOffsetLimit(userId int32, peerType , peerId int32, offset int32, limit int32) (messages []*mtproto.TLMessage) {
 	// TODO(@benqi): Check messageDAO
 	messageDAO := dao.GetMessagesDAO(dao.DB_SLAVE)
 
-	messagesDOList := messageDAO.SelectByUserIdAndPeerOffsetLimit(offset, int32(ptype), userId, peerId, limit)
+	var maxId = offset
+	//if maxId < limit {
+	//	maxId = 0
+	//} else {
+	//	maxId = maxId - limit
+	//}
+
+	messagesDOList := messageDAO.SelectByUserIdAndPeerOffsetLimit(maxId, peerType, userId, peerId, limit)
 	messages = []*mtproto.TLMessage{}
 
 	for _, messageDO := range messagesDOList {
 		message := &mtproto.TLMessage{}
-		message.Out = true
 		message.Id = messageDO.Id
 		message.FromId = messageDO.UserId
 		switch messageDO.PeerType {
 		case base.PEER_EMPTY:
 			continue
 		case base.PEER_SELF, base.PEER_USER:
+			if messageDO.UserId == userId {
+				message.Out = true
+			} else {
+				message.Out = false
+			}
 			peer := &mtproto.TLPeerUser{messageDO.PeerId}
 			message.ToId = peer.ToPeer()
 		case base.PEER_CHAT:
@@ -127,10 +163,23 @@ func (m *messageModel) GetMessagesByUserIdPeerOffsetLimit(userId int32, ptype ba
 			peer := &mtproto.TLPeerChannel{messageDO.PeerId}
 			message.ToId = peer.ToPeer()
 		}
-		message.Date = messageDO.Date
+		message.Date = messageDO.Date2
 		message.Message = messageDO.Message
 
 		messages = append(messages, message)
 	}
 	return
+}
+
+func (m *messageModel) GetMessagesByPts(userId int32, pts int32) (messages []*mtproto.TLMessage) {
+	messageDAO := dao.GetMessagesDAO(dao.DB_SLAVE)
+
+	messagesDOList := messageDAO.SelectByPts(userId, pts)
+	messages = []*mtproto.TLMessage{}
+	for _, messageDO := range messagesDOList {
+		message := messagesDOToMessage(&messageDO)
+		messages = append(messages, message)
+	}
+
+	return messages
 }

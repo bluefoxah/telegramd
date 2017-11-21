@@ -50,6 +50,7 @@ type MysqlDAOList struct {
 	MessageBoxsDAO *mysql_dao.MessageBoxsDAO
 	MessagesDAO *mysql_dao.MessagesDAO
 	SeqUpdatesNgenDAO* mysql_dao.SeqUpdatesNgenDAO
+	ClientUpdatesStateDAO* mysql_dao.ClientUpdatesStateDAO
 }
 
 // TODO(@benqi): 一主多从
@@ -81,6 +82,7 @@ func InstallMysqlDAOManager(clients map[string]*sqlx.DB) {
 		daoList.MessageBoxsDAO = mysql_dao.NewMessageBoxsDAO(v)
 		daoList.MessagesDAO = mysql_dao.NewMessagesDAO(v)
 		daoList.SeqUpdatesNgenDAO = mysql_dao.NewSeqUpdatesNgenDAO(v)
+		daoList.ClientUpdatesStateDAO = mysql_dao.NewClientUpdatesStateDAO(v)
 
 		mysqlDAOManager.daoListMap[k] = daoList
 	}
@@ -202,6 +204,15 @@ func GetSeqUpdatesNgenDAO(dbName string) (dao *mysql_dao.SeqUpdatesNgenDAO) {
 	// err := mysqlDAOManager.daoListMap[dbName]
 	if daoList != nil {
 		dao = daoList.SeqUpdatesNgenDAO
+	}
+	return
+}
+
+func GetClientUpdatesStateDAO(dbName string) (dao *mysql_dao.ClientUpdatesStateDAO) {
+	daoList := GetMysqlDAOList(dbName)
+	// err := mysqlDAOManager.daoListMap[dbName]
+	if daoList != nil {
+		dao = daoList.ClientUpdatesStateDAO
 	}
 	return
 }

@@ -174,3 +174,25 @@ func (dao *UserDialogsDAO) SelectDialogsByPeerType(user_id int32, peer_type int3
 
 	return values
 }
+
+// update user_dialogs set top_message = :top_message where id = :id
+// TODO(@benqi): sqlmap
+func (dao *UserDialogsDAO) UpdateTopMessage(top_message int32, id int32) int64 {
+	var query = "update user_dialogs set top_message = ? where id = ?"
+	r, err := dao.db.Exec(query, top_message, id)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Exec in UpdateTopMessage(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	rows, err := r.RowsAffected()
+	if err != nil {
+		errDesc := fmt.Sprintf("RowsAffected in UpdateTopMessage(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	return rows
+}

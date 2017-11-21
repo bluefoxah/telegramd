@@ -24,7 +24,7 @@ type MessagesDO struct {
 	PeerId    int32  `db:"peer_id"`
 	RandomId  int64  `db:"random_id"`
 	Message   string `db:"message"`
-	Date      int32  `db:"date"`
+	Date2     int32  `db:"date2"`
 	CreatedAt string `db:"created_at"`
 	DeletedAt string `db:"deleted_at"`
 }

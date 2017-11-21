@@ -22,6 +22,9 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
 	"errors"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/biz_model/model"
+	"github.com/nebulaim/telegramd/biz_model/base"
 	"time"
 )
 
@@ -29,25 +32,49 @@ type UpdatesServiceImpl struct {
 }
 
 func (s *UpdatesServiceImpl) UpdatesGetState(ctx context.Context, request *mtproto.TLUpdatesGetState) (*mtproto.Updates_State, error) {
-	glog.Infof("UpdatesGetState - Process: {%v}", request)
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("UpdatesGetState(%v) - Process: {%v}", md, request)
 
-	state := mtproto.TLUpdatesState{}
-	state.Date = int32(time.Now().Unix())
-	state.Pts = 1
-	state.Qts = 0
-	state.Seq = 1
-	state.UnreadCount = 0
-
+	state := model.GetUpdatesModel().GetState(md.AuthId, md.UserId)
 	glog.Infof("UpdatesGetState - reply: {%v}", state)
 	return state.ToUpdates_State(), nil
 }
 
+// updates.difference#f49ca0 new_messages:Vector<Message> new_encrypted_messages:Vector<EncryptedMessage> other_updates:Vector<Update> chats:Vector<Chat> users:Vector<User> state:updates.State = updates.Difference;
 func (s *UpdatesServiceImpl) UpdatesGetDifference(ctx context.Context, request *mtproto.TLUpdatesGetDifference) (*mtproto.Updates_Difference, error) {
 	glog.Infof("UpdatesGetDifference - Process: {%v}", request)
 
-	difference := &mtproto.TLUpdatesDifferenceEmpty{}
-	difference.Seq = 1
-	difference.Date = request.Pts
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+
+
+	difference := &mtproto.TLUpdatesDifference{}
+
+	messages := model.GetMessageModel().GetMessagesByPts(md.UserId, request.Pts)
+	userIdList := []int32{md.UserId}
+	for _, m := range messages {
+		peer := base.FromPeer(m.ToId)
+		switch peer.PeerType {
+		case base.PEER_USER:
+			userIdList = append(userIdList, peer.PeerId)
+		case base.PEER_CHAT:
+		case base.PEER_CHANNEL:
+		}
+
+		difference.NewMessages = append(difference.NewMessages, m.ToMessage())
+	}
+
+	usersList := model.GetUserModel().GetUserList(userIdList)
+	for _, u := range usersList {
+		difference.Users = append(difference.Users, u.ToUser())
+	}
+
+	state := &mtproto.TLUpdatesState{}
+
+	// TODO(@benqi): Pts通过规则计算出来
+	state.Pts = request.Pts + int32(len(messages))
+	state.Date = int32(time.Now().Unix())
+	state.UnreadCount = 0
+	difference.State = state.ToUpdates_State()
 
 	glog.Infof("UpdatesGetDifference - reply: {%v}", difference)
 	return difference.ToUpdates_Difference(), nil

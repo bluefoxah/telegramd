@@ -27,7 +27,7 @@ import (
 	"time"
 	"github.com/nebulaim/telegramd/frontend/id"
 	"fmt"
-	"google.golang.org/grpc/metadata"
+	"github.com/nebulaim/telegramd/grpc_util"
 )
 
 type AuthServiceImpl struct {
@@ -165,9 +165,7 @@ func (s *AuthServiceImpl) AuthSignUp(ctx context.Context, request *mtproto.TLAut
 func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAuthSignIn) (*mtproto.Auth_Authorization, error) {
 	glog.Infof("AuthSignIn - Process: {%v}", request)
 
-	md, _ := metadata.FromIncomingContext(ctx)
-	rpcMetaData := mtproto.RpcMetaData{}
-	rpcMetaData.Decode(md)
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
 
 	// Check code
 	authPhoneTransactionsDAO := dao.GetAuthPhoneTransactionsDAO(dao.DB_SLAVE)
@@ -188,10 +186,10 @@ func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAut
 		}
 	}
 
-	do3 := dao.GetAuthUsersDAO(dao.DB_SLAVE).SelectByAuthId(rpcMetaData.AuthId)
+	do3 := dao.GetAuthUsersDAO(dao.DB_SLAVE).SelectByAuthId(md.AuthId)
 	if do3 == nil {
 		do3 := &dataobject.AuthUsersDO{}
-		do3.AuthId = rpcMetaData.AuthId
+		do3.AuthId = md.AuthId
 		do3.UserId = do2.Id
 		dao.GetAuthUsersDAO(dao.DB_MASTER).Insert(do3)
 	}

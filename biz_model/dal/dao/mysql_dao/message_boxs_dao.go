@@ -52,3 +52,63 @@ func (dao *MessageBoxsDAO) Insert(do *dataobject.MessageBoxsDO) int64 {
 	}
 	return id
 }
+
+// select pts from message_boxs where user_id = :user_id order by pts desc limit 1
+// TODO(@benqi): sqlmap
+func (dao *MessageBoxsDAO) SelectLastPts(user_id int32) *dataobject.MessageBoxsDO {
+	var query = "select pts from message_boxs where user_id = ? order by pts desc limit 1"
+	rows, err := dao.db.Queryx(query, user_id)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Queryx in SelectLastPts(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	defer rows.Close()
+
+	do := &dataobject.MessageBoxsDO{}
+	if rows.Next() {
+		err = rows.StructScan(do)
+		if err != nil {
+			errDesc := fmt.Sprintf("StructScan in SelectLastPts(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+		}
+	} else {
+		return nil
+	}
+
+	return do
+}
+
+// select pts from message_boxs where user_id = :user_id and message_id > :message_id order by pts asc
+// TODO(@benqi): sqlmap
+func (dao *MessageBoxsDAO) SelectPtsByGTMessageID(user_id int32, message_id int32) []dataobject.MessageBoxsDO {
+	var query = "select pts from message_boxs where user_id = ? and message_id > ? order by pts asc"
+	rows, err := dao.db.Queryx(query, user_id, message_id)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Queryx in SelectPtsByGTMessageID(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	defer rows.Close()
+
+	var values []dataobject.MessageBoxsDO
+	for rows.Next() {
+		v := dataobject.MessageBoxsDO{}
+
+		// TODO(@benqi): 不使用反射
+		err := rows.StructScan(&v)
+		if err != nil {
+			errDesc := fmt.Sprintf("StructScan in SelectPtsByGTMessageID(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+		}
+		values = append(values, v)
+	}
+
+	return values
+}

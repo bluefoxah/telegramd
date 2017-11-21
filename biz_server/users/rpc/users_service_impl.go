@@ -21,8 +21,8 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
-	"google.golang.org/grpc/metadata"
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/grpc_util"
 )
 
 type UsersServiceImpl struct {
@@ -50,10 +50,7 @@ type UsersServiceImpl struct {
 func (s *UsersServiceImpl) UsersGetFullUser(ctx context.Context, request *mtproto.TLUsersGetFullUser) (*mtproto.UserFull, error) {
 	glog.Infof("UsersGetFullUser - Process: {%v}", request)
 
-	// 查出来
-	md, _ := metadata.FromIncomingContext(ctx)
-	rpcMetaData := mtproto.RpcMetaData{}
-	rpcMetaData.Decode(md)
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
 
 	fullUser := &mtproto.TLUserFull{}
 	fullUser.PhoneCallsAvailable = true
@@ -64,7 +61,7 @@ func (s *UsersServiceImpl) UsersGetFullUser(ctx context.Context, request *mtprot
 	switch request.Id.Payload.(type) {
 	case *mtproto.InputUser_InputUserSelf:
 		// User
-		userDO := dao.GetUsersDAO(dao.DB_SLAVE).SelectById(rpcMetaData.UserId)
+		userDO := dao.GetUsersDAO(dao.DB_SLAVE).SelectById(md.UserId)
 		user := &mtproto.TLUser{}
 		user.Self = true
 		user.Contact = false

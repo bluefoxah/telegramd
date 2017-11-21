@@ -54,15 +54,15 @@ func GetDialogModel() *dialogModel {
 //	int32 pts = 9;
 //	DraftMessage draft = 10;
 //}
-func (m *dialogModel) GetDialogsByUserIDAndType(userId int32, peerType base.PeerType) (dialogs []*mtproto.TLDialog) {
+func (m *dialogModel) GetDialogsByUserIDAndType(userId, peerType int32) (dialogs []*mtproto.TLDialog) {
 	dialogsDAO := dao.GetUserDialogsDAO(dao.DB_SLAVE)
 
 	var dialogDOList []dataobject.UserDialogsDO
-	if peerType == base.PEER_INVALID || peerType == base.PEER_EMPTY {
+	if peerType == base.PEER_UNKNOWN || peerType == base.PEER_EMPTY {
 		dialogDOList = dialogsDAO.SelectDialogsByUserID(userId)
 		glog.Infof("SelectDialogsByUserID(%d) - {%v}", userId, dialogDOList)
 	} else {
-		dialogDOList = dialogsDAO.SelectDialogsByPeerType(userId, int32(peerType))
+		dialogDOList = dialogsDAO.SelectDialogsByPeerType(userId, peerType)
 		glog.Infof("SelectDialogsByPeerType(%d, %d) - {%v}", userId, int32(peerType), dialogDOList)
 	}
 
@@ -117,4 +117,9 @@ func (m *dialogModel) GetPinnedDialogs(userId int32) (dialogs []*mtproto.TLDialo
 	//peerDialogs.State = mtproto.MakeUpdates_State(state)
 
 	return
+}
+
+func (m *dialogModel) UpdateTopMessage(dialogId, topMessage int32) {
+	dialogsDAO := dao.GetUserDialogsDAO(dao.DB_MASTER)
+	dialogsDAO.UpdateTopMessage(topMessage, dialogId)
 }

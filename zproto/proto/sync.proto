@@ -39,7 +39,8 @@ message VoidRsp {
 message DeliveryUpdatesToUsers {
     int64 my_auth_key_id = 1;
     int64 my_session_id = 2;
-    repeated int32  sendto_user_id_list = 3;
+    int64 my_netlib_session_id = 3;
+    repeated int32  sendto_user_id_list = 4;
     // uint32 raw_data_header = 4;
     bytes  raw_data = 5;
 }

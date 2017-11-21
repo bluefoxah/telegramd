@@ -135,6 +135,15 @@ func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
 
 // TODO(@benqi): 可以不关注seqNo
 func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
+	if c.Codec.UserId != 0 {
+		defer func() {
+			if r := recover(); r != nil {
+				glog.Error(r)
+			}
+		}()
+		c.setOnline()
+	}
+
 	var reply TLObject
 	// var err error
 
@@ -201,9 +210,6 @@ func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 				c.Codec.UserId = do.UserId
 				c.setOnline()
 			}
-		} else {
-			// TODO(@benqi): 权限过滤
-			c.setOnline()
 		}
 
 		// 初始化metadata

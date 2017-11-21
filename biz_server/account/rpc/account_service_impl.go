@@ -21,21 +21,11 @@ import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
-	"github.com/nebulaim/telegramd/biz_model/dal/dao"
-	"google.golang.org/grpc/metadata"
-	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 	"github.com/cosiner/gohper/errors"
 	"github.com/nebulaim/telegramd/biz_model/model"
 	"time"
-)
-
-const (
-	TOKEN_TYPE_APNS = 1
-	TOKEN_TYPE_GCM = 2
-	TOKEN_TYPE_MPNS = 3
-	TOKEN_TYPE_SIMPLE_PUSH = 4
-	TOKEN_TYPE_UBUNTU_PHONE = 5
-	TOKEN_TYPE_BLACKBERRY = 6
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/biz_model/base"
 )
 
 type AccountServiceImpl struct {
@@ -44,63 +34,61 @@ type AccountServiceImpl struct {
 func (s *AccountServiceImpl) AccountRegisterDevice(ctx context.Context, request *mtproto.TLAccountRegisterDevice) (*mtproto.Bool, error) {
 	glog.Info("AccountRegisterDevice - Process: %v", request)
 
-	// 查出来
-	md, _ := metadata.FromIncomingContext(ctx)
-	rpcMetaData := mtproto.RpcMetaData{}
-	rpcMetaData.Decode(md)
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
 
-	// TODO(@benqi): check token_type
+	// TODO(@benqi): check toke_type invalid
+	model.GetAccountModel().RegisterDevice(md.AuthId, md.UserId, int8(request.TokenType), request.Token)
 
-	do := dao.GetDevicesDAO(dao.DB_SLAVE).SelectIdByAuthId(rpcMetaData.AuthId, int8(request.TokenType), request.Token)
-	if do == nil {
-		do = &dataobject.DevicesDO{
-			AuthId: rpcMetaData.AuthId,
-			UserId: rpcMetaData.UserId,
-			TokenType: int8(request.TokenType),
-			Token: request.Token,
-		}
-
-		dao.GetDevicesDAO(dao.DB_MASTER).Insert(do)
-	} else {
-		dao.GetDevicesDAO(dao.DB_MASTER).UpdateStateById(0, do.Id)
-	}
-
-	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
+	reply := &mtproto.TLBoolTrue{}
 	glog.Infof("AccountRegisterDevice - reply: {%v}\n", reply)
 
-	return reply, nil
+	return reply.ToBool(), nil
 }
 
-func (s *AccountServiceImpl) AccountUnregisterDevice(ctx context.Context, request *mtproto.TLAccountUnregisterDevice) (*mtproto.Bool, error) {
+func (s *AccountServiceImpl) AccountUnregisterDevice(ctx context.Context, request *mtproto.TLAccountUnregisterDevice) (reply *mtproto.Bool, err error) {
 	glog.Info("AccountUnregisterDevice - Process: %v", request)
 
-	// 查出来
-	md, _ := metadata.FromIncomingContext(ctx)
-	rpcMetaData := mtproto.RpcMetaData{}
-	rpcMetaData.Decode(md)
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
 
-	// TODO(@benqi): check token_type
-
-	do := dao.GetDevicesDAO(dao.DB_SLAVE).SelectIdByAuthId(rpcMetaData.AuthId, int8(request.TokenType), request.Token)
-
-	if do == nil {
-		// glog.Errorf("AccountUnregisterDevice - s.DeviceDAO.Insert error: %s", err)
+	// TODO(@benqi): check toke_type invalid
+	if ok := model.GetAccountModel().UnRegisterDevice(md.AuthId, md.UserId, int8(request.TokenType), request.Token); ok {
+		reply = mtproto.MakeBool(&mtproto.TLBoolTrue{})
 	} else {
-		dao.GetDevicesDAO(dao.DB_MASTER).UpdateStateById(1, do.Id)
+		reply = mtproto.MakeBool(&mtproto.TLBoolFalse{})
 	}
 
-	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
+	err = nil
 	glog.Infof("AccountUnregisterDevice - reply: {%v}\n", reply)
 
-	return reply, nil
+	return
 }
 
-func (s *AccountServiceImpl) AccountUpdateNotifySettings(ctx context.Context, request *mtproto.TLAccountUpdateNotifySettings) (*mtproto.Bool, error) {
+//inputPeerNotifyEventsEmpty#f03064d8 = InputPeerNotifyEvents;
+//inputPeerNotifyEventsAll#e86a2c74 = InputPeerNotifyEvents;
+//inputPeerNotifySettings#38935eb2
+// flags:#
+// 	show_previews:flags.0?true
+// 	silent:flags.1?true
+//  mute_until:int
+// 	sound:string = InputPeerNotifySettings;
+func (s *AccountServiceImpl) AccountUpdateNotifySettings(ctx context.Context, request *mtproto.TLAccountUpdateNotifySettings) (reply *mtproto.Bool, err error) {
 	glog.Info("AccountUpdateNotifySettings - Process: %v", request)
 
-	// TODO(@benqi): 实现逻辑
-	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
-
+	peer := base.FromInputNotifyPeer(request.GetPeer())
+	settings := request.GetSettings().GetInputPeerNotifySettings()
+	_ = settings
+	switch peer.PeerType {
+	case base.PEER_EMPTY:
+	case base.PEER_SELF:
+	case base.PEER_USER:
+	case base.PEER_CHAT:
+	case base.PEER_CHANNEL:
+	case base.PEER_USERS:
+	case base.PEER_CHATS:
+	case base.PEER_ALL:
+		reply = mtproto.MakeBool(&mtproto.TLBoolFalse{})
+	default:
+	}
 	glog.Infof("AccountUpdateNotifySettings - reply: {%v}\n", reply)
 	return reply, nil
 }
@@ -118,26 +106,26 @@ func (s *AccountServiceImpl) AccountResetNotifySettings(ctx context.Context, req
 func (s *AccountServiceImpl) AccountUpdateStatus(ctx context.Context, request *mtproto.TLAccountUpdateStatus) (*mtproto.Bool, error) {
 	glog.Infof("AccountUpdateStatus - Process: {%v}", request)
 
-	// TODO(@benqi): 实现逻辑
-	md, _ := metadata.FromIncomingContext(ctx)
-	rpcMetaData := mtproto.RpcMetaData{}
-	rpcMetaData.Decode(md)
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
 
 	status := &model.SessionStatus{}
-	status.UserId = rpcMetaData.UserId
-	status.AuthKeyId = rpcMetaData.AuthId
-	status.SessionId = rpcMetaData.SessionId
-	status.ServerId = rpcMetaData.ServerId
+	status.UserId = md.UserId
+	status.AuthKeyId = md.AuthId
+	status.SessionId = md.SessionId
+	status.ServerId = md.ServerId
 	status.Now = time.Now().Unix()
 
-	glog.Infof("AccountUpdateStatus - SetOnline: {%v}\n", status)
+	// Offline可能为nil，由grpc中间件保证Offline必须设置值
+	if request.Offline.GetBoolTrue() != nil {
+		model.GetOnlineStatusModel().SetOnline(status)
+	} else {
+		model.GetOnlineStatusModel().SetOffline(status)
+	}
 
-	model.GetOnlineStatusModel().SetOnline(status)
-
-	reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
+	reply := &mtproto.TLBoolTrue{}
 
 	glog.Infof("AccountUpdateStatus - reply: {%v}\n", reply)
-	return reply, nil
+	return reply.ToBool(), nil
 }
 
 func (s *AccountServiceImpl) AccountReportPeer(ctx context.Context, request *mtproto.TLAccountReportPeer) (*mtproto.Bool, error) {

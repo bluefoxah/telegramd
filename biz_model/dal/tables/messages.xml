@@ -2,7 +2,7 @@
 <table sqlname="messages">
     <operation name="Insert">
         <sql>
-            INSERT INTO messages (user_id, peer_type, peer_id, random_id, message, date, created_at) VALUES (:user_id, :peer_type, :peer_id, :random_id, :message, :date, :created_at)
+            INSERT INTO messages (user_id, peer_type, peer_id, random_id, message, date2) VALUES (:user_id, :peer_type, :peer_id, :random_id, :message, :date2)
         </sql>
     </operation>
 
@@ -11,14 +11,14 @@
             <param name="idList" type="[]int32" />
         </params>
         <sql>
-            SELECT id, user_id, peer_type, peer_id, random_id, message, date FROM messages WHERE id IN (:idList)
+            SELECT id, user_id, peer_type, peer_id, random_id, message, date2 FROM messages WHERE id IN (:idList)
         </sql>
     </operation>
 
     <operation name="SelectByUserIdAndPeer" result_set="list">
         <sql>
             SELECT
-                id, user_id, peer_type, peer_id, random_id, message, date
+                id, user_id, peer_type, peer_id, random_id, message, date2
             FROM
                 messages
             WHERE
@@ -34,12 +34,30 @@
         <sql>
             <![CDATA[
             SELECT
-                id, user_id, peer_type, peer_id, random_id, message, date
+                id, user_id, peer_type, peer_id, random_id, message, date2
             FROM
                 messages
             WHERE
-                id > :offset_id AND peer_type = :peer_type AND ((user_id = :user_id AND peer_id = :peer_id) OR (user_id = :peer_id AND peer_id = :user_id)) LIMIT :limit
+                id < :offset_id AND peer_type = :peer_type AND
+                ((user_id = :user_id AND peer_id = :peer_id)
+                OR (user_id = :peer_id AND peer_id = :user_id)) ORDER BY id DESC LIMIT :limit
             ]]>
         </sql>
     </operation>
+
+    <operation name="SelectByPts" result_set="list">
+        <params>
+            <param name="user_id" type="int32" />
+            <param name="pts" type="int32" />
+        </params>
+        <sql>
+            SELECT
+                id, user_id, peer_type, peer_id, random_id, message, date2
+            FROM
+                messages
+            WHERE
+                id IN (SELECT message_id FROM message_boxs WHERE user_id = :user_id AND pts > :pts)
+        </sql>
+    </operation>
+
 </table>

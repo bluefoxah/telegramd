@@ -226,6 +226,7 @@ func (c *Client) onInvokeAfterMsg(msgId int64, seqNo int32, request TLObject) er
 		return fmt.Errorf("Decode query error: %s", hex.EncodeToString(invokeAfterMsg.Query))
 	}
 
+	c.OnMessage(msgId, seqNo, query)
 	return nil
 }
 

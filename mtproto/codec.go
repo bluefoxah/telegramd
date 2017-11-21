@@ -227,6 +227,10 @@ func (m *MTProtoCodec) Send(msg interface{}) error {
 		encrypedMessage.SessionId = m.SessionId
 		encrypedMessage.salt = m.Salt
 		encrypedMessage.SeqNo = m.getSeqNo(true)
+		switch encrypedMessage.Object.(type) {
+		case *TLUpdates:
+			glog.Info("send message: %v", encrypedMessage)
+		}
 		b, _ := encrypedMessage.encode(int64(m.AuthKeyId), m.AuthKey)
 
 		sb := make([]byte, 4)

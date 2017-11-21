@@ -40,6 +40,8 @@ func New{{.Name}}DAO(db* sqlx.DB) *{{.Name}}DAO {
 {{template "SELECT_STRUCT_SINGLE" $v}}
 {{else if eq .QueryType "SELECT_STRUCT_LIST"}}
 {{template "SELECT_STRUCT_LIST" $v}}
+{{else if eq .QueryType "SELECT_STRUCT_MAP"}}
+{{template "SELECT_STRUCT_MAP" $v}}
 {{else if eq .QueryType "UPDATE"}}
 {{template "UPDATE" $v}}
 {{else if eq .QueryType "DELETE"}}
@@ -129,6 +131,43 @@ func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if n
         err := rows.StructScan(&v)
         if err != nil {
             errDesc := fmt.Sprintf("StructScan in {{.FuncName}}(_), error: %v", err)
+            glog.Error(errDesc)
+            panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+        }
+		values = append(values, v)
+    }
+
+    return values
+}
+{{end}}
+
+{{define "SELECT_STRUCT_MAP"}}
+// {{.Sql}}
+// TODO(@benqi): sqlmap
+func (dao *{{.TableName}}DAO) {{.FuncName}}({{ range $i, $v := .Params }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{.Type}} {{end}}) ([]map[string]interface{}) {
+{{if eq .ParamHasList "true"}}  var q = "{{.CompiledByNamedSql}}"
+    query, a, err := sqlx.In(q, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
+    rows, err := dao.db.Queryx(query, a...)
+{{else}} var query = "{{.CompiledByNamedSql}}"
+    rows, err := dao.db.Queryx(query, {{range $i, $v := .QueryParams }} {{if ne $i 0 }} , {{end}} {{.FieldName}} {{end}})
+{{end}}
+	if err != nil {
+        errDesc := fmt.Sprintf("Queryx in {{.FuncName}}(_), error: %v", err)
+        glog.Error(errDesc)
+        panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	defer rows.Close()
+
+	values := make([]map[string]interface{}, 0)
+
+	for rows.Next() {
+    	v := make(map[string]interface{})
+
+        // TODO(@benqi): 不使用反射
+        err := rows.MapScan(v)
+        if err != nil {
+            errDesc := fmt.Sprintf("MaptScan in {{.FuncName}}(_), error: %v", err)
             glog.Error(errDesc)
             panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
         }

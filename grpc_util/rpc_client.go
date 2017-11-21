@@ -67,6 +67,17 @@ func (c* RPCClient) Invoke(rpcMetaData *zproto.RpcMetadata, object mtproto.TLObj
 	// grpc.Header(&header)
 
 	if err != nil {
+		// TODO(@benqi): 哪些情况需要断开客户端连接
+		if s, ok := status.FromError(err); !ok {
+			switch s.Code() {
+			// TODO(@benqi): Rpc error, trailer has rpc_error metadata
+			case codes.Unknown:
+				return RpcErrorFromMD(trailer), nil
+			}
+		}
+		glog.Errorf("RPC method: %s,  >> %v.Invoke(_) = _, %v: \n", t.Method, c.conn, err)
+		return mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_INTERNAL), "INTERNAL_SERVER_ERROR"), nil
+	} else {
 		glog.Infof("Invoke - Invoke reply: {%v}\n", r)
 		reply, ok := r.(mtproto.TLObject)
 
@@ -79,16 +90,5 @@ func (c* RPCClient) Invoke(rpcMetaData *zproto.RpcMetadata, object mtproto.TLObj
 		}
 
 		return reply, nil
-	} else {
-		// TODO(@benqi): 哪些情况需要断开客户端连接
-		if s, ok := status.FromError(err); !ok {
-			switch s.Code() {
-			// TODO(@benqi): Rpc error, trailer has rpc_error metadata
-			case codes.Unknown:
-				return RpcErrorFromMD(trailer), nil
-			}
-		}
-		glog.Errorf("RPC method: %s,  >> %v.Invoke(_) = _, %v: \n", t.Method, c.conn, err)
-		return mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_INTERNAL), "INTERNAL_SERVER_ERROR"), nil
 	}
 }

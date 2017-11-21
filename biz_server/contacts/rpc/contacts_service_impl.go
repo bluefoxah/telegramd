@@ -120,8 +120,12 @@ func (s *ContactsServiceImpl) ContactsDeleteContact(ctx context.Context, request
 }
 
 func (s *ContactsServiceImpl) ContactsGetBlocked(ctx context.Context, request *mtproto.TLContactsGetBlocked) (*mtproto.Contacts_Blocked, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("ContactsGetBlocked - Process: {%v}", request)
+
+	blocked := &mtproto.TLContactsBlocked{}
+
+	glog.Infof("ContactsSearch - reply: {%v}\n", blocked)
+	return blocked.ToContacts_Blocked(), nil
 }
 
 // func (s *ContactsServiceImpl)ContactsExportCard(ctx context.Context,  request *mtproto.TLContactsExportCard) (*mtproto.Vector<int32T>, error) {

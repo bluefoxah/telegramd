@@ -110,23 +110,24 @@ func (s *SyncServiceImpl) DeliveryUpdates(ctx context.Context, deliver *zproto.D
 		// 会不会出问题？？
 		ss[status.ServerId] = append(ss[status.ServerId], status)
 	}
-
-	glog.Infof("DeliveryUpdates: ss: {%v}", ss[1])
-
 	for k, ss3 := range ss {
-		glog.Infof("DeliveryUpdates: k: {%v}, v: {%v}", k, ss3)
+		// glog.Infof("DeliveryUpdates: k: {%v}, v: {%v}", k, ss3)
 
 		go s.withReadLock(func() {
 			for _, ss4 := range ss3 {
-				update := &zproto.PushUpdatesData{}
-				update.AuthKeyId = ss4.AuthKeyId
-				update.SessionId = ss4.SessionId
-				update.NetlibSessionId = ss4.NetlibSessionId
-				// update.RawDataHeader = deliver.RawDataHeader
-				update.RawData = deliver.RawData
+				if ss4.NetlibSessionId != deliver.MyNetlibSessionId {
+					update := &zproto.PushUpdatesData{}
+					update.AuthKeyId = ss4.AuthKeyId
+					update.SessionId = ss4.SessionId
+					update.NetlibSessionId = ss4.NetlibSessionId
+					// update.RawDataHeader = deliver.RawDataHeader
+					update.RawData = deliver.RawData
 
-				glog.Infof("DeliveryUpdates: update: {%v}", update)
-				s.updates[k] <- update
+					glog.Infof("DeliveryUpdates: update: {%v}", update)
+					s.updates[k] <- update
+				} else {
+					glog.Infof("Not delivery me: {%v}", ss4)
+				}
 			}
 		})
 	}

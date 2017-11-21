@@ -52,8 +52,8 @@ import (
 //    - ......
 // auth_key_id ->
 const (
-	ONLINE_TIMEOUT = 150  			// 15秒
-	CHECK_ONLINE_TIMEOUT = 170  	// 17秒, 15+2秒的误差
+	ONLINE_TIMEOUT = 15  			// 15秒
+	CHECK_ONLINE_TIMEOUT = 17  		// 17秒, 15+2秒的误差
 	onlineKeyPrefix = "online"		//
 )
 
@@ -152,6 +152,18 @@ func (s *onlineStatusModel) SetOnline(status *SessionStatus) (err error) {
 		glog.Errorf("SetOnline - EXPIRE {%v}, error: %s", status, err)
 		return
 	}
+	return
+}
+
+func (s *onlineStatusModel) SetOffline(status *SessionStatus) (err error) {
+	// 设置离线将Now减少CHECK_ONLINE_TIMEOUT
+	now := status.Now
+	status.Now -= CHECK_ONLINE_TIMEOUT
+	defer func() {
+		status.Now = now
+	}()
+
+	err = s.SetOnline(status)
 	return
 }
 

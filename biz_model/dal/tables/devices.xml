@@ -2,22 +2,25 @@
 <table sqlname="devices">
     <operation name="Insert">
         <sql>
-            INSERT INTO devices (user_id, token_type, token, state) VALUES (:user_id, :token_type, :token, :state)
+            INSERT INTO devices (auth_id, user_id, token_type, token, state) VALUES (:auth_id, :user_id, :token_type, :token, :state)
         </sql>
     </operation>
-    <operation name="SelectIdByAuthId">
+
+    <operation name="SelectId">
         <sql>
-            SELECT id FROM devices WHERE user_id in (SELECT id FROM auth_users WHERE auth_id = :auth_id) AND token_type = :token_type AND token = :token limit 1
+            SELECT id FROM devices WHERE auth_id = :auth_id AND token_type = :token_type AND token = :token limit 1
         </sql>
     </operation>
+
     <operation name="UpdateStateById">
         <sql>
             UPDATE devices SET state = :state WHERE id = :id
         </sql>
     </operation>
-    <operation name="UpdateStateByAuthId">
+
+    <operation name="UpdateState">
         <sql>
-            UPDATE devices SET state=1 WHERE id = :id
+            UPDATE devices SET state = :state WHERE  auth_id = :auth_id AND token_type = :token_type AND token = :token
         </sql>
     </operation>
 </table>
