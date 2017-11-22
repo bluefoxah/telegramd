@@ -17,21 +17,13 @@
 
 package dataobject
 
-type UsersDO struct {
-	Id            int32  `db:"id"`
-	AccessHash    int64  `db:"access_hash"`
-	FirstName     string `db:"first_name"`
-	LastName      string `db:"last_name"`
-	Username      string `db:"username"`
-	Phone         string `db:"phone"`
-	CountryCode   string `db:"country_code"`
-	Bio           string `db:"bio"`
-	About         string `db:"about"`
-	State         int32  `db:"state"`
-	IsBot         int8   `db:"is_bot"`
-	Deleted       int8   `db:"deleted"`
-	DeletedReason string `db:"deleted_reason"`
-	CreatedAt     string `db:"created_at"`
-	UpdatedAt     string `db:"updated_at"`
-	DeletedAt     string `db:"deleted_at"`
+type TmpPasswordsDO struct {
+	Id           int32  `db:"id"`
+	AuthId       int64  `db:"auth_id"`
+	UserId       int32  `db:"user_id"`
+	PasswordHash string `db:"password_hash"`
+	Period       int32  `db:"period"`
+	TmpPassword  string `db:"tmp_password"`
+	ValidUntil   int32  `db:"valid_until"`
+	CreatedAt    string `db:"created_at"`
 }

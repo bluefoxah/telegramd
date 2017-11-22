@@ -23,17 +23,15 @@ import (
 	"golang.org/x/net/context"
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"time"
-	"github.com/nebulaim/telegramd/biz_server/sync_client"
 	"github.com/nebulaim/telegramd/biz_model/base"
 	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 	base2 "github.com/nebulaim/telegramd/base/base"
-	"github.com/nebulaim/telegramd/zproto"
 	"github.com/nebulaim/telegramd/biz_model/model"
 	"github.com/nebulaim/telegramd/grpc_util"
+	delivery2 "github.com/nebulaim/telegramd/biz_server/delivery"
 )
 
 type MessagesServiceImpl struct {
-	SyncRPCClient *sync_client.SyncRPCClient
 }
 
 func (s *MessagesServiceImpl) MessagesSetTyping(ctx context.Context, request *mtproto.TLMessagesSetTyping) (*mtproto.Bool, error) {
@@ -69,9 +67,6 @@ func (s *MessagesServiceImpl) MessagesSetTyping(ctx context.Context, request *mt
 
 	if peerUserId != 0 {
 		// TODO(@benqi): Dispatch to updates
-		// var update *mtproto.Update
-		// updateUserTyping#5c486927 user_id:int action:SendMessageAction = Update;
-		// updateChatUserTyping#9a65ea1f chat_id:int user_id:int action:SendMessageAction = Update;
 		// 转发
 		typing := &mtproto.TLUpdateUserTyping{}
 		typing.UserId = md.UserId
@@ -81,14 +76,12 @@ func (s *MessagesServiceImpl) MessagesSetTyping(ctx context.Context, request *mt
 		updates.Update = typing.ToUpdate()
 		updates.Date = int32(time.Now().Unix())
 
-		delivery := &zproto.DeliveryUpdatesToUsers{}
-		delivery.MyAuthKeyId = md.AuthId
-		delivery.MySessionId = md.SessionId
-		delivery.SendtoUserIdList = append(delivery.SendtoUserIdList, peerUserId)
-		updateRawData := updates.ToUpdates().Encode()
-		delivery.RawData = updateRawData
-		glog.Infof("MessagesSendMessage - delivery: %v", delivery)
-		s.SyncRPCClient.Client.DeliveryUpdates(context.Background(), delivery)
+		delivery2.GetDeliveryInstance().DeliveryUpdates(
+			md.AuthId,
+			md.SessionId,
+			md.NetlibSessionId,
+			[]int32{peerUserId},
+			updates.ToUpdates().Encode())
 	}
 
 	return reply, nil
@@ -268,12 +261,19 @@ func (s *MessagesServiceImpl) MessagesGetHistory(ctx context.Context, request *m
 	return messagesMessages.ToMessages_Messages(), nil
 }
 
+
+// messages.search#39e9ea0 flags:# peer:InputPeer q:string from_id:flags.0?InputUser filter:MessagesFilter min_date:int max_date:int offset_id:int add_offset:int limit:int max_id:int min_id:int = messages.Messages;
+// {peer:<inputPeerUser:<user_id:2 access_hash:5537087501845505974 > > filter:<inputMessagesFilterUrl:<> > }
 func (s *MessagesServiceImpl) MessagesSearch(ctx context.Context, request *mtproto.TLMessagesSearch) (*mtproto.Messages_Messages, error) {
 	glog.Infof("MessagesSearch - Process: {%v}", request)
 
+	_ = grpc_util.RpcMetadataFromIncoming(ctx)
+	_ = base.FromInputPeer(request.GetPeer())
 
-
-	return nil, nil
+	// TODO(@benqi): Not impl
+	reply := &mtproto.TLMessagesMessages{}
+	glog.Infof("MessagesGetHistory - reply: {%v}", reply)
+	return reply.ToMessages_Messages(), nil
 }
 
 func (s *MessagesServiceImpl) MessagesSearchGlobal(ctx context.Context, request *mtproto.TLMessagesSearchGlobal) (*mtproto.Messages_Messages, error) {
@@ -488,23 +488,29 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 
 		// 推送给sync
 		// 推给客户端的updates
-		update := mtproto.TLUpdateShortMessage{}
-		update.Id = int32(messageId)
-		update.UserId = md.UserId
-		update.Pts = int32(outPts)
-		update.PtsCount = 1
-		update.Message = request.Message
-		update.Date = int32(time.Now().Unix())
-		updateRawData := update.ToUpdates().Encode()
+		updates := mtproto.TLUpdateShortMessage{}
+		updates.Id = int32(messageId)
+		updates.UserId = md.UserId
+		updates.Pts = int32(outPts)
+		updates.PtsCount = 1
+		updates.Message = request.Message
+		updates.Date = int32(time.Now().Unix())
 
-		delivery := &zproto.DeliveryUpdatesToUsers{}
-		delivery.MyAuthKeyId = md.AuthId
-		delivery.MySessionId = md.SessionId
-		delivery.SendtoUserIdList = append(delivery.SendtoUserIdList, md.UserId)
-		delivery.RawData = updateRawData
+		delivery2.GetDeliveryInstance().DeliveryUpdatesNotMe(
+			md.AuthId,
+			md.SessionId,
+			md.NetlibSessionId,
+			[]int32{md.UserId},
+			updates.ToUpdates().Encode())
 
-		glog.Infof("MessagesSendMessage - delivery: %v", delivery)
-		_, _ = s.SyncRPCClient.Client.DeliveryUpdates(context.Background(), delivery)
+		//delivery := &zproto.DeliveryUpdatesToUsers{}
+		//delivery.MyAuthKeyId = md.AuthId
+		//delivery.MySessionId = md.SessionId
+		//delivery.SendtoUserIdList = append(delivery.SendtoUserIdList, md.UserId)
+		//delivery.RawData = updateRawData
+		//
+		//glog.Infof("MessagesSendMessage - delivery: %v", delivery)
+		//_, _ = s.SyncRPCClient.Client.DeliveryUpdates(context.Background(), delivery)
 		// update.Encode()
 
 		// 返回给客户端
@@ -574,25 +580,31 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 
 		// 推送给sync
 		// 推给客户端的updates
-		update := mtproto.TLUpdateShortMessage{}
-		update.Id = int32(messageId)
-		update.UserId = md.UserId
-		update.Pts = int32(inPts)
-		update.PtsCount = 1
-		update.Message = request.Message
-		update.Date = message.Date2
-		updateRawData := update.ToUpdates().Encode()
+		updates := mtproto.TLUpdateShortMessage{}
+		updates.Id = int32(messageId)
+		updates.UserId = md.UserId
+		updates.Pts = int32(inPts)
+		updates.PtsCount = 1
+		updates.Message = request.Message
+		updates.Date = message.Date2
 
-		delivery := &zproto.DeliveryUpdatesToUsers{}
-		delivery.MyAuthKeyId = md.AuthId
-		delivery.MySessionId = md.SessionId
-		delivery.MyNetlibSessionId = md.NetlibSessionId
-		delivery.SendtoUserIdList = append(delivery.SendtoUserIdList, md.UserId)
-		delivery.SendtoUserIdList = append(delivery.SendtoUserIdList, inputPeerUser.UserId)
-		delivery.RawData = updateRawData
+		delivery2.GetDeliveryInstance().DeliveryUpdatesNotMe(
+			md.AuthId,
+			md.SessionId,
+			md.NetlibSessionId,
+			[]int32{md.UserId, inputPeerUser.UserId},
+			updates.ToUpdates().Encode())
 
-		glog.Infof("MessagesSendMessage - delivery: %v", delivery)
-		_, _ = s.SyncRPCClient.Client.DeliveryUpdates(context.Background(), delivery)
+		//delivery := &zproto.DeliveryUpdatesToUsers{}
+		//delivery.MyAuthKeyId = md.AuthId
+		//delivery.MySessionId = md.SessionId
+		//delivery.MyNetlibSessionId = md.NetlibSessionId
+		//delivery.SendtoUserIdList = append(delivery.SendtoUserIdList, md.UserId)
+		//delivery.SendtoUserIdList = append(delivery.SendtoUserIdList, inputPeerUser.UserId)
+		//delivery.RawData = updateRawData
+		//
+		//glog.Infof("MessagesSendMessage - delivery: %v", delivery)
+		//_, _ = s.SyncRPCClient.Client.DeliveryUpdates(context.Background(), delivery)
 		// update.Encode()
 
 		// 返回给客户端

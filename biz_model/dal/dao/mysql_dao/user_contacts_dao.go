@@ -33,10 +33,10 @@ func NewUserContactsDAO(db *sqlx.DB) *UserContactsDAO {
 	return &UserContactsDAO{db}
 }
 
-// insert into user_contacts(owner_user_id, contact_user_id) values (:owner_user_id, :contact_user_id)
+// insert into user_contacts(owner_user_id, contact_user_id, created_at) values (:owner_user_id, :contact_user_id, :created_at)
 // TODO(@benqi): sqlmap
 func (dao *UserContactsDAO) Insert(do *dataobject.UserContactsDO) int64 {
-	var query = "insert into user_contacts(owner_user_id, contact_user_id) values (:owner_user_id, :contact_user_id)"
+	var query = "insert into user_contacts(owner_user_id, contact_user_id, created_at) values (:owner_user_id, :contact_user_id, :created_at)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
@@ -82,4 +82,49 @@ func (dao *UserContactsDAO) SelectUserContacts(owner_user_id int32) []dataobject
 	}
 
 	return values
+}
+
+// update user_contacts set is_blocked = :is_blocked where owner_user_id = :owner_user_id and contact_user_id = :contact_user_id
+// TODO(@benqi): sqlmap
+func (dao *UserContactsDAO) UpdateBlock(is_blocked int8, owner_user_id int32, contact_user_id int32) int64 {
+	var query = "update user_contacts set is_blocked = ? where owner_user_id = ? and contact_user_id = ?"
+	r, err := dao.db.Exec(query, is_blocked, owner_user_id, contact_user_id)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Exec in UpdateBlock(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	rows, err := r.RowsAffected()
+	if err != nil {
+		errDesc := fmt.Sprintf("RowsAffected in UpdateBlock(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	return rows
+}
+
+// update user_contacts set is_deleted = 1 where owner_user_id = :owner_user_id and contact_user_id in (:id_list)
+// TODO(@benqi): sqlmap
+func (dao *UserContactsDAO) DeleteContacts(owner_user_id int32, id_list []int32) int64 {
+	var q = "update user_contacts set is_deleted = 1 where owner_user_id = ? and contact_user_id in (?)"
+	query, a, err := sqlx.In(q, owner_user_id, id_list)
+	r, err := dao.db.Exec(query, a...)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Exec in DeleteContacts(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	rows, err := r.RowsAffected()
+	if err != nil {
+		errDesc := fmt.Sprintf("RowsAffected in DeleteContacts(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	return rows
 }

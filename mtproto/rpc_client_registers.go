@@ -123,6 +123,7 @@ var rpcContextRegisters = map[string]RPCContextTuple{
 	"TLAccountGetTmpPassword":              RPCContextTuple{"/mtproto.RPCAccount/account_getTmpPassword", func() interface{} { return new(Account_TmpPassword) }},
 	"TLUsersGetFullUser":                   RPCContextTuple{"/mtproto.RPCUsers/users_getFullUser", func() interface{} { return new(UserFull) }},
 	"TLContactsGetContacts":                RPCContextTuple{"/mtproto.RPCContacts/contacts_getContacts", func() interface{} { return new(Contacts_Contacts) }},
+	"TLContactsGetContacts2":               RPCContextTuple{"/mtproto.RPCContacts/contacts_getContacts2", func() interface{} { return new(Contacts_Contacts) }},
 	"TLContactsImportContacts":             RPCContextTuple{"/mtproto.RPCContacts/contacts_importContacts", func() interface{} { return new(Contacts_ImportedContacts) }},
 	"TLContactsDeleteContact":              RPCContextTuple{"/mtproto.RPCContacts/contacts_deleteContact", func() interface{} { return new(Contacts_Link) }},
 	"TLContactsGetBlocked":                 RPCContextTuple{"/mtproto.RPCContacts/contacts_getBlocked", func() interface{} { return new(Contacts_Blocked) }},

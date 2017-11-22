@@ -922,6 +922,7 @@ It has these top-level messages:
 	TLUsersGetFullUser
 	TLContactsGetStatuses
 	TLContactsGetContacts
+	TLContactsGetContacts2
 	TLContactsImportContacts
 	TLContactsDeleteContact
 	TLContactsGetBlocked

@@ -2,7 +2,10 @@
 <table sqlname="users">
     <operation name="Insert">
         <sql>
-            INSERT INTO users (phone) VALUES (:phone)
+            INSERT INTO users
+                (first_name, last_name, access_hash, username, phone, country_code, bio, about, is_bot)
+            VALUES
+                (:first_name, :last_name, :access_hash, :username, :phone, :country_code, :bio, :about, :is_bot)
         </sql>
     </operation>
     <operation name="SelectByPhoneNumber">
@@ -26,6 +29,25 @@
     <operation name="SelectByQueryString" result_set="list">
         <sql>
             SELECT id, access_hash, first_name, last_name, username, phone FROM users WHERE username = :username OR first_name = :first_name OR last_name = :last_name OR phone = :phone limit 20
+        </sql>
+    </operation>
+
+    <!-- soft deleted -->
+    <operation name="Delete">
+        <sql>
+            UPDATE users SET deleted=1, deleted_reason=:deleted_reason, deleted_at=:deleted_at WHERE id=:id
+        </sql>
+    </operation>
+
+    <operation name="UpdateUsername">
+        <sql>
+            UPDATE users SET username=:username WHERE id=:id
+        </sql>
+    </operation>
+
+    <operation name="UpdateProfile">
+        <sql>
+            UPDATE users SET first_name=:first_name, last_name=:last_name, about=:about WHERE id=:id
         </sql>
     </operation>
 </table>

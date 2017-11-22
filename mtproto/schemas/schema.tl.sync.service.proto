@@ -87,6 +87,7 @@ service RPCContacts {
   rpc contacts_resetSaved(TL_contacts_resetSaved) returns (Bool) {}
   // rpc contacts_getStatuses(TL_contacts_getStatuses) returns (Vector<ContactStatus>) {}
   rpc contacts_getContacts(TL_contacts_getContacts) returns (contacts_Contacts) {}
+  rpc contacts_getContacts2(TL_contacts_getContacts2) returns (contacts_Contacts) {}
   rpc contacts_importContacts(TL_contacts_importContacts) returns (contacts_ImportedContacts) {}
   rpc contacts_deleteContact(TL_contacts_deleteContact) returns (contacts_Link) {}
   rpc contacts_getBlocked(TL_contacts_getBlocked) returns (contacts_Blocked) {}

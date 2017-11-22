@@ -51,6 +51,10 @@ type MysqlDAOList struct {
 	MessagesDAO *mysql_dao.MessagesDAO
 	SeqUpdatesNgenDAO* mysql_dao.SeqUpdatesNgenDAO
 	ClientUpdatesStateDAO* mysql_dao.ClientUpdatesStateDAO
+	UserNotifySettingsDAO* mysql_dao.UserNotifySettingsDAO
+	ReportsDAO* mysql_dao.ReportsDAO
+	UserPrivacysDAO* mysql_dao.UserPrivacysDAO
+	TmpPasswordsDAO* mysql_dao.TmpPasswordsDAO
 }
 
 // TODO(@benqi): 一主多从
@@ -83,6 +87,10 @@ func InstallMysqlDAOManager(clients map[string]*sqlx.DB) {
 		daoList.MessagesDAO = mysql_dao.NewMessagesDAO(v)
 		daoList.SeqUpdatesNgenDAO = mysql_dao.NewSeqUpdatesNgenDAO(v)
 		daoList.ClientUpdatesStateDAO = mysql_dao.NewClientUpdatesStateDAO(v)
+		daoList.UserNotifySettingsDAO = mysql_dao.NewUserNotifySettingsDAO(v)
+		daoList.ReportsDAO = mysql_dao.NewReportsDAO(v)
+		daoList.UserPrivacysDAO = mysql_dao.NewUserPrivacysDAO(v)
+		daoList.TmpPasswordsDAO = mysql_dao.NewTmpPasswordsDAO(v)
 
 		mysqlDAOManager.daoListMap[k] = daoList
 	}
@@ -96,6 +104,15 @@ func  GetMysqlDAOList(dbName string) (daoList *MysqlDAOList) {
 	daoList, ok := mysqlDAOManager.daoListMap[dbName]
 	if !ok {
 		glog.Errorf("GetMysqlDAOList - Not found daoList: %s", dbName)
+	}
+	return
+}
+
+func GetCommonDAO(dbName string) (dao *mysql_dao.CommonDAO) {
+	daoList := GetMysqlDAOList(dbName)
+	// err := mysqlDAOManager.daoListMap[dbName]
+	if daoList != nil {
+		dao = daoList.CommonDAO
 	}
 	return
 }
@@ -213,6 +230,42 @@ func GetClientUpdatesStateDAO(dbName string) (dao *mysql_dao.ClientUpdatesStateD
 	// err := mysqlDAOManager.daoListMap[dbName]
 	if daoList != nil {
 		dao = daoList.ClientUpdatesStateDAO
+	}
+	return
+}
+
+func GetUserNotifySettingsDAO(dbName string) (dao *mysql_dao.UserNotifySettingsDAO) {
+	daoList := GetMysqlDAOList(dbName)
+	// err := mysqlDAOManager.daoListMap[dbName]
+	if daoList != nil {
+		dao = daoList.UserNotifySettingsDAO
+	}
+	return
+}
+
+func GetReportsDAO(dbName string) (dao *mysql_dao.ReportsDAO) {
+	daoList := GetMysqlDAOList(dbName)
+	// err := mysqlDAOManager.daoListMap[dbName]
+	if daoList != nil {
+		dao = daoList.ReportsDAO
+	}
+	return
+}
+
+func GetUserPrivacysDAO(dbName string) (dao *mysql_dao.UserPrivacysDAO) {
+	daoList := GetMysqlDAOList(dbName)
+	// err := mysqlDAOManager.daoListMap[dbName]
+	if daoList != nil {
+		dao = daoList.UserPrivacysDAO
+	}
+	return
+}
+
+func GetTmpPasswordsDAO(dbName string) (dao *mysql_dao.TmpPasswordsDAO) {
+	daoList := GetMysqlDAOList(dbName)
+	// err := mysqlDAOManager.daoListMap[dbName]
+	if daoList != nil {
+		dao = daoList.TmpPasswordsDAO
 	}
 	return
 }

@@ -715,6 +715,7 @@ var registers2 = map[int32]newTLObjectFunc{
 	int32(TLConstructor_CRC32_users_getFullUser):                                func() TLObject { return new(TLUsersGetFullUser) },
 	int32(TLConstructor_CRC32_contacts_getStatuses):                             func() TLObject { return new(TLContactsGetStatuses) },
 	int32(TLConstructor_CRC32_contacts_getContacts):                             func() TLObject { return new(TLContactsGetContacts) },
+	int32(TLConstructor_CRC32_contacts_getContacts2):                            func() TLObject { return new(TLContactsGetContacts2) },
 	int32(TLConstructor_CRC32_contacts_importContacts):                          func() TLObject { return new(TLContactsImportContacts) },
 	int32(TLConstructor_CRC32_contacts_deleteContact):                           func() TLObject { return new(TLContactsDeleteContact) },
 	int32(TLConstructor_CRC32_contacts_deleteContacts):                          func() TLObject { return new(TLContactsDeleteContacts) },
@@ -38035,6 +38036,19 @@ func (m *TLContactsGetContacts) Encode() []byte {
 
 func (m *TLContactsGetContacts) Decode(dbuf *DecodeBuf) error {
 	m.Hash = dbuf.Int()
+	return dbuf.err
+}
+
+// contacts.getContacts2#c023849f hash:string = contacts.Contacts;
+func (m *TLContactsGetContacts2) Encode() []byte {
+	x := NewEncodeBuf(512)
+	x.Int(int32(TLConstructor_CRC32_contacts_getContacts2))
+	x.String(m.Hash)
+	return x.buf
+}
+
+func (m *TLContactsGetContacts2) Decode(dbuf *DecodeBuf) error {
+	m.Hash = dbuf.String()
 	return dbuf.err
 }
 

@@ -115,6 +115,40 @@ func (s *SyncServiceImpl) DeliveryUpdates(ctx context.Context, deliver *zproto.D
 
 		go s.withReadLock(func() {
 			for _, ss4 := range ss3 {
+				update := &zproto.PushUpdatesData{}
+				update.AuthKeyId = ss4.AuthKeyId
+				update.SessionId = ss4.SessionId
+				update.NetlibSessionId = ss4.NetlibSessionId
+				// update.RawDataHeader = deliver.RawDataHeader
+				update.RawData = deliver.RawData
+
+				glog.Infof("DeliveryUpdates: update: {%v}", update)
+				s.updates[k] <- update
+			}
+		})
+	}
+
+	reply = &zproto.VoidRsp{}
+	return
+}
+
+func (s *SyncServiceImpl) DeliveryUpdatesNotMe(ctx context.Context, deliver *zproto.DeliveryUpdatesToUsers) (reply *zproto.VoidRsp, err error) {
+	glog.Infof("DeliveryUpdates: {%v}", deliver)
+
+	statusList, err := model.GetOnlineStatusModel().GetOnlineByUserIdList(deliver.SendtoUserIdList)
+	ss := make(map[int32][]*model.SessionStatus)
+	for _, status := range statusList {
+		if _, ok := ss[status.ServerId]; !ok {
+			ss[status.ServerId] = []*model.SessionStatus{}
+		}
+		// 会不会出问题？？
+		ss[status.ServerId] = append(ss[status.ServerId], status)
+	}
+	for k, ss3 := range ss {
+		// glog.Infof("DeliveryUpdates: k: {%v}, v: {%v}", k, ss3)
+
+		go s.withReadLock(func() {
+			for _, ss4 := range ss3 {
 				if ss4.NetlibSessionId != deliver.MyNetlibSessionId {
 					update := &zproto.PushUpdatesData{}
 					update.AuthKeyId = ss4.AuthKeyId

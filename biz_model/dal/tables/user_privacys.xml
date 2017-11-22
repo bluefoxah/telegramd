@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table sqlname="user_privacys">
+    <operation name="Insert">
+        <sql>
+            INSERT INTO
+                user_privacys (user_id, password, recovery_mail, status_timestamp, chat_invite, phone_call, ttl, ttl_created_at, created_at)
+            VALUES
+                (:user_id, :password, :recovery_mail, :status_timestamp, :chat_invite, :phone_call, :ttl, :ttl_created_at, :created_at)
+        </sql>
+    </operation>
+
+    <operation name="UpdateTTL">
+        <sql>
+            UPDATE user_privacys SET ttl = :ttl, ttl_created_at = :ttl_created_at WHERE user_id = :user_id
+        </sql>
+    </operation>
+
+    <operation name="SelectTTL">
+        <sql>
+            SELECT ttl, ttl_created_at FROM user_privacys WHERE user_id = :user_id
+        </sql>
+    </operation>
+</table>

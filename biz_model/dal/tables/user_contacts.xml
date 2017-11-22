@@ -2,12 +2,25 @@
 <table sqlname="user_contacts">
     <operation name="Insert">
         <sql>
-            INSERT INTO user_contacts (owner_user_id, contact_user_id) VALUES (:owner_user_id, :contact_user_id)
+            INSERT INTO user_contacts (owner_user_id, contact_user_id, created_at) VALUES (:owner_user_id, :contact_user_id, :created_at)
         </sql>
     </operation>
     <operation name="SelectUserContacts" result_set="list">
         <sql>
             SELECT contact_user_id FROM user_contacts WHERE owner_user_id=:owner_user_id AND is_deleted = 0
+        </sql>
+    </operation>
+    <operation name="UpdateBlock">
+        <sql>
+            UPDATE user_contacts SET is_blocked = :is_blocked WHERE owner_user_id = :owner_user_id AND contact_user_id = :contact_user_id
+        </sql>
+    </operation>
+    <operation name="DeleteContacts">
+        <params>
+            <param name="id_list" type="[]int32" />
+        </params>
+        <sql>
+            UPDATE user_contacts SET is_deleted = 1 WHERE owner_user_id = :owner_user_id AND contact_user_id in (:id_list)
         </sql>
     </operation>
 </table>

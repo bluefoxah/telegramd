@@ -35,5 +35,4 @@
             UPDATE user_dialogs SET top_message = :top_message WHERE id = :id
         </sql>
     </operation>
-
 </table>

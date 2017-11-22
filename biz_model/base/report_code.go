@@ -51,17 +51,19 @@ func (i ReportReasonType) String() (s string) {
 	return
 }
 
-func (i *ReportReasonType) FromReportReason(reason *mtproto.ReportReason) {
+func FromReportReason(reason *mtproto.ReportReason) (i ReportReasonType) {
 	switch reason.Payload.(type) {
 	case *mtproto.ReportReason_InputReportReasonSpam:
-		*i = REASON_OTHER
+		i = REASON_OTHER
 	case *mtproto.ReportReason_InputReportReasonViolence:
-		*i = REASON_SPAM
+		i = REASON_SPAM
 	case *mtproto.ReportReason_InputReportReasonPornography:
-		*i = REASON_VIOLENCE
+		i = REASON_VIOLENCE
 	case *mtproto.ReportReason_InputReportReasonOther:
-		*i = REASON_PORNOGRAPHY
+		i = REASON_PORNOGRAPHY
 	}
+
+	return
 }
 
 func (i ReportReasonType) ToReportReason(reason *mtproto.ReportReason) {

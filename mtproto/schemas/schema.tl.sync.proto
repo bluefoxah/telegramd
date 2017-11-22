@@ -5953,6 +5953,11 @@ message TL_contacts_getContacts {
   int32 hash = 1;
 };
 
+// contacts.getContacts#22c6aa08 hash:string = contacts.Contacts;
+message TL_contacts_getContacts2 {
+  string hash = 1;
+};
+
 // contacts.importContacts#2c800be5 contacts:Vector<InputContact> = contacts.ImportedContacts;
 message TL_contacts_importContacts {
   repeated InputContact contacts = 1;

@@ -15,26 +15,18 @@
  * limitations under the License.
  */
 
-package sync_client
+package dataobject
 
-import (
-	"github.com/golang/glog"
-	"github.com/nebulaim/telegramd/zproto"
-	"google.golang.org/grpc"
-)
-
-type SyncRPCClient struct {
-	Client zproto.RPCSyncClient
-}
-
-func NewSyncRPCClient(target string) (c *SyncRPCClient, err error) {
-	conn, err := grpc.Dial(target, grpc.WithInsecure())
-	if err != nil {
-		glog.Error(err)
-		panic(err)
-	}
-	c = &SyncRPCClient {
-		Client: zproto.NewRPCSyncClient(conn),
-	}
-	return
+type UserPrivacysDO struct {
+	Id              int32  `db:"id"`
+	UserId          int32  `db:"user_id"`
+	Password        string `db:"password"`
+	RecoveryMail    string `db:"recovery_mail"`
+	StatusTimestamp int8   `db:"status_timestamp"`
+	ChatInvite      int8   `db:"chat_invite"`
+	PhoneCall       int8   `db:"phone_call"`
+	Ttl             int32  `db:"ttl"`
+	TtlCreatedAt    int32  `db:"ttl_created_at"`
+	CreatedAt       string `db:"created_at"`
+	UpdatedAt       string `db:"updated_at"`
 }

@@ -59,4 +59,5 @@ service RPCSync {
     rpc PushUpdatesStream(ServerAuthReq) returns (stream PushUpdatesData);
     // rpc ServerAuth(ServerAuthReq) returns (VoidRsp);
     rpc DeliveryUpdates(DeliveryUpdatesToUsers) returns (VoidRsp);
+    rpc DeliveryUpdatesNotMe(DeliveryUpdatesToUsers) returns (VoidRsp);
 }

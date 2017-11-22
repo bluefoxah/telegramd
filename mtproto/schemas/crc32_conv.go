@@ -35,6 +35,8 @@ func main() {
 
 
 	var c int32 = 1197350236
+	var c2 = 583445000
+	fmt.Printf("c2: %x\n", uint32(c2))
 	fmt.Printf("c: %x\n", uint32(c))
 	fmt.Printf("c: %x\n", uint32(TLConstructor_CRC32_message2))
 	fmt.Printf("c: %x\n", uint32(TLConstructor_CRC32_msg_container))

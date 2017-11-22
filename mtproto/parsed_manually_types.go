@@ -179,3 +179,5 @@ func (m *TLRpcResult) Decode(dbuf *DecodeBuf) error {
 	m.Result = dbuf.Object()
 	return dbuf.err
 }
+
+// contacts.getContacts2#22c6aa08 hash:string = contacts.Contacts;

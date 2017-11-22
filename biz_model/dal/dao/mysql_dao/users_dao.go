@@ -33,10 +33,10 @@ func NewUsersDAO(db *sqlx.DB) *UsersDAO {
 	return &UsersDAO{db}
 }
 
-// insert into users(phone) values (:phone)
+// insert into users(first_name, last_name, access_hash, username, phone, country_code, bio, about, is_bot) values (:first_name, :last_name, :access_hash, :username, :phone, :country_code, :bio, :about, :is_bot)
 // TODO(@benqi): sqlmap
 func (dao *UsersDAO) Insert(do *dataobject.UsersDO) int64 {
-	var query = "insert into users(phone) values (:phone)"
+	var query = "insert into users(first_name, last_name, access_hash, username, phone, country_code, bio, about, is_bot) values (:first_name, :last_name, :access_hash, :username, :phone, :country_code, :bio, :about, :is_bot)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
@@ -172,4 +172,70 @@ func (dao *UsersDAO) SelectByQueryString(username string, first_name string, las
 	}
 
 	return values
+}
+
+// update users set deleted = 1, deleted_reason = :deleted_reason, deleted_at = :deleted_at where id = :id
+// TODO(@benqi): sqlmap
+func (dao *UsersDAO) Delete(deleted_reason string, deleted_at string, id int32) int64 {
+	var query = "update users set deleted = 1, deleted_reason = ?, deleted_at = ? where id = ?"
+	r, err := dao.db.Exec(query, deleted_reason, deleted_at, id)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Exec in Delete(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	rows, err := r.RowsAffected()
+	if err != nil {
+		errDesc := fmt.Sprintf("RowsAffected in Delete(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	return rows
+}
+
+// update users set username = :username where id = :id
+// TODO(@benqi): sqlmap
+func (dao *UsersDAO) UpdateUsername(username string, id int32) int64 {
+	var query = "update users set username = ? where id = ?"
+	r, err := dao.db.Exec(query, username, id)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Exec in UpdateUsername(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	rows, err := r.RowsAffected()
+	if err != nil {
+		errDesc := fmt.Sprintf("RowsAffected in UpdateUsername(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	return rows
+}
+
+// update users set first_name = :first_name, last_name = :last_name, about = :about where id = :id
+// TODO(@benqi): sqlmap
+func (dao *UsersDAO) UpdateProfile(first_name string, last_name string, about string, id int32) int64 {
+	var query = "update users set first_name = ?, last_name = ?, about = ? where id = ?"
+	r, err := dao.db.Exec(query, first_name, last_name, about, id)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Exec in UpdateProfile(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	rows, err := r.RowsAffected()
+	if err != nil {
+		errDesc := fmt.Sprintf("RowsAffected in UpdateProfile(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	return rows
 }

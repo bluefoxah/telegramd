@@ -715,6 +715,9 @@ enum TLConstructor {
   CRC32_users_getFullUser = -902781519;
   CRC32_contacts_getStatuses = -995929106;
   CRC32_contacts_getContacts = -1071414113;
+  // layer70, for android version 4.2
+  // contacts.getContacts#22c6aa08 hash:string = contacts.Contacts;
+  CRC32_contacts_getContacts2 = 583445000;
   CRC32_contacts_importContacts = 746589157;
   CRC32_contacts_deleteContact = -1902823612;
   CRC32_contacts_deleteContacts = 1504393374;

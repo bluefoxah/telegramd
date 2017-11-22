@@ -39,12 +39,12 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 	"google.golang.org/grpc"
 	"net"
-	"github.com/nebulaim/telegramd/biz_server/sync_client"
 	"github.com/nebulaim/telegramd/base/redis_client"
 	"github.com/nebulaim/telegramd/base/mysql_client"
 	"github.com/BurntSushi/toml"
 	"fmt"
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/biz_server/delivery"
 )
 
 func init() {
@@ -94,10 +94,7 @@ func main() {
 		glog.Fatalf("failed to listen: %v", err)
 	}
 
-	c, err := sync_client.NewSyncRPCClient(bizServerConfig.RpcClient.Addr)
-	if err != nil {
-		glog.Fatalf("failed to listen: %v", err)
-	}
+	delivery.InstallDeliveryInstance(bizServerConfig.RpcClient.Addr)
 
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
@@ -118,7 +115,7 @@ func main() {
 	mtproto.RegisterRPCLangpackServer(grpcServer, &langpack.LangpackServiceImpl{})
 
 	// MessagesServiceImpl
-	mtproto.RegisterRPCMessagesServer(grpcServer, &messages.MessagesServiceImpl{c})
+	mtproto.RegisterRPCMessagesServer(grpcServer, &messages.MessagesServiceImpl{})
 
 	mtproto.RegisterRPCPaymentsServer(grpcServer, &payments.PaymentsServiceImpl{})
 	mtproto.RegisterRPCPhoneServer(grpcServer, &phone.PhoneServiceImpl{})
