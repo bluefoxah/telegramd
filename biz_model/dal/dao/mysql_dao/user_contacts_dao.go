@@ -33,10 +33,10 @@ func NewUserContactsDAO(db *sqlx.DB) *UserContactsDAO {
 	return &UserContactsDAO{db}
 }
 
-// insert into user_contacts(owner_user_id, contact_user_id, created_at) values (:owner_user_id, :contact_user_id, :created_at)
+// insert into user_contacts(owner_user_id, contact_user_id, date2, created_at) values (:owner_user_id, :contact_user_id, :date2, :created_at)
 // TODO(@benqi): sqlmap
 func (dao *UserContactsDAO) Insert(do *dataobject.UserContactsDO) int64 {
-	var query = "insert into user_contacts(owner_user_id, contact_user_id, created_at) values (:owner_user_id, :contact_user_id, :created_at)"
+	var query = "insert into user_contacts(owner_user_id, contact_user_id, date2, created_at) values (:owner_user_id, :contact_user_id, :date2, :created_at)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
@@ -53,10 +53,10 @@ func (dao *UserContactsDAO) Insert(do *dataobject.UserContactsDO) int64 {
 	return id
 }
 
-// select contact_user_id from user_contacts where owner_user_id = :owner_user_id and is_deleted = 0
+// select contact_user_id, date2 from user_contacts where owner_user_id = :owner_user_id and is_deleted = 0
 // TODO(@benqi): sqlmap
 func (dao *UserContactsDAO) SelectUserContacts(owner_user_id int32) []dataobject.UserContactsDO {
-	var query = "select contact_user_id from user_contacts where owner_user_id = ? and is_deleted = 0"
+	var query = "select contact_user_id, date2 from user_contacts where owner_user_id = ? and is_deleted = 0"
 	rows, err := dao.db.Queryx(query, owner_user_id)
 
 	if err != nil {
@@ -75,6 +75,37 @@ func (dao *UserContactsDAO) SelectUserContacts(owner_user_id int32) []dataobject
 		err := rows.StructScan(&v)
 		if err != nil {
 			errDesc := fmt.Sprintf("StructScan in SelectUserContacts(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+		}
+		values = append(values, v)
+	}
+
+	return values
+}
+
+// select contact_user_id from user_contacts where owner_user_id = :owner_user_id and date2 > :date2 order by date2 asc limit :limit
+// TODO(@benqi): sqlmap
+func (dao *UserContactsDAO) SelectBlockedList(owner_user_id int32, date2 int32, limit int32) []dataobject.UserContactsDO {
+	var query = "select contact_user_id from user_contacts where owner_user_id = ? and date2 > ? order by date2 asc limit ?"
+	rows, err := dao.db.Queryx(query, owner_user_id, date2, limit)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Queryx in SelectBlockedList(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	defer rows.Close()
+
+	var values []dataobject.UserContactsDO
+	for rows.Next() {
+		v := dataobject.UserContactsDO{}
+
+		// TODO(@benqi): 不使用反射
+		err := rows.StructScan(&v)
+		if err != nil {
+			errDesc := fmt.Sprintf("StructScan in SelectBlockedList(_), error: %v", err)
 			glog.Error(errDesc)
 			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}

@@ -22,6 +22,7 @@ type UserContactsDO struct {
 	OwnerUserId   int32  `db:"owner_user_id"`
 	ContactUserId int32  `db:"contact_user_id"`
 	IsBlocked     int8   `db:"is_blocked"`
+	Date2         int32  `db:"date2"`
 	IsDeleted     int8   `db:"is_deleted"`
 	CreatedAt     string `db:"created_at"`
 	UpdatedAt     string `db:"updated_at"`

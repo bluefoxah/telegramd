@@ -23,6 +23,9 @@ import (
 	"golang.org/x/net/context"
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/biz_model/model"
+	"github.com/nebulaim/telegramd/biz_model/base"
+	"github.com/cosiner/gohper/errors"
 )
 
 type ContactsServiceImpl struct {
@@ -88,9 +91,55 @@ func (s *ContactsServiceImpl) ContactsUnblock(ctx context.Context, request *mtpr
 	return mtproto.ToBool(true), nil
 }
 
+// contacts.getBlocked#f57c350f offset:int limit:int = contacts.Blocked;
+// Android client request:
+// 	TLRPC.TL_contacts_getBlocked req = new TLRPC.TL_contacts_getBlocked();
+// 	req.offset = 0;
+// 	req.limit = 200;
+func (s *ContactsServiceImpl) ContactsGetBlocked(ctx context.Context, request *mtproto.TLContactsGetBlocked) (*mtproto.Contacts_Blocked, error) {
+	glog.Infof("ContactsGetBlocked - Process: {%v}", request)
+
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	blockedList := dao.GetUserContactsDAO(dao.DB_SLAVE).SelectBlockedList(md.UserId, request.Offset, request.Limit)
+
+	blocks := &mtproto.TLContactsBlocked{}
+
+	if len(blockedList) > 0 {
+		blockedIdList := make([]int32, 0, len(blockedList))
+		for _, c := range blockedList {
+			blocked := &mtproto.TLContactBlocked{}
+			blocked.UserId = c.ContactUserId
+			blocked.Date = c.Date2
+			blocks.Blocked = append(blocks.Blocked, blocked.ToContactBlocked())
+			blockedIdList = append(blockedIdList, c.ContactUserId)
+		}
+
+		users := model.GetUserModel().GetUserList(blockedIdList)
+		for _, u := range users {
+			blocks.Users = append(blocks.Users, u.ToUser())
+		}
+	}
+
+	glog.Infof("ContactsSearch - reply: {%v}\n", blocks)
+	return blocks.ToContacts_Blocked(), nil
+}
+
 // contacts.resetTopPeerRating#1ae373ac category:TopPeerCategory peer:InputPeer = Bool;
 func (s *ContactsServiceImpl) ContactsResetTopPeerRating(ctx context.Context, request *mtproto.TLContactsResetTopPeerRating) (*mtproto.Bool, error) {
-	glog.Info("ContactsResetTopPeerRating - Process: {%v}", request)
+	glog.Infof("ContactsResetTopPeerRating - Process: {%v}", request)
+
+	_ = grpc_util.RpcMetadataFromIncoming(ctx)
+	_ = base.FromInputPeer(request.Peer)
+
+	// TODO(@benqi): 看看客户端代码，什么情况会调用
+	switch request.GetCategory().GetPayload().(type) {
+	case *mtproto.TopPeerCategory_TopPeerCategoryBotsPM:
+	case *mtproto.TopPeerCategory_TopPeerCategoryBotsInline:
+	case *mtproto.TopPeerCategory_TopPeerCategoryCorrespondents:
+	case *mtproto.TopPeerCategory_TopPeerCategoryGroups:
+	case *mtproto.TopPeerCategory_TopPeerCategoryChannels:
+	case *mtproto.TopPeerCategory_TopPeerCategoryPhoneCalls:
+	}
 
 	glog.Infof("ContactsResetTopPeerRating - reply: {true}")
 	return mtproto.ToBool(true), nil
@@ -98,13 +147,17 @@ func (s *ContactsServiceImpl) ContactsResetTopPeerRating(ctx context.Context, re
 
 // contacts.resetSaved#879537f1 = Bool;
 func (s *ContactsServiceImpl) ContactsResetSaved(ctx context.Context, request *mtproto.TLContactsResetSaved) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("ContactsResetSaved - Process: %v", request)
+
+	// TODO(@benqi): 客户端未调用此请求
+	glog.Infof("ContactsResetSaved - reply: {true}")
+	return mtproto.ToBool(true), nil
 }
 
+// contacts.importCard#4fe196fe export_card:Vector<int> = User;
 func (s *ContactsServiceImpl) ContactsImportCard(ctx context.Context, request *mtproto.TLContactsImportCard) (*mtproto.User, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("ContactsImportCard - Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 // contacts.getStatuses#c4a353ee = Vector<ContactStatus>;
@@ -206,30 +259,20 @@ func (s *ContactsServiceImpl) ContactsGetContacts2(ctx context.Context, request 
 
 // contacts.importContacts#2c800be5 contacts:Vector<InputContact> = contacts.ImportedContacts;
 func (s *ContactsServiceImpl) ContactsImportContacts(ctx context.Context, request *mtproto.TLContactsImportContacts) (*mtproto.Contacts_ImportedContacts, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("ContactsImportContacts - Process: {%v}", request)
+	return nil, errors.New("Not impl")
 }
 
 // contacts.deleteContact#8e953744 id:InputUser = contacts.Link;
 func (s *ContactsServiceImpl) ContactsDeleteContact(ctx context.Context, request *mtproto.TLContactsDeleteContact) (*mtproto.Contacts_Link, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-//contacts.getBlocked#f57c350f offset:int limit:int = contacts.Blocked;
-func (s *ContactsServiceImpl) ContactsGetBlocked(ctx context.Context, request *mtproto.TLContactsGetBlocked) (*mtproto.Contacts_Blocked, error) {
-	glog.Infof("ContactsGetBlocked - Process: {%v}", request)
-
-	blocked := &mtproto.TLContactsBlocked{}
-
-	glog.Infof("ContactsSearch - reply: {%v}\n", blocked)
-	return blocked.ToContacts_Blocked(), nil
+	glog.Infof("ContactsDeleteContact - Process: %v", request)
+	return nil, errors.New("Not impl")
 }
 
 // contacts.exportCard#84e53737 = Vector<int>;
 // func (s *ContactsServiceImpl)ContactsExportCard(ctx context.Context,  request *mtproto.TLContactsExportCard) (*mtproto.Vector<int32T>, error) {
 //   glog.Info("Process: %v", request)
-//   return nil, nil
+//	 return nil, errors.New("Not impl")
 // }
 
 // contacts.search#11f812d8 q:string limit:int = contacts.Found;
@@ -265,12 +308,12 @@ func (s *ContactsServiceImpl) ContactsSearch(ctx context.Context, request *mtpro
 
 // contacts.resolveUsername#f93ccba3 username:string = contacts.ResolvedPeer;
 func (s *ContactsServiceImpl) ContactsResolveUsername(ctx context.Context, request *mtproto.TLContactsResolveUsername) (*mtproto.Contacts_ResolvedPeer, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("ContactsResolveUsername - Process: {%v}", request)
+	return nil, errors.New("Not impl")
 }
 
 // contacts.getTopPeers#d4982db5 flags:# correspondents:flags.0?true bots_pm:flags.1?true bots_inline:flags.2?true phone_calls:flags.3?true groups:flags.10?true channels:flags.15?true offset:int limit:int hash:int = contacts.TopPeers;
 func (s *ContactsServiceImpl) ContactsGetTopPeers(ctx context.Context, request *mtproto.TLContactsGetTopPeers) (*mtproto.Contacts_TopPeers, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Info("ContactsGetTopPeers - Process: {%v}", request)
+	return nil, errors.New("Not impl")
 }
