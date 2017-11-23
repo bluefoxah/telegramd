@@ -29,6 +29,7 @@ import (
 	"github.com/nebulaim/telegramd/biz_model/model"
 	"github.com/nebulaim/telegramd/grpc_util"
 	delivery2 "github.com/nebulaim/telegramd/biz_server/delivery"
+	"github.com/nebulaim/telegramd/frontend/id"
 )
 
 type MessagesServiceImpl struct {
@@ -633,29 +634,146 @@ func (s *MessagesServiceImpl) MessagesForwardMessages(ctx context.Context, reque
 	return nil, nil
 }
 
+// messages.editChatTitle#dc452855 chat_id:int title:string = Updates;
 func (s *MessagesServiceImpl) MessagesEditChatTitle(ctx context.Context, request *mtproto.TLMessagesEditChatTitle) (*mtproto.Updates, error) {
 	glog.Info("Process: %v", request)
+
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	_ = dao.GetChatsDA(dao.DB_MASTER).UpdateTitle(request.Title, md.UserId, id.NextId(), base2.NowFormatYMDHMS(), md.UserId)
+
+	chat := &mtproto.TLChat{}
+	chat.Id = request.ChatId
+	chat.Title = request.Title
+	chat.Photo = mtproto.MakeChatPhoto(&mtproto.TLChatPhotoEmpty{})
+	chat.Date = int32(time.Now().Unix())
+	chat.Version = 1
+
+	updates := &mtproto.TLUpdates{}
+
+	updates.Chats = append(updates.Chats, chat.ToChat())
+
 	return nil, nil
 }
 
 func (s *MessagesServiceImpl) MessagesEditChatPhoto(ctx context.Context, request *mtproto.TLMessagesEditChatPhoto) (*mtproto.Updates, error) {
-	glog.Info("Process: %v", request)
+	glog.Infof("MessagesEditChatPhoto - Process: {%v}", request)
 	return nil, nil
 }
 
+// messages.addChatUser#f9a0aa09 chat_id:int user_id:InputUser fwd_limit:int = Updates;
 func (s *MessagesServiceImpl) MessagesAddChatUser(ctx context.Context, request *mtproto.TLMessagesAddChatUser) (*mtproto.Updates, error) {
 	glog.Info("Process: %v", request)
 	return nil, nil
 }
 
+// messages.deleteChatUser#e0611f16 chat_id:int user_id:InputUser = Updates;
 func (s *MessagesServiceImpl) MessagesDeleteChatUser(ctx context.Context, request *mtproto.TLMessagesDeleteChatUser) (*mtproto.Updates, error) {
 	glog.Info("Process: %v", request)
 	return nil, nil
 }
 
+// messages.createChat#9cb126e users:Vector<InputUser> title:string = Updates;
 func (s *MessagesServiceImpl) MessagesCreateChat(ctx context.Context, request *mtproto.TLMessagesCreateChat) (*mtproto.Updates, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("MessagesCreateChat - Process: {%v}", request)
+
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+
+	// TODO(@benqi): 检查输入数据合法性:
+	// 	1. 群人数必须>=3
+	// 	2. 检查request.Users，剔除创建者用户
+
+	updates := &mtproto.TLUpdates{}
+
+	chatDO := &dataobject.ChatsDO{}
+	chatDO.AccessHash = id.NextId()
+	chatDO.CreatedAt = base2.NowFormatYMDHMS()
+	chatDO.CreatorUserId = md.UserId
+	// TODO(@benqi): 使用客户端message_id
+	chatDO.CreateRandomId = id.NextId()
+	chatDO.Title = request.Title
+
+	chatDO.TitleChangerUserId = md.UserId
+	chatDO.TitleChangedAt = chatDO.CreatedAt
+	// TODO(@benqi): 使用客户端message_id
+	chatDO.TitleChangeRandomId = chatDO.AccessHash
+
+	chatDO.AvatarChangerUserId = md.UserId
+	chatDO.AvatarChangedAt = chatDO.CreatedAt
+	// TODO(@benqi): 使用客户端message_id
+	chatDO.AvatarChangeRandomId = chatDO.AccessHash
+
+	// TODO(@benqi): 事务！
+	lastInsertId := dao.GetChatsDA(dao.DB_MASTER).Insert(chatDO)
+
+	// chat#d91cdd54
+	// flags:#
+	// 	creator:flags.0?true
+	// 	kicked:flags.1?true
+	// 	left:flags.2?true
+	// 	admins_enabled:flags.3?true
+	// 	admin:flags.4?true
+	// 	deactivated:flags.5?true
+	// id:int
+	// title:string
+	// photo:ChatPhoto
+	// participants_count:int
+	// date:int
+	// version:int
+	// 	migrated_to:flags.6?InputChannel = Chat;
+	chat := &mtproto.TLChat{}
+	chat.Id = int32(lastInsertId)
+	chat.Title = request.Title
+	chat.Photo = mtproto.MakeChatPhoto(&mtproto.TLChatPhotoEmpty{})
+	chat.Date = int32(time.Now().Unix())
+	chat.Version = 1
+	updates.Chats = append(updates.Chats, chat.ToChat())
+
+	chatUserDO := &dataobject.ChatUsersDO{}
+	chatUserDO.ChatId = chat.Id
+	chatUserDO.CreatedAt = chatDO.CreatedAt
+	chatUserDO.State = 0
+	chatUserDO.InvitedAt = chat.Date
+	chatUserDO.InviterUserId = md.UserId
+	chatUserDO.JoinedAt = chat.Date
+	chatUserDO.UserId = md.UserId
+	chatUserDO.IsAdmin = 1
+	chat.ParticipantsCount += 1
+	dao.GetChatUsersDAO(dao.DB_MASTER).Insert(chatUserDO)
+
+	chatUserIdList := make([]int32, 0, len(request.GetUsers()))
+	for _, u := range request.GetUsers() {
+		// _ = base.FromInputPeer(p)
+		switch u.Payload.(type) {
+		case *mtproto.InputUser_InputUserEmpty:
+			// TODO(@benqi): 非法参数
+		case *mtproto.InputUser_InputUserSelf:
+			continue
+		case *mtproto.InputUser_InputUser:
+			uId := u.GetInputUser().GetUserId()
+			if uId == md.UserId {
+				continue
+			}
+
+			chat.ParticipantsCount += 1
+			// updates#74ae4240 updates:Vector<Update> users:Vector<User> chats:Vector<Chat> date:int seq:int = Updates;
+			chatUserIdList = append(chatUserIdList, u.GetInputUser().GetUserId())
+
+			chatUserDO.UserId = u.GetInputUser().GetUserId()
+			chatUserDO.IsAdmin = 0
+			dao.GetChatUsersDAO(dao.DB_MASTER).Insert(chatUserDO)
+		}
+	}
+
+	users := model.GetUserModel().GetUserList(chatUserIdList)
+	for _, u := range users {
+		updates.Users = append(updates.Users, u.ToUser())
+	}
+
+	updates.Date = chat.Date
+	updates.Seq = 1
+
+	glog.Infof("MessagesSendMessage - reply: %v", updates)
+	return updates.ToUpdates(), nil
 }
 
 func (s *MessagesServiceImpl) MessagesForwardMessage(ctx context.Context, request *mtproto.TLMessagesForwardMessage) (*mtproto.Updates, error) {

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table sqlname="chats">
+    <operation name="Insert">
+        <sql>
+            INSERT INTO chats
+                (creator_user_id, access_hash, create_random_id, title, title_changer_user_id, title_change_random_id, title_changed_at, avatar_changer_user_id, avatar_change_random_id, avatar_changed_at, created_at)
+            VALUES
+                (:creator_user_id, :access_hash, :create_random_id, :title, :title_changer_user_id, :title_change_random_id, :title_changed_at, :avatar_changer_user_id, :avatar_change_random_id, :avatar_changed_at, :created_at)
+        </sql>
+    </operation>
+    <operation name="Select">
+        <sql>
+            SELECT id, title, version WHERE id=:id
+        </sql>
+    </operation>
+    <operation name="UpdateTitle">
+        <sql>
+            UPDATE
+                chats
+            SET
+                title=:title, title_changer_user_id=:title_changer_user_id, title_change_random_id=:title_change_random_id, title_changed_at=:title_changed_at
+            WHERE
+                id=:id
+        </sql>
+    </operation>
+</table>

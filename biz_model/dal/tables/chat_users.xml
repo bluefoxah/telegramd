@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table sqlname="chat_users">
+    <operation name="Insert">
+        <sql>
+            INSERT INTO chat_users
+                (chat_id, user_id, is_admin, inviter_user_id, invited_at, joined_at, state, created_at)
+            VALUES
+                (:chat_id, :user_id, :is_admin, :inviter_user_id, :invited_at, :joined_at, :state, :created_at)
+        </sql>
+    </operation>
+</table>

@@ -385,9 +385,14 @@ func (s *AccountServiceImpl) AccountGetAuthorizations(ctx context.Context, reque
 // account.noPassword#96dabc18 new_salt:bytes email_unconfirmed_pattern:string = account.Password;
 // account.password#7c18141c current_salt:bytes new_salt:bytes hint:string has_recovery:Bool email_unconfirmed_pattern:string = account.Password;
 func (s *AccountServiceImpl) AccountGetPassword(ctx context.Context, request *mtproto.TLAccountGetPassword) (*mtproto.Account_Password, error) {
-	glog.Infof("AccountGetPassword - Process: %v", request)
+	glog.Infof("AccountGetPassword - Process: {%v}", request)
 
-	return nil, errors.New("Not impl")
+	// md := grpc_util.RpcMetadataFromIncoming(ctx)
+	password := &mtproto.TLAccountNoPassword{}
+	password.NewSalt = []byte("111")
+	password.EmailUnconfirmedPattern = "EmailUnconfirmedPattern"
+
+	return password.ToAccount_Password(), nil
 }
 
 // account.getPasswordSettings#bc8d11bb current_password_hash:bytes = account.PasswordSettings;
