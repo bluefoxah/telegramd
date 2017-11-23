@@ -246,5 +246,12 @@ func (c *Client) onGzipPacked(msgId int64, seqNo int32, request TLObject) error 
 	gzipPacked, _ := request.(*TLGzipPacked)
 	glog.Info("processGzipPacked - request data: ", gzipPacked.String())
 
+	dbuf := NewDecodeBuf(gzipPacked.PackedData)
+	o := dbuf.Object()
+	if o == nil {
+		return fmt.Errorf("Decode query error: %s", hex.EncodeToString(gzipPacked.PackedData))
+	}
+
+	c.OnMessage(msgId, seqNo, o)
 	return nil
 }

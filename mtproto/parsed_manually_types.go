@@ -21,6 +21,8 @@ import (
 	"github.com/golang/glog"
 	"fmt"
 	"encoding/hex"
+	"bytes"
+	"compress/gzip"
 )
 
 //const (
@@ -152,7 +154,21 @@ func (m *TLGzipPacked) Encode() []byte {
 }
 
 func (m *TLGzipPacked) Decode(dbuf *DecodeBuf) error {
-	m.PackedData = dbuf.buf
+	m.PackedData = make([]byte, 0, 4096)
+
+	var buf bytes.Buffer
+	_, _ = buf.Write(dbuf.StringBytes())
+	gz, _ := gzip.NewReader(&buf)
+
+	b := make([]byte, 4096)
+	for true {
+		n, _ := gz.Read(b)
+		m.PackedData = append(m.PackedData, b[0:n]...)
+		if n <= 0 {
+			break
+		}
+	}
+
 	return dbuf.err
 }
 
