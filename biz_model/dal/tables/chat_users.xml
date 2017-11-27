@@ -3,9 +3,20 @@
     <operation name="Insert">
         <sql>
             INSERT INTO chat_users
-                (chat_id, user_id, is_admin, inviter_user_id, invited_at, joined_at, state, created_at)
+                (chat_id, user_id, participant_type, inviter_user_id, invited_at, joined_at, state, created_at)
             VALUES
-                (:chat_id, :user_id, :is_admin, :inviter_user_id, :invited_at, :joined_at, :state, :created_at)
+                (:chat_id, :user_id, :participant_type, :inviter_user_id, :invited_at, :joined_at, :state, :created_at)
+        </sql>
+    </operation>
+
+    <operation name="SelectByChatId" result_set="list">
+        <sql>
+            SELECT
+                id, chat_id, user_id, participant_type, inviter_user_id, invited_at, joined_at
+            FROM
+                chat_users
+            WHERE
+                chat_id = :chat_id
         </sql>
     </operation>
 </table>

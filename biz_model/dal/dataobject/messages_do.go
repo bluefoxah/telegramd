@@ -18,13 +18,16 @@
 package dataobject
 
 type MessagesDO struct {
-	Id        int32  `db:"id"`
-	UserId    int32  `db:"user_id"`
-	PeerType  int32  `db:"peer_type"`
-	PeerId    int32  `db:"peer_id"`
-	RandomId  int64  `db:"random_id"`
-	Message   string `db:"message"`
-	Date2     int32  `db:"date2"`
-	CreatedAt string `db:"created_at"`
-	DeletedAt string `db:"deleted_at"`
+	Id           int32  `db:"id"`
+	UserId       int32  `db:"user_id"`
+	SenderUserId int32  `db:"sender_user_id"`
+	PeerType     int32  `db:"peer_type"`
+	PeerId       int32  `db:"peer_id"`
+	RandomId     int64  `db:"random_id"`
+	MessageType  int8   `db:"message_type"`
+	MessageData  []byte `db:"message_data"`
+	Message      string `db:"message"`
+	Date2        int32  `db:"date2"`
+	CreatedAt    string `db:"created_at"`
+	DeletedAt    string `db:"deleted_at"`
 }

@@ -22,6 +22,7 @@ type ChatsDO struct {
 	CreatorUserId        int32  `db:"creator_user_id"`
 	CreateRandomId       int64  `db:"create_random_id"`
 	AccessHash           int64  `db:"access_hash"`
+	ParticipantCount     int32  `db:"participant_count"`
 	Title                string `db:"title"`
 	TitleChangerUserId   int32  `db:"title_changer_user_id"`
 	TitleChangedAt       string `db:"title_changed_at"`

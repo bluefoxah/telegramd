@@ -28,7 +28,7 @@ type ServerAuthReq struct {
 func (m *ServerAuthReq) Reset()                    { *m = ServerAuthReq{} }
 func (m *ServerAuthReq) String() string            { return proto.CompactTextString(m) }
 func (*ServerAuthReq) ProtoMessage()               {}
-func (*ServerAuthReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{0} }
+func (*ServerAuthReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{0} }
 
 func (m *ServerAuthReq) GetServerId() int32 {
 	if m != nil {
@@ -50,7 +50,7 @@ type VoidRsp struct {
 func (m *VoidRsp) Reset()                    { *m = VoidRsp{} }
 func (m *VoidRsp) String() string            { return proto.CompactTextString(m) }
 func (*VoidRsp) ProtoMessage()               {}
-func (*VoidRsp) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{1} }
+func (*VoidRsp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1} }
 
 //
 type DeliveryUpdatesToUsers struct {
@@ -65,7 +65,7 @@ type DeliveryUpdatesToUsers struct {
 func (m *DeliveryUpdatesToUsers) Reset()                    { *m = DeliveryUpdatesToUsers{} }
 func (m *DeliveryUpdatesToUsers) String() string            { return proto.CompactTextString(m) }
 func (*DeliveryUpdatesToUsers) ProtoMessage()               {}
-func (*DeliveryUpdatesToUsers) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{2} }
+func (*DeliveryUpdatesToUsers) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{2} }
 
 func (m *DeliveryUpdatesToUsers) GetMyAuthKeyId() int64 {
 	if m != nil {
@@ -113,7 +113,7 @@ type PushUpdatesData struct {
 func (m *PushUpdatesData) Reset()                    { *m = PushUpdatesData{} }
 func (m *PushUpdatesData) String() string            { return proto.CompactTextString(m) }
 func (*PushUpdatesData) ProtoMessage()               {}
-func (*PushUpdatesData) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{3} }
+func (*PushUpdatesData) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{3} }
 
 func (m *PushUpdatesData) GetAuthKeyId() int64 {
 	if m != nil {
@@ -327,9 +327,9 @@ var _RPCSync_serviceDesc = grpc.ServiceDesc{
 	Metadata: "sync.proto",
 }
 
-func init() { proto.RegisterFile("sync.proto", fileDescriptor2) }
+func init() { proto.RegisterFile("sync.proto", fileDescriptor3) }
 
-var fileDescriptor2 = []byte{
+var fileDescriptor3 = []byte{
 	// 434 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x92, 0xdf, 0x6e, 0xd3, 0x30,
 	0x18, 0xc5, 0xe5, 0x76, 0x5d, 0x97, 0xaf, 0x94, 0x50, 0x6f, 0x40, 0x18, 0x62, 0x44, 0x41, 0xa0,

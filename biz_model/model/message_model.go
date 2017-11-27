@@ -25,6 +25,7 @@ import (
 	"github.com/golang/glog"
 	base2 "github.com/nebulaim/telegramd/base/base"
 	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"time"
 )
 
 type messageModel struct {
@@ -183,3 +184,85 @@ func (m *messageModel) GetMessagesByPts(userId int32, pts int32) (messages []*mt
 
 	return messages
 }
+
+// CreateMessage
+func (m *messageModel) CreateMessageBoxes(userId, fromId int32, peer *base.PeerUtil, incoming bool, messageId int32) (int32) {
+	messageBox := &dataobject.MessageBoxesDO{}
+	if incoming {
+		messageBox.UserId = userId
+		messageBox.SenderUserId = fromId
+		messageBox.MessageBoxType = 0
+		messageBox.PeerType = int8(peer.PeerType)
+		messageBox.PeerId = peer.PeerId
+		messageBox.MessageId = messageId
+		outPts := GetSequenceModel().NextID(base2.Int32ToString(messageBox.UserId))
+		messageBox.Pts = int32(outPts)
+		messageBox.CreatedAt = base2.NowFormatYMDHMS()
+	} else {
+		messageBox.UserId = userId
+		messageBox.SenderUserId = fromId
+		messageBox.MessageBoxType = 1
+		messageBox.PeerType = int8(peer.PeerType)
+		messageBox.PeerId = peer.PeerId
+		messageBox.MessageId = messageId
+		inPts := GetSequenceModel().NextID(base2.Int32ToString(messageBox.UserId))
+		messageBox.Pts = int32(inPts)
+		messageBox.CreatedAt = base2.NowFormatYMDHMS()
+	}
+	dao.GetMessageBoxesDAO(dao.DB_MASTER).Insert(messageBox)
+	return messageBox.Pts
+}
+
+// CreateMessage
+func (m *messageModel) CreateHistoryMessage(fromId int32, peer *base.PeerUtil, randomId int64, message *mtproto.TLMessage) (messageId int32) {
+	// var message2
+	// peer := base.FromPeer(message.ToId)
+
+	messageDO := &dataobject.MessagesDO{}
+	messageDO.SenderUserId = fromId
+	messageDO.PeerType = peer.PeerType
+	messageDO.PeerId = peer.PeerId
+	// Message
+	messageDO.MessageType = 1
+	messageDO.RandomId = randomId
+	messageDO.Date2 = message.Date
+	messageDO.MessageData = message.Encode()
+
+	messageId = int32(dao.GetMessagesDAO(dao.DB_MASTER).Insert(messageDO))
+	return
+}
+
+// CreateMessage
+func (m *messageModel) CreateHistoryMessageService(fromId int32, peer *base.PeerUtil, randomId int64, message *mtproto.TLMessageService) (messageId int32) {
+	// var message2
+	// peer := base.FromPeer(message.ToId)
+
+	messageDO := &dataobject.MessagesDO{}
+	messageDO.SenderUserId = fromId
+	messageDO.PeerType = peer.PeerType
+	messageDO.PeerId = peer.PeerId
+	// MessageService
+	messageDO.MessageType = 2
+	messageDO.RandomId = randomId
+	messageDO.Date2 = int32(time.Now().Unix())
+	messageDO.MessageData = message.Encode()
+
+	messageId = int32(dao.GetMessagesDAO(dao.DB_MASTER).Insert(messageDO))
+	return
+}
+
+//func (m *messageModel) MakeUpdatesByMessage(randomId int64, message *mtproto.TLMessageService) (updates *mtproto.Updates) {
+//	//// 插入消息
+//	peer := base.FromPeer(message.ToId)
+//	messageDO := &dataobject.MessagesDO{}
+//
+//	messageDO.UserId = message.FromId
+//	messageDO.PeerType = peer.PeerType
+//	messageDO.PeerId = peer.PeerId
+//	messageDO.RandomId = randomId
+//	messageDO.Date2 = message.Date
+//
+//	messageId := dao.GetMessagesDAO(dao.DB_MASTER).Insert(messageDO)
+//	message.Id = int32(messageId)
+//	return
+//}

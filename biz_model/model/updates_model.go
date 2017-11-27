@@ -46,7 +46,7 @@ func (m *updatesModel) GetState(authKeyId int64, userId int32) *mtproto.TLUpdate
 	// TODO(@benqi): 从数据库取出date
 	state.Date = int32(time.Now().Unix())
 
-	do := dao.GetMessageBoxsDAO(dao.DB_SLAVE).SelectLastPts(userId)
+	do := dao.GetMessageBoxesDAO(dao.DB_SLAVE).SelectLastPts(userId)
 	if do == nil || do.Pts == 0 {
 		// TODO(@benqi):
 		state.Date = int32(time.Now().Unix())
@@ -64,7 +64,7 @@ func (m *updatesModel) GetState(authKeyId int64, userId int32) *mtproto.TLUpdate
 }
 
 func (m *updatesModel) GetAffectedMessage(userId, messageId int32) *mtproto.TLMessagesAffectedMessages {
-	doList := dao.GetMessageBoxsDAO(dao.DB_SLAVE).SelectPtsByGTMessageID(userId, messageId)
+	doList := dao.GetMessageBoxesDAO(dao.DB_SLAVE).SelectPtsByGTMessageID(userId, messageId)
 	if len(doList) == 0 {
 		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_OTHER2), fmt.Sprintf("GetAffectedMessage(%d, %d) empty", userId, messageId)))
 	}

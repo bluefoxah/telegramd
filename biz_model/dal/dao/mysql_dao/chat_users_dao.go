@@ -33,10 +33,10 @@ func NewChatUsersDAO(db *sqlx.DB) *ChatUsersDAO {
 	return &ChatUsersDAO{db}
 }
 
-// insert into chat_users(chat_id, user_id, is_admin, inviter_user_id, invited_at, joined_at, state, created_at) values (:chat_id, :user_id, :is_admin, :inviter_user_id, :invited_at, :joined_at, :state, :created_at)
+// insert into chat_users(chat_id, user_id, participant_type, inviter_user_id, invited_at, joined_at, state, created_at) values (:chat_id, :user_id, :participant_type, :inviter_user_id, :invited_at, :joined_at, :state, :created_at)
 // TODO(@benqi): sqlmap
 func (dao *ChatUsersDAO) Insert(do *dataobject.ChatUsersDO) int64 {
-	var query = "insert into chat_users(chat_id, user_id, is_admin, inviter_user_id, invited_at, joined_at, state, created_at) values (:chat_id, :user_id, :is_admin, :inviter_user_id, :invited_at, :joined_at, :state, :created_at)"
+	var query = "insert into chat_users(chat_id, user_id, participant_type, inviter_user_id, invited_at, joined_at, state, created_at) values (:chat_id, :user_id, :participant_type, :inviter_user_id, :invited_at, :joined_at, :state, :created_at)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
@@ -51,4 +51,35 @@ func (dao *ChatUsersDAO) Insert(do *dataobject.ChatUsersDO) int64 {
 		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 	return id
+}
+
+// select id, chat_id, user_id, participant_type, inviter_user_id, invited_at, joined_at from chat_users where chat_id = :chat_id
+// TODO(@benqi): sqlmap
+func (dao *ChatUsersDAO) SelectByChatId(chat_id int32) []dataobject.ChatUsersDO {
+	var query = "select id, chat_id, user_id, participant_type, inviter_user_id, invited_at, joined_at from chat_users where chat_id = ?"
+	rows, err := dao.db.Queryx(query, chat_id)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Queryx in SelectByChatId(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	defer rows.Close()
+
+	var values []dataobject.ChatUsersDO
+	for rows.Next() {
+		v := dataobject.ChatUsersDO{}
+
+		// TODO(@benqi): 不使用反射
+		err := rows.StructScan(&v)
+		if err != nil {
+			errDesc := fmt.Sprintf("StructScan in SelectByChatId(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+		}
+		values = append(values, v)
+	}
+
+	return values
 }

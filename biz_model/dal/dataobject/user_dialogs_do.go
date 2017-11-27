@@ -20,7 +20,7 @@ package dataobject
 type UserDialogsDO struct {
 	Id                  int32  `db:"id"`
 	UserId              int32  `db:"user_id"`
-	PeerType            int32  `db:"peer_type"`
+	PeerType            int8   `db:"peer_type"`
 	PeerId              int32  `db:"peer_id"`
 	IsPinned            int8   `db:"is_pinned"`
 	TopMessage          int32  `db:"top_message"`

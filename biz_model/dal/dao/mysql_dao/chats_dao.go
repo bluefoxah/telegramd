@@ -33,10 +33,10 @@ func NewChatsDAO(db *sqlx.DB) *ChatsDAO {
 	return &ChatsDAO{db}
 }
 
-// insert into chats(creator_user_id, access_hash, create_random_id, title, title_changer_user_id, title_change_random_id, title_changed_at, avatar_changer_user_id, avatar_change_random_id, avatar_changed_at, created_at) values (:creator_user_id, :access_hash, :create_random_id, :title, :title_changer_user_id, :title_change_random_id, :title_changed_at, :avatar_changer_user_id, :avatar_change_random_id, :avatar_changed_at, :created_at)
+// insert into chats(creator_user_id, access_hash, participant_count, create_random_id, title, title_changer_user_id, title_change_random_id, title_changed_at, avatar_changer_user_id, avatar_change_random_id, avatar_changed_at, created_at) values (:creator_user_id, :access_hash, :participant_count, :create_random_id, :title, :title_changer_user_id, :title_change_random_id, :title_changed_at, :avatar_changer_user_id, :avatar_change_random_id, :avatar_changed_at, :created_at)
 // TODO(@benqi): sqlmap
 func (dao *ChatsDAO) Insert(do *dataobject.ChatsDO) int64 {
-	var query = "insert into chats(creator_user_id, access_hash, create_random_id, title, title_changer_user_id, title_change_random_id, title_changed_at, avatar_changer_user_id, avatar_change_random_id, avatar_changed_at, created_at) values (:creator_user_id, :access_hash, :create_random_id, :title, :title_changer_user_id, :title_change_random_id, :title_changed_at, :avatar_changer_user_id, :avatar_change_random_id, :avatar_changed_at, :created_at)"
+	var query = "insert into chats(creator_user_id, access_hash, participant_count, create_random_id, title, title_changer_user_id, title_change_random_id, title_changed_at, avatar_changer_user_id, avatar_change_random_id, avatar_changed_at, created_at) values (:creator_user_id, :access_hash, :participant_count, :create_random_id, :title, :title_changer_user_id, :title_change_random_id, :title_changed_at, :avatar_changer_user_id, :avatar_change_random_id, :avatar_changed_at, :created_at)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
@@ -53,10 +53,10 @@ func (dao *ChatsDAO) Insert(do *dataobject.ChatsDO) int64 {
 	return id
 }
 
-// select id, title, version from dual where id = :id
+// select id, participant_count, title, version from chats where id = :id
 // TODO(@benqi): sqlmap
 func (dao *ChatsDAO) Select(id int32) *dataobject.ChatsDO {
-	var query = "select id, title, version from dual where id = ?"
+	var query = "select id, participant_count, title, version from chats where id = ?"
 	rows, err := dao.db.Queryx(query, id)
 
 	if err != nil {

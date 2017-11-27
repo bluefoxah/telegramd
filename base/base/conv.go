@@ -46,3 +46,11 @@ func Int64ToString(i int64) string {
 func Int32ToString(i int32) string {
 	return strconv.FormatInt(int64(i), 10)
 }
+
+func BoolToInt8(b bool) int8 {
+	if b {
+		return 1
+	} else {
+		return 0
+	}
+}

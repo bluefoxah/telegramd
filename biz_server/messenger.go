@@ -37,7 +37,6 @@ import (
 	upload "github.com/nebulaim/telegramd/biz_server/upload/rpc"
 	users "github.com/nebulaim/telegramd/biz_server/users/rpc"
 	"github.com/nebulaim/telegramd/mtproto"
-	"google.golang.org/grpc"
 	"net"
 	"github.com/nebulaim/telegramd/base/redis_client"
 	"github.com/nebulaim/telegramd/base/mysql_client"
@@ -45,6 +44,8 @@ import (
 	"fmt"
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"github.com/nebulaim/telegramd/biz_server/delivery"
+	"github.com/nebulaim/telegramd/grpc_util/middleware/recovery2"
+	"github.com/nebulaim/telegramd/grpc_util"
 )
 
 func init() {
@@ -96,8 +97,9 @@ func main() {
 
 	delivery.InstallDeliveryInstance(bizServerConfig.RpcClient.Addr)
 
-	var opts []grpc.ServerOption
-	grpcServer := grpc.NewServer(opts...)
+	// var opts []grpc.ServerOption
+	// grpcServer := grpc.NewServer(opts...)
+	grpcServer := grpc_recovery2.NewRecoveryServer(grpc_util.BizUnaryRecoveryHandler, grpc_util.BizStreamRecoveryHandler)
 
 	// AccountServiceImpl
 	mtproto.RegisterRPCAccountServer(grpcServer, &account.AccountServiceImpl{})

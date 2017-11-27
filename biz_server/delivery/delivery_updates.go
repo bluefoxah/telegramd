@@ -55,7 +55,7 @@ func (d *deliveryService) DeliveryUpdates(authKeyId, sessionId, netlibSessionId 
 	delivery.SendtoUserIdList = sendtoUserIdList
 	delivery.RawData = rawData
 
-	glog.Infof("AccountUpdateNotifySettings - delivery: %v", delivery)
+	glog.Infof("DeliveryUpdates - delivery: %v", delivery)
 	_, err = d.client.DeliveryUpdates(context.Background(), delivery)
 	return
 }
@@ -68,7 +68,7 @@ func (d *deliveryService) DeliveryUpdatesNotMe(authKeyId, sessionId, netlibSessi
 	delivery.SendtoUserIdList = sendtoUserIdList
 	delivery.RawData = rawData
 
-	glog.Infof("AccountUpdateNotifySettings - delivery: %v", delivery)
+	glog.Infof("DeliveryUpdatesNotMe - delivery: %v", delivery)
 	_, err = d.client.DeliveryUpdatesNotMe(context.Background(), delivery)
 	return
 }

@@ -24,6 +24,7 @@ import (
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 	"github.com/golang/glog"
+	base2 "github.com/nebulaim/telegramd/base/base"
 )
 
 var (
@@ -62,7 +63,7 @@ func (m *dialogModel) GetDialogsByUserIDAndType(userId, peerType int32) (dialogs
 		dialogDOList = dialogsDAO.SelectDialogsByUserID(userId)
 		glog.Infof("SelectDialogsByUserID(%d) - {%v}", userId, dialogDOList)
 	} else {
-		dialogDOList = dialogsDAO.SelectDialogsByPeerType(userId, peerType)
+		dialogDOList = dialogsDAO.SelectDialogsByPeerType(userId, int8(peerType))
 		glog.Infof("SelectDialogsByPeerType(%d, %d) - {%v}", userId, int32(peerType), dialogDOList)
 	}
 
@@ -119,7 +120,42 @@ func (m *dialogModel) GetPinnedDialogs(userId int32) (dialogs []*mtproto.TLDialo
 	return
 }
 
-func (m *dialogModel) UpdateTopMessage(dialogId, topMessage int32) {
-	dialogsDAO := dao.GetUserDialogsDAO(dao.DB_MASTER)
-	dialogsDAO.UpdateTopMessage(topMessage, dialogId)
+//func (m *dialogModel) UpdateTopMessage(dialogId, topMessage int32) {
+//	dialogsDAO := dao.GetUserDialogsDAO(dao.DB_MASTER)
+//	dialogsDAO.UpdateTopMessage(topMessage, dialogId)
+//}
+
+func (m *dialogModel) CreateOrUpdateByLastMessage(userId int32, peer *base.PeerUtil, topMessage int32, unreadMentions bool) (dialogId int32) {
+	// TODO(@benqi): 事务
+	// 创建会话
+	slave := dao.GetUserDialogsDAO(dao.DB_SLAVE)
+	master := dao.GetUserDialogsDAO(dao.DB_MASTER)
+
+	dialog :=slave.SelectByPeer(userId, int8(peer.PeerType), peer.PeerId)
+	if dialog == nil {
+		dialog = &dataobject.UserDialogsDO{}
+		dialog.UserId = userId
+		dialog.PeerType = int8(peer.PeerType)
+		dialog.PeerId = peer.PeerId
+		if unreadMentions {
+			dialog.UnreadMentionsCount = 1
+		} else {
+			dialog.UnreadMentionsCount = 0
+		}
+		dialog.UnreadCount = 1
+		dialog.TopMessage = topMessage
+		dialog.CreatedAt = base2.NowFormatYMDHMS()
+
+		dialogId = int32(master.Insert(dialog))
+	} else {
+		if unreadMentions {
+			dialog.UnreadMentionsCount += 1
+		}
+		dialog.UnreadCount += 1
+		dialog.TopMessage = topMessage
+		master.UpdateTopMessage(topMessage, dialog.UnreadCount, dialog.UnreadMentionsCount, dialog.Id)
+
+		dialogId = dialog.Id
+	}
+	return
 }

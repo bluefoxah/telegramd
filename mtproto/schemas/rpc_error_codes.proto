@@ -129,7 +129,7 @@ enum TLRpcErrorCodes {
 
     // PHONE_NUMBER_BANNED
     // SESSION_PASSWORD_NEEDED
-
+    //
     BAD_REQUEST = 400;
 
     // There was an unauthorized attempt to use functionality available only to authorized users.

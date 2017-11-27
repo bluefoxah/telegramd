@@ -3,14 +3,14 @@
     <operation name="Insert">
         <sql>
             INSERT INTO chats
-                (creator_user_id, access_hash, create_random_id, title, title_changer_user_id, title_change_random_id, title_changed_at, avatar_changer_user_id, avatar_change_random_id, avatar_changed_at, created_at)
+                (creator_user_id, access_hash, participant_count, create_random_id, title, title_changer_user_id, title_change_random_id, title_changed_at, avatar_changer_user_id, avatar_change_random_id, avatar_changed_at, created_at)
             VALUES
-                (:creator_user_id, :access_hash, :create_random_id, :title, :title_changer_user_id, :title_change_random_id, :title_changed_at, :avatar_changer_user_id, :avatar_change_random_id, :avatar_changed_at, :created_at)
+                (:creator_user_id, :access_hash, :participant_count, :create_random_id, :title, :title_changer_user_id, :title_change_random_id, :title_changed_at, :avatar_changer_user_id, :avatar_change_random_id, :avatar_changed_at, :created_at)
         </sql>
     </operation>
     <operation name="Select">
         <sql>
-            SELECT id, title, version WHERE id=:id
+            SELECT id, participant_count, title, version FROm chats WHERE id=:id
         </sql>
     </operation>
     <operation name="UpdateTitle">
