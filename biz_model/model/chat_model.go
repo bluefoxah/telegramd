@@ -174,3 +174,34 @@ func (m *chatModel) GetChatParticipants(chatId int32) (*mtproto.TLChatParticipan
 	return participants
 }
 
+func (m *chatModel) GetChatsByIDList(idList []int32) (chats []*mtproto.TLChat) {
+	// TODO(@benqi): Check messageDAO
+	chatsDOList := dao.GetChatsDAO(dao.DB_SLAVE).SelectByIdList(idList)
+
+	for _, chatDO := range chatsDOList {
+		chat := &mtproto.TLChat{}
+		chat.Id = chatDO.Id
+		chat.Title = chatDO.Title
+		chat.Photo = mtproto.MakeChatPhoto(&mtproto.TLChatPhotoEmpty{})
+		chat.Version = chatDO.Version
+		chat.Date = int32(time.Now().Unix())
+		chats = append(chats, chat)
+	}
+	return
+}
+
+func (m *chatModel) GetChatListChatsByIDList(idList []int32) (chats []*mtproto.Chat) {
+	// TODO(@benqi): Check messageDAO
+	chatsDOList := dao.GetChatsDAO(dao.DB_SLAVE).SelectByIdList(idList)
+
+	for _, chatDO := range chatsDOList {
+		chat := &mtproto.TLChat{}
+		chat.Id = chatDO.Id
+		chat.Title = chatDO.Title
+		chat.Photo = mtproto.MakeChatPhoto(&mtproto.TLChatPhotoEmpty{})
+		chat.Version = chatDO.Version
+		chat.Date = int32(time.Now().Unix())
+		chats = append(chats, chat.ToChat())
+	}
+	return
+}

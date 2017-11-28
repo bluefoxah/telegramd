@@ -15,7 +15,7 @@
     </operation>
     <operation name="SelectById">
         <sql>
-            SELECT id, access_hash, first_name, last_name, username FROM users WHERE id=:id limit 1
+            SELECT id, access_hash, first_name, last_name, username, phone FROM users WHERE id=:id limit 1
         </sql>
     </operation>
     <operation name="SelectUsersByIdList" result_set="list">
@@ -23,7 +23,7 @@
             <param name="id_list" type="[]int32" />
         </params>
         <sql>
-            SELECT id, access_hash, first_name, last_name, username FROM users WHERE id in (:id_list)
+            SELECT id, access_hash, first_name, last_name, username, phone FROM users WHERE id in (:id_list)
         </sql>
     </operation>
     <operation name="SelectByQueryString" result_set="list">
@@ -47,7 +47,7 @@
 
     <operation name="UpdateProfile">
         <sql>
-            UPDATE users SET first_name=:first_name, last_name=:last_name, about=:about WHERE id=:id
+            UPDATE users SET first_name = :first_name, last_name = :last_name, about = :about WHERE id=:id
         </sql>
     </operation>
 </table>

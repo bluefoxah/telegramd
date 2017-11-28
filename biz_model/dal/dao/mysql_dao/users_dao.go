@@ -82,10 +82,10 @@ func (dao *UsersDAO) SelectByPhoneNumber(phone string) *dataobject.UsersDO {
 	return do
 }
 
-// select id, access_hash, first_name, last_name, username from users where id = :id limit 1
+// select id, access_hash, first_name, last_name, username, phone from users where id = :id limit 1
 // TODO(@benqi): sqlmap
 func (dao *UsersDAO) SelectById(id int32) *dataobject.UsersDO {
-	var query = "select id, access_hash, first_name, last_name, username from users where id = ? limit 1"
+	var query = "select id, access_hash, first_name, last_name, username, phone from users where id = ? limit 1"
 	rows, err := dao.db.Queryx(query, id)
 
 	if err != nil {
@@ -111,10 +111,10 @@ func (dao *UsersDAO) SelectById(id int32) *dataobject.UsersDO {
 	return do
 }
 
-// select id, access_hash, first_name, last_name, username from users where id in (:id_list)
+// select id, access_hash, first_name, last_name, username, phone from users where id in (:id_list)
 // TODO(@benqi): sqlmap
 func (dao *UsersDAO) SelectUsersByIdList(id_list []int32) []dataobject.UsersDO {
-	var q = "select id, access_hash, first_name, last_name, username from users where id in (?)"
+	var q = "select id, access_hash, first_name, last_name, username, phone from users where id in (?)"
 	query, a, err := sqlx.In(q, id_list)
 	rows, err := dao.db.Queryx(query, a...)
 

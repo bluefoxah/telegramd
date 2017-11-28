@@ -301,25 +301,25 @@ func (s *MessagesServiceImpl) MessagesGetDialogs(ctx context.Context, request *m
 
 	md := grpc_util.RpcMetadataFromIncoming(ctx)
 
-	peer := base.FromInputPeer(request.OffsetPeer)
+	// peer := base.FromInputPeer(request.OffsetPeer)
 	messageDialogs := &mtproto.TLMessagesDialogs{}
 
-	dialogs := model.GetDialogModel().GetDialogsByUserIDAndType(md.UserId, peer.PeerType)
+	dialogs := model.GetDialogModel().GetDialogsByUserIDAndType(md.UserId, base.PEER_EMPTY)
 	messageIdList := []int32{}
 	userIdList := []int32{md.UserId}
 	chatIdList := []int32{}
 	for _, dialog := range dialogs {
 		// dialog.Peer
 		messageIdList = append(messageIdList, dialog.TopMessage)
+		peer := base.FromPeer(dialog.GetPeer())
 		// TODO(@benqi): 先假设只有PEER_USER
-		//if ptype == base.PEER_USER {
-		//	userIdList = append(userIdList, dialog.Peer.GetPeerUser().UserId)
-		//} else if ptype == base.PEER_CHAT {
-		//	chatIdList = append(chatIdList, dialog.Peer.GetPeerChat().ChatId)
-		//}
-		userIdList = append(userIdList, dialog.Peer.GetPeerUser().UserId)
+		if peer.PeerType == base.PEER_USER {
+			userIdList = append(userIdList, dialog.Peer.GetPeerUser().UserId)
+		} else if peer.PeerType == base.PEER_CHAT {
+			chatIdList = append(chatIdList, dialog.Peer.GetPeerChat().ChatId)
+		}
+		// userIdList = append(userIdList, dialog.Peer.GetPeerUser().UserId)
 		messageDialogs.Dialogs = append(messageDialogs.Dialogs, dialog.ToDialog())
-
 	}
 
 	if len(messageIdList) > 0 {
@@ -337,11 +337,7 @@ func (s *MessagesServiceImpl) MessagesGetDialogs(ctx context.Context, request *m
 	}
 
 	if len(chatIdList) > 0 {
-		// TODO(@benqi): 还未实现chat
-		//chats := model.GetChatModel().GetChatList(chatIdList)
-		//for _, chat := range chats {
-		//	messageDialogs.Users = append(messageDialogs.Users, chat.ToChat())
-		//}
+		messageDialogs.Chats = model.GetChatModel().GetChatListChatsByIDList(chatIdList)
 	}
 
 	glog.Infof("MessagesGetDialogs - reply: %v", messageDialogs)

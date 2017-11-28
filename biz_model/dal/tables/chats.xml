@@ -23,4 +23,12 @@
                 id=:id
         </sql>
     </operation>
+    <operation name="SelectByIdList" result_set="list">
+        <params>
+            <param name="idList" type="[]int32" />
+        </params>
+        <sql>
+            SELECT id, participant_count, title, version FROM chats WHERE id IN (:idList)
+        </sql>
+    </operation>
 </table>

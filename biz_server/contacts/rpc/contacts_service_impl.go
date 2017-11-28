@@ -171,44 +171,30 @@ func (s *ContactsServiceImpl) ContactsGetContacts(ctx context.Context, request *
 	glog.Infof("ContactsGetContacts: %v", request)
 
 	md := grpc_util.RpcMetadataFromIncoming(ctx)
-
-	// TODO(@benqi): Logout逻辑处理，失效AuthKey
-	// reply := mtproto.MakeBool(&mtproto.TLBoolTrue{})
-
 	contacts := &mtproto.TLContactsContacts{}
 
 	contactsDOList := dao.GetUserContactsDAO(dao.DB_SLAVE).SelectUserContacts(md.UserId)
 	contacts.SavedCount = int32(len(contactsDOList))
 
+	userIdList := make([]int32, 0, len(contactsDOList))
+
 	for _, do := range contactsDOList {
 		contact := &mtproto.TLContact{}
 		contact.UserId = do.ContactUserId
-		contact.Mutual = mtproto.MakeBool(&mtproto.TLBoolFalse{})
-
+		contact.Mutual = mtproto.MakeBool(&mtproto.TLBoolTrue{})
 		contacts.Contacts = append(contacts.Contacts, mtproto.MakeContact(contact))
-
-		userDO := dao.GetUsersDAO(dao.DB_SLAVE).SelectById(do.ContactUserId)
-		user := &mtproto.TLUser{}
-		user.Id = userDO.Id
-		if user.Id == md.UserId {
-			user.Self = true
-		} else {
-			user.Self = false
-		}
-		user.Contact = true
-		user.AccessHash = userDO.AccessHash
-		user.FirstName = userDO.FirstName
-		user.LastName = userDO.LastName
-		user.Username = userDO.Username
-		user.Phone = userDO.Phone
-
-		contacts.Users = append(contacts.Users, mtproto.MakeUser(user))
+		userIdList = append(userIdList, contact.UserId)
 	}
 
-	reply := mtproto.MakeContacts_Contacts(contacts)
+	users := model.GetUserModel().GetUserList(userIdList)
+	for _, u := range users {
+		u.Contact = true
+		contacts.Users = append(contacts.Users, u.ToUser())
+	}
+	// reply := mtproto.MakeContacts_Contacts(contacts)
 
-	glog.Infof("ContactsGetContacts - reply: {%v}\n", reply)
-	return reply, nil
+	glog.Infof("ContactsGetContacts - reply: {%v}\n", contacts)
+	return contacts.ToContacts_Contacts(), nil
 }
 
 // @benqi: Android client

@@ -103,3 +103,35 @@ func (dao *ChatsDAO) UpdateTitle(title string, title_changer_user_id int32, titl
 
 	return rows
 }
+
+// select id, participant_count, title, version from chats where id in (:idList)
+// TODO(@benqi): sqlmap
+func (dao *ChatsDAO) SelectByIdList(idList []int32) []dataobject.ChatsDO {
+	var q = "select id, participant_count, title, version from chats where id in (?)"
+	query, a, err := sqlx.In(q, idList)
+	rows, err := dao.db.Queryx(query, a...)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Queryx in SelectByIdList(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	defer rows.Close()
+
+	var values []dataobject.ChatsDO
+	for rows.Next() {
+		v := dataobject.ChatsDO{}
+
+		// TODO(@benqi): 不使用反射
+		err := rows.StructScan(&v)
+		if err != nil {
+			errDesc := fmt.Sprintf("StructScan in SelectByIdList(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+		}
+		values = append(values, v)
+	}
+
+	return values
+}
