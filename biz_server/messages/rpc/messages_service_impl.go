@@ -531,9 +531,10 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 
 			// 推送给sync
 			// 推给客户端的updates
-			updates := mtproto.TLUpdateShortMessage{}
+			updates := mtproto.TLUpdateShortChatMessage{}
 			updates.Id = int32(messageId)
-			updates.UserId = md.UserId
+			updates.FromId = md.UserId
+			updates.ChatId = peer.PeerId
 			updates.Pts = pts
 			updates.PtsCount = 1
 			updates.Message = request.Message
@@ -661,7 +662,9 @@ func (s *MessagesServiceImpl) MessagesCreateChat(ctx context.Context, request *m
 	md := grpc_util.RpcMetadataFromIncoming(ctx)
 	randomId := md.ClientMsgId
 
-	chatUserIdList := make([]int32, 0, len(request.GetUsers()))
+	chatUserIdList := make([]int32, 0, len(request.GetUsers())+1)
+	// chatUserIdList = append(chatUserIdList, md.UserId)
+
 	for _, u := range request.Users {
 		switch u.Payload.(type) {
 		case *mtproto.InputUser_InputUserEmpty:
@@ -674,8 +677,8 @@ func (s *MessagesServiceImpl) MessagesCreateChat(ctx context.Context, request *m
 		}
  	}
 
- 	chat, participants := model.GetChatModel().CreateChat(md.UserId, request.Title, chatUserIdList)
-
+ 	chat, participants := model.GetChatModel().CreateChat(md.UserId, request.Title, chatUserIdList, md.ClientMsgId)
+	chatUserIdList = append(chatUserIdList, md.UserId)
 	peer := &base.PeerUtil{}
 	peer.PeerType = base.PEER_CHAT
 	peer.PeerId = chat.Id
@@ -691,23 +694,19 @@ func (s *MessagesServiceImpl) MessagesCreateChat(ctx context.Context, request *m
 	action.Users = chatUserIdList
 	messageService.Action = action.ToMessageAction()
 
-	messageServiceId := model.GetMessageModel().CreateHistoryMessageService(md.UserId, peer, id.NextId(), messageService)
+	messageServiceId := model.GetMessageModel().CreateHistoryMessageService(md.UserId, peer, md.ClientMsgId, messageService)
 	messageService.Id = int32(messageServiceId)
 
 	users := model.GetUserModel().GetUserList(chatUserIdList)
 	updateUsers := make([]*mtproto.User, 0, len(users))
 	for _, u := range users {
-		// updates := &mtproto.TLUpdates{}
-		updateUsers = append(updateUsers, u.ToUser())
-	}
-
-	for _, u := range users {
+		u.Self = true
 		updates := &mtproto.TLUpdates{}
 
 		// 2. MessageBoxes
 		pts := model.GetMessageModel().CreateMessageBoxes(u.Id, md.UserId, peer, false, messageServiceId)
 		// 3. dialog
-		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, peer, messageServiceId, false)
+		model.GetDialogModel().CreateOrUpdateByLastMessage(u.Id, peer, messageServiceId, false)
 
 		if u.GetId() == md.UserId {
 			updateMessageID := &mtproto.TLUpdateMessageID{}
@@ -750,6 +749,15 @@ func (s *MessagesServiceImpl) MessagesCreateChat(ctx context.Context, request *m
 				[]int32{u.Id},
 				updates.ToUpdates().Encode())
 		}
+		u.Self = false
+	}
+
+	for _, u := range users {
+		// updates := &mtproto.TLUpdates{}
+		if u.Id == md.UserId {
+			u.Self = true
+		}
+		updateUsers = append(updateUsers, u.ToUser())
 	}
 
 	glog.Infof("MessagesCreateChat - reply: {%v}", reply)
@@ -863,6 +871,9 @@ func (s *MessagesServiceImpl) MessagesGetFullChat(ctx context.Context, request *
 
 	users := model.GetUserModel().GetUserList(chatUserIdList)
 	for _, u := range users {
+		if u.Id == md.UserId {
+			u.Self = true
+		}
 		messagesChatFull.Users = append(messagesChatFull.Users, u.ToUser())
 	}
 	messagesChatFull.Chats = append(messagesChatFull.Chats, chat.ToChat())

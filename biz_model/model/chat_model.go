@@ -43,6 +43,43 @@ func GetChatModel() *chatModel {
 	return chatInstance
 }
 
+func (m *chatModel) AddChatParticipant(chatId, chatUserId, inviterId int32, participantType int8) (participant *mtproto.ChatParticipant) {
+	// uId := u.GetInputUser().GetUserId()
+	chatUserDO := &dataobject.ChatUsersDO{}
+
+	chatUserDO.ChatId = chatId
+	chatUserDO.CreatedAt = base.NowFormatYMDHMS()
+	chatUserDO.State = 0
+	chatUserDO.InvitedAt = int32(time.Now().Unix())
+	chatUserDO.InviterUserId = inviterId
+	chatUserDO.JoinedAt = chatUserDO.InvitedAt
+	chatUserDO.UserId = chatUserId
+	chatUserDO.ParticipantType = participantType
+	dao.GetChatUsersDAO(dao.DB_MASTER).Insert(chatUserDO)
+
+	if participantType == 2 {
+		participant2 := &mtproto.TLChatParticipantCreator{}
+		participant2.UserId = chatUserId
+
+		participant = participant2.ToChatParticipant()
+	} else if participantType == 1 {
+		participant2 := &mtproto.TLChatParticipant{}
+		participant2.UserId = chatUserId
+		participant2.Date = chatUserDO.InvitedAt
+		participant2.InviterId = inviterId
+
+		participant = participant2.ToChatParticipant()
+	} else if participantType == 0 {
+		participant2 := &mtproto.TLChatParticipant{}
+		participant2.UserId = chatUserId
+		participant2.Date = chatUserDO.InvitedAt
+		participant2.InviterId = inviterId
+		// participants.Participants = append(participants.Participants, participant.ToChatParticipant())
+
+		participant = participant2.ToChatParticipant()
+	}
+	return
+}
 /*
 	chatEmpty#9ba2d800 id:int = Chat;
 	chat#d91cdd54 flags:# creator:flags.0?true kicked:flags.1?true left:flags.2?true admins_enabled:flags.3?true admin:flags.4?true deactivated:flags.5?true id:int title:string photo:ChatPhoto participants_count:int date:int version:int migrated_to:flags.6?InputChannel = Chat;
@@ -50,13 +87,14 @@ func GetChatModel() *chatModel {
 	channel#cb44b1c flags:# creator:flags.0?true left:flags.2?true editor:flags.3?true broadcast:flags.5?true verified:flags.7?true megagroup:flags.8?true restricted:flags.9?true democracy:flags.10?true signatures:flags.11?true min:flags.12?true id:int access_hash:flags.13?long title:string username:flags.6?string photo:ChatPhoto date:int version:int restriction_reason:flags.9?string admin_rights:flags.14?ChannelAdminRights banned_rights:flags.15?ChannelBannedRights = Chat;
 	channelForbidden#289da732 flags:# broadcast:flags.5?true megagroup:flags.8?true id:int access_hash:long title:string until_date:flags.16?int = Chat;
  */
-func (m *chatModel) CreateChat(userId int32, title string, chatUserIdList []int32) (*mtproto.TLChat, *mtproto.TLChatParticipants) {
+func (m *chatModel) CreateChat(userId int32, title string, chatUserIdList []int32, random int64) (*mtproto.TLChat, *mtproto.TLChatParticipants) {
 	chat := &mtproto.TLChat{}
 	// chat.Id = int32(lastInsertId)
 	chat.Title = title
 	chat.Photo = mtproto.MakeChatPhoto(&mtproto.TLChatPhotoEmpty{})
 	chat.Date = int32(time.Now().Unix())
 	chat.Version = 1
+	chat.ParticipantsCount = int32(len(chatUserIdList))+1
 
 	chatDO := &dataobject.ChatsDO{}
 	chatDO.AccessHash = id.NextId()
@@ -76,6 +114,7 @@ func (m *chatModel) CreateChat(userId int32, title string, chatUserIdList []int3
 	// TODO(@benqi): 使用客户端message_id
 	chatDO.AvatarChangeRandomId = chatDO.AccessHash
 	// dao.GetChatsDA()
+	chatDO.ParticipantCount = chat.ParticipantsCount
 
 	// TODO(@benqi): 事务！
 	chat.Id = int32(dao.GetChatsDAO(dao.DB_MASTER).Insert(chatDO))
@@ -85,34 +124,14 @@ func (m *chatModel) CreateChat(userId int32, title string, chatUserIdList []int3
 	participants.ChatId = chat.Id
 	participants.Version = 1
 
+
+	participants.Participants = append(participants.Participants, m.AddChatParticipant(chat.Id, userId, userId, 2))
 	// chatUserIdList := make([]int32, 0, len(request.GetUsers()))
 	for _, chatUserId := range chatUserIdList {
-		// uId := u.GetInputUser().GetUserId()
-		chatUserDO := &dataobject.ChatUsersDO{}
-		chatUserDO.ChatId = chat.Id
-		chatUserDO.CreatedAt = chatDO.CreatedAt
-		chatUserDO.State = 0
-		chatUserDO.InvitedAt = chat.Date
-		chatUserDO.InviterUserId = userId
-		chatUserDO.JoinedAt = chat.Date
-		chatUserDO.UserId = userId
-		chat.ParticipantsCount += 1
-
 		if chatUserId == userId {
-			chatUserDO.ParticipantType = 2
-			participant := &mtproto.TLChatParticipantCreator{}
-			participant.UserId = userId
-			participants.Participants = append(participants.Participants, participant.ToChatParticipant())
-		} else {
-			chatUserDO.ParticipantType = 0
-			participant := &mtproto.TLChatParticipant{}
-			participant.UserId = chatUserId
-			participant.Date = chat.Date
-			participant.InviterId = userId
-			participants.Participants = append(participants.Participants, participant.ToChatParticipant())
+			continue
 		}
-
-		dao.GetChatUsersDAO(dao.DB_MASTER).Insert(chatUserDO)
+		participants.Participants = append(participants.Participants, m.AddChatParticipant(chat.Id, chatUserId, userId, 0))
 	}
 
 	return chat, participants
@@ -128,6 +147,7 @@ func (m *chatModel) GetChat(chatId int32) (*mtproto.TLChat) {
 	chat.Title = chatDO.Title
 	chat.Photo = mtproto.MakeChatPhoto(&mtproto.TLChatPhotoEmpty{})
 	chat.Version = chatDO.Version
+	chat.ParticipantsCount = chatDO.ParticipantCount
 	chat.Date = int32(time.Now().Unix())
 	return chat
 }
@@ -152,7 +172,7 @@ func (m *chatModel) GetChatParticipants(chatId int32) (*mtproto.TLChatParticipan
 	participants.Version = 1
 	for _, chatUsersDO := range chatUsersDOList {
 		// uId := u.GetInputUser().GetUserId()
-		if chatUsersDO.ParticipantType == 0 {
+		if chatUsersDO.ParticipantType == 2 {
 			// chatUserDO.IsAdmin = 1
 			participant := &mtproto.TLChatParticipantCreator{}
 			participant.UserId = chatUsersDO.UserId
@@ -163,7 +183,7 @@ func (m *chatModel) GetChatParticipants(chatId int32) (*mtproto.TLChatParticipan
 			participant.InviterId = chatUsersDO.InviterUserId
 			participant.Date = chatUsersDO.JoinedAt
 			participants.Participants = append(participants.Participants, participant.ToChatParticipant())
-		} else if chatUsersDO.ParticipantType == 2 {
+		} else if chatUsersDO.ParticipantType == 0 {
 			participant := &mtproto.TLChatParticipant{}
 			participant.UserId = chatUsersDO.UserId
 			participant.InviterId = chatUsersDO.InviterUserId
