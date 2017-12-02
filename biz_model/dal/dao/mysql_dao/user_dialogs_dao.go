@@ -33,10 +33,10 @@ func NewUserDialogsDAO(db *sqlx.DB) *UserDialogsDAO {
 	return &UserDialogsDAO{db}
 }
 
-// insert into user_dialogs(user_id, peer_type, peer_id, created_at) values (:user_id, :peer_type, :peer_id, :created_at)
+// insert into user_dialogs(user_id, peer_type, peer_id, top_message, unread_count, date2, created_at) values (:user_id, :peer_type, :peer_id, :top_message, :unread_count, :date2, :created_at)
 // TODO(@benqi): sqlmap
 func (dao *UserDialogsDAO) Insert(do *dataobject.UserDialogsDO) int64 {
-	var query = "insert into user_dialogs(user_id, peer_type, peer_id, created_at) values (:user_id, :peer_type, :peer_id, :created_at)"
+	var query = "insert into user_dialogs(user_id, peer_type, peer_id, top_message, unread_count, date2, created_at) values (:user_id, :peer_type, :peer_id, :top_message, :unread_count, :date2, :created_at)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
@@ -53,10 +53,10 @@ func (dao *UserDialogsDAO) Insert(do *dataobject.UserDialogsDO) int64 {
 	return id
 }
 
-// select peer_type, peer_id from user_dialogs where user_id = :user_id and is_pinned = 1
+// select peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, date2 from user_dialogs where user_id = :user_id and is_pinned = 1
 // TODO(@benqi): sqlmap
 func (dao *UserDialogsDAO) SelectPinnedDialogs(user_id int32) []dataobject.UserDialogsDO {
-	var query = "select peer_type, peer_id from user_dialogs where user_id = ? and is_pinned = 1"
+	var query = "select peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, date2 from user_dialogs where user_id = ? and is_pinned = 1"
 	rows, err := dao.db.Queryx(query, user_id)
 
 	if err != nil {
@@ -113,10 +113,10 @@ func (dao *UserDialogsDAO) CheckExists(user_id int32, peer_type int8, peer_id in
 	return do
 }
 
-// select id, unread_count, unread_mentions_count from user_dialogs where user_id = :user_id and peer_type = :peer_type and peer_id = :peer_id
+// select id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, date2 from user_dialogs where user_id = :user_id and peer_type = :peer_type and peer_id = :peer_id
 // TODO(@benqi): sqlmap
 func (dao *UserDialogsDAO) SelectByPeer(user_id int32, peer_type int8, peer_id int32) *dataobject.UserDialogsDO {
-	var query = "select id, unread_count, unread_mentions_count from user_dialogs where user_id = ? and peer_type = ? and peer_id = ?"
+	var query = "select id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, date2 from user_dialogs where user_id = ? and peer_type = ? and peer_id = ?"
 	rows, err := dao.db.Queryx(query, user_id, peer_type, peer_id)
 
 	if err != nil {
@@ -142,10 +142,10 @@ func (dao *UserDialogsDAO) SelectByPeer(user_id int32, peer_type int8, peer_id i
 	return do
 }
 
-// select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = :user_id
+// select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, date2 from user_dialogs where user_id = :user_id
 // TODO(@benqi): sqlmap
 func (dao *UserDialogsDAO) SelectDialogsByUserID(user_id int32) []dataobject.UserDialogsDO {
-	var query = "select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = ?"
+	var query = "select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, date2 from user_dialogs where user_id = ?"
 	rows, err := dao.db.Queryx(query, user_id)
 
 	if err != nil {
@@ -173,10 +173,41 @@ func (dao *UserDialogsDAO) SelectDialogsByUserID(user_id int32) []dataobject.Use
 	return values
 }
 
-// select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = :user_id and peer_type = :peer_type
+// select peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, date2 from user_dialogs where user_id = :user_id and is_pinned = :is_pinned and date2 > :date2 order by date2 desc limit :limit
+// TODO(@benqi): sqlmap
+func (dao *UserDialogsDAO) SelectDialogsByPinnedAndOffsetDate(user_id int32, is_pinned int8, date2 int32, limit int32) []dataobject.UserDialogsDO {
+	var query = "select peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, date2 from user_dialogs where user_id = ? and is_pinned = ? and date2 > ? order by date2 desc limit ?"
+	rows, err := dao.db.Queryx(query, user_id, is_pinned, date2, limit)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Queryx in SelectDialogsByPinnedAndOffsetDate(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	defer rows.Close()
+
+	var values []dataobject.UserDialogsDO
+	for rows.Next() {
+		v := dataobject.UserDialogsDO{}
+
+		// TODO(@benqi): 不使用反射
+		err := rows.StructScan(&v)
+		if err != nil {
+			errDesc := fmt.Sprintf("StructScan in SelectDialogsByPinnedAndOffsetDate(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+		}
+		values = append(values, v)
+	}
+
+	return values
+}
+
+// select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, date2 from user_dialogs where user_id = :user_id and peer_type = :peer_type
 // TODO(@benqi): sqlmap
 func (dao *UserDialogsDAO) SelectDialogsByPeerType(user_id int32, peer_type int8) []dataobject.UserDialogsDO {
-	var query = "select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count from user_dialogs where user_id = ? and peer_type = ?"
+	var query = "select peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, date2 from user_dialogs where user_id = ? and peer_type = ?"
 	rows, err := dao.db.Queryx(query, user_id, peer_type)
 
 	if err != nil {
@@ -204,11 +235,11 @@ func (dao *UserDialogsDAO) SelectDialogsByPeerType(user_id int32, peer_type int8
 	return values
 }
 
-// update user_dialogs set top_message = :top_message, unread_count = :unread_count, unread_mentions_count = :unread_mentions_count where id = :id
+// update user_dialogs set top_message = :top_message, unread_count = :unread_count, unread_mentions_count = :unread_mentions_count, date2 = :date2 where id = :id
 // TODO(@benqi): sqlmap
-func (dao *UserDialogsDAO) UpdateTopMessage(top_message int32, unread_count int32, unread_mentions_count int32, id int32) int64 {
-	var query = "update user_dialogs set top_message = ?, unread_count = ?, unread_mentions_count = ? where id = ?"
-	r, err := dao.db.Exec(query, top_message, unread_count, unread_mentions_count, id)
+func (dao *UserDialogsDAO) UpdateTopMessage(top_message int32, unread_count int32, unread_mentions_count int32, date2 int32, id int32) int64 {
+	var query = "update user_dialogs set top_message = ?, unread_count = ?, unread_mentions_count = ?, date2 = ? where id = ?"
+	r, err := dao.db.Exec(query, top_message, unread_count, unread_mentions_count, date2, id)
 
 	if err != nil {
 		errDesc := fmt.Sprintf("Exec in UpdateTopMessage(_), error: %v", err)

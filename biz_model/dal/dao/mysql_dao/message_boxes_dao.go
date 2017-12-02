@@ -33,10 +33,10 @@ func NewMessageBoxesDAO(db *sqlx.DB) *MessageBoxesDAO {
 	return &MessageBoxesDAO{db}
 }
 
-// insert into message_boxes(user_id, message_box_type, message_id, pts, created_at) values (:user_id, :message_box_type, :message_id, :pts, :created_at)
+// insert into message_boxes(user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, date2, created_at) values (:user_id, :sender_user_id, :message_box_type, :peer_type, :peer_id, :pts, :message_id, :media_unread, :date2, :created_at)
 // TODO(@benqi): sqlmap
 func (dao *MessageBoxesDAO) Insert(do *dataobject.MessageBoxesDO) int64 {
-	var query = "insert into message_boxes(user_id, message_box_type, message_id, pts, created_at) values (:user_id, :message_box_type, :message_id, :pts, :created_at)"
+	var query = "insert into message_boxes(user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, date2, created_at) values (:user_id, :sender_user_id, :message_box_type, :peer_type, :peer_id, :pts, :message_id, :media_unread, :date2, :created_at)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
@@ -84,12 +84,12 @@ func (dao *MessageBoxesDAO) SelectLastPts(user_id int32) *dataobject.MessageBoxe
 
 // select pts from message_boxes where user_id = :user_id and message_id > :message_id order by pts asc
 // TODO(@benqi): sqlmap
-func (dao *MessageBoxesDAO) SelectPtsByGTMessageID(user_id int32, message_id int32) []dataobject.MessageBoxesDO {
+func (dao *MessageBoxesDAO) SelectPtsByGtMessageID(user_id int32, message_id int32) []dataobject.MessageBoxesDO {
 	var query = "select pts from message_boxes where user_id = ? and message_id > ? order by pts asc"
 	rows, err := dao.db.Queryx(query, user_id, message_id)
 
 	if err != nil {
-		errDesc := fmt.Sprintf("Queryx in SelectPtsByGTMessageID(_), error: %v", err)
+		errDesc := fmt.Sprintf("Queryx in SelectPtsByGtMessageID(_), error: %v", err)
 		glog.Error(errDesc)
 		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
@@ -103,7 +103,101 @@ func (dao *MessageBoxesDAO) SelectPtsByGTMessageID(user_id int32, message_id int
 		// TODO(@benqi): 不使用反射
 		err := rows.StructScan(&v)
 		if err != nil {
-			errDesc := fmt.Sprintf("StructScan in SelectPtsByGTMessageID(_), error: %v", err)
+			errDesc := fmt.Sprintf("StructScan in SelectPtsByGtMessageID(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+		}
+		values = append(values, v)
+	}
+
+	return values
+}
+
+// select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = :user_id and peer_type = :peer_type and peer_id = :peer_id and message_id > :message_id order by pts asc limit :limit
+// TODO(@benqi): sqlmap
+func (dao *MessageBoxesDAO) SelectByPeerOffsetLimit(user_id int32, peer_type int8, peer_id int32, message_id int32, limit int32) []dataobject.MessageBoxesDO {
+	var query = "select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = ? and peer_type = ? and peer_id = ? and message_id > ? order by pts asc limit ?"
+	rows, err := dao.db.Queryx(query, user_id, peer_type, peer_id, message_id, limit)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Queryx in SelectByPeerOffsetLimit(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	defer rows.Close()
+
+	var values []dataobject.MessageBoxesDO
+	for rows.Next() {
+		v := dataobject.MessageBoxesDO{}
+
+		// TODO(@benqi): 不使用反射
+		err := rows.StructScan(&v)
+		if err != nil {
+			errDesc := fmt.Sprintf("StructScan in SelectByPeerOffsetLimit(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+		}
+		values = append(values, v)
+	}
+
+	return values
+}
+
+// select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = :user_id and pts > :pts
+// TODO(@benqi): sqlmap
+func (dao *MessageBoxesDAO) SelectByGtPts(user_id int32, pts int32) []dataobject.MessageBoxesDO {
+	var query = "select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = ? and pts > ?"
+	rows, err := dao.db.Queryx(query, user_id, pts)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Queryx in SelectByGtPts(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	defer rows.Close()
+
+	var values []dataobject.MessageBoxesDO
+	for rows.Next() {
+		v := dataobject.MessageBoxesDO{}
+
+		// TODO(@benqi): 不使用反射
+		err := rows.StructScan(&v)
+		if err != nil {
+			errDesc := fmt.Sprintf("StructScan in SelectByGtPts(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+		}
+		values = append(values, v)
+	}
+
+	return values
+}
+
+// select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = :user_id and message_id in (:idList)
+// TODO(@benqi): sqlmap
+func (dao *MessageBoxesDAO) SelectByMessageIdList(user_id int32, idList []int32) []dataobject.MessageBoxesDO {
+	var q = "select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = ? and message_id in (?)"
+	query, a, err := sqlx.In(q, user_id, idList)
+	rows, err := dao.db.Queryx(query, a...)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Queryx in SelectByMessageIdList(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	defer rows.Close()
+
+	var values []dataobject.MessageBoxesDO
+	for rows.Next() {
+		v := dataobject.MessageBoxesDO{}
+
+		// TODO(@benqi): 不使用反射
+		err := rows.StructScan(&v)
+		if err != nil {
+			errDesc := fmt.Sprintf("StructScan in SelectByMessageIdList(_), error: %v", err)
 			glog.Error(errDesc)
 			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}

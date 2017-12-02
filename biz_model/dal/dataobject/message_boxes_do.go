@@ -28,6 +28,7 @@ type MessageBoxesDO struct {
 	MessageId      int32  `db:"message_id"`
 	MediaUnread    int8   `db:"media_unread"`
 	State          int8   `db:"state"`
+	Date2          int32  `db:"date2"`
 	CreatedAt      string `db:"created_at"`
 	UpdatedAt      string `db:"updated_at"`
 }

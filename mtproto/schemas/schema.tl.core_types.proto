@@ -52,8 +52,6 @@ message Null {
   }
 }
 
-
-
 // boolFalse#bc799737 = Bool;
 message TL_boolFalse {
 }

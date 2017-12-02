@@ -33,10 +33,10 @@ func NewMessagesDAO(db *sqlx.DB) *MessagesDAO {
 	return &MessagesDAO{db}
 }
 
-// insert into messages(user_id, peer_type, peer_id, random_id, message, date2) values (:user_id, :peer_type, :peer_id, :random_id, :message, :date2)
+// insert into messages(sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2) values (:sender_user_id, :peer_type, :peer_id, :random_id, :message_type, :message_data, :date2)
 // TODO(@benqi): sqlmap
 func (dao *MessagesDAO) Insert(do *dataobject.MessagesDO) int64 {
-	var query = "insert into messages(user_id, peer_type, peer_id, random_id, message, date2) values (:user_id, :peer_type, :peer_id, :random_id, :message, :date2)"
+	var query = "insert into messages(sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2) values (:sender_user_id, :peer_type, :peer_id, :random_id, :message_type, :message_data, :date2)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
@@ -53,10 +53,10 @@ func (dao *MessagesDAO) Insert(do *dataobject.MessagesDO) int64 {
 	return id
 }
 
-// select id, user_id, peer_type, peer_id, random_id, message, date2 from messages where id in (:idList)
+// select id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2 from messages where id in (:idList)
 // TODO(@benqi): sqlmap
 func (dao *MessagesDAO) SelectByIdList(idList []int32) []dataobject.MessagesDO {
-	var q = "select id, user_id, peer_type, peer_id, random_id, message, date2 from messages where id in (?)"
+	var q = "select id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2 from messages where id in (?)"
 	query, a, err := sqlx.In(q, idList)
 	rows, err := dao.db.Queryx(query, a...)
 
@@ -76,99 +76,6 @@ func (dao *MessagesDAO) SelectByIdList(idList []int32) []dataobject.MessagesDO {
 		err := rows.StructScan(&v)
 		if err != nil {
 			errDesc := fmt.Sprintf("StructScan in SelectByIdList(_), error: %v", err)
-			glog.Error(errDesc)
-			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
-		}
-		values = append(values, v)
-	}
-
-	return values
-}
-
-// select id, user_id, peer_type, peer_id, random_id, message, date2 from messages where peer_type = :peer_type and (user_id = :user_id and peer_id = :peer_id) or (user_id = :peer_id and peer_id = :user_id)
-// TODO(@benqi): sqlmap
-func (dao *MessagesDAO) SelectByUserIdAndPeer(peer_type int32, user_id int32, peer_id int32) []dataobject.MessagesDO {
-	var query = "select id, user_id, peer_type, peer_id, random_id, message, date2 from messages where peer_type = ? and (user_id = ? and peer_id = ?) or (user_id = ? and peer_id = ?)"
-	rows, err := dao.db.Queryx(query, peer_type, user_id, peer_id, peer_id, user_id)
-
-	if err != nil {
-		errDesc := fmt.Sprintf("Queryx in SelectByUserIdAndPeer(_), error: %v", err)
-		glog.Error(errDesc)
-		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
-	}
-
-	defer rows.Close()
-
-	var values []dataobject.MessagesDO
-	for rows.Next() {
-		v := dataobject.MessagesDO{}
-
-		// TODO(@benqi): 不使用反射
-		err := rows.StructScan(&v)
-		if err != nil {
-			errDesc := fmt.Sprintf("StructScan in SelectByUserIdAndPeer(_), error: %v", err)
-			glog.Error(errDesc)
-			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
-		}
-		values = append(values, v)
-	}
-
-	return values
-}
-
-// select id, user_id, peer_type, peer_id, random_id, message, date2 from messages where id < :offset_id and peer_type = :peer_type and ((user_id = :user_id and peer_id = :peer_id) or (user_id = :peer_id and peer_id = :user_id)) order by id desc limit :limit
-// TODO(@benqi): sqlmap
-func (dao *MessagesDAO) SelectByUserIdAndPeerOffsetLimit(offset_id int32, peer_type int32, user_id int32, peer_id int32, limit int32) []dataobject.MessagesDO {
-	var query = "select id, user_id, peer_type, peer_id, random_id, message, date2 from messages where id < ? and peer_type = ? and ((user_id = ? and peer_id = ?) or (user_id = ? and peer_id = ?)) order by id desc limit ?"
-	rows, err := dao.db.Queryx(query, offset_id, peer_type, user_id, peer_id, peer_id, user_id, limit)
-
-	if err != nil {
-		errDesc := fmt.Sprintf("Queryx in SelectByUserIdAndPeerOffsetLimit(_), error: %v", err)
-		glog.Error(errDesc)
-		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
-	}
-
-	defer rows.Close()
-
-	var values []dataobject.MessagesDO
-	for rows.Next() {
-		v := dataobject.MessagesDO{}
-
-		// TODO(@benqi): 不使用反射
-		err := rows.StructScan(&v)
-		if err != nil {
-			errDesc := fmt.Sprintf("StructScan in SelectByUserIdAndPeerOffsetLimit(_), error: %v", err)
-			glog.Error(errDesc)
-			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
-		}
-		values = append(values, v)
-	}
-
-	return values
-}
-
-// select id, user_id, peer_type, peer_id, random_id, message, date2 from messages where id in (select message_id from message_boxs where user_id = :user_id and pts > :pts)
-// TODO(@benqi): sqlmap
-func (dao *MessagesDAO) SelectByPts(user_id int32, pts int32) []dataobject.MessagesDO {
-	var query = "select id, user_id, peer_type, peer_id, random_id, message, date2 from messages where id in (select message_id from message_boxs where user_id = ? and pts > ?)"
-	rows, err := dao.db.Queryx(query, user_id, pts)
-
-	if err != nil {
-		errDesc := fmt.Sprintf("Queryx in SelectByPts(_), error: %v", err)
-		glog.Error(errDesc)
-		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
-	}
-
-	defer rows.Close()
-
-	var values []dataobject.MessagesDO
-	for rows.Next() {
-		v := dataobject.MessagesDO{}
-
-		// TODO(@benqi): 不使用反射
-		err := rows.StructScan(&v)
-		if err != nil {
-			errDesc := fmt.Sprintf("StructScan in SelectByPts(_), error: %v", err)
 			glog.Error(errDesc)
 			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}

@@ -2,30 +2,26 @@
 <table sqlname="messages">
     <operation name="Insert">
         <sql>
-            INSERT INTO messages (user_id, peer_type, peer_id, random_id, message, date2) VALUES (:user_id, :peer_type, :peer_id, :random_id, :message, :date2)
+            INSERT INTO messages
+                (sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2)
+            VALUES
+                (:sender_user_id, :peer_type, :peer_id, :random_id, :message_type, :message_data, :date2)
         </sql>
     </operation>
-
     <operation name="SelectByIdList" result_set="list">
         <params>
             <param name="idList" type="[]int32" />
         </params>
         <sql>
-            SELECT id, user_id, peer_type, peer_id, random_id, message, date2 FROM messages WHERE id IN (:idList)
-        </sql>
-    </operation>
-
-    <operation name="SelectByUserIdAndPeer" result_set="list">
-        <sql>
             SELECT
-                id, user_id, peer_type, peer_id, random_id, message, date2
+                id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2
             FROM
                 messages
             WHERE
-            peer_type = :peer_type AND (user_id = :user_id AND peer_id = :peer_id) OR (user_id = :peer_id AND peer_id = :user_id)
+                id IN (:idList)
         </sql>
     </operation>
-
+    <!--
     <operation name="SelectByUserIdAndPeerOffsetLimit" result_set="list">
         <params>
             <param name="offset_id" type="int32" />
@@ -34,30 +30,32 @@
         <sql>
             <![CDATA[
             SELECT
-                id, user_id, peer_type, peer_id, random_id, message, date2
+                id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2
             FROM
                 messages
             WHERE
                 id < :offset_id AND peer_type = :peer_type AND
-                ((user_id = :user_id AND peer_id = :peer_id)
-                OR (user_id = :peer_id AND peer_id = :user_id)) ORDER BY id DESC LIMIT :limit
+                ((sender_user_id = :sender_user_id AND peer_id = :peer_id)
+                OR (sender_user_id = :peer_id AND peer_id = :sender_user_id)) ORDER BY id DESC LIMIT :limit
             ]]>
         </sql>
     </operation>
 
-    <operation name="SelectByPts" result_set="list">
+    <operation name="SelectChatMessageByOffsetLimit" result_set="list">
         <params>
-            <param name="user_id" type="int32" />
-            <param name="pts" type="int32" />
+            <param name="offset_id" type="int32" />
+            <param name="limit" type="int32" />
         </params>
         <sql>
+            <![CDATA[
             SELECT
-                id, user_id, peer_type, peer_id, random_id, message, date2
+                id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2
             FROM
                 messages
             WHERE
-                id IN (SELECT message_id FROM message_boxs WHERE user_id = :user_id AND pts > :pts)
+                id < :offset_id AND peer_type = :peer_type AND sender_user_id = :sender_user_id ORDER BY id DESC LIMIT :limit
+            ]]>
         </sql>
     </operation>
-
+    -->
 </table>

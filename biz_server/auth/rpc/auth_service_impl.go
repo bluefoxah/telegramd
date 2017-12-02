@@ -28,6 +28,7 @@ import (
 	"github.com/nebulaim/telegramd/frontend/id"
 	"fmt"
 	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/ttacon/libphonenumber"
 )
 
 type AuthServiceImpl struct {
@@ -75,10 +76,12 @@ func (s *AuthServiceImpl) AuthCheckPhone(ctx context.Context, request *mtproto.T
 	// TODO(@benqi): panic/recovery
 	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
 
-	usersDO := usersDAO.SelectByPhoneNumber(request.PhoneNumber)
+	// 客户端发送的手机号格式为: "+86 111 1111 1111"，归一化
+	phoneNumer := libphonenumber.NormalizeDigitsOnly(request.PhoneNumber)
+
+	usersDO := usersDAO.SelectByPhoneNumber(phoneNumer)
 
 	var reply *mtproto.Auth_CheckedPhone
-
 	if usersDO == nil {
 		// 未注册
 		reply = mtproto.MakeAuth_CheckedPhone(&mtproto.TLAuthCheckedPhone{
@@ -92,6 +95,9 @@ func (s *AuthServiceImpl) AuthCheckPhone(ctx context.Context, request *mtproto.T
 	}
 
 	glog.Infof("AuthCheckPhone - reply: {%v}\n", reply)
+
+	// TODO(@benqi): 强制验证通过
+	// checked := &mtproto.TLAuthCheckedPhone{mtproto.ToBool(true)}
 	return reply, nil
 }
 
@@ -115,12 +121,15 @@ func (s *AuthServiceImpl) AuthSendCode(ctx context.Context, request *mtproto.TLA
 	// 检查满足条件的TransactionHash是否存在，可能的条件：
 	//  1. is_deleted !=0 and now - created_at < 15 分钟
 
-	do := dao.GetAuthPhoneTransactionsDAO(dao.DB_SLAVE).SelectByPhoneAndApiIdAndHash(request.PhoneNumber, request.ApiId, request.ApiHash)
+	// 客户端发送的手机号格式为: "+86 111 1111 1111"，归一化
+	phoneNumer := libphonenumber.NormalizeDigitsOnly(request.PhoneNumber)
+
+	do := dao.GetAuthPhoneTransactionsDAO(dao.DB_SLAVE).SelectByPhoneAndApiIdAndHash(phoneNumer, request.ApiId, request.ApiHash)
 	if do == nil {
 		do = &dataobject.AuthPhoneTransactionsDO{}
 		do.ApiId = request.ApiId
 		do.ApiHash = request.ApiHash
-		do.PhoneNumber = request.PhoneNumber
+		do.PhoneNumber = phoneNumer
 		do.Code = "123456"
 		do.CreatedAt = time.Now().Format("2006-01-02 15:04:05")
 		// TODO(@benqi): 生成一个32字节的随机字串
@@ -166,10 +175,12 @@ func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAut
 	glog.Infof("AuthSignIn - Process: {%v}", request)
 
 	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	// 客户端发送的手机号格式为: "+86 111 1111 1111"，归一化
+	phoneNumer := libphonenumber.NormalizeDigitsOnly(request.PhoneNumber)
 
 	// Check code
 	authPhoneTransactionsDAO := dao.GetAuthPhoneTransactionsDAO(dao.DB_SLAVE)
-	do1 := authPhoneTransactionsDAO.SelectByPhoneCode(request.PhoneCodeHash, request.PhoneCode, request.PhoneNumber)
+	do1 := authPhoneTransactionsDAO.SelectByPhoneCode(request.PhoneCodeHash, request.PhoneCode, phoneNumer)
 	if do1 == nil {
 		err := fmt.Errorf("SelectByPhoneCode(_) return empty in request: {}%v", request)
 		glog.Error(err)
@@ -177,7 +188,7 @@ func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAut
 	}
 
 	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
-	do2 := usersDAO.SelectByPhoneNumber(request.PhoneNumber)
+	do2 := usersDAO.SelectByPhoneNumber(phoneNumer)
 	if do2 == nil {
 		if do1 == nil {
 			err := fmt.Errorf("SelectByPhoneNumber(_) return empty in request{}%v", request)
@@ -203,7 +214,7 @@ func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAut
 	user.FirstName = do2.FirstName
 	user.LastName = do2.LastName
 	user.Username = do2.Username
-	user.Phone = request.PhoneNumber
+	user.Phone = phoneNumer
 	authAuthorization.User = mtproto.MakeUser(user)
 
 	reply := mtproto.MakeAuth_Authorization(authAuthorization)

@@ -188,6 +188,11 @@ func (s *ContactsServiceImpl) ContactsGetContacts(ctx context.Context, request *
 
 	users := model.GetUserModel().GetUserList(userIdList)
 	for _, u := range users {
+		if u.Id == md.UserId {
+			u.Self = true
+		} else {
+			u.Self = false
+		}
 		u.Contact = true
 		contacts.Users = append(contacts.Users, u.ToUser())
 	}
@@ -265,6 +270,7 @@ func (s *ContactsServiceImpl) ContactsDeleteContact(ctx context.Context, request
 func (s *ContactsServiceImpl) ContactsSearch(ctx context.Context, request *mtproto.TLContactsSearch) (*mtproto.Contacts_Found, error) {
 	glog.Infof("ContactsSearch - Process: {%v}", request)
 
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
 	// TODO(@benqi) 使用ES查询
 	usersDOList := dao.GetUsersDAO(dao.DB_SLAVE).SelectByQueryString(request.Q, request.Q, request.Q, request.Q)
 
@@ -275,7 +281,11 @@ func (s *ContactsServiceImpl) ContactsSearch(ctx context.Context, request *mtpro
 
 		user := &mtproto.TLUser{}
 		user.Id = usersDO.Id
-		user.Self = false
+		if md.UserId == user.Id {
+			user.Self = true
+		} else {
+			user.Self = false
+		}
 		user.Contact = true
 		user.AccessHash = usersDO.AccessHash
 		user.FirstName = usersDO.FirstName

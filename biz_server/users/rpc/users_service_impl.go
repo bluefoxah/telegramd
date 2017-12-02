@@ -84,7 +84,7 @@ func (s *UsersServiceImpl) UsersGetFullUser(ctx context.Context, request *mtprot
 		// User
 		userDO := dao.GetUsersDAO(dao.DB_SLAVE).SelectById(inputUser.UserId)
 		user := &mtproto.TLUser{}
-		user.Self = false
+		user.Self = md.UserId == inputUser.UserId
 		user.Contact = true
 		user.Id = userDO.Id
 		user.FirstName = userDO.FirstName

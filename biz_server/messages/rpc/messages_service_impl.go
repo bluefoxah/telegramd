@@ -227,32 +227,48 @@ func (s *MessagesServiceImpl) MessagesGetHistory(ctx context.Context, request *m
 	glog.Infof("MessagesGetHistory - Process: {%v}", request)
 
 	md := grpc_util.RpcMetadataFromIncoming(ctx)
-
-	messagesMessages := &mtproto.TLMessagesMessages{}
 	peer := base.FromInputPeer(request.Peer)
 
 	chatIdList := []int32{}
-	_ = chatIdList
-	userIdList := []int32{md.UserId}
+	userIdList := []int32{}
 
-	switch peer.PeerType {
-	case base.PEER_EMPTY:
-	case base.PEER_CHAT:
-		// TODO(@benqi): chats
-	case base.PEER_USER:
-		ms := model.GetMessageModel().GetMessagesByUserIdPeerOffsetLimit(md.UserId, peer.PeerType, request.Peer.GetInputPeerUser().UserId, request.OffsetId, request.Limit)
-		for _, message := range ms {
-			messagesMessages.Messages = append(messagesMessages.Messages, message.ToMessage())
+	offsetId := request.OffsetId + request.AddOffset
+	messages := model.GetMessageModel().GetMessagesByUserIdPeerOffsetLimit(md.UserId, peer.PeerType, peer.PeerId, offsetId, request.Limit)
+	for _, message := range messages {
+		switch message.Payload.(type) {
+		case *mtproto.Message_Message:
+			m := message.GetMessage()
+			userIdList = append(userIdList, m.FromId)
+			p := base.FromPeer(m.GetToId())
+			switch p.PeerType {
+			case base.PEER_SELF, base.PEER_USER:
+				userIdList = append(userIdList, p.PeerId)
+			case base.PEER_CHAT:
+				chatIdList = append(chatIdList, p.PeerId)
+			case base.PEER_CHANNEL:
+				// TODO(@benqi): add channel
+			}
+		case *mtproto.Message_MessageService:
+			m := message.GetMessageService()
+			userIdList = append(userIdList, m.FromId)
+			chatIdList = append(chatIdList, m.GetToId().GetPeerChat().GetChatId())
 		}
-		userIdList = append(userIdList, request.Peer.GetInputPeerUser().UserId)
-	case base.PEER_SELF:
-	case base.PEER_CHANNEL:
-	default:
 	}
 
-	users := model.GetUserModel().GetUserList(userIdList)
-	for _, u := range users {
-		messagesMessages.Users = append(messagesMessages.Users, u.ToUser())
+	messagesMessages := &mtproto.TLMessagesMessages{}
+	messagesMessages.Messages = messages
+	if len(userIdList) > 0 {
+		users := model.GetUserModel().GetUserList(userIdList)
+		for _, u := range users {
+			if u.Id == md.UserId {
+				u.Self = true
+			}
+			u.Contact = true
+			messagesMessages.Users = append(messagesMessages.Users, u.ToUser())
+		}
+	}
+	if len(chatIdList) > 0 {
+		messagesMessages.Chats = model.GetChatModel().GetChatListByIDList(chatIdList)
 	}
 
 	glog.Infof("MessagesGetHistory - reply: {%v}", messagesMessages)
@@ -284,63 +300,79 @@ func (s *MessagesServiceImpl) MessagesGetUnreadMentions(ctx context.Context, req
 	return nil, nil
 }
 
-// messages.getDialogs#191ba9c5
-// 	flags:#
-// 		exclude_pinned:flags.0?true
-// 	offset_date:int
-//  offset_id:int
-//  offset_peer:InputPeer
-//  limit:int = messages.Dialogs;
-// messages.dialogs#15ba6c40 dialogs:Vector<Dialog> messages:Vector<Message> chats:Vector<Chat> users:Vector<User> = messages.Dialogs;
-// dialog#e4def5db flags:# pinned:flags.2?true peer:Peer top_message:int read_inbox_max_id:int read_outbox_max_id:int unread_count:int unread_mentions_count:int notify_settings:PeerNotifySettings pts:flags.0?int draft:flags.1?DraftMessage = Dialog;
-// Message message#90dddc11 flags:# out:flags.1?true mentioned:flags.4?true media_unread:flags.5?true silent:flags.13?true post:flags.14?true id:int from_id:flags.8?int to_id:Peer fwd_from:flags.2?MessageFwdHeader via_bot_id:flags.11?int reply_to_msg_id:flags.3?int date:int message:string media:flags.9?MessageMedia reply_markup:flags.6?ReplyMarkup entities:flags.7?Vector<MessageEntity> views:flags.10?int edit_date:flags.15?int post_author:flags.16?string = Message;
-// Chat
-// User
+/*
+	query: { messages_getDialogs
+	  flags: 1 [INT],
+	  exclude_pinned: YES [ BY BIT 0 IN FIELD flags ],
+	  offset_date: 0 [INT],
+	  offset_id: 0 [INT],
+	  offset_peer: { inputPeerEmpty },
+	  limit: 20 [INT],
+	},
+ */
 func (s *MessagesServiceImpl) MessagesGetDialogs(ctx context.Context, request *mtproto.TLMessagesGetDialogs) (*mtproto.Messages_Dialogs, error) {
 	glog.Infof("MessagesGetDialogs - Process: {%v}", request)
 
 	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	peer := base.FromInputPeer(request.OffsetPeer)
 
-	// peer := base.FromInputPeer(request.OffsetPeer)
+	var dialogs []*mtproto.TLDialog
+
+	if peer.PeerType == base.PEER_EMPTY {
+		// 取出全部
+	} else {
+		dialogDO := dao.GetUserDialogsDAO(dao.DB_SLAVE).SelectByPeer(md.UserId, int8(peer.PeerType), peer.PeerId)
+		// TODO(@benqi): date, access_hash check
+		if dialogDO == nil || request.OffsetId > dialogDO.TopMessage {
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_BAD_REQUEST), "InputPeer invalid"))
+		}
+	}
+
+	dialogs = model.GetDialogModel().GetDialogsByOffsetDate(md.UserId, request.ExcludePinned, request.OffsetDate, request.Limit)
 	messageDialogs := &mtproto.TLMessagesDialogs{}
 
-	dialogs := model.GetDialogModel().GetDialogsByUserIDAndType(md.UserId, base.PEER_EMPTY)
 	messageIdList := []int32{}
 	userIdList := []int32{md.UserId}
 	chatIdList := []int32{}
+
 	for _, dialog := range dialogs {
 		// dialog.Peer
 		messageIdList = append(messageIdList, dialog.TopMessage)
-		peer := base.FromPeer(dialog.GetPeer())
+		p := dialog.GetPeer()
 		// TODO(@benqi): 先假设只有PEER_USER
-		if peer.PeerType == base.PEER_USER {
-			userIdList = append(userIdList, dialog.Peer.GetPeerUser().UserId)
-		} else if peer.PeerType == base.PEER_CHAT {
-			chatIdList = append(chatIdList, dialog.Peer.GetPeerChat().ChatId)
+		switch p.Payload.(type) {
+		case *mtproto.Peer_PeerUser:
+			userIdList = append(userIdList, p.GetPeerUser().GetUserId())
+		case *mtproto.Peer_PeerChat:
+			chatIdList = append(chatIdList, p.GetPeerChat().GetChatId())
+		case *mtproto.Peer_PeerChannel:
 		}
-		// userIdList = append(userIdList, dialog.Peer.GetPeerUser().UserId)
 		messageDialogs.Dialogs = append(messageDialogs.Dialogs, dialog.ToDialog())
 	}
 
+	glog.Infof("messageIdList - %v", messageIdList)
 	if len(messageIdList) > 0 {
-		messages := model.GetMessageModel().GetMessagesByIDList(messageIdList)
-		for _, message := range messages {
-			messageDialogs.Messages = append(messageDialogs.Messages, message.ToMessage())
-		}
+		messageDialogs.Messages = model.GetMessageModel().GetMessagesByPeerAndMessageIdList(md.UserId, messageIdList)
 	}
 
-	if len(userIdList) > 0 {
-		users := model.GetUserModel().GetUserList(userIdList)
-		for _, user := range users {
-			messageDialogs.Users = append(messageDialogs.Users, user.ToUser())
+	users := model.GetUserModel().GetUserList(userIdList)
+	for _, user := range users {
+		if user.Id == md.UserId {
+			user.Self = true
+		} else {
+			user.Self = false
 		}
+		user.Contact = true
+		user.MutualContact = true
+		messageDialogs.Users = append(messageDialogs.Users, user.ToUser())
 	}
 
 	if len(chatIdList) > 0 {
-		messageDialogs.Chats = model.GetChatModel().GetChatListChatsByIDList(chatIdList)
+		messageDialogs.Chats = model.GetChatModel().GetChatListByIDList(chatIdList)
 	}
 
-	glog.Infof("MessagesGetDialogs - reply: %v", messageDialogs)
+	// d, _ := json.Marshal(messageDialogs)
+	glog.Infof("MessagesGetDialogs - reply: {%v}", messageDialogs)
 	return messageDialogs.ToMessages_Dialogs(), nil
 }
 
@@ -450,7 +482,12 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 	// request.NoWebpage
 	// request.ClearDraft
 	message.FromId = md.UserId
-	message.ToId = peer.ToPeer()
+	if peer.PeerType == base.PEER_SELF {
+		to := &mtproto.TLPeerUser{md.UserId}
+		message.ToId = to.ToPeer()
+	} else {
+		message.ToId = peer.ToPeer()
+	}
 	message.Message = request.Message
 	message.ReplyToMsgId = request.ReplyToMsgId
 	message.ReplyMarkup = request.ReplyMarkup
@@ -459,15 +496,14 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 	// glog.Infof("metadata: {%v}, rpcMetaData: {%v}", md, rpcMetaData)
 
 	sentMessage := &mtproto.TLUpdateShortSentMessage{}
-	_ = sentMessage
 	switch peer.PeerType {
 	case base.PEER_SELF:
 		// 1. SaveMessage
 		messageId := model.GetMessageModel().CreateHistoryMessage(md.UserId, peer, request.RandomId, message)
 		// 2. MessageBoxes
-		pts := model.GetMessageModel().CreateMessageBoxes(md.UserId, message.FromId, peer, false, messageId)
+		pts := model.GetMessageModel().CreateMessageBoxes(md.UserId, message.FromId, peer.PeerType, md.UserId, false, messageId)
 		// 3. dialog
-		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, peer, messageId, message.Mentioned)
+		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, peer.PeerType, md.UserId, messageId, message.Mentioned)
 
 		// 推送给sync
 		// 推给客户端的updates
@@ -487,19 +523,19 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 			updates.ToUpdates().Encode())
 
 		// 返回给客户端
-		sentMessage := &mtproto.TLUpdateShortSentMessage{}
+		// sentMessage := &mtproto.TLUpdateShortSentMessage{}
 		sentMessage.Out = true
 		sentMessage.Id = int32(messageId)
 		sentMessage.Pts = pts
 		sentMessage.PtsCount = 1
 		sentMessage.Date = int32(time.Now().Unix())
-
+		sentMessage.Media = mtproto.MakeMessageMedia(&mtproto.TLMessageMediaEmpty{})
 		glog.Infof("MessagesSendMessage - reply: %v", sentMessage)
-		reply = sentMessage.ToUpdates()
+		// reply = sentMessage.ToUpdates()
 
 	case base.PEER_CHAT:
 		// 返回给客户端
-		sentMessage := &mtproto.TLUpdateShortSentMessage{}
+		// sentMessage := &mtproto.TLUpdateShortSentMessage{}
 		sentMessage.Out = true
 		// sentMessage.Id = int32(messageId)
 		// sentMessage.Pts = outPts
@@ -522,8 +558,8 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 			}
 
 			// 2. MessageBoxes
-			pts := model.GetMessageModel().CreateMessageBoxes(userId, md.UserId, peer, false, messageId)
-			model.GetDialogModel().CreateOrUpdateByLastMessage(userId, peer, messageId, message.Mentioned)
+			pts := model.GetMessageModel().CreateMessageBoxes(userId, md.UserId, peer.PeerType, peer.PeerId, false, messageId)
+			model.GetDialogModel().CreateOrUpdateByLastMessage(userId, peer.PeerType, peer.PeerId, messageId, message.Mentioned)
 
 			// inPts := model.GetMessageModel().CreateMessageBoxes(peer.PeerId, message.FromId, peer, true, messageId)
 			// 3. dialog
@@ -560,16 +596,16 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 			}
 		}
 		glog.Infof("MessagesSendMessage - reply: %v", sentMessage)
-		reply = sentMessage.ToUpdates()
+		// reply = sentMessage.ToUpdates()
 	case base.PEER_USER:
 		// 1. SaveMessage
 		messageId := model.GetMessageModel().CreateHistoryMessage(md.UserId, peer, request.RandomId, message)
 		// 2. MessageBoxes
-		outPts := model.GetMessageModel().CreateMessageBoxes(md.UserId, message.FromId, peer, false, messageId)
-		inPts := model.GetMessageModel().CreateMessageBoxes(peer.PeerId, message.FromId, peer, true, messageId)
+		outPts := model.GetMessageModel().CreateMessageBoxes(md.UserId, message.FromId, peer.PeerType, peer.PeerId, false, messageId)
+		inPts := model.GetMessageModel().CreateMessageBoxes(peer.PeerId, message.FromId, peer.PeerType, md.UserId, true, messageId)
 		// 3. dialog
-		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, peer, messageId, message.Mentioned)
-		model.GetDialogModel().CreateOrUpdateByLastMessage(peer.PeerId, peer, messageId, message.Mentioned)
+		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, peer.PeerType, peer.PeerId, messageId, message.Mentioned)
+		model.GetDialogModel().CreateOrUpdateByLastMessage(peer.PeerId, peer.PeerType, md.UserId, messageId, message.Mentioned)
 
 		// 推送给sync
 		// 推给客户端的updates
@@ -589,22 +625,23 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 			updates.ToUpdates().Encode())
 
 		// 返回给客户端
-		sentMessage := &mtproto.TLUpdateShortSentMessage{}
+		// sentMessage := &mtproto.TLUpdateShortSentMessage{}
 		sentMessage.Out = true
 		sentMessage.Id = int32(messageId)
 		sentMessage.Pts = outPts
 		sentMessage.PtsCount = 1
 		sentMessage.Date = message.Date
 
-		glog.Infof("MessagesSendMessage - reply: %v", sentMessage)
-		reply = sentMessage.ToUpdates()
+		// glog.Infof("MessagesSendMessage - reply: %v", sentMessage)
+		// reply = sentMessage.ToUpdates()
 	case base.PEER_CHANNEL:
 
 	default:
 		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_BAD_REQUEST), "InputPeer invalid"))
 	}
 
-	return
+	glog.Infof("MessagesSendMessage - reply: {%v}", sentMessage)
+	return sentMessage.ToUpdates(), nil
 }
 
 func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mtproto.TLMessagesSendMedia) (*mtproto.Updates, error) {
@@ -704,9 +741,9 @@ func (s *MessagesServiceImpl) MessagesCreateChat(ctx context.Context, request *m
 		updates := &mtproto.TLUpdates{}
 
 		// 2. MessageBoxes
-		pts := model.GetMessageModel().CreateMessageBoxes(u.Id, md.UserId, peer, false, messageServiceId)
+		pts := model.GetMessageModel().CreateMessageBoxes(u.Id, md.UserId, peer.PeerType, peer.PeerId, false, messageServiceId)
 		// 3. dialog
-		model.GetDialogModel().CreateOrUpdateByLastMessage(u.Id, peer, messageServiceId, false)
+		model.GetDialogModel().CreateOrUpdateByLastMessage(u.Id, peer.PeerType, peer.PeerId, messageServiceId, false)
 
 		if u.GetId() == md.UserId {
 			updateMessageID := &mtproto.TLUpdateMessageID{}
@@ -1008,32 +1045,54 @@ func (s *MessagesServiceImpl) MessagesGetPeerDialogs(ctx context.Context, reques
 func (s *MessagesServiceImpl) MessagesGetPinnedDialogs(ctx context.Context, request *mtproto.TLMessagesGetPinnedDialogs) (*mtproto.Messages_PeerDialogs, error) {
 	glog.Infof("MessagesGetPinnedDialogs - Process: {%v}", request)
 
-	// 查出来
-	// md := grpc_util.RpcMetadataFromIncoming(ctx)
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
 
-/*
-	// TODO(@benqi): check error!
-	// authUsersDO, _ := s.AuthUsersDAO.SelectByAuthId(rpcMetaData.AuthId)
-	// glog.Info("user_id: ", authUsersDO)
-	// userDialogsDO, _ := s.UserDialogsDAO.SelectPinnedDialogs(authUsersDO.UserId)
-	userDialogsDO, _ := dao.GetUserDialogsDAO(dao.DB_SLAVE).SelectPinnedDialogs(rpcMetaData.UserId)
-	_ = userDialogsDO
-
+	dialogs := model.GetDialogModel().GetPinnedDialogs(md.UserId)
 	peerDialogs := &mtproto.TLMessagesPeerDialogs{}
+
+	messageIdList := []int32{}
+	userIdList := []int32{md.UserId}
+	chatIdList := []int32{}
+
+	for _, dialog := range dialogs {
+		// dialog.Peer
+		messageIdList = append(messageIdList, dialog.TopMessage)
+		peer := base.FromPeer(dialog.GetPeer())
+		// TODO(@benqi): 先假设只有PEER_USER
+		if peer.PeerType == base.PEER_USER {
+			userIdList = append(userIdList, dialog.Peer.GetPeerUser().UserId)
+		} else if peer.PeerType == base.PEER_SELF {
+			userIdList = append(userIdList, md.UserId)
+		} else if peer.PeerType == base.PEER_CHAT {
+			chatIdList = append(chatIdList, dialog.Peer.GetPeerChat().ChatId)
+		}
+		peerDialogs.Dialogs = append(peerDialogs.Dialogs, dialog.ToDialog())
+	}
+
+	glog.Infof("messageIdList - %v", messageIdList)
+	if len(messageIdList) > 0 {
+		peerDialogs.Messages = model.GetMessageModel().GetMessagesByPeerAndMessageIdList(md.UserId, messageIdList)
+	}
+
+	users := model.GetUserModel().GetUserList(userIdList)
+	for _, user := range users {
+		if user.Id == md.UserId {
+			user.Self = true
+		} else {
+			user.Self = false
+		}
+		user.Contact = true
+		user.MutualContact = true
+		peerDialogs.Users = append(peerDialogs.Users, user.ToUser())
+	}
+
+	if len(chatIdList) > 0 {
+		peerDialogs.Chats = model.GetChatModel().GetChatListByIDList(chatIdList)
+	}
+
 	state := &mtproto.TLUpdatesState{}
 	state.Date = int32(time.Now().Unix())
-
-	peerDialogs.State = mtproto.MakeUpdates_State(state)
-
-	reply := mtproto.MakeMessages_PeerDialogs(peerDialogs)
-	glog.Infof("MessagesGetPinnedDialogs - reply: {%v}\n", reply)
-
-	return reply, nil
- */
- 	peerDialogs := &mtproto.TLMessagesPeerDialogs{}
-	state := &mtproto.TLUpdatesState{}
-	state.Date = int32(time.Now().Unix())
-	state.Pts = 1
+	state.Pts = model.GetMessageModel().GetLastPtsByUserId(md.UserId)
 	state.Qts = 0
 	state.Seq = 1
 	state.UnreadCount = 0

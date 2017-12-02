@@ -22,7 +22,6 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"time"
-	"fmt"
 )
 
 type updatesModel struct {
@@ -63,14 +62,14 @@ func (m *updatesModel) GetState(authKeyId int64, userId int32) *mtproto.TLUpdate
 	return state
 }
 
-func (m *updatesModel) GetAffectedMessage(userId, messageId int32) *mtproto.TLMessagesAffectedMessages {
-	doList := dao.GetMessageBoxesDAO(dao.DB_SLAVE).SelectPtsByGTMessageID(userId, messageId)
-	if len(doList) == 0 {
-		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_OTHER2), fmt.Sprintf("GetAffectedMessage(%d, %d) empty", userId, messageId)))
-	}
-
-	affected := &mtproto.TLMessagesAffectedMessages{}
-	affected.Pts = doList[0].Pts
-	affected.PtsCount = int32(len(doList))
-	return affected
-}
+//func (m *updatesModel) GetAffectedMessage(userId, messageId int32) *mtproto.TLMessagesAffectedMessages {
+//	doList := dao.GetMessageBoxesDAO(dao.DB_SLAVE).SelectPtsByGTMessageID(userId, messageId)
+//	if len(doList) == 0 {
+//		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_OTHER2), fmt.Sprintf("GetAffectedMessage(%d, %d) empty", userId, messageId)))
+//	}
+//
+//	affected := &mtproto.TLMessagesAffectedMessages{}
+//	affected.Pts = doList[0].Pts
+//	affected.PtsCount = int32(len(doList))
+//	return affected
+//}

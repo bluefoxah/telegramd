@@ -24,8 +24,8 @@ import (
 	"errors"
 	"github.com/nebulaim/telegramd/grpc_util"
 	"github.com/nebulaim/telegramd/biz_model/model"
-	"github.com/nebulaim/telegramd/biz_model/base"
 	"time"
+	"github.com/nebulaim/telegramd/biz_model/base"
 )
 
 type UpdatesServiceImpl struct {
@@ -45,28 +45,44 @@ func (s *UpdatesServiceImpl) UpdatesGetDifference(ctx context.Context, request *
 	glog.Infof("UpdatesGetDifference - Process: {%v}", request)
 
 	md := grpc_util.RpcMetadataFromIncoming(ctx)
-
-
 	difference := &mtproto.TLUpdatesDifference{}
-
-	messages := model.GetMessageModel().GetMessagesByPts(md.UserId, request.Pts)
+	messages := model.GetMessageModel().GetMessagesByGtPts(md.UserId, request.Pts)
 	userIdList := []int32{md.UserId}
-	for _, m := range messages {
-		peer := base.FromPeer(m.ToId)
-		switch peer.PeerType {
-		case base.PEER_USER:
-			userIdList = append(userIdList, peer.PeerId)
-		case base.PEER_CHAT:
-		case base.PEER_CHANNEL:
-		}
+	chatIdList := []int32{}
 
-		difference.NewMessages = append(difference.NewMessages, m.ToMessage())
+	for _, m := range messages {
+		switch m.Payload.(type) {
+		case *mtproto.Message_Message:
+			m2 := m.GetMessage()
+			userIdList = append(userIdList, m2.FromId)
+			peer := base.FromPeer(m2.GetToId())
+			switch peer.PeerType {
+			case base.PEER_USER:
+				userIdList = append(userIdList, peer.PeerId)
+			case base.PEER_CHAT:
+				chatIdList = append(chatIdList, peer.PeerId)
+			case base.PEER_CHANNEL:
+				// TODO(@benqi): add channel
+			}
+		case *mtproto.Message_MessageService:
+			m2 := m.GetMessageService()
+			userIdList = append(userIdList, m2.FromId)
+			chatIdList = append(chatIdList, m2.GetToId().GetPeerChat().GetChatId())
+		case *mtproto.Message_MessageEmpty:
+		}
+		difference.NewMessages = append(difference.NewMessages, m)
 	}
 
 	usersList := model.GetUserModel().GetUserList(userIdList)
 	for _, u := range usersList {
+		if u.Id == md.UserId {
+			u.Self = true
+		}
+		u.Contact = true
+		u.MutualContact = true
 		difference.Users = append(difference.Users, u.ToUser())
 	}
+
 
 	state := &mtproto.TLUpdatesState{}
 
@@ -75,7 +91,6 @@ func (s *UpdatesServiceImpl) UpdatesGetDifference(ctx context.Context, request *
 	state.Date = int32(time.Now().Unix())
 	state.UnreadCount = 0
 	difference.State = state.ToUpdates_State()
-
 	glog.Infof("UpdatesGetDifference - reply: {%v}", difference)
 	return difference.ToUpdates_Difference(), nil
 }

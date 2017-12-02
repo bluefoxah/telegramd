@@ -2,12 +2,20 @@
 <table sqlname="user_dialogs">
     <operation name="Insert">
         <sql>
-            INSERT INTO user_dialogs (user_id, peer_type, peer_id, created_at) VALUES (:user_id, :peer_type, :peer_id, :created_at)
+            INSERT INTO user_dialogs
+                (user_id, peer_type, peer_id, top_message, unread_count, date2, created_at)
+            VALUES
+                (:user_id, :peer_type, :peer_id, :top_message, :unread_count, :date2, :created_at)
         </sql>
     </operation>
     <operation name="SelectPinnedDialogs" result_set="list">
         <sql>
-            SELECT peer_type, peer_id FROM user_dialogs WHERE user_id=:user_id AND is_pinned = 1
+            SELECT
+                peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, date2
+            FROM
+                user_dialogs
+            WHERE
+                user_id=:user_id AND is_pinned = 1
         </sql>
     </operation>
     <operation name="CheckExists">
@@ -17,18 +25,42 @@
     </operation>
     <operation name="SelectByPeer">
         <sql>
-            SELECT id, unread_count, unread_mentions_count FROM user_dialogs WHERE user_id=:user_id AND peer_type = :peer_type AND peer_id = :peer_id
+            SELECT
+                id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, date2
+            FROM
+                user_dialogs
+            WHERE
+                user_id=:user_id AND peer_type = :peer_type AND peer_id = :peer_id
         </sql>
     </operation>
     <operation name="SelectDialogsByUserID" result_set="list">
         <sql>
-            SELECT peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count FROM user_dialogs WHERE user_id=:user_id
+            SELECT
+                peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, date2
+            FROM
+                user_dialogs
+            WHERE
+                user_id=:user_id
+        </sql>
+    </operation>
+    <operation name="SelectDialogsByPinnedAndOffsetDate" result_set="list">
+        <params>
+            <param name="limit" type="int32" />
+        </params>
+        <sql>
+            SELECT
+                peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, date2
+            FROM
+                user_dialogs
+            WHERE
+                user_id = :user_id AND is_pinned = :is_pinned AND date2 > :date2
+                ORDER BY date2 DESC LIMIT :limit
         </sql>
     </operation>
     <operation name="SelectDialogsByPeerType" result_set="list">
         <sql>
             SELECT
-                peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count
+                peer_type, peer_id, is_pinned, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, date2
             FROM
                 user_dialogs
             WHERE
@@ -37,7 +69,12 @@
     </operation>
     <operation name="UpdateTopMessage">
         <sql>
-            UPDATE user_dialogs SET top_message = :top_message, unread_count = :unread_count, unread_mentions_count = :unread_mentions_count WHERE id = :id
+            UPDATE
+                user_dialogs
+            SET
+                top_message = :top_message, unread_count = :unread_count, unread_mentions_count = :unread_mentions_count, date2 = :date2
+            WHERE
+                id = :id
         </sql>
     </operation>
 </table>

@@ -210,7 +210,7 @@ func (m *chatModel) GetChatsByIDList(idList []int32) (chats []*mtproto.TLChat) {
 	return
 }
 
-func (m *chatModel) GetChatListChatsByIDList(idList []int32) (chats []*mtproto.Chat) {
+func (m *chatModel) GetChatListByIDList(idList []int32) (chats []*mtproto.Chat) {
 	// TODO(@benqi): Check messageDAO
 	chatsDOList := dao.GetChatsDAO(dao.DB_SLAVE).SelectByIdList(idList)
 
