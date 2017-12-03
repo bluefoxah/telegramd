@@ -63,7 +63,7 @@ func (m *chatModel) AddChatParticipant(chatId, chatUserId, inviterId int32, part
 
 		participant = participant2.ToChatParticipant()
 	} else if participantType == 1 {
-		participant2 := &mtproto.TLChatParticipant{}
+		participant2 := &mtproto.TLChatParticipantAdmin{}
 		participant2.UserId = chatUserId
 		participant2.Date = chatUserDO.InvitedAt
 		participant2.InviterId = inviterId
@@ -162,6 +162,12 @@ func (m *chatModel) GetChatFull(chatId int32) (*mtproto.TLChatFull) {
 	chatFull.ExportedInvite = mtproto.MakeExportedChatInvite(&mtproto.TLChatInviteEmpty{})
 	return chatFull
 }
+
+//func (m* chatModel) GetChatAndParticipants(chatId int32) (*mtproto.TLChat, *mtproto.TLChatParticipants) {
+//	chat := m.GetChat(chatId)
+//	participants := m.GetChatParticipants(chatId)
+//	return  chat, participants
+//}
 
 func (m *chatModel) GetChatParticipants(chatId int32) (*mtproto.TLChatParticipants) {
 	chatUsersDOList := dao.GetChatUsersDAO(dao.DB_SLAVE).SelectByChatId(chatId)

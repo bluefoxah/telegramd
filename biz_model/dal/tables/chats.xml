@@ -10,7 +10,7 @@
     </operation>
     <operation name="Select">
         <sql>
-            SELECT id, participant_count, title, version FROm chats WHERE id=:id
+            SELECT id, participant_count, title, version FROM chats WHERE id=:id
         </sql>
     </operation>
     <operation name="UpdateTitle">
@@ -29,6 +29,11 @@
         </params>
         <sql>
             SELECT id, participant_count, title, version FROM chats WHERE id IN (:idList)
+        </sql>
+    </operation>
+    <operation name="UpdateParticipantCount">
+        <sql>
+            UPDATE chats SET participant_count=:participant_count, version=:version WHERE id=:id
         </sql>
     </operation>
 </table>

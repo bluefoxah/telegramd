@@ -17,6 +17,7 @@
 
 package mtproto
 
+////////////////////////////////////////////////////////////////////////////////
 func ToBool(b bool) *Bool {
 	if b {
 		return MakeBool(&TLBoolTrue{})
@@ -34,3 +35,21 @@ func FromBool(b *Bool) bool {
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////////////
+// 太麻烦了
+func GetUserIdListByChatParticipants(participants *TLChatParticipants) []int32 {
+	chatUserIdList := []int32{}
+
+	// TODO(@benqi):  nil check
+	for _, participant := range participants.GetParticipants() {
+		switch participant.Payload.(type) {
+		case *ChatParticipant_ChatParticipant:
+			chatUserIdList = append(chatUserIdList, participant.GetChatParticipant().GetUserId())
+		case *ChatParticipant_ChatParticipantAdmin:
+			chatUserIdList = append(chatUserIdList, participant.GetChatParticipantAdmin().GetUserId())
+		case *ChatParticipant_ChatParticipantCreator:
+			chatUserIdList = append(chatUserIdList, participant.GetChatParticipantCreator().GetUserId())
+		}
+	}
+	return chatUserIdList
+}

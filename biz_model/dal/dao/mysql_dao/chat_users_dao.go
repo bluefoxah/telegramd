@@ -83,3 +83,24 @@ func (dao *ChatUsersDAO) SelectByChatId(chat_id int32) []dataobject.ChatUsersDO 
 
 	return values
 }
+
+// delete from chat_users where chat_id = :chat_id and user_id = :user_id
+// TODO(@benqi): sqlmap
+func (dao *ChatUsersDAO) DeleteChatUser(chat_id int32, user_id int32) int64 {
+	var query = "delete from chat_users where chat_id = ? and user_id = ?"
+	r, err := dao.db.Exec(query, chat_id, user_id)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Exec in DeleteChatUser(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	rows, err := r.RowsAffected()
+	if err != nil {
+		errDesc := fmt.Sprintf("RowsAffected in DeleteChatUser(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+	return rows
+}

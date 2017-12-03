@@ -19,4 +19,13 @@
                 chat_id = :chat_id
         </sql>
     </operation>
+
+    <operation name="DeleteChatUser">
+        <sql>
+            DELETE FROM
+                chat_users
+            WHERE
+                chat_id = :chat_id AND user_id = :user_id
+        </sql>
+    </operation>
 </table>

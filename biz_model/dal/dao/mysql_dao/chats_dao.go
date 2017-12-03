@@ -135,3 +135,25 @@ func (dao *ChatsDAO) SelectByIdList(idList []int32) []dataobject.ChatsDO {
 
 	return values
 }
+
+// update chats set participant_count = :participant_count, version = :version where id = :id
+// TODO(@benqi): sqlmap
+func (dao *ChatsDAO) UpdateParticipantCount(participant_count int32, version int32, id int32) int64 {
+	var query = "update chats set participant_count = ?, version = ? where id = ?"
+	r, err := dao.db.Exec(query, participant_count, version, id)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Exec in UpdateParticipantCount(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	rows, err := r.RowsAffected()
+	if err != nil {
+		errDesc := fmt.Sprintf("RowsAffected in UpdateParticipantCount(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	return rows
+}
