@@ -248,7 +248,7 @@ func (m *messageModel) getMessagesByMessageBoxes(boxes []dataobject.MessageBoxes
 		switch message.Payload.(type) {
 		case *mtproto.Message_Message:
 			m2 := message.GetMessage()
-			if boxDO.MessageBoxType == 0 {
+			if boxDO.MessageBoxType == 1 {
 				m2.Out = true
 			} else {
 				m2.Out = false

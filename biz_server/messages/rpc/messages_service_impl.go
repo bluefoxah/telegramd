@@ -332,7 +332,7 @@ func (s *MessagesServiceImpl) MessagesGetDialogs(ctx context.Context, request *m
 	messageDialogs := &mtproto.TLMessagesDialogs{}
 
 	messageIdList := []int32{}
-	userIdList := []int32{md.UserId}
+	userIdList := []int32{}
 	chatIdList := []int32{}
 
 	for _, dialog := range dialogs {
@@ -355,6 +355,7 @@ func (s *MessagesServiceImpl) MessagesGetDialogs(ctx context.Context, request *m
 		messageDialogs.Messages = model.GetMessageModel().GetMessagesByPeerAndMessageIdList(md.UserId, messageIdList)
 	}
 
+	// userIdList = append(userIdList, md.UserId)
 	users := model.GetUserModel().GetUserList(userIdList)
 	for _, user := range users {
 		if user.Id == md.UserId {

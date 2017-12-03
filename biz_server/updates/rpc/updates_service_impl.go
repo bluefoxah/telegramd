@@ -47,7 +47,7 @@ func (s *UpdatesServiceImpl) UpdatesGetDifference(ctx context.Context, request *
 	md := grpc_util.RpcMetadataFromIncoming(ctx)
 	difference := &mtproto.TLUpdatesDifference{}
 	messages := model.GetMessageModel().GetMessagesByGtPts(md.UserId, request.Pts)
-	userIdList := []int32{md.UserId}
+	userIdList := []int32{}
 	chatIdList := []int32{}
 
 	for _, m := range messages {
@@ -73,16 +73,17 @@ func (s *UpdatesServiceImpl) UpdatesGetDifference(ctx context.Context, request *
 		difference.NewMessages = append(difference.NewMessages, m)
 	}
 
-	usersList := model.GetUserModel().GetUserList(userIdList)
-	for _, u := range usersList {
-		if u.Id == md.UserId {
-			u.Self = true
+	if len(userIdList) > 0 {
+		usersList := model.GetUserModel().GetUserList(userIdList)
+		for _, u := range usersList {
+			if u.Id == md.UserId {
+				u.Self = true
+			}
+			u.Contact = true
+			u.MutualContact = true
+			difference.Users = append(difference.Users, u.ToUser())
 		}
-		u.Contact = true
-		u.MutualContact = true
-		difference.Users = append(difference.Users, u.ToUser())
 	}
-
 
 	state := &mtproto.TLUpdatesState{}
 
