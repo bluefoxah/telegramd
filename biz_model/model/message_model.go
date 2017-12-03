@@ -34,6 +34,10 @@ const (
 	MESSAGE_TYPE_MESSAGE = 1
 	MESSAGE_TYPE_MESSAGE_SERVICE = 2
 )
+const (
+	MESSAGE_BOX_TYPE_INCOMING = 0
+	MESSAGE_BOX_TYPE_OUTGOING = 1
+)
 
 type messageModel struct {
 	// messageDAO *dao.MessagesDAO
@@ -248,7 +252,7 @@ func (m *messageModel) getMessagesByMessageBoxes(boxes []dataobject.MessageBoxes
 		switch message.Payload.(type) {
 		case *mtproto.Message_Message:
 			m2 := message.GetMessage()
-			if boxDO.MessageBoxType == 1 {
+			if boxDO.MessageBoxType == MESSAGE_BOX_TYPE_OUTGOING {
 				m2.Out = true
 			} else {
 				m2.Out = false
@@ -259,7 +263,7 @@ func (m *messageModel) getMessagesByMessageBoxes(boxes []dataobject.MessageBoxes
 			glog.Infof("message(%d): %v", i, m2)
 		case *mtproto.Message_MessageService:
 			m2 := message.GetMessageService()
-			if boxDO.MessageBoxType == 0 {
+			if boxDO.MessageBoxType == MESSAGE_BOX_TYPE_OUTGOING {
 				m2.Out = true
 			} else {
 				m2.Out = false
@@ -299,7 +303,7 @@ func (m *messageModel) CreateMessageBoxes(userId, fromId int32, peerType int32, 
 	if incoming {
 		messageBox.UserId = userId
 		messageBox.SenderUserId = fromId
-		messageBox.MessageBoxType = 0
+		messageBox.MessageBoxType = MESSAGE_BOX_TYPE_INCOMING
 		messageBox.PeerType = int8(peerType)
 		messageBox.PeerId = peerId
 		messageBox.MessageId = messageId
@@ -310,7 +314,7 @@ func (m *messageModel) CreateMessageBoxes(userId, fromId int32, peerType int32, 
 	} else {
 		messageBox.UserId = userId
 		messageBox.SenderUserId = fromId
-		messageBox.MessageBoxType = 1
+		messageBox.MessageBoxType = MESSAGE_BOX_TYPE_OUTGOING
 		messageBox.PeerType = int8(peerType)
 		messageBox.PeerId = peerId
 		messageBox.MessageId = messageId

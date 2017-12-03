@@ -29,6 +29,7 @@ import (
 	"github.com/nebulaim/telegramd/grpc_util"
 	delivery2 "github.com/nebulaim/telegramd/biz_server/delivery"
 	"github.com/nebulaim/telegramd/frontend/id"
+	"math"
 )
 
 type MessagesServiceImpl struct {
@@ -230,9 +231,12 @@ func (s *MessagesServiceImpl) MessagesGetHistory(ctx context.Context, request *m
 	peer := base.FromInputPeer(request.Peer)
 
 	chatIdList := []int32{}
-	userIdList := []int32{}
+	userIdList := []int32{md.UserId}
 
 	offsetId := request.OffsetId + request.AddOffset
+	if offsetId <= 0 {
+		offsetId = math.MaxInt32
+	}
 	messages := model.GetMessageModel().GetMessagesByUserIdPeerOffsetLimit(md.UserId, peer.PeerType, peer.PeerId, offsetId, request.Limit)
 	for _, message := range messages {
 		switch message.Payload.(type) {
@@ -332,7 +336,7 @@ func (s *MessagesServiceImpl) MessagesGetDialogs(ctx context.Context, request *m
 	messageDialogs := &mtproto.TLMessagesDialogs{}
 
 	messageIdList := []int32{}
-	userIdList := []int32{}
+	userIdList := []int32{md.UserId}
 	chatIdList := []int32{}
 
 	for _, dialog := range dialogs {
@@ -559,7 +563,8 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 			}
 
 			// 2. MessageBoxes
-			pts := model.GetMessageModel().CreateMessageBoxes(userId, md.UserId, peer.PeerType, peer.PeerId, false, messageId)
+			outgoing := userId == md.UserId
+			pts := model.GetMessageModel().CreateMessageBoxes(userId, md.UserId, peer.PeerType, peer.PeerId, outgoing, messageId)
 			model.GetDialogModel().CreateOrUpdateByLastMessage(userId, peer.PeerType, peer.PeerId, messageId, message.Mentioned)
 
 			// inPts := model.GetMessageModel().CreateMessageBoxes(peer.PeerId, message.FromId, peer, true, messageId)

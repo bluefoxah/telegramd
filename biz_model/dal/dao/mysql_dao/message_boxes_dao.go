@@ -113,10 +113,10 @@ func (dao *MessageBoxesDAO) SelectPtsByGtMessageID(user_id int32, message_id int
 	return values
 }
 
-// select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = :user_id and peer_type = :peer_type and peer_id = :peer_id and message_id > :message_id order by pts asc limit :limit
+// select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = :user_id and peer_type = :peer_type and peer_id = :peer_id and message_id < :message_id order by message_id desc limit :limit
 // TODO(@benqi): sqlmap
 func (dao *MessageBoxesDAO) SelectByPeerOffsetLimit(user_id int32, peer_type int8, peer_id int32, message_id int32, limit int32) []dataobject.MessageBoxesDO {
-	var query = "select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = ? and peer_type = ? and peer_id = ? and message_id > ? order by pts asc limit ?"
+	var query = "select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = ? and peer_type = ? and peer_id = ? and message_id < ? order by message_id desc limit ?"
 	rows, err := dao.db.Queryx(query, user_id, peer_type, peer_id, message_id, limit)
 
 	if err != nil {

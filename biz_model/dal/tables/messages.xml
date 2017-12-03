@@ -18,7 +18,7 @@
             FROM
                 messages
             WHERE
-                id IN (:idList)
+                id IN (:idList) ORDER BY id DESC
         </sql>
     </operation>
     <!--

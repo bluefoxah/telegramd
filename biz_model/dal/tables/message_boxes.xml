@@ -32,8 +32,8 @@
             FROM
                 message_boxes
             WHERE
-                user_id = :user_id AND peer_type = :peer_type AND peer_id = :peer_id AND message_id > :message_id
-            ORDER BY pts LIMIT :limit
+                user_id = :user_id AND peer_type = :peer_type AND peer_id = :peer_id AND message_id < :message_id
+            ORDER BY message_id DESC LIMIT :limit
             ]]>
         </sql>
     </operation>
