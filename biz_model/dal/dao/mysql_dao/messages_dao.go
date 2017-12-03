@@ -53,10 +53,10 @@ func (dao *MessagesDAO) Insert(do *dataobject.MessagesDO) int64 {
 	return id
 }
 
-// select id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2 from messages where id in (:idList) order by id desc
+// select id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2 from messages where id in (:idList)
 // TODO(@benqi): sqlmap
 func (dao *MessagesDAO) SelectByIdList(idList []int32) []dataobject.MessagesDO {
-	var q = "select id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2 from messages where id in (?) order by id desc"
+	var q = "select id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2 from messages where id in (?)"
 	query, a, err := sqlx.In(q, idList)
 	rows, err := dao.db.Queryx(query, a...)
 
@@ -76,6 +76,38 @@ func (dao *MessagesDAO) SelectByIdList(idList []int32) []dataobject.MessagesDO {
 		err := rows.StructScan(&v)
 		if err != nil {
 			errDesc := fmt.Sprintf("StructScan in SelectByIdList(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+		}
+		values = append(values, v)
+	}
+
+	return values
+}
+
+// select id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2 from messages where id in (:idList) order by id desc
+// TODO(@benqi): sqlmap
+func (dao *MessagesDAO) SelectOrderByIdList(idList []int32) []dataobject.MessagesDO {
+	var q = "select id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2 from messages where id in (?) order by id desc"
+	query, a, err := sqlx.In(q, idList)
+	rows, err := dao.db.Queryx(query, a...)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Queryx in SelectOrderByIdList(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	defer rows.Close()
+
+	var values []dataobject.MessagesDO
+	for rows.Next() {
+		v := dataobject.MessagesDO{}
+
+		// TODO(@benqi): 不使用反射
+		err := rows.StructScan(&v)
+		if err != nil {
+			errDesc := fmt.Sprintf("StructScan in SelectOrderByIdList(_), error: %v", err)
 			glog.Error(errDesc)
 			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}

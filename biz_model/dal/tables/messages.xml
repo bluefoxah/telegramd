@@ -18,6 +18,19 @@
             FROM
                 messages
             WHERE
+                id IN (:idList)
+        </sql>
+    </operation>
+    <operation name="SelectOrderByIdList" result_set="list">
+        <params>
+            <param name="idList" type="[]int32" />
+        </params>
+        <sql>
+            SELECT
+                id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2
+            FROM
+                messages
+            WHERE
                 id IN (:idList) ORDER BY id DESC
         </sql>
     </operation>
