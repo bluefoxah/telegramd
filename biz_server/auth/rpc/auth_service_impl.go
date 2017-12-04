@@ -176,11 +176,11 @@ func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAut
 
 	md := grpc_util.RpcMetadataFromIncoming(ctx)
 	// 客户端发送的手机号格式为: "+86 111 1111 1111"，归一化
-	phoneNumer := libphonenumber.NormalizeDigitsOnly(request.PhoneNumber)
+	phoneNumber := libphonenumber.NormalizeDigitsOnly(request.PhoneNumber)
 
 	// Check code
 	authPhoneTransactionsDAO := dao.GetAuthPhoneTransactionsDAO(dao.DB_SLAVE)
-	do1 := authPhoneTransactionsDAO.SelectByPhoneCode(request.PhoneCodeHash, request.PhoneCode, phoneNumer)
+	do1 := authPhoneTransactionsDAO.SelectByPhoneCode(request.PhoneCodeHash, request.PhoneCode, phoneNumber)
 	if do1 == nil {
 		err := fmt.Errorf("SelectByPhoneCode(_) return empty in request: {}%v", request)
 		glog.Error(err)
@@ -188,7 +188,7 @@ func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAut
 	}
 
 	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
-	do2 := usersDAO.SelectByPhoneNumber(phoneNumer)
+	do2 := usersDAO.SelectByPhoneNumber(phoneNumber)
 	if do2 == nil {
 		err := fmt.Errorf("SelectByPhoneNumber(_) return empty in request{}%v", request)
 		glog.Error(err)
@@ -212,7 +212,7 @@ func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAut
 	user.FirstName = do2.FirstName
 	user.LastName = do2.LastName
 	user.Username = do2.Username
-	user.Phone = phoneNumer
+	user.Phone = phoneNumber
 	authAuthorization.User = mtproto.MakeUser(user)
 
 	reply := mtproto.MakeAuth_Authorization(authAuthorization)
