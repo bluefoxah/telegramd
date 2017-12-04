@@ -190,11 +190,9 @@ func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAut
 	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
 	do2 := usersDAO.SelectByPhoneNumber(phoneNumer)
 	if do2 == nil {
-		if do1 == nil {
-			err := fmt.Errorf("SelectByPhoneNumber(_) return empty in request{}%v", request)
-			glog.Error(err)
-			return nil, err
-		}
+		err := fmt.Errorf("SelectByPhoneNumber(_) return empty in request{}%v", request)
+		glog.Error(err)
+		return nil, err
 	}
 
 	do3 := dao.GetAuthUsersDAO(dao.DB_SLAVE).SelectByAuthId(md.AuthId)
