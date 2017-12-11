@@ -18,7 +18,21 @@
 package rpc
 
 import (
+	"github.com/BurntSushi/toml"
+	model2 "github.com/nebulaim/telegramd/biz_server/langpack/model"
 )
+
+const (
+	LANG_PACK_EN_FILE = "./lang_pack_en.toml"
+)
+
+var langs model2.LangPacks
+
+func init()  {
+	if _, err := toml.DecodeFile(LANG_PACK_EN_FILE, &langs); err != nil {
+		panic(err)
+	}
+}
 
 type LangpackServiceImpl struct {
 }

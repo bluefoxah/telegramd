@@ -32,6 +32,15 @@ func (s *HelpServiceImpl) HelpGetSupport(ctx context.Context, request *mtproto.T
     glog.Infof("HelpGetSupport - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
     // TODO(@benqi): Impl HelpGetSupport logic
+    reply := mtproto.NewTLHelpSupport()
+    // &mtproto.TLHelpSupport{}
+    reply.SetPhoneNumber("+86 111 1111 1111")
+
+    //user := model.GetUserModel().GetUser(SUPPORT_USER_ID)
+    //reply.User = user.ToUser()
+	//
+    //glog.Infof("HelpGetSupport - reply: {%v}\n", reply)
+    //return reply.ToHelp_Support(), nil
 
     return nil, fmt.Errorf("Not impl HelpGetSupport")
 }

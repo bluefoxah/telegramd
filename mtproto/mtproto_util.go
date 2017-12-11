@@ -17,27 +17,22 @@
 
 package mtproto
 
-/*
-import "time"
+// import "time"
 
 ////////////////////////////////////////////////////////////////////////////////
 func ToBool(b bool) *Bool {
 	if b {
-		return MakeBool(&TLBoolTrue{})
+		return NewTLBoolTrue().To_Bool()
 	} else {
-		return MakeBool(&TLBoolFalse{})
+		return NewTLBoolFalse().To_Bool()
 	}
 }
 
 func FromBool(b *Bool) bool {
-	switch b.Payload.(type) {
-	case *Bool_BoolTrue:
-		return true
-	default:
-		return false
-	}
+	return TLConstructor_CRC32_boolTrue == b.GetConstructor()
 }
 
+/*
 //////////////////////////////////////////////////////////////////////////////////
 // 太麻烦了
 func GetUserIdListByChatParticipants(participants *TLChatParticipants) []int32 {

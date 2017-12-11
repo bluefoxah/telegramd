@@ -22,7 +22,7 @@ import "github.com/nebulaim/telegramd/mtproto"
 type LangPacks struct {
 	LangCode    string
 	Version     int32
-	Strings     []*mtproto.TLLangPackString
-	StringPluralizeds []*mtproto.TLLangPackStringPluralized
-	StringDeleteds []*mtproto.TLLangPackStringDeleted
+	Strings     []*mtproto.LangPackString_Data
+	StringPluralizeds []*mtproto.LangPackString_Data
+	StringDeleteds []*mtproto.LangPackString_Data
 }

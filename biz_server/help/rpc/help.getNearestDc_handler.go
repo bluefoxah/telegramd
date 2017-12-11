@@ -21,7 +21,6 @@ import (
     "github.com/golang/glog"
     "github.com/nebulaim/telegramd/mtproto"
     "golang.org/x/net/context"
-    "fmt"
     "github.com/nebulaim/telegramd/grpc_util"
     "github.com/nebulaim/telegramd/base/logger"
 )
@@ -31,7 +30,11 @@ func (s *HelpServiceImpl) HelpGetNearestDc(ctx context.Context, request *mtproto
     md := grpc_util.RpcMetadataFromIncoming(ctx)
     glog.Infof("HelpGetNearestDc - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl HelpGetNearestDc logic
-
-    return nil, fmt.Errorf("Not impl HelpGetNearestDc")
+    dc := &mtproto.TLNearestDc{ Data2: &mtproto.NearestDc_Data{
+        Country: "US",
+        ThisDc: 2,
+        NearestDc: 2,
+    }}
+    glog.Infof("HelpGetNearestDc - reply: %s", logger.JsonDebugData(dc))
+    return dc.To_NearestDc(), nil
 }
