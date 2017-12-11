@@ -17,6 +17,7 @@
 
 package rpc
 
+/*
 import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
@@ -420,3 +421,4 @@ func (s *AccountServiceImpl) AccountGetTmpPassword(ctx context.Context, request 
 
 	return tmpPassword.ToAccount_TmpPassword(), nil
 }
+*/

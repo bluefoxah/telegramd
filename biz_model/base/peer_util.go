@@ -18,7 +18,7 @@
 package base
 
 import (
-	"github.com/nebulaim/telegramd/mtproto"
+	// "github.com/nebulaim/telegramd/mtproto"
 	"fmt"
 )
 
@@ -65,6 +65,7 @@ func (p PeerUtil) String() (s string) {
 	return
 }
 
+/*
 func FromInputPeer(peer *mtproto.InputPeer) (p *PeerUtil) {
 	p = &PeerUtil{}
 	switch peer.Payload.(type) {
@@ -228,3 +229,4 @@ func (p *PeerUtil) ToNotifyPeer() (peer *mtproto.NotifyPeer) {
 	}
 	return
 }
+*/

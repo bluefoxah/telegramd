@@ -17,6 +17,8 @@
 
 package rpc
 
+
+/*
 import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
@@ -115,3 +117,4 @@ func (s *UsersServiceImpl) UsersGetFullUser(ctx context.Context, request *mtprot
 	glog.Infof("UsersGetFullUser - reply: {%v}\n", reply)
 	return reply, nil
 }
+*/

@@ -17,6 +17,7 @@
 
 package rpc
 
+/*
 import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
@@ -45,3 +46,4 @@ func (s *StickersServiceImpl) StickersAddStickerToSet(ctx context.Context, reque
 	glog.Info("Process: %v", request)
 	return nil, nil
 }
+*/

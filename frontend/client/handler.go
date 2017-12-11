@@ -53,11 +53,11 @@ func (c *Client) onNewSessionCreated(sessionId, msgId int64, seqNo int32) (notif
 	}
 
 	// c.Codec.SessionId =
-	notify = &TLNewSessionCreated{
+	notify = &TLNewSessionCreated{Data2: &NewSession_Data{
 		FirstMsgId: msgId,
 		UniqueId: id.NextId(),
 		ServerSalt: authSaltsDO.Salt,
-	}
+	}}
 	return
 }
 
@@ -80,10 +80,10 @@ func (c *Client) onPing(msgId int64, seqNo int32, request TLObject) (TLObject) {
 	glog.Info("processPing - request data: ", ping.String())
 
 	// c.setOnline()
-	pong := &TLPong{
+	pong := &TLPong{Data2: &Pong_Data{
 		MsgId: msgId,
 		PingId: ping.PingId,
-	}
+	}}
 
 	return pong
 }
@@ -101,10 +101,10 @@ func (c *Client) onPingDelayDisconnect(msgId int64, seqNo int32, request TLObjec
 	glog.Info("processPingDelayDisconnect - request data: ", pingDelayDissconnect.String())
 
 	// c.setOnline()
-	pong := &TLPong{
+	pong := &TLPong{ Data2: &Pong_Data{
 		MsgId: msgId,
 		PingId: pingDelayDissconnect.PingId,
-	}
+	}}
 
 	return pong
 }
@@ -114,9 +114,9 @@ func (c *Client) onDestroySession(msgId int64, seqNo int32, request TLObject) (T
 	glog.Info("processDestroySession - request data: ", destroySession.String())
 
 	// TODO(@benqi): 实现destroySession处理逻辑
-	destroy_session_ok := &TLDestroySessionOk{
+	destroy_session_ok := &TLDestroySessionOk{ Data2: &DestroySessionRes_Data{
 		SessionId: destroySession.SessionId,
-	}
+	}}
 	return destroy_session_ok
 }
 

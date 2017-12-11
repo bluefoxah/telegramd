@@ -17,6 +17,8 @@
 
 package rpc
 
+
+/*
 import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
@@ -313,3 +315,4 @@ func (s *ContactsServiceImpl) ContactsGetTopPeers(ctx context.Context, request *
 	glog.Info("ContactsGetTopPeers - Process: {%v}", request)
 	return nil, errors.New("Not impl")
 }
+*/

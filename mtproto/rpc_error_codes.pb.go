@@ -9,253 +9,128 @@ It is generated from these files:
 	schema.tl.core_types.proto
 	schema.tl.crc32.proto
 	schema.tl.handshake.proto
+	schema.tl.handshake_service.proto
 	schema.tl.sync.proto
-	schema.tl.sync.service.proto
+	schema.tl.sync_service.proto
 	schema.tl.transport.proto
+	schema.tl.transport_service.proto
 
 It has these top-level messages:
-	Bool
-	True
+	Error_Data
 	Error
+	TLError
+	Null_Data
 	Null
+	TLNull
+	Bool_Data
+	Bool
 	TLBoolFalse
 	TLBoolTrue
+	True_Data
+	True
 	TLTrue
-	TLError
-	TLNull
-	ResPQ
-	P_QInnerData
-	Server_DH_Params
+	Server_DHInnerData_Data
 	Server_DHInnerData
-	Client_DH_Inner_Data
-	SetClient_DHParamsAnswer
-	DestroyAuthKeyRes
-	TLResPQ
-	TLPQInnerData
-	TLServer_DHParamsFail
-	TLServer_DHParamsOk
 	TLServer_DHInnerData
+	Client_DH_Inner_Data_Data
+	Client_DH_Inner_Data
 	TLClient_DHInnerData
+	SetClient_DHParamsAnswer_Data
+	SetClient_DHParamsAnswer
 	TLDhGenOk
 	TLDhGenRetry
 	TLDhGenFail
+	DestroyAuthKeyRes_Data
+	DestroyAuthKeyRes
 	TLDestroyAuthKeyOk
 	TLDestroyAuthKeyNone
 	TLDestroyAuthKeyFail
+	ResPQ_Data
+	ResPQ
+	TLResPQ
+	P_QInnerData_Data
+	P_QInnerData
+	TLPQInnerData
+	Server_DH_Params_Data
+	Server_DH_Params
+	TLServer_DHParamsFail
+	TLServer_DHParamsOk
 	TLReqPq
 	TLReq_DHParams
 	TLSetClient_DHParams
 	TLDestroyAuthKey
-	InputPeer
-	InputUser
-	InputContact
-	InputFile
-	InputMedia
-	InputChatPhoto
-	InputGeoPoint
-	InputPhoto
-	InputFileLocation
-	InputAppEvent
-	Peer
-	Storage_FileType
-	FileLocation
-	User
-	UserProfilePhoto
-	UserStatus
-	Chat
-	ChatFull
-	ChatParticipant
-	ChatParticipants
-	ChatPhoto
-	Message
-	MessageMedia
-	MessageAction
-	Dialog
-	Photo
-	PhotoSize
-	GeoPoint
-	Auth_CheckedPhone
-	Auth_SentCode
-	Auth_Authorization
-	Auth_ExportedAuthorization
-	InputNotifyPeer
-	InputPeerNotifyEvents
-	InputPeerNotifySettings
-	PeerNotifyEvents
-	PeerNotifySettings
-	PeerSettings
-	WallPaper
-	ReportReason
-	UserFull
-	Contact
-	ImportedContact
-	ContactBlocked
-	ContactStatus
-	Contacts_Link
-	Contacts_Contacts
-	Contacts_ImportedContacts
-	Contacts_Blocked
-	Messages_Dialogs
+	Messages_Messages_Data
 	Messages_Messages
-	Messages_Chats
-	Messages_ChatFull
-	Messages_AffectedHistory
-	MessagesFilter
-	Update
-	Updates_State
-	Updates_Difference
-	Updates
-	Photos_Photos
-	Photos_Photo
-	Upload_File
-	DcOption
-	Config
-	NearestDc
-	Help_AppUpdate
-	Help_InviteText
-	EncryptedChat
-	InputEncryptedChat
-	EncryptedFile
-	InputEncryptedFile
-	EncryptedMessage
-	Messages_DhConfig
-	Messages_SentEncryptedMessage
-	InputDocument
-	Document
-	Help_Support
-	NotifyPeer
-	SendMessageAction
-	Contacts_Found
-	InputPrivacyKey
-	PrivacyKey
-	InputPrivacyRule
-	PrivacyRule
-	Account_PrivacyRules
-	AccountDaysTTL
-	DocumentAttribute
-	Messages_Stickers
-	StickerPack
-	Messages_AllStickers
-	DisabledFeature
-	Messages_AffectedMessages
-	ContactLink
-	WebPage
-	Authorization
-	Account_Authorizations
-	Account_Password
-	Account_PasswordSettings
-	Account_PasswordInputSettings
-	Auth_PasswordRecovery
-	ReceivedNotifyMessage
-	ExportedChatInvite
-	ChatInvite
-	InputStickerSet
-	StickerSet
-	Messages_StickerSet
-	BotCommand
-	BotInfo
-	KeyboardButton
-	KeyboardButtonRow
-	ReplyMarkup
-	MessageEntity
-	InputChannel
-	Contacts_ResolvedPeer
-	MessageRange
-	Updates_ChannelDifference
+	TLMessagesMessages
+	TLMessagesMessagesSlice
+	TLMessagesChannelMessages
+	ChannelMessagesFilter_Data
 	ChannelMessagesFilter
-	ChannelParticipant
-	ChannelParticipantsFilter
-	Channels_ChannelParticipants
-	Channels_ChannelParticipant
-	Help_TermsOfService
-	FoundGif
-	Messages_FoundGifs
-	Messages_SavedGifs
-	InputBotInlineMessage
-	InputBotInlineResult
-	BotInlineMessage
-	BotInlineResult
-	Messages_BotResults
-	ExportedMessageLink
-	MessageFwdHeader
-	Auth_CodeType
-	Auth_SentCodeType
-	Messages_BotCallbackAnswer
-	Messages_MessageEditData
-	InputBotInlineMessageID
-	InlineBotSwitchPM
-	Messages_PeerDialogs
-	TopPeer
-	TopPeerCategory
-	TopPeerCategoryPeers
-	Contacts_TopPeers
-	DraftMessage
-	Messages_FeaturedStickers
-	Messages_RecentStickers
-	Messages_ArchivedStickers
-	Messages_StickerSetInstallResult
-	StickerSetCovered
-	MaskCoords
-	InputStickeredMedia
-	Game
+	TLChannelMessagesFilterEmpty
+	TLChannelMessagesFilter
+	InputGame_Data
 	InputGame
-	HighScore
-	Messages_HighScores
-	RichText
-	PageBlock
-	Page
-	PhoneCallDiscardReason
-	DataJSON
-	LabeledPrice
-	Invoice
-	PaymentCharge
-	PostAddress
-	PaymentRequestedInfo
-	PaymentSavedCredentials
-	WebDocument
-	InputWebDocument
-	InputWebFileLocation
-	Upload_WebFile
-	Payments_PaymentForm
-	Payments_ValidatedRequestedInfo
-	Payments_PaymentResult
-	Payments_PaymentReceipt
-	Payments_SavedInfo
-	InputPaymentCredentials
-	Account_TmpPassword
-	ShippingOption
-	InputStickerSetItem
-	InputPhoneCall
-	PhoneCall
-	PhoneConnection
-	PhoneCallProtocol
-	Phone_PhoneCall
-	Upload_CdnFile
-	CdnPublicKey
-	CdnConfig
-	LangPackString
-	LangPackDifference
-	LangPackLanguage
-	ChannelAdminRights
+	TLInputGameID
+	TLInputGameShortName
+	ChannelBannedRights_Data
 	ChannelBannedRights
-	ChannelAdminLogEventAction
-	ChannelAdminLogEvent
-	Channels_AdminLogResults
-	ChannelAdminLogEventsFilter
-	PopularContact
-	CdnFileHash
-	Messages_FavedStickers
-	TLInputPeerEmpty
-	TLInputPeerSelf
-	TLInputPeerChat
-	TLInputPeerUser
-	TLInputPeerChannel
-	TLInputUserEmpty
-	TLInputUserSelf
-	TLInputUser
-	TLInputPhoneContact
+	TLChannelBannedRights
+	InputEncryptedFile_Data
+	InputEncryptedFile
+	TLInputEncryptedFileEmpty
+	TLInputEncryptedFileUploaded
+	TLInputEncryptedFile
+	TLInputEncryptedFileBigUploaded
+	NotifyPeer_Data
+	NotifyPeer
+	TLNotifyPeer
+	TLNotifyUsers
+	TLNotifyChats
+	TLNotifyAll
+	StickerSet_Data
+	StickerSet
+	TLStickerSet
+	Messages_FeaturedStickers_Data
+	Messages_FeaturedStickers
+	TLMessagesFeaturedStickersNotModified
+	TLMessagesFeaturedStickers
+	PaymentRequestedInfo_Data
+	PaymentRequestedInfo
+	TLPaymentRequestedInfo
+	LangPackString_Data
+	LangPackString
+	TLLangPackString
+	TLLangPackStringPluralized
+	TLLangPackStringDeleted
+	ChatParticipants_Data
+	ChatParticipants
+	TLChatParticipantsForbidden
+	TLChatParticipants
+	Messages_AffectedHistory_Data
+	Messages_AffectedHistory
+	TLMessagesAffectedHistory
+	PrivacyKey_Data
+	PrivacyKey
+	TLPrivacyKeyStatusTimestamp
+	TLPrivacyKeyChatInvite
+	TLPrivacyKeyPhoneCall
+	Messages_Stickers_Data
+	Messages_Stickers
+	TLMessagesStickersNotModified
+	TLMessagesStickers
+	Messages_FoundGifs_Data
+	Messages_FoundGifs
+	TLMessagesFoundGifs
+	DraftMessage_Data
+	DraftMessage
+	TLDraftMessageEmpty
+	TLDraftMessage
+	InputFile_Data
+	InputFile
 	TLInputFile
 	TLInputFileBig
+	InputMedia_Data
+	InputMedia
 	TLInputMediaEmpty
 	TLInputMediaUploadedPhoto
 	TLInputMediaPhoto
@@ -269,152 +144,71 @@ It has these top-level messages:
 	TLInputMediaDocumentExternal
 	TLInputMediaGame
 	TLInputMediaInvoice
-	TLInputChatPhotoEmpty
-	TLInputChatUploadedPhoto
-	TLInputChatPhoto
-	TLInputGeoPointEmpty
-	TLInputGeoPoint
-	TLInputPhotoEmpty
-	TLInputPhoto
-	TLInputFileLocation
-	TLInputEncryptedFileLocation
-	TLInputDocumentFileLocation
-	TLInputAppEvent
-	TLPeerUser
-	TLPeerChat
-	TLPeerChannel
-	TLStorageFileUnknown
-	TLStorageFilePartial
-	TLStorageFileJpeg
-	TLStorageFileGif
-	TLStorageFilePng
-	TLStorageFilePdf
-	TLStorageFileMp3
-	TLStorageFileMov
-	TLStorageFileMp4
-	TLStorageFileWebp
-	TLFileLocationUnavailable
-	TLFileLocation
+	User_Data
+	User
 	TLUserEmpty
 	TLUser
-	TLUserProfilePhotoEmpty
-	TLUserProfilePhoto
-	TLUserStatusEmpty
-	TLUserStatusOnline
-	TLUserStatusOffline
-	TLUserStatusRecently
-	TLUserStatusLastWeek
-	TLUserStatusLastMonth
-	TLChatEmpty
-	TLChat
-	TLChatForbidden
-	TLChannel
-	TLChannelForbidden
-	TLChatFull
-	TLChannelFull
-	TLChatParticipant
-	TLChatParticipantCreator
-	TLChatParticipantAdmin
-	TLChatParticipantsForbidden
-	TLChatParticipants
+	ChatPhoto_Data
+	ChatPhoto
 	TLChatPhotoEmpty
 	TLChatPhoto
-	TLMessageEmpty
-	TLMessage
-	TLMessageService
-	TLMessageMediaEmpty
-	TLMessageMediaPhoto
-	TLMessageMediaGeo
-	TLMessageMediaContact
-	TLMessageMediaUnsupported
-	TLMessageMediaDocument
-	TLMessageMediaWebPage
-	TLMessageMediaVenue
-	TLMessageMediaGame
-	TLMessageMediaInvoice
-	TLMessageActionEmpty
-	TLMessageActionChatCreate
-	TLMessageActionChatEditTitle
-	TLMessageActionChatEditPhoto
-	TLMessageActionChatDeletePhoto
-	TLMessageActionChatAddUser
-	TLMessageActionChatDeleteUser
-	TLMessageActionChatJoinedByLink
-	TLMessageActionChannelCreate
-	TLMessageActionChatMigrateTo
-	TLMessageActionChannelMigrateFrom
-	TLMessageActionPinMessage
-	TLMessageActionHistoryClear
-	TLMessageActionGameScore
-	TLMessageActionPaymentSentMe
-	TLMessageActionPaymentSent
-	TLMessageActionPhoneCall
-	TLMessageActionScreenshotTaken
-	TLDialog
-	TLPhotoEmpty
-	TLPhoto
+	PhotoSize_Data
+	PhotoSize
 	TLPhotoSizeEmpty
 	TLPhotoSize
 	TLPhotoCachedSize
-	TLGeoPointEmpty
-	TLGeoPoint
-	TLAuthCheckedPhone
-	TLAuthSentCode
-	TLAuthAuthorization
-	TLAuthExportedAuthorization
-	TLInputNotifyPeer
-	TLInputNotifyUsers
-	TLInputNotifyChats
-	TLInputNotifyAll
-	TLInputPeerNotifyEventsEmpty
-	TLInputPeerNotifyEventsAll
-	TLInputPeerNotifySettings
-	TLPeerNotifyEventsEmpty
-	TLPeerNotifyEventsAll
-	TLPeerNotifySettingsEmpty
-	TLPeerNotifySettings
-	TLPeerSettings
-	TLWallPaper
-	TLWallPaperSolid
-	TLInputReportReasonSpam
-	TLInputReportReasonViolence
-	TLInputReportReasonPornography
-	TLInputReportReasonOther
-	TLUserFull
-	TLContact
-	TLImportedContact
-	TLContactBlocked
-	TLContactStatus
-	TLContactsLink
+	Contacts_Contacts_Data
+	Contacts_Contacts
 	TLContactsContactsNotModified
 	TLContactsContacts
-	TLContactsImportedContacts
+	Contacts_Blocked_Data
+	Contacts_Blocked
 	TLContactsBlocked
 	TLContactsBlockedSlice
-	TLMessagesDialogs
-	TLMessagesDialogsSlice
-	TLMessagesMessages
-	TLMessagesMessagesSlice
-	TLMessagesChannelMessages
-	TLMessagesChats
-	TLMessagesChatsSlice
-	TLMessagesChatFull
-	TLMessagesAffectedHistory
-	TLInputMessagesFilterEmpty
-	TLInputMessagesFilterPhotos
-	TLInputMessagesFilterVideo
-	TLInputMessagesFilterPhotoVideo
-	TLInputMessagesFilterPhotoVideoDocuments
-	TLInputMessagesFilterDocument
-	TLInputMessagesFilterUrl
-	TLInputMessagesFilterGif
-	TLInputMessagesFilterVoice
-	TLInputMessagesFilterMusic
-	TLInputMessagesFilterChatPhotos
-	TLInputMessagesFilterPhoneCalls
-	TLInputMessagesFilterRoundVoice
-	TLInputMessagesFilterRoundVideo
-	TLInputMessagesFilterMyMentions
+	Messages_HighScores_Data
+	Messages_HighScores
+	TLMessagesHighScores
+	CdnPublicKey_Data
+	CdnPublicKey
+	TLCdnPublicKey
+	LangPackDifference_Data
+	LangPackDifference
+	TLLangPackDifference
+	ContactStatus_Data
+	ContactStatus
+	TLContactStatus
+	FoundGif_Data
+	FoundGif
+	TLFoundGif
+	TLFoundGifCached
+	Messages_BotCallbackAnswer_Data
+	Messages_BotCallbackAnswer
+	TLMessagesBotCallbackAnswer
+	TopPeerCategoryPeers_Data
+	TopPeerCategoryPeers
+	TLTopPeerCategoryPeers
+	Messages_RecentStickers_Data
+	Messages_RecentStickers
+	TLMessagesRecentStickersNotModified
+	TLMessagesRecentStickers
+	PaymentSavedCredentials_Data
+	PaymentSavedCredentials
+	TLPaymentSavedCredentialsCard
+	Account_TmpPassword_Data
+	Account_TmpPassword
+	TLAccountTmpPassword
+	Messages_DhConfig_Data
+	Messages_DhConfig
+	TLMessagesDhConfigNotModified
+	TLMessagesDhConfig
+	Auth_SentCodeType_Data
+	Auth_SentCodeType
+	TLAuthSentCodeTypeApp
+	TLAuthSentCodeTypeSms
+	TLAuthSentCodeTypeCall
+	TLAuthSentCodeTypeFlashCall
+	Update_Data
+	Update
 	TLUpdateNewMessage
 	TLUpdateMessageID
 	TLUpdateDeleteMessages
@@ -480,144 +274,154 @@ It has these top-level messages:
 	TLUpdateFavedStickers
 	TLUpdateChannelReadMessagesContents
 	TLUpdateContactsReset
-	TLUpdatesState
-	TLUpdatesDifferenceEmpty
-	TLUpdatesDifference
-	TLUpdatesDifferenceSlice
-	TLUpdatesDifferenceTooLong
-	TLUpdatesTooLong
-	TLUpdateShortMessage
-	TLUpdateShortChatMessage
-	TLUpdateShort
-	TLUpdatesCombined
-	TLUpdates
-	TLUpdateShortSentMessage
-	TLPhotosPhotos
-	TLPhotosPhotosSlice
-	TLPhotosPhoto
-	TLUploadFile
-	TLUploadFileCdnRedirect
-	TLDcOption
-	TLConfig
+	InputBotInlineMessage_Data
+	InputBotInlineMessage
+	TLInputBotInlineMessageMediaAuto
+	TLInputBotInlineMessageText
+	TLInputBotInlineMessageMediaGeo
+	TLInputBotInlineMessageMediaVenue
+	TLInputBotInlineMessageMediaContact
+	TLInputBotInlineMessageGame
+	Contacts_TopPeers_Data
+	Contacts_TopPeers
+	TLContactsTopPeersNotModified
+	TLContactsTopPeers
+	MaskCoords_Data
+	MaskCoords
+	TLMaskCoords
+	PhoneCallDiscardReason_Data
+	PhoneCallDiscardReason
+	TLPhoneCallDiscardReasonMissed
+	TLPhoneCallDiscardReasonDisconnect
+	TLPhoneCallDiscardReasonHangup
+	TLPhoneCallDiscardReasonBusy
+	ShippingOption_Data
+	ShippingOption
+	TLShippingOption
+	ChannelAdminLogEvent_Data
+	ChannelAdminLogEvent
+	TLChannelAdminLogEvent
+	InputChatPhoto_Data
+	InputChatPhoto
+	TLInputChatPhotoEmpty
+	TLInputChatUploadedPhoto
+	TLInputChatPhoto
+	Contact_Data
+	Contact
+	TLContact
+	Account_Password_Data
+	Account_Password
+	TLAccountNoPassword
+	TLAccountPassword
+	Messages_StickerSet_Data
+	Messages_StickerSet
+	TLMessagesStickerSet
+	InputStickeredMedia_Data
+	InputStickeredMedia
+	TLInputStickeredMediaPhoto
+	TLInputStickeredMediaDocument
+	ChannelAdminLogEventAction_Data
+	ChannelAdminLogEventAction
+	TLChannelAdminLogEventActionChangeTitle
+	TLChannelAdminLogEventActionChangeAbout
+	TLChannelAdminLogEventActionChangeUsername
+	TLChannelAdminLogEventActionChangePhoto
+	TLChannelAdminLogEventActionToggleInvites
+	TLChannelAdminLogEventActionToggleSignatures
+	TLChannelAdminLogEventActionUpdatePinned
+	TLChannelAdminLogEventActionEditMessage
+	TLChannelAdminLogEventActionDeleteMessage
+	TLChannelAdminLogEventActionParticipantJoin
+	TLChannelAdminLogEventActionParticipantLeave
+	TLChannelAdminLogEventActionParticipantInvite
+	TLChannelAdminLogEventActionParticipantToggleBan
+	TLChannelAdminLogEventActionParticipantToggleAdmin
+	TLChannelAdminLogEventActionChangeStickerSet
+	Chat_Data
+	Chat
+	TLChatEmpty
+	TLChat
+	TLChatForbidden
+	TLChannel
+	TLChannelForbidden
+	MessageAction_Data
+	MessageAction
+	TLMessageActionEmpty
+	TLMessageActionChatCreate
+	TLMessageActionChatEditTitle
+	TLMessageActionChatEditPhoto
+	TLMessageActionChatDeletePhoto
+	TLMessageActionChatAddUser
+	TLMessageActionChatDeleteUser
+	TLMessageActionChatJoinedByLink
+	TLMessageActionChannelCreate
+	TLMessageActionChatMigrateTo
+	TLMessageActionChannelMigrateFrom
+	TLMessageActionPinMessage
+	TLMessageActionHistoryClear
+	TLMessageActionGameScore
+	TLMessageActionPaymentSentMe
+	TLMessageActionPaymentSent
+	TLMessageActionPhoneCall
+	TLMessageActionScreenshotTaken
+	ChannelParticipant_Data
+	ChannelParticipant
+	TLChannelParticipant
+	TLChannelParticipantSelf
+	TLChannelParticipantCreator
+	TLChannelParticipantAdmin
+	TLChannelParticipantBanned
+	TopPeer_Data
+	TopPeer
+	TLTopPeer
+	InputWebDocument_Data
+	InputWebDocument
+	TLInputWebDocument
+	UserProfilePhoto_Data
+	UserProfilePhoto
+	TLUserProfilePhotoEmpty
+	TLUserProfilePhoto
+	UserFull_Data
+	UserFull
+	TLUserFull
+	NearestDc_Data
+	NearestDc
 	TLNearestDc
-	TLHelpAppUpdate
-	TLHelpNoAppUpdate
-	TLHelpInviteText
-	TLEncryptedChatEmpty
-	TLEncryptedChatWaiting
-	TLEncryptedChatRequested
-	TLEncryptedChat
-	TLEncryptedChatDiscarded
-	TLInputEncryptedChat
-	TLEncryptedFileEmpty
-	TLEncryptedFile
-	TLInputEncryptedFileEmpty
-	TLInputEncryptedFileUploaded
-	TLInputEncryptedFile
-	TLInputEncryptedFileBigUploaded
-	TLEncryptedMessage
-	TLEncryptedMessageService
-	TLMessagesDhConfigNotModified
-	TLMessagesDhConfig
-	TLMessagesSentEncryptedMessage
-	TLMessagesSentEncryptedFile
-	TLInputDocumentEmpty
-	TLInputDocument
-	TLDocumentEmpty
-	TLDocument
-	TLHelpSupport
-	TLNotifyPeer
-	TLNotifyUsers
-	TLNotifyChats
-	TLNotifyAll
-	TLSendMessageTypingAction
-	TLSendMessageCancelAction
-	TLSendMessageRecordVideoAction
-	TLSendMessageUploadVideoAction
-	TLSendMessageRecordAudioAction
-	TLSendMessageUploadAudioAction
-	TLSendMessageUploadPhotoAction
-	TLSendMessageUploadDocumentAction
-	TLSendMessageGeoLocationAction
-	TLSendMessageChooseContactAction
-	TLSendMessageGamePlayAction
-	TLSendMessageRecordRoundAction
-	TLSendMessageUploadRoundAction
-	TLContactsFound
-	TLInputPrivacyKeyStatusTimestamp
-	TLInputPrivacyKeyChatInvite
-	TLInputPrivacyKeyPhoneCall
-	TLPrivacyKeyStatusTimestamp
-	TLPrivacyKeyChatInvite
-	TLPrivacyKeyPhoneCall
+	InputPrivacyRule_Data
+	InputPrivacyRule
 	TLInputPrivacyValueAllowContacts
 	TLInputPrivacyValueAllowAll
 	TLInputPrivacyValueAllowUsers
 	TLInputPrivacyValueDisallowContacts
 	TLInputPrivacyValueDisallowAll
 	TLInputPrivacyValueDisallowUsers
-	TLPrivacyValueAllowContacts
-	TLPrivacyValueAllowAll
-	TLPrivacyValueAllowUsers
-	TLPrivacyValueDisallowContacts
-	TLPrivacyValueDisallowAll
-	TLPrivacyValueDisallowUsers
-	TLAccountPrivacyRules
-	TLAccountDaysTTL
-	TLDocumentAttributeImageSize
-	TLDocumentAttributeAnimated
-	TLDocumentAttributeSticker
-	TLDocumentAttributeVideo
-	TLDocumentAttributeAudio
-	TLDocumentAttributeFilename
-	TLDocumentAttributeHasStickers
-	TLMessagesStickersNotModified
-	TLMessagesStickers
-	TLStickerPack
-	TLMessagesAllStickersNotModified
-	TLMessagesAllStickers
-	TLDisabledFeature
-	TLMessagesAffectedMessages
-	TLContactLinkUnknown
-	TLContactLinkNone
-	TLContactLinkHasPhone
-	TLContactLinkContact
-	TLWebPageEmpty
-	TLWebPagePending
-	TLWebPage
-	TLWebPageNotModified
-	TLAuthorization
-	TLAccountAuthorizations
-	TLAccountNoPassword
-	TLAccountPassword
-	TLAccountPasswordSettings
-	TLAccountPasswordInputSettings
-	TLAuthPasswordRecovery
+	InputStickerSetItem_Data
+	InputStickerSetItem
+	TLInputStickerSetItem
+	StickerSetCovered_Data
+	StickerSetCovered
+	TLStickerSetCovered
+	TLStickerSetMultiCovered
+	FileLocation_Data
+	FileLocation
+	TLFileLocationUnavailable
+	TLFileLocation
+	ChatParticipant_Data
+	ChatParticipant
+	TLChatParticipant
+	TLChatParticipantCreator
+	TLChatParticipantAdmin
+	Auth_SentCode_Data
+	Auth_SentCode
+	TLAuthSentCode
+	Contacts_Found_Data
+	Contacts_Found
+	TLContactsFound
+	ReceivedNotifyMessage_Data
+	ReceivedNotifyMessage
 	TLReceivedNotifyMessage
-	TLChatInviteEmpty
-	TLChatInviteExported
-	TLChatInviteAlready
-	TLChatInvite
-	TLInputStickerSetEmpty
-	TLInputStickerSetID
-	TLInputStickerSetShortName
-	TLStickerSet
-	TLMessagesStickerSet
-	TLBotCommand
-	TLBotInfo
-	TLKeyboardButton
-	TLKeyboardButtonUrl
-	TLKeyboardButtonCallback
-	TLKeyboardButtonRequestPhone
-	TLKeyboardButtonRequestGeoLocation
-	TLKeyboardButtonSwitchInline
-	TLKeyboardButtonGame
-	TLKeyboardButtonBuy
-	TLKeyboardButtonRow
-	TLReplyKeyboardHide
-	TLReplyKeyboardForceReply
-	TLReplyKeyboardMarkup
-	TLReplyInlineMarkup
+	MessageEntity_Data
+	MessageEntity
 	TLMessageEntityUnknown
 	TLMessageEntityMention
 	TLMessageEntityHashtag
@@ -631,95 +435,466 @@ It has these top-level messages:
 	TLMessageEntityTextUrl
 	TLMessageEntityMentionName
 	TLInputMessageEntityMentionName
+	InputBotInlineResult_Data
+	InputBotInlineResult
+	TLInputBotInlineResult
+	TLInputBotInlineResultPhoto
+	TLInputBotInlineResultDocument
+	TLInputBotInlineResultGame
+	Photos_Photo_Data
+	Photos_Photo
+	TLPhotosPhoto
+	Config_Data
+	Config
+	TLConfig
+	KeyboardButton_Data
+	KeyboardButton
+	TLKeyboardButton
+	TLKeyboardButtonUrl
+	TLKeyboardButtonCallback
+	TLKeyboardButtonRequestPhone
+	TLKeyboardButtonRequestGeoLocation
+	TLKeyboardButtonSwitchInline
+	TLKeyboardButtonGame
+	TLKeyboardButtonBuy
+	Channels_ChannelParticipant_Data
+	Channels_ChannelParticipant
+	TLChannelsChannelParticipant
+	InputWebFileLocation_Data
+	InputWebFileLocation
+	TLInputWebFileLocation
+	PhoneCallProtocol_Data
+	PhoneCallProtocol
+	TLPhoneCallProtocol
+	CdnFileHash_Data
+	CdnFileHash
+	TLCdnFileHash
+	ChatInvite_Data
+	ChatInvite
+	TLChatInviteAlready
+	TLChatInvite
+	MessageMedia_Data
+	MessageMedia
+	TLMessageMediaEmpty
+	TLMessageMediaPhoto
+	TLMessageMediaGeo
+	TLMessageMediaContact
+	TLMessageMediaUnsupported
+	TLMessageMediaDocument
+	TLMessageMediaWebPage
+	TLMessageMediaVenue
+	TLMessageMediaGame
+	TLMessageMediaInvoice
+	InputPeerNotifyEvents_Data
+	InputPeerNotifyEvents
+	TLInputPeerNotifyEventsEmpty
+	TLInputPeerNotifyEventsAll
+	PeerNotifySettings_Data
+	PeerNotifySettings
+	TLPeerNotifySettingsEmpty
+	TLPeerNotifySettings
+	Contacts_Link_Data
+	Contacts_Link
+	TLContactsLink
+	Updates_Difference_Data
+	Updates_Difference
+	TLUpdatesDifferenceEmpty
+	TLUpdatesDifference
+	TLUpdatesDifferenceSlice
+	TLUpdatesDifferenceTooLong
+	Help_InviteText_Data
+	Help_InviteText
+	TLHelpInviteText
+	SendMessageAction_Data
+	SendMessageAction
+	TLSendMessageTypingAction
+	TLSendMessageCancelAction
+	TLSendMessageRecordVideoAction
+	TLSendMessageUploadVideoAction
+	TLSendMessageRecordAudioAction
+	TLSendMessageUploadAudioAction
+	TLSendMessageUploadPhotoAction
+	TLSendMessageUploadDocumentAction
+	TLSendMessageGeoLocationAction
+	TLSendMessageChooseContactAction
+	TLSendMessageGamePlayAction
+	TLSendMessageRecordRoundAction
+	TLSendMessageUploadRoundAction
+	InputChannel_Data
+	InputChannel
 	TLInputChannelEmpty
 	TLInputChannel
-	TLContactsResolvedPeer
-	TLMessageRange
-	TLUpdatesChannelDifferenceEmpty
-	TLUpdatesChannelDifferenceTooLong
-	TLUpdatesChannelDifference
-	TLChannelMessagesFilterEmpty
-	TLChannelMessagesFilter
-	TLChannelParticipant
-	TLChannelParticipantSelf
-	TLChannelParticipantCreator
-	TLChannelParticipantAdmin
-	TLChannelParticipantBanned
+	Messages_MessageEditData_Data
+	Messages_MessageEditData
+	TLMessagesMessageEditData
+	PhoneCall_Data
+	PhoneCall
+	TLPhoneCallEmpty
+	TLPhoneCallWaiting
+	TLPhoneCallRequested
+	TLPhoneCallAccepted
+	TLPhoneCall
+	TLPhoneCallDiscarded
+	PostAddress_Data
+	PostAddress
+	TLPostAddress
+	InputFileLocation_Data
+	InputFileLocation
+	TLInputFileLocation
+	TLInputEncryptedFileLocation
+	TLInputDocumentFileLocation
+	Peer_Data
+	Peer
+	TLPeerUser
+	TLPeerChat
+	TLPeerChannel
+	InputNotifyPeer_Data
+	InputNotifyPeer
+	TLInputNotifyPeer
+	TLInputNotifyUsers
+	TLInputNotifyChats
+	TLInputNotifyAll
+	BotCommand_Data
+	BotCommand
+	TLBotCommand
+	BotInlineMessage_Data
+	BotInlineMessage
+	TLBotInlineMessageMediaAuto
+	TLBotInlineMessageText
+	TLBotInlineMessageMediaGeo
+	TLBotInlineMessageMediaVenue
+	TLBotInlineMessageMediaContact
+	Messages_StickerSetInstallResult_Data
+	Messages_StickerSetInstallResult
+	TLMessagesStickerSetInstallResultSuccess
+	TLMessagesStickerSetInstallResultArchive
+	LabeledPrice_Data
+	LabeledPrice
+	TLLabeledPrice
+	InputPeer_Data
+	InputPeer
+	TLInputPeerEmpty
+	TLInputPeerSelf
+	TLInputPeerChat
+	TLInputPeerUser
+	TLInputPeerChannel
+	Photo_Data
+	Photo
+	TLPhotoEmpty
+	TLPhoto
+	ContactBlocked_Data
+	ContactBlocked
+	TLContactBlocked
+	DcOption_Data
+	DcOption
+	TLDcOption
+	Messages_SentEncryptedMessage_Data
+	Messages_SentEncryptedMessage
+	TLMessagesSentEncryptedMessage
+	TLMessagesSentEncryptedFile
+	Account_PasswordSettings_Data
+	Account_PasswordSettings
+	TLAccountPasswordSettings
+	Messages_BotResults_Data
+	Messages_BotResults
+	TLMessagesBotResults
+	DataJSON_Data
+	DataJSON
+	TLDataJSON
+	Payments_ValidatedRequestedInfo_Data
+	Payments_ValidatedRequestedInfo
+	TLPaymentsValidatedRequestedInfo
+	Payments_PaymentReceipt_Data
+	Payments_PaymentReceipt
+	TLPaymentsPaymentReceipt
+	InputEncryptedChat_Data
+	InputEncryptedChat
+	TLInputEncryptedChat
+	BotInfo_Data
+	BotInfo
+	TLBotInfo
+	Invoice_Data
+	Invoice
+	TLInvoice
+	InputPhoneCall_Data
+	InputPhoneCall
+	TLInputPhoneCall
+	Auth_Authorization_Data
+	Auth_Authorization
+	TLAuthAuthorization
+	Photos_Photos_Data
+	Photos_Photos
+	TLPhotosPhotos
+	TLPhotosPhotosSlice
+	DisabledFeature_Data
+	DisabledFeature
+	TLDisabledFeature
+	InlineBotSwitchPM_Data
+	InlineBotSwitchPM
+	TLInlineBotSwitchPM
+	Payments_PaymentResult_Data
+	Payments_PaymentResult
+	TLPaymentsPaymentResult
+	TLPaymentsPaymentVerficationNeeded
+	ChannelAdminLogEventsFilter_Data
+	ChannelAdminLogEventsFilter
+	TLChannelAdminLogEventsFilter
+	InputContact_Data
+	InputContact
+	TLInputPhoneContact
+	Messages_Chats_Data
+	Messages_Chats
+	TLMessagesChats
+	TLMessagesChatsSlice
+	InputPrivacyKey_Data
+	InputPrivacyKey
+	TLInputPrivacyKeyStatusTimestamp
+	TLInputPrivacyKeyChatInvite
+	TLInputPrivacyKeyPhoneCall
+	Messages_AffectedMessages_Data
+	Messages_AffectedMessages
+	TLMessagesAffectedMessages
+	Messages_SavedGifs_Data
+	Messages_SavedGifs
+	TLMessagesSavedGifsNotModified
+	TLMessagesSavedGifs
+	Messages_ArchivedStickers_Data
+	Messages_ArchivedStickers
+	TLMessagesArchivedStickers
+	ChannelParticipantsFilter_Data
+	ChannelParticipantsFilter
 	TLChannelParticipantsRecent
 	TLChannelParticipantsAdmins
 	TLChannelParticipantsKicked
 	TLChannelParticipantsBots
 	TLChannelParticipantsBanned
 	TLChannelParticipantsSearch
-	TLChannelsChannelParticipants
-	TLChannelsChannelParticipant
-	TLHelpTermsOfService
-	TLFoundGif
-	TLFoundGifCached
-	TLMessagesFoundGifs
-	TLMessagesSavedGifsNotModified
-	TLMessagesSavedGifs
-	TLInputBotInlineMessageMediaAuto
-	TLInputBotInlineMessageText
-	TLInputBotInlineMessageMediaGeo
-	TLInputBotInlineMessageMediaVenue
-	TLInputBotInlineMessageMediaContact
-	TLInputBotInlineMessageGame
-	TLInputBotInlineResult
-	TLInputBotInlineResultPhoto
-	TLInputBotInlineResultDocument
-	TLInputBotInlineResultGame
-	TLBotInlineMessageMediaAuto
-	TLBotInlineMessageText
-	TLBotInlineMessageMediaGeo
-	TLBotInlineMessageMediaVenue
-	TLBotInlineMessageMediaContact
+	PeerSettings_Data
+	PeerSettings
+	TLPeerSettings
+	Game_Data
+	Game
+	TLGame
+	InputAppEvent_Data
+	InputAppEvent
+	TLInputAppEvent
+	Messages_Dialogs_Data
+	Messages_Dialogs
+	TLMessagesDialogs
+	TLMessagesDialogsSlice
+	AccountDaysTTL_Data
+	AccountDaysTTL
+	TLAccountDaysTTL
+	Account_Authorizations_Data
+	Account_Authorizations
+	TLAccountAuthorizations
+	ReplyMarkup_Data
+	ReplyMarkup
+	TLReplyKeyboardHide
+	TLReplyKeyboardForceReply
+	TLReplyKeyboardMarkup
+	TLReplyInlineMarkup
+	BotInlineResult_Data
+	BotInlineResult
 	TLBotInlineResult
 	TLBotInlineMediaResult
-	TLMessagesBotResults
-	TLExportedMessageLink
+	MessageFwdHeader_Data
+	MessageFwdHeader
 	TLMessageFwdHeader
+	Page_Data
+	Page
+	TLPagePart
+	TLPageFull
+	Messages_FavedStickers_Data
+	Messages_FavedStickers
+	TLMessagesFavedStickersNotModified
+	TLMessagesFavedStickers
+	InputBotInlineMessageID_Data
+	InputBotInlineMessageID
+	TLInputBotInlineMessageID
+	Storage_FileType_Data
+	Storage_FileType
+	TLStorageFileUnknown
+	TLStorageFilePartial
+	TLStorageFileJpeg
+	TLStorageFileGif
+	TLStorageFilePng
+	TLStorageFilePdf
+	TLStorageFileMp3
+	TLStorageFileMov
+	TLStorageFileMp4
+	TLStorageFileWebp
+	MessagesFilter_Data
+	MessagesFilter
+	TLInputMessagesFilterEmpty
+	TLInputMessagesFilterPhotos
+	TLInputMessagesFilterVideo
+	TLInputMessagesFilterPhotoVideo
+	TLInputMessagesFilterPhotoVideoDocuments
+	TLInputMessagesFilterDocument
+	TLInputMessagesFilterUrl
+	TLInputMessagesFilterGif
+	TLInputMessagesFilterVoice
+	TLInputMessagesFilterMusic
+	TLInputMessagesFilterChatPhotos
+	TLInputMessagesFilterPhoneCalls
+	TLInputMessagesFilterRoundVoice
+	TLInputMessagesFilterRoundVideo
+	TLInputMessagesFilterMyMentions
+	EncryptedChat_Data
+	EncryptedChat
+	TLEncryptedChatEmpty
+	TLEncryptedChatWaiting
+	TLEncryptedChatRequested
+	TLEncryptedChat
+	TLEncryptedChatDiscarded
+	EncryptedFile_Data
+	EncryptedFile
+	TLEncryptedFileEmpty
+	TLEncryptedFile
+	EncryptedMessage_Data
+	EncryptedMessage
+	TLEncryptedMessage
+	TLEncryptedMessageService
+	PrivacyRule_Data
+	PrivacyRule
+	TLPrivacyValueAllowContacts
+	TLPrivacyValueAllowAll
+	TLPrivacyValueAllowUsers
+	TLPrivacyValueDisallowContacts
+	TLPrivacyValueDisallowAll
+	TLPrivacyValueDisallowUsers
+	Updates_ChannelDifference_Data
+	Updates_ChannelDifference
+	TLUpdatesChannelDifferenceEmpty
+	TLUpdatesChannelDifferenceTooLong
+	TLUpdatesChannelDifference
+	CdnConfig_Data
+	CdnConfig
+	TLCdnConfig
+	PopularContact_Data
+	PopularContact
+	TLPopularContact
+	Contacts_ResolvedPeer_Data
+	Contacts_ResolvedPeer
+	TLContactsResolvedPeer
+	GeoPoint_Data
+	GeoPoint
+	TLGeoPointEmpty
+	TLGeoPoint
+	Auth_CheckedPhone_Data
+	Auth_CheckedPhone
+	TLAuthCheckedPhone
+	Auth_ExportedAuthorization_Data
+	Auth_ExportedAuthorization
+	TLAuthExportedAuthorization
+	Contacts_ImportedContacts_Data
+	Contacts_ImportedContacts
+	TLContactsImportedContacts
+	Updates_Data
+	Updates
+	TLUpdatesTooLong
+	TLUpdateShortMessage
+	TLUpdateShortChatMessage
+	TLUpdateShort
+	TLUpdatesCombined
+	TLUpdates
+	TLUpdateShortSentMessage
+	StickerPack_Data
+	StickerPack
+	TLStickerPack
+	Messages_AllStickers_Data
+	Messages_AllStickers
+	TLMessagesAllStickersNotModified
+	TLMessagesAllStickers
+	Channels_ChannelParticipants_Data
+	Channels_ChannelParticipants
+	TLChannelsChannelParticipants
+	ChatFull_Data
+	ChatFull
+	TLChatFull
+	TLChannelFull
+	Dialog_Data
+	Dialog
+	TLDialog
+	Updates_State_Data
+	Updates_State
+	TLUpdatesState
+	Help_AppUpdate_Data
+	Help_AppUpdate
+	TLHelpAppUpdate
+	TLHelpNoAppUpdate
+	InputStickerSet_Data
+	InputStickerSet
+	TLInputStickerSetEmpty
+	TLInputStickerSetID
+	TLInputStickerSetShortName
+	Help_TermsOfService_Data
+	Help_TermsOfService
+	TLHelpTermsOfService
+	Auth_CodeType_Data
+	Auth_CodeType
 	TLAuthCodeTypeSms
 	TLAuthCodeTypeCall
 	TLAuthCodeTypeFlashCall
-	TLAuthSentCodeTypeApp
-	TLAuthSentCodeTypeSms
-	TLAuthSentCodeTypeCall
-	TLAuthSentCodeTypeFlashCall
-	TLMessagesBotCallbackAnswer
-	TLMessagesMessageEditData
-	TLInputBotInlineMessageID
-	TLInlineBotSwitchPM
-	TLMessagesPeerDialogs
-	TLTopPeer
-	TLTopPeerCategoryBotsPM
-	TLTopPeerCategoryBotsInline
-	TLTopPeerCategoryCorrespondents
-	TLTopPeerCategoryGroups
-	TLTopPeerCategoryChannels
-	TLTopPeerCategoryPhoneCalls
-	TLTopPeerCategoryPeers
-	TLContactsTopPeersNotModified
-	TLContactsTopPeers
-	TLDraftMessageEmpty
-	TLDraftMessage
-	TLMessagesFeaturedStickersNotModified
-	TLMessagesFeaturedStickers
-	TLMessagesRecentStickersNotModified
-	TLMessagesRecentStickers
-	TLMessagesArchivedStickers
-	TLMessagesStickerSetInstallResultSuccess
-	TLMessagesStickerSetInstallResultArchive
-	TLStickerSetCovered
-	TLStickerSetMultiCovered
-	TLMaskCoords
-	TLInputStickeredMediaPhoto
-	TLInputStickeredMediaDocument
-	TLGame
-	TLInputGameID
-	TLInputGameShortName
-	TLHighScore
-	TLMessagesHighScores
+	Message_Data
+	Message
+	TLMessageEmpty
+	TLMessage
+	TLMessageService
+	InputPeerNotifySettings_Data
+	InputPeerNotifySettings
+	TLInputPeerNotifySettings
+	ReportReason_Data
+	ReportReason
+	TLInputReportReasonSpam
+	TLInputReportReasonViolence
+	TLInputReportReasonPornography
+	TLInputReportReasonOther
+	Upload_File_Data
+	Upload_File
+	TLUploadFile
+	TLUploadFileCdnRedirect
+	Upload_WebFile_Data
+	Upload_WebFile
+	TLUploadWebFile
+	Upload_CdnFile_Data
+	Upload_CdnFile
+	TLUploadCdnFileReuploadNeeded
+	TLUploadCdnFile
+	PaymentCharge_Data
+	PaymentCharge
+	TLPaymentCharge
+	InputUser_Data
+	InputUser
+	TLInputUserEmpty
+	TLInputUserSelf
+	TLInputUser
+	InputGeoPoint_Data
+	InputGeoPoint
+	TLInputGeoPointEmpty
+	TLInputGeoPoint
+	InputDocument_Data
+	InputDocument
+	TLInputDocumentEmpty
+	TLInputDocument
+	DocumentAttribute_Data
+	DocumentAttribute
+	TLDocumentAttributeImageSize
+	TLDocumentAttributeAnimated
+	TLDocumentAttributeSticker
+	TLDocumentAttributeVideo
+	TLDocumentAttributeAudio
+	TLDocumentAttributeFilename
+	TLDocumentAttributeHasStickers
+	Authorization_Data
+	Authorization
+	TLAuthorization
+	KeyboardButtonRow_Data
+	KeyboardButtonRow
+	TLKeyboardButtonRow
+	RichText_Data
+	RichText
 	TLTextEmpty
 	TLTextPlain
 	TLTextBold
@@ -730,6 +905,61 @@ It has these top-level messages:
 	TLTextUrl
 	TLTextEmail
 	TLTextConcat
+	Payments_SavedInfo_Data
+	Payments_SavedInfo
+	TLPaymentsSavedInfo
+	Channels_AdminLogResults_Data
+	Channels_AdminLogResults
+	TLChannelsAdminLogResults
+	Messages_ChatFull_Data
+	Messages_ChatFull
+	TLMessagesChatFull
+	Document_Data
+	Document
+	TLDocumentEmpty
+	TLDocument
+	Help_Support_Data
+	Help_Support
+	TLHelpSupport
+	WebPage_Data
+	WebPage
+	TLWebPageEmpty
+	TLWebPagePending
+	TLWebPage
+	TLWebPageNotModified
+	Auth_PasswordRecovery_Data
+	Auth_PasswordRecovery
+	TLAuthPasswordRecovery
+	WebDocument_Data
+	WebDocument
+	TLWebDocument
+	Phone_PhoneCall_Data
+	Phone_PhoneCall
+	TLPhonePhoneCall
+	InputPhoto_Data
+	InputPhoto
+	TLInputPhotoEmpty
+	TLInputPhoto
+	UserStatus_Data
+	UserStatus
+	TLUserStatusEmpty
+	TLUserStatusOnline
+	TLUserStatusOffline
+	TLUserStatusRecently
+	TLUserStatusLastWeek
+	TLUserStatusLastMonth
+	Account_PasswordInputSettings_Data
+	Account_PasswordInputSettings
+	TLAccountPasswordInputSettings
+	ExportedChatInvite_Data
+	ExportedChatInvite
+	TLChatInviteEmpty
+	TLChatInviteExported
+	HighScore_Data
+	HighScore
+	TLHighScore
+	PageBlock_Data
+	PageBlock
 	TLPageBlockUnsupported
 	TLPageBlockTitle
 	TLPageBlockSubtitle
@@ -753,77 +983,59 @@ It has these top-level messages:
 	TLPageBlockSlideshow
 	TLPageBlockChannel
 	TLPageBlockAudio
-	TLPagePart
-	TLPageFull
-	TLPhoneCallDiscardReasonMissed
-	TLPhoneCallDiscardReasonDisconnect
-	TLPhoneCallDiscardReasonHangup
-	TLPhoneCallDiscardReasonBusy
-	TLDataJSON
-	TLLabeledPrice
-	TLInvoice
-	TLPaymentCharge
-	TLPostAddress
-	TLPaymentRequestedInfo
-	TLPaymentSavedCredentialsCard
-	TLWebDocument
-	TLInputWebDocument
-	TLInputWebFileLocation
-	TLUploadWebFile
-	TLPaymentsPaymentForm
-	TLPaymentsValidatedRequestedInfo
-	TLPaymentsPaymentResult
-	TLPaymentsPaymentVerficationNeeded
-	TLPaymentsPaymentReceipt
-	TLPaymentsSavedInfo
+	InputPaymentCredentials_Data
+	InputPaymentCredentials
 	TLInputPaymentCredentialsSaved
 	TLInputPaymentCredentials
-	TLAccountTmpPassword
-	TLShippingOption
-	TLInputStickerSetItem
-	TLInputPhoneCall
-	TLPhoneCallEmpty
-	TLPhoneCallWaiting
-	TLPhoneCallRequested
-	TLPhoneCallAccepted
-	TLPhoneCall
-	TLPhoneCallDiscarded
-	TLPhoneConnection
-	TLPhoneCallProtocol
-	TLPhonePhoneCall
-	TLUploadCdnFileReuploadNeeded
-	TLUploadCdnFile
-	TLCdnPublicKey
-	TLCdnConfig
-	TLLangPackString
-	TLLangPackStringPluralized
-	TLLangPackStringDeleted
-	TLLangPackDifference
+	LangPackLanguage_Data
+	LangPackLanguage
 	TLLangPackLanguage
+	WallPaper_Data
+	WallPaper
+	TLWallPaper
+	TLWallPaperSolid
+	TopPeerCategory_Data
+	TopPeerCategory
+	TLTopPeerCategoryBotsPM
+	TLTopPeerCategoryBotsInline
+	TLTopPeerCategoryCorrespondents
+	TLTopPeerCategoryGroups
+	TLTopPeerCategoryChannels
+	TLTopPeerCategoryPhoneCalls
+	ImportedContact_Data
+	ImportedContact
+	TLImportedContact
+	MessageRange_Data
+	MessageRange
+	TLMessageRange
+	ExportedMessageLink_Data
+	ExportedMessageLink
+	TLExportedMessageLink
+	Messages_PeerDialogs_Data
+	Messages_PeerDialogs
+	TLMessagesPeerDialogs
+	Payments_PaymentForm_Data
+	Payments_PaymentForm
+	TLPaymentsPaymentForm
+	PeerNotifyEvents_Data
+	PeerNotifyEvents
+	TLPeerNotifyEventsEmpty
+	TLPeerNotifyEventsAll
+	Account_PrivacyRules_Data
+	Account_PrivacyRules
+	TLAccountPrivacyRules
+	ContactLink_Data
+	ContactLink
+	TLContactLinkUnknown
+	TLContactLinkNone
+	TLContactLinkHasPhone
+	TLContactLinkContact
+	PhoneConnection_Data
+	PhoneConnection
+	TLPhoneConnection
+	ChannelAdminRights_Data
+	ChannelAdminRights
 	TLChannelAdminRights
-	TLChannelBannedRights
-	TLChannelAdminLogEventActionChangeTitle
-	TLChannelAdminLogEventActionChangeAbout
-	TLChannelAdminLogEventActionChangeUsername
-	TLChannelAdminLogEventActionChangePhoto
-	TLChannelAdminLogEventActionToggleInvites
-	TLChannelAdminLogEventActionToggleSignatures
-	TLChannelAdminLogEventActionUpdatePinned
-	TLChannelAdminLogEventActionEditMessage
-	TLChannelAdminLogEventActionDeleteMessage
-	TLChannelAdminLogEventActionParticipantJoin
-	TLChannelAdminLogEventActionParticipantLeave
-	TLChannelAdminLogEventActionParticipantInvite
-	TLChannelAdminLogEventActionParticipantToggleBan
-	TLChannelAdminLogEventActionParticipantToggleAdmin
-	TLChannelAdminLogEventActionChangeStickerSet
-	TLChannelAdminLogEvent
-	TLChannelsAdminLogResults
-	TLChannelAdminLogEventsFilter
-	TLPopularContact
-	TLCdnFileHash
-	TLMessagesFavedStickersNotModified
-	TLMessagesFavedStickers
 	TLInvokeAfterMsg
 	TLInvokeAfterMsgs
 	TLInitConnection
@@ -831,205 +1043,165 @@ It has these top-level messages:
 	TLInvokeWithoutUpdates
 	TLAuthCheckPhone
 	TLAuthSendCode
-	TLAuthResendCode
-	TLAccountSendChangePhoneCode
-	TLAccountSendConfirmPhoneCode
 	TLAuthSignUp
 	TLAuthSignIn
-	TLAuthImportAuthorization
-	TLAuthImportBotAuthorization
-	TLAuthCheckPassword
-	TLAuthRecoverPassword
 	TLAuthLogOut
 	TLAuthResetAuthorizations
 	TLAuthSendInvites
+	TLAuthExportAuthorization
+	TLAuthImportAuthorization
 	TLAuthBindTempAuthKey
+	TLAuthImportBotAuthorization
+	TLAuthCheckPassword
+	TLAuthRequestPasswordRecovery
+	TLAuthRecoverPassword
+	TLAuthResendCode
 	TLAuthCancelCode
 	TLAuthDropTempAuthKeys
 	TLAccountRegisterDevice
 	TLAccountUnregisterDevice
 	TLAccountUpdateNotifySettings
+	TLAccountGetNotifySettings
 	TLAccountResetNotifySettings
+	TLAccountUpdateProfile
 	TLAccountUpdateStatus
+	TLAccountGetWallPapers
 	TLAccountReportPeer
 	TLAccountCheckUsername
-	TLAccountDeleteAccount
-	TLAccountSetAccountTTL
-	TLAccountUpdateDeviceLocked
-	TLAccountResetAuthorization
-	TLAccountUpdatePasswordSettings
-	TLAccountConfirmPhone
-	TLContactsDeleteContacts
-	TLContactsBlock
-	TLContactsUnblock
-	TLContactsResetTopPeerRating
-	TLContactsResetSaved
-	TLMessagesSetTyping
-	TLMessagesReportSpam
-	TLMessagesHideReportSpam
-	TLMessagesDiscardEncryption
-	TLMessagesSetEncryptedTyping
-	TLMessagesReadEncryptedHistory
-	TLMessagesReportEncryptedSpam
-	TLMessagesUninstallStickerSet
-	TLMessagesEditChatAdmin
-	TLMessagesReorderStickerSets
-	TLMessagesSaveGif
-	TLMessagesSetInlineBotResults
-	TLMessagesEditInlineBotMessage
-	TLMessagesSetBotCallbackAnswer
-	TLMessagesSaveDraft
-	TLMessagesReadFeaturedStickers
-	TLMessagesSaveRecentSticker
-	TLMessagesClearRecentStickers
-	TLMessagesSetInlineGameScore
-	TLMessagesToggleDialogPin
-	TLMessagesReorderPinnedDialogs
-	TLMessagesSetBotShippingResults
-	TLMessagesSetBotPrecheckoutResults
-	TLMessagesFaveSticker
-	TLUploadSaveFilePart
-	TLUploadSaveBigFilePart
-	TLHelpSaveAppLog
-	TLHelpSetBotUpdatesStatus
-	TLChannelsReadHistory
-	TLChannelsReportSpam
-	TLChannelsEditAbout
-	TLChannelsCheckUsername
-	TLChannelsUpdateUsername
-	TLChannelsSetStickers
-	TLChannelsReadMessageContents
-	TLBotsAnswerWebhookJSONQuery
-	TLPaymentsClearSavedInfo
-	TLPhoneReceivedCall
-	TLPhoneSaveCallDebug
-	TLAuthExportAuthorization
-	TLAuthRequestPasswordRecovery
-	TLAccountGetNotifySettings
-	TLAccountUpdateProfile
 	TLAccountUpdateUsername
-	TLAccountChangePhone
-	TLContactsImportCard
-	TLAccountGetWallPapers
 	TLAccountGetPrivacy
 	TLAccountSetPrivacy
+	TLAccountDeleteAccount
 	TLAccountGetAccountTTL
+	TLAccountSetAccountTTL
+	TLAccountSendChangePhoneCode
+	TLAccountChangePhone
+	TLAccountUpdateDeviceLocked
 	TLAccountGetAuthorizations
+	TLAccountResetAuthorization
 	TLAccountGetPassword
 	TLAccountGetPasswordSettings
+	TLAccountUpdatePasswordSettings
+	TLAccountSendConfirmPhoneCode
+	TLAccountConfirmPhone
 	TLAccountGetTmpPassword
 	TLUsersGetUsers
 	TLUsersGetFullUser
 	TLContactsGetStatuses
 	TLContactsGetContacts
-	TLContactsGetContacts2
 	TLContactsImportContacts
 	TLContactsDeleteContact
+	TLContactsDeleteContacts
+	TLContactsBlock
+	TLContactsUnblock
 	TLContactsGetBlocked
 	TLContactsExportCard
-	TLMessagesGetMessagesViews
+	TLContactsImportCard
 	TLContactsSearch
 	TLContactsResolveUsername
 	TLContactsGetTopPeers
+	TLContactsResetTopPeerRating
+	TLContactsResetSaved
 	TLMessagesGetMessages
+	TLMessagesGetDialogs
 	TLMessagesGetHistory
 	TLMessagesSearch
-	TLMessagesSearchGlobal
-	TLMessagesGetUnreadMentions
-	TLChannelsGetMessages
-	TLMessagesGetDialogs
 	TLMessagesReadHistory
-	TLMessagesDeleteMessages
-	TLMessagesReadMessageContents
-	TLChannelsDeleteMessages
 	TLMessagesDeleteHistory
-	TLChannelsDeleteUserHistory
+	TLMessagesDeleteMessages
 	TLMessagesReceivedMessages
+	TLMessagesSetTyping
 	TLMessagesSendMessage
 	TLMessagesSendMedia
 	TLMessagesForwardMessages
+	TLMessagesReportSpam
+	TLMessagesHideReportSpam
+	TLMessagesGetPeerSettings
+	TLMessagesGetChats
+	TLMessagesGetFullChat
 	TLMessagesEditChatTitle
 	TLMessagesEditChatPhoto
 	TLMessagesAddChatUser
 	TLMessagesDeleteChatUser
 	TLMessagesCreateChat
 	TLMessagesForwardMessage
-	TLMessagesImportChatInvite
-	TLMessagesStartBot
-	TLMessagesToggleChatAdmins
-	TLMessagesMigrateChat
-	TLMessagesSendInlineBotResult
-	TLMessagesEditMessage
-	TLMessagesGetAllDrafts
-	TLMessagesSetGameScore
-	TLMessagesSendScreenshotNotification
-	TLHelpGetAppChangelog
-	TLChannelsCreateChannel
-	TLChannelsEditAdmin
-	TLChannelsEditTitle
-	TLChannelsEditPhoto
-	TLChannelsJoinChannel
-	TLChannelsLeaveChannel
-	TLChannelsInviteToChannel
-	TLChannelsDeleteChannel
-	TLChannelsToggleInvites
-	TLChannelsToggleSignatures
-	TLChannelsUpdatePinnedMessage
-	TLChannelsEditBanned
-	TLPhoneDiscardCall
-	TLPhoneSetCallRating
-	TLMessagesGetPeerSettings
-	TLMessagesGetChats
-	TLMessagesGetCommonChats
-	TLMessagesGetAllChats
-	TLChannelsGetChannels
-	TLChannelsGetAdminedPublicChannels
-	TLMessagesGetFullChat
-	TLChannelsGetFullChannel
 	TLMessagesGetDhConfig
 	TLMessagesRequestEncryption
 	TLMessagesAcceptEncryption
+	TLMessagesDiscardEncryption
+	TLMessagesSetEncryptedTyping
+	TLMessagesReadEncryptedHistory
 	TLMessagesSendEncrypted
 	TLMessagesSendEncryptedFile
 	TLMessagesSendEncryptedService
 	TLMessagesReceivedQueue
-	TLPhotosDeletePhotos
+	TLMessagesReportEncryptedSpam
+	TLMessagesReadMessageContents
 	TLMessagesGetAllStickers
-	TLMessagesGetMaskStickers
 	TLMessagesGetWebPagePreview
-	TLMessagesUploadMedia
 	TLMessagesExportChatInvite
-	TLChannelsExportInvite
 	TLMessagesCheckChatInvite
+	TLMessagesImportChatInvite
 	TLMessagesGetStickerSet
-	TLStickersCreateStickerSet
-	TLStickersRemoveStickerFromSet
-	TLStickersChangeStickerPosition
-	TLStickersAddStickerToSet
 	TLMessagesInstallStickerSet
+	TLMessagesUninstallStickerSet
+	TLMessagesStartBot
+	TLMessagesGetMessagesViews
+	TLMessagesToggleChatAdmins
+	TLMessagesEditChatAdmin
+	TLMessagesMigrateChat
+	TLMessagesSearchGlobal
+	TLMessagesReorderStickerSets
 	TLMessagesGetDocumentByHash
 	TLMessagesSearchGifs
 	TLMessagesGetSavedGifs
+	TLMessagesSaveGif
 	TLMessagesGetInlineBotResults
+	TLMessagesSetInlineBotResults
+	TLMessagesSendInlineBotResult
 	TLMessagesGetMessageEditData
+	TLMessagesEditMessage
+	TLMessagesEditInlineBotMessage
 	TLMessagesGetBotCallbackAnswer
+	TLMessagesSetBotCallbackAnswer
 	TLMessagesGetPeerDialogs
-	TLMessagesGetPinnedDialogs
+	TLMessagesSaveDraft
+	TLMessagesGetAllDrafts
 	TLMessagesGetFeaturedStickers
+	TLMessagesReadFeaturedStickers
 	TLMessagesGetRecentStickers
+	TLMessagesSaveRecentSticker
+	TLMessagesClearRecentStickers
 	TLMessagesGetArchivedStickers
+	TLMessagesGetMaskStickers
 	TLMessagesGetAttachedStickers
+	TLMessagesSetGameScore
+	TLMessagesSetInlineGameScore
 	TLMessagesGetGameHighScores
 	TLMessagesGetInlineGameHighScores
+	TLMessagesGetCommonChats
+	TLMessagesGetAllChats
 	TLMessagesGetWebPage
+	TLMessagesToggleDialogPin
+	TLMessagesReorderPinnedDialogs
+	TLMessagesGetPinnedDialogs
+	TLMessagesSetBotShippingResults
+	TLMessagesSetBotPrecheckoutResults
+	TLMessagesUploadMedia
+	TLMessagesSendScreenshotNotification
 	TLMessagesGetFavedStickers
+	TLMessagesFaveSticker
+	TLMessagesGetUnreadMentions
 	TLUpdatesGetState
 	TLUpdatesGetDifference
 	TLUpdatesGetChannelDifference
 	TLPhotosUpdateProfilePhoto
 	TLPhotosUploadProfilePhoto
+	TLPhotosDeletePhotos
 	TLPhotosGetUserPhotos
+	TLUploadSaveFilePart
 	TLUploadGetFile
+	TLUploadSaveBigFilePart
 	TLUploadGetWebFile
 	TLUploadGetCdnFile
 	TLUploadReuploadCdnFile
@@ -1037,67 +1209,133 @@ It has these top-level messages:
 	TLHelpGetConfig
 	TLHelpGetNearestDc
 	TLHelpGetAppUpdate
+	TLHelpSaveAppLog
 	TLHelpGetInviteText
 	TLHelpGetSupport
+	TLHelpGetAppChangelog
 	TLHelpGetTermsOfService
+	TLHelpSetBotUpdatesStatus
 	TLHelpGetCdnConfig
+	TLChannelsReadHistory
+	TLChannelsDeleteMessages
+	TLChannelsDeleteUserHistory
+	TLChannelsReportSpam
+	TLChannelsGetMessages
 	TLChannelsGetParticipants
 	TLChannelsGetParticipant
+	TLChannelsGetChannels
+	TLChannelsGetFullChannel
+	TLChannelsCreateChannel
+	TLChannelsEditAbout
+	TLChannelsEditAdmin
+	TLChannelsEditTitle
+	TLChannelsEditPhoto
+	TLChannelsCheckUsername
+	TLChannelsUpdateUsername
+	TLChannelsJoinChannel
+	TLChannelsLeaveChannel
+	TLChannelsInviteToChannel
+	TLChannelsExportInvite
+	TLChannelsDeleteChannel
+	TLChannelsToggleInvites
 	TLChannelsExportMessageLink
+	TLChannelsToggleSignatures
+	TLChannelsUpdatePinnedMessage
+	TLChannelsGetAdminedPublicChannels
+	TLChannelsEditBanned
 	TLChannelsGetAdminLog
+	TLChannelsSetStickers
+	TLChannelsReadMessageContents
 	TLBotsSendCustomRequest
-	TLPhoneGetCallConfig
+	TLBotsAnswerWebhookJSONQuery
 	TLPaymentsGetPaymentForm
 	TLPaymentsGetPaymentReceipt
 	TLPaymentsValidateRequestedInfo
 	TLPaymentsSendPaymentForm
 	TLPaymentsGetSavedInfo
+	TLPaymentsClearSavedInfo
+	TLStickersCreateStickerSet
+	TLStickersRemoveStickerFromSet
+	TLStickersChangeStickerPosition
+	TLStickersAddStickerToSet
+	TLPhoneGetCallConfig
 	TLPhoneRequestCall
 	TLPhoneAcceptCall
 	TLPhoneConfirmCall
+	TLPhoneReceivedCall
+	TLPhoneDiscardCall
+	TLPhoneSetCallRating
+	TLPhoneSaveCallDebug
 	TLLangpackGetLangPack
-	TLLangpackGetDifference
 	TLLangpackGetStrings
+	TLLangpackGetDifference
 	TLLangpackGetLanguages
-	MsgsAck
-	BadMsgNotification
-	MsgsStateReq
-	MsgsStateInfo
-	MsgsAllInfo
-	MsgDetailedInfo
-	MsgResendReq
-	RpcError
-	RpcDropAnswer
+	Vector_WallPaper
+	Vector_User
+	Vector_ContactStatus
+	VectorInt
+	Vector_ReceivedNotifyMessage
+	VectorLong
+	Vector_StickerSetCovered
+	Vector_CdnFileHash
+	Vector_LangPackString
+	Vector_LangPackLanguage
+	FutureSalt_Data
 	FutureSalt
-	FutureSalts
+	TLFutureSalt
+	Pong_Data
 	Pong
+	TLPong
+	DestroySessionRes_Data
 	DestroySessionRes
+	TLDestroySessionOk
+	TLDestroySessionNone
+	NewSession_Data
 	NewSession
-	HttpWait
-	IpPort
+	TLNewSessionCreated
+	Help_ConfigSimple_Data
 	Help_ConfigSimple
-	TLMsgsAck
-	TLBadMsgNotification
-	TLBadServerSalt
+	TLHelpConfigSimple
+	MsgsStateReq_Data
+	MsgsStateReq
 	TLMsgsStateReq
-	TLMsgsStateInfo
+	MsgsAllInfo_Data
+	MsgsAllInfo
 	TLMsgsAllInfo
-	TLMsgDetailedInfo
-	TLMsgNewDetailedInfo
+	MsgResendReq_Data
+	MsgResendReq
 	TLMsgResendReq
-	TLRpcError
+	RpcDropAnswer_Data
+	RpcDropAnswer
 	TLRpcAnswerUnknown
 	TLRpcAnswerDroppedRunning
 	TLRpcAnswerDropped
-	TLFutureSalt
-	TLFutureSalts
-	TLPong
-	TLDestroySessionOk
-	TLDestroySessionNone
-	TLNewSessionCreated
+	BadMsgNotification_Data
+	BadMsgNotification
+	TLBadMsgNotification
+	TLBadServerSalt
+	MsgsStateInfo_Data
+	MsgsStateInfo
+	TLMsgsStateInfo
+	MsgDetailedInfo_Data
+	MsgDetailedInfo
+	TLMsgDetailedInfo
+	TLMsgNewDetailedInfo
+	RpcError_Data
+	RpcError
+	TLRpcError
+	HttpWait_Data
+	HttpWait
 	TLHttpWait
+	IpPort_Data
+	IpPort
 	TLIpPort
-	TLHelpConfigSimple
+	MsgsAck_Data
+	MsgsAck
+	TLMsgsAck
+	FutureSalts_Data
+	FutureSalts
+	TLFutureSalts
 	TLRpcDropAnswer
 	TLGetFutureSalts
 	TLPing
@@ -1222,7 +1460,10 @@ const (
 	TLRpcErrorCodes_PARTICIPANT_VERSION_OUTDATED TLRpcErrorCodes = 400019
 	//
 	TLRpcErrorCodes_PHONE_CODE_INVALID TLRpcErrorCodes = 400020
-	TLRpcErrorCodes_BAD_REQUEST        TLRpcErrorCodes = 400
+	// PHONE_NUMBER_BANNED
+	// SESSION_PASSWORD_NEEDED
+	//
+	TLRpcErrorCodes_BAD_REQUEST TLRpcErrorCodes = 400
 	// There was an unauthorized attempt to use functionality available only to authorized users.
 	//
 	// Examples of Errors:

@@ -17,6 +17,7 @@
 
 package rpc
 
+/*
 import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
@@ -249,3 +250,4 @@ func (s *AuthServiceImpl) AuthRequestPasswordRecovery(ctx context.Context, reque
 	glog.Infof("Process: %v", request)
 	return nil, errors.New("Not impl")
 }
+*/

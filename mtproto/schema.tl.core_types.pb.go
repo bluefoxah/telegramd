@@ -12,492 +12,290 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
-// Type forward declarations
-type Bool struct {
-	// Types that are valid to be assigned to Payload:
-	//	*Bool_BoolFalse
-	//	*Bool_BoolTrue
-	Payload isBool_Payload `protobuf_oneof:"payload"`
-}
-
-func (m *Bool) Reset()                    { *m = Bool{} }
-func (m *Bool) String() string            { return proto.CompactTextString(m) }
-func (*Bool) ProtoMessage()               {}
-func (*Bool) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{0} }
-
-type isBool_Payload interface {
-	isBool_Payload()
-}
-
-type Bool_BoolFalse struct {
-	BoolFalse *TLBoolFalse `protobuf:"bytes,1,opt,name=boolFalse,oneof"`
-}
-type Bool_BoolTrue struct {
-	BoolTrue *TLBoolTrue `protobuf:"bytes,2,opt,name=boolTrue,oneof"`
-}
-
-func (*Bool_BoolFalse) isBool_Payload() {}
-func (*Bool_BoolTrue) isBool_Payload()  {}
-
-func (m *Bool) GetPayload() isBool_Payload {
-	if m != nil {
-		return m.Payload
-	}
-	return nil
-}
-
-func (m *Bool) GetBoolFalse() *TLBoolFalse {
-	if x, ok := m.GetPayload().(*Bool_BoolFalse); ok {
-		return x.BoolFalse
-	}
-	return nil
-}
-
-func (m *Bool) GetBoolTrue() *TLBoolTrue {
-	if x, ok := m.GetPayload().(*Bool_BoolTrue); ok {
-		return x.BoolTrue
-	}
-	return nil
-}
-
-// XXX_OneofFuncs is for the internal use of the proto package.
-func (*Bool) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
-	return _Bool_OneofMarshaler, _Bool_OneofUnmarshaler, _Bool_OneofSizer, []interface{}{
-		(*Bool_BoolFalse)(nil),
-		(*Bool_BoolTrue)(nil),
-	}
-}
-
-func _Bool_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
-	m := msg.(*Bool)
-	// payload
-	switch x := m.Payload.(type) {
-	case *Bool_BoolFalse:
-		b.EncodeVarint(1<<3 | proto.WireBytes)
-		if err := b.EncodeMessage(x.BoolFalse); err != nil {
-			return err
-		}
-	case *Bool_BoolTrue:
-		b.EncodeVarint(2<<3 | proto.WireBytes)
-		if err := b.EncodeMessage(x.BoolTrue); err != nil {
-			return err
-		}
-	case nil:
-	default:
-		return fmt.Errorf("Bool.Payload has unexpected type %T", x)
-	}
-	return nil
-}
-
-func _Bool_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
-	m := msg.(*Bool)
-	switch tag {
-	case 1: // payload.boolFalse
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		msg := new(TLBoolFalse)
-		err := b.DecodeMessage(msg)
-		m.Payload = &Bool_BoolFalse{msg}
-		return true, err
-	case 2: // payload.boolTrue
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		msg := new(TLBoolTrue)
-		err := b.DecodeMessage(msg)
-		m.Payload = &Bool_BoolTrue{msg}
-		return true, err
-	default:
-		return false, nil
-	}
-}
-
-func _Bool_OneofSizer(msg proto.Message) (n int) {
-	m := msg.(*Bool)
-	// payload
-	switch x := m.Payload.(type) {
-	case *Bool_BoolFalse:
-		s := proto.Size(x.BoolFalse)
-		n += proto.SizeVarint(1<<3 | proto.WireBytes)
-		n += proto.SizeVarint(uint64(s))
-		n += s
-	case *Bool_BoolTrue:
-		s := proto.Size(x.BoolTrue)
-		n += proto.SizeVarint(2<<3 | proto.WireBytes)
-		n += proto.SizeVarint(uint64(s))
-		n += s
-	case nil:
-	default:
-		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
-	}
-	return n
-}
-
-type True struct {
-	// Types that are valid to be assigned to Payload:
-	//	*True_True
-	Payload isTrue_Payload `protobuf_oneof:"payload"`
-}
-
-func (m *True) Reset()                    { *m = True{} }
-func (m *True) String() string            { return proto.CompactTextString(m) }
-func (*True) ProtoMessage()               {}
-func (*True) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{1} }
-
-type isTrue_Payload interface {
-	isTrue_Payload()
-}
-
-type True_True struct {
-	True *TLTrue `protobuf:"bytes,1,opt,name=true,oneof"`
-}
-
-func (*True_True) isTrue_Payload() {}
-
-func (m *True) GetPayload() isTrue_Payload {
-	if m != nil {
-		return m.Payload
-	}
-	return nil
-}
-
-func (m *True) GetTrue() *TLTrue {
-	if x, ok := m.GetPayload().(*True_True); ok {
-		return x.True
-	}
-	return nil
-}
-
-// XXX_OneofFuncs is for the internal use of the proto package.
-func (*True) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
-	return _True_OneofMarshaler, _True_OneofUnmarshaler, _True_OneofSizer, []interface{}{
-		(*True_True)(nil),
-	}
-}
-
-func _True_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
-	m := msg.(*True)
-	// payload
-	switch x := m.Payload.(type) {
-	case *True_True:
-		b.EncodeVarint(1<<3 | proto.WireBytes)
-		if err := b.EncodeMessage(x.True); err != nil {
-			return err
-		}
-	case nil:
-	default:
-		return fmt.Errorf("True.Payload has unexpected type %T", x)
-	}
-	return nil
-}
-
-func _True_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
-	m := msg.(*True)
-	switch tag {
-	case 1: // payload.true
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		msg := new(TLTrue)
-		err := b.DecodeMessage(msg)
-		m.Payload = &True_True{msg}
-		return true, err
-	default:
-		return false, nil
-	}
-}
-
-func _True_OneofSizer(msg proto.Message) (n int) {
-	m := msg.(*True)
-	// payload
-	switch x := m.Payload.(type) {
-	case *True_True:
-		s := proto.Size(x.True)
-		n += proto.SizeVarint(1<<3 | proto.WireBytes)
-		n += proto.SizeVarint(uint64(s))
-		n += s
-	case nil:
-	default:
-		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
-	}
-	return n
-}
-
-type Error struct {
-	// Types that are valid to be assigned to Payload:
-	//	*Error_Error
-	Payload isError_Payload `protobuf_oneof:"payload"`
-}
-
-func (m *Error) Reset()                    { *m = Error{} }
-func (m *Error) String() string            { return proto.CompactTextString(m) }
-func (*Error) ProtoMessage()               {}
-func (*Error) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{2} }
-
-type isError_Payload interface {
-	isError_Payload()
-}
-
-type Error_Error struct {
-	Error *TLError `protobuf:"bytes,1,opt,name=error,oneof"`
-}
-
-func (*Error_Error) isError_Payload() {}
-
-func (m *Error) GetPayload() isError_Payload {
-	if m != nil {
-		return m.Payload
-	}
-	return nil
-}
-
-func (m *Error) GetError() *TLError {
-	if x, ok := m.GetPayload().(*Error_Error); ok {
-		return x.Error
-	}
-	return nil
-}
-
-// XXX_OneofFuncs is for the internal use of the proto package.
-func (*Error) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
-	return _Error_OneofMarshaler, _Error_OneofUnmarshaler, _Error_OneofSizer, []interface{}{
-		(*Error_Error)(nil),
-	}
-}
-
-func _Error_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
-	m := msg.(*Error)
-	// payload
-	switch x := m.Payload.(type) {
-	case *Error_Error:
-		b.EncodeVarint(1<<3 | proto.WireBytes)
-		if err := b.EncodeMessage(x.Error); err != nil {
-			return err
-		}
-	case nil:
-	default:
-		return fmt.Errorf("Error.Payload has unexpected type %T", x)
-	}
-	return nil
-}
-
-func _Error_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
-	m := msg.(*Error)
-	switch tag {
-	case 1: // payload.error
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		msg := new(TLError)
-		err := b.DecodeMessage(msg)
-		m.Payload = &Error_Error{msg}
-		return true, err
-	default:
-		return false, nil
-	}
-}
-
-func _Error_OneofSizer(msg proto.Message) (n int) {
-	m := msg.(*Error)
-	// payload
-	switch x := m.Payload.(type) {
-	case *Error_Error:
-		s := proto.Size(x.Error)
-		n += proto.SizeVarint(1<<3 | proto.WireBytes)
-		n += proto.SizeVarint(uint64(s))
-		n += s
-	case nil:
-	default:
-		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
-	}
-	return n
-}
-
-type Null struct {
-	// Types that are valid to be assigned to Payload:
-	//	*Null_Null
-	Payload isNull_Payload `protobuf_oneof:"payload"`
-}
-
-func (m *Null) Reset()                    { *m = Null{} }
-func (m *Null) String() string            { return proto.CompactTextString(m) }
-func (*Null) ProtoMessage()               {}
-func (*Null) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{3} }
-
-type isNull_Payload interface {
-	isNull_Payload()
-}
-
-type Null_Null struct {
-	Null *TLNull `protobuf:"bytes,1,opt,name=null,oneof"`
-}
-
-func (*Null_Null) isNull_Payload() {}
-
-func (m *Null) GetPayload() isNull_Payload {
-	if m != nil {
-		return m.Payload
-	}
-	return nil
-}
-
-func (m *Null) GetNull() *TLNull {
-	if x, ok := m.GetPayload().(*Null_Null); ok {
-		return x.Null
-	}
-	return nil
-}
-
-// XXX_OneofFuncs is for the internal use of the proto package.
-func (*Null) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
-	return _Null_OneofMarshaler, _Null_OneofUnmarshaler, _Null_OneofSizer, []interface{}{
-		(*Null_Null)(nil),
-	}
-}
-
-func _Null_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
-	m := msg.(*Null)
-	// payload
-	switch x := m.Payload.(type) {
-	case *Null_Null:
-		b.EncodeVarint(1<<3 | proto.WireBytes)
-		if err := b.EncodeMessage(x.Null); err != nil {
-			return err
-		}
-	case nil:
-	default:
-		return fmt.Errorf("Null.Payload has unexpected type %T", x)
-	}
-	return nil
-}
-
-func _Null_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
-	m := msg.(*Null)
-	switch tag {
-	case 1: // payload.null
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		msg := new(TLNull)
-		err := b.DecodeMessage(msg)
-		m.Payload = &Null_Null{msg}
-		return true, err
-	default:
-		return false, nil
-	}
-}
-
-func _Null_OneofSizer(msg proto.Message) (n int) {
-	m := msg.(*Null)
-	// payload
-	switch x := m.Payload.(type) {
-	case *Null_Null:
-		s := proto.Size(x.Null)
-		n += proto.SizeVarint(1<<3 | proto.WireBytes)
-		n += proto.SizeVarint(uint64(s))
-		n += s
-	case nil:
-	default:
-		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
-	}
-	return n
-}
-
-// boolFalse#bc799737 = Bool;
-type TLBoolFalse struct {
-}
-
-func (m *TLBoolFalse) Reset()                    { *m = TLBoolFalse{} }
-func (m *TLBoolFalse) String() string            { return proto.CompactTextString(m) }
-func (*TLBoolFalse) ProtoMessage()               {}
-func (*TLBoolFalse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{4} }
-
-// boolTrue#997275b5 = Bool;
-type TLBoolTrue struct {
-}
-
-func (m *TLBoolTrue) Reset()                    { *m = TLBoolTrue{} }
-func (m *TLBoolTrue) String() string            { return proto.CompactTextString(m) }
-func (*TLBoolTrue) ProtoMessage()               {}
-func (*TLBoolTrue) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{5} }
-
-// true#3fedd339 = True;
-type TLTrue struct {
-}
-
-func (m *TLTrue) Reset()                    { *m = TLTrue{} }
-func (m *TLTrue) String() string            { return proto.CompactTextString(m) }
-func (*TLTrue) ProtoMessage()               {}
-func (*TLTrue) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{6} }
-
-// error#c4b9f9bb code:int text:string = Error;
-type TLError struct {
+// /////////////////////////////////////////////////////////////////////////////
+// Error <--
+//  + TL_error
+//
+type Error_Data struct {
 	Code int32  `protobuf:"varint,1,opt,name=code" json:"code,omitempty"`
 	Text string `protobuf:"bytes,2,opt,name=text" json:"text,omitempty"`
 }
 
-func (m *TLError) Reset()                    { *m = TLError{} }
-func (m *TLError) String() string            { return proto.CompactTextString(m) }
-func (*TLError) ProtoMessage()               {}
-func (*TLError) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{7} }
+func (m *Error_Data) Reset()                    { *m = Error_Data{} }
+func (m *Error_Data) String() string            { return proto.CompactTextString(m) }
+func (*Error_Data) ProtoMessage()               {}
+func (*Error_Data) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{0} }
 
-func (m *TLError) GetCode() int32 {
+func (m *Error_Data) GetCode() int32 {
 	if m != nil {
 		return m.Code
 	}
 	return 0
 }
 
-func (m *TLError) GetText() string {
+func (m *Error_Data) GetText() string {
 	if m != nil {
 		return m.Text
 	}
 	return ""
 }
 
+type Error struct {
+	Constructor TLConstructor `protobuf:"varint,1,opt,name=constructor,enum=mtproto.TLConstructor" json:"constructor,omitempty"`
+	Data2       *Error_Data   `protobuf:"bytes,2,opt,name=data2" json:"data2,omitempty"`
+}
+
+func (m *Error) Reset()                    { *m = Error{} }
+func (m *Error) String() string            { return proto.CompactTextString(m) }
+func (*Error) ProtoMessage()               {}
+func (*Error) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{1} }
+
+func (m *Error) GetConstructor() TLConstructor {
+	if m != nil {
+		return m.Constructor
+	}
+	return TLConstructor_CRC32_UNKNOWN
+}
+
+func (m *Error) GetData2() *Error_Data {
+	if m != nil {
+		return m.Data2
+	}
+	return nil
+}
+
+// error#c4b9f9bb code:int text:string = Error;
+type TLError struct {
+	Data2 *Error_Data `protobuf:"bytes,2,opt,name=data2" json:"data2,omitempty"`
+}
+
+func (m *TLError) Reset()                    { *m = TLError{} }
+func (m *TLError) String() string            { return proto.CompactTextString(m) }
+func (*TLError) ProtoMessage()               {}
+func (*TLError) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{2} }
+
+func (m *TLError) GetData2() *Error_Data {
+	if m != nil {
+		return m.Data2
+	}
+	return nil
+}
+
+// /////////////////////////////////////////////////////////////////////////////
+// Null <--
+//  + TL_null
+//
+type Null_Data struct {
+}
+
+func (m *Null_Data) Reset()                    { *m = Null_Data{} }
+func (m *Null_Data) String() string            { return proto.CompactTextString(m) }
+func (*Null_Data) ProtoMessage()               {}
+func (*Null_Data) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{3} }
+
+type Null struct {
+	Constructor TLConstructor `protobuf:"varint,1,opt,name=constructor,enum=mtproto.TLConstructor" json:"constructor,omitempty"`
+	Data2       *Null_Data    `protobuf:"bytes,2,opt,name=data2" json:"data2,omitempty"`
+}
+
+func (m *Null) Reset()                    { *m = Null{} }
+func (m *Null) String() string            { return proto.CompactTextString(m) }
+func (*Null) ProtoMessage()               {}
+func (*Null) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{4} }
+
+func (m *Null) GetConstructor() TLConstructor {
+	if m != nil {
+		return m.Constructor
+	}
+	return TLConstructor_CRC32_UNKNOWN
+}
+
+func (m *Null) GetData2() *Null_Data {
+	if m != nil {
+		return m.Data2
+	}
+	return nil
+}
+
 // null#56730bcc = Null;
 type TLNull struct {
+	Data2 *Null_Data `protobuf:"bytes,2,opt,name=data2" json:"data2,omitempty"`
 }
 
 func (m *TLNull) Reset()                    { *m = TLNull{} }
 func (m *TLNull) String() string            { return proto.CompactTextString(m) }
 func (*TLNull) ProtoMessage()               {}
-func (*TLNull) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{8} }
+func (*TLNull) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{5} }
+
+func (m *TLNull) GetData2() *Null_Data {
+	if m != nil {
+		return m.Data2
+	}
+	return nil
+}
+
+// /////////////////////////////////////////////////////////////////////////////
+// Bool <--
+//  + TL_boolFalse
+//  + TL_boolTrue
+//
+type Bool_Data struct {
+}
+
+func (m *Bool_Data) Reset()                    { *m = Bool_Data{} }
+func (m *Bool_Data) String() string            { return proto.CompactTextString(m) }
+func (*Bool_Data) ProtoMessage()               {}
+func (*Bool_Data) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{6} }
+
+type Bool struct {
+	Constructor TLConstructor `protobuf:"varint,1,opt,name=constructor,enum=mtproto.TLConstructor" json:"constructor,omitempty"`
+	Data2       *Bool_Data    `protobuf:"bytes,2,opt,name=data2" json:"data2,omitempty"`
+}
+
+func (m *Bool) Reset()                    { *m = Bool{} }
+func (m *Bool) String() string            { return proto.CompactTextString(m) }
+func (*Bool) ProtoMessage()               {}
+func (*Bool) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{7} }
+
+func (m *Bool) GetConstructor() TLConstructor {
+	if m != nil {
+		return m.Constructor
+	}
+	return TLConstructor_CRC32_UNKNOWN
+}
+
+func (m *Bool) GetData2() *Bool_Data {
+	if m != nil {
+		return m.Data2
+	}
+	return nil
+}
+
+// boolFalse#bc799737 = Bool;
+type TLBoolFalse struct {
+	Data2 *Bool_Data `protobuf:"bytes,2,opt,name=data2" json:"data2,omitempty"`
+}
+
+func (m *TLBoolFalse) Reset()                    { *m = TLBoolFalse{} }
+func (m *TLBoolFalse) String() string            { return proto.CompactTextString(m) }
+func (*TLBoolFalse) ProtoMessage()               {}
+func (*TLBoolFalse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{8} }
+
+func (m *TLBoolFalse) GetData2() *Bool_Data {
+	if m != nil {
+		return m.Data2
+	}
+	return nil
+}
+
+// boolTrue#997275b5 = Bool;
+type TLBoolTrue struct {
+	Data2 *Bool_Data `protobuf:"bytes,2,opt,name=data2" json:"data2,omitempty"`
+}
+
+func (m *TLBoolTrue) Reset()                    { *m = TLBoolTrue{} }
+func (m *TLBoolTrue) String() string            { return proto.CompactTextString(m) }
+func (*TLBoolTrue) ProtoMessage()               {}
+func (*TLBoolTrue) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{9} }
+
+func (m *TLBoolTrue) GetData2() *Bool_Data {
+	if m != nil {
+		return m.Data2
+	}
+	return nil
+}
+
+// /////////////////////////////////////////////////////////////////////////////
+// True <--
+//  + TL_true
+//
+type True_Data struct {
+}
+
+func (m *True_Data) Reset()                    { *m = True_Data{} }
+func (m *True_Data) String() string            { return proto.CompactTextString(m) }
+func (*True_Data) ProtoMessage()               {}
+func (*True_Data) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{10} }
+
+type True struct {
+	Constructor TLConstructor `protobuf:"varint,1,opt,name=constructor,enum=mtproto.TLConstructor" json:"constructor,omitempty"`
+	Data2       *True_Data    `protobuf:"bytes,2,opt,name=data2" json:"data2,omitempty"`
+}
+
+func (m *True) Reset()                    { *m = True{} }
+func (m *True) String() string            { return proto.CompactTextString(m) }
+func (*True) ProtoMessage()               {}
+func (*True) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{11} }
+
+func (m *True) GetConstructor() TLConstructor {
+	if m != nil {
+		return m.Constructor
+	}
+	return TLConstructor_CRC32_UNKNOWN
+}
+
+func (m *True) GetData2() *True_Data {
+	if m != nil {
+		return m.Data2
+	}
+	return nil
+}
+
+// true#3fedd339 = True;
+type TLTrue struct {
+	Data2 *True_Data `protobuf:"bytes,2,opt,name=data2" json:"data2,omitempty"`
+}
+
+func (m *TLTrue) Reset()                    { *m = TLTrue{} }
+func (m *TLTrue) String() string            { return proto.CompactTextString(m) }
+func (*TLTrue) ProtoMessage()               {}
+func (*TLTrue) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{12} }
+
+func (m *TLTrue) GetData2() *True_Data {
+	if m != nil {
+		return m.Data2
+	}
+	return nil
+}
 
 func init() {
-	proto.RegisterType((*Bool)(nil), "mtproto.Bool")
-	proto.RegisterType((*True)(nil), "mtproto.True")
+	proto.RegisterType((*Error_Data)(nil), "mtproto.Error_Data")
 	proto.RegisterType((*Error)(nil), "mtproto.Error")
+	proto.RegisterType((*TLError)(nil), "mtproto.TL_error")
+	proto.RegisterType((*Null_Data)(nil), "mtproto.Null_Data")
 	proto.RegisterType((*Null)(nil), "mtproto.Null")
+	proto.RegisterType((*TLNull)(nil), "mtproto.TL_null")
+	proto.RegisterType((*Bool_Data)(nil), "mtproto.Bool_Data")
+	proto.RegisterType((*Bool)(nil), "mtproto.Bool")
 	proto.RegisterType((*TLBoolFalse)(nil), "mtproto.TL_boolFalse")
 	proto.RegisterType((*TLBoolTrue)(nil), "mtproto.TL_boolTrue")
+	proto.RegisterType((*True_Data)(nil), "mtproto.True_Data")
+	proto.RegisterType((*True)(nil), "mtproto.True")
 	proto.RegisterType((*TLTrue)(nil), "mtproto.TL_true")
-	proto.RegisterType((*TLError)(nil), "mtproto.TL_error")
-	proto.RegisterType((*TLNull)(nil), "mtproto.TL_null")
 }
 
 func init() { proto.RegisterFile("schema.tl.core_types.proto", fileDescriptor1) }
 
 var fileDescriptor1 = []byte{
-	// 290 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x90, 0xc1, 0x4b, 0xc3, 0x30,
-	0x14, 0xc6, 0xbb, 0xd1, 0xda, 0xf5, 0x4d, 0x45, 0x83, 0xc2, 0xd0, 0x8b, 0xf4, 0x20, 0xf3, 0x92,
-	0x43, 0xc5, 0x83, 0x07, 0x2f, 0x05, 0xa5, 0x07, 0x15, 0x29, 0xbd, 0x8f, 0xb4, 0x0b, 0x3a, 0x48,
-	0xfb, 0x4a, 0x9a, 0x82, 0x03, 0xff, 0x78, 0x79, 0x69, 0x37, 0xc3, 0xf0, 0xd4, 0xaf, 0xef, 0xfb,
-	0x7e, 0xf9, 0x5e, 0x02, 0x57, 0x5d, 0xf5, 0x25, 0x6b, 0xc1, 0x8d, 0xe2, 0x15, 0x6a, 0xb9, 0x32,
-	0xdb, 0x56, 0x76, 0xbc, 0xd5, 0x68, 0x90, 0x85, 0xb5, 0xb1, 0x22, 0xfe, 0x01, 0x3f, 0x45, 0x54,
-	0xec, 0x01, 0xa2, 0x12, 0x51, 0xbd, 0x08, 0xd5, 0xc9, 0xc5, 0xe4, 0x66, 0xb2, 0x9c, 0x27, 0x97,
-	0x7c, 0x0c, 0xf1, 0xe2, 0x75, 0xb5, 0x37, 0x33, 0x2f, 0xff, 0x4b, 0xb2, 0x04, 0x66, 0xf4, 0x53,
-	0xe8, 0x5e, 0x2e, 0xa6, 0x96, 0xba, 0x38, 0xa4, 0xc8, 0xcb, 0xbc, 0x7c, 0x9f, 0x4b, 0x23, 0x08,
-	0x5b, 0xb1, 0x55, 0x28, 0xd6, 0xf1, 0x23, 0xf8, 0x34, 0x62, 0xb7, 0xe0, 0x1b, 0x3a, 0x62, 0x28,
-	0x3e, 0x73, 0x8f, 0x30, 0x03, 0x6e, 0x7d, 0x17, 0x7d, 0x82, 0xe0, 0x59, 0x6b, 0xd4, 0xec, 0x0e,
-	0x02, 0x49, 0x62, 0x84, 0xcf, 0x5d, 0xd8, 0x1a, 0x99, 0x97, 0x0f, 0x89, 0x83, 0xe6, 0xf7, 0x5e,
-	0x29, 0x6a, 0x6e, 0x7a, 0xa5, 0xfe, 0x6b, 0xa6, 0x39, 0x35, 0xd3, 0xd7, 0x45, 0x4f, 0xe1, 0xd8,
-	0x7d, 0x90, 0xf8, 0x04, 0xe6, 0xce, 0x55, 0xe3, 0x08, 0xc2, 0x71, 0xed, 0x38, 0x81, 0xd9, 0x6e,
-	0x09, 0xc6, 0xc0, 0xaf, 0x70, 0x3d, 0x5c, 0x31, 0xc8, 0xad, 0xa6, 0x99, 0x91, 0xdf, 0xc6, 0xbe,
-	0x5c, 0x94, 0x5b, 0x3d, 0xe2, 0xb6, 0x73, 0x09, 0xd7, 0x15, 0xd6, 0xbc, 0x91, 0x65, 0xaf, 0xc4,
-	0xa6, 0xe6, 0xb2, 0xf9, 0xdc, 0x34, 0x72, 0xb7, 0x62, 0x1a, 0xbe, 0x15, 0x1f, 0x24, 0xb2, 0x69,
-	0x79, 0x64, 0x27, 0xf7, 0xbf, 0x01, 0x00, 0x00, 0xff, 0xff, 0x0b, 0x92, 0xa7, 0x7d, 0xf3, 0x01,
-	0x00, 0x00,
+	// 313 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x91, 0xcf, 0x4f, 0xc2, 0x30,
+	0x14, 0xc7, 0x03, 0x01, 0x71, 0xaf, 0xc6, 0x43, 0x8d, 0x86, 0xe0, 0x85, 0xec, 0x34, 0x2f, 0x3d,
+	0x0c, 0x8d, 0x9c, 0xf1, 0x47, 0x3c, 0x4c, 0x63, 0x96, 0xde, 0x97, 0x52, 0x1a, 0xc5, 0x74, 0x7b,
+	0xa4, 0xeb, 0x12, 0xfd, 0xef, 0x4d, 0x0b, 0x14, 0xf0, 0x60, 0x24, 0x86, 0xdb, 0xeb, 0xeb, 0xf7,
+	0xb3, 0xcf, 0xb7, 0x19, 0x0c, 0x6a, 0xf9, 0xae, 0x4a, 0xc1, 0xac, 0x66, 0x12, 0x8d, 0x2a, 0xec,
+	0xd7, 0x42, 0xd5, 0x6c, 0x61, 0xd0, 0x22, 0xed, 0x95, 0xd6, 0x0f, 0x83, 0xf3, 0xad, 0x90, 0x91,
+	0xa3, 0x74, 0x79, 0x1f, 0x5f, 0x03, 0x3c, 0x18, 0x83, 0xa6, 0xb8, 0x17, 0x56, 0x50, 0x0a, 0x1d,
+	0x89, 0x33, 0xd5, 0x6f, 0x0d, 0x5b, 0x49, 0x37, 0xf7, 0xb3, 0xdb, 0x59, 0xf5, 0x69, 0xfb, 0xed,
+	0x61, 0x2b, 0x89, 0x72, 0x3f, 0xc7, 0x1a, 0xba, 0x9e, 0xa2, 0x63, 0x20, 0x12, 0xab, 0xda, 0x9a,
+	0x46, 0x5a, 0x34, 0x9e, 0x3b, 0x4d, 0x2f, 0xd8, 0x4a, 0xca, 0x78, 0x76, 0xb7, 0xb9, 0xcd, 0xb7,
+	0xa3, 0xf4, 0x0a, 0xba, 0x33, 0x61, 0x45, 0xea, 0xbf, 0x4b, 0xd2, 0xb3, 0xc0, 0x6c, 0xea, 0xe4,
+	0xcb, 0x44, 0x7c, 0x03, 0xc7, 0x3c, 0x2b, 0x94, 0x17, 0xee, 0x81, 0x11, 0x88, 0x5e, 0x1a, 0xad,
+	0xfd, 0x2e, 0xfe, 0x80, 0x8e, 0x3b, 0xfc, 0xa3, 0x70, 0xb2, 0x6b, 0xa6, 0x81, 0x09, 0x92, 0xb5,
+	0x78, 0x04, 0x3d, 0x9e, 0x15, 0x95, 0xd3, 0xfd, 0x1d, 0x22, 0x10, 0x4d, 0x10, 0x37, 0x6d, 0xdd,
+	0xe1, 0x10, 0x6d, 0x83, 0x64, 0x2d, 0x1e, 0xc3, 0x09, 0xcf, 0x8a, 0x29, 0xa2, 0x7e, 0x14, 0xba,
+	0x56, 0x7b, 0x90, 0xb7, 0x40, 0x56, 0x24, 0x37, 0xcd, 0x3e, 0x20, 0x81, 0xc8, 0x11, 0xe1, 0xad,
+	0x1e, 0x3f, 0xc0, 0x5b, 0x83, 0x64, 0xf7, 0xcf, 0xd8, 0x5f, 0xdb, 0xfe, 0x84, 0x26, 0x09, 0x5c,
+	0x4a, 0x2c, 0x59, 0xa5, 0xa6, 0x8d, 0x16, 0xf3, 0x92, 0xa9, 0xea, 0x6d, 0x5e, 0xa9, 0x75, 0x7e,
+	0xd2, 0x7b, 0xe6, 0xaf, 0x6e, 0x78, 0x6a, 0x4f, 0x8f, 0xfc, 0x66, 0xf4, 0x1d, 0x00, 0x00, 0xff,
+	0xff, 0x41, 0x6d, 0x23, 0xb7, 0x91, 0x03, 0x00, 0x00,
 }

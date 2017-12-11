@@ -116,7 +116,7 @@ func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
 		}
 
 		c.Codec.SessionId =  request.SessionId
-		c.Codec.Salt = newSessionCreated.ServerSalt
+		c.Codec.Salt = newSessionCreated.GetServerSalt()
 
 		m := &EncryptedMessage2{
 			// NeedAck : false,

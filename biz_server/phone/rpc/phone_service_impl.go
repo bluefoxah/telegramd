@@ -17,6 +17,7 @@
 
 package rpc
 
+/*
 import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
@@ -65,3 +66,4 @@ func (s *PhoneServiceImpl) PhoneConfirmCall(ctx context.Context, request *mtprot
 	glog.Info("Process: %v", request)
 	return nil, nil
 }
+*/

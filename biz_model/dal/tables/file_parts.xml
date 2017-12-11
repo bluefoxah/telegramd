@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table sqlname="file_parts">
+    <operation name="Insert">
+        <sql>
+            INSERT INTO file_parts
+                (creator_user_id, file_id, file_part, is_big_file, file_total_parts, bytes)
+            VALUES
+                (:creator_user_id, :file_id, :file_part, :is_big_file, :file_total_parts, :bytes)
+        </sql>
+    </operation>
+    <operation name="SelectFileParts" result_set="list">
+        <sql>
+            SELECT
+                creator_user_id, file_id, file_part, is_big_file, file_total_parts, bytes
+            FROM
+                file_parts
+            WHERE
+                file_id = :file_id ORDER by file_part
+        </sql>
+    </operation>
+</table>

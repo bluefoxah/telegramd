@@ -22,8 +22,8 @@ import (
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 	"time"
-	"github.com/nebulaim/telegramd/mtproto"
-	"github.com/nebulaim/telegramd/biz_model/base"
+	// "github.com/nebulaim/telegramd/mtproto"
+	// "github.com/nebulaim/telegramd/biz_model/base"
 )
 
 const (
@@ -77,6 +77,7 @@ func (m *accountModel) UnRegisterDevice(authKeyId int64, userId int32, tokenType
 	return rows == 1
 }
 
+/*
 func (m *accountModel) GetNotifySettings(userId int32, peer *base.PeerUtil) *mtproto.PeerNotifySettings {
 	do := dao.GetUserNotifySettingsDAO(dao.DB_SLAVE).SelectByPeer(userId, int8(peer.PeerType), peer.PeerId)
 
@@ -142,3 +143,4 @@ func (m *accountModel) ResetNotifySettings(userId int32) {
 		master.UpdateByPeer(1, 0, 0, "default", 0, userId, base.PEER_ALL, 0)
 	}
 }
+*/

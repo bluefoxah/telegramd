@@ -19,9 +19,9 @@ package model
 
 import (
 	"sync"
-	"github.com/nebulaim/telegramd/mtproto"
-	"github.com/nebulaim/telegramd/biz_model/dal/dao"
-	"time"
+	//"github.com/nebulaim/telegramd/mtproto"
+	//"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	//"time"
 )
 
 type updatesModel struct {
@@ -39,6 +39,7 @@ func GetUpdatesModel() *updatesModel {
 	return updatesInstance
 }
 
+/*
 func (m *updatesModel) GetState(authKeyId int64, userId int32) *mtproto.TLUpdatesState {
 	state := &mtproto.TLUpdatesState{}
 
@@ -73,3 +74,5 @@ func (m *updatesModel) GetState(authKeyId int64, userId int32) *mtproto.TLUpdate
 //	affected.PtsCount = int32(len(doList))
 //	return affected
 //}
+
+*/

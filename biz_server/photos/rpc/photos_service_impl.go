@@ -17,6 +17,7 @@
 
 package rpc
 
+/*
 import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
@@ -45,3 +46,4 @@ func (s *PhotosServiceImpl) PhotosGetUserPhotos(ctx context.Context, request *mt
 	glog.Info("Process: %v", request)
 	return nil, nil
 }
+*/

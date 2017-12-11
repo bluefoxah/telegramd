@@ -17,6 +17,7 @@
 
 package rpc
 
+/*
 import (
 	"github.com/golang/glog"
 	"github.com/nebulaim/telegramd/mtproto"
@@ -100,3 +101,4 @@ func (s *UpdatesServiceImpl) UpdatesGetChannelDifference(ctx context.Context, re
 	glog.Infof("UpdatesGetChannelDifference - Process: {%v}", request)
 	return nil, errors.New("UpdatesGetChannelDifference - Not impl")
 }
+*/

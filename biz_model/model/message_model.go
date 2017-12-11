@@ -18,15 +18,15 @@
 package model
 
 import (
-	"github.com/nebulaim/telegramd/mtproto"
-	"github.com/nebulaim/telegramd/biz_model/base"
 	"sync"
-	"github.com/nebulaim/telegramd/biz_model/dal/dao"
-	"github.com/golang/glog"
-	base2 "github.com/nebulaim/telegramd/base/base"
-	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
-	"time"
-	"github.com/golang/protobuf/proto"
+	//"github.com/nebulaim/telegramd/mtproto"
+	//"github.com/nebulaim/telegramd/biz_model/base"
+	//"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	//"github.com/golang/glog"
+	//base2 "github.com/nebulaim/telegramd/base/base"
+	//"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	//"time"
+	//"github.com/golang/protobuf/proto"
 )
 
 const (
@@ -55,6 +55,7 @@ func GetMessageModel() *messageModel {
 	return messageInstance
 }
 
+/*
 func (m *messageModel) getMessagesByIDList(idList []int32, order bool) (messages []*mtproto.Message) {
 	// TODO(@benqi): Check messageDAO
 	messageDAO := dao.GetMessagesDAO(dao.DB_SLAVE)
@@ -241,4 +242,5 @@ func (m *messageModel) CreateHistoryMessageService(fromId int32, peer *base.Peer
 //	messageId := dao.GetMessagesDAO(dao.DB_MASTER).Insert(messageDO)
 //	message.Id = int32(messageId)
 //	return
-//}
+*/
+

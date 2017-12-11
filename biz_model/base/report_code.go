@@ -18,7 +18,7 @@
 package base
 
 import (
-	"github.com/nebulaim/telegramd/mtproto"
+	// "github.com/nebulaim/telegramd/mtproto"
 )
 
 type ReportReasonType int8
@@ -51,6 +51,7 @@ func (i ReportReasonType) String() (s string) {
 	return
 }
 
+/*
 func FromReportReason(reason *mtproto.ReportReason) (i ReportReasonType) {
 	switch reason.Payload.(type) {
 	case *mtproto.ReportReason_InputReportReasonSpam:
@@ -79,3 +80,4 @@ func (i ReportReasonType) ToReportReason(reason *mtproto.ReportReason) {
 	}
 	return
 }
+*/

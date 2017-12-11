@@ -18,11 +18,11 @@
 package model
 
 import (
-	"github.com/nebulaim/telegramd/biz_model/dal/dao"
-	"github.com/nebulaim/telegramd/mtproto"
 	"sync"
-	"github.com/golang/glog"
-	"github.com/nebulaim/telegramd/base/base"
+	//"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	//"github.com/nebulaim/telegramd/mtproto"
+	//"github.com/golang/glog"
+	//"github.com/nebulaim/telegramd/base/base"
 )
 
 type userModel struct {
@@ -41,6 +41,7 @@ func GetUserModel() *userModel {
 	return userInstance
 }
 
+/*
 func (m *userModel) GetUser(userId int32) (user* mtproto.TLUser) {
 	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
 
@@ -151,3 +152,4 @@ func (m *userModel) GetUserFull(userId int32) (userFull *mtproto.TLUserFull) {
 //func (m *UserModel) GetUserFullList(userId []int32) (user []*mtproto.TLUserFull) {
 //	return nil
 //}
+*/

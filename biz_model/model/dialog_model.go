@@ -18,14 +18,14 @@
 package model
 
 import (
-	"github.com/nebulaim/telegramd/mtproto"
-	"github.com/nebulaim/telegramd/biz_model/base"
 	"sync"
-	"github.com/nebulaim/telegramd/biz_model/dal/dao"
-	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
-	"github.com/golang/glog"
-	base2 "github.com/nebulaim/telegramd/base/base"
-	"time"
+	//"github.com/nebulaim/telegramd/mtproto"
+	//"github.com/nebulaim/telegramd/biz_model/base"
+	//"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	//"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	//"github.com/golang/glog"
+	//base2 "github.com/nebulaim/telegramd/base/base"
+	//"time"
 )
 
 var (
@@ -43,6 +43,7 @@ func GetDialogModel() *dialogModel {
 	return dialogInstance
 }
 
+/*
 func dialogDOToDialog(dialogDO* dataobject.UserDialogsDO) *mtproto.TLDialog {
 	dialog := &mtproto.TLDialog{}
 	dialog.Pinned = dialogDO.IsPinned == 1
@@ -99,12 +100,12 @@ func dialogDOToDialog(dialogDO* dataobject.UserDialogsDO) *mtproto.TLDialog {
 //}
 //
 //
-///*
+/// *
 //  exclude_pinned: YES [ BY BIT 0 IN FIELD flags ],
 //  offset_date: 0 [INT],
 //  offset_id: 0 [INT],
 //  offset_peer: { inputPeerEmpty },
-// */
+// *  ///
 func (m *dialogModel) GetDialogsByOffsetDate(userId int32, excludePinned bool, offsetData int32, limit int32) (dialogs []*mtproto.TLDialog) {
 	dialogDOList := dao.GetUserDialogsDAO(dao.DB_SLAVE).SelectDialogsByPinnedAndOffsetDate(
 		userId, base2.BoolToInt8(!excludePinned), offsetData, limit)
@@ -273,3 +274,5 @@ func (m *dialogModel) CreateOrUpdateByLastMessage(userId int32, peerType int32, 
 	}
 	return
 }
+
+*/

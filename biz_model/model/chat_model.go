@@ -19,12 +19,12 @@ package model
 
 import (
 	"sync"
-	"github.com/nebulaim/telegramd/mtproto"
-	"github.com/nebulaim/telegramd/frontend/id"
-	"time"
-	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
-	"github.com/nebulaim/telegramd/base/base"
-	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	// "github.com/nebulaim/telegramd/mtproto"
+	// "github.com/nebulaim/telegramd/frontend/id"
+	// "time"
+	// "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	// "github.com/nebulaim/telegramd/base/base"
+	// "github.com/nebulaim/telegramd/biz_model/dal/dao"
 )
 
 type chatModel struct {
@@ -43,6 +43,7 @@ func GetChatModel() *chatModel {
 	return chatInstance
 }
 
+/*
 func (m *chatModel) AddChatParticipant(chatId, chatUserId, inviterId int32, participantType int8) (participant *mtproto.ChatParticipant) {
 	// uId := u.GetInputUser().GetUserId()
 	chatUserDO := &dataobject.ChatUsersDO{}
@@ -80,13 +81,13 @@ func (m *chatModel) AddChatParticipant(chatId, chatUserId, inviterId int32, part
 	}
 	return
 }
-/*
+/ *
 	chatEmpty#9ba2d800 id:int = Chat;
 	chat#d91cdd54 flags:# creator:flags.0?true kicked:flags.1?true left:flags.2?true admins_enabled:flags.3?true admin:flags.4?true deactivated:flags.5?true id:int title:string photo:ChatPhoto participants_count:int date:int version:int migrated_to:flags.6?InputChannel = Chat;
 	chatForbidden#7328bdb id:int title:string = Chat;
 	channel#cb44b1c flags:# creator:flags.0?true left:flags.2?true editor:flags.3?true broadcast:flags.5?true verified:flags.7?true megagroup:flags.8?true restricted:flags.9?true democracy:flags.10?true signatures:flags.11?true min:flags.12?true id:int access_hash:flags.13?long title:string username:flags.6?string photo:ChatPhoto date:int version:int restriction_reason:flags.9?string admin_rights:flags.14?ChannelAdminRights banned_rights:flags.15?ChannelBannedRights = Chat;
 	channelForbidden#289da732 flags:# broadcast:flags.5?true megagroup:flags.8?true id:int access_hash:long title:string until_date:flags.16?int = Chat;
- */
+ * /
 func (m *chatModel) CreateChat(userId int32, title string, chatUserIdList []int32, random int64) (*mtproto.TLChat, *mtproto.TLChatParticipants) {
 	chat := &mtproto.TLChat{}
 	// chat.Id = int32(lastInsertId)
@@ -231,3 +232,4 @@ func (m *chatModel) GetChatListByIDList(idList []int32) (chats []*mtproto.Chat) 
 	}
 	return
 }
+*/

@@ -16,6 +16,16 @@
  */
 
 package rpc
+/*
+
+import (
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"time"
+	"github.com/nebulaim/telegramd/frontend/id"
+)
+
+
 
 import (
 	"github.com/golang/glog"
@@ -207,11 +217,55 @@ func (s *MessagesServiceImpl) MessagesFaveSticker(ctx context.Context, request *
 // }
 
 func (s *MessagesServiceImpl) MessagesGetMessages(ctx context.Context, request *mtproto.TLMessagesGetMessages) (*mtproto.Messages_Messages, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("MessagesGetMessages - Process: {%v}", request)
+
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	userIdList := []int32{md.UserId}
+	chatIdList := []int32{}
+
+	messages := model.GetMessageModel().GetMessagesByPeerAndMessageIdList(md.UserId, request.Id)
+	for _, message := range messages {
+		switch message.Payload.(type) {
+		case *mtproto.Message_Message:
+			m := message.GetMessage()
+			userIdList = append(userIdList, m.FromId)
+			p := base.FromPeer(m.GetToId())
+			switch p.PeerType {
+			case base.PEER_SELF, base.PEER_USER:
+				userIdList = append(userIdList, p.PeerId)
+			case base.PEER_CHAT:
+				chatIdList = append(chatIdList, p.PeerId)
+			case base.PEER_CHANNEL:
+				// TODO(@benqi): add channel
+			}
+		case *mtproto.Message_MessageService:
+			m := message.GetMessageService()
+			userIdList = append(userIdList, m.FromId)
+			chatIdList = append(chatIdList, m.GetToId().GetPeerChat().GetChatId())
+		}
+	}
+
+	messagesMessages := &mtproto.TLMessagesMessages{}
+	messagesMessages.Messages = messages
+	if len(userIdList) > 0 {
+		users := model.GetUserModel().GetUserList(userIdList)
+		for _, u := range users {
+			if u.Id == md.UserId {
+				u.Self = true
+			}
+			u.Contact = true
+			messagesMessages.Users = append(messagesMessages.Users, u.ToUser())
+		}
+	}
+	if len(chatIdList) > 0 {
+		messagesMessages.Chats = model.GetChatModel().GetChatListByIDList(chatIdList)
+	}
+
+	glog.Infof("MessagesGetMessages - reply: {%v}", messagesMessages)
+	return messagesMessages.ToMessages_Messages(), nil
 }
 
-/*
+/ *
 message TL_messages_getHistory {
   InputPeer peer = 1;
   int32 offset_id = 2;
@@ -221,7 +275,7 @@ message TL_messages_getHistory {
   int32 max_id = 6;
   int32 min_id = 7;
 };
- */
+ * /
 // messages.getHistory#afa92846 peer:InputPeer offset_id:int offset_date:int add_offset:int limit:int max_id:int min_id:int = messages.Messages;
 // messages.messages#8c718e87 messages:Vector<Message> chats:Vector<Chat> users:Vector<User> = messages.Messages;
 func (s *MessagesServiceImpl) MessagesGetHistory(ctx context.Context, request *mtproto.TLMessagesGetHistory) (*mtproto.Messages_Messages, error) {
@@ -304,7 +358,7 @@ func (s *MessagesServiceImpl) MessagesGetUnreadMentions(ctx context.Context, req
 	return nil, nil
 }
 
-/*
+/ *
 	query: { messages_getDialogs
 	  flags: 1 [INT],
 	  exclude_pinned: YES [ BY BIT 0 IN FIELD flags ],
@@ -313,7 +367,7 @@ func (s *MessagesServiceImpl) MessagesGetUnreadMentions(ctx context.Context, req
 	  offset_peer: { inputPeerEmpty },
 	  limit: 20 [INT],
 	},
- */
+ * /
 func (s *MessagesServiceImpl) MessagesGetDialogs(ctx context.Context, request *mtproto.TLMessagesGetDialogs) (*mtproto.Messages_Dialogs, error) {
 	glog.Infof("MessagesGetDialogs - Process: {%v}", request)
 
@@ -384,7 +438,7 @@ func (s *MessagesServiceImpl) MessagesGetDialogs(ctx context.Context, request *m
 func (s *MessagesServiceImpl) MessagesReadHistory(ctx context.Context, request *mtproto.TLMessagesReadHistory) (*mtproto.Messages_AffectedMessages, error) {
 	glog.Infof("MessagesReadHistory - Process: {%v}", request)
 
-/*
+/ *
 	md := grpc_util.RpcMetadataFromIncoming(ctx)
 
 	var affected *mtproto.TLMessagesAffectedMessages = nil
@@ -397,7 +451,7 @@ func (s *MessagesServiceImpl) MessagesReadHistory(ctx context.Context, request *
 	case base.PEER_CHANNEL:
 	default:
 	}
- */
+ * /
 
  	// TODO(@benqi): 实现逻辑
 	affected := &mtproto.TLMessagesAffectedMessages{}
@@ -429,7 +483,7 @@ func (s *MessagesServiceImpl) MessagesDeleteHistory(ctx context.Context, request
 // }
 
 
-/*
+/ *
 	// messages.sendMessage#fa88427a flags:# no_webpage:flags.1?true silent:flags.5?true background:flags.6?true clear_draft:flags.7?true peer:InputPeer reply_to_msg_id:flags.0?int message:string random_id:long reply_markup:flags.2?ReplyMarkup entities:flags.3?Vector<MessageEntity> = Updates;
 	message TL_messages_sendMessage {
 	  bool no_webpage = 1;
@@ -472,7 +526,7 @@ func (s *MessagesServiceImpl) MessagesDeleteHistory(ctx context.Context, request
 	  int32 reply_to_msg_id = 13;
 	  repeated MessageEntity entities = 14;
 	}
- */
+ * /
 func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *mtproto.TLMessagesSendMessage) (reply *mtproto.Updates, err error) {
 	glog.Infof("MessagesSendMessage - Process: {%v}", request)
 
@@ -651,8 +705,190 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 }
 
 func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mtproto.TLMessagesSendMedia) (*mtproto.Updates, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
+	glog.Infof("MessagesSendMessage - Process: {%v}", request)
+
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	peer := base.FromInputPeer(request.GetPeer())
+
+	message := &mtproto.TLMessage{}
+
+	message.Silent = request.Silent
+	// TODO(@benqi): ???
+	// request.Background
+	// request.NoWebpage
+	// request.ClearDraft
+	message.FromId = md.UserId
+	if peer.PeerType == base.PEER_SELF {
+		to := &mtproto.TLPeerUser{md.UserId}
+		message.ToId = to.ToPeer()
+	} else {
+		message.ToId = peer.ToPeer()
+	}
+	message.ReplyToMsgId = request.ReplyToMsgId
+	message.ReplyMarkup = request.ReplyMarkup
+	message.Date = int32(time.Now().Unix())
+	// glog.Infof("metadata: {%v}, rpcMetaData: {%v}", md, rpcMetaData)
+
+	switch request.Media.Payload.(type) {
+	case mtproto.InputMedia_InputMediaUploadedPhoto:
+		// photo := request.GetMedia().GetInputMediaUploadedPhoto()
+		// inputMediaPhoto#81fa373a flags:# id:InputPhoto caption:string ttl_seconds:flags.0?int = InputMedia;
+		//switch mediaPhoto.GetId().Payload.(type) {
+		//case *mtproto.InputPhoto_InputPhotoEmpty:
+		//	// input_photo := mediaPhoto.GetId().GetInputPhotoEmpty()
+		//case *mtproto.InputPhoto_InputPhoto:
+		//	input_photo := mediaPhoto.GetId().GetInputPhoto().GetId()
+		//}
+	}
+
+	sentMessage := &mtproto.TLUpdateShortSentMessage{}
+	switch peer.PeerType {
+	case base.PEER_SELF:
+		// 1. SaveMessage
+		messageId := model.GetMessageModel().CreateHistoryMessage(md.UserId, peer, request.RandomId, message)
+		// 2. MessageBoxes
+		pts := model.GetMessageModel().CreateMessageBoxes(md.UserId, message.FromId, peer.PeerType, md.UserId, false, messageId)
+		// 3. dialog
+		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, peer.PeerType, md.UserId, messageId, message.Mentioned)
+
+		// 推送给sync
+		// 推给客户端的updates
+		updates := mtproto.TLUpdateShortMessage{}
+		updates.Id = int32(messageId)
+		updates.UserId = md.UserId
+		updates.Pts = pts
+		updates.PtsCount = 1
+		// updates.Message = request.Message
+		updates.Date = int32(time.Now().Unix())
+
+		delivery2.GetDeliveryInstance().DeliveryUpdatesNotMe(
+			md.AuthId,
+			md.SessionId,
+			md.NetlibSessionId,
+			[]int32{md.UserId},
+			updates.ToUpdates().Encode())
+
+		// 返回给客户端
+		// sentMessage := &mtproto.TLUpdateShortSentMessage{}
+		sentMessage.Out = true
+		sentMessage.Id = int32(messageId)
+		sentMessage.Pts = pts
+		sentMessage.PtsCount = 1
+		sentMessage.Date = int32(time.Now().Unix())
+		sentMessage.Media = mtproto.MakeMessageMedia(&mtproto.TLMessageMediaEmpty{})
+		glog.Infof("MessagesSendMessage - reply: %v", sentMessage)
+		// reply = sentMessage.ToUpdates()
+
+	case base.PEER_CHAT:
+		// 返回给客户端
+		// sentMessage := &mtproto.TLUpdateShortSentMessage{}
+		sentMessage.Out = true
+		// sentMessage.Id = int32(messageId)
+		// sentMessage.Pts = outPts
+		sentMessage.PtsCount = 1
+		sentMessage.Date = message.Date
+
+		// 1. SaveMessage
+		messageId := model.GetMessageModel().CreateHistoryMessage(md.UserId, peer, request.RandomId, message)
+
+		participants := model.GetChatModel().GetChatParticipants(peer.PeerId)
+		var userId int32 = 0
+		for _, participan := range participants.GetParticipants() {
+			switch participan.Payload.(type) {
+			case *mtproto.ChatParticipant_ChatParticipantCreator:
+				userId = participan.GetChatParticipantCreator().GetUserId()
+			case *mtproto.ChatParticipant_ChatParticipantAdmin:
+				userId = participan.GetChatParticipantAdmin().GetUserId()
+			case *mtproto.ChatParticipant_ChatParticipant:
+				userId = participan.GetChatParticipant().GetUserId()
+			}
+
+			// 2. MessageBoxes
+			outgoing := userId == md.UserId
+			pts := model.GetMessageModel().CreateMessageBoxes(userId, md.UserId, peer.PeerType, peer.PeerId, outgoing, messageId)
+			model.GetDialogModel().CreateOrUpdateByLastMessage(userId, peer.PeerType, peer.PeerId, messageId, message.Mentioned)
+
+			// inPts := model.GetMessageModel().CreateMessageBoxes(peer.PeerId, message.FromId, peer, true, messageId)
+			// 3. dialog
+			// model.GetDialogModel().CreateOrUpdateByLastMessage(peer.PeerId, peer, messageId, message.Mentioned)
+
+			// 推送给sync
+			// 推给客户端的updates
+			updates := mtproto.TLUpdateShortChatMessage{}
+			updates.Id = int32(messageId)
+			updates.FromId = md.UserId
+			updates.ChatId = peer.PeerId
+			updates.Pts = pts
+			updates.PtsCount = 1
+			// updates.Message = request.Message
+			updates.Date = message.Date
+
+			if md.UserId == userId {
+				sentMessage.Id = int32(messageId)
+				sentMessage.Pts = pts
+
+				delivery2.GetDeliveryInstance().DeliveryUpdatesNotMe(
+					md.AuthId,
+					md.SessionId,
+					md.NetlibSessionId,
+					[]int32{userId},
+					updates.ToUpdates().Encode())
+			} else {
+				delivery2.GetDeliveryInstance().DeliveryUpdates(
+					md.AuthId,
+					md.SessionId,
+					md.NetlibSessionId,
+					[]int32{userId},
+					updates.ToUpdates().Encode())
+			}
+		}
+		glog.Infof("MessagesSendMessage - reply: %v", sentMessage)
+		// reply = sentMessage.ToUpdates()
+	case base.PEER_USER:
+		// 1. SaveMessage
+		messageId := model.GetMessageModel().CreateHistoryMessage(md.UserId, peer, request.RandomId, message)
+		// 2. MessageBoxes
+		outPts := model.GetMessageModel().CreateMessageBoxes(md.UserId, message.FromId, peer.PeerType, peer.PeerId, false, messageId)
+		inPts := model.GetMessageModel().CreateMessageBoxes(peer.PeerId, message.FromId, peer.PeerType, md.UserId, true, messageId)
+		// 3. dialog
+		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, peer.PeerType, peer.PeerId, messageId, message.Mentioned)
+		model.GetDialogModel().CreateOrUpdateByLastMessage(peer.PeerId, peer.PeerType, md.UserId, messageId, message.Mentioned)
+
+		// 推送给sync
+		// 推给客户端的updates
+		updates := mtproto.TLUpdateShortMessage{}
+		updates.Id = int32(messageId)
+		updates.UserId = md.UserId
+		updates.Pts = inPts
+		updates.PtsCount = 1
+		// updates.Message = request.Message
+		updates.Date = message.Date
+
+		delivery2.GetDeliveryInstance().DeliveryUpdatesNotMe(
+			md.AuthId,
+			md.SessionId,
+			md.NetlibSessionId,
+			[]int32{md.UserId, peer.PeerId},
+			updates.ToUpdates().Encode())
+
+		// 返回给客户端
+		// sentMessage := &mtproto.TLUpdateShortSentMessage{}
+		sentMessage.Out = true
+		sentMessage.Id = int32(messageId)
+		sentMessage.Pts = outPts
+		sentMessage.PtsCount = 1
+		sentMessage.Date = message.Date
+
+		// glog.Infof("MessagesSendMessage - reply: %v", sentMessage)
+		// reply = sentMessage.ToUpdates()
+	case base.PEER_CHANNEL:
+
+	default:
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_BAD_REQUEST), "InputPeer invalid"))
+	}
+
+	glog.Infof("MessagesSendMessage - reply: {%v}", sentMessage)
+	return sentMessage.ToUpdates(), nil
 }
 
 func (s *MessagesServiceImpl) MessagesForwardMessages(ctx context.Context, request *mtproto.TLMessagesForwardMessages) (*mtproto.Updates, error) {
@@ -1511,3 +1747,4 @@ func (s *MessagesServiceImpl) MessagesGetFavedStickers(ctx context.Context, requ
 	glog.Infof("MessagesGetFavedStickers - reply: {%v}\n", stickers)
 	return stickers.ToMessages_FavedStickers(), nil
 }
+*/

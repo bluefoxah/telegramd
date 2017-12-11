@@ -31,50 +31,50 @@ import (
 //
 // ERROR_SEE_OTHER code has _X is dc number, We use custom NewXXXX()
 func NewFileMigrateX(dc int32, message string) *TLRpcError {
-	return &TLRpcError{
-		ErrorCode: int32(TLRpcErrorCodes_ERROR_SEE_OTHER),
+	return  &TLRpcError{Data2: &RpcError_Data{
+		ErrorCode:    int32(TLRpcErrorCodes_ERROR_SEE_OTHER),
 		ErrorMessage: fmt.Sprintf("FILE_MIGRATE_%d: %s", dc, message),
-	}
+	}}
 }
 
 func NewPhoneMigrateX(dc int32, message string) *TLRpcError {
-	return &TLRpcError{
+	return &TLRpcError{Data2: &RpcError_Data{
 		ErrorCode: int32(TLRpcErrorCodes_ERROR_SEE_OTHER),
 		ErrorMessage: fmt.Sprintf("PHONE_MIGRATE_%d: %s", dc, message),
-	}
+	}}
 }
 
 func NewNetworkMigrateX(dc int32, message string) *TLRpcError {
-	return &TLRpcError{
+	return &TLRpcError{Data2: &RpcError_Data{
 		ErrorCode: int32(TLRpcErrorCodes_ERROR_SEE_OTHER),
 		ErrorMessage: fmt.Sprintf("NETWORK_MIGRATE_%d: %s", dc, message),
-	}
+	}}
 }
 
 func NewUserMigrateX(dc int32, message string) *TLRpcError {
-	return &TLRpcError{
+	return &TLRpcError{Data2: &RpcError_Data{
 		ErrorCode: int32(TLRpcErrorCodes_ERROR_SEE_OTHER),
 		ErrorMessage: fmt.Sprintf("USER_MIGRATE_%d: %s", dc, message),
-	}
+	}}
 }
 
 // FLOOD_WAIT_X: A wait of X seconds is required (where X is a number)
 //
 func NewFloodWaitX(second int32, message string) *TLRpcError {
-	return &TLRpcError{
+	return &TLRpcError{Data2: &RpcError_Data{
 		ErrorCode: int32(TLRpcErrorCodes_FLOOD),
 		ErrorMessage: fmt.Sprintf("FLOOD_WAIT_%d: %s", second, message),
-	}
+	}}
 }
 
 // normal code NewXXX
 func NewRpcError(code int32, message string) (err *TLRpcError) {
 	if name, ok := TLRpcErrorCodes_name[int32(code)]; ok {
 		if code <= int32(TLRpcErrorCodes_OTHER2) {
-			err = &TLRpcError{
+			err = &TLRpcError{Data2: &RpcError_Data{
 				ErrorCode: code,
 				ErrorMessage: fmt.Sprintf("%s: %s", name, message),
-			}
+			}}
 		} else {
 			switch code {
 			// Not
@@ -82,32 +82,32 @@ func NewRpcError(code int32, message string) (err *TLRpcError) {
 				 int32(TLRpcErrorCodes_NETWORK_MIGRATE_X),
 				 int32(TLRpcErrorCodes_PHONE_MIGRATE_X),
 				 int32(TLRpcErrorCodes_USER_MIGRATE_X):
-				err = &TLRpcError{
+				err = &TLRpcError{Data2: &RpcError_Data{
 					ErrorCode: int32(TLRpcErrorCodes_OTHER2),
 					ErrorMessage: fmt.Sprintf("INTERNAL_SERVER_ERROR: Not invoke NewRpcError(%s), please use New%s(dc, %s), ", name, name, message),
-				}
+				}}
 				glog.Error(err)
 
 			case int32(TLRpcErrorCodes_FLOOD_WAIT_X):
-				err = &TLRpcError{
+				err = &TLRpcError{Data2: &RpcError_Data{
 					ErrorCode: int32(TLRpcErrorCodes_FLOOD),
 					ErrorMessage: fmt.Sprintf("FLOOD_WAIT_%d: %s", name, name),
-				}
+				}}
 				glog.Error(err)
 			default:
-				err = &TLRpcError{
+				err = &TLRpcError{Data2: &RpcError_Data{
 					// subcode = code * 10000 + i
 					ErrorCode: code / 10000,
 					ErrorMessage: fmt.Sprintf("%s: %s", name, message),
-				}
+				}}
 			}
 		}
 	} else {
-		err = &TLRpcError{
+		err = &TLRpcError{Data2: &RpcError_Data{
 			// subcode = code * 10000 + i
 			ErrorCode: int32(TLRpcErrorCodes_INTERNAL),
 			ErrorMessage: fmt.Sprintf("INTERNAL_SERVER_ERROR: code = %d, message = %s", code, message),
-		}
+		}}
 	}
 
 	return
@@ -115,7 +115,7 @@ func NewRpcError(code int32, message string) (err *TLRpcError) {
 
 // Impl error interface
 func (e *TLRpcError) Error() string {
-	return fmt.Sprintf("rpc error: code = %d desc = %s", e.ErrorCode, e.ErrorMessage)
+	return fmt.Sprintf("rpc error: code = %d desc = %s", e.GetErrorCode(), e.GetErrorMessage())
 }
 
 // Impl error interface

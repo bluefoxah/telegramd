@@ -16,7 +16,7 @@
  */
 
 package rpc
-
+/*
 import (
 	"errors"
 	"github.com/BurntSushi/toml"
@@ -194,3 +194,4 @@ func (s *HelpServiceImpl) HelpGetCdnConfig(ctx context.Context, request *mtproto
 	glog.Infof("Process: %v", request)
 	return nil, errors.New("Not impl")
 }
+*/

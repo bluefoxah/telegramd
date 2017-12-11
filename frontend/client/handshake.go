@@ -50,17 +50,19 @@ func (c *Client) onReqPq(request *UnencryptedMessage) (TLObject) {
 		return nil
 	}
 
-	resPQ := &TLResPQ{}
+	resPQ := &TLResPQ{
+		Data2: &ResPQ_Data{},
+	}
 
 	// Nonce
-	resPQ.Nonce = make([]byte, 16)
-	copy(resPQ.Nonce, reqPq.Nonce)
+	resPQ.SetNonce(make([]byte, 16))
+	copy(resPQ.Data2.Nonce, reqPq.Nonce)
 
-	resPQ.ServerNonce = crypto.GenerateNonce(16)
+	resPQ.SetServerNonce(crypto.GenerateNonce(16))
 
 	// TODO(@benqi): 使用算法生成PQ
 	// 这里直接指定了PQ值: {0x17, 0xED, 0x48, 0x94, 0x1A, 0x08, 0xF9, 0x81}
-	resPQ.Pq = string([]byte{0x17, 0xED, 0x48, 0x94, 0x1A, 0x08, 0xF9, 0x81})
+	resPQ.SetPq(string([]byte{0x17, 0xED, 0x48, 0x94, 0x1A, 0x08, 0xF9, 0x81}))
 
 	// TODO(@benqi): 预先计算出fingerprint
 	// 这里直接使用了0xc3b42b026ce86b21
@@ -69,11 +71,11 @@ func (c *Client) onReqPq(request *UnencryptedMessage) (TLObject) {
 	// var u uint64 = 14404393623918429762
 	var u uint64 = 12240908862933197005
 
-	resPQ.ServerPublicKeyFingerprints = []int64{int64(u)}
+	resPQ.SetServerPublicKeyFingerprints([]int64{int64(u)})
 
 	// 缓存客户端Nonce
 	c.Nonce = reqPq.Nonce
-	c.ServerNonce = resPQ.ServerNonce
+	c.ServerNonce = resPQ.GetServerNonce()
 	c.Codec.State = CODEC_resPQ
 	return resPQ
 }
@@ -127,7 +129,8 @@ func (c *Client) onReq_DHParams(request *UnencryptedMessage) (TLObject) {
 	glog.Info(hex.EncodeToString(encryptedPQInnerData[:20]))
 
 	// 2. 反序列化出pqInnerData
-	pqInnerData := &TLPQInnerData{}
+	pqInnerData := NewTLPQInnerData()
+	// &TLPQInnerData{}
 	dbuf := NewDecodeBuf(encryptedPQInnerData[SHA_DIGEST_LENGTH+4:])
 	err := pqInnerData.Decode(dbuf)
 	if err != nil {
@@ -138,7 +141,7 @@ func (c *Client) onReq_DHParams(request *UnencryptedMessage) (TLObject) {
 	glog.Info("processReq_DHParams - pqInnerData Decode sucess: ", pqInnerData.String())
 
 	// 缓存NewNonce
-	c.NewNonce = pqInnerData.NewNonce
+	c.NewNonce = pqInnerData.GetNewNonce()
 
 	// TODO(@benqi): 直接指定了dh2048_p和dh2048_g!!!
 	var dh2048_p =[]byte{
@@ -174,14 +177,14 @@ func (c *Client) onReq_DHParams(request *UnencryptedMessage) (TLObject) {
 	g_a := new(big.Int)
 	g_a.Exp(new(big.Int).SetBytes(dh2048_g), c.A, c.P)
 	// ServerNonce
-	server_DHInnerData := &TLServer_DHInnerData{}
-
-	server_DHInnerData.Nonce = c.Nonce
-	server_DHInnerData.ServerNonce = c.ServerNonce
-	server_DHInnerData.G = int32(dh2048_g[0])
-	server_DHInnerData.GA = string(g_a.Bytes())
-	server_DHInnerData.DhPrime = string(dh2048_p)
-	server_DHInnerData.ServerTime = int32(time.Now().Unix())
+	server_DHInnerData := &TLServer_DHInnerData{ Data2: &Server_DHInnerData_Data{
+			Nonce: c.Nonce,
+			ServerNonce: c.ServerNonce,
+			G: int32(dh2048_g[0]),
+			GA: string(g_a.Bytes()),
+			DhPrime: string(dh2048_p),
+			ServerTime: int32(time.Now().Unix()),
+	}}
 
 	server_DHInnerData_buf := server_DHInnerData.Encode()
 	// server_DHInnerData_buf_sha1 := sha1.Sum(server_DHInnerData_buf)
@@ -211,10 +214,11 @@ func (c *Client) onReq_DHParams(request *UnencryptedMessage) (TLObject) {
 	e := crypto.NewAES256IGECryptor(tmp_aes_key_and_iv[:32], tmp_aes_key_and_iv[32:64])
 	tmp_encrypted_answer, _ = e.Encrypt(tmp_encrypted_answer)
 
-	server_DHParamsOk := &TLServer_DHParamsOk{}
-	server_DHParamsOk.Nonce = c.Nonce
-	server_DHParamsOk.ServerNonce = c.ServerNonce
-	server_DHParamsOk.EncryptedAnswer = string(tmp_encrypted_answer)
+	server_DHParamsOk := &TLServer_DHParamsOk{ Data2: &Server_DH_Params_Data{
+		Nonce:  c.Nonce,
+		ServerNonce: c.ServerNonce,
+		EncryptedAnswer: string(tmp_encrypted_answer),
+	}}
 
 	c.Codec.State = CODEC_server_DH_params_ok
 
@@ -259,7 +263,8 @@ func (c *Client) onSetClient_DHParams(request *UnencryptedMessage) (TLObject) {
 
 	// TODO(@benqi): 检查签名是否合法
 	dbuf := NewDecodeBuf(decryptedData[24:])
-	client_DHInnerData := &TLClient_DHInnerData{}
+	client_DHInnerData := NewTLClient_DHInnerData()
+	// &TLClient_DHInnerData{}
 	err = client_DHInnerData.Decode(dbuf)
 	if err != nil {
 		glog.Errorf("processSetClient_DHParams - TLClient_DHInnerData decode error: %s", err)
@@ -269,20 +274,20 @@ func (c *Client) onSetClient_DHParams(request *UnencryptedMessage) (TLObject) {
 	glog.Info("processSetClient_DHParams - client_DHInnerData: ", client_DHInnerData.String())
 
 	//
-	if !bytes.Equal(client_DHInnerData.Nonce, c.Nonce) {
+	if !bytes.Equal(client_DHInnerData.GetNonce(), c.Nonce) {
 		glog.Error("processSetClient_DHParams - Wrong client_DHInnerData's Nonce")
 		return nil
 	}
 
 	// ServerNonce
-	if !bytes.Equal(client_DHInnerData.ServerNonce, c.ServerNonce) {
+	if !bytes.Equal(client_DHInnerData.GetServerNonce(), c.ServerNonce) {
 		glog.Error("processSetClient_DHParams - Wrong client_DHInnerData's ServerNonce")
 		return nil
 	}
 
 	// hash_key
 	authKeyNum := new(big.Int)
-	authKeyNum.Exp(new(big.Int).SetBytes([]byte(client_DHInnerData.GB)), c.A, c.P)
+	authKeyNum.Exp(new(big.Int).SetBytes([]byte(client_DHInnerData.GetGB())), c.A, c.P)
 	authKey := make([]byte, 256)
 	copy(authKey[256-len(authKeyNum.Bytes()):], authKeyNum.Bytes())
 
@@ -295,10 +300,11 @@ func (c *Client) onSetClient_DHParams(request *UnencryptedMessage) (TLObject) {
 	sha1_e := sha1.Sum(authKeyAuxHash[:len(authKeyAuxHash)-12])
 	authKeyAuxHash = append(authKeyAuxHash, sha1_e[:]...)
 
-	dhGenOk := &TLDhGenOk{}
-	dhGenOk.Nonce = c.Nonce
-	dhGenOk.ServerNonce = c.ServerNonce
-	dhGenOk.NewNonceHash1 = authKeyAuxHash[len(authKeyAuxHash)-16:len(authKeyAuxHash)]
+	dhGenOk := &TLDhGenOk{ Data2: &SetClient_DHParamsAnswer_Data{
+		Nonce: c.Nonce,
+		ServerNonce: c.ServerNonce,
+		NewNonceHash1: authKeyAuxHash[len(authKeyAuxHash)-16:len(authKeyAuxHash)],
+	}}
 
 	c.Codec.AuthKeyId = int64(binary.LittleEndian.Uint64(authKeyAuxHash[len(c.NewNonce)+1+12:len(c.NewNonce)+1+12+8]))
 	c.Codec.AuthKey = authKey
