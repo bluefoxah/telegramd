@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // help.getCdnConfig#52029342 = CdnConfig;
 func (s *HelpServiceImpl) HelpGetCdnConfig(ctx context.Context, request *mtproto.TLHelpGetCdnConfig) (*mtproto.CdnConfig, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("HelpGetCdnConfig - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("HelpGetCdnConfig - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl HelpGetCdnConfig logic
+	// TODO(@benqi): Impl HelpGetCdnConfig logic
 
-    return nil, fmt.Errorf("Not impl HelpGetCdnConfig")
+	return nil, fmt.Errorf("Not impl HelpGetCdnConfig")
 }

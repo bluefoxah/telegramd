@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // contacts.getStatuses#c4a353ee = Vector<ContactStatus>;
 func (s *ContactsServiceImpl) ContactsGetStatuses(ctx context.Context, request *mtproto.TLContactsGetStatuses) (*mtproto.Vector_ContactStatus, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("ContactsGetStatuses - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("ContactsGetStatuses - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl ContactsGetStatuses logic
+	// TODO(@benqi): Impl ContactsGetStatuses logic
 
-    return nil, fmt.Errorf("Not impl ContactsGetStatuses")
+	return nil, fmt.Errorf("Not impl ContactsGetStatuses")
 }

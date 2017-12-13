@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // messages.editInlineBotMessage#130c2c85 flags:# no_webpage:flags.1?true id:InputBotInlineMessageID message:flags.11?string reply_markup:flags.2?ReplyMarkup entities:flags.3?Vector<MessageEntity> = Bool;
 func (s *MessagesServiceImpl) MessagesEditInlineBotMessage(ctx context.Context, request *mtproto.TLMessagesEditInlineBotMessage) (*mtproto.Bool, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("MessagesEditInlineBotMessage - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("MessagesEditInlineBotMessage - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl MessagesEditInlineBotMessage logic
+	// TODO(@benqi): Impl MessagesEditInlineBotMessage logic
 
-    return nil, fmt.Errorf("Not impl MessagesEditInlineBotMessage")
+	return nil, fmt.Errorf("Not impl MessagesEditInlineBotMessage")
 }

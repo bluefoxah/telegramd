@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // photos.uploadProfilePhoto#4f32c098 file:InputFile = photos.Photo;
 func (s *PhotosServiceImpl) PhotosUploadProfilePhoto(ctx context.Context, request *mtproto.TLPhotosUploadProfilePhoto) (*mtproto.Photos_Photo, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("PhotosUploadProfilePhoto - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("PhotosUploadProfilePhoto - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl PhotosUploadProfilePhoto logic
+	// TODO(@benqi): Impl PhotosUploadProfilePhoto logic
 
-    return nil, fmt.Errorf("Not impl PhotosUploadProfilePhoto")
+	return nil, fmt.Errorf("Not impl PhotosUploadProfilePhoto")
 }

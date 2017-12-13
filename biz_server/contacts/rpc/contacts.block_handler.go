@@ -18,20 +18,28 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 )
 
 // contacts.block#332b49fc id:InputUser = Bool;
 func (s *ContactsServiceImpl) ContactsBlock(ctx context.Context, request *mtproto.TLContactsBlock) (*mtproto.Bool, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("ContactsBlock - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("ContactsBlock - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl ContactsBlock logic
+	switch request.GetId().GetConstructor() {
+	case mtproto.TLConstructor_CRC32_inputUserEmpty:
+	case mtproto.TLConstructor_CRC32_inputUserSelf:
+		dao.GetUserContactsDAO(dao.DB_MASTER).UpdateBlock(1, md.UserId, md.UserId)
+	case mtproto.TLConstructor_CRC32_inputUser:
+		// TODO(@benqi): Check InputUser's userId and access_hash
+		dao.GetUserContactsDAO(dao.DB_MASTER).UpdateBlock(1, md.UserId, request.GetId().GetData2().GetUserId())
+	}
 
-    return nil, fmt.Errorf("Not impl ContactsBlock")
+	glog.Infof("ContactsBlock - reply: {true}")
+	return mtproto.ToBool(true), nil
 }

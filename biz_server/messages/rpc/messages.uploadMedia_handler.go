@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // messages.uploadMedia#519bc2b1 peer:InputPeer media:InputMedia = MessageMedia;
 func (s *MessagesServiceImpl) MessagesUploadMedia(ctx context.Context, request *mtproto.TLMessagesUploadMedia) (*mtproto.MessageMedia, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("MessagesUploadMedia - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("MessagesUploadMedia - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl MessagesUploadMedia logic
+	// TODO(@benqi): Impl MessagesUploadMedia logic
 
-    return nil, fmt.Errorf("Not impl MessagesUploadMedia")
+	return nil, fmt.Errorf("Not impl MessagesUploadMedia")
 }

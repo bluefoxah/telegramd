@@ -18,20 +18,21 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // messages.getFeaturedStickers#2dacca4f hash:int = messages.FeaturedStickers;
 func (s *MessagesServiceImpl) MessagesGetFeaturedStickers(ctx context.Context, request *mtproto.TLMessagesGetFeaturedStickers) (*mtproto.Messages_FeaturedStickers, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("MessagesGetFeaturedStickers - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("MessagesGetFeaturedStickers - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl MessagesGetFeaturedStickers logic
+	// TODO(@benqi): Impl MessagesGetFeaturedStickers logic
+	stickers := mtproto.NewTLMessagesFeaturedStickersNotModified()
 
-    return nil, fmt.Errorf("Not impl MessagesGetFeaturedStickers")
+	glog.Infof("MessagesGetFeaturedStickers - reply: %s", logger.JsonDebugData(stickers))
+	return stickers.To_Messages_FeaturedStickers(), nil
 }

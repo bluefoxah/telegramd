@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // account.getWallPapers#c04cfac2 = Vector<WallPaper>;
 func (s *AccountServiceImpl) AccountGetWallPapers(ctx context.Context, request *mtproto.TLAccountGetWallPapers) (*mtproto.Vector_WallPaper, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("AccountGetWallPapers - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("AccountGetWallPapers - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl AccountGetWallPapers logic
+	// TODO(@benqi): Impl AccountGetWallPapers logic
 
-    return nil, fmt.Errorf("Not impl AccountGetWallPapers")
+	return nil, fmt.Errorf("Not impl AccountGetWallPapers")
 }

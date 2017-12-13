@@ -17,33 +17,7 @@
 
 package rpc
 
-/*
-import (
-	"github.com/golang/glog"
-	"github.com/nebulaim/telegramd/mtproto"
-	"golang.org/x/net/context"
-)
+import ()
 
 type PhotosServiceImpl struct {
 }
-
-// func (s *PhotosServiceImpl)PhotosDeletePhotos(ctx context.Context,  request *mtproto.TLPhotosDeletePhotos) (*mtproto.Vector<int64T>, error) {
-//   glog.Info("Process: %v", request)
-//   return nil, nil
-// }
-
-func (s *PhotosServiceImpl) PhotosUpdateProfilePhoto(ctx context.Context, request *mtproto.TLPhotosUpdateProfilePhoto) (*mtproto.UserProfilePhoto, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *PhotosServiceImpl) PhotosUploadProfilePhoto(ctx context.Context, request *mtproto.TLPhotosUploadProfilePhoto) (*mtproto.Photos_Photo, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *PhotosServiceImpl) PhotosGetUserPhotos(ctx context.Context, request *mtproto.TLPhotosGetUserPhotos) (*mtproto.Photos_Photos, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-*/

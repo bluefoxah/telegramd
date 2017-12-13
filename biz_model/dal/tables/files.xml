@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table sqlname="files">
+    <operation name="Insert">
+        <sql>
+            INSERT INTO files
+                (creator_user_id, file_id, file_parts, file_size, md5_checksum)
+            VALUES
+                (:creator_user_id, :file_id, :file_parts, :file_size, :md5_checksum)
+        </sql>
+    </operation>
+</table>

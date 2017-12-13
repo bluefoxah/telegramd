@@ -20,9 +20,9 @@ package rpc
 import (
 	"flag"
 	"github.com/golang/glog"
-	"net"
-	"google.golang.org/grpc"
 	"github.com/nebulaim/telegramd/mtproto"
+	"google.golang.org/grpc"
+	"net"
 )
 
 func DoMainServer() {

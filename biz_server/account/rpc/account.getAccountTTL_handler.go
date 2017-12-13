@@ -18,20 +18,28 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 )
 
 // account.getAccountTTL#8fc711d = AccountDaysTTL;
 func (s *AccountServiceImpl) AccountGetAccountTTL(ctx context.Context, request *mtproto.TLAccountGetAccountTTL) (*mtproto.AccountDaysTTL, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("AccountGetAccountTTL - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("AccountGetAccountTTL - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl AccountGetAccountTTL logic
+	// TODO(@benqi): 估计不是这个规则
+	do := dao.GetUserPrivacysDAO(dao.DB_SLAVE).SelectTTL(md.UserId)
+	ttl := mtproto.NewTLAccountDaysTTL()
+	if do == nil {
+		ttl.SetDays(180)
+	} else {
+		ttl.SetDays(do.Ttl)
+	}
 
-    return nil, fmt.Errorf("Not impl AccountGetAccountTTL")
+	glog.Infof("AccountReportPeer - reply: %s\n", logger.JsonDebugData(ttl))
+	return ttl.To_AccountDaysTTL(), nil
 }

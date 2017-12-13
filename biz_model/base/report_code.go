@@ -18,7 +18,8 @@
 package base
 
 import (
-	// "github.com/nebulaim/telegramd/mtproto"
+	"github.com/nebulaim/telegramd/mtproto"
+	"fmt"
 )
 
 type ReportReasonType int8
@@ -51,33 +52,47 @@ func (i ReportReasonType) String() (s string) {
 	return
 }
 
-/*
 func FromReportReason(reason *mtproto.ReportReason) (i ReportReasonType) {
-	switch reason.Payload.(type) {
-	case *mtproto.ReportReason_InputReportReasonSpam:
+	switch reason.GetConstructor() {
+	case mtproto.TLConstructor_CRC32_inputReportReasonSpam:
 		i = REASON_OTHER
-	case *mtproto.ReportReason_InputReportReasonViolence:
+	case mtproto.TLConstructor_CRC32_inputReportReasonViolence:
 		i = REASON_SPAM
-	case *mtproto.ReportReason_InputReportReasonPornography:
+	case mtproto.TLConstructor_CRC32_inputReportReasonPornography:
 		i = REASON_VIOLENCE
-	case *mtproto.ReportReason_InputReportReasonOther:
+	case mtproto.TLConstructor_CRC32_inputReportReasonOther:
 		i = REASON_PORNOGRAPHY
+	default:
+		panic(fmt.Sprintf("FromReportReason(%v) error!", reason))
 	}
 
 	return
 }
 
-func (i ReportReasonType) ToReportReason(reason *mtproto.ReportReason) {
+func (i ReportReasonType) ToReportReason(text string) (reason *mtproto.ReportReason) {
 	switch i {
 	case REASON_OTHER:
-		reason = mtproto.MakeReportReason(&mtproto.TLInputReportReasonOther{})
+		reason = &mtproto.ReportReason{
+			Constructor: mtproto.TLConstructor_CRC32_inputReportReasonOther,
+			Data2: &mtproto.ReportReason_Data{text},
+		}
 	case REASON_SPAM:
-		reason = mtproto.MakeReportReason(&mtproto.TLInputReportReasonSpam{})
+		reason = &mtproto.ReportReason{
+			Constructor: mtproto.TLConstructor_CRC32_inputReportReasonSpam,
+			Data2: &mtproto.ReportReason_Data{},
+		}
 	case REASON_VIOLENCE:
-		reason = mtproto.MakeReportReason(&mtproto.TLInputReportReasonViolence{})
+		reason = &mtproto.ReportReason{
+			Constructor: mtproto.TLConstructor_CRC32_inputReportReasonViolence,
+			Data2: &mtproto.ReportReason_Data{},
+		}
 	case REASON_PORNOGRAPHY:
-		reason = mtproto.MakeReportReason(&mtproto.TLInputReportReasonPornography{})
+		reason = &mtproto.ReportReason{
+			Constructor: mtproto.TLConstructor_CRC32_inputReportReasonPornography,
+			Data2: &mtproto.ReportReason_Data{},
+		}
+	default:
+		panic(fmt.Sprintf("ToReportReason(%v) error!", i))
 	}
 	return
 }
-*/

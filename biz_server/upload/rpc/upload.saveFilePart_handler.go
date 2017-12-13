@@ -18,20 +18,56 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"crypto/md5"
+	"fmt"
+)
+
+const (
+	maxFilePartSize = 32768
 )
 
 // upload.saveFilePart#b304a621 file_id:long file_part:int bytes:bytes = Bool;
 func (s *UploadServiceImpl) UploadSaveFilePart(ctx context.Context, request *mtproto.TLUploadSaveFilePart) (*mtproto.Bool, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("UploadSaveFilePart - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("UploadSaveFilePart - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl UploadSaveFilePart logic
+	filePartsDO := &dataobject.FilePartsDO{
+	    CreatorUserId: md.UserId,
+	    FileId: request.FileId,
+	    FilePart: request.FilePart,
+	    IsBigFile: 0,
+	    Bytes: request.Bytes,
+	}
+	dao.GetFilePartsDAO(dao.DB_MASTER).Insert(filePartsDO)
 
-    return nil, fmt.Errorf("Not impl UploadSaveFilePart")
+	if len(request.Bytes) < maxFilePartSize {
+		// 文件上传结束, 计算出文件大小和md5，存盘
+		filePartsDOList := dao.GetFilePartsDAO(dao.DB_MASTER).SelectFileParts(md.UserId, request.FileId)
+		// datas := make([]byte, 0, len(filePartsDOList)*maxFilePartSize)
+		md5Hash := md5.New()
+		fileSize := 0
+		for _, v := range filePartsDOList {
+			fileSize += len(v.Bytes)
+			md5Hash.Write(v.Bytes)
+		}
+
+		filesDO := &dataobject.FilesDO{
+			CreatorUserId: md.UserId,
+			FileId: request.FileId,
+			FileParts: int32(len(filePartsDOList)),
+			FileSize: int64(fileSize),
+			Md5Checksum: fmt.Sprintf("%x", md5Hash.Sum(nil)),
+		}
+		dao.GetFilesDAO(dao.DB_MASTER).Insert(filesDO)
+	}
+
+	glog.Infof("UploadSaveFilePart - reply: {true}")
+	return mtproto.ToBool(true), nil
 }

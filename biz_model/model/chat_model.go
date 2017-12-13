@@ -19,12 +19,12 @@ package model
 
 import (
 	"sync"
-	// "github.com/nebulaim/telegramd/mtproto"
-	// "github.com/nebulaim/telegramd/frontend/id"
-	// "time"
-	// "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
-	// "github.com/nebulaim/telegramd/base/base"
-	// "github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/mtproto"
+	"github.com/nebulaim/telegramd/frontend/id"
+	"time"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/base/base"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 )
 
 type chatModel struct {
@@ -43,10 +43,10 @@ func GetChatModel() *chatModel {
 	return chatInstance
 }
 
-/*
+
 func (m *chatModel) AddChatParticipant(chatId, chatUserId, inviterId int32, participantType int8) (participant *mtproto.ChatParticipant) {
 	// uId := u.GetInputUser().GetUserId()
-	chatUserDO := &dataobject.ChatUsersDO{}
+	chatUserDO := &dataobject.ChatParticipantsDO{}
 
 	chatUserDO.ChatId = chatId
 	chatUserDO.CreatedAt = base.NowFormatYMDHMS()
@@ -56,46 +56,46 @@ func (m *chatModel) AddChatParticipant(chatId, chatUserId, inviterId int32, part
 	chatUserDO.JoinedAt = chatUserDO.InvitedAt
 	chatUserDO.UserId = chatUserId
 	chatUserDO.ParticipantType = participantType
-	dao.GetChatUsersDAO(dao.DB_MASTER).Insert(chatUserDO)
+	dao.GetChatParticipantsDAO(dao.DB_MASTER).Insert(chatUserDO)
 
 	if participantType == 2 {
-		participant2 := &mtproto.TLChatParticipantCreator{}
-		participant2.UserId = chatUserId
+		participant2 := mtproto.NewTLChatParticipantCreator()
+		participant2.SetUserId(chatUserId)
 
-		participant = participant2.ToChatParticipant()
+		participant = participant2.To_ChatParticipant()
 	} else if participantType == 1 {
-		participant2 := &mtproto.TLChatParticipantAdmin{}
-		participant2.UserId = chatUserId
-		participant2.Date = chatUserDO.InvitedAt
-		participant2.InviterId = inviterId
+		participant2 := mtproto.NewTLChatParticipantAdmin()
+		participant2.SetUserId(chatUserId)
+		participant2.SetDate(chatUserDO.InvitedAt)
+		participant2.SetInviterId(inviterId)
 
-		participant = participant2.ToChatParticipant()
+		participant = participant2.To_ChatParticipant()
 	} else if participantType == 0 {
-		participant2 := &mtproto.TLChatParticipant{}
-		participant2.UserId = chatUserId
-		participant2.Date = chatUserDO.InvitedAt
-		participant2.InviterId = inviterId
+		participant2 := mtproto.NewTLChatParticipant()
+		participant2.SetUserId(chatUserId)
+		participant2.SetDate(chatUserDO.InvitedAt)
+		participant2.SetInviterId(inviterId)
 		// participants.Participants = append(participants.Participants, participant.ToChatParticipant())
 
-		participant = participant2.ToChatParticipant()
+		participant = participant2.To_ChatParticipant()
 	}
 	return
 }
-/ *
+/*
 	chatEmpty#9ba2d800 id:int = Chat;
 	chat#d91cdd54 flags:# creator:flags.0?true kicked:flags.1?true left:flags.2?true admins_enabled:flags.3?true admin:flags.4?true deactivated:flags.5?true id:int title:string photo:ChatPhoto participants_count:int date:int version:int migrated_to:flags.6?InputChannel = Chat;
 	chatForbidden#7328bdb id:int title:string = Chat;
 	channel#cb44b1c flags:# creator:flags.0?true left:flags.2?true editor:flags.3?true broadcast:flags.5?true verified:flags.7?true megagroup:flags.8?true restricted:flags.9?true democracy:flags.10?true signatures:flags.11?true min:flags.12?true id:int access_hash:flags.13?long title:string username:flags.6?string photo:ChatPhoto date:int version:int restriction_reason:flags.9?string admin_rights:flags.14?ChannelAdminRights banned_rights:flags.15?ChannelBannedRights = Chat;
 	channelForbidden#289da732 flags:# broadcast:flags.5?true megagroup:flags.8?true id:int access_hash:long title:string until_date:flags.16?int = Chat;
- * /
+ */
 func (m *chatModel) CreateChat(userId int32, title string, chatUserIdList []int32, random int64) (*mtproto.TLChat, *mtproto.TLChatParticipants) {
-	chat := &mtproto.TLChat{}
+	chat := mtproto.NewTLChat()
 	// chat.Id = int32(lastInsertId)
-	chat.Title = title
-	chat.Photo = mtproto.MakeChatPhoto(&mtproto.TLChatPhotoEmpty{})
-	chat.Date = int32(time.Now().Unix())
-	chat.Version = 1
-	chat.ParticipantsCount = int32(len(chatUserIdList))+1
+	chat.SetTitle(title)
+	chat.SetPhoto(mtproto.NewTLChatPhotoEmpty().To_ChatPhoto())
+	chat.SetDate(int32(time.Now().Unix()))
+	chat.SetVersion(1)
+	chat.SetParticipantsCount(int32(len(chatUserIdList))+1)
 
 	chatDO := &dataobject.ChatsDO{}
 	chatDO.AccessHash = id.NextId()
@@ -115,52 +115,51 @@ func (m *chatModel) CreateChat(userId int32, title string, chatUserIdList []int3
 	// TODO(@benqi): 使用客户端message_id
 	chatDO.AvatarChangeRandomId = chatDO.AccessHash
 	// dao.GetChatsDA()
-	chatDO.ParticipantCount = chat.ParticipantsCount
+	chatDO.ParticipantCount = chat.GetParticipantsCount()
 
 	// TODO(@benqi): 事务！
-	chat.Id = int32(dao.GetChatsDAO(dao.DB_MASTER).Insert(chatDO))
+	chat.SetId(int32(dao.GetChatsDAO(dao.DB_MASTER).Insert(chatDO)))
 
 	// updateChatParticipants := &mtproto.TLUpdateChatParticipants{}
-	participants := &mtproto.TLChatParticipants{}
-	participants.ChatId = chat.Id
-	participants.Version = 1
+	participants := mtproto.NewTLChatParticipants()
+	participants.SetChatId(chat.GetId())
+	participants.SetVersion(1)
 
-
-	participants.Participants = append(participants.Participants, m.AddChatParticipant(chat.Id, userId, userId, 2))
+	participants.Data2.Participants = append(participants.Data2.Participants, m.AddChatParticipant(chat.GetId(), userId, userId, 2))
 	// chatUserIdList := make([]int32, 0, len(request.GetUsers()))
 	for _, chatUserId := range chatUserIdList {
 		if chatUserId == userId {
 			continue
 		}
-		participants.Participants = append(participants.Participants, m.AddChatParticipant(chat.Id, chatUserId, userId, 0))
+		participants.Data2.Participants = append(participants.Data2.Participants, m.AddChatParticipant(chat.GetId(), chatUserId, userId, 0))
 	}
 
 	return chat, participants
 }
 
 func (m *chatModel) GetChat(chatId int32) (*mtproto.TLChat) {
-	chat := &mtproto.TLChat{}
+	chat := mtproto.NewTLChat()
 	chatDO := dao.GetChatsDAO(dao.DB_SLAVE).Select(chatId)
 	if chatDO == nil {
 		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_BAD_REQUEST), "InputPeer invalid"))
 	}
-	chat.Id = chatId
-	chat.Title = chatDO.Title
-	chat.Photo = mtproto.MakeChatPhoto(&mtproto.TLChatPhotoEmpty{})
-	chat.Version = chatDO.Version
-	chat.ParticipantsCount = chatDO.ParticipantCount
-	chat.Date = int32(time.Now().Unix())
+	chat.SetId(chatId)
+	chat.SetTitle(chatDO.Title)
+	chat.SetPhoto(mtproto.NewTLChatPhotoEmpty().To_ChatPhoto())
+	chat.SetVersion(chatDO.Version)
+	chat.SetParticipantsCount(chatDO.ParticipantCount)
+	chat.SetDate(int32(time.Now().Unix()))
 	return chat
 }
 
 func (m *chatModel) GetChatFull(chatId int32) (*mtproto.TLChatFull) {
-	chatFull := &mtproto.TLChatFull{}
+	chatFull := mtproto.NewTLChatFull()
 
-	chatFull.Id = chatId
-	chatFull.Participants = m.GetChatParticipants(chatId).ToChatParticipants()
-	photo := &mtproto.TLPhotoEmpty{}
-	chatFull.ChatPhoto = photo.ToPhoto()
-	chatFull.ExportedInvite = mtproto.MakeExportedChatInvite(&mtproto.TLChatInviteEmpty{})
+	chatFull.SetId(chatId)
+	chatFull.SetParticipants(m.GetChatParticipants(chatId).To_ChatParticipants())
+	photo := mtproto.NewTLPhotoEmpty()
+	chatFull.SetChatPhoto(photo.To_Photo())
+	chatFull.SetExportedInvite(mtproto.NewTLChatInviteEmpty().To_ExportedChatInvite())
 	return chatFull
 }
 
@@ -171,31 +170,31 @@ func (m *chatModel) GetChatFull(chatId int32) (*mtproto.TLChatFull) {
 //}
 
 func (m *chatModel) GetChatParticipants(chatId int32) (*mtproto.TLChatParticipants) {
-	chatUsersDOList := dao.GetChatUsersDAO(dao.DB_SLAVE).SelectByChatId(chatId)
+	chatUsersDOList := dao.GetChatParticipantsDAO(dao.DB_SLAVE).SelectByChatId(chatId)
 
 	// updateChatParticipants := &mtproto.TLUpdateChatParticipants{}
-	participants := &mtproto.TLChatParticipants{}
-	participants.ChatId = chatId
-	participants.Version = 1
+	participants := mtproto.NewTLChatParticipants()
+	participants.SetChatId(chatId)
+	participants.SetVersion(1)
 	for _, chatUsersDO := range chatUsersDOList {
 		// uId := u.GetInputUser().GetUserId()
 		if chatUsersDO.ParticipantType == 2 {
 			// chatUserDO.IsAdmin = 1
-			participant := &mtproto.TLChatParticipantCreator{}
-			participant.UserId = chatUsersDO.UserId
-			participants.Participants = append(participants.Participants, participant.ToChatParticipant())
+			participant := mtproto.NewTLChatParticipantCreator()
+			participant.SetUserId(chatUsersDO.UserId)
+			participants.SetParticipants(append(participants.Data2.Participants, participant.To_ChatParticipant()))
 		} else if chatUsersDO.ParticipantType == 1 {
-			participant := &mtproto.TLChatParticipantAdmin{}
-			participant.UserId = chatUsersDO.UserId
-			participant.InviterId = chatUsersDO.InviterUserId
-			participant.Date = chatUsersDO.JoinedAt
-			participants.Participants = append(participants.Participants, participant.ToChatParticipant())
+			participant := mtproto.NewTLChatParticipantAdmin()
+			participant.SetUserId(chatUsersDO.UserId)
+			participant.SetInviterId(chatUsersDO.InviterUserId)
+			participant.SetDate(chatUsersDO.JoinedAt)
+			participants.Data2.Participants = append(participants.Data2.Participants, participant.To_ChatParticipant())
 		} else if chatUsersDO.ParticipantType == 0 {
-			participant := &mtproto.TLChatParticipant{}
-			participant.UserId = chatUsersDO.UserId
-			participant.InviterId = chatUsersDO.InviterUserId
-			participant.Date = chatUsersDO.JoinedAt
-			participants.Participants = append(participants.Participants, participant.ToChatParticipant())
+			participant := mtproto.NewTLChatParticipant()
+			participant.SetUserId(chatUsersDO.UserId)
+			participant.SetInviterId(chatUsersDO.InviterUserId)
+			participant.SetDate(chatUsersDO.JoinedAt)
+			participants.Data2.Participants = append(participants.Data2.Participants, participant.To_ChatParticipant())
 		}
 	}
 	return participants
@@ -206,12 +205,12 @@ func (m *chatModel) GetChatsByIDList(idList []int32) (chats []*mtproto.TLChat) {
 	chatsDOList := dao.GetChatsDAO(dao.DB_SLAVE).SelectByIdList(idList)
 
 	for _, chatDO := range chatsDOList {
-		chat := &mtproto.TLChat{}
-		chat.Id = chatDO.Id
-		chat.Title = chatDO.Title
-		chat.Photo = mtproto.MakeChatPhoto(&mtproto.TLChatPhotoEmpty{})
-		chat.Version = chatDO.Version
-		chat.Date = int32(time.Now().Unix())
+		chat := mtproto.NewTLChat()
+		chat.SetId(chatDO.Id)
+		chat.SetTitle(chatDO.Title)
+		chat.SetPhoto(mtproto.NewTLChatPhotoEmpty().To_ChatPhoto())
+		chat.SetVersion(chatDO.Version)
+		chat.SetDate(int32(time.Now().Unix()))
 		chats = append(chats, chat)
 	}
 	return
@@ -222,14 +221,14 @@ func (m *chatModel) GetChatListByIDList(idList []int32) (chats []*mtproto.Chat) 
 	chatsDOList := dao.GetChatsDAO(dao.DB_SLAVE).SelectByIdList(idList)
 
 	for _, chatDO := range chatsDOList {
-		chat := &mtproto.TLChat{}
-		chat.Id = chatDO.Id
-		chat.Title = chatDO.Title
-		chat.Photo = mtproto.MakeChatPhoto(&mtproto.TLChatPhotoEmpty{})
-		chat.Version = chatDO.Version
-		chat.Date = int32(time.Now().Unix())
-		chats = append(chats, chat.ToChat())
+		chat := mtproto.NewTLChat()
+		chat.SetId(chatDO.Id)
+		chat.SetTitle(chatDO.Title)
+		chat.SetPhoto(mtproto.NewTLChatPhotoEmpty().To_ChatPhoto())
+		chat.SetVersion(chatDO.Version)
+		chat.SetDate(int32(time.Now().Unix()))
+		chats = append(chats, chat.To_Chat())
 	}
 	return
 }
-*/
+

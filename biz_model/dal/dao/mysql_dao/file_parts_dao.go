@@ -53,11 +53,11 @@ func (dao *FilePartsDAO) Insert(do *dataobject.FilePartsDO) int64 {
 	return id
 }
 
-// select creator_user_id, file_id, file_part, is_big_file, file_total_parts, bytes from file_parts where file_id = :file_id order by file_part asc
+// select creator_user_id, file_id, file_part, is_big_file, file_total_parts, bytes from file_parts where creator_user_id = :creator_user_id and file_id = :file_id order by file_part asc
 // TODO(@benqi): sqlmap
-func (dao *FilePartsDAO) SelectFileParts(file_id int64) []dataobject.FilePartsDO {
-	var query = "select creator_user_id, file_id, file_part, is_big_file, file_total_parts, bytes from file_parts where file_id = ? order by file_part asc"
-	rows, err := dao.db.Queryx(query, file_id)
+func (dao *FilePartsDAO) SelectFileParts(creator_user_id int32, file_id int64) []dataobject.FilePartsDO {
+	var query = "select creator_user_id, file_id, file_part, is_big_file, file_total_parts, bytes from file_parts where creator_user_id = ? and file_id = ? order by file_part asc"
+	rows, err := dao.db.Queryx(query, creator_user_id, file_id)
 
 	if err != nil {
 		errDesc := fmt.Sprintf("Queryx in SelectFileParts(_), error: %v", err)

@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // bots.answerWebhookJSONQuery#e6213f4d query_id:long data:DataJSON = Bool;
 func (s *BotsServiceImpl) BotsAnswerWebhookJSONQuery(ctx context.Context, request *mtproto.TLBotsAnswerWebhookJSONQuery) (*mtproto.Bool, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("BotsAnswerWebhookJSONQuery - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("BotsAnswerWebhookJSONQuery - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl BotsAnswerWebhookJSONQuery logic
+	// TODO(@benqi): Impl BotsAnswerWebhookJSONQuery logic
 
-    return nil, fmt.Errorf("Not impl BotsAnswerWebhookJSONQuery")
+	return nil, fmt.Errorf("Not impl BotsAnswerWebhookJSONQuery")
 }

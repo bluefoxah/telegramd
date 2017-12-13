@@ -18,20 +18,21 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // messages.getMaskStickers#65b8c79f hash:int = messages.AllStickers;
 func (s *MessagesServiceImpl) MessagesGetMaskStickers(ctx context.Context, request *mtproto.TLMessagesGetMaskStickers) (*mtproto.Messages_AllStickers, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("MessagesGetMaskStickers - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("MessagesGetMaskStickers - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl MessagesGetMaskStickers logic
+	// TODO(@benqi): Impl MessagesGetMaskStickers logic
 
-    return nil, fmt.Errorf("Not impl MessagesGetMaskStickers")
+	stickers := mtproto.NewTLMessagesAllStickersNotModified()
+	glog.Infof("MessagesGetMaskStickers - reply: %s", logger.JsonDebugData(stickers))
+	return stickers.To_Messages_AllStickers(), nil
 }

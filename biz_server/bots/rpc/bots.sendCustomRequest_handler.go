@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // bots.sendCustomRequest#aa2769ed custom_method:string params:DataJSON = DataJSON;
 func (s *BotsServiceImpl) BotsSendCustomRequest(ctx context.Context, request *mtproto.TLBotsSendCustomRequest) (*mtproto.DataJSON, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("BotsSendCustomRequest - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("BotsSendCustomRequest - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl BotsSendCustomRequest logic
+	// TODO(@benqi): Impl BotsSendCustomRequest logic
 
-    return nil, fmt.Errorf("Not impl BotsSendCustomRequest")
+	return nil, fmt.Errorf("Not impl BotsSendCustomRequest")
 }

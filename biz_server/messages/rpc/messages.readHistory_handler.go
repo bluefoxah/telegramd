@@ -18,20 +18,23 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // messages.readHistory#e306d3a peer:InputPeer max_id:int = messages.AffectedMessages;
 func (s *MessagesServiceImpl) MessagesReadHistory(ctx context.Context, request *mtproto.TLMessagesReadHistory) (*mtproto.Messages_AffectedMessages, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("MessagesReadHistory - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("MessagesReadHistory - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl MessagesReadHistory logic
+	// TODO(@benqi): Impl MessagesReadHistory logic
+	affected := &mtproto.TLMessagesAffectedMessages{}
+	affected.SetPts(-1)
+	affected.SetPtsCount(0)
 
-    return nil, fmt.Errorf("Not impl MessagesReadHistory")
+	glog.Infof("MessagesReadHistory - reply: %s", logger.JsonDebugData(affected))
+	return affected.To_Messages_AffectedMessages(), nil
 }

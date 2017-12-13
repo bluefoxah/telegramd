@@ -19,13 +19,13 @@ package model
 
 import (
 	"sync"
-	//"github.com/nebulaim/telegramd/mtproto"
-	//"github.com/nebulaim/telegramd/biz_model/base"
-	//"github.com/nebulaim/telegramd/biz_model/dal/dao"
-	//"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
-	//"github.com/golang/glog"
-	//base2 "github.com/nebulaim/telegramd/base/base"
-	//"time"
+	"github.com/nebulaim/telegramd/mtproto"
+	"github.com/nebulaim/telegramd/biz_model/base"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/golang/glog"
+	base2 "github.com/nebulaim/telegramd/base/base"
+	"time"
 )
 
 var (
@@ -43,35 +43,50 @@ func GetDialogModel() *dialogModel {
 	return dialogInstance
 }
 
-/*
+
 func dialogDOToDialog(dialogDO* dataobject.UserDialogsDO) *mtproto.TLDialog {
-	dialog := &mtproto.TLDialog{}
-	dialog.Pinned = dialogDO.IsPinned == 1
+	dialog := mtproto.NewTLDialog()
+	// dialogData := dialog.GetData2()
+
+	dialog.SetPinned(dialogDO.IsPinned == 1)
+	//p := base.PeerUtil{
+	//	PeerType: int32(dialogDO.PeerType),
+	//	PeerId: dialogDO.PeerId,
+	//}
+	//dialog.SetPeer(p.ToPeer())
+
 	switch dialogDO.PeerType {
 	case base.PEER_EMPTY:
 	case base.PEER_SELF, base.PEER_USER:
-		peer := &mtproto.TLPeerUser{dialogDO.PeerId}
-		dialog.Peer = peer.ToPeer()
+		peer := &mtproto.TLPeerUser{ Data2: &mtproto.Peer_Data{
+			UserId: dialogDO.PeerId,
+		}}
+		dialog.SetPeer(peer.To_Peer())
 	case base.PEER_CHAT:
-		peer := &mtproto.TLPeerChat{dialogDO.PeerId}
-		dialog.Peer = peer.ToPeer()
+		peer := &mtproto.TLPeerChat{ Data2: &mtproto.Peer_Data{
+			ChatId: dialogDO.PeerId,
+		}}
+		dialog.SetPeer(peer.To_Peer())
 	case base.PEER_CHANNEL:
-		peer := &mtproto.TLPeerChannel{dialogDO.PeerId}
-		dialog.Peer = peer.ToPeer()
+		peer := &mtproto.TLPeerChannel{ Data2: &mtproto.Peer_Data{
+			ChannelId: dialogDO.PeerId,
+		}}
+		dialog.SetPeer(peer.To_Peer())
 	}
-	dialog.TopMessage = dialogDO.TopMessage
-	dialog.ReadInboxMaxId = dialogDO.ReadInboxMaxId
-	dialog.ReadOutboxMaxId = dialogDO.ReadOutboxMaxId
-	dialog.UnreadCount = dialogDO.UnreadCount
-	dialog.UnreadMentionsCount = dialogDO.UnreadMentionsCount
+
+	dialog.SetTopMessage(dialogDO.TopMessage)
+	dialog.SetReadInboxMaxId(dialogDO.ReadInboxMaxId)
+	dialog.SetReadOutboxMaxId(dialogDO.ReadOutboxMaxId)
+	dialog.SetUnreadCount(dialogDO.UnreadCount)
+	dialog.SetUnreadMentionsCount(dialogDO.UnreadMentionsCount)
 
 	// TODO(@benqi): pts/draft
 	// NotifySettings
-	peerNotifySettings := &mtproto.TLPeerNotifySettings{}
-	peerNotifySettings.ShowPreviews = true
-	peerNotifySettings.MuteUntil = 0
-	peerNotifySettings.Sound = "default"
-	dialog.NotifySettings = peerNotifySettings.ToPeerNotifySettings()
+	peerNotifySettings := mtproto.NewTLPeerNotifySettings()
+	peerNotifySettings.SetShowPreviews(true)
+	peerNotifySettings.SetMuteUntil(0)
+	peerNotifySettings.SetSound("default")
+	dialog.SetNotifySettings(peerNotifySettings.To_PeerNotifySettings())
 
 	return dialog
 }
@@ -110,34 +125,42 @@ func (m *dialogModel) GetDialogsByOffsetDate(userId int32, excludePinned bool, o
 	dialogDOList := dao.GetUserDialogsDAO(dao.DB_SLAVE).SelectDialogsByPinnedAndOffsetDate(
 		userId, base2.BoolToInt8(!excludePinned), offsetData, limit)
 	for _, dialogDO := range dialogDOList {
-		dialog := &mtproto.TLDialog{}
-		dialog.Pinned = dialogDO.IsPinned == 1
+		dialog := mtproto.NewTLDialog()
+		dialog.SetPinned(dialogDO.IsPinned == 1)
+
 		switch dialogDO.PeerType {
 		case base.PEER_EMPTY:
 			continue
 		case base.PEER_SELF, base.PEER_USER:
-			peer := &mtproto.TLPeerUser{dialogDO.PeerId}
-			dialog.Peer = peer.ToPeer()
+			peer := &mtproto.TLPeerUser{ Data2: &mtproto.Peer_Data{
+				UserId: dialogDO.PeerId,
+			}}
+			dialog.SetPeer(peer.To_Peer())
 		case base.PEER_CHAT:
-			peer := &mtproto.TLPeerChat{dialogDO.PeerId}
-			dialog.Peer = peer.ToPeer()
+			peer := &mtproto.TLPeerChat{ Data2: &mtproto.Peer_Data{
+				ChatId: dialogDO.PeerId,
+			}}
+			dialog.SetPeer(peer.To_Peer())
 		case base.PEER_CHANNEL:
-			peer := &mtproto.TLPeerChannel{dialogDO.PeerId}
-			dialog.Peer = peer.ToPeer()
+			peer := &mtproto.TLPeerChannel{ Data2: &mtproto.Peer_Data{
+				ChannelId: dialogDO.PeerId,
+			}}
+			dialog.SetPeer(peer.To_Peer())
 		}
-		dialog.TopMessage = dialogDO.TopMessage
-		dialog.ReadInboxMaxId = dialogDO.ReadInboxMaxId
-		dialog.ReadOutboxMaxId = dialogDO.ReadOutboxMaxId
-		dialog.UnreadCount = dialogDO.UnreadCount
-		dialog.UnreadMentionsCount = dialogDO.UnreadMentionsCount
+
+		dialog.SetTopMessage(dialogDO.TopMessage)
+		dialog.SetReadInboxMaxId(dialogDO.ReadInboxMaxId)
+		dialog.SetReadOutboxMaxId(dialogDO.ReadOutboxMaxId)
+		dialog.SetUnreadCount(dialogDO.UnreadCount)
+		dialog.SetUnreadMentionsCount(dialogDO.UnreadMentionsCount)
 
 		// TODO(@benqi): pts/draft
 		// NotifySettings
-		peerNotifySettings := &mtproto.TLPeerNotifySettings{}
-		peerNotifySettings.ShowPreviews = true
-		peerNotifySettings.MuteUntil = 0
-		peerNotifySettings.Sound = "default"
-		dialog.NotifySettings = peerNotifySettings.ToPeerNotifySettings()
+		peerNotifySettings := mtproto.NewTLPeerNotifySettings()
+		peerNotifySettings.SetShowPreviews(true)
+		peerNotifySettings.SetMuteUntil(0)
+		peerNotifySettings.SetSound("default")
+		dialog.SetNotifySettings(peerNotifySettings.To_PeerNotifySettings())
 
 		dialogs = append(dialogs, dialog)
 	}
@@ -160,34 +183,42 @@ func (m *dialogModel) GetDialogsByUserIDAndType(userId, peerType int32) (dialogs
 	// dialogDOList, _ := dialogsDAO.SelectDialogsByUserID(userId)
 	dialogs = []*mtproto.TLDialog{}
 	for _, dialogDO := range dialogDOList {
-		dialog := &mtproto.TLDialog{}
-		dialog.Pinned = dialogDO.IsPinned == 1
+		dialog := mtproto.NewTLDialog()
+		dialog.SetPinned(dialogDO.IsPinned == 1)
+
 		switch dialogDO.PeerType {
 		case base.PEER_EMPTY:
 			continue
 		case base.PEER_SELF, base.PEER_USER:
-			peer := &mtproto.TLPeerUser{dialogDO.PeerId}
-			dialog.Peer = peer.ToPeer()
+			peer := &mtproto.TLPeerUser{ Data2: &mtproto.Peer_Data{
+				UserId: dialogDO.PeerId,
+			}}
+			dialog.SetPeer(peer.To_Peer())
 		case base.PEER_CHAT:
-			peer := &mtproto.TLPeerChat{dialogDO.PeerId}
-			dialog.Peer = peer.ToPeer()
+			peer := &mtproto.TLPeerChat{ Data2: &mtproto.Peer_Data{
+				ChatId: dialogDO.PeerId,
+			}}
+			dialog.SetPeer(peer.To_Peer())
 		case base.PEER_CHANNEL:
-			peer := &mtproto.TLPeerChannel{dialogDO.PeerId}
-			dialog.Peer = peer.ToPeer()
+			peer := &mtproto.TLPeerChannel{ Data2: &mtproto.Peer_Data{
+				ChannelId: dialogDO.PeerId,
+			}}
+			dialog.SetPeer(peer.To_Peer())
 		}
-		dialog.TopMessage = dialogDO.TopMessage
-		dialog.ReadInboxMaxId = dialogDO.ReadInboxMaxId
-		dialog.ReadOutboxMaxId = dialogDO.ReadOutboxMaxId
-		dialog.UnreadCount = dialogDO.UnreadCount
-		dialog.UnreadMentionsCount = dialogDO.UnreadMentionsCount
+
+		dialog.SetTopMessage(dialogDO.TopMessage)
+		dialog.SetReadInboxMaxId(dialogDO.ReadInboxMaxId)
+		dialog.SetReadOutboxMaxId(dialogDO.ReadOutboxMaxId)
+		dialog.SetUnreadCount(dialogDO.UnreadCount)
+		dialog.SetUnreadMentionsCount(dialogDO.UnreadMentionsCount)
 
 		// TODO(@benqi): pts/draft
 		// NotifySettings
-		peerNotifySettings := &mtproto.TLPeerNotifySettings{}
-		peerNotifySettings.ShowPreviews = true
-		peerNotifySettings.MuteUntil = 0
-		peerNotifySettings.Sound = "default"
-		dialog.NotifySettings = peerNotifySettings.ToPeerNotifySettings()
+		peerNotifySettings := mtproto.NewTLPeerNotifySettings()
+		peerNotifySettings.SetShowPreviews(true)
+		peerNotifySettings.SetMuteUntil(0)
+		peerNotifySettings.SetSound("default")
+		dialog.SetNotifySettings(peerNotifySettings.To_PeerNotifySettings())
 
 		dialogs = append(dialogs, dialog)
 	}
@@ -199,34 +230,42 @@ func (m *dialogModel) GetDialogsByUserIDAndType(userId, peerType int32) (dialogs
 func (m *dialogModel) GetPinnedDialogs(userId int32) (dialogs []*mtproto.TLDialog) {
 	dialogDOList := dao.GetUserDialogsDAO(dao.DB_SLAVE).SelectPinnedDialogs(userId)
 	for _, dialogDO := range dialogDOList {
-		dialog := &mtproto.TLDialog{}
-		dialog.Pinned = dialogDO.IsPinned == 1
+		dialog := mtproto.NewTLDialog()
+		dialog.SetPinned(dialogDO.IsPinned == 1)
+
 		switch dialogDO.PeerType {
 		case base.PEER_EMPTY:
 			continue
 		case base.PEER_SELF, base.PEER_USER:
-			peer := &mtproto.TLPeerUser{dialogDO.PeerId}
-			dialog.Peer = peer.ToPeer()
+			peer := &mtproto.TLPeerUser{ Data2: &mtproto.Peer_Data{
+				UserId: dialogDO.PeerId,
+			}}
+			dialog.SetPeer(peer.To_Peer())
 		case base.PEER_CHAT:
-			peer := &mtproto.TLPeerChat{dialogDO.PeerId}
-			dialog.Peer = peer.ToPeer()
+			peer := &mtproto.TLPeerChat{ Data2: &mtproto.Peer_Data{
+				ChatId: dialogDO.PeerId,
+			}}
+			dialog.SetPeer(peer.To_Peer())
 		case base.PEER_CHANNEL:
-			peer := &mtproto.TLPeerChannel{dialogDO.PeerId}
-			dialog.Peer = peer.ToPeer()
+			peer := &mtproto.TLPeerChannel{ Data2: &mtproto.Peer_Data{
+				ChannelId: dialogDO.PeerId,
+			}}
+			dialog.SetPeer(peer.To_Peer())
 		}
-		dialog.TopMessage = dialogDO.TopMessage
-		dialog.ReadInboxMaxId = dialogDO.ReadInboxMaxId
-		dialog.ReadOutboxMaxId = dialogDO.ReadOutboxMaxId
-		dialog.UnreadCount = dialogDO.UnreadCount
-		dialog.UnreadMentionsCount = dialogDO.UnreadMentionsCount
+
+		dialog.SetTopMessage(dialogDO.TopMessage)
+		dialog.SetReadInboxMaxId(dialogDO.ReadInboxMaxId)
+		dialog.SetReadOutboxMaxId(dialogDO.ReadOutboxMaxId)
+		dialog.SetUnreadCount(dialogDO.UnreadCount)
+		dialog.SetUnreadMentionsCount(dialogDO.UnreadMentionsCount)
 
 		// TODO(@benqi): pts/draft
 		// NotifySettings
-		peerNotifySettings := &mtproto.TLPeerNotifySettings{}
-		peerNotifySettings.ShowPreviews = true
-		peerNotifySettings.MuteUntil = 0
-		peerNotifySettings.Sound = "default"
-		dialog.NotifySettings = peerNotifySettings.ToPeerNotifySettings()
+		peerNotifySettings := mtproto.NewTLPeerNotifySettings()
+		peerNotifySettings.SetShowPreviews(true)
+		peerNotifySettings.SetMuteUntil(0)
+		peerNotifySettings.SetSound("default")
+		dialog.SetNotifySettings(peerNotifySettings.To_PeerNotifySettings())
 
 		dialogs = append(dialogs, dialog)
 	}
@@ -274,5 +313,3 @@ func (m *dialogModel) CreateOrUpdateByLastMessage(userId int32, peerType int32, 
 	}
 	return
 }
-
-*/

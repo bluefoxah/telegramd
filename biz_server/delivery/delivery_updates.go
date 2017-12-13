@@ -18,9 +18,9 @@
 package delivery
 
 import (
-	"github.com/nebulaim/telegramd/zproto"
-	"github.com/golang/glog"
 	"context"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/zproto"
 	"google.golang.org/grpc"
 )
 

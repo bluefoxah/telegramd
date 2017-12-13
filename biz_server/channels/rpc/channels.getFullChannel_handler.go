@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // channels.getFullChannel#8736a09 channel:InputChannel = messages.ChatFull;
 func (s *ChannelsServiceImpl) ChannelsGetFullChannel(ctx context.Context, request *mtproto.TLChannelsGetFullChannel) (*mtproto.Messages_ChatFull, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("ChannelsGetFullChannel - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("ChannelsGetFullChannel - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl ChannelsGetFullChannel logic
+	// TODO(@benqi): Impl ChannelsGetFullChannel logic
 
-    return nil, fmt.Errorf("Not impl ChannelsGetFullChannel")
+	return nil, fmt.Errorf("Not impl ChannelsGetFullChannel")
 }

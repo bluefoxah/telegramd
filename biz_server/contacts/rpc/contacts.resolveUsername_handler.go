@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // contacts.resolveUsername#f93ccba3 username:string = contacts.ResolvedPeer;
 func (s *ContactsServiceImpl) ContactsResolveUsername(ctx context.Context, request *mtproto.TLContactsResolveUsername) (*mtproto.Contacts_ResolvedPeer, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("ContactsResolveUsername - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("ContactsResolveUsername - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl ContactsResolveUsername logic
+	// TODO(@benqi): Impl ContactsResolveUsername logic
 
-    return nil, fmt.Errorf("Not impl ContactsResolveUsername")
+	return nil, fmt.Errorf("Not impl ContactsResolveUsername")
 }

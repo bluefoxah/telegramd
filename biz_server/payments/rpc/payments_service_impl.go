@@ -17,44 +17,7 @@
 
 package rpc
 
-
-/*
-import (
-	"github.com/golang/glog"
-	"github.com/nebulaim/telegramd/mtproto"
-	"golang.org/x/net/context"
-)
+import ()
 
 type PaymentsServiceImpl struct {
 }
-
-func (s *PaymentsServiceImpl) PaymentsClearSavedInfo(ctx context.Context, request *mtproto.TLPaymentsClearSavedInfo) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *PaymentsServiceImpl) PaymentsGetPaymentForm(ctx context.Context, request *mtproto.TLPaymentsGetPaymentForm) (*mtproto.Payments_PaymentForm, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *PaymentsServiceImpl) PaymentsGetPaymentReceipt(ctx context.Context, request *mtproto.TLPaymentsGetPaymentReceipt) (*mtproto.Payments_PaymentReceipt, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *PaymentsServiceImpl) PaymentsValidateRequestedInfo(ctx context.Context, request *mtproto.TLPaymentsValidateRequestedInfo) (*mtproto.Payments_ValidatedRequestedInfo, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *PaymentsServiceImpl) PaymentsSendPaymentForm(ctx context.Context, request *mtproto.TLPaymentsSendPaymentForm) (*mtproto.Payments_PaymentResult, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *PaymentsServiceImpl) PaymentsGetSavedInfo(ctx context.Context, request *mtproto.TLPaymentsGetSavedInfo) (*mtproto.Payments_SavedInfo, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-*/

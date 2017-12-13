@@ -19,10 +19,11 @@ package model
 
 import (
 	"sync"
-	//"github.com/nebulaim/telegramd/biz_model/dal/dao"
-	//"github.com/nebulaim/telegramd/mtproto"
-	//"github.com/golang/glog"
-	//"github.com/nebulaim/telegramd/base/base"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/mtproto"
+	"github.com/nebulaim/telegramd/base/base"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
 )
 
 type userModel struct {
@@ -41,22 +42,22 @@ func GetUserModel() *userModel {
 	return userInstance
 }
 
-/*
 func (m *userModel) GetUser(userId int32) (user* mtproto.TLUser) {
 	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
-
 	userDO := usersDAO.SelectById(userId)
+
 	if userDO != nil {
 		// TODO(@benqi): fill bot, photo, about...
-		user = &mtproto.TLUser{}
-		// user.Self由业务层进行判断
-		// user.Self = true
-		user.Id = userDO.Id
-		user.AccessHash = userDO.AccessHash
-		user.FirstName = userDO.FirstName
-		user.LastName = userDO.LastName
-		user.Username = userDO.Username
-		user.Phone = userDO.Phone
+		user = &mtproto.TLUser{ Data2: &mtproto.User_Data{
+			// user.Self由业务层进行判断
+			// user.Self = true
+			Id: userDO.Id,
+			AccessHash: userDO.AccessHash,
+			FirstName: userDO.FirstName,
+			LastName: userDO.LastName,
+			Username: userDO.Username,
+			Phone: userDO.Phone,
+		}}
 	}
 	return
 }
@@ -68,21 +69,21 @@ func (m *userModel) GetUserList(userIdList []int32) (users []*mtproto.TLUser) {
 	users = []*mtproto.TLUser{}
 	for _, userDO := range userDOList {
 		// TODO(@benqi): fill bot, photo, about...
-		user := &mtproto.TLUser{}
-		// user.Self由业务层进行判断
-		// user.Self = true
-		user.Id = userDO.Id
-		user.AccessHash = userDO.AccessHash
-		user.FirstName = userDO.FirstName
-		user.LastName = userDO.LastName
-		user.Username = userDO.Username
-		user.Phone = userDO.Phone
+		user := &mtproto.TLUser{Data2: &mtproto.User_Data{
+			// user.Self由业务层进行判断
+			// user.Self = true
+			Id:         userDO.Id,
+			AccessHash: userDO.AccessHash,
+			FirstName:  userDO.FirstName,
+			LastName:   userDO.LastName,
+			Username:   userDO.Username,
+			Phone:      userDO.Phone,
+		}}
 
 		users = append(users, user)
 	}
 
-	glog.Infof("SelectUsersByIdList(%s) - {%v}", base.JoinInt32List(userIdList, ","), users)
-
+	glog.Infof("SelectUsersByIdList(%s) - %s", base.JoinInt32List(userIdList, ","), logger.JsonDebugData(users))
 	return
 }
 
@@ -152,4 +153,3 @@ func (m *userModel) GetUserFull(userId int32) (userFull *mtproto.TLUserFull) {
 //func (m *UserModel) GetUserFullList(userId []int32) (user []*mtproto.TLUserFull) {
 //	return nil
 //}
-*/

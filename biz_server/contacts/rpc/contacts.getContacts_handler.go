@@ -18,20 +18,47 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/biz_model/model"
 )
 
 // contacts.getContacts#c023849f hash:int = contacts.Contacts;
 func (s *ContactsServiceImpl) ContactsGetContacts(ctx context.Context, request *mtproto.TLContactsGetContacts) (*mtproto.Contacts_Contacts, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("ContactsGetContacts - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("ContactsGetContacts - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl ContactsGetContacts logic
+	contacts := mtproto.NewTLContactsContacts()
 
-    return nil, fmt.Errorf("Not impl ContactsGetContacts")
+	contactsDOList := dao.GetUserContactsDAO(dao.DB_SLAVE).SelectUserContacts(md.UserId)
+	contacts.SetSavedCount(int32(len(contactsDOList)))
+
+	userIdList := make([]int32, 0, len(contactsDOList))
+
+	for _, do := range contactsDOList {
+		contact := mtproto.NewTLContact()
+		contact.SetUserId(do.ContactUserId)
+		contact.SetMutual(mtproto.ToBool(true))
+		contacts.Data2.Contacts = append(contacts.Data2.Contacts, contact.To_Contact())
+		userIdList = append(userIdList, contact.GetUserId())
+	}
+
+	users := model.GetUserModel().GetUserList(userIdList)
+	for _, u := range users {
+		if u.GetId() == md.UserId {
+			u.SetSelf(true)
+		} else {
+			u.SetSelf(false)
+		}
+		u.SetContact(true)
+		contacts.Data2.Users = append(contacts.Data2.Users, u.To_User())
+	}
+	// reply := mtproto.MakeContacts_Contacts(contacts)
+
+	glog.Infof("ContactsGetContacts - reply: %s\n", logger.JsonDebugData(contacts))
+	return contacts.To_Contacts_Contacts(), nil
 }

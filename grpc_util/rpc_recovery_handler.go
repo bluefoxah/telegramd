@@ -23,17 +23,26 @@ import (
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc"
 	"github.com/nebulaim/telegramd/mtproto"
+	"runtime/debug"
+	"github.com/golang/glog"
 )
 
 func BizUnaryRecoveryHandler(ctx context.Context, p interface{}) (err error) {
+	// debug.PrintStack()
+	glog.Errorf("BizUnaryRecoveryHandler - %s", debug.Stack())
+	glog.Info(debug.Stack())
+
 	switch p.(type) {
 	case *mtproto.TLRpcError:
 		code, _ := p.(*mtproto.TLRpcError)
 		md, _ := RpcErrorToMD(code)
 		grpc.SetTrailer(ctx, md)
-		return status.Errorf(codes.Unknown, "panic triggered rpc_error: {%v}", p)
+		err = status.Errorf(codes.Unknown, "panic triggered rpc_error: {%v}", p)
+	default:
+		err = status.Errorf(codes.Unknown, "panic unknown triggered: %v", p)
 	}
-	return status.Errorf(codes.Unknown, "panic unknown triggered: %v", p)
+	glog.Errorf("Panic: %v", err.Error())
+	return
 }
 
 func BizStreamRecoveryHandler(stream grpc.ServerStream, p interface{}) (err error) {

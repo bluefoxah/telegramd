@@ -18,23 +18,23 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // help.getNearestDc#1fb33026 = NearestDc;
 func (s *HelpServiceImpl) HelpGetNearestDc(ctx context.Context, request *mtproto.TLHelpGetNearestDc) (*mtproto.NearestDc, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("HelpGetNearestDc - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("HelpGetNearestDc - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    dc := &mtproto.TLNearestDc{ Data2: &mtproto.NearestDc_Data{
-        Country: "US",
-        ThisDc: 2,
-        NearestDc: 2,
-    }}
-    glog.Infof("HelpGetNearestDc - reply: %s", logger.JsonDebugData(dc))
-    return dc.To_NearestDc(), nil
+	dc := &mtproto.TLNearestDc{Data2: &mtproto.NearestDc_Data{
+		Country:   "US",
+		ThisDc:    2,
+		NearestDc: 2,
+	}}
+	glog.Infof("HelpGetNearestDc - reply: %s", logger.JsonDebugData(dc))
+	return dc.To_NearestDc(), nil
 }

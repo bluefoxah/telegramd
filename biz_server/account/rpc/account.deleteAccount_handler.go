@@ -18,20 +18,29 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	base2 "github.com/nebulaim/telegramd/base/base"
 )
 
 // account.deleteAccount#418d4e0b reason:string = Bool;
 func (s *AccountServiceImpl) AccountDeleteAccount(ctx context.Context, request *mtproto.TLAccountDeleteAccount) (*mtproto.Bool, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("AccountDeleteAccount - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("AccountDeleteAccount - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl AccountDeleteAccount logic
+	// TODO(@benqi): Impl AccountDeleteAccount logic
+	affected := dao.GetUsersDAO(dao.DB_MASTER).Delete(
+		request.GetReason(),
+		base2.NowFormatYMDHMS(),
+		md.UserId)
 
-    return nil, fmt.Errorf("Not impl AccountDeleteAccount")
+	deletedOk := affected == 1
+	// TODO(@benqi): 1. Clear account data 2. Kickoff other client
+
+	glog.Infof("AccountDeleteAccount - reply: {%v}", deletedOk)
+	return mtproto.ToBool(deletedOk), nil
 }

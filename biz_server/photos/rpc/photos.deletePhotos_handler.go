@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // photos.deletePhotos#87cf7f2f id:Vector<InputPhoto> = Vector<long>;
 func (s *PhotosServiceImpl) PhotosDeletePhotos(ctx context.Context, request *mtproto.TLPhotosDeletePhotos) (*mtproto.VectorLong, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("PhotosDeletePhotos - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("PhotosDeletePhotos - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl PhotosDeletePhotos logic
+	// TODO(@benqi): Impl PhotosDeletePhotos logic
 
-    return nil, fmt.Errorf("Not impl PhotosDeletePhotos")
+	return nil, fmt.Errorf("Not impl PhotosDeletePhotos")
 }

@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // channels.leaveChannel#f836aa95 channel:InputChannel = Updates;
 func (s *ChannelsServiceImpl) ChannelsLeaveChannel(ctx context.Context, request *mtproto.TLChannelsLeaveChannel) (*mtproto.Updates, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("ChannelsLeaveChannel - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("ChannelsLeaveChannel - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl ChannelsLeaveChannel logic
+	// TODO(@benqi): Impl ChannelsLeaveChannel logic
 
-    return nil, fmt.Errorf("Not impl ChannelsLeaveChannel")
+	return nil, fmt.Errorf("Not impl ChannelsLeaveChannel")
 }

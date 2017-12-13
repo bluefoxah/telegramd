@@ -17,33 +17,7 @@
 
 package rpc
 
-/*
-import (
-	"github.com/golang/glog"
-	"github.com/nebulaim/telegramd/mtproto"
-	"golang.org/x/net/context"
-)
+import ()
 
 type StickersServiceImpl struct {
 }
-
-func (s *StickersServiceImpl) StickersCreateStickerSet(ctx context.Context, request *mtproto.TLStickersCreateStickerSet) (*mtproto.Messages_StickerSet, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *StickersServiceImpl) StickersRemoveStickerFromSet(ctx context.Context, request *mtproto.TLStickersRemoveStickerFromSet) (*mtproto.Messages_StickerSet, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *StickersServiceImpl) StickersChangeStickerPosition(ctx context.Context, request *mtproto.TLStickersChangeStickerPosition) (*mtproto.Messages_StickerSet, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *StickersServiceImpl) StickersAddStickerToSet(ctx context.Context, request *mtproto.TLStickersAddStickerToSet) (*mtproto.Messages_StickerSet, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-*/

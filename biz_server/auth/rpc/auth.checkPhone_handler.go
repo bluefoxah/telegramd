@@ -18,20 +18,41 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"github.com/ttacon/libphonenumber"
+	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 )
 
 // auth.checkPhone#6fe51dfb phone_number:string = auth.CheckedPhone;
 func (s *AuthServiceImpl) AuthCheckPhone(ctx context.Context, request *mtproto.TLAuthCheckPhone) (*mtproto.Auth_CheckedPhone, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("AuthCheckPhone - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("AuthCheckPhone - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl AuthCheckPhone logic
+	// TODO(@benqi): panic/recovery
+	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
 
-    return nil, fmt.Errorf("Not impl AuthCheckPhone")
+	// 客户端发送的手机号格式为: "+86 111 1111 1111"，归一化
+	phoneNumer := libphonenumber.NormalizeDigitsOnly(request.PhoneNumber)
+
+	usersDO := usersDAO.SelectByPhoneNumber(phoneNumer)
+
+	var reply *mtproto.Auth_CheckedPhone
+	if usersDO == nil {
+	    // 未注册
+	    checkedPhone := mtproto.NewTLAuthCheckedPhone()
+	    checkedPhone.SetPhoneRegistered(mtproto.ToBool(false))
+	    reply = checkedPhone.To_Auth_CheckedPhone()
+	} else {
+	    // 已经注册
+		checkedPhone := mtproto.NewTLAuthCheckedPhone()
+		checkedPhone.SetPhoneRegistered(mtproto.ToBool(true))
+		reply = checkedPhone.To_Auth_CheckedPhone()
+	}
+
+	glog.Infof("AuthCheckPhone - reply: %s\n", reply)
+	return reply, nil
 }

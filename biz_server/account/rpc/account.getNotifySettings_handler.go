@@ -18,20 +18,24 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/biz_model/base"
+	"github.com/nebulaim/telegramd/biz_model/model"
 )
 
 // account.getNotifySettings#12b3ad31 peer:InputNotifyPeer = PeerNotifySettings;
 func (s *AccountServiceImpl) AccountGetNotifySettings(ctx context.Context, request *mtproto.TLAccountGetNotifySettings) (*mtproto.PeerNotifySettings, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("AccountGetNotifySettings - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("AccountGetNotifySettings - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl AccountGetNotifySettings logic
+	// TODO(@benqi): Impl AccountGetNotifySettings logic
+	peer := base.FromInputNotifyPeer(request.GetPeer())
+	reply := model.GetAccountModel().GetNotifySettings(md.UserId, peer)
 
-    return nil, fmt.Errorf("Not impl AccountGetNotifySettings")
+	glog.Infof("AccountReportPeer - reply: %s", logger.JsonDebugData(reply))
+	return reply, nil
 }

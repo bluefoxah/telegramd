@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // langpack.getStrings#2e1ee318 lang_code:string keys:Vector<string> = Vector<LangPackString>;
 func (s *LangpackServiceImpl) LangpackGetStrings(ctx context.Context, request *mtproto.TLLangpackGetStrings) (*mtproto.Vector_LangPackString, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("LangpackGetStrings - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("LangpackGetStrings - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl LangpackGetStrings logic
+	// TODO(@benqi): Impl LangpackGetStrings logic
 
-    return nil, fmt.Errorf("Not impl LangpackGetStrings")
+	return nil, fmt.Errorf("Not impl LangpackGetStrings")
 }

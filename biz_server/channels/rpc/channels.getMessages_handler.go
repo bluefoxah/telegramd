@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // channels.getMessages#93d7b347 channel:InputChannel id:Vector<int> = messages.Messages;
 func (s *ChannelsServiceImpl) ChannelsGetMessages(ctx context.Context, request *mtproto.TLChannelsGetMessages) (*mtproto.Messages_Messages, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("ChannelsGetMessages - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("ChannelsGetMessages - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl ChannelsGetMessages logic
+	// TODO(@benqi): Impl ChannelsGetMessages logic
 
-    return nil, fmt.Errorf("Not impl ChannelsGetMessages")
+	return nil, fmt.Errorf("Not impl ChannelsGetMessages")
 }

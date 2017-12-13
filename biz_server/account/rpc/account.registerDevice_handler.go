@@ -18,20 +18,22 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/biz_model/model"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // account.registerDevice#637ea878 token_type:int token:string = Bool;
 func (s *AccountServiceImpl) AccountRegisterDevice(ctx context.Context, request *mtproto.TLAccountRegisterDevice) (*mtproto.Bool, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("AccountRegisterDevice - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("AccountRegisterDevice - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl AccountRegisterDevice logic
+	// TODO(@benqi): check toke_type invalid
+	model.GetAccountModel().RegisterDevice(md.AuthId, md.UserId, int8(request.TokenType), request.Token)
 
-    return nil, fmt.Errorf("Not impl AccountRegisterDevice")
+	glog.Infof("AccountRegisterDevice - reply: {true}")
+	return mtproto.ToBool(true), nil
 }

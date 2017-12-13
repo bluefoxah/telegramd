@@ -18,20 +18,22 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/biz_model/model"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // account.unregisterDevice#65c55b40 token_type:int token:string = Bool;
 func (s *AccountServiceImpl) AccountUnregisterDevice(ctx context.Context, request *mtproto.TLAccountUnregisterDevice) (*mtproto.Bool, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("AccountUnregisterDevice - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("AccountUnregisterDevice - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl AccountUnregisterDevice logic
+	// TODO(@benqi): check toke_type invalid
+	ok := model.GetAccountModel().UnRegisterDevice(md.AuthId, md.UserId, int8(request.TokenType), request.Token)
 
-    return nil, fmt.Errorf("Not impl AccountUnregisterDevice")
+	glog.Infof("AccountUnregisterDevice - reply: {%v}\n", ok)
+	return mtproto.ToBool(ok), nil
 }

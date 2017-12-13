@@ -18,11 +18,11 @@
 package rpc
 
 import (
-	//"flag"
-	//"net"
-	//"github.com/golang/glog"
-	//"google.golang.org/grpc"
-	//"github.com/nebulaim/telegramd/mtproto"
+//"flag"
+//"net"
+//"github.com/golang/glog"
+//"google.golang.org/grpc"
+//"github.com/nebulaim/telegramd/mtproto"
 )
 
 type RPCServer struct {
@@ -39,4 +39,3 @@ func RPCServerInit() {
 	//mtproto.RegisterRPCChannelsServer(grpcServer, &AuthServiceImpl{})
 	//grpcServer.Serve(lis)
 }
-

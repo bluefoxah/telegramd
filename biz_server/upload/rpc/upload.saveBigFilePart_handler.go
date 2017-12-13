@@ -18,20 +18,30 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 )
 
 // upload.saveBigFilePart#de7b673d file_id:long file_part:int file_total_parts:int bytes:bytes = Bool;
 func (s *UploadServiceImpl) UploadSaveBigFilePart(ctx context.Context, request *mtproto.TLUploadSaveBigFilePart) (*mtproto.Bool, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("UploadSaveBigFilePart - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("UploadSaveBigFilePart - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl UploadSaveBigFilePart logic
+	filePartsDO := &dataobject.FilePartsDO{
+	    CreatorUserId: md.UserId,
+	    FileId: request.FileId,
+	    FilePart: request.FilePart,
+	    IsBigFile: 1,
+	    FileTotalParts: request.FileTotalParts,
+	    Bytes: request.Bytes,
+	}
+	dao.GetFilePartsDAO(dao.DB_MASTER).Insert(filePartsDO)
 
-    return nil, fmt.Errorf("Not impl UploadSaveBigFilePart")
+	glog.Infof("UploadSaveBigFilePart - reply: {true}")
+	return mtproto.ToBool(true), nil
 }

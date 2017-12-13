@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // upload.getWebFile#24e6818d location:InputWebFileLocation offset:int limit:int = upload.WebFile;
 func (s *UploadServiceImpl) UploadGetWebFile(ctx context.Context, request *mtproto.TLUploadGetWebFile) (*mtproto.Upload_WebFile, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("UploadGetWebFile - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("UploadGetWebFile - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl UploadGetWebFile logic
+	// TODO(@benqi): Impl UploadGetWebFile logic
 
-    return nil, fmt.Errorf("Not impl UploadGetWebFile")
+	return nil, fmt.Errorf("Not impl UploadGetWebFile")
 }

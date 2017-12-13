@@ -33,7 +33,7 @@ func NewSyncRPCClient(target string) (c *SyncRPCClient, err error) {
 		glog.Error(err)
 		panic(err)
 	}
-	c = &SyncRPCClient {
+	c = &SyncRPCClient{
 		Client: zproto.NewRPCSyncClient(conn),
 	}
 	return

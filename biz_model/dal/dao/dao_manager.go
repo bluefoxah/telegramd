@@ -56,8 +56,9 @@ type MysqlDAOList struct {
 	UserPrivacysDAO* mysql_dao.UserPrivacysDAO
 	TmpPasswordsDAO* mysql_dao.TmpPasswordsDAO
 	ChatsDAO *mysql_dao.ChatsDAO
-	ChatUsersDAO *mysql_dao.ChatUsersDAO
+	ChatParticipantsDAO *mysql_dao.ChatParticipantsDAO
 	FilePartsDAO *mysql_dao.FilePartsDAO
+	FilesDAO *mysql_dao.FilesDAO
 }
 
 // TODO(@benqi): 一主多从
@@ -95,8 +96,10 @@ func InstallMysqlDAOManager(clients map[string]*sqlx.DB) {
 		daoList.UserPrivacysDAO = mysql_dao.NewUserPrivacysDAO(v)
 		daoList.TmpPasswordsDAO = mysql_dao.NewTmpPasswordsDAO(v)
 		daoList.ChatsDAO = mysql_dao.NewChatsDAO(v)
-		daoList.ChatUsersDAO = mysql_dao.NewChatUsersDAO(v)
+		daoList.ChatParticipantsDAO = mysql_dao.NewChatParticipantsDAO(v)
 		daoList.FilePartsDAO = mysql_dao.NewFilePartsDAO(v)
+		daoList.FilesDAO = mysql_dao.NewFilesDAO(v)
+
 		mysqlDAOManager.daoListMap[k] = daoList
 	}
 }
@@ -284,11 +287,11 @@ func GetChatsDAO(dbName string) (dao *mysql_dao.ChatsDAO) {
 	return
 }
 
-func GetChatUsersDAO(dbName string) (dao *mysql_dao.ChatUsersDAO) {
+func GetChatParticipantsDAO(dbName string) (dao *mysql_dao.ChatParticipantsDAO) {
 	daoList := GetMysqlDAOList(dbName)
 	// err := mysqlDAOManager.daoListMap[dbName]
 	if daoList != nil {
-		dao = daoList.ChatUsersDAO
+		dao = daoList.ChatParticipantsDAO
 	}
 	return
 }
@@ -298,6 +301,15 @@ func GetFilePartsDAO(dbName string) (dao *mysql_dao.FilePartsDAO) {
 	// err := mysqlDAOManager.daoListMap[dbName]
 	if daoList != nil {
 		dao = daoList.FilePartsDAO
+	}
+	return
+}
+
+func GetFilesDAO(dbName string) (dao *mysql_dao.FilesDAO) {
+	daoList := GetMysqlDAOList(dbName)
+	// err := mysqlDAOManager.daoListMap[dbName]
+	if daoList != nil {
+		dao = daoList.FilesDAO
 	}
 	return
 }

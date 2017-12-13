@@ -18,20 +18,21 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // messages.getSavedGifs#83bf3d52 hash:int = messages.SavedGifs;
 func (s *MessagesServiceImpl) MessagesGetSavedGifs(ctx context.Context, request *mtproto.TLMessagesGetSavedGifs) (*mtproto.Messages_SavedGifs, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("MessagesGetSavedGifs - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("MessagesGetSavedGifs - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl MessagesGetSavedGifs logic
+	// TODO(@benqi): Impl MessagesGetSavedGifs logic
+	stickers := mtproto.NewTLMessagesSavedGifsNotModified()
 
-    return nil, fmt.Errorf("Not impl MessagesGetSavedGifs")
+	glog.Infof("MessagesGetSavedGifs - reply: %s\n", logger.JsonDebugData(stickers))
+	return stickers.To_Messages_SavedGifs(), nil
 }

@@ -25,18 +25,18 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 )
 
-type ChatUsersDAO struct {
+type ChatParticipantsDAO struct {
 	db *sqlx.DB
 }
 
-func NewChatUsersDAO(db *sqlx.DB) *ChatUsersDAO {
-	return &ChatUsersDAO{db}
+func NewChatParticipantsDAO(db *sqlx.DB) *ChatParticipantsDAO {
+	return &ChatParticipantsDAO{db}
 }
 
-// insert into chat_users(chat_id, user_id, participant_type, inviter_user_id, invited_at, joined_at, state, created_at) values (:chat_id, :user_id, :participant_type, :inviter_user_id, :invited_at, :joined_at, :state, :created_at)
+// insert into chat_participants(chat_id, user_id, participant_type, inviter_user_id, invited_at, joined_at, state, created_at) values (:chat_id, :user_id, :participant_type, :inviter_user_id, :invited_at, :joined_at, :state, :created_at)
 // TODO(@benqi): sqlmap
-func (dao *ChatUsersDAO) Insert(do *dataobject.ChatUsersDO) int64 {
-	var query = "insert into chat_users(chat_id, user_id, participant_type, inviter_user_id, invited_at, joined_at, state, created_at) values (:chat_id, :user_id, :participant_type, :inviter_user_id, :invited_at, :joined_at, :state, :created_at)"
+func (dao *ChatParticipantsDAO) Insert(do *dataobject.ChatParticipantsDO) int64 {
+	var query = "insert into chat_participants(chat_id, user_id, participant_type, inviter_user_id, invited_at, joined_at, state, created_at) values (:chat_id, :user_id, :participant_type, :inviter_user_id, :invited_at, :joined_at, :state, :created_at)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
@@ -53,10 +53,10 @@ func (dao *ChatUsersDAO) Insert(do *dataobject.ChatUsersDO) int64 {
 	return id
 }
 
-// select id, chat_id, user_id, participant_type, inviter_user_id, invited_at, joined_at from chat_users where chat_id = :chat_id
+// select id, chat_id, user_id, participant_type, inviter_user_id, invited_at, joined_at from chat_participants where chat_id = :chat_id
 // TODO(@benqi): sqlmap
-func (dao *ChatUsersDAO) SelectByChatId(chat_id int32) []dataobject.ChatUsersDO {
-	var query = "select id, chat_id, user_id, participant_type, inviter_user_id, invited_at, joined_at from chat_users where chat_id = ?"
+func (dao *ChatParticipantsDAO) SelectByChatId(chat_id int32) []dataobject.ChatParticipantsDO {
+	var query = "select id, chat_id, user_id, participant_type, inviter_user_id, invited_at, joined_at from chat_participants where chat_id = ?"
 	rows, err := dao.db.Queryx(query, chat_id)
 
 	if err != nil {
@@ -67,9 +67,9 @@ func (dao *ChatUsersDAO) SelectByChatId(chat_id int32) []dataobject.ChatUsersDO 
 
 	defer rows.Close()
 
-	var values []dataobject.ChatUsersDO
+	var values []dataobject.ChatParticipantsDO
 	for rows.Next() {
-		v := dataobject.ChatUsersDO{}
+		v := dataobject.ChatParticipantsDO{}
 
 		// TODO(@benqi): 不使用反射
 		err := rows.StructScan(&v)
@@ -84,10 +84,10 @@ func (dao *ChatUsersDAO) SelectByChatId(chat_id int32) []dataobject.ChatUsersDO 
 	return values
 }
 
-// delete from chat_users where chat_id = :chat_id and user_id = :user_id
+// delete from chat_participants where chat_id = :chat_id and user_id = :user_id
 // TODO(@benqi): sqlmap
-func (dao *ChatUsersDAO) DeleteChatUser(chat_id int32, user_id int32) int64 {
-	var query = "delete from chat_users where chat_id = ? and user_id = ?"
+func (dao *ChatParticipantsDAO) DeleteChatUser(chat_id int32, user_id int32) int64 {
+	var query = "delete from chat_participants where chat_id = ? and user_id = ?"
 	r, err := dao.db.Exec(query, chat_id, user_id)
 
 	if err != nil {

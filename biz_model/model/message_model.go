@@ -19,20 +19,23 @@ package model
 
 import (
 	"sync"
-	//"github.com/nebulaim/telegramd/mtproto"
-	//"github.com/nebulaim/telegramd/biz_model/base"
-	//"github.com/nebulaim/telegramd/biz_model/dal/dao"
-	//"github.com/golang/glog"
-	//base2 "github.com/nebulaim/telegramd/base/base"
-	//"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
-	//"time"
-	//"github.com/golang/protobuf/proto"
+	"github.com/nebulaim/telegramd/mtproto"
+	"github.com/nebulaim/telegramd/biz_model/base"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/golang/glog"
+	base2 "github.com/nebulaim/telegramd/base/base"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"time"
+	"github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"encoding/json"
 )
 
 const (
 	MESSAGE_TYPE_UNKNOWN = 0
-	MESSAGE_TYPE_MESSAGE = 1
-	MESSAGE_TYPE_MESSAGE_SERVICE = 2
+	MESSAGE_TYPE_MESSAGE_EMPTY = 1
+	MESSAGE_TYPE_MESSAGE = 2
+	MESSAGE_TYPE_MESSAGE_SERVICE = 3
 )
 const (
 	MESSAGE_BOX_TYPE_INCOMING = 0
@@ -55,42 +58,54 @@ func GetMessageModel() *messageModel {
 	return messageInstance
 }
 
-/*
 func (m *messageModel) getMessagesByIDList(idList []int32, order bool) (messages []*mtproto.Message) {
 	// TODO(@benqi): Check messageDAO
 	messageDAO := dao.GetMessagesDAO(dao.DB_SLAVE)
 
 	var messagesDOList []dataobject.MessagesDO
-	if order {
-		messagesDOList = messageDAO.SelectByIdList(idList)
 
+	if order {
+		// TODO(@benqi): 不推给DB，程序内排序
+		messagesDOList = messageDAO.SelectOrderByIdList(idList)
 	} else {
 		messagesDOList = messageDAO.SelectByIdList(idList)
 	}
-	// messages = []*mtproto.TLMessage{}
 
+	messages = []*mtproto.Message{}
 	for _, messageDO := range messagesDOList {
-		if messageDO.MessageType == MESSAGE_TYPE_MESSAGE {
-			message := &mtproto.TLMessage{}
-			err := proto.Unmarshal(messageDO.MessageData, message)
-			if err != nil {
-				glog.Errorf("GetMessagesByIDList - Unmarshal message(%d)error: %v", messageDO.Id, err)
-				continue
-			}
-			message.Id = messageDO.Id
-			messages = append(messages, message.ToMessage())
-		} else if messageDO.MessageType == MESSAGE_TYPE_MESSAGE_SERVICE {
-			message := &mtproto.TLMessageService{}
-			err := proto.Unmarshal(messageDO.MessageData, message)
-			if err != nil {
-				glog.Errorf("GetMessagesByIDList - Unmarshal message(%d)error: %v", messageDO.Id, err)
-				continue
-			}
-			message.Id = messageDO.Id
-			messages = append(messages, message.ToMessage())
+		message := &mtproto.Message{
+			Data2: &mtproto.Message_Data{},
 		}
+		switch messageDO.MessageType {
+		case MESSAGE_TYPE_MESSAGE_EMPTY:
+			message.Constructor = mtproto.TLConstructor_CRC32_messageEmpty
+		case MESSAGE_TYPE_MESSAGE:
+			message.Constructor = mtproto.TLConstructor_CRC32_message
+			// err := proto.Unmarshal(messageDO.MessageData, message)
+			err := json.Unmarshal(messageDO.MessageData, message)
+			if err != nil {
+				glog.Errorf("GetMessagesByIDList - Unmarshal message(%d)error: %v", messageDO.Id, err)
+				continue
+			}
+			message.Data2.Id = messageDO.Id
+			//messages = append(messages, message.To_Message())
+		case MESSAGE_TYPE_MESSAGE_SERVICE:
+			message.Constructor = mtproto.TLConstructor_CRC32_messageService
+			// err := proto.Unmarshal(messageDO.MessageData, message)
+			err := json.Unmarshal(messageDO.MessageData, message)
+			if err != nil {
+				glog.Errorf("GetMessagesByIDList - Unmarshal message(%d)error: %v", messageDO.Id, err)
+				continue
+			}
+			message.Data2.Id = messageDO.Id
+		default:
+			glog.Error("Invalid messageType, db's data error: %s", logger.JsonDebugData(messageDO))
+			continue
+		}
+
+		messages = append(messages, message)
 	}
-	glog.Infof("GetMessagesByIDList(%s) - {%v}", base2.JoinInt32List(idList, ","), messages)
+	glog.Infof("GetMessagesByIDList(%s) - %s", base2.JoinInt32List(idList, ","), logger.JsonDebugData(messages))
 	return
 }
 
@@ -110,40 +125,25 @@ func (m *messageModel) GetMessagesByUserIdPeerOffsetLimit(userId int32, peerType
 }
 
 func (m *messageModel) getMessagesByMessageBoxes(boxes []dataobject.MessageBoxesDO, order bool) []*mtproto.Message {
-	glog.Infof("getMessagesByMessageBoxes - boxes: {%v}", boxes)
+	glog.Infof("getMessagesByMessageBoxes - boxes: %s", logger.JsonDebugData(boxes))
 	messageIdList := make([]int32, 0, len(boxes))
 	for _, do := range boxes {
 		messageIdList = append(messageIdList, do.MessageId)
 	}
 	messageList := m.getMessagesByIDList(messageIdList, order)
-	// TODO(@benqi): 假设数据一致
+	// TODO(@benqi): 假设数据一致，后续还是要考虑数据不一致情况
 	for i, message := range messageList {
+		// TODO(@benqi): 数据不一致会有问题
 		boxDO := boxes[i]
-		switch message.Payload.(type) {
-		case *mtproto.Message_Message:
-			m2 := message.GetMessage()
-			if boxDO.MessageBoxType == MESSAGE_BOX_TYPE_OUTGOING {
-				m2.Out = true
-			} else {
-				m2.Out = false
-			}
-			m2.Silent = true
-			m2.MediaUnread = boxDO.MediaUnread != 0
-			m2.Mentioned = false
-			glog.Infof("message(%d): %v", i, m2)
-		case *mtproto.Message_MessageService:
-			m2 := message.GetMessageService()
-			if boxDO.MessageBoxType == MESSAGE_BOX_TYPE_OUTGOING {
-				m2.Out = true
-			} else {
-				m2.Out = false
-			}
-			m2.Silent = true
-			m2.MediaUnread = boxDO.MediaUnread != 0
-			m2.Mentioned = false
-			glog.Infof("message2(%d): %v", i, m2)
+		if boxDO.MessageBoxType == MESSAGE_BOX_TYPE_OUTGOING {
+			message.Data2.Out = true
+		} else {
+			message.Data2.Out = false
 		}
-		glog.Infof("message(%d): %v", i, messageList[i])
+		message.Data2.Silent = true
+		message.Data2.MediaUnread = boxDO.MediaUnread != 0
+		message.Data2.Mentioned = false
+		glog.Infof("message(%d): %s", i, logger.JsonDebugData(message))
 	}
 
 	return messageList
@@ -169,61 +169,56 @@ func (m *messageModel) GetLastPtsByUserId(userId int32) int32 {
 
 // CreateMessage
 func (m *messageModel) CreateMessageBoxes(userId, fromId int32, peerType int32, peerId int32, incoming bool, messageId int32) (int32) {
-	messageBox := &dataobject.MessageBoxesDO{}
+	messageBox := &dataobject.MessageBoxesDO{
+		UserId:       userId,
+		SenderUserId: fromId,
+		PeerType:     int8(peerType),
+		PeerId:       peerId,
+		MessageId:    messageId,
+		Date2:        int32(time.Now().Unix()),
+		CreatedAt:    base2.NowFormatYMDHMS(),
+	}
+
 	if incoming {
-		messageBox.UserId = userId
-		messageBox.SenderUserId = fromId
 		messageBox.MessageBoxType = MESSAGE_BOX_TYPE_INCOMING
-		messageBox.PeerType = int8(peerType)
-		messageBox.PeerId = peerId
-		messageBox.MessageId = messageId
 		outPts := GetSequenceModel().NextID(base2.Int32ToString(messageBox.UserId))
 		messageBox.Pts = int32(outPts)
-		messageBox.Date2 = int32(time.Now().Unix())
-		messageBox.CreatedAt = base2.NowFormatYMDHMS()
 	} else {
-		messageBox.UserId = userId
-		messageBox.SenderUserId = fromId
 		messageBox.MessageBoxType = MESSAGE_BOX_TYPE_OUTGOING
-		messageBox.PeerType = int8(peerType)
-		messageBox.PeerId = peerId
-		messageBox.MessageId = messageId
 		inPts := GetSequenceModel().NextID(base2.Int32ToString(messageBox.UserId))
 		messageBox.Pts = int32(inPts)
-		messageBox.Date2 = int32(time.Now().Unix())
-		messageBox.CreatedAt = base2.NowFormatYMDHMS()
 	}
+
 	dao.GetMessageBoxesDAO(dao.DB_MASTER).Insert(messageBox)
 	return messageBox.Pts
 }
 
-// CreateMessage
-func (m *messageModel) CreateHistoryMessage(fromId int32, peer *base.PeerUtil, randomId int64, message *mtproto.TLMessage) (messageId int32) {
+// CreateHistoryMessage2
+func (m *messageModel) CreateHistoryMessage2(fromId int32, peer *base.PeerUtil, randomId int64, date int32, message *mtproto.Message) (messageId int32) {
 	// TODO(@benqi): 重复插入出错处理
-	messageDO := &dataobject.MessagesDO{}
-	messageDO.SenderUserId = fromId
-	messageDO.PeerType = peer.PeerType
-	messageDO.PeerId = peer.PeerId
-	// Message
-	messageDO.MessageType = MESSAGE_TYPE_MESSAGE
-	messageDO.RandomId = randomId
-	messageDO.Date2 = message.Date
-	messageDO.MessageData, _ = proto.Marshal(message)
-	messageId = int32(dao.GetMessagesDAO(dao.DB_MASTER).Insert(messageDO))
-	return
-}
+	messageDO := &dataobject.MessagesDO{
+		SenderUserId: fromId,
+		PeerType:     peer.PeerType,
+		PeerId:       peer.PeerId,
+		RandomId:     randomId,
+		Date2:        date,
+	}
 
-// CreateMessage
-func (m *messageModel) CreateHistoryMessageService(fromId int32, peer *base.PeerUtil, randomId int64, message *mtproto.TLMessageService) (messageId int32) {
-	// TODO(@benqi): 重复插入出错处理
-	messageDO := &dataobject.MessagesDO{}
-	messageDO.SenderUserId = fromId
-	messageDO.PeerType = peer.PeerType
-	messageDO.PeerId = peer.PeerId
-	messageDO.MessageType = MESSAGE_TYPE_MESSAGE_SERVICE
-	messageDO.RandomId = randomId
-	messageDO.Date2 = int32(time.Now().Unix())
-	messageDO.MessageData, _ = proto.Marshal(message)
+	switch message.GetConstructor() {
+	case mtproto.TLConstructor_CRC32_messageEmpty:
+		messageDO.MessageType = MESSAGE_TYPE_MESSAGE_EMPTY
+	case mtproto.TLConstructor_CRC32_message:
+		messageDO.MessageType = MESSAGE_TYPE_MESSAGE
+	case mtproto.TLConstructor_CRC32_messageService:
+		messageDO.MessageType = MESSAGE_TYPE_MESSAGE_SERVICE
+	default:
+		panic(fmt.Errorf("Invalid message_type: {%v}", message))
+	}
+
+	// TODO(@benqi): 测试阶段使用Json!!!
+	// messageDO.MessageData, _ = proto.Marshal(message)
+	messageDO.MessageData, _ = json.Marshal(message)
+
 	messageId = int32(dao.GetMessagesDAO(dao.DB_MASTER).Insert(messageDO))
 	return
 }
@@ -242,5 +237,5 @@ func (m *messageModel) CreateHistoryMessageService(fromId int32, peer *base.Peer
 //	messageId := dao.GetMessagesDAO(dao.DB_MASTER).Insert(messageDO)
 //	message.Id = int32(messageId)
 //	return
-*/
+
 

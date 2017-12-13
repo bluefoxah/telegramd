@@ -18,20 +18,20 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/biz_model/model"
 )
 
 // updates.getState#edd4882a = updates.State;
 func (s *UpdatesServiceImpl) UpdatesGetState(ctx context.Context, request *mtproto.TLUpdatesGetState) (*mtproto.Updates_State, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("UpdatesGetState - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("UpdatesGetState - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl UpdatesGetState logic
-
-    return nil, fmt.Errorf("Not impl UpdatesGetState")
+	state := model.GetUpdatesModel().GetState(md.AuthId, md.UserId)
+	glog.Infof("UpdatesGetState - reply: %s", logger.JsonDebugData(state))
+	return state.To_Updates_State(), nil
 }

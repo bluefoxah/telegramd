@@ -18,20 +18,46 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/biz_server/delivery"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
+	"time"
+	"github.com/nebulaim/telegramd/biz_model/model"
+	"github.com/nebulaim/telegramd/biz_model/base"
 )
 
 // account.resetNotifySettings#db7e1747 = Bool;
 func (s *AccountServiceImpl) AccountResetNotifySettings(ctx context.Context, request *mtproto.TLAccountResetNotifySettings) (*mtproto.Bool, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("AccountResetNotifySettings - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("AccountResetNotifySettings - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl AccountResetNotifySettings logic
+	// TODO(@benqi): Impl AccountResetNotifySettings logic
+	model.GetAccountModel().ResetNotifySettings(md.UserId)
+	peer := &base.PeerUtil{}
+	peer.PeerType = base.PEER_ALL
+	update := mtproto.NewTLUpdateNotifySettings()
+	update.SetPeer(peer.ToNotifyPeer())
+	updateSettings := mtproto.NewTLPeerNotifySettings()
+	updateSettings.SetShowPreviews(true)
+	updateSettings.SetSilent(false)
+	updateSettings.SetMuteUntil(0)
+	updateSettings.SetSound("default")
+	update.SetNotifySettings(updateSettings.To_PeerNotifySettings())
 
-    return nil, fmt.Errorf("Not impl AccountResetNotifySettings")
+	updates := mtproto.NewTLUpdateShort()
+	updates.SetDate(int32(time.Now().Unix()))
+	updates.SetUpdate(update.To_Update())
+
+	delivery.GetDeliveryInstance().DeliveryUpdatesNotMe(
+		md.AuthId,
+		md.SessionId,
+		md.NetlibSessionId,
+		[]int32{md.UserId},
+		updates.To_Updates().Encode())
+
+	glog.Infof("AccountResetNotifySettings - reply: {true}")
+	return mtproto.ToBool(true), nil
 }

@@ -18,20 +18,22 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // account.getPassword#548a30f5 = account.Password;
 func (s *AccountServiceImpl) AccountGetPassword(ctx context.Context, request *mtproto.TLAccountGetPassword) (*mtproto.Account_Password, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("AccountGetPassword - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("AccountGetPassword - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl AccountGetPassword logic
+	password := mtproto.NewTLAccountNoPassword()
+	password.SetNewSalt([]byte("111"))
+	password.SetEmailUnconfirmedPattern("EmailUnconfirmedPattern")
 
-    return nil, fmt.Errorf("Not impl AccountGetPassword")
+	glog.Infof("AccountGetPassword - reply: %s", logger.JsonDebugData(password))
+	return password.To_Account_Password(), nil
 }

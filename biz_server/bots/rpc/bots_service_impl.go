@@ -17,23 +17,7 @@
 
 package rpc
 
-/*
-import (
-	"github.com/golang/glog"
-	"github.com/nebulaim/telegramd/mtproto"
-	"golang.org/x/net/context"
-)
+import ()
 
 type BotsServiceImpl struct {
 }
-
-func (s *BotsServiceImpl) BotsAnswerWebhookJSONQuery(ctx context.Context, request *mtproto.TLBotsAnswerWebhookJSONQuery) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *BotsServiceImpl) BotsSendCustomRequest(ctx context.Context, request *mtproto.TLBotsSendCustomRequest) (*mtproto.DataJSON, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-*/

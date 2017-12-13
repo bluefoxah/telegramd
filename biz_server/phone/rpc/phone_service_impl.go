@@ -17,53 +17,7 @@
 
 package rpc
 
-/*
-import (
-	"github.com/golang/glog"
-	"github.com/nebulaim/telegramd/mtproto"
-	"golang.org/x/net/context"
-)
+import ()
 
 type PhoneServiceImpl struct {
 }
-
-func (s *PhoneServiceImpl) PhoneReceivedCall(ctx context.Context, request *mtproto.TLPhoneReceivedCall) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *PhoneServiceImpl) PhoneSaveCallDebug(ctx context.Context, request *mtproto.TLPhoneSaveCallDebug) (*mtproto.Bool, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *PhoneServiceImpl) PhoneDiscardCall(ctx context.Context, request *mtproto.TLPhoneDiscardCall) (*mtproto.Updates, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *PhoneServiceImpl) PhoneSetCallRating(ctx context.Context, request *mtproto.TLPhoneSetCallRating) (*mtproto.Updates, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *PhoneServiceImpl) PhoneGetCallConfig(ctx context.Context, request *mtproto.TLPhoneGetCallConfig) (*mtproto.DataJSON, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *PhoneServiceImpl) PhoneRequestCall(ctx context.Context, request *mtproto.TLPhoneRequestCall) (*mtproto.Phone_PhoneCall, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *PhoneServiceImpl) PhoneAcceptCall(ctx context.Context, request *mtproto.TLPhoneAcceptCall) (*mtproto.Phone_PhoneCall, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-
-func (s *PhoneServiceImpl) PhoneConfirmCall(ctx context.Context, request *mtproto.TLPhoneConfirmCall) (*mtproto.Phone_PhoneCall, error) {
-	glog.Info("Process: %v", request)
-	return nil, nil
-}
-*/

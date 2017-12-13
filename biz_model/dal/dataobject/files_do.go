@@ -15,10 +15,14 @@
  * limitations under the License.
  */
 
-package rpc
+package dataobject
 
-import (
-)
-
-type UploadServiceImpl struct {
+type FilesDO struct {
+	Id            int64  `db:"id"`
+	CreatorUserId int32  `db:"creator_user_id"`
+	FileId        int64  `db:"file_id"`
+	FileParts     int32  `db:"file_parts"`
+	FileSize      int64  `db:"file_size"`
+	Md5Checksum   string `db:"md5_checksum"`
+	CreatedAt     string `db:"created_at"`
 }

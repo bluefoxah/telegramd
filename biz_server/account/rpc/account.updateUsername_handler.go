@@ -18,20 +18,30 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/biz_model/model"
 )
 
 // account.updateUsername#3e0bdd7c username:string = User;
 func (s *AccountServiceImpl) AccountUpdateUsername(ctx context.Context, request *mtproto.TLAccountUpdateUsername) (*mtproto.User, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("AccountUpdateUsername - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("AccountUpdateUsername - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl AccountUpdateUsername logic
+	affected := dao.GetUsersDAO(dao.DB_MASTER).UpdateUsername(request.GetUsername(), md.UserId)
+	ok := affected == 1
 
-    return nil, fmt.Errorf("Not impl AccountUpdateUsername")
+	if !ok {
+		// panic()
+	}
+
+	user := model.GetUserModel().GetUser(md.UserId)
+	// TODO(@benqi): Delivery updateUserName updates
+
+	glog.Infof("AccountReportPeer - reply: %s", logger.JsonDebugData(user))
+	return user.To_User(), nil
 }

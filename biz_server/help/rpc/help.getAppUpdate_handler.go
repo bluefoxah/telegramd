@@ -18,20 +18,21 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // help.getAppUpdate#ae2de196 = help.AppUpdate;
 func (s *HelpServiceImpl) HelpGetAppUpdate(ctx context.Context, request *mtproto.TLHelpGetAppUpdate) (*mtproto.Help_AppUpdate, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("HelpGetAppUpdate - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("HelpGetAppUpdate - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl HelpGetAppUpdate logic
+	// TODO(@benqi): Impl HelpGetAppUpdate logic
+	reply := &mtproto.TLHelpNoAppUpdate{Data2: &mtproto.Help_AppUpdate_Data{}}
 
-    return nil, fmt.Errorf("Not impl HelpGetAppUpdate")
+	glog.Infof("HelpGetAppUpdate - reply: %s\n", logger.JsonDebugData(reply))
+	return reply.To_Help_AppUpdate(), nil
 }

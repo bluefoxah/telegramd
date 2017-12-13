@@ -18,20 +18,24 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
 )
 
 // messages.reportEncryptedSpam#4b0c8c0f peer:InputEncryptedChat = Bool;
 func (s *MessagesServiceImpl) MessagesReportEncryptedSpam(ctx context.Context, request *mtproto.TLMessagesReportEncryptedSpam) (*mtproto.Bool, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("MessagesReportEncryptedSpam - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("MessagesReportEncryptedSpam - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl MessagesReportEncryptedSpam logic
+	// peer := base.FromInputPeer(request.GetPeer())
+	//
+	// if peer.PeerType == base.PEER_USER || peer.PeerType == base.PEER_CHAT {
+	//	// TODO(@benqi): 入库
+	// }
 
-    return nil, fmt.Errorf("Not impl MessagesReportEncryptedSpam")
+	glog.Info("MessagesReportEncryptedSpam - reply: {true}")
+	return mtproto.ToBool(true), nil
 }

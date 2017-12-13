@@ -18,20 +18,28 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
+	"time"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 )
 
 // account.setAccountTTL#2442485e ttl:AccountDaysTTL = Bool;
 func (s *AccountServiceImpl) AccountSetAccountTTL(ctx context.Context, request *mtproto.TLAccountSetAccountTTL) (*mtproto.Bool, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("AccountSetAccountTTL - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("AccountSetAccountTTL - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl AccountSetAccountTTL logic
+	ttl := request.GetTtl().To_AccountDaysTTL()
+	affected := dao.GetUserPrivacysDAO(dao.DB_MASTER).UpdateTTL(
+		ttl.GetDays(),
+		int32(time.Now().Unix()),
+		md.UserId)
 
-    return nil, fmt.Errorf("Not impl AccountSetAccountTTL")
+	updatedOk := affected == 1
+
+	glog.Infof("AccountSetAccountTTL - reply: {%v}", updatedOk)
+	return mtproto.ToBool(updatedOk), nil
 }

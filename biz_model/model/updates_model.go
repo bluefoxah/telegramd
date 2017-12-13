@@ -22,6 +22,9 @@ import (
 	//"github.com/nebulaim/telegramd/mtproto"
 	//"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	//"time"
+	"time"
+	"github.com/nebulaim/telegramd/mtproto"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 )
 
 type updatesModel struct {
@@ -39,26 +42,26 @@ func GetUpdatesModel() *updatesModel {
 	return updatesInstance
 }
 
-/*
 func (m *updatesModel) GetState(authKeyId int64, userId int32) *mtproto.TLUpdatesState {
-	state := &mtproto.TLUpdatesState{}
+	state := mtproto.NewTLUpdatesState()
+	stateData := state.GetData2()
 
 	// TODO(@benqi): 从数据库取出date
-	state.Date = int32(time.Now().Unix())
+	stateData.Date = int32(time.Now().Unix())
 
 	do := dao.GetMessageBoxesDAO(dao.DB_SLAVE).SelectLastPts(userId)
 	if do == nil || do.Pts == 0 {
 		// TODO(@benqi):
-		state.Date = int32(time.Now().Unix())
-		state.Pts = 1
-		state.Qts = 0
-		state.Seq = 1
-		state.UnreadCount = 0
+		stateData.Date = int32(time.Now().Unix())
+		stateData.Pts = 1
+		stateData.Qts = 0
+		stateData.Seq = 1
+		stateData.UnreadCount = 0
 	} else {
-		state.Pts = do.Pts
-		state.Qts = 0
-		state.Seq = 1
-		state.UnreadCount = 0
+		stateData.Pts = do.Pts
+		stateData.Qts = 0
+		stateData.Seq = 1
+		stateData.UnreadCount = 0
 	}
 	return state
 }
@@ -75,4 +78,3 @@ func (m *updatesModel) GetState(authKeyId int64, userId int32) *mtproto.TLUpdate
 //	return affected
 //}
 
-*/

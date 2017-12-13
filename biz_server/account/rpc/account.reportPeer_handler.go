@@ -18,20 +18,37 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/biz_model/base"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 )
 
 // account.reportPeer#ae189d5f peer:InputPeer reason:ReportReason = Bool;
 func (s *AccountServiceImpl) AccountReportPeer(ctx context.Context, request *mtproto.TLAccountReportPeer) (*mtproto.Bool, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("AccountReportPeer - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("AccountReportPeer - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl AccountReportPeer logic
+	peer := base.FromInputPeer(request.GetPeer())
+	reason := base.FromReportReason(request.GetReason())
 
-    return nil, fmt.Errorf("Not impl AccountReportPeer")
+	// Insert to db
+	do := &dataobject.ReportsDO{}
+	do.AuthId = md.AuthId
+	do.UserId = md.UserId
+	do.PeerType = peer.PeerType
+	do.PeerId = peer.PeerId
+	do.Reason = int8(reason)
+	if reason == base.REASON_OTHER {
+		reason := request.GetReason().To_InputReportReasonOther()
+		do.Content = reason.GetText()
+	}
+	dao.GetReportsDAO(dao.DB_MASTER).Insert(do)
+
+	glog.Infof("AccountReportPeer - reply: {true}",)
+	return mtproto.ToBool(true), nil
 }

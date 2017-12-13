@@ -18,20 +18,62 @@
 package rpc
 
 import (
-    "github.com/golang/glog"
-    "github.com/nebulaim/telegramd/mtproto"
-    "golang.org/x/net/context"
-    "fmt"
-    "github.com/nebulaim/telegramd/grpc_util"
-    "github.com/nebulaim/telegramd/base/logger"
+	"fmt"
+	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/logger"
+	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/mtproto"
+	"github.com/ttacon/libphonenumber"
+	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
 // auth.signIn#bcd51581 phone_number:string phone_code_hash:string phone_code:string = auth.Authorization;
 func (s *AuthServiceImpl) AuthSignIn(ctx context.Context, request *mtproto.TLAuthSignIn) (*mtproto.Auth_Authorization, error) {
-    md := grpc_util.RpcMetadataFromIncoming(ctx)
-    glog.Infof("AuthSignIn - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
+	md := grpc_util.RpcMetadataFromIncoming(ctx)
+	glog.Infof("AuthSignIn - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-    // TODO(@benqi): Impl AuthSignIn logic
+	// 客户端发送的手机号格式为: "+86 111 1111 1111"，归一化
+	phoneNumber := libphonenumber.NormalizeDigitsOnly(request.PhoneNumber)
 
-    return nil, fmt.Errorf("Not impl AuthSignIn")
+	// Check code
+	authPhoneTransactionsDAO := dao.GetAuthPhoneTransactionsDAO(dao.DB_SLAVE)
+	do1 := authPhoneTransactionsDAO.SelectByPhoneCode(request.PhoneCodeHash, request.PhoneCode, phoneNumber)
+	if do1 == nil {
+	    err := fmt.Errorf("SelectByPhoneCode(_) return empty in request: {}%v", request)
+	    glog.Error(err)
+	    return nil, err
+	}
+
+	usersDAO := dao.GetUsersDAO(dao.DB_SLAVE)
+	do2 := usersDAO.SelectByPhoneNumber(phoneNumber)
+	if do2 == nil {
+	    err := fmt.Errorf("SelectByPhoneNumber(_) return empty in request{}%v", request)
+	    glog.Error(err)
+	    return nil, err
+	}
+
+	do3 := dao.GetAuthUsersDAO(dao.DB_SLAVE).SelectByAuthId(md.AuthId)
+	if do3 == nil {
+	    do3 := &dataobject.AuthUsersDO{}
+	    do3.AuthId = md.AuthId
+	    do3.UserId = do2.Id
+	    dao.GetAuthUsersDAO(dao.DB_MASTER).Insert(do3)
+	}
+
+	// TODO(@benqi): 从数据库加载
+	authAuthorization := mtproto.NewTLAuthAuthorization()
+	user := mtproto.NewTLUser()
+	user.SetSelf(true)
+	user.SetId(do2.Id)
+	user.SetAccessHash(do2.AccessHash)
+	user.SetFirstName(do2.FirstName)
+	user.SetLastName(do2.LastName)
+	user.SetUsername(do2.Username)
+	user.SetPhone(phoneNumber)
+	authAuthorization.SetUser(user.To_User())
+
+	glog.Infof("AuthSignIn - reply: %s\n", logger.JsonDebugData(authAuthorization))
+	return authAuthorization.To_Auth_Authorization(), nil
 }
