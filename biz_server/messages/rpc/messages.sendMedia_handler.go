@@ -71,17 +71,30 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 	message.SetReplyMarkup(request.GetReplyMarkup())
 	message.SetDate(now)
 
-	// glog.Infof("metadata: {%v}, rpcMetaData: {%v}", md, rpcMetaData)
+	mediaData := request.GetMedia().GetData2()
 	switch request.Media.GetConstructor() {
 	case mtproto.TLConstructor_CRC32_inputMediaUploadedPhoto:
-		// photo := request.GetMedia().GetInputMediaUploadedPhoto()
-		// inputMediaPhoto#81fa373a flags:# id:InputPhoto caption:string ttl_seconds:flags.0?int = InputMedia;
-		//switch mediaPhoto.GetId().Payload.(type) {
-		//case *mtproto.InputPhoto_InputPhotoEmpty:
-		//	// input_photo := mediaPhoto.GetId().GetInputPhotoEmpty()
-		//case *mtproto.InputPhoto_InputPhoto:
-		//	input_photo := mediaPhoto.GetId().GetInputPhoto().GetId()
-		//}
+		fileData := mediaData.GetFile().GetData2()
+
+		media := mtproto.NewTLMessageMediaPhoto()
+		photo := mtproto.NewTLPhoto()
+		photo.SetAccessHash(1)
+		photo.SetDate(now)
+		photo.SetId(1)
+		sizes, err := model.GetPhotoModel().UploadPhoto(md.UserId, fileData.GetId(), fileData.GetParts(), fileData.GetName(), fileData.GetMd5Checksum())
+		if err != nil {
+			glog.Errorf("UploadPhoto error: %v, by %s", err, logger.JsonDebugData(media))
+		} else {
+			photo.SetSizes(sizes)
+		}
+
+		media.SetCaption(mediaData.GetCaption())
+		media.SetTtlSeconds(mediaData.GetTtlSeconds())
+		media.SetPhoto(photo.To_Photo())
+
+		glog.Infof("inputMediaUploadedPhoto: %s", logger.JsonDebugData(media))
+
+		message.SetMedia(media.To_MessageMedia())
 	}
 
 	sentMessage := mtproto.NewTLUpdateShortSentMessage()
@@ -93,6 +106,9 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 		pts := model.GetMessageModel().CreateMessageBoxes(md.UserId, message.GetFromId(), base.PEER_SELF, md.UserId, false, messageId)
 		// 3. dialog
 		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, base.PEER_SELF, md.UserId, messageId, message.GetMentioned())
+
+
+
 		// 推送给sync
 		// 推给客户端的updates
 		updates := mtproto.NewTLUpdateShortMessage()
@@ -131,28 +147,74 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 		// 3. dialog
 		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, base.PEER_USER, peer.PeerId, messageId, message.GetMentioned())
 		model.GetDialogModel().CreateOrUpdateByLastMessage(peer.PeerId, base.PEER_USER, md.UserId, messageId, message.GetMentioned())
+
+		users := model.GetUserModel().GetUserList([]int32{md.UserId, peer.PeerId})
+
+		// sender
 		// 推送给sync
 		// 推给客户端的updates
-		updates := mtproto.NewTLUpdateShortMessage()
-		updates.SetId(int32(messageId))
-		updates.SetUserId(md.UserId)
-		updates.SetPts(inPts)
-		updates.SetPtsCount(1)
-		// updates.Message = request.Message
+		updates := mtproto.NewTLUpdates()
+
+		updates.SetSeq(0)
 		updates.SetDate(now)
+
+		updateNewMessage := mtproto.NewTLUpdateNewMessage()
+		updateNewMessage.SetMessage(message.To_Message())
+		updateNewMessage.SetPts(outPts)
+		updateNewMessage.SetPtsCount(1)
+		updates.Data2.Updates = append(updates.Data2.Updates, updateNewMessage.To_Update())
+
+		message.SetOut(true)
+
+		for _, u := range  users {
+			if u.GetId() != md.UserId {
+				u.SetSelf(true)
+			}
+			u.SetContact(true)
+			updates.Data2.Users = append(updates.Data2.Users, u.To_User())
+			// .SetUsers(users)
+		}
+
 		delivery.GetDeliveryInstance().DeliveryUpdatesNotMe(
 			md.AuthId,
 			md.SessionId,
 			md.NetlibSessionId,
 			[]int32{md.UserId, peer.PeerId},
 			updates.To_Updates().Encode())
+
+		//	updates := &mtproto.TLUpdates{}
+		updateMessageID := mtproto.NewTLUpdateMessageID()
+		updateMessageID.SetId(int32(messageId))
+		updateMessageID.SetRandomId(md.ClientMsgId)
+		updates.Data2.Updates = append(updates.Data2.Updates, updateMessageID.To_Update())
+
+		// fix message data
+		message.SetOut(false)
+		updateNewMessage.SetPtsCount(inPts)
+		updates.SetUsers([]*mtproto.User{})
+		for _, u := range  users {
+			if u.GetId() == md.UserId {
+				u.SetSelf(true)
+			}
+			u.SetContact(true)
+			updates.Data2.Users = append(updates.Data2.Users, u.To_User())
+		}
+
+		return updates.To_Updates(), nil
+
+		// updates.SetId(int32(messageId))
+		// updates.SetUserId(md.UserId)
+		// updates.SetPts(inPts)
+		// updates.SetPtsCount(1)
+		// updates.Message = request.Message
+		// updates.SetDate(now)
 		// 返回给客户端
 		// sentMessage := &mtproto.TLUpdateShortSentMessage{}
-		sentMessage.SetOut(true)
-		sentMessage.SetId(int32(messageId))
-		sentMessage.SetPts(outPts)
-		sentMessage.SetPtsCount(1)
-		sentMessage.SetDate(now)
+		// sentMessage.SetOut(true)
+		// sentMessage.SetId(int32(messageId))
+		// sentMessage.SetPts(outPts)
+		// sentMessage.SetPtsCount(1)
+		// sentMessage.SetDate(now)
 		// glog.Infof("MessagesSendMessage - reply: %v", sentMessage)
 		// reply = sentMessage.ToUpdates()
 	case mtproto.TLConstructor_CRC32_inputPeerChat:

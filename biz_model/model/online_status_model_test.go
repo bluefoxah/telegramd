@@ -26,7 +26,7 @@ import (
 // var onlineModel *OnlineStatusModel
 
 func init()  {
-	_ := &redis_client.RedisConfig{
+	_ = &redis_client.RedisConfig{
 		Name: "test",
 		Addr: "127.0.0.1:6379",
 		Idle: 100,
@@ -44,7 +44,7 @@ func init()  {
 }
 
 func TestSetOnline(t *testing.T) {
-	s := &SessionStatus{
+	_ = &SessionStatus{
 		UserId: 1,
 		AuthKeyId: 1,
 		SessionId: 1,

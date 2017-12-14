@@ -21,6 +21,7 @@ type FilesDO struct {
 	Id            int64  `db:"id"`
 	CreatorUserId int32  `db:"creator_user_id"`
 	FileId        int64  `db:"file_id"`
+	AccessHash    int64  `db:"access_hash"`
 	FileParts     int32  `db:"file_parts"`
 	FileSize      int64  `db:"file_size"`
 	Md5Checksum   string `db:"md5_checksum"`

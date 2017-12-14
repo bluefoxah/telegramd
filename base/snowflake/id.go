@@ -70,11 +70,11 @@ func NewIdWorker(workerId, datacenterId int64, twepoch int64) (*IdWorker, error)
 	idWorker := &IdWorker{}
 	if workerId > maxWorkerId || workerId < 0 {
 		glog.Errorf("worker Id can't be greater than %d or less than 0", maxWorkerId)
-		return nil, errors.New(fmt.Sprintf("worker Id: %d error", workerId))
+		return nil, fmt.Errorf("worker Id: %d error", workerId)
 	}
 	if datacenterId > maxDatacenterId || datacenterId < 0 {
 		glog.Errorf("datacenter Id can't be greater than %d or less than 0", maxDatacenterId)
-		return nil, errors.New(fmt.Sprintf("datacenter Id: %d error", datacenterId))
+		return nil, fmt.Errorf("datacenter Id: %d error", datacenterId)
 	}
 	idWorker.workerId = workerId
 	idWorker.datacenterId = datacenterId

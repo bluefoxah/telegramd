@@ -3,9 +3,20 @@
     <operation name="Insert">
         <sql>
             INSERT INTO files
-                (creator_user_id, file_id, file_parts, file_size, md5_checksum)
+                (creator_user_id, file_id, access_hash, file_parts, file_size, md5_checksum)
             VALUES
-                (:creator_user_id, :file_id, :file_parts, :file_size, :md5_checksum)
+                (:creator_user_id, :file_id, :access_hash, :file_parts, :file_size, :md5_checksum)
+        </sql>
+    </operation>
+
+    <operation name="SelectByIDAndParts">
+        <sql>
+            SELECT
+                id, creator_user_id, file_id, access_hash, file_parts, file_size, md5_checksum
+            FROM
+                files
+            WHERE
+                file_id = :file_id AND file_parts = :file_parts LIMIT 1
         </sql>
     </operation>
 </table>

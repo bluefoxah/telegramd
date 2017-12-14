@@ -15,7 +15,7 @@
             FROM
                 file_parts
             WHERE
-                creator_user_id = :creator_user_id AND file_id = :file_id ORDER by file_part
+                file_id = :file_id ORDER by file_part
         </sql>
     </operation>
 </table>

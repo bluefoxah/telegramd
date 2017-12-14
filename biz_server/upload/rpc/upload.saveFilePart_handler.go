@@ -38,6 +38,7 @@ func (s *UploadServiceImpl) UploadSaveFilePart(ctx context.Context, request *mtp
 	md := grpc_util.RpcMetadataFromIncoming(ctx)
 	glog.Infof("UploadSaveFilePart - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
+	// TODO(@benqi): 最简单的实现保证跑通流程
 	filePartsDO := &dataobject.FilePartsDO{
 	    CreatorUserId: md.UserId,
 	    FileId: request.FileId,
@@ -49,7 +50,7 @@ func (s *UploadServiceImpl) UploadSaveFilePart(ctx context.Context, request *mtp
 
 	if len(request.Bytes) < maxFilePartSize {
 		// 文件上传结束, 计算出文件大小和md5，存盘
-		filePartsDOList := dao.GetFilePartsDAO(dao.DB_MASTER).SelectFileParts(md.UserId, request.FileId)
+		filePartsDOList := dao.GetFilePartsDAO(dao.DB_MASTER).SelectFileParts(request.FileId)
 		// datas := make([]byte, 0, len(filePartsDOList)*maxFilePartSize)
 		md5Hash := md5.New()
 		fileSize := 0
