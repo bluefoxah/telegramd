@@ -29,6 +29,7 @@ import (
 	"github.com/nebulaim/telegramd/base/base"
 	"fmt"
 	"github.com/golang/glog"
+	id2 "github.com/nebulaim/telegramd/frontend/id"
 )
 
 const (
@@ -128,13 +129,14 @@ func (m *photoModel) UploadPhoto(userId int32, id int64, parts int32, name, md5C
 
 	imgSz := MakeResizeInfo(img)
 
+	vId := id2.NextId()
 	for i, sz := range sizeList {
 		photoDatasDO := &dataobject.PhotoDatasDO{
 			FileId: id,
 			DcId: 2,
-			VolumeId: 12345,
-			LocalId: 12345,
-			AccessHash: 1111,
+			VolumeId: vId,
+			// LocalId: 12345,
+			AccessHash: id2.NextId(),
 		}
 
 		var dst *image.NRGBA
@@ -154,7 +156,7 @@ func (m *photoModel) UploadPhoto(userId int32, id int64, parts int32, name, md5C
 		}
 
 		photoDatasDO.Bytes = imgBuf.Bytes()
-		dao.GetPhotoDatasDAO(dao.DB_MASTER).Insert(photoDatasDO)
+		localId := int32(dao.GetPhotoDatasDAO(dao.DB_MASTER).Insert(photoDatasDO))
 
 		photoSizeData := &mtproto.PhotoSize_Data{
 			Type: getSizeType(i),
@@ -165,20 +167,19 @@ func (m *photoModel) UploadPhoto(userId int32, id int64, parts int32, name, md5C
 				Constructor: mtproto.TLConstructor_CRC32_fileLocation,
 				Data2: &mtproto.FileLocation_Data{
 					VolumeId: photoDatasDO.VolumeId,
-					LocalId:  photoDatasDO.LocalId,
-					Secret:   1,
+					LocalId:  localId,
+					Secret:   id2.NextId(),
 					DcId: 	photoDatasDO.DcId}}}
 
 		if i== 0 {
 			sizes = append(sizes, &mtproto.PhotoSize{
 				Constructor: mtproto.TLConstructor_CRC32_photoCachedSize,
 				Data2:       photoSizeData,})
-			photoSizeData.Bytes = photoSizeData.Bytes
+			photoSizeData.Bytes = photoDatasDO.Bytes
 		} else {
 			sizes = append(sizes, &mtproto.PhotoSize{
 				Constructor: mtproto.TLConstructor_CRC32_photoSize,
 				Data2:       photoSizeData,})
-			photoSizeData.Bytes = photoSizeData.Bytes
 		}
 	}
 

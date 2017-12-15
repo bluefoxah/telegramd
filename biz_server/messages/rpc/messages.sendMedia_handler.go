@@ -27,6 +27,7 @@ import (
 	"github.com/nebulaim/telegramd/biz_model/model"
 	"github.com/nebulaim/telegramd/biz_model/base"
 	"github.com/nebulaim/telegramd/biz_server/delivery"
+	"github.com/nebulaim/telegramd/frontend/id"
 )
 
 // messages.sendMedia#c8f16791 flags:# silent:flags.5?true background:flags.6?true clear_draft:flags.7?true peer:InputPeer reply_to_msg_id:flags.0?int media:InputMedia random_id:long reply_markup:flags.2?ReplyMarkup = Updates;
@@ -78,9 +79,9 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 
 		media := mtproto.NewTLMessageMediaPhoto()
 		photo := mtproto.NewTLPhoto()
-		photo.SetAccessHash(1)
+		photo.SetAccessHash(id.NextId())
 		photo.SetDate(now)
-		photo.SetId(1)
+		photo.SetId(fileData.GetId())
 		sizes, err := model.GetPhotoModel().UploadPhoto(md.UserId, fileData.GetId(), fileData.GetParts(), fileData.GetName(), fileData.GetMd5Checksum())
 		if err != nil {
 			glog.Errorf("UploadPhoto error: %v, by %s", err, logger.JsonDebugData(media))
@@ -141,6 +142,8 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 		// peer := request.GetPeer().To_InputPeerUser()
 		// 1. SaveMessage
 		messageId := model.GetMessageModel().CreateHistoryMessage2(md.UserId, peer, request.RandomId, now, message.To_Message())
+		message.SetId(messageId)
+
 		// 2. MessageBoxes
 		outPts := model.GetMessageModel().CreateMessageBoxes(md.UserId, message.GetFromId(), base.PEER_USER, peer.PeerId, false, messageId)
 		inPts := model.GetMessageModel().CreateMessageBoxes(peer.PeerId, message.GetFromId(), base.PEER_USER, md.UserId, true, messageId)
@@ -162,13 +165,16 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 		updateNewMessage.SetMessage(message.To_Message())
 		updateNewMessage.SetPts(outPts)
 		updateNewMessage.SetPtsCount(1)
+
 		updates.Data2.Updates = append(updates.Data2.Updates, updateNewMessage.To_Update())
 
-		message.SetOut(true)
+		message.SetOut(false)
 
 		for _, u := range  users {
 			if u.GetId() != md.UserId {
 				u.SetSelf(true)
+			} else {
+				u.SetSelf(false)
 			}
 			u.SetContact(true)
 			updates.Data2.Users = append(updates.Data2.Users, u.To_User())
@@ -179,22 +185,33 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 			md.AuthId,
 			md.SessionId,
 			md.NetlibSessionId,
-			[]int32{md.UserId, peer.PeerId},
+			// []int32{md.UserId, peer.PeerId},
+			[]int32{peer.PeerId},
 			updates.To_Updates().Encode())
 
 		//	updates := &mtproto.TLUpdates{}
+
 		updateMessageID := mtproto.NewTLUpdateMessageID()
 		updateMessageID.SetId(int32(messageId))
 		updateMessageID.SetRandomId(md.ClientMsgId)
-		updates.Data2.Updates = append(updates.Data2.Updates, updateMessageID.To_Update())
+		// updates.Data2.Updates = append(updates.Data2.Updates, updateMessageID.To_Update())
+
+		updatesList := []*mtproto.Update{updateMessageID.To_Update()}
+		updatesList = append(updatesList, updates.GetUpdates()...)
+		updates.SetUpdates(updatesList)
 
 		// fix message data
-		message.SetOut(false)
-		updateNewMessage.SetPtsCount(inPts)
+		// message.SetOut(false)
+		updateNewMessage.SetPts(inPts)
+
 		updates.SetUsers([]*mtproto.User{})
 		for _, u := range  users {
 			if u.GetId() == md.UserId {
 				u.SetSelf(true)
+				message.SetOut(true)
+			} else {
+				u.SetSelf(false)
+				message.SetOut(false)
 			}
 			u.SetContact(true)
 			updates.Data2.Users = append(updates.Data2.Users, u.To_User())
