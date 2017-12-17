@@ -227,11 +227,27 @@ func (m *MTProtoCodec) Send(msg interface{}) error {
 		encrypedMessage.SessionId = m.SessionId
 		encrypedMessage.salt = m.Salt
 		encrypedMessage.SeqNo = m.getSeqNo(true)
-		switch encrypedMessage.Object.(type) {
-		case *TLUpdates:
-			glog.Info("send message: %v", encrypedMessage)
-		}
+		// switch encrypedMessage.Object.(type) {
+		// case *TLUpdates:
+		// 	glog.Info("send message: %v", encrypedMessage)
+		// }
 		b, _ := encrypedMessage.encode(int64(m.AuthKeyId), m.AuthKey)
+
+		//switch encrypedMessage.Object.(type) {
+		//case *TLRpcResult:
+		//	result := encrypedMessage.Object.(*TLRpcResult)
+		//	switch result.Result.(type) {
+		//	case
+		//	}
+		//
+		//	msgDetailedInfo := NewTLMsgDetailedInfo()
+		//
+		//	msgDetailedInfo.SetBytes()
+		//	msgDetailedInfo.SetAnswerMsgId()
+		//	msgDetailedInfo.SetMsgId()
+		//	msgDetailedInfo.SetStatus(0)
+		//default:
+		//}
 
 		sb := make([]byte, 4)
 		// minus padding
@@ -251,18 +267,46 @@ func (m *MTProtoCodec) Send(msg interface{}) error {
 		}
 		return nil
 
-		// encryptedMessage := message.(*EncryptedMessage2)
-		// encryptedMessage.sessionId = m.SessionId
-		// encryptedMessage.salt = m.Salt
-		// encryptedMessage.salt = 0
-		// b, _ := encryptedMessage.encode(m.AuthKey)
-		//
-		// _, err := m.rw.Write(b)
-		// if err != nil {
-		// 	glog.Warning("MTProtoCodec - Send EncryptedMessage2 errror: %s", err)
-		//   	return err
-		// }
-		// return nil
+	case *MsgDetailedInfoContainer:
+		// TODO(@benqi): 蹩脚的实现
+		encrypedMessage := msg.(*MsgDetailedInfoContainer).Message
+		encrypedMessage.SessionId = m.SessionId
+		encrypedMessage.salt = m.Salt
+		encrypedMessage.SeqNo = m.getSeqNo(true)
+		b, _ := encrypedMessage.encode(int64(m.AuthKeyId), m.AuthKey)
+
+		msgDetailedInfo := NewTLMsgDetailedInfo()
+		objData := encrypedMessage.Object.Encode()
+		// TODO(@benqi): ReqMsgId置入MsgDetailedInfoContainer内
+		msgDetailedInfo.SetMsgId(encrypedMessage.Object.(*TLRpcResult).ReqMsgId)
+		msgDetailedInfo.SetAnswerMsgId(encrypedMessage.MessageId)
+		msgDetailedInfo.SetBytes(int32(len(objData)))
+		msgDetailedInfo.SetStatus(0)
+
+		msgDetailedInfoMessage := &EncryptedMessage2{
+			NeedAck : false,
+			// SeqNo:	  seqNo,
+			Object:   msgDetailedInfo,
+		}
+		m.Send(msgDetailedInfoMessage)
+
+		sb := make([]byte, 4)
+		// minus padding
+		size := len(b)/4
+
+		if size < 127 {
+			sb = []byte{byte(size)}
+		} else {
+			binary.LittleEndian.PutUint32(sb, uint32(size<<8|127))
+		}
+
+		b = append(sb, b...)
+		_, err := m.rw.Write(b)
+		if err != nil {
+			glog.Warning("MTProtoCodec - Send EncryptedMessage2 errror: %s", err)
+			return err
+		}
+		return nil
 	}
 
 	return errors.New("msg type error, only UnencryptedMessage or EncryptedMessage2, but recv invalid type")

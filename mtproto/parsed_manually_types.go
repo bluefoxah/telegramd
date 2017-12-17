@@ -68,7 +68,7 @@ func (m *TLMessage2) Decode(dbuf *DecodeBuf) error {
 		return err
 	}
 
-	glog.Info("Sucess decoded core_message: ", m.Object.String())
+	// glog.Info("Sucess decoded core_message: ", m.Object.String())
 	return dbuf2.err
 }
 

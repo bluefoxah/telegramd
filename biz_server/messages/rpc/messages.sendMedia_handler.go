@@ -27,6 +27,7 @@ import (
 	"github.com/nebulaim/telegramd/biz_model/model"
 	"github.com/nebulaim/telegramd/biz_model/base"
 	"github.com/nebulaim/telegramd/biz_server/delivery"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"github.com/nebulaim/telegramd/frontend/id"
 )
 
@@ -79,10 +80,18 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 
 		media := mtproto.NewTLMessageMediaPhoto()
 		photo := mtproto.NewTLPhoto()
-		photo.SetAccessHash(id.NextId())
+
+		// get access_hash
+		filesDO := dao.GetFilesDAO(dao.DB_MASTER).SelectByIDAndParts(fileData.GetId(), fileData.GetParts())
+		photo.SetAccessHash(filesDO.AccessHash)
+
+		// @benqi
+		//   重要，客户端发送图片文件后，要求返回的id不能和上传文件相同，如果相同认为文件上传未结束
+		photoId := id.NextId()
 		photo.SetDate(now)
-		photo.SetId(fileData.GetId())
-		sizes, err := model.GetPhotoModel().UploadPhoto(md.UserId, fileData.GetId(), fileData.GetParts(), fileData.GetName(), fileData.GetMd5Checksum())
+		photo.SetId(photoId)
+		// photo.SetId(fileData.GetId())
+		sizes, err := model.GetPhotoModel().UploadPhoto(md.UserId, photoId, fileData.GetId(), fileData.GetParts(), fileData.GetName(), fileData.GetMd5Checksum())
 		if err != nil {
 			glog.Errorf("UploadPhoto error: %v, by %s", err, logger.JsonDebugData(media))
 		} else {
@@ -93,7 +102,7 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 		media.SetTtlSeconds(mediaData.GetTtlSeconds())
 		media.SetPhoto(photo.To_Photo())
 
-		glog.Infof("inputMediaUploadedPhoto: %s", logger.JsonDebugData(media))
+		// glog.Infof("inputMediaUploadedPhoto: %s", logger.JsonDebugData(media))
 
 		message.SetMedia(media.To_MessageMedia())
 	}
@@ -193,7 +202,7 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 
 		updateMessageID := mtproto.NewTLUpdateMessageID()
 		updateMessageID.SetId(int32(messageId))
-		updateMessageID.SetRandomId(md.ClientMsgId)
+		updateMessageID.SetRandomId(request.GetRandomId())
 		// updates.Data2.Updates = append(updates.Data2.Updates, updateMessageID.To_Update())
 
 		updatesList := []*mtproto.Update{updateMessageID.To_Update()}
@@ -217,6 +226,9 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 			updates.Data2.Users = append(updates.Data2.Users, u.To_User())
 		}
 
+		message.SetOut(true)
+
+		glog.Infof("MessagesSendMedia - reply: %s", logger.JsonDebugData(updates))
 		return updates.To_Updates(), nil
 
 		// updates.SetId(int32(messageId))

@@ -115,6 +115,13 @@ func (m *UnencryptedMessage) decode(b []byte) error {
 	return dbuf.err
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////
+// MsgDetailedInfo
+type MsgDetailedInfoContainer struct {
+	Message *EncryptedMessage2
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
 // TODO(@benqi): 将Encrypt和Descrypt移到底层
 type EncryptedMessage2 struct {
 	// AuthKeyId int64
@@ -280,3 +287,6 @@ func (m *EncryptedMessage2) encrypt(authKey []byte, data []byte) ([]byte, error)
 	m.msgKey = message_key[8:8+16]
 	return x, nil
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////
+//

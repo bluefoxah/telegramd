@@ -21,9 +21,9 @@ import (
 	"sync"
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"github.com/nebulaim/telegramd/mtproto"
-	"github.com/nebulaim/telegramd/base/base"
-	"github.com/golang/glog"
-	"github.com/nebulaim/telegramd/base/logger"
+	// "github.com/nebulaim/telegramd/base/base"
+	// "github.com/golang/glog"
+	// "github.com/nebulaim/telegramd/base/logger"
 )
 
 type userModel struct {
@@ -83,7 +83,7 @@ func (m *userModel) GetUserList(userIdList []int32) (users []*mtproto.TLUser) {
 		users = append(users, user)
 	}
 
-	glog.Infof("SelectUsersByIdList(%s) - %s", base.JoinInt32List(userIdList, ","), logger.JsonDebugData(users))
+	// glog.Infof("SelectUsersByIdList(%s) - %s", base.JoinInt32List(userIdList, ","), logger.JsonDebugData(users))
 	return
 }
 

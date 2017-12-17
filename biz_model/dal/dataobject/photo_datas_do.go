@@ -19,7 +19,7 @@ package dataobject
 
 type PhotoDatasDO struct {
 	Id         int32  `db:"id"`
-	FileId     int64  `db:"file_id"`
+	PhotoId    int64  `db:"photo_id"`
 	PhotoType  int8   `db:"photo_type"`
 	DcId       int32  `db:"dc_id"`
 	VolumeId   int64  `db:"volume_id"`

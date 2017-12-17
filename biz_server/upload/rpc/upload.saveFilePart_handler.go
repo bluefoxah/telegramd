@@ -27,6 +27,7 @@ import (
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"crypto/md5"
 	"fmt"
+	"github.com/nebulaim/telegramd/frontend/id"
 )
 
 const (
@@ -64,6 +65,7 @@ func (s *UploadServiceImpl) UploadSaveFilePart(ctx context.Context, request *mtp
 			FileId: request.FileId,
 			FileParts: int32(len(filePartsDOList)),
 			FileSize: int64(fileSize),
+			AccessHash: id.NextId(),
 			Md5Checksum: fmt.Sprintf("%x", md5Hash.Sum(nil)),
 		}
 		dao.GetFilesDAO(dao.DB_MASTER).Insert(filesDO)

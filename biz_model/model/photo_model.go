@@ -30,6 +30,7 @@ import (
 	"fmt"
 	"github.com/golang/glog"
 	id2 "github.com/nebulaim/telegramd/frontend/id"
+	"time"
 )
 
 const (
@@ -43,6 +44,19 @@ const (
 	PHOTO_SIZE_XLARGE_SIZE 		= 800
 	PHOTO_SIZE_YLARGE_SIZE 		= 1280
 )
+
+/*
+	storage.fileUnknown#aa963b05 = storage.FileType;
+	storage.filePartial#40bc6f52 = storage.FileType;
+	storage.fileJpeg#7efe0e = storage.FileType;
+	storage.fileGif#cae1aadf = storage.FileType;
+	storage.filePng#a4f63c0 = storage.FileType;
+	storage.filePdf#ae1e508d = storage.FileType;
+	storage.fileMp3#528a0677 = storage.FileType;
+	storage.fileMov#4b09ebbc = storage.FileType;
+	storage.fileMp4#b3cea0e4 = storage.FileType;
+	storage.fileWebp#1081464c = storage.FileType;
+ */
 
 type photoModel struct {
 	// usersDAO *dao.UsersDAO
@@ -96,15 +110,20 @@ func MakeResizeInfo(img image.Image) resizeInfo {
 	}
 }
 
-func (m *photoModel) UploadPhoto(userId int32, id int64, parts int32, name, md5Checksum string) ([]*mtproto.PhotoSize, error) {
+// TODO: @benqi
+// 	我们未来的图片存储系统可能会按facebook的Haystack论文来实现
+// 	mtproto协议也定义了一套自己的文件存储方案，fileLocation#53d69076 dc_id:int volume_id:long local_id:int secret:long = FileLocation;
+// 	在这里，我们重新定义mtproto的volume_id和local_id，对应Haystack的key和alternate_key，secret对应cookie
+//  在当前简单实现里，volume_id由sonwflake生成，local_id对应于图片类型，secret为access_hash
+func (m *photoModel) UploadPhoto(userId int32, photoId, fileId int64, parts int32, name, md5Checksum string) ([]*mtproto.PhotoSize, error) {
 	sizes := make([]*mtproto.PhotoSize, 0, 4)
 
 	// 图片压缩和处理
 	// ext := filepath.Ext(name)
 
-	filesDO := dao.GetFilesDAO(dao.DB_MASTER).SelectByIDAndParts(id, parts)
+	filesDO := dao.GetFilesDAO(dao.DB_MASTER).SelectByIDAndParts(fileId, parts)
 	if filesDO == nil {
-		return nil, fmt.Errorf("File exists: id = %d, parts = %d", id, parts)
+		return nil, fmt.Errorf("File exists: id = %d, parts = %d", fileId, parts)
 	}
 
 	// check md5Checksum, big file's md5 is empty
@@ -113,7 +132,7 @@ func (m *photoModel) UploadPhoto(userId int32, id int64, parts int32, name, md5C
 	}
 
 	// select file data
-	filePartsDOList := dao.GetFilePartsDAO(dao.DB_MASTER).SelectFileParts(id)
+	filePartsDOList := dao.GetFilePartsDAO(dao.DB_MASTER).SelectFileParts(fileId)
 	fileDatas := []byte{}
 
 	for _, p := range filePartsDOList {
@@ -132,10 +151,10 @@ func (m *photoModel) UploadPhoto(userId int32, id int64, parts int32, name, md5C
 	vId := id2.NextId()
 	for i, sz := range sizeList {
 		photoDatasDO := &dataobject.PhotoDatasDO{
-			FileId: id,
+			PhotoId: photoId,
 			DcId: 2,
 			VolumeId: vId,
-			// LocalId: 12345,
+			LocalId: int32(i),
 			AccessHash: id2.NextId(),
 		}
 
@@ -156,7 +175,7 @@ func (m *photoModel) UploadPhoto(userId int32, id int64, parts int32, name, md5C
 		}
 
 		photoDatasDO.Bytes = imgBuf.Bytes()
-		localId := int32(dao.GetPhotoDatasDAO(dao.DB_MASTER).Insert(photoDatasDO))
+		dao.GetPhotoDatasDAO(dao.DB_MASTER).Insert(photoDatasDO)
 
 		photoSizeData := &mtproto.PhotoSize_Data{
 			Type: getSizeType(i),
@@ -167,8 +186,8 @@ func (m *photoModel) UploadPhoto(userId int32, id int64, parts int32, name, md5C
 				Constructor: mtproto.TLConstructor_CRC32_fileLocation,
 				Data2: &mtproto.FileLocation_Data{
 					VolumeId: photoDatasDO.VolumeId,
-					LocalId:  localId,
-					Secret:   id2.NextId(),
+					LocalId:  int32(i),
+					Secret:   photoDatasDO.AccessHash,
 					DcId: 	photoDatasDO.DcId}}}
 
 		if i== 0 {
@@ -184,4 +203,24 @@ func (m *photoModel) UploadPhoto(userId int32, id int64, parts int32, name, md5C
 	}
 
 	return sizes, nil
+}
+
+func (m *photoModel) GetPhotoFileData(volumeId int64, localId int32, secret int64, offset int32, limit int32) *mtproto.Upload_File {
+	// inputFileLocation#14637196 volume_id:long local_id:int secret:long = InputFileLocation;
+	photoDatasDO := dao.GetPhotoDatasDAO(dao.DB_MASTER).SelectByFileLocation(volumeId, localId, secret)
+	if photoDatasDO != nil {
+		if offset <= int32(len(photoDatasDO.Bytes)) {
+			uploadFile := mtproto.NewTLUploadFile()
+			uploadFile.SetType(mtproto.NewTLStorageFileJpeg().To_Storage_FileType())
+			if offset + limit > int32(len(photoDatasDO.Bytes)) {
+				limit = int32(len(photoDatasDO.Bytes)) - offset
+			}
+			uploadFile.SetBytes(photoDatasDO.Bytes[offset:offset+limit])
+			uploadFile.SetMtime(int32(time.Now().Unix()))
+			return uploadFile.To_Upload_File()
+		}
+	} else {
+		glog.Errorf("GetPhotoDatasDAO nil")
+	}
+	return nil
 }

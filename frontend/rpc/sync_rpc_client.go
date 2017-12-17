@@ -26,6 +26,7 @@ import (
 	"time"
 	"github.com/nebulaim/telegramd/mtproto"
 	net2 "github.com/nebulaim/telegramd/net"
+	"github.com/nebulaim/telegramd/base/logger"
 )
 
 type SyncRPCClient struct {
@@ -55,7 +56,6 @@ func (c* SyncRPCClient) RunUpdatesStreamLoop(server *net2.Server) {
 		stream, err := c.client.PushUpdatesStream(context.Background(), auth)
 		if err != nil {
 			glog.Errorf(".PushUpdatesStream(_) = _, %v", err)
-
 			time.Sleep(10 * time.Second)
 			continue
 		}
@@ -64,19 +64,21 @@ func (c* SyncRPCClient) RunUpdatesStreamLoop(server *net2.Server) {
 		for {
 			update, err := stream.Recv()
 			if err == io.EOF {
+				glog.Errorf("Recv error: %v.PushUpdatesStream(_) = _, %v", update, err)
 				time.Sleep(10 * time.Second)
 				break
 			}
 			if err != nil {
-				glog.Errorf("%v.PushUpdatesStream(_) = _, %v", update, err)
+				glog.Errorf("Recv error: %v.PushUpdatesStream(_) = _, %v", update, err)
 				time.Sleep(10 * time.Second)
 				break
 			}
 
+			// glog.Infof("RunUpdatesStreamLoop - updates: %s", logger.JsonDebugData(update))
 			// TODO(@benqi): 这是一种简单粗暴的实现方式
 			dbuf := mtproto.NewDecodeBuf(update.RawData)
 			o := dbuf.Object()
-			glog.Infof("RunUpdatesStreamLoop - updates: {%v}", update)
+			glog.Infof("RunUpdatesStreamLoop - updates: %s", logger.JsonDebugData(o))
 			sendBySessionID(server, update.NetlibSessionId, o)
 		}
 	}
@@ -91,7 +93,7 @@ func sendBySessionID(server *net2.Server, sessionId int64, message mtproto.TLObj
 			Object:   message,
 		}
 
-		glog.Infof("sendBySessionID - send by session: %d, message: {%v}", sessionId, m)
+		// glog.Infof("sendBySessionID - send by session: %d, message: {%v}", sessionId, m)
 		session.Send(m)
 	} else {
 		glog.Errorf("SendBySessionID - can't found sessionId: %d", sessionId)

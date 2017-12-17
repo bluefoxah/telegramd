@@ -237,6 +237,19 @@ func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 			ReqMsgId: msgId,
 			Result: rpcResult,
 		}
+
+		// TODO(@benqi): 协议底层处理
+		if _, ok := request.(*TLMessagesSendMedia); ok {
+			if _, ok := rpcResult.(*TLRpcError); !ok {
+				// TODO(@benqi): 由底层处理，通过多种策略（gzip, msg_container等）来打包并发送给客户端
+				m := &MsgDetailedInfoContainer{Message: &EncryptedMessage2{
+					NeedAck: false,
+					SeqNo:   seqNo,
+					Object:  reply,
+				}}
+				return c.Session.Send(m)
+			}
+		}
 	}
 
 	if reply == nil {

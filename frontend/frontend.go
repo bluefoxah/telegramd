@@ -47,6 +47,8 @@ type RpcClientConfig struct {
 type FrontendConfig struct{
 	ServerId 	int32			// 服务器ID
 	Server 		*ServerConfig
+	Server2 		*ServerConfig
+	Server3 		*ServerConfig
 	BizRpcClient	*RpcClientConfig
 	SyncRpcClient	*RpcClientConfig
 	Mysql		[]mysql_client.MySQLConfig

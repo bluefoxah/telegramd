@@ -3,22 +3,20 @@
     <operation name="Insert">
         <sql>
             INSERT INTO photo_datas
-                (file_id, photo_type, dc_id, volume_id, local_id, access_hash, width, height, bytes)
+                (photo_id, photo_type, dc_id, volume_id, local_id, access_hash, width, height, bytes)
             VALUES
-                (:file_id, :photo_type, :dc_id, :volume_id, :local_id, :access_hash, :width, :height, :bytes)
+                (:photo_id, :photo_type, :dc_id, :volume_id, :local_id, :access_hash, :width, :height, :bytes)
         </sql>
     </operation>
 
-    <operation name="SelectByFileID">
+    <operation name="SelectByFileLocation">
         <sql>
             SELECT
-                id, file_id, photo_type, dc_id, volume_id, local_id, access_hash, width, height, bytes
+                id, photo_id, photo_type, bytes
             FROM
                 photo_datas
             WHERE
-                file_id = :file_id LIMIT 1
+                dc_id = 2 AND volume_id = :volume_id AND local_id = :local_id AND access_hash = :access_hash
         </sql>
     </operation>
 </table>
-
-

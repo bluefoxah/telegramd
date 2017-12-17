@@ -33,10 +33,10 @@ func NewPhotoDatasDAO(db *sqlx.DB) *PhotoDatasDAO {
 	return &PhotoDatasDAO{db}
 }
 
-// insert into photo_datas(file_id, photo_type, dc_id, volume_id, local_id, access_hash, width, height, bytes) values (:file_id, :photo_type, :dc_id, :volume_id, :local_id, :access_hash, :width, :height, :bytes)
+// insert into photo_datas(photo_id, photo_type, dc_id, volume_id, local_id, access_hash, width, height, bytes) values (:photo_id, :photo_type, :dc_id, :volume_id, :local_id, :access_hash, :width, :height, :bytes)
 // TODO(@benqi): sqlmap
 func (dao *PhotoDatasDAO) Insert(do *dataobject.PhotoDatasDO) int64 {
-	var query = "insert into photo_datas(file_id, photo_type, dc_id, volume_id, local_id, access_hash, width, height, bytes) values (:file_id, :photo_type, :dc_id, :volume_id, :local_id, :access_hash, :width, :height, :bytes)"
+	var query = "insert into photo_datas(photo_id, photo_type, dc_id, volume_id, local_id, access_hash, width, height, bytes) values (:photo_id, :photo_type, :dc_id, :volume_id, :local_id, :access_hash, :width, :height, :bytes)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
@@ -53,14 +53,14 @@ func (dao *PhotoDatasDAO) Insert(do *dataobject.PhotoDatasDO) int64 {
 	return id
 }
 
-// select id, file_id, photo_type, dc_id, volume_id, local_id, access_hash, width, height, bytes from photo_datas where file_id = :file_id limit 1
+// select id, photo_id, photo_type, bytes from photo_datas where dc_id = 2 and volume_id = :volume_id and local_id = :local_id and access_hash = :access_hash
 // TODO(@benqi): sqlmap
-func (dao *PhotoDatasDAO) SelectByFileID(file_id int64) *dataobject.PhotoDatasDO {
-	var query = "select id, file_id, photo_type, dc_id, volume_id, local_id, access_hash, width, height, bytes from photo_datas where file_id = ? limit 1"
-	rows, err := dao.db.Queryx(query, file_id)
+func (dao *PhotoDatasDAO) SelectByFileLocation(volume_id int64, local_id int32, access_hash int64) *dataobject.PhotoDatasDO {
+	var query = "select id, photo_id, photo_type, bytes from photo_datas where dc_id = 2 and volume_id = ? and local_id = ? and access_hash = ?"
+	rows, err := dao.db.Queryx(query, volume_id, local_id, access_hash)
 
 	if err != nil {
-		errDesc := fmt.Sprintf("Queryx in SelectByFileID(_), error: %v", err)
+		errDesc := fmt.Sprintf("Queryx in SelectByFileLocation(_), error: %v", err)
 		glog.Error(errDesc)
 		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
@@ -71,7 +71,7 @@ func (dao *PhotoDatasDAO) SelectByFileID(file_id int64) *dataobject.PhotoDatasDO
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			errDesc := fmt.Sprintf("StructScan in SelectByFileID(_), error: %v", err)
+			errDesc := fmt.Sprintf("StructScan in SelectByFileLocation(_), error: %v", err)
 			glog.Error(errDesc)
 			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
