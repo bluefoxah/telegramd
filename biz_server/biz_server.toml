@@ -24,14 +24,14 @@ password = ""
 
 [[mysql]]
 name = "immaster"
-dsn = "root:@/nebulaim?charset=utf8"
+dsn = "root:@/nebulaim?charset=utf8mb4"
 #root:1@tcp(127.0.0.1:3306)/nebulaim?timeout=5s&readTimeout=5s&writeTimeout=5s&parseTime=true&loc=Local&charset=utf8,utf8mb4"
 active = 5
 idle = 2
 
 [[mysql]]
 name = "imslave"
-dsn = "root:@/nebulaim?charset=utf8"
+dsn = "root:@/nebulaim?charset=utf8mb4"
 # root:1@tcp(127.0.0.1:3306)/nebulaim?timeout=5s&readTimeout=5s&writeTimeout=5s&parseTime=true&loc=Local&charset=utf8,utf8mb4"
 active = 5
 idle = 2

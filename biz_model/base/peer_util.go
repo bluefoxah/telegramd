@@ -264,3 +264,26 @@ func (p *PeerUtil) ToNotifyPeer() (peer *mtproto.NotifyPeer) {
 	}
 	return
 }
+
+func ToPeerByTypeAndID(peerType int8, peerId int32) (peer *mtproto.Peer) {
+	switch peerType {
+	case PEER_USER:
+		peer = &mtproto.Peer{
+			Constructor: mtproto.TLConstructor_CRC32_peerUser,
+			Data2: &mtproto.Peer_Data{UserId: peerId},
+		}
+	case PEER_CHAT:
+		peer = &mtproto.Peer{
+			Constructor: mtproto.TLConstructor_CRC32_peerChat,
+			Data2: &mtproto.Peer_Data{ChatId: peerId},
+		}
+	case PEER_CHANNEL:
+		peer = &mtproto.Peer{
+			Constructor: mtproto.TLConstructor_CRC32_peerChannel,
+			Data2: &mtproto.Peer_Data{ChannelId: peerId},
+		}
+	default:
+		panic(fmt.Sprintf("ToPeerByTypeAndID(%d, %d) error!", peerType, peerId))
+	}
+	return
+}

@@ -40,18 +40,28 @@ func (s *UpdatesServiceImpl) UpdatesGetDifference(ctx context.Context, request *
 
 	for _, m := range messages {
 	    switch m.GetConstructor()  {
+
 	    case mtproto.TLConstructor_CRC32_message:
 	        m2 := m.To_Message()
 	        userIdList = append(userIdList, m2.GetFromId())
-	        peer := base.FromPeer(m2.GetToId())
-	        switch peer.PeerType {
-	        case base.PEER_USER:
-	            userIdList = append(userIdList, peer.PeerId)
-	        case base.PEER_CHAT:
-	            chatIdList = append(chatIdList, peer.PeerId)
-	        case base.PEER_CHANNEL:
-	            // TODO(@benqi): add channel
-	        }
+			p := base.FromPeer(m2.GetToId())
+			switch p.PeerType {
+			case base.PEER_SELF, base.PEER_USER:
+				userIdList = append(userIdList, p.PeerId)
+			case base.PEER_CHAT:
+				chatIdList = append(chatIdList, p.PeerId)
+			case base.PEER_CHANNEL:
+				// TODO(@benqi): add channel
+			}
+			//peer := base.FromPeer(m2.GetToId())
+	        //switch peer.PeerType {
+	        //case base.PEER_USER:
+	        //    userIdList = append(userIdList, peer.PeerId)
+	        //case base.PEER_CHAT:
+	        //    chatIdList = append(chatIdList, peer.PeerId)
+	        //case base.PEER_CHANNEL:
+	        //    // TODO(@benqi): add channel
+	        //}
 	    case mtproto.TLConstructor_CRC32_messageService:
 	        m2 := m.To_MessageService()
 	        userIdList = append(userIdList, m2.GetFromId())
@@ -66,7 +76,9 @@ func (s *UpdatesServiceImpl) UpdatesGetDifference(ctx context.Context, request *
 	    for _, u := range usersList {
 	        if u.GetId() == md.UserId {
 	            u.SetSelf(true)
-	        }
+	        } else {
+	        	u.SetSelf(false)
+			}
 	        u.SetContact(true)
 	        u.SetMutualContact(true)
 	        difference.Data2.Users = append(difference.Data2.Users, u.To_User())

@@ -85,8 +85,7 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 		filesDO := dao.GetFilesDAO(dao.DB_MASTER).SelectByIDAndParts(fileData.GetId(), fileData.GetParts())
 		photo.SetAccessHash(filesDO.AccessHash)
 
-		// @benqi
-		//   重要，客户端发送图片文件后，要求返回的id不能和上传文件相同，如果相同认为文件上传未结束
+		// @benqi。重要，客户端发送图片文件后，要求返回的id不能和上传文件相同
 		photoId := id.NextId()
 		photo.SetDate(now)
 		photo.SetId(photoId)
@@ -105,6 +104,9 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 		// glog.Infof("inputMediaUploadedPhoto: %s", logger.JsonDebugData(media))
 
 		message.SetMedia(media.To_MessageMedia())
+	case mtproto.TLConstructor_CRC32_inputMediaDocument:
+		// id:InputDocument caption:string ttl_seconds:flags.0?int
+
 	}
 
 	sentMessage := mtproto.NewTLUpdateShortSentMessage()
@@ -115,7 +117,7 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 		// 2. MessageBoxes
 		pts := model.GetMessageModel().CreateMessageBoxes(md.UserId, message.GetFromId(), base.PEER_SELF, md.UserId, false, messageId)
 		// 3. dialog
-		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, base.PEER_SELF, md.UserId, messageId, message.GetMentioned())
+		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, base.PEER_SELF, md.UserId, messageId, message.GetMentioned(), false)
 
 
 
@@ -124,7 +126,8 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 		updates := mtproto.NewTLUpdateShortMessage()
 		updates.SetId(int32(messageId))
 		updates.SetUserId(md.UserId)
-		updates.SetPts(pts)
+		// TODO(@benqi): 暂时这样实现验证发消息是否有问题，有问题的
+		updates.SetPts(pts-1)
 		updates.SetPtsCount(1)
 		// updates.Message = request.Message
 
@@ -140,7 +143,8 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 
 		sentMessage.SetOut(true)
 		sentMessage.SetId(int32(messageId))
-		sentMessage.SetPts(pts)
+		// TODO(@benqi): 暂时这样实现验证发消息是否有问题，有问题的
+		sentMessage.SetPts(pts-1)
 		sentMessage.SetPtsCount(1)
 		sentMessage.SetDate(int32(time.Now().Unix()))
 		sentMessage.SetMedia(mtproto.NewTLMessageMediaEmpty().To_MessageMedia())
@@ -157,8 +161,8 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 		outPts := model.GetMessageModel().CreateMessageBoxes(md.UserId, message.GetFromId(), base.PEER_USER, peer.PeerId, false, messageId)
 		inPts := model.GetMessageModel().CreateMessageBoxes(peer.PeerId, message.GetFromId(), base.PEER_USER, md.UserId, true, messageId)
 		// 3. dialog
-		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, base.PEER_USER, peer.PeerId, messageId, message.GetMentioned())
-		model.GetDialogModel().CreateOrUpdateByLastMessage(peer.PeerId, base.PEER_USER, md.UserId, messageId, message.GetMentioned())
+		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, base.PEER_USER, peer.PeerId, messageId, message.GetMentioned(), false)
+		model.GetDialogModel().CreateOrUpdateByLastMessage(peer.PeerId, base.PEER_USER, md.UserId, messageId, message.GetMentioned(), true)
 
 		users := model.GetUserModel().GetUserList([]int32{md.UserId, peer.PeerId})
 
@@ -172,7 +176,8 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 
 		updateNewMessage := mtproto.NewTLUpdateNewMessage()
 		updateNewMessage.SetMessage(message.To_Message())
-		updateNewMessage.SetPts(outPts)
+		// TODO(@benqi): 暂时这样实现验证发消息是否有问题，有问题的
+		updateNewMessage.SetPts(outPts-1)
 		updateNewMessage.SetPtsCount(1)
 
 		updates.Data2.Updates = append(updates.Data2.Updates, updateNewMessage.To_Update())
@@ -190,13 +195,13 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 			// .SetUsers(users)
 		}
 
-		delivery.GetDeliveryInstance().DeliveryUpdatesNotMe(
-			md.AuthId,
-			md.SessionId,
-			md.NetlibSessionId,
-			// []int32{md.UserId, peer.PeerId},
-			[]int32{peer.PeerId},
-			updates.To_Updates().Encode())
+		//delivery.GetDeliveryInstance().DeliveryUpdatesNotMe(
+		//	md.AuthId,
+		//	md.SessionId,
+		//	md.NetlibSessionId,
+		//	// []int32{md.UserId, peer.PeerId},
+		//	[]int32{peer.PeerId},
+		//	updates.To_Updates().Encode())
 
 		//	updates := &mtproto.TLUpdates{}
 
@@ -211,7 +216,8 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 
 		// fix message data
 		// message.SetOut(false)
-		updateNewMessage.SetPts(inPts)
+		// TODO(@benqi): 暂时这样实现验证发消息是否有问题，有问题的
+		updateNewMessage.SetPts(inPts-1)
 
 		updates.SetUsers([]*mtproto.User{})
 		for _, u := range  users {
@@ -270,7 +276,7 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 			// 2. MessageBoxes
 			outgoing := userId == md.UserId
 			pts := model.GetMessageModel().CreateMessageBoxes(userId, md.UserId, peer.PeerType, peer.PeerId, outgoing, messageId)
-			model.GetDialogModel().CreateOrUpdateByLastMessage(userId, peer.PeerType, peer.PeerId, messageId, message.GetMentioned())
+			model.GetDialogModel().CreateOrUpdateByLastMessage(userId, peer.PeerType, peer.PeerId, messageId, message.GetMentioned(), false)
 			// inPts := model.GetMessageModel().CreateMessageBoxes(peer.PeerId, message.FromId, peer, true, messageId)
 			// 3. dialog
 			// model.GetDialogModel().CreateOrUpdateByLastMessage(peer.PeerId, peer, messageId, message.Mentioned)
@@ -280,13 +286,15 @@ func (s *MessagesServiceImpl) MessagesSendMedia(ctx context.Context, request *mt
 			updates.SetId(int32(messageId))
 			updates.SetFromId(md.UserId)
 			updates.SetChatId(peer.PeerId)
-			updates.SetPts(pts)
+			// TODO(@benqi): 暂时这样实现验证发消息是否有问题，有问题的
+			updates.SetPts(pts-1)
 			updates.SetPtsCount(1)
 			// updates.Message = request.Message
 			updates.SetDate(now)
 			if md.UserId == userId {
 				sentMessage.SetId(int32(messageId))
-				sentMessage.SetPts(pts)
+				// TODO(@benqi): 暂时这样实现验证发消息是否有问题，有问题的
+				sentMessage.SetPts(pts-1)
 				delivery.GetDeliveryInstance().DeliveryUpdatesNotMe(
 					md.AuthId,
 					md.SessionId,

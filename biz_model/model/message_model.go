@@ -82,7 +82,7 @@ func (m *messageModel) getMessagesByIDList(idList []int32, order bool) (messages
 		case MESSAGE_TYPE_MESSAGE:
 			message.Constructor = mtproto.TLConstructor_CRC32_message
 			// err := proto.Unmarshal(messageDO.MessageData, message)
-			err := json.Unmarshal(messageDO.MessageData, message)
+			err := json.Unmarshal([]byte(messageDO.MessageData), message)
 			if err != nil {
 				glog.Errorf("GetMessagesByIDList - Unmarshal message(%d)error: %v", messageDO.Id, err)
 				continue
@@ -92,7 +92,7 @@ func (m *messageModel) getMessagesByIDList(idList []int32, order bool) (messages
 		case MESSAGE_TYPE_MESSAGE_SERVICE:
 			message.Constructor = mtproto.TLConstructor_CRC32_messageService
 			// err := proto.Unmarshal(messageDO.MessageData, message)
-			err := json.Unmarshal(messageDO.MessageData, message)
+			err := json.Unmarshal([]byte(messageDO.MessageData), message)
 			if err != nil {
 				glog.Errorf("GetMessagesByIDList - Unmarshal message(%d)error: %v", messageDO.Id, err)
 				continue
@@ -114,14 +114,24 @@ func (m *messageModel) GetMessagesByPeerAndMessageIdList(userId int32, idList []
 	return m.getMessagesByMessageBoxes(boxesList, true)
 }
 
-func (m *messageModel) GetMessagesByUserIdPeerOffsetLimit(userId int32, peerType , peerId int32, offset int32, limit int32) []*mtproto.Message {
+func (m *messageModel) LoadBackwardHistoryMessages(userId int32, peerType , peerId int32, offset int32, limit int32) []*mtproto.Message {
 	// 1. 先从message_boxes取出message_id
-	boxesList := dao.GetMessageBoxesDAO(dao.DB_SLAVE).SelectByPeerOffsetLimit(userId, int8(peerType), peerId, offset, limit)
+	boxesList := dao.GetMessageBoxesDAO(dao.DB_SLAVE).SelectBackwardByPeerOffsetLimit(userId, int8(peerType), peerId, offset, limit)
 	glog.Infof("GetMessagesByUserIdPeerOffsetLimit - boxesList: %v", boxesList)
 	if len(boxesList) == 0 {
 		return make([]*mtproto.Message, 0)
 	}
-	return m.getMessagesByMessageBoxes(boxesList, false)
+	return m.getMessagesByMessageBoxes(boxesList, true)
+}
+
+func (m *messageModel) LoadForwardHistoryMessages(userId int32, peerType , peerId int32, offset int32, limit int32) []*mtproto.Message {
+	// 1. 先从message_boxes取出message_id
+	boxesList := dao.GetMessageBoxesDAO(dao.DB_SLAVE).SelectForwardByPeerOffsetLimit(userId, int8(peerType), peerId, offset, limit)
+	glog.Infof("GetMessagesByUserIdPeerOffsetLimit - boxesList: %v", boxesList)
+	if len(boxesList) == 0 {
+		return make([]*mtproto.Message, 0)
+	}
+	return m.getMessagesByMessageBoxes(boxesList, true)
 }
 
 func (m *messageModel) getMessagesByMessageBoxes(boxes []dataobject.MessageBoxesDO, order bool) []*mtproto.Message {
@@ -140,10 +150,10 @@ func (m *messageModel) getMessagesByMessageBoxes(boxes []dataobject.MessageBoxes
 		} else {
 			message.Data2.Out = false
 		}
-		message.Data2.Silent = true
+		// message.Data2.Silent = true
 		message.Data2.MediaUnread = boxDO.MediaUnread != 0
 		message.Data2.Mentioned = false
-		glog.Infof("message(%d): %s", i, logger.JsonDebugData(message))
+		// glog.Infof("message(%d): %s", i, logger.JsonDebugData(message))
 	}
 
 	return messageList
@@ -154,7 +164,7 @@ func (m *messageModel) GetMessagesByGtPts(userId int32, pts int32) []*mtproto.Me
 	if len(boxDOList) == 0 {
 		return make([]*mtproto.Message, 0)
 	} else {
-		return m.getMessagesByMessageBoxes(boxDOList, true)
+		return m.getMessagesByMessageBoxes(boxDOList, false)
 	}
 }
 
@@ -217,8 +227,8 @@ func (m *messageModel) CreateHistoryMessage2(fromId int32, peer *base.PeerUtil, 
 
 	// TODO(@benqi): 测试阶段使用Json!!!
 	// messageDO.MessageData, _ = proto.Marshal(message)
-	messageDO.MessageData, _ = json.Marshal(message)
-
+	messageData, _ := json.Marshal(message)
+	messageDO.MessageData = string(messageData)
 	messageId = int32(dao.GetMessagesDAO(dao.DB_MASTER).Insert(messageDO))
 	return
 }

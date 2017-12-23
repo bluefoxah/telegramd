@@ -24,6 +24,7 @@ import (
 	"fmt"
 	"github.com/BurntSushi/toml"
 	"testing"
+	"github.com/nebulaim/telegramd/base/logger"
 )
 
 func TestGetAuthKey(t *testing.T) {
@@ -34,5 +35,5 @@ func TestGetAuthKey(t *testing.T) {
 		return
 	}
 
-	fmt.Printf("%v\n", config)
+	fmt.Printf("%s\n", logger.JsonDebugData(config))
 }

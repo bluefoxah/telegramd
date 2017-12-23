@@ -53,10 +53,10 @@ func (dao *MessagesDAO) Insert(do *dataobject.MessagesDO) int64 {
 	return id
 }
 
-// select id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2 from messages where id in (:idList)
+// select id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2 from messages where id in (:idList) order by id asc
 // TODO(@benqi): sqlmap
 func (dao *MessagesDAO) SelectByIdList(idList []int32) []dataobject.MessagesDO {
-	var q = "select id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2 from messages where id in (?)"
+	var q = "select id, sender_user_id, peer_type, peer_id, random_id, message_type, message_data, date2 from messages where id in (?) order by id asc"
 	query, a, err := sqlx.In(q, idList)
 	rows, err := dao.db.Queryx(query, a...)
 

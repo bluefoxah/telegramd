@@ -18,17 +18,18 @@
 package dataobject
 
 type MessageBoxesDO struct {
-	Id             int32  `db:"id"`
-	UserId         int32  `db:"user_id"`
-	SenderUserId   int32  `db:"sender_user_id"`
-	MessageBoxType int8   `db:"message_box_type"`
-	PeerType       int8   `db:"peer_type"`
-	PeerId         int32  `db:"peer_id"`
-	Pts            int32  `db:"pts"`
-	MessageId      int32  `db:"message_id"`
-	MediaUnread    int8   `db:"media_unread"`
-	State          int8   `db:"state"`
-	Date2          int32  `db:"date2"`
-	CreatedAt      string `db:"created_at"`
-	UpdatedAt      string `db:"updated_at"`
+	Id               int32  `db:"id"`
+	UserId           int32  `db:"user_id"`
+	UserMessageBoxId int32  `db:"user_message_box_id"`
+	MessageId        int32  `db:"message_id"`
+	SenderUserId     int32  `db:"sender_user_id"`
+	MessageBoxType   int8   `db:"message_box_type"`
+	PeerType         int8   `db:"peer_type"`
+	PeerId           int32  `db:"peer_id"`
+	Pts              int32  `db:"pts"`
+	MediaUnread      int8   `db:"media_unread"`
+	State            int8   `db:"state"`
+	Date2            int32  `db:"date2"`
+	CreatedAt        string `db:"created_at"`
+	UpdatedAt        string `db:"updated_at"`
 }

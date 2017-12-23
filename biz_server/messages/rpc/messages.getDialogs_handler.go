@@ -28,6 +28,71 @@ import (
 	"github.com/nebulaim/telegramd/biz_model/model"
 )
 
+// android client request source code
+/*
+	TLRPC.TL_messages_getDialogs req = new TLRPC.TL_messages_getDialogs();
+	req.limit = count;
+	req.exclude_pinned = true;
+	if (UserConfig.dialogsLoadOffsetId != -1) {
+		if (UserConfig.dialogsLoadOffsetId == Integer.MAX_VALUE) {
+			dialogsEndReached = true;
+			serverDialogsEndReached = true;
+			loadingDialogs = false;
+			NotificationCenter.getInstance().postNotificationName(NotificationCenter.dialogsNeedReload);
+			return;
+		}
+		req.offset_id = UserConfig.dialogsLoadOffsetId;
+		req.offset_date = UserConfig.dialogsLoadOffsetDate;
+		if (req.offset_id == 0) {
+			req.offset_peer = new TLRPC.TL_inputPeerEmpty();
+		} else {
+			if (UserConfig.dialogsLoadOffsetChannelId != 0) {
+				req.offset_peer = new TLRPC.TL_inputPeerChannel();
+				req.offset_peer.channel_id = UserConfig.dialogsLoadOffsetChannelId;
+			} else if (UserConfig.dialogsLoadOffsetUserId != 0) {
+				req.offset_peer = new TLRPC.TL_inputPeerUser();
+				req.offset_peer.user_id = UserConfig.dialogsLoadOffsetUserId;
+			} else {
+				req.offset_peer = new TLRPC.TL_inputPeerChat();
+				req.offset_peer.chat_id = UserConfig.dialogsLoadOffsetChatId;
+			}
+			req.offset_peer.access_hash = UserConfig.dialogsLoadOffsetAccess;
+		}
+	} else {
+		boolean found = false;
+		for (int a = dialogs.size() - 1; a >= 0; a--) {
+			TLRPC.TL_dialog dialog = dialogs.get(a);
+			if (dialog.pinned) {
+				continue;
+			}
+			int lower_id = (int) dialog.id;
+			int high_id = (int) (dialog.id >> 32);
+			if (lower_id != 0 && high_id != 1 && dialog.top_message > 0) {
+				MessageObject message = dialogMessage.get(dialog.id);
+				if (message != null && message.getId() > 0) {
+					req.offset_date = message.messageOwner.date;
+					req.offset_id = message.messageOwner.id;
+					int id;
+					if (message.messageOwner.to_id.channel_id != 0) {
+						id = -message.messageOwner.to_id.channel_id;
+					} else if (message.messageOwner.to_id.chat_id != 0) {
+						id = -message.messageOwner.to_id.chat_id;
+					} else {
+						id = message.messageOwner.to_id.user_id;
+					}
+					req.offset_peer = getInputPeer(id);
+					found = true;
+					break;
+				}
+			}
+		}
+		if (!found) {
+			req.offset_peer = new TLRPC.TL_inputPeerEmpty();
+		}
+	}
+ */
+// 由客户端代码: offset_id为当前用户最后一条消息ID，offset_peer为最后一条消息的接收者peer
+// offset_date
 // messages.getDialogs#191ba9c5 flags:# exclude_pinned:flags.0?true offset_date:int offset_id:int offset_peer:InputPeer limit:int = messages.Dialogs;
 func (s *MessagesServiceImpl) MessagesGetDialogs(ctx context.Context, request *mtproto.TLMessagesGetDialogs) (*mtproto.Messages_Dialogs, error) {
 	md := grpc_util.RpcMetadataFromIncoming(ctx)
@@ -38,13 +103,15 @@ func (s *MessagesServiceImpl) MessagesGetDialogs(ctx context.Context, request *m
 	if peer.PeerType == base.PEER_EMPTY {
 		// 取出全部
 	} else {
-		dialogDO := dao.GetUserDialogsDAO(dao.DB_SLAVE).SelectByPeer(md.UserId, int8(peer.PeerType), peer.PeerId)
+		// 通过message_boxs表检查offset_peer
+		offsetMessageDO := dao.GetMessageBoxesDAO(dao.DB_SLAVE).SelectByUserIdAndMessageBoxId(md.UserId, request.OffsetId)
 		// TODO(@benqi): date, access_hash check
-		if dialogDO == nil || request.OffsetId > dialogDO.TopMessage {
+		if offsetMessageDO == nil || ( peer.PeerType != int32(offsetMessageDO.PeerType)  && peer.PeerId != offsetMessageDO.PeerId) {
 			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_BAD_REQUEST), "InputPeer invalid"))
 		}
 	}
-	dialogs = model.GetDialogModel().GetDialogsByOffsetDate(md.UserId, request.ExcludePinned, request.OffsetDate, request.Limit)
+
+	dialogs = model.GetDialogModel().GetDialogsByOffsetId(md.UserId, request.GetExcludePinned(), request.GetOffsetId(), request.GetLimit())
 	messageDialogs := mtproto.NewTLMessagesDialogs()
 	messageIdList := []int32{}
 	userIdList := []int32{md.UserId}

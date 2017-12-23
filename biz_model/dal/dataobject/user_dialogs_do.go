@@ -28,6 +28,12 @@ type UserDialogsDO struct {
 	ReadOutboxMaxId     int32  `db:"read_outbox_max_id"`
 	UnreadCount         int32  `db:"unread_count"`
 	UnreadMentionsCount int32  `db:"unread_mentions_count"`
+	ShowPreviews        int8   `db:"show_previews"`
+	Silent              int8   `db:"silent"`
+	MuteUntil           int32  `db:"mute_until"`
+	Sound               string `db:"sound"`
+	Pts                 int32  `db:"pts"`
+	DraftId             int32  `db:"draft_id"`
 	Date2               int32  `db:"date2"`
 	CreatedAt           string `db:"created_at"`
 	UpdatedAt           string `db:"updated_at"`

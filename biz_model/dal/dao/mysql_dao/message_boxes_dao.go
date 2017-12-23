@@ -82,6 +82,35 @@ func (dao *MessageBoxesDAO) SelectLastPts(user_id int32) *dataobject.MessageBoxe
 	return do
 }
 
+// select pts from message_boxes where user_id = :user_id and peer_type = :peer_type and peer_id = :peer_id order by pts desc limit 1
+// TODO(@benqi): sqlmap
+func (dao *MessageBoxesDAO) SelectLastPtsByPeer(user_id int32, peer_type int8, peer_id int32) *dataobject.MessageBoxesDO {
+	var query = "select pts from message_boxes where user_id = ? and peer_type = ? and peer_id = ? order by pts desc limit 1"
+	rows, err := dao.db.Queryx(query, user_id, peer_type, peer_id)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Queryx in SelectLastPtsByPeer(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	defer rows.Close()
+
+	do := &dataobject.MessageBoxesDO{}
+	if rows.Next() {
+		err = rows.StructScan(do)
+		if err != nil {
+			errDesc := fmt.Sprintf("StructScan in SelectLastPtsByPeer(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+		}
+	} else {
+		return nil
+	}
+
+	return do
+}
+
 // select pts from message_boxes where user_id = :user_id and message_id > :message_id order by pts asc
 // TODO(@benqi): sqlmap
 func (dao *MessageBoxesDAO) SelectPtsByGtMessageID(user_id int32, message_id int32) []dataobject.MessageBoxesDO {
@@ -115,12 +144,12 @@ func (dao *MessageBoxesDAO) SelectPtsByGtMessageID(user_id int32, message_id int
 
 // select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = :user_id and peer_type = :peer_type and peer_id = :peer_id and message_id < :message_id order by message_id desc limit :limit
 // TODO(@benqi): sqlmap
-func (dao *MessageBoxesDAO) SelectByPeerOffsetLimit(user_id int32, peer_type int8, peer_id int32, message_id int32, limit int32) []dataobject.MessageBoxesDO {
+func (dao *MessageBoxesDAO) SelectBackwardByPeerOffsetLimit(user_id int32, peer_type int8, peer_id int32, message_id int32, limit int32) []dataobject.MessageBoxesDO {
 	var query = "select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = ? and peer_type = ? and peer_id = ? and message_id < ? order by message_id desc limit ?"
 	rows, err := dao.db.Queryx(query, user_id, peer_type, peer_id, message_id, limit)
 
 	if err != nil {
-		errDesc := fmt.Sprintf("Queryx in SelectByPeerOffsetLimit(_), error: %v", err)
+		errDesc := fmt.Sprintf("Queryx in SelectBackwardByPeerOffsetLimit(_), error: %v", err)
 		glog.Error(errDesc)
 		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
@@ -134,7 +163,7 @@ func (dao *MessageBoxesDAO) SelectByPeerOffsetLimit(user_id int32, peer_type int
 		// TODO(@benqi): 不使用反射
 		err := rows.StructScan(&v)
 		if err != nil {
-			errDesc := fmt.Sprintf("StructScan in SelectByPeerOffsetLimit(_), error: %v", err)
+			errDesc := fmt.Sprintf("StructScan in SelectBackwardByPeerOffsetLimit(_), error: %v", err)
 			glog.Error(errDesc)
 			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}
@@ -144,10 +173,41 @@ func (dao *MessageBoxesDAO) SelectByPeerOffsetLimit(user_id int32, peer_type int
 	return values
 }
 
-// select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = :user_id and pts > :pts
+// select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = :user_id and peer_type = :peer_type and peer_id = :peer_id and message_id >= :message_id order by message_id asc limit :limit
+// TODO(@benqi): sqlmap
+func (dao *MessageBoxesDAO) SelectForwardByPeerOffsetLimit(user_id int32, peer_type int8, peer_id int32, message_id int32, limit int32) []dataobject.MessageBoxesDO {
+	var query = "select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = ? and peer_type = ? and peer_id = ? and message_id >= ? order by message_id asc limit ?"
+	rows, err := dao.db.Queryx(query, user_id, peer_type, peer_id, message_id, limit)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Queryx in SelectForwardByPeerOffsetLimit(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	defer rows.Close()
+
+	var values []dataobject.MessageBoxesDO
+	for rows.Next() {
+		v := dataobject.MessageBoxesDO{}
+
+		// TODO(@benqi): 不使用反射
+		err := rows.StructScan(&v)
+		if err != nil {
+			errDesc := fmt.Sprintf("StructScan in SelectForwardByPeerOffsetLimit(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+		}
+		values = append(values, v)
+	}
+
+	return values
+}
+
+// select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = :user_id and pts > :pts order by pts asc
 // TODO(@benqi): sqlmap
 func (dao *MessageBoxesDAO) SelectByGtPts(user_id int32, pts int32) []dataobject.MessageBoxesDO {
-	var query = "select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = ? and pts > ?"
+	var query = "select user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2 from message_boxes where user_id = ? and pts > ? order by pts asc"
 	rows, err := dao.db.Queryx(query, user_id, pts)
 
 	if err != nil {
@@ -205,4 +265,33 @@ func (dao *MessageBoxesDAO) SelectByMessageIdList(user_id int32, idList []int32)
 	}
 
 	return values
+}
+
+// select user_id, user_message_box_id, message_id, sender_user_id, message_box_type, peer_type, peer_id, media_unread, date2 from message_boxed where user_id = :user_id and user_message_box_id = :user_message_box_id limit 1
+// TODO(@benqi): sqlmap
+func (dao *MessageBoxesDAO) SelectByUserIdAndMessageBoxId(user_id int32, user_message_box_id int32) *dataobject.MessageBoxesDO {
+	var query = "select user_id, user_message_box_id, message_id, sender_user_id, message_box_type, peer_type, peer_id, media_unread, date2 from message_boxed where user_id = ? and user_message_box_id = ? limit 1"
+	rows, err := dao.db.Queryx(query, user_id, user_message_box_id)
+
+	if err != nil {
+		errDesc := fmt.Sprintf("Queryx in SelectByUserIdAndMessageBoxId(_), error: %v", err)
+		glog.Error(errDesc)
+		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+	}
+
+	defer rows.Close()
+
+	do := &dataobject.MessageBoxesDO{}
+	if rows.Next() {
+		err = rows.StructScan(do)
+		if err != nil {
+			errDesc := fmt.Sprintf("StructScan in SelectByUserIdAndMessageBoxId(_), error: %v", err)
+			glog.Error(errDesc)
+			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
+		}
+	} else {
+		return nil
+	}
+
+	return do
 }

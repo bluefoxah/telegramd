@@ -53,7 +53,7 @@ func (dao *SequenceDAO) Incr(key string) (seq int64, err error) {
 	conn := dao.redis.Get()
 	defer conn.Close()
 
-	// 设置键盘
+	// 设置键
 	seq, err = redis.Int64(conn.Do("INCR", fmt.Sprintf("%s_%s", seqUpdatesNgenId, key)))
 	if err != nil {
 		// glog.Errorf("NextID - INCR {%d}, error: %s", k, err)

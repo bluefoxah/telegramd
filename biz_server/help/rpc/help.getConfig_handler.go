@@ -69,6 +69,7 @@ func (s *HelpServiceImpl) HelpGetConfig(ctx context.Context, request *mtproto.TL
 	helpConfig.SetForwardedCountMax(config.ForwardedCountMax)
 	helpConfig.SetOnlineUpdatePeriodMs(config.OnlineUpdatePeriodMs)
 	helpConfig.SetOfflineBlurTimeoutMs(config.OfflineBlurTimeoutMs)
+	helpConfig.SetOfflineIdleTimeoutMs(config.OfflineIdleTimeoutMs)
 	helpConfig.SetOnlineCloudTimeoutMs(config.OnlineCloudTimeoutMs)
 	helpConfig.SetNotifyCloudDelayMs(config.NotifyCloudDelayMs)
 	helpConfig.SetNotifyDefaultDelayMs(config.NotifyDefaultDelayMs)

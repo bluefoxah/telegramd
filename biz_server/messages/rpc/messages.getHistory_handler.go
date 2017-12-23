@@ -28,6 +28,81 @@ import (
 	"math"
 )
 
+//const (
+//	LOAD_HISTORY_TYPE_BACKWARD = 0
+//	LOAD_HISTORY_TYPE_FORWARD = 1
+//	LOAD_HISTORY_TYPE_FIRST_UNREAD = 2
+//	LOAD_HISTORY_TYPE_AROUND_MESSAGE = 3
+//	LOAD_HISTORY_TYPE_AROUND_DATE = 4
+//)
+//
+//func calcLoadHistoryType(addOffset, limit int32) int {
+//	if addOffset == 0 {
+//		return LOAD_HISTORY_TYPE_BACKWARD
+//	} else if addOffset == -limit + 5 {
+//		return LOAD_HISTORY_TYPE_AROUND_DATE
+//	} else if addOffset == -limit / 2 {
+//		return LOAD_HISTORY_TYPE_AROUND_MESSAGE
+//	} else if addOffset == -limit - 1 {
+//		return 	LOAD_HISTORY_TYPE_FORWARD
+//	} else if addOffset == -limit + 6 {
+//		// TODO(@benqi): 	} else if (load_type == 2 && max_id != 0) {
+//		return LOAD_HISTORY_TYPE_FIRST_UNREAD
+//	} else {
+//		// TODO(@benqi):
+//		//if (lower_part < 0 && max_id != 0) {
+//		//	TLRPC.Chat chat = getChat(-lower_part);
+//		//	if (ChatObject.isChannel(chat)) {
+//		//		req.add_offset = -1;
+//		//		req.limit += 1;
+//		//	}
+//		//}
+//	}
+//	return LOAD_HISTORY_TYPE_BACKWARD
+//}
+
+// From android client
+//
+// load_type == 0 ? backward loading
+// load_type == 1 ? forward loading
+// load_type == 2 ? load from first unread
+// load_type == 3 ? load around message
+// load_type == 4 ? load around date
+/*
+  // @benqi: 这什么鬼规则啊？？？
+  1. getHistory, ps: max_id:int min_id:int未使用
+	TLRPC.TL_messages_getHistory req = new TLRPC.TL_messages_getHistory();
+	req.peer = getInputPeer(lower_part);
+	if (load_type == 4) {
+		req.add_offset = -count + 5;
+	} else if (load_type == 3) {
+		req.add_offset = -count / 2;
+	} else if (load_type == 1) {
+		req.add_offset = -count - 1;
+	} else if (load_type == 2 && max_id != 0) {
+		req.add_offset = -count + 6;
+	} else {
+		if (lower_part < 0 && max_id != 0) {
+			TLRPC.Chat chat = getChat(-lower_part);
+			if (ChatObject.isChannel(chat)) {
+				req.add_offset = -1;
+				req.limit += 1;
+			}
+		}
+	}
+	req.limit = count;
+	req.offset_id = max_id;
+	req.offset_date = offset_date;
+
+  2. Load dialog last message, ps: limit = 1
+	TLRPC.TL_messages_getHistory req = new TLRPC.TL_messages_getHistory();
+	req.peer = peer == null ? getInputPeer(lower_id) : peer;
+	if (req.peer == null) {
+		return;
+	}
+	req.limit = 1;
+
+ */
 // messages.getHistory#afa92846 peer:InputPeer offset_id:int offset_date:int add_offset:int limit:int max_id:int min_id:int = messages.Messages;
 func (s *MessagesServiceImpl) MessagesGetHistory(ctx context.Context, request *mtproto.TLMessagesGetHistory) (*mtproto.Messages_Messages, error) {
 	md := grpc_util.RpcMetadataFromIncoming(ctx)
@@ -36,11 +111,61 @@ func (s *MessagesServiceImpl) MessagesGetHistory(ctx context.Context, request *m
 	peer := base.FromInputPeer(request.GetPeer())
 	chatIdList := []int32{}
 	userIdList := []int32{md.UserId}
-	offsetId := request.OffsetId + request.AddOffset
-	if offsetId <= 0 {
+
+	offsetId := request.GetOffsetId()
+	addOffset := request.GetAddOffset()
+	limit := request.GetLimit()
+	messages := []*mtproto.Message{}
+
+	if limit == 1 {
+		// 1. Load dialog last messag
 		offsetId = math.MaxInt32
+		messages = model.GetMessageModel().LoadBackwardHistoryMessages(md.UserId, peer.PeerType, peer.PeerId, offsetId, limit)
+	} else {
+		if addOffset < 0 {
+			if addOffset + limit <= 0 {
+				// LOAD_HISTORY_TYPE_FORWARD
+				// Forward是按升序排
+				messages = model.GetMessageModel().LoadForwardHistoryMessages(md.UserId, peer.PeerType, peer.PeerId, offsetId, -addOffset)
+			} else {
+				// LOAD_HISTORY_TYPE_FORWARD and LOAD_HISTORY_TYPE_BACKWARD
+				// 按升序排
+				messages1 := model.GetMessageModel().LoadForwardHistoryMessages(md.UserId, peer.PeerType, peer.PeerId, offsetId, -addOffset)
+				messages = append(messages, messages1...)
+				// 降序
+				messages2 := model.GetMessageModel().LoadBackwardHistoryMessages(md.UserId, peer.PeerType, peer.PeerId, offsetId, limit + addOffset)
+				messages = append(messages, messages2...)
+			}
+		} else {
+			// 降序
+			messages = model.GetMessageModel().LoadBackwardHistoryMessages(md.UserId, peer.PeerType, peer.PeerId, offsetId, addOffset + limit)
+		}
+		//// 2. getHistory
+		//loadType := calcLoadHistoryType(addOffset, limit)
+		//switch loadType {
+		//case LOAD_HISTORY_TYPE_BACKWARD:
+		//	messages = model.GetMessageModel().LoadBackwardHistoryMessages(md.UserId, peer.PeerType, peer.PeerId, offsetId, limit)
+		//case LOAD_HISTORY_TYPE_FORWARD:
+		//	// TODO(@benqi): 可能有问题，可能要按limit以及addOffset全部取出然后排除掉多余的offset
+		//	// Forward是按升序排
+		//	messages = model.GetMessageModel().LoadForwardHistoryMessages(md.UserId, peer.PeerType, peer.PeerId, offsetId, limit)
+		//
+		//case LOAD_HISTORY_TYPE_FIRST_UNREAD:
+		//	// TODO(@benqi): 暂不实现
+		//case LOAD_HISTORY_TYPE_AROUND_MESSAGE:
+		//	// 按升序排
+		//	messages1 := model.GetMessageModel().LoadForwardHistoryMessages(md.UserId, peer.PeerType, peer.PeerId, offsetId, limit/2)
+		//	messages = append(messages, messages1...)
+		//	// 降序
+		//	messages2 := model.GetMessageModel().LoadBackwardHistoryMessages(md.UserId, peer.PeerType, peer.PeerId, offsetId, limit/2)
+		//	messages = append(messages, messages2...)
+		//case LOAD_HISTORY_TYPE_AROUND_DATE:
+		//	// TODO(@benqi): 暂不实现
+		//}
 	}
-	messages := model.GetMessageModel().GetMessagesByUserIdPeerOffsetLimit(md.UserId, peer.PeerType, peer.PeerId, offsetId, request.Limit)
+
+	// TODO(@benqi): 查询出来超过limit条记录是否要处理？
+	// messages = model.GetMessageModel().LoadBackwardHistoryMessages(md.UserId, peer.PeerType, peer.PeerId, request.GetOffsetId(), request.GetLimit())
 	for _, message := range messages {
 		switch message.GetConstructor() {
 		case mtproto.TLConstructor_CRC32_message:
@@ -76,6 +201,6 @@ func (s *MessagesServiceImpl) MessagesGetHistory(ctx context.Context, request *m
 	if len(chatIdList) > 0 {
 		messagesMessages.SetChats(model.GetChatModel().GetChatListByIDList(chatIdList))
 	}
-	glog.Infof("MessagesGetHistory - reply: %s", messagesMessages)
+	glog.Infof("MessagesGetHistory - reply: %s", logger.JsonDebugData(messagesMessages))
 	return messagesMessages.To_Messages_Messages(), nil
 }

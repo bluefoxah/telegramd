@@ -36,6 +36,7 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 
 	peer := base.FromInputPeer(request.GetPeer())
 	message := mtproto.NewTLMessage()
+
 	message.SetSilent(request.GetSilent())
 	now := int32(time.Now().Unix())
 	// TODO(@benqi): ???
@@ -65,12 +66,13 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 		// 2. MessageBoxes
 		pts := model.GetMessageModel().CreateMessageBoxes(md.UserId, message.GetFromId(), peer.PeerType, md.UserId, false, messageId)
 		// 3. dialog
-		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, peer.PeerType, md.UserId, messageId, message.GetMentioned())
+		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, peer.PeerType, md.UserId, messageId, message.GetMentioned(), false)
 		// 推送给sync
 		// 推给客户端的updates
 		updates := mtproto.NewTLUpdateShortMessage()
 		updates.SetId(int32(messageId))
 		updates.SetUserId(md.UserId)
+		// TODO(@benqi): 暂时这样实现验证发消息是否有问题，有问题的
 		updates.SetPts(pts)
 		updates.SetPtsCount(1)
 		updates.SetMessage(request.Message)
@@ -85,6 +87,7 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 		// sentMessage := &mtproto.TLUpdateShortSentMessage{}
 		sentMessage.SetOut(true)
 		sentMessage.SetId(int32(messageId))
+		// TODO(@benqi): 暂时这样实现验证发消息是否有问题，有问题的
 		sentMessage.SetPts(pts)
 		sentMessage.SetPtsCount(1)
 		sentMessage.SetDate(now)
@@ -115,7 +118,7 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 			// 2. MessageBoxes
 			outgoing := userId == md.UserId
 			pts := model.GetMessageModel().CreateMessageBoxes(userId, md.UserId, peer.PeerType, peer.PeerId, outgoing, messageId)
-			model.GetDialogModel().CreateOrUpdateByLastMessage(userId, peer.PeerType, peer.PeerId, messageId, message.GetMentioned())
+			model.GetDialogModel().CreateOrUpdateByLastMessage(userId, peer.PeerType, peer.PeerId, messageId, message.GetMentioned(), false)
 			// inPts := model.GetMessageModel().CreateMessageBoxes(peer.PeerId, message.FromId, peer, true, messageId)
 			// 3. dialog
 			// model.GetDialogModel().CreateOrUpdateByLastMessage(peer.PeerId, peer, messageId, message.Mentioned)
@@ -125,13 +128,15 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 			updates.SetId(int32(messageId))
 			updates.SetFromId(md.UserId)
 			updates.SetChatId(peer.PeerId)
+			// TODO(@benqi): 暂时这样实现验证发消息是否有问题，有问题的
 			updates.SetPts(pts)
 			updates.SetPtsCount(1)
 			updates.SetMessage(request.Message)
 			updates.SetDate(message.GetDate())
 			if md.UserId == userId {
 				sentMessage.SetId(int32(messageId))
-				sentMessage.SetPts(pts)
+				// TODO(@benqi): 暂时这样实现验证发消息是否有问题，有问题的
+				sentMessage.SetPts(pts-1)
 				delivery.GetDeliveryInstance().DeliveryUpdatesNotMe(
 					md.AuthId,
 					md.SessionId,
@@ -156,13 +161,14 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 		outPts := model.GetMessageModel().CreateMessageBoxes(md.UserId, message.GetFromId(), peer.PeerType, peer.PeerId, false, messageId)
 		inPts := model.GetMessageModel().CreateMessageBoxes(peer.PeerId, message.GetFromId(), peer.PeerType, md.UserId, true, messageId)
 		// 3. dialog
-		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, peer.PeerType, peer.PeerId, messageId, message.GetMentioned())
-		model.GetDialogModel().CreateOrUpdateByLastMessage(peer.PeerId, peer.PeerType, md.UserId, messageId, message.GetMentioned())
+		model.GetDialogModel().CreateOrUpdateByLastMessage(md.UserId, peer.PeerType, peer.PeerId, messageId, message.GetMentioned(), false)
+		model.GetDialogModel().CreateOrUpdateByLastMessage(peer.PeerId, peer.PeerType, md.UserId, messageId, message.GetMentioned(), true)
 		// 推送给sync
 		// 推给客户端的updates
 		updates := mtproto.NewTLUpdateShortMessage()
 		updates.SetId(int32(messageId))
 		updates.SetUserId(md.UserId)
+		// TODO(@benqi): 暂时这样实现验证发消息是否有问题，有问题的
 		updates.SetPts(inPts)
 		updates.SetPtsCount(1)
 		updates.SetMessage(request.Message)
@@ -173,10 +179,30 @@ func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *
 			md.NetlibSessionId,
 			[]int32{md.UserId, peer.PeerId},
 			updates.To_Updates().Encode())
+
+/*
+		// 用户在线订阅
+		updateShort := mtproto.NewTLUpdateShort();
+		updateUserStatus := mtproto.NewTLUpdateUserStatus()
+		updateUserStatus.SetUserId(md.UserId)
+		userStatus := mtproto.NewTLUserStatusOffline()
+		userStatus.SetWasOnline(now)
+		updateUserStatus.SetStatus(userStatus.To_UserStatus())
+		updateShort.SetUpdate(updateUserStatus.To_Update())
+		updateShort.SetDate(now)
+		delivery.GetDeliveryInstance().DeliveryUpdatesNotMe(
+			md.AuthId,
+			md.SessionId,
+			md.NetlibSessionId,
+			[]int32{peer.PeerId},
+			updateShort.To_Updates().Encode())
+ */
+
 		// 返回给客户端
 		// sentMessage := &mtproto.TLUpdateShortSentMessage{}
 		sentMessage.SetOut(true)
 		sentMessage.SetId(int32(messageId))
+		// TODO(@benqi): 暂时这样实现验证发消息是否有问题，有问题的
 		sentMessage.SetPts(outPts)
 		sentMessage.SetPtsCount(1)
 		sentMessage.SetDate(now)

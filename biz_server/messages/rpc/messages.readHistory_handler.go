@@ -23,6 +23,12 @@ import (
 	"github.com/nebulaim/telegramd/grpc_util"
 	"github.com/nebulaim/telegramd/mtproto"
 	"golang.org/x/net/context"
+	"github.com/nebulaim/telegramd/biz_model/base"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"time"
+	"github.com/nebulaim/telegramd/biz_server/delivery"
+	"github.com/nebulaim/telegramd/biz_model/model"
+	base2 "github.com/nebulaim/telegramd/base/base"
 )
 
 // messages.readHistory#e306d3a peer:InputPeer max_id:int = messages.AffectedMessages;
@@ -30,10 +36,61 @@ func (s *MessagesServiceImpl) MessagesReadHistory(ctx context.Context, request *
 	md := grpc_util.RpcMetadataFromIncoming(ctx)
 	glog.Infof("MessagesReadHistory - metadata: %s, request: %s", logger.JsonDebugData(md), logger.JsonDebugData(request))
 
-	// TODO(@benqi): Impl MessagesReadHistory logic
-	affected := &mtproto.TLMessagesAffectedMessages{}
-	affected.SetPts(-1)
-	affected.SetPtsCount(0)
+	/*
+        body: { rpc_result
+          req_msg_id: 6498830637519766076 [LONG],
+          result: { messages_affectedMessages
+            pts: 567 [INT],
+            pts_count: 1 [INT],
+          },
+        },
+	 */
+
+	peer := base.FromInputPeer(request.GetPeer())
+
+	// Delivery updateReadHistoryOutbox to peer
+	// peer := base.FromInputPeer(request.GetPeer())
+	updateReadHistoryOutbox := mtproto.NewTLUpdateReadHistoryOutbox()
+	oudboxDO := dao.GetUserDialogsDAO(dao.DB_SLAVE).SelectByPeer(peer.PeerId, int8(peer.PeerType), md.UserId)
+	outboxPeer := &mtproto.TLPeerUser{Data2: &mtproto.Peer_Data{
+		UserId: md.UserId,
+	}}
+
+	// lastPts := model.GetMessageModel().GetLastPtsByUserId(peer.PeerId)
+	// _ = lastPts
+	updateReadHistoryOutbox.SetPeer(outboxPeer.To_Peer())
+
+	// TODO(@benqi): db里存放什么？
+	pts := model.GetSequenceModel().NextID(base2.Int32ToString(peer.PeerId))
+	updateReadHistoryOutbox.SetPts(int32(pts))
+	updateReadHistoryOutbox.SetPtsCount(1)
+	updateReadHistoryOutbox.SetMaxId(oudboxDO.TopMessage)
+
+	updates := mtproto.NewTLUpdates()
+	updates.SetSeq(0)
+	updates.SetDate(int32(time.Now().Unix()))
+	updates.SetUpdates([]*mtproto.Update{updateReadHistoryOutbox.To_Update()})
+
+	delivery.GetDeliveryInstance().DeliveryUpdatesNotMe(
+		md.AuthId,
+		md.SessionId,
+		md.NetlibSessionId,
+		[]int32{peer.PeerId},
+		updates.To_Updates().Encode())
+
+	// TODO(@benqi): 如何处理多端登录？
+
+	// TODO(@benqi):
+	dao.GetUserDialogsDAO(dao.DB_MASTER).UpdateUnreadByPeer(md.UserId, int8(peer.PeerType), peer.PeerId)
+	// model.GetDialogModel().get
+	// 1. maxId找到
+	// lastPts = model.GetMessageModel().GetLastPtsByUserId(peer.PeerId)
+	affected := mtproto.NewTLMessagesAffectedMessages()
+
+	// TODO(@benqi): db里存放什么？
+	pts = model.GetSequenceModel().NextID(base2.Int32ToString(peer.PeerId))
+	affected.SetPts(int32(pts))
+	affected.SetPtsCount(1)
 
 	glog.Infof("MessagesReadHistory - reply: %s", logger.JsonDebugData(affected))
 	return affected.To_Messages_AffectedMessages(), nil

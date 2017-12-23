@@ -15,13 +15,25 @@
         </sql>
     </operation>
 
+    <operation name="SelectLastPtsByPeer">
+        <sql>
+            SELECT
+                pts
+            FROM
+                message_boxes
+            WHERE
+                user_id = :user_id AND peer_type = :peer_type AND peer_id = :peer_id ORDER BY pts DESC LIMIT 1
+        </sql>
+    </operation>
+
     <operation name="SelectPtsByGtMessageID" result_set="list">
         <sql>
             SELECT pts FROM message_boxes WHERE user_id = :user_id AND message_id > :message_id ORDER BY pts
         </sql>
     </operation>
 
-    <operation name="SelectByPeerOffsetLimit" result_set="list">
+    <!-- // Backward -->
+    <operation name="SelectBackwardByPeerOffsetLimit" result_set="list">
         <params>
             <param name="limit" type="int32" />
         </params>
@@ -38,6 +50,24 @@
         </sql>
     </operation>
 
+    <!-- // Forward -->
+    <operation name="SelectForwardByPeerOffsetLimit" result_set="list">
+        <params>
+            <param name="limit" type="int32" />
+        </params>
+        <sql>
+            <![CDATA[
+            SELECT
+                user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2
+            FROM
+                message_boxes
+            WHERE
+                user_id = :user_id AND peer_type = :peer_type AND peer_id = :peer_id AND message_id >= :message_id
+            ORDER BY message_id LIMIT :limit
+            ]]>
+        </sql>
+    </operation>
+
     <operation name="SelectByGtPts" result_set="list">
         <sql>
             SELECT
@@ -45,7 +75,7 @@
             FROM
                 message_boxes
             WHERE
-                user_id = :user_id AND pts > :pts
+                user_id = :user_id AND pts > :pts ORDER BY pts
         </sql>
     </operation>
 
@@ -62,5 +92,18 @@
                 user_id = :user_id AND message_id IN (:idList)
         </sql>
     </operation>
+
+
+    <operation name="SelectByUserIdAndMessageBoxId">
+        <sql>
+            SELECT
+                user_id, user_message_box_id, message_id, sender_user_id, message_box_type, peer_type, peer_id, media_unread, date2
+            FROM
+                message_boxed
+            WHERE
+                user_id = :user_id AND user_message_box_id = :user_message_box_id LIMIT 1
+        </sql>
+    </operation>
+
 
 </table>
