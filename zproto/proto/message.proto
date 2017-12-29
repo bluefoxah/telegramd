@@ -19,7 +19,7 @@ syntax = "proto3";
 
 option java_multiple_files = true;
 option java_package = "com.nebulaim.zproto";
-option java_outer_classname = "ZProtoChatTest";
+option java_outer_classname = "ZProtoMessage";
 option optimize_for = CODE_SIZE;
 
 package zproto;
@@ -30,6 +30,9 @@ message MessageDataEmpty {
 
 message MessageData {
     int32 message_type = 1;
+}
+
+message VoidRsp {
 }
 
 // messageEmpty#83e5de54 id:int = Message;

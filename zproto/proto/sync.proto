@@ -22,6 +22,8 @@ option java_package = "com.nebulaim.zproto";
 option java_outer_classname = "ZProtoSync";
 option optimize_for = CODE_SIZE;
 
+import "message.proto";
+
 package zproto;
 
 ///////////////////////////////////////////////////////////////////////
@@ -30,9 +32,6 @@ package zproto;
 message ServerAuthReq {
     int32  server_id = 1;
     string server_name = 2;
-}
-
-message VoidRsp {
 }
 
 //

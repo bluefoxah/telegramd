@@ -24,29 +24,58 @@ import (
 	"net"
 	"github.com/nebulaim/telegramd/frontend/rpc"
 	"github.com/nebulaim/telegramd/frontend/client"
-	"github.com/nebulaim/telegramd/frontend/auth_key"
 	"github.com/nebulaim/telegramd/grpc_util"
+	"github.com/nebulaim/telegramd/grpc_util/service_discovery"
 )
+
+type ServerConfig struct {
+	Addr string
+}
+
+type RpcClientConfig struct {
+	ServiceName string
+	Addr string
+}
+
+type FrontendConfig struct {
+	ServerId         int32 // 服务器ID
+	Server           ServerConfig
+	Server2          ServerConfig
+	Server3          ServerConfig
+	BizRpcClient     RpcClientConfig
+	SyncRpcClient    RpcClientConfig
+	AuthKeyRpcClient service_discovery.ServiceDiscoveryClientConfig
+	AuthSessionRpcClient service_discovery.ServiceDiscoveryClientConfig
+}
 
 type Server struct {
 	Server      *net2.Server
-	cacheKeys	*auth_key.AuthKeyCacheManager
+	authKeyRpcClient *rpc.AuthKeyRPCClient
+	authSessionRpcClient *rpc.AuthSessionRPCClient
+	rpcClient *grpc_util.RPCClient
+	syncRpcClient *rpc.SyncRPCClient
 }
 
-func NewServer(addr string) (s *Server) {
+
+func NewServer(frontendConfig *FrontendConfig) (s *Server) {
 	s = &Server{}
 
 	mtproto := NewMTProto()
-	lsn := listen("server", addr)
+	lsn := listen("server", frontendConfig.Server.Addr)
 	s.Server = net2.NewServer(lsn, mtproto, 1024, net2.HandlerFunc(emptySessionLoop))
-	s.cacheKeys = auth_key.NewAuthKeyCacheManager()
+
+	// TODO(@benqi): check error
+	s.rpcClient, _ = grpc_util.NewRPCClient(frontendConfig.BizRpcClient.Addr)
+	s.authKeyRpcClient, _ = rpc.NewAuthKeyRPCClient(&frontendConfig.AuthKeyRpcClient)
+	s.authSessionRpcClient, _ = rpc.NewAuthSessionRPCClient(&frontendConfig.AuthSessionRpcClient)
+	s.syncRpcClient, _ = rpc.NewSyncRPCClient(frontendConfig.SyncRpcClient.Addr)
 	return
 }
 
-func (s* Server) Serve(rpcClient *grpc_util.RPCClient, syncRpcClient *rpc.SyncRPCClient) {
+func (s* Server) Serve() {
 	glog.Info("Serve...")
 
-	go syncRpcClient.RunUpdatesStreamLoop(s.Server)
+	go s.syncRpcClient.RunUpdatesStreamLoop(s.Server)
 
 	for {
 		session, err := s.Server.Accept2()
@@ -55,9 +84,10 @@ func (s* Server) Serve(rpcClient *grpc_util.RPCClient, syncRpcClient *rpc.SyncRP
 		}
 		glog.Info("a new client ", session.ID())
 
-		c := client.NewClient(session, rpcClient)
+		c := client.NewClient(session, s.rpcClient, s.authKeyRpcClient, s.authSessionRpcClient)
 		// 使用很土的办法，注入cacheKeys
-		c.Codec.AuthKeyStorager = s.cacheKeys
+		// c.Codec.AuthKeyStorager = s.cacheKeys
+		c.Codec.AuthKeyStorager = c.AuthKeyClient
 
 		go s.sessionLoop(c)
 	}
@@ -67,6 +97,9 @@ func (s* Server) sessionLoop(c *client.Client) {
 	// client := client.NewClient(c)
 	// .Info("NewClient, sessionId: ", session.ID(), ", addr: ", client.RemoteAddr)
 
+	defer func() {
+
+	}()
 	for {
 		// 接收数据包
 		msg, err := c.Session.Receive()
@@ -101,6 +134,7 @@ func (s* Server) sessionLoop(c *client.Client) {
 				switch m.Object.(type) {
 				case *TLReqPq:
 					c.Codec.State = CODEC_req_pq
+					c.Handshake = client.NewHandshakeHandler(c.AuthKeyClient)
 				default:
 					// 未加密第一个包不是TL_req_pq，那么能推断出是RPC消息，key也已经创建
 					// Encrypted
@@ -136,6 +170,7 @@ func (s* Server) sessionLoop(c *client.Client) {
 				m, _ := msg.(*EncryptedMessage2)
 				err = c.OnEncryptedMessage(m)
 			case *UnencryptedMessage:
+				// 可能不会发生没这种情况
 				m, _ := msg.(*UnencryptedMessage)
 				err = c.OnUnencryptedMessage(m)
 			}

@@ -15,32 +15,21 @@
  * limitations under the License.
  */
 
-package main
+// protoc --go_out=plugins=grpc:. echo.proto
 
-import (
-	server2 "github.com/nebulaim/telegramd/frontend/server"
-	"flag"
-	"github.com/BurntSushi/toml"
-	"fmt"
-	"github.com/golang/glog"
-)
+syntax = "proto3";
 
-func init() {
-	flag.Set("alsologtostderr", "true")
-	flag.Set("log_dir", "false")
+package proto;
+
+message EchoReq {
+    string echo_data = 1;
 }
 
-func main() {
-	flag.Parse()
-
-	frontendConfig := &server2.FrontendConfig{}
-	if _, err := toml.DecodeFile("./frontend.toml", frontendConfig); err != nil {
-		fmt.Errorf("%s\n", err)
-		return
-	}
-
-	glog.Info(frontendConfig)
-
-	server := server2.NewServer(frontendConfig)
-	server.Serve()
+message EchoRsp {
+    string echo_data = 1;
 }
+
+service EchoService {
+    rpc Echo(EchoReq) returns (EchoRsp) {}
+}
+

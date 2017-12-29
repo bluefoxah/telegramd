@@ -1,10 +1,5 @@
-#!/usr/bin/python
-#-*- coding: utf-8 -*-
-#encoding=utf-8
-
-'''
 /*
- *  Copyright (c) 2017, https://github.com/nebulaim/
+ *  Copyright (c) 2017, https://github.com/nebulaim
  *  All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,4 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-'''
+
+package service_discovery
+
+import (
+	"github.com/nebulaim/telegramd/base/base"
+)
+
+type ServiceDiscoveryServerConfig struct {
+	ServiceName string
+	NodeID		string
+	RPCAddr     string
+	EtcdAddrs   []string
+	Interval    base.Duration
+	TTL         base.Duration
+}
+
+type ServiceDiscoveryClientConfig struct {
+	ServiceName string
+	EtcdAddrs   []string
+	Balancer    string
+}
+

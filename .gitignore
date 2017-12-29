@@ -22,3 +22,7 @@ Thumbs.db
 *.log
 *.swp
 *.swo
+sync_server/sync_server
+frontend/frontend
+auth_key_server/auth_key_server
+auth_session_server/auth_session_server

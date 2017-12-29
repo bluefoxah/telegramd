@@ -15,32 +15,15 @@
  * limitations under the License.
  */
 
-package main
+package rpc
 
-import (
-	server2 "github.com/nebulaim/telegramd/frontend/server"
-	"flag"
-	"github.com/BurntSushi/toml"
-	"fmt"
-	"github.com/golang/glog"
-)
+import "sync"
 
-func init() {
-	flag.Set("alsologtostderr", "true")
-	flag.Set("log_dir", "false")
+// TODO(@benqi): 缓存key垃圾回收
+var cacheAuthKey sync.Map
+
+type CacheAuthKeyItem struct {
+	AuthKey []byte
+	UserId  int32
 }
 
-func main() {
-	flag.Parse()
-
-	frontendConfig := &server2.FrontendConfig{}
-	if _, err := toml.DecodeFile("./frontend.toml", frontendConfig); err != nil {
-		fmt.Errorf("%s\n", err)
-		return
-	}
-
-	glog.Info(frontendConfig)
-
-	server := server2.NewServer(frontendConfig)
-	server.Serve()
-}

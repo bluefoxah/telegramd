@@ -28,7 +28,57 @@ import (
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/codes"
 	"github.com/nebulaim/telegramd/zproto"
+	"github.com/nebulaim/telegramd/grpc_util/service_discovery"
+	"github.com/coreos/etcd/clientv3"
+	"github.com/nebulaim/telegramd/grpc_util/service_discovery/etcd3"
+	"github.com/nebulaim/telegramd/grpc_util/load_balancer"
 )
+
+const (
+	random = "random"
+	round_robin = "round_robin"
+	consistent_hash = "consistent_hash"
+)
+
+func NewRPCClientByServiceDiscovery(discovery *service_discovery.ServiceDiscoveryClientConfig) (c *grpc.ClientConn, err error) {
+
+	//etcdConfg := clientv3.Config{
+	//	Endpoints: []string{"http://127.0.0.1:2379"},
+	//}
+	//r := etcd3.NewResolver("/nebulaim", "auth_key", etcdConfg)
+	//b := load_balancer.NewBalancer(r, load_balancer.NewRoundRobinSelector())
+	//c, err := grpc.Dial("", grpc.WithInsecure(),  grpc.WithBalancer(b), grpc.WithTimeout(time.Second*5))
+	//if err != nil {
+	//	log.Printf("grpc dial: %s", err)
+	//	return
+	//}
+	//defer c.Close()
+	//
+	//client := mtproto.NewRPCAuthKeyClient(c)
+
+	etcdConfg := clientv3.Config{
+		Endpoints: discovery.EtcdAddrs,
+	}
+	r := etcd3.NewResolver("/nebulaim", discovery.ServiceName, etcdConfg)
+	var b grpc.Balancer
+	switch discovery.Balancer {
+	case "random":
+		b = load_balancer.NewBalancer(r, load_balancer.NewRandomSelector())
+	case "round_robin":
+		b = load_balancer.NewBalancer(r, load_balancer.NewRoundRobinSelector())
+	case "consistent_hash":
+		b = load_balancer.NewBalancer(r, load_balancer.NewKetamaSelector(load_balancer.DefaultKetamaKey))
+	default:
+		b = load_balancer.NewBalancer(r, load_balancer.NewRoundRobinSelector())
+	}
+
+	c, err = grpc.Dial("", grpc.WithInsecure(),  grpc.WithBalancer(b), grpc.WithTimeout(time.Second*5))
+	if err != nil {
+		glog.Error(err)
+		panic(err)
+	}
+	return
+}
 
 type RPCClient struct {
 	conn *grpc.ClientConn

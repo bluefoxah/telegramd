@@ -24,36 +24,41 @@ import (
 	"github.com/golang/glog"
 	"math/big"
 	"errors"
-	"github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"fmt"
 	"github.com/nebulaim/telegramd/frontend/id"
 	"time"
 	"github.com/nebulaim/telegramd/grpc_util"
 	"github.com/nebulaim/telegramd/zproto"
+	"github.com/nebulaim/telegramd/frontend/rpc"
 )
 
-
 type Client struct {
-	Session *net2.Session
-	RPCClient *grpc_util.RPCClient
-	Codec   *MTProtoCodec
-
+	Session    *net2.Session
+	RPCClient  *grpc_util.RPCClient
+	Codec      *MTProtoCodec
 	RemoteAddr net.Addr
 	LocalAddr  net.Addr
 
+	AuthKeyClient     *rpc.AuthKeyRPCClient
+	AuthSessionClient *rpc.AuthSessionRPCClient
+	Handshake         *HandshakeHandler
+	AuthSession		  *AuthSession
+
 	// TODO(@benqi): 移到handshake处理器里
-	Nonce []byte			// 每连接缓存客户端生成的Nonce
-	ServerNonce []byte		// 每连接缓存服务生成的ServerNonce
-	NewNonce []byte
-	A *big.Int
-	P *big.Int
+	Nonce       []byte // 每连接缓存客户端生成的Nonce
+	ServerNonce []byte // 每连接缓存服务生成的ServerNonce
+	NewNonce    []byte
+	A           *big.Int
+	P           *big.Int
 }
 
-func NewClient(session *net2.Session, rpcClient *grpc_util.RPCClient) (c *Client) {
+func NewClient(session *net2.Session, rpcClient *grpc_util.RPCClient, authKeyClient *rpc.AuthKeyRPCClient, authSessionClient *rpc.AuthSessionRPCClient) (c *Client) {
 	c = &Client{
-		Session: 	session,
-		RPCClient:	rpcClient,
-		Codec:		session.Codec().(*MTProtoCodec),
+		Session:           session,
+		RPCClient:         rpcClient,
+		AuthKeyClient:     authKeyClient,
+		AuthSessionClient: authSessionClient,
+		Codec:             session.Codec().(*MTProtoCodec),
 	}
 
 	c.RemoteAddr = c.Codec.RemoteAddr()
@@ -68,14 +73,18 @@ func (c *Client) OnHandshake(request *UnencryptedMessage) error {
 	switch request.Object.(type) {
 	case *TLMsgsAck:
 		msg_acks, _ := request.Object.(*TLMsgsAck)
-		c.onHandshakeMsgsAck(msg_acks)
+		c.Handshake.onHandshakeMsgsAck(c, msg_acks)
+		// c.onHandshakeMsgsAck(msg_acks)
 		return nil
 	case *TLReqPq:
-		reply = c.onReqPq(request)
+		reply = c.Handshake.onReqPq(c, request)
+		// reply = c.onReqPq(request)
 	case *TLReq_DHParams:
-		reply = c.onReq_DHParams(request)
+		reply = c.Handshake.onReq_DHParams(c, request)
+		// reply = c.onReq_DHParams(request)
 	case *TLSetClient_DHParams:
-		reply = c.onSetClient_DHParams(request)
+		reply = c.Handshake.onSetClient_DHParams(c, request)
+		// reply = c.onSetClient_DHParams(request)
 	default:
 		glog.Errorf("OnHandshake: Invalid request!!!!")
 		reply = nil
@@ -108,14 +117,30 @@ func (c *Client) OnUnencryptedMessage(request *UnencryptedMessage) error {
 
 func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
 	// NewSessionCreated
-	if c.Codec.SessionId == 0 {
-		// 需要创建Session
+	if c.AuthSession == nil {
+		c.AuthSession = GetOrCreateSession(c.Codec.AuthKeyId, request.SessionId)
+	}
+
+	if c.AuthSession.Id != request.SessionId {
+		// Telegram 以session为核心，我们可以将session理解为虚连接，由客户端创建，
+		// 一般情况下一个session对应与客户端的运行实例的生命周期，
+		// 客户端每次启动时创建一个session，退出时销毁session。
+		// 服务端也应该存储session，但如果服务端内存不足需要回收session或者服务端异常丢失session后，
+		// 会主动要求客户端重新生成session。
+		// 一个session可能会对应多条tcp长连接（一般情况下只对应一条tcp连接）或整个生命周期内多次http请求
+		//
+		// 首先检查session是否已经创建
+
 		newSessionCreated := c.onNewSessionCreated(request.SessionId, request.MessageId, request.SeqNo)
 		if newSessionCreated == nil {
 			return fmt.Errorf("onNewSessionCreated error!")
 		}
 
-		c.Codec.SessionId =  request.SessionId
+		c.AuthSession.Id = request.SessionId
+		c.AuthSession.NetlibSessionId = int64(c.Session.ID())
+
+		// TODO(@benqi): remove Codec.SessionId
+		c.Codec.SessionId = request.SessionId
 		c.Codec.Salt = newSessionCreated.GetServerSalt()
 
 		m := &EncryptedMessage2{
@@ -204,12 +229,16 @@ func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 				}
 			}()
 
-			do := dao.GetAuthUsersDAO(dao.DB_SLAVE).SelectByAuthId(c.Codec.AuthKeyId)
-			glog.Info("SelectByAuthId : ", do)
-			if do != nil {
-				c.Codec.UserId = do.UserId
-				c.setOnline()
+			userId := c.AuthSessionClient.GetUserIDByAuthKey(c.Codec.AuthKeyId)
+			if userId != 0 {
+				c.Codec.UserId = userId
 			}
+			//
+			//do := dao.GetAuthUsersDAO(dao.DB_SLAVE).SelectByAuthId(c.Codec.AuthKeyId)
+			//glog.Info("SelectByAuthId : ", do)
+			//if do != nil {
+			//	c.setOnline()
+			//}
 		}
 
 		// 初始化metadata
@@ -264,4 +293,11 @@ func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 	}
 
 	return c.Session.Send(m)
+}
+
+func (c *Client) OnClose() {
+	if c.AuthSession != nil {
+		c.AuthSession.NetlibSessionId = 0
+		UpdateAuthSession(c.Codec.AuthKeyId, c.AuthSession)
+	}
 }

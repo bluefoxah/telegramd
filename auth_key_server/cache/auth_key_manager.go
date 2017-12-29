@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package auth_key
+package cache
 
 import (
 	"github.com/golang/glog"
@@ -24,6 +24,11 @@ import (
 	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 	"github.com/cosiner/gohper/errors"
 )
+
+type AuthKeyStorager interface {
+	GetAuthKey(int64) []byte
+	PutAuthKey(int64, []byte) error
+}
 
 // "root:@/nebulaim?charset=utf8"
 // 30

@@ -15,32 +15,15 @@
  * limitations under the License.
  */
 
-package main
+package config
 
 import (
-	server2 "github.com/nebulaim/telegramd/frontend/server"
-	"flag"
-	"github.com/BurntSushi/toml"
-	"fmt"
-	"github.com/golang/glog"
+	"github.com/nebulaim/telegramd/base/base"
 )
 
-func init() {
-	flag.Set("alsologtostderr", "true")
-	flag.Set("log_dir", "false")
-}
-
-func main() {
-	flag.Parse()
-
-	frontendConfig := &server2.FrontendConfig{}
-	if _, err := toml.DecodeFile("./frontend.toml", frontendConfig); err != nil {
-		fmt.Errorf("%s\n", err)
-		return
-	}
-
-	glog.Info(frontendConfig)
-
-	server := server2.NewServer(frontendConfig)
-	server.Serve()
+type EtcdConfig struct {
+	Name    string
+	Root    string
+	Addrs   []string
+	Timeout base.Duration
 }

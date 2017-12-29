@@ -22,11 +22,13 @@ import (
 	"fmt"
 	"encoding/hex"
 	. "github.com/nebulaim/telegramd/mtproto"
-	"time"
+	// "time"
+	// "github.com/nebulaim/telegramd/frontend/id"
+	// "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	// "github.com/nebulaim/telegramd/biz_model/model"
+	// "github.com/nebulaim/telegramd/biz_model/dal/dao"
 	"github.com/nebulaim/telegramd/frontend/id"
-	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
-	"github.com/nebulaim/telegramd/biz_model/model"
-	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/zproto"
 )
 
 func (c *Client) onMsgsAck(msgId int64, seqNo int32, request TLObject) {
@@ -43,6 +45,7 @@ func (c *Client) onNewSessionCreated(sessionId, msgId int64, seqNo int32) (notif
 		}
 	}()
 
+/*
 	// TODO(@benqi): 客户端保存的initConnection信息推到后台服务存储
 	authSaltsDO := dao.GetAuthSaltsDAO(dao.DB_SLAVE).SelectByAuthId(c.Codec.AuthKeyId)
 	if authSaltsDO == nil {
@@ -51,27 +54,28 @@ func (c *Client) onNewSessionCreated(sessionId, msgId int64, seqNo int32) (notif
 	} else {
 		// TODO(@benqi): salts是否已经过有效期
 	}
-
+ */
 	// c.Codec.SessionId =
 	notify = &TLNewSessionCreated{Data2: &NewSession_Data{
 		FirstMsgId: msgId,
 		UniqueId: id.NextId(),
-		ServerSalt: authSaltsDO.Salt,
+		ServerSalt: id.NextId(),
 	}}
 	return
 }
 
 func (c *Client) setOnline() {
 	if c.Codec.UserId != 0 {
-		status := &model.SessionStatus{}
-		status.ServerId = 1
-		status.UserId = c.Codec.UserId
-		status.AuthKeyId = c.Codec.AuthKeyId
-		status.SessionId = c.Codec.SessionId
-		status.NetlibSessionId = int64(c.Session.ID())
-		status.Now = time.Now().Unix()
-		glog.Infof("setOnline - SetOnline: {%v}\n", status)
-		model.GetOnlineStatusModel().SetOnline(status)
+		onlineStatus := &zproto.OnlineStatus{
+			ServerId:        1,
+			UserId:          c.Codec.UserId,
+			AuthKeyId:       c.Codec.AuthKeyId,
+			SessionId:       c.Codec.SessionId,
+			NetlibSessionId: int64(c.Session.ID()),
+		}
+
+		glog.Infof("setOnline - SetOnline: {%v}\n", onlineStatus)
+		c.AuthSessionClient.UpdateOnline(onlineStatus)
 	}
 }
 
@@ -183,6 +187,7 @@ func (c *Client) onInvokeWithLayer(msgId int64, seqNo int32, request TLObject) (
 		}
 	}()
 
+/*
 	// TODO(@benqi): 客户端保存的initConnection信息推到后台服务存储
 	do :=  dao.GetAuthsDAO(dao.DB_MASTER).SelectConnectionHashByAuthId(c.Codec.AuthKeyId)
 	if do == nil {
@@ -201,6 +206,7 @@ func (c *Client) onInvokeWithLayer(msgId int64, seqNo int32, request TLObject) (
 	} else {
 		// TODO(@benqi): 更新initConnection信息
 	}
+ */
 
 	dbuf = NewDecodeBuf(initConnection.Query)
 	query := dbuf.Object()

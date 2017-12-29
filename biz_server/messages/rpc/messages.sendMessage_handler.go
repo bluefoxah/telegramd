@@ -29,6 +29,10 @@ import (
 	"github.com/nebulaim/telegramd/biz_server/delivery"
 )
 
+// 流程：
+//  1. 入库: 1）存消息数据，2）分别存到发件箱和收件箱里
+//  2. 离线推送
+//  3. 在线推送
 // messages.sendMessage#fa88427a flags:# no_webpage:flags.1?true silent:flags.5?true background:flags.6?true clear_draft:flags.7?true peer:InputPeer reply_to_msg_id:flags.0?int message:string random_id:long reply_markup:flags.2?ReplyMarkup entities:flags.3?Vector<MessageEntity> = Updates;
 func (s *MessagesServiceImpl) MessagesSendMessage(ctx context.Context, request *mtproto.TLMessagesSendMessage) (*mtproto.Updates, error) {
 	md := grpc_util.RpcMetadataFromIncoming(ctx)

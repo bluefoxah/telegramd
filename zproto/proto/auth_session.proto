@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2016, https://github.com/nebula-im
+ *  Copyright (c) 2017, https://github.com/nebulaim
  *  All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,39 +19,32 @@ syntax = "proto3";
 
 option java_multiple_files = true;
 option java_package = "com.nebulaim.zproto";
-option java_outer_classname = "ZProtoRpcMetaData";
+option java_outer_classname = "ZProtoAuthSession";
 option optimize_for = CODE_SIZE;
-
-import "google/protobuf/any.proto";
 
 package zproto;
 
-message AuthKeyMetadata {
-    bytes nonce = 1;
-    bytes server_nonce = 2;
-    bytes new_nonce = 3;
-    bytes a = 4;
-    bytes p = 5;
-    int64 auth_key_id = 6;
-    bytes auth_key = 7;
+import "message.proto";
+
+message AuthUserReq {
+    int64 auth_key_id = 1;
 }
 
-message RpcMetadata {
-    int32 server_id	 = 1;
-    int64 netlib_session_id = 2;
-    string client_addr = 3;
-    int64 auth_id = 4;
-    int64 session_id = 5;
-    int64 trace_id = 6;
-    int64 span_id = 7;
-    int64 receive_time = 8;
-    string from = 9;
-    string to = 10;
-
-    // 用户ID
-    int32 user_id = 11;
-    int64 client_msg_id = 12;
-
-    google.protobuf.Any extend = 15;
+message AuthUserRsp {
+    int64 auth_key_id = 1;
+    int32 user_id = 2;
 }
 
+message OnlineStatus {
+    int32 user_id = 1;
+    int64 auth_key_id = 2;
+    int64 session_id = 3;
+    int32 server_id = 4;
+    int64 netlib_session_id = 5;
+    int64 now = 6;
+}
+
+service RPCAuthSession {
+    rpc GetAuthUser(AuthUserReq) returns (AuthUserRsp);
+    rpc UpdateOnline(OnlineStatus) returns (VoidRsp);
+}

@@ -15,32 +15,9 @@
  * limitations under the License.
  */
 
-package main
+package client
 
-import (
-	server2 "github.com/nebulaim/telegramd/frontend/server"
-	"flag"
-	"github.com/BurntSushi/toml"
-	"fmt"
-	"github.com/golang/glog"
-)
+// TODO(@benqi):
+func (s *AuthSession) onDataReceived() {
 
-func init() {
-	flag.Set("alsologtostderr", "true")
-	flag.Set("log_dir", "false")
-}
-
-func main() {
-	flag.Parse()
-
-	frontendConfig := &server2.FrontendConfig{}
-	if _, err := toml.DecodeFile("./frontend.toml", frontendConfig); err != nil {
-		fmt.Errorf("%s\n", err)
-		return
-	}
-
-	glog.Info(frontendConfig)
-
-	server := server2.NewServer(frontendConfig)
-	server.Serve()
 }
