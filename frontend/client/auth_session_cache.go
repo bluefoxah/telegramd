@@ -89,7 +89,7 @@ func (m *AuthSessionGroup) GetOrCreate(sessId int64) (sess *AuthSession) {
 	defer m.lock.RUnlock()
 
 	for _, s := range m.AuthSessionList {
-		if s != nil || (s.Id == sessId && !s.used) {
+		if s != nil && (s.Id == sessId && !s.used) {
 			s.used = true
 			sess = s
 			break

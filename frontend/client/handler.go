@@ -64,6 +64,7 @@ func (c *Client) onNewSessionCreated(sessionId, msgId int64, seqNo int32) (notif
 	return
 }
 
+// TODO(@benqi): 间隔一段时间发送
 func (c *Client) setOnline() {
 	if c.Codec.UserId != 0 {
 		onlineStatus := &zproto.OnlineStatus{

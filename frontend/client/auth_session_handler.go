@@ -17,7 +17,6 @@
 
 package client
 
-// TODO(@benqi):
+// TODO(@benqi): ackid...
 func (s *AuthSession) onDataReceived() {
-
 }
