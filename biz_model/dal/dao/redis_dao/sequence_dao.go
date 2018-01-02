@@ -23,14 +23,17 @@
 package redis_dao
 
 import (
-	"fmt"
 	"github.com/garyburd/redigo/redis"
-	"github.com/nebulaim/telegramd/base/base"
 	"github.com/nebulaim/telegramd/base/redis_client"
+	"github.com/golang/glog"
 )
 
 const (
-	seqUpdatesNgenId = "seq_updates_ngen"
+	// TODO(@benqi): 使用更紧凑的前缀
+	seqUpdatesNgenId = "seq_updates_ngen_"
+	ptsUpdatesNgenId = "pts_updates_ngen_"
+	qtsUpdatesNgenId = "qts_updates_ngen_"
+	boxUpdatesNgenId = "message_box_ngen_"
 )
 
 type SequenceDAO struct {
@@ -45,34 +48,59 @@ func NewSequenceDAO(redis *redis_client.RedisPool) *SequenceDAO {
 	}
 }
 
-// 独立出incr和set的原因
-// 在NextID直接获取redis的连接，incr执行完后可能存在操作数据库的大事物
-// 有可能会导致redis在一段时间内未释放
-// 独立出来后，一旦执行incr或set则立即释放redis连接
-func (dao *SequenceDAO) Incr(key string) (seq int64, err error) {
+func (dao *SequenceDAO) NextSeqId(key string) (seq int64, err error) {
+	return dao.FetchNextSequence(seqUpdatesNgenId + key)
+}
+
+func (dao *SequenceDAO) CurrentSeqId(key string) (seq int64, err error) {
+	return dao.GetCurrentSequence(seqUpdatesNgenId + key)
+}
+
+func (dao *SequenceDAO) NextPtsId(key string) (seq int64, err error) {
+	return dao.FetchNextSequence(ptsUpdatesNgenId + key)
+}
+
+func (dao *SequenceDAO) CurrentPtsId(key string) (seq int64, err error) {
+	return dao.GetCurrentSequence(ptsUpdatesNgenId + key)
+}
+
+func (dao *SequenceDAO) NextQtsId(key string) (seq int64, err error) {
+	return dao.FetchNextSequence(qtsUpdatesNgenId + key)
+}
+
+func (dao *SequenceDAO) CurrentQtsId(key string) (seq int64, err error) {
+	return dao.GetCurrentSequence(qtsUpdatesNgenId + key)
+}
+
+func (dao *SequenceDAO) NextMessageBoxId(key string) (seq int64, err error) {
+	return dao.FetchNextSequence(boxUpdatesNgenId + key)
+}
+
+func (dao *SequenceDAO) CurrentMessageBoxId(key string) (seq int64, err error) {
+	return dao.GetCurrentSequence(boxUpdatesNgenId + key)
+}
+
+func (dao *SequenceDAO) FetchNextSequence(key string) (seq int64, err error) {
 	conn := dao.redis.Get()
 	defer conn.Close()
 
 	// 设置键
-	seq, err = redis.Int64(conn.Do("INCR", fmt.Sprintf("%s_%s", seqUpdatesNgenId, key)))
+	seq, err = redis.Int64(conn.Do("INCR", key))
 	if err != nil {
-		// glog.Errorf("NextID - INCR {%d}, error: %s", k, err)
-		return
+		glog.Errorf("FetchNextSequence - INCR {%s}, error: {%v}", key, err)
 	}
 
 	return
 }
 
-func (dao *SequenceDAO) Set(key string, seq int64) (err error) {
+func (dao *SequenceDAO) GetCurrentSequence(key string) (seq int64, err error) {
 	conn := dao.redis.Get()
 	defer conn.Close()
 
-	_, err = redis.Bool(conn.Do("SET", fmt.Sprintf("%s_%s", seqUpdatesNgenId, key), base.Int64ToString(seq)))
+	seq, err = redis.Int64(conn.Do("GET", key))
 	if err != nil {
-		// glog.Errorf("NextID - SET {%s}, error: %s", k, err)
-		return
+		glog.Errorf("GetCurrentSequence - GET {%s}, error: {%v}", key, err)
 	}
 
 	return
 }
-

@@ -12,7 +12,7 @@
     <operation name="SelectPinnedDialogs" result_set="list">
         <sql>
             SELECT
-                peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, show_previews, silent, mute_until, sound, pts, draft_id, date2
+                id, peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, show_previews, silent, mute_until, sound, pts, draft_id, date2
             FROM
                 user_dialogs
             WHERE
@@ -27,7 +27,7 @@
     <operation name="SelectByPeer">
         <sql>
             SELECT
-                peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, show_previews, silent, mute_until, sound, pts, draft_id, date2
+                id, peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, show_previews, silent, mute_until, sound, pts, draft_id, date2
             FROM
                 user_dialogs
             WHERE
@@ -37,7 +37,7 @@
     <operation name="SelectDialogsByUserID" result_set="list">
         <sql>
             SELECT
-                peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, show_previews, silent, mute_until, sound, pts, draft_id, date2
+                id, peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, show_previews, silent, mute_until, sound, pts, draft_id, date2
             FROM
                 user_dialogs
             WHERE
@@ -52,7 +52,7 @@
         <sql>
             <![CDATA[
             SELECT
-                peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, show_previews, silent, mute_until, sound, pts, draft_id, date2
+                id, peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, show_previews, silent, mute_until, sound, pts, draft_id, date2
             FROM
                 user_dialogs
             WHERE
@@ -69,7 +69,7 @@
         </params>
         <sql>
             SELECT
-                peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, show_previews, silent, mute_until, sound, pts, draft_id, date2
+                id, peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, show_previews, silent, mute_until, sound, pts, draft_id, date2
             FROM
                 user_dialogs
             WHERE
@@ -80,7 +80,7 @@
     <operation name="SelectDialogsByPeerType" result_set="list">
         <sql>
             SELECT
-                peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, show_previews, silent, mute_until, sound, pts, draft_id, date2
+                id, peer_type, peer_id, top_message, read_inbox_max_id, read_outbox_max_id, unread_count, unread_mentions_count, show_previews, silent, mute_until, sound, pts, draft_id, date2
             FROM
                 user_dialogs
             WHERE
@@ -102,7 +102,17 @@
             UPDATE
                 user_dialogs
             SET
-                unread_count = 0
+                unread_count = 0, read_inbox_max_id = :read_inbox_max_id
+            WHERE
+                user_id=:user_id AND peer_type = :peer_type AND peer_id = :peer_id
+        </sql>
+    </operation>
+    <operation name="UpdateReadOutboxMaxIdByPeer">
+        <sql>
+            UPDATE
+                user_dialogs
+            SET
+                read_outbox_max_id = :read_outbox_max_id
             WHERE
                 user_id=:user_id AND peer_type = :peer_type AND peer_id = :peer_id
         </sql>

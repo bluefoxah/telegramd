@@ -25,18 +25,18 @@ import (
 	"github.com/nebulaim/telegramd/mtproto"
 )
 
-type PtsUpdatesNgenDAO struct {
+type UserQtsUpdatesDAO struct {
 	db *sqlx.DB
 }
 
-func NewPtsUpdatesNgenDAO(db *sqlx.DB) *PtsUpdatesNgenDAO {
-	return &PtsUpdatesNgenDAO{db}
+func NewUserQtsUpdatesDAO(db *sqlx.DB) *UserQtsUpdatesDAO {
+	return &UserQtsUpdatesDAO{db}
 }
 
-// insert into pts_updates_ngen(user_id, pts, update_type, update_data, date2) values (:user_id, :pts, :update_type, :update_data, :date2)
+// insert into user_qts_updates(user_id, qts, update_type, update_data, date2) values (:user_id, :qts, :update_type, :update_data, :date2)
 // TODO(@benqi): sqlmap
-func (dao *PtsUpdatesNgenDAO) Insert(do *dataobject.PtsUpdatesNgenDO) int64 {
-	var query = "insert into pts_updates_ngen(user_id, pts, update_type, update_data, date2) values (:user_id, :pts, :update_type, :update_data, :date2)"
+func (dao *UserQtsUpdatesDAO) Insert(do *dataobject.UserQtsUpdatesDO) int64 {
+	var query = "insert into user_qts_updates(user_id, qts, update_type, update_data, date2) values (:user_id, :qts, :update_type, :update_data, :date2)"
 	r, err := dao.db.NamedExec(query, do)
 	if err != nil {
 		errDesc := fmt.Sprintf("NamedExec in Insert(%v), error: %v", do, err)
@@ -53,25 +53,25 @@ func (dao *PtsUpdatesNgenDAO) Insert(do *dataobject.PtsUpdatesNgenDO) int64 {
 	return id
 }
 
-// select pts from pts_updates_ngen where user_id = :user_id order by pts desc limit 1
+// select qts from user_qts_updates where user_id = :user_id order by qts desc limit 1
 // TODO(@benqi): sqlmap
-func (dao *PtsUpdatesNgenDAO) SelectLastPtsByUserId(user_id int32) *dataobject.PtsUpdatesNgenDO {
-	var query = "select pts from pts_updates_ngen where user_id = ? order by pts desc limit 1"
+func (dao *UserQtsUpdatesDAO) SelectLastQtsByUserId(user_id int32) *dataobject.UserQtsUpdatesDO {
+	var query = "select qts from user_qts_updates where user_id = ? order by qts desc limit 1"
 	rows, err := dao.db.Queryx(query, user_id)
 
 	if err != nil {
-		errDesc := fmt.Sprintf("Queryx in SelectLastPtsByUserId(_), error: %v", err)
+		errDesc := fmt.Sprintf("Queryx in SelectLastQtsByUserId(_), error: %v", err)
 		glog.Error(errDesc)
 		panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 	}
 
 	defer rows.Close()
 
-	do := &dataobject.PtsUpdatesNgenDO{}
+	do := &dataobject.UserQtsUpdatesDO{}
 	if rows.Next() {
 		err = rows.StructScan(do)
 		if err != nil {
-			errDesc := fmt.Sprintf("StructScan in SelectLastPtsByUserId(_), error: %v", err)
+			errDesc := fmt.Sprintf("StructScan in SelectLastQtsByUserId(_), error: %v", err)
 			glog.Error(errDesc)
 			panic(mtproto.NewRpcError(int32(mtproto.TLRpcErrorCodes_DBERR), errDesc))
 		}

@@ -25,6 +25,7 @@ import (
 	"time"
 	"github.com/nebulaim/telegramd/mtproto"
 	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
 type updatesModel struct {
@@ -49,7 +50,7 @@ func (m *updatesModel) GetState(authKeyId int64, userId int32) *mtproto.TLUpdate
 	// TODO(@benqi): 从数据库取出date
 	stateData.Date = int32(time.Now().Unix())
 
-	do := dao.GetMessageBoxesDAO(dao.DB_SLAVE).SelectLastPts(userId)
+	do := dao.GetAuthUpdatesStateDAO(dao.DB_SLAVE).SelectById(authKeyId, userId)
 	if do == nil || do.Pts == 0 {
 		// TODO(@benqi):
 		stateData.Date = int32(time.Now().Unix())
@@ -59,11 +60,50 @@ func (m *updatesModel) GetState(authKeyId int64, userId int32) *mtproto.TLUpdate
 		stateData.UnreadCount = 0
 	} else {
 		stateData.Pts = do.Pts
-		stateData.Qts = 0
-		stateData.Seq = 1
+		stateData.Qts = do.Qts
+		stateData.Seq = do.Seq
 		stateData.UnreadCount = 0
 	}
 	return state
+}
+
+func (m *updatesModel) AddPtsToUpdatesQueue(userId, pts, peerType, peerId, updateType, messageBoxId, maxMessageBoxId int32, ) int32 {
+	do := &dataobject.UserPtsUpdatesDO{
+		UserId:          userId,
+		PeerType:		 int8(peerType),
+		PeerId:			 peerId,
+		Pts:             pts,
+		UpdateType:      updateType,
+		MessageBoxId:    messageBoxId,
+		MaxMessageBoxId: maxMessageBoxId,
+		Date2:           int32(time.Now().Unix()),
+	}
+
+	return int32(dao.GetUserPtsUpdatesDAO(dao.DB_MASTER).Insert(do))
+}
+
+func (m *updatesModel) AddQtsToUpdatesQueue(userId, qts, updateType int32, updateData []byte) int32 {
+	do := &dataobject.UserQtsUpdatesDO{
+		UserId:     userId,
+		UpdateType: updateType,
+		UpdateData: updateData,
+		Date2:      int32(time.Now().Unix()),
+		Qts:        qts,
+	}
+
+	return int32(dao.GetUserQtsUpdatesDAO(dao.DB_MASTER).Insert(do))
+}
+
+func (m *updatesModel) AddSeqToUpdatesQueue(userId, seq, updateType int32, updateData []byte) int32 {
+	do := &dataobject.UserSeqUpdatesDO{
+		UserId:     userId,
+		UpdateType: updateType,
+		UpdateData: updateData,
+		Date2:      int32(time.Now().Unix()),
+		Seq:        seq,
+	}
+
+	return int32(dao.GetUserSeqUpdatesDAO(dao.DB_MASTER).Insert(do))
 }
 
 //func (m *updatesModel) GetAffectedMessage(userId, messageId int32) *mtproto.TLMessagesAffectedMessages {

@@ -22,7 +22,6 @@ import (
 	. "github.com/nebulaim/telegramd/mtproto"
 	"net"
 	"github.com/golang/glog"
-	"math/big"
 	"errors"
 	"fmt"
 	"github.com/nebulaim/telegramd/frontend/id"
@@ -44,12 +43,7 @@ type Client struct {
 	Handshake         *HandshakeHandler
 	AuthSession		  *AuthSession
 
-	// TODO(@benqi): 移到handshake处理器里
-	Nonce       []byte // 每连接缓存客户端生成的Nonce
-	ServerNonce []byte // 每连接缓存服务生成的ServerNonce
-	NewNonce    []byte
-	A           *big.Int
-	P           *big.Int
+	ConnectionType 	  int
 }
 
 func NewClient(session *net2.Session, rpcClient *grpc_util.RPCClient, authKeyClient *rpc.AuthKeyRPCClient, authSessionClient *rpc.AuthSessionRPCClient) (c *Client) {
@@ -59,6 +53,7 @@ func NewClient(session *net2.Session, rpcClient *grpc_util.RPCClient, authKeyCli
 		AuthKeyClient:     authKeyClient,
 		AuthSessionClient: authSessionClient,
 		Codec:             session.Codec().(*MTProtoCodec),
+		ConnectionType:	   -1,
 	}
 
 	c.RemoteAddr = c.Codec.RemoteAddr()
@@ -119,6 +114,15 @@ func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
 	// NewSessionCreated
 	if c.AuthSession == nil {
 		c.AuthSession = GetOrCreateSession(c.Codec.AuthKeyId, request.SessionId)
+		//if c.AuthSession.Id == 0 {
+		//	c.AuthSession.NetlibSessionId = int64(c.Session.ID())
+		//	c.AuthSession.Id = request.SessionId
+		//	// AuthSession
+		//	if c.ConnectionType != -1 {
+		//		c.AuthSession.Type = c.ConnectionType
+		//		UpdateAuthSession(c.Codec.AuthKeyId, c.AuthSession)
+		//	}
+		//}
 	}
 
 	if c.AuthSession.Id != request.SessionId {
@@ -127,7 +131,7 @@ func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
 		// 客户端每次启动时创建一个session，退出时销毁session。
 		// 服务端也应该存储session，但如果服务端内存不足需要回收session或者服务端异常丢失session后，
 		// 会主动要求客户端重新生成session。
-		// 一个session可能会对应多条tcp长连接（一般情况下只对应一条tcp连接）或整个生命周期内多次http请求
+		// session一般情况下只对应一条tcp连接或整个生命周期内多次http请求
 		//
 		// 首先检查session是否已经创建
 
@@ -138,6 +142,10 @@ func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
 
 		c.AuthSession.Id = request.SessionId
 		c.AuthSession.NetlibSessionId = int64(c.Session.ID())
+		if c.ConnectionType != -1 {
+			c.AuthSession.Type = c.ConnectionType
+			UpdateAuthSession(c.Codec.AuthKeyId, c.AuthSession)
+		}
 
 		// TODO(@benqi): remove Codec.SessionId
 		c.Codec.SessionId = request.SessionId
@@ -158,7 +166,6 @@ func (c *Client) OnEncryptedMessage(request *EncryptedMessage2) error {
 	return c.OnMessage(request.MessageId, request.SeqNo, request.Object)
 }
 
-// TODO(@benqi): 可以不关注seqNo
 func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 	if c.Codec.UserId != 0 {
 		defer func() {
@@ -166,6 +173,8 @@ func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 				glog.Error(r)
 			}
 		}()
+
+		// TODO(@benqi): Genernal或Push才会后设置online，如果Genernal则必须已经注册
 		c.setOnline()
 	}
 
@@ -200,6 +209,25 @@ func (c *Client) OnMessage(msgId int64, seqNo int32, request TLObject) error {
 	case *TLGzipPacked:
 		return c.onGzipPacked(msgId, seqNo, request)
 	default:
+		if c.ConnectionType != -1 {
+			switch request.(type) {
+			case *TLUploadSaveFilePart, *TLUploadSaveBigFilePart, *TLUploadReuploadCdnFile:
+				c.AuthSession.Type = UPLOAD
+				c.ConnectionType = UPLOAD
+				UpdateAuthSession(c.Codec.AuthKeyId, c.AuthSession)
+			case *TLUploadGetFile, *TLUploadGetWebFile, *TLUploadGetCdnFile, *TLUploadCdnFileReuploadNeeded:
+				c.AuthSession.Type = DOWNLOAD
+				c.ConnectionType = DOWNLOAD
+				UpdateAuthSession(c.Codec.AuthKeyId, c.AuthSession)
+			case *TLHelpGetConfig:
+				// TODO(@benqi): 暂时还不能确定是否TEMP
+			default:
+				c.AuthSession.Type = GENERIC
+				c.ConnectionType = GENERIC
+				UpdateAuthSession(c.Codec.AuthKeyId, c.AuthSession)
+			}
+		}
+
 		// glog.Error("processEncryptedMessage - Not impl processor")
 		// rspObject = nil
 

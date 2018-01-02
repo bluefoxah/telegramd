@@ -26,6 +26,7 @@ import (
 	"github.com/golang/glog"
 	base2 "github.com/nebulaim/telegramd/base/base"
 	"time"
+	"github.com/nebulaim/telegramd/base/logger"
 )
 
 var (
@@ -150,6 +151,7 @@ func (m *dialogModel) CreateOrUpdateByLastMessage(userId int32, peerType int32, 
 		dialog.CreatedAt = base2.NowFormatYMDHMS()
 		dialog.Date2 = date
 		dialogId = int32(master.Insert(dialog))
+		glog.Infof("UpdateTopMessage(Insert) - %s", logger.JsonDebugData(dialog))
 	} else {
 		if unreadMentions {
 			dialog.UnreadMentionsCount += 1
@@ -161,6 +163,7 @@ func (m *dialogModel) CreateOrUpdateByLastMessage(userId int32, peerType int32, 
 		dialog.Date2 = date
 		dialogId = dialog.Id
 		master.UpdateTopMessage(topMessage, dialog.UnreadCount, dialog.UnreadMentionsCount, date, dialog.Id)
+		glog.Infof("UpdateTopMessage(update) - %s", logger.JsonDebugData(dialog))
 	}
 	return
 }

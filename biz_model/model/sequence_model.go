@@ -18,10 +18,10 @@
 package model
 
 import (
-	"time"
+	// "time"
 	"sync"
-	dao2 "github.com/nebulaim/telegramd/biz_model/dal/dao"
-	"github.com/nebulaim/telegramd/biz_model/dal/dataobject"
+	"github.com/nebulaim/telegramd/biz_model/dal/dao"
+	// "github.com/nebulaim/telegramd/biz_model/dal/dataobject"
 )
 
 var (
@@ -40,6 +40,7 @@ func GetSequenceModel() *sequnceModel {
 	return sequenceInstance
 }
 
+/*
 // TODO(@benqi):
 //  使用数据库和REDIS获取sequence
 //  redis: sequence
@@ -88,4 +89,44 @@ func (dao *sequnceModel) NextID(key string) (seq int64) {
 
 	return
 }
+*/
 
+func (m *sequnceModel) NextSeqId(key string) (seq int64) {
+	seq, _ = dao.GetSequenceDAO(dao.CACHE).NextSeqId(key)
+	return
+}
+
+func (m *sequnceModel) CurrentSeqId(key string) (seq int64) {
+	seq, _ = dao.GetSequenceDAO(dao.CACHE).CurrentSeqId(key)
+	return
+}
+
+func (m *sequnceModel) NextPtsId(key string) (seq int64) {
+	seq, _ = dao.GetSequenceDAO(dao.CACHE).NextPtsId(key)
+	return
+}
+
+func (m *sequnceModel) CurrentPtsId(key string) (seq int64) {
+	seq, _ = dao.GetSequenceDAO(dao.CACHE).CurrentPtsId(key)
+	return
+}
+
+func (m *sequnceModel) NextQtsId(key string) (seq int64) {
+	seq, _ = dao.GetSequenceDAO(dao.CACHE).NextQtsId(key)
+	return
+}
+
+func (m *sequnceModel) CurrentQtsId(key string) (seq int64) {
+	seq, _ = dao.GetSequenceDAO(dao.CACHE).CurrentQtsId(key)
+	return
+}
+
+func (m *sequnceModel) NextMessageBoxId(key string) (seq int64) {
+	seq, _ = dao.GetSequenceDAO(dao.CACHE).NextMessageBoxId(key)
+	return
+}
+
+func (m *sequnceModel) CurrentMessageBoxId(key string) (seq int64) {
+	seq, _ = dao.GetSequenceDAO(dao.CACHE).CurrentMessageBoxId(key)
+	return
+}

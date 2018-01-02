@@ -105,6 +105,17 @@ func (c *Client) onPingDelayDisconnect(msgId int64, seqNo int32, request TLObjec
 	pingDelayDissconnect, _ := request.(*TLPingDelayDisconnect)
 	glog.Info("processPingDelayDisconnect - request data: ", pingDelayDissconnect.String())
 
+	// TODO(@benqi): check android client
+	if c.ConnectionType != -1 {
+		// 1. recv register_device
+		// 2. save to push pushsession
+		// 3. check session
+		if pingDelayDissconnect.GetDisconnectDelay() == 60 * 7 {
+			c.ConnectionType = PUSH
+			c.AuthSession.Type = PUSH
+			UpdateAuthSession(c.Codec.AuthKeyId, c.AuthSession)
+		}
+	}
 	// c.setOnline()
 	pong := &TLPong{ Data2: &Pong_Data{
 		MsgId: msgId,

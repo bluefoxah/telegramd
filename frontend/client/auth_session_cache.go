@@ -36,14 +36,20 @@ var cacheAuthSessionGroup sync.Map
 //)
 //
 
+// PUSU ==> ConnectionTypePush
+// ConnectionTypePush和其它类型不太一样，session一旦创建以后不会改变
 const (
 	GENERIC = 0
 	DOWNLOAD = 1
 	UPLOAD = 3
+
+	// Android
 	PUSH = 7
+
+	// 暂时不考虑
 	TEMP = 8
 
-	// INVALID = math.MaxInt32
+	INVALID_TYPE = -1 // math.MaxInt32
 )
 
 const (
@@ -114,7 +120,7 @@ func (m *AuthSessionGroup) Update(sess *AuthSession) {
 	switch sess.Type {
 	case GENERIC, PUSH, TEMP:
 		if m.AuthSessionList[sess.Type] != nil {
-			glog.Infof("AuthSessionGroup - Set: existed session {%v}, set session {%v}", m.AuthSessionList[sess.Type], sess)
+			glog.Infof("AuthSessionGroup - Update: existed session {%v}, set session {%v}", m.AuthSessionList[sess.Type], sess)
 		}
 
 		sess.used = sess.NetlibSessionId != 0
@@ -140,8 +146,10 @@ func (m *AuthSessionGroup) Update(sess *AuthSession) {
 			}
 		}
 		if !found {
-			glog.Infof("AuthSessionGroup - Set download: {%v}", sesses)
+			glog.Infof("AuthSessionGroup - Update download: {%v}", sesses)
 		}
+	default:
+		glog.Errorf("AuthSessionGroup - Update error: {%v}", sess)
 	}
 }
 
@@ -167,7 +175,45 @@ func UpdateAuthSession(keyId int64, sess *AuthSession) {
 		sessGroup = k.(*AuthSessionGroup)
 		sessGroup.Update(sess)
 	} else {
-		glog.Errorf("UpdateAuthSession - Not execute GetOrCreateSession!!!!")
+		sessGroup = NewAuthSessionGroup()
+		sessGroup.Update(sess)
+
+		// TODO(@benqi): 可能会被其它线程覆盖，但关系不大
+		cacheAuthSessionGroup.Store(keyId, sessGroup)
 	}
 }
 
+/*
+	upload.saveFilePart#b304a621 file_id:long file_part:int bytes:bytes = Bool;
+	upload.getFile#e3a6cfb5 location:InputFileLocation offset:int limit:int = upload.File;
+	upload.saveBigFilePart#de7b673d file_id:long file_part:int file_total_parts:int bytes:bytes = Bool;
+	upload.getWebFile#24e6818d location:InputWebFileLocation offset:int limit:int = upload.WebFile;
+	upload.getCdnFile#2000bcc3 file_token:bytes offset:int limit:int = upload.CdnFile;
+	upload.reuploadCdnFile#1af91c09 file_token:bytes request_token:bytes = Vector<CdnFileHash>;
+	upload.getCdnFileHashes#f715c87b file_token:bytes offset:int = Vector<CdnFileHash>;
+func GetAuthSessionTypeByRequest(request mtproto.TLObject) int {
+	// TODO(@benqi): TEMP type
+	switch request.(type) {
+	case *mtproto.TLUploadSaveFilePart,
+			*mtproto.TLUploadSaveBigFilePart,
+			*mtproto.TLUploadReuploadCdnFile:
+		return UPLOAD
+	case *mtproto.TLUploadGetFile,
+			*mtproto.TLUploadGetWebFile,
+			*mtproto.TLUploadGetCdnFile,
+			*mtproto.TLUploadCdnFileReuploadNeeded:
+		return DOWNLOAD
+	case *mtproto.TLHelpGetConfig:
+		return TEMP
+	default:
+		return GENERIC
+	}
+	return 0
+}
+
+
+func GetAuthSessionTypeByPing(ping *mtproto.TLPingDelayDisconnect) int {
+
+}
+
+*/

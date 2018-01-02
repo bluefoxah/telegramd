@@ -3,9 +3,9 @@
     <operation name="Insert">
         <sql>
             INSERT INTO message_boxes
-                (user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, date2, created_at)
+                (user_id, user_message_box_id, message_id, sender_user_id, message_box_type, peer_type, peer_id, pts, media_unread, date2, created_at)
             VALUES
-                (:user_id, :sender_user_id, :message_box_type, :peer_type, :peer_id, :pts, :message_id, :media_unread, :date2, :created_at)
+                (:user_id, :user_message_box_id, :message_id, :sender_user_id, :message_box_type, :peer_type, :peer_id, :pts, :media_unread, :date2, :created_at)
         </sql>
     </operation>
 
@@ -40,12 +40,12 @@
         <sql>
             <![CDATA[
             SELECT
-                user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2
+                user_id, user_message_box_id, message_id, sender_user_id, message_box_type, peer_type, peer_id, pts, media_unread, state, date2
             FROM
                 message_boxes
             WHERE
-                user_id = :user_id AND peer_type = :peer_type AND peer_id = :peer_id AND message_id < :message_id
-            ORDER BY message_id DESC LIMIT :limit
+                user_id = :user_id AND peer_type = :peer_type AND peer_id = :peer_id AND user_message_box_id < :user_message_box_id
+            ORDER BY user_message_box_id DESC LIMIT :limit
             ]]>
         </sql>
     </operation>
@@ -58,12 +58,12 @@
         <sql>
             <![CDATA[
             SELECT
-                user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2
+                user_id, user_message_box_id, message_id, sender_user_id, message_box_type, peer_type, peer_id, pts, media_unread, state, date2
             FROM
                 message_boxes
             WHERE
-                user_id = :user_id AND peer_type = :peer_type AND peer_id = :peer_id AND message_id >= :message_id
-            ORDER BY message_id LIMIT :limit
+                user_id = :user_id AND peer_type = :peer_type AND peer_id = :peer_id AND user_message_box_id >= :user_message_box_id
+            ORDER BY user_message_box_id LIMIT :limit
             ]]>
         </sql>
     </operation>
@@ -71,7 +71,7 @@
     <operation name="SelectByGtPts" result_set="list">
         <sql>
             SELECT
-                user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2
+                user_id, user_message_box_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2
             FROM
                 message_boxes
             WHERE
@@ -85,11 +85,11 @@
         </params>
         <sql>
             SELECT
-                user_id, sender_user_id, message_box_type, peer_type, peer_id, pts, message_id, media_unread, state, date2
+                user_id, user_message_box_id, message_id, sender_user_id, message_box_type, peer_type, peer_id, pts, media_unread, state, date2
             FROM
                 message_boxes
             WHERE
-                user_id = :user_id AND message_id IN (:idList)
+                user_id = :user_id AND user_message_box_id IN (:idList)
         </sql>
     </operation>
 

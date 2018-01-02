@@ -147,6 +147,9 @@ func (c* HandshakeHandler) onSetClient_DHParams(client *Client, request *mtproto
 	client.Codec.AuthKey = authKeyMD.AuthKey
 	client.Codec.State = mtproto.CODEC_dh_gen_ok
 
+	// 执行handshake的连接类型为GENERIC
+	client.ConnectionType = GENERIC
+
 	glog.Infof("onSetClient_DHParams - reply: %v, c: %v", res, authKeyMD)
 	return res
 }

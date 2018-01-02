@@ -36,30 +36,34 @@ type MysqlDAOList struct {
 	CommonDAO *mysql_dao.CommonDAO
 
 	// auth_key
-	AuthKeysDAO* mysql_dao.AuthKeysDAO
-	AuthsDAO *mysql_dao.AuthsDAO
+	AuthKeysDAO  *mysql_dao.AuthKeysDAO
+	AuthsDAO     *mysql_dao.AuthsDAO
 	AuthSaltsDAO *mysql_dao.AuthSaltsDAO
 	AuthUsersDAO *mysql_dao.AuthUsersDAO
 
 	// biz
-	UsersDAO *mysql_dao.UsersDAO
-	DevicesDAO *mysql_dao.DevicesDAO
+	UsersDAO                 *mysql_dao.UsersDAO
+	DevicesDAO               *mysql_dao.DevicesDAO
 	AuthPhoneTransactionsDAO *mysql_dao.AuthPhoneTransactionsDAO
-	UserDialogsDAO *mysql_dao.UserDialogsDAO
-	UserContactsDAO *mysql_dao.UserContactsDAO
-	MessageBoxesDAO *mysql_dao.MessageBoxesDAO
-	MessagesDAO *mysql_dao.MessagesDAO
-	SeqUpdatesNgenDAO* mysql_dao.SeqUpdatesNgenDAO
-	ClientUpdatesStateDAO* mysql_dao.ClientUpdatesStateDAO
-	UserNotifySettingsDAO* mysql_dao.UserNotifySettingsDAO
-	ReportsDAO* mysql_dao.ReportsDAO
-	UserPrivacysDAO* mysql_dao.UserPrivacysDAO
-	TmpPasswordsDAO* mysql_dao.TmpPasswordsDAO
-	ChatsDAO *mysql_dao.ChatsDAO
-	ChatParticipantsDAO *mysql_dao.ChatParticipantsDAO
-	FilePartsDAO *mysql_dao.FilePartsDAO
-	FilesDAO *mysql_dao.FilesDAO
-	PhotoDatasDAO *mysql_dao.PhotoDatasDAO
+	UserDialogsDAO           *mysql_dao.UserDialogsDAO
+	UserContactsDAO          *mysql_dao.UserContactsDAO
+	MessageBoxesDAO          *mysql_dao.MessageBoxesDAO
+	MessagesDAO              *mysql_dao.MessagesDAO
+	SeqUpdatesNgenDAO        *mysql_dao.SeqUpdatesNgenDAO
+	ClientUpdatesStateDAO    *mysql_dao.ClientUpdatesStateDAO
+	UserNotifySettingsDAO    *mysql_dao.UserNotifySettingsDAO
+	ReportsDAO               *mysql_dao.ReportsDAO
+	UserPrivacysDAO          *mysql_dao.UserPrivacysDAO
+	TmpPasswordsDAO          *mysql_dao.TmpPasswordsDAO
+	ChatsDAO                 *mysql_dao.ChatsDAO
+	ChatParticipantsDAO      *mysql_dao.ChatParticipantsDAO
+	FilePartsDAO             *mysql_dao.FilePartsDAO
+	FilesDAO                 *mysql_dao.FilesDAO
+	PhotoDatasDAO            *mysql_dao.PhotoDatasDAO
+	UserPtsUpdatesDAO        *mysql_dao.UserPtsUpdatesDAO
+	UserQtsUpdatesDAO        *mysql_dao.UserQtsUpdatesDAO
+	UserSeqUpdatesDAO        *mysql_dao.UserSeqUpdatesDAO
+	AuthUpdatesStateDAO		 *mysql_dao.AuthUpdatesStateDAO
 }
 
 // TODO(@benqi): 一主多从
@@ -101,6 +105,11 @@ func InstallMysqlDAOManager(clients map[string]*sqlx.DB) {
 		daoList.FilePartsDAO = mysql_dao.NewFilePartsDAO(v)
 		daoList.FilesDAO = mysql_dao.NewFilesDAO(v)
 		daoList.PhotoDatasDAO = mysql_dao.NewPhotoDatasDAO(v)
+
+		daoList.UserPtsUpdatesDAO = mysql_dao.NewUserPtsUpdatesDAO(v)
+		daoList.UserQtsUpdatesDAO = mysql_dao.NewUserQtsUpdatesDAO(v)
+		daoList.UserSeqUpdatesDAO = mysql_dao.NewUserSeqUpdatesDAO(v)
+		daoList.AuthUpdatesStateDAO = mysql_dao.NewAuthUpdatesStateDAO(v)
 
 		mysqlDAOManager.daoListMap[k] = daoList
 	}
@@ -321,6 +330,43 @@ func GetPhotoDatasDAO(dbName string) (dao *mysql_dao.PhotoDatasDAO) {
 	// err := mysqlDAOManager.daoListMap[dbName]
 	if daoList != nil {
 		dao = daoList.PhotoDatasDAO
+	}
+	return
+}
+
+func GetUserPtsUpdatesDAO(dbName string) (dao *mysql_dao.UserPtsUpdatesDAO) {
+	daoList := GetMysqlDAOList(dbName)
+	// err := mysqlDAOManager.daoListMap[dbName]
+	if daoList != nil {
+		dao = daoList.UserPtsUpdatesDAO
+	}
+	return
+}
+
+func GetUserQtsUpdatesDAO(dbName string) (dao *mysql_dao.UserQtsUpdatesDAO) {
+	daoList := GetMysqlDAOList(dbName)
+	// err := mysqlDAOManager.daoListMap[dbName]
+	if daoList != nil {
+		dao = daoList.UserQtsUpdatesDAO
+	}
+	return
+}
+
+func GetUserSeqUpdatesDAO(dbName string) (dao *mysql_dao.UserSeqUpdatesDAO) {
+	daoList := GetMysqlDAOList(dbName)
+	// err := mysqlDAOManager.daoListMap[dbName]
+	if daoList != nil {
+		dao = daoList.UserSeqUpdatesDAO
+	}
+	return
+}
+
+
+func GetAuthUpdatesStateDAO(dbName string) (dao *mysql_dao.AuthUpdatesStateDAO) {
+	daoList := GetMysqlDAOList(dbName)
+	// err := mysqlDAOManager.daoListMap[dbName]
+	if daoList != nil {
+		dao = daoList.AuthUpdatesStateDAO
 	}
 	return
 }
